@@ -8,10 +8,19 @@ Run SQL queries against Databricks directly from Cursor IDE. Create/drop tables 
 - **[QUICK_START.md](./QUICK_START.md)** - Daily usage workflow
 - **[INSTRUCTIONS.md](./INSTRUCTIONS.md)** - Detailed workflow and best practices
 
-## Prerequisites
+## Quick Setup
 
-1. **Set up connection** (one-time): Follow [SETUP.md](./SETUP.md) to configure your Databricks credentials
-2. **Activate virtual environment**:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/vkvb-hf/cursor-databricks.git
+   cd cursor-databricks
+   ```
+
+2. **Set up connection** (one-time): Follow [SETUP.md](./SETUP.md) to configure your Databricks credentials
+   - Copy `config.py.example` to `config.py`
+   - Update `config.py` with your Databricks credentials
+
+3. **Activate virtual environment**:
    ```bash
    cd /Users/visal.kumar/Documents/databricks
    source databricks_env/bin/activate
