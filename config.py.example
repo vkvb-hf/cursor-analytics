@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""
+Centralized configuration for Databricks connection
+
+⚠️ IMPORTANT: Never commit this file to version control if it contains real credentials!
+Consider using environment variables or a .gitignore entry for this file.
+
+To set up your connection:
+1. Get your Databricks Personal Access Token from User Settings → Access Tokens
+2. Find your HTTP_PATH from SQL Warehouses → Connection Details
+3. Find your CLUSTER_ID from Compute → Clusters
+4. Copy this file to config.py and update the values below
+
+See SETUP.md for detailed instructions.
+"""
+# Databricks Connection Settings
+SERVER_HOSTNAME = 'your-workspace.cloud.databricks.com'  # Your workspace hostname (without https://)
+HTTP_PATH = 'sql/protocolv1/o/YOUR_ORG_ID/YOUR_CLUSTER_ID'  # Your HTTP path
+TOKEN = 'dapi...'  # Your personal access token
+
+# Cluster Settings (for cluster management)
+CLUSTER_ID = 'YOUR_CLUSTER_ID'  # Your cluster ID
+DATABRICKS_HOST = 'https://your-workspace.cloud.databricks.com'  # Full workspace URL
+
