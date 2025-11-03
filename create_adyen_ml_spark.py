@@ -132,7 +132,7 @@ def create_table_with_spark(
             # Fallback: Use workspace API if dbutils not available (local execution)
             print("   ⚠️  dbutils not available, using workspace API...")
             from databricks_workspace import get_csv_files_from_workspace
-            from csv_to_table import DATABRICKS_HOST, TOKEN
+            from config import DATABRICKS_HOST, TOKEN
             
             csv_files = get_csv_files_from_workspace(workspace_path, DATABRICKS_HOST, TOKEN)
             
