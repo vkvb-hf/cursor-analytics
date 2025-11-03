@@ -1,40 +1,28 @@
-# Configuration files with sensitive credentials
+# Configuration
 config.py
 
-# Python cache and bytecode
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 
-# Virtual environment
-databricks_env/
+# Virtual environments
 venv/
 env/
-ENV/
+databricks_env/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Output files
-*.csv
-*.json
-*.xlsx
-*_output.*
-
-# Test files
-test_*.sql
-temp_*.sql
-
-# Logs
+# Project-specific
 *.log
-
+/tmp/

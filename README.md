@@ -1,202 +1,174 @@
-# Cursor Databricks Integration
+# Databricks Python Utilities
 
-Run SQL queries against Databricks directly from Cursor IDE. Create/drop tables from SQL files and explore data with formatted output.
+A collection of generic, reusable utilities for working with Databricks, plus project-specific implementations.
 
-## 📋 Quick Links
+## 📁 Project Structure
 
-- **[SETUP.md](./SETUP.md)** - Complete connection setup guide (read this first!)
-- **[QUICK_START.md](./QUICK_START.md)** - Daily usage workflow
-- **[INSTRUCTIONS.md](./INSTRUCTIONS.md)** - Detailed workflow and best practices
+```
+cursor_databricks/
+├── config.py                 # Databricks connection configuration
+├── utils/                    # Generic, reusable utilities
+│   ├── databricks_job_runner.py    # Job creation and execution
+│   ├── databricks_workspace.py    # Workspace file operations
+│   ├── table_inspector.py         # Table inspection and validation
+│   ├── csv_to_table.py            # CSV to Delta table conversion
+│   ├── upload_csvs.py             # CSV file upload utilities
+│   ├── unzip_csvs.py              # File extraction utilities
+│   └── query_util.py              # SQL query utilities
+├── projects/                 # Project-specific implementations
+│   └── adyen_ml/            # Adyen ML project files
+│       ├── run_adyen_ml_job.py
+│       └── ...
+├── tests/                    # Test and debugging scripts
+└── docs/                     # Documentation
+    └── AI_UTILITY_GUIDE.md  # AI model utility selection guide
+```
 
-## Quick Setup
+## 🚀 Quick Start
 
-1. **Clone the repository:**
+1. **Setup Configuration**
    ```bash
-   git clone https://github.com/vkvb-hf/cursor-databricks.git
-   cd cursor-databricks
+   cp config.py.example config.py
+   # Edit config.py with your Databricks credentials
    ```
 
-2. **Set up connection** (one-time): Follow [SETUP.md](./SETUP.md) to configure your Databricks credentials
-   - Copy `config.py.example` to `config.py`
-   - Update `config.py` with your Databricks credentials
-
-3. **Activate virtual environment**:
+2. **Install Dependencies**
    ```bash
-   cd /Users/visal.kumar/Documents/databricks
-   source databricks_env/bin/activate
-   cd cursor_databricks
+   pip install databricks-sql-connector requests
    ```
 
-## Main Use Cases
-
-### 1. Query Tables for Exploration
-
-Run SQL queries with formatted output:
-
-```bash
-# Quick query with default limit (20 rows)
-python query_util.py "SELECT * FROM payments_hf.chargebacks_dashboard LIMIT 10"
-
-# Custom limit
-python query_util.py "SELECT * FROM table" --limit 50
-
-# Show all rows
-python query_util.py "SELECT * FROM table" --limit 0
-
-# With custom title
-python query_util.py "SELECT * FROM table" --title "Chargeback Analysis"
-```
-
-### 2. Create/Drop Tables from SQL Files
-
-Create or replace tables using SQL SELECT statements:
-
-```bash
-# Create table
-python create_table.py path/to/query.sql schema.table_name
-
-# Drop existing table and recreate
-python create_table.py path/to/query.sql schema.table_name --drop-if-exists
-```
-
-Example:
-```bash
-python create_table.py ../GitHub/ddi-pays-pipelines/ddi_pays_pipelines/analytics_etl/queries/chargebacks_dashboard.sql payments_hf.chargebacks_dashboard --drop-if-exists
-```
-
-### 3. Run SQL Files for Exploration
-
-Execute SQL files with various output formats:
-
-```bash
-# Show results in terminal (formatted table)
-python run_sql_file.py query.sql show 100
-
-# Save to CSV
-python run_sql_file.py query.sql csv
-
-# Save to JSON
-python run_sql_file.py query.sql json
-```
-
-### 4. Interactive SQL Shell
-
-For exploratory queries and quick testing:
-
-```bash
-python interactive_sql.py
-```
-
-Then enter SQL queries directly:
-```
-SQL> SELECT * FROM payments_hf.chargebacks_dashboard LIMIT 5
-SQL> SELECT country, COUNT(*) FROM payments_hf.chargebacks_dashboard GROUP BY country
-SQL> exit
-```
-
-## File Structure
-
-### Core Files
-
-- **`config.py`** - Centralized connection configuration (update this with your credentials)
-- **`query_util.py`** - Main query tool with formatted output (⭐ use this for exploration)
-- **`create_table.py`** - Create/drop tables from SQL files
-- **`run_sql_file.py`** - Execute SQL files with various output formats
-- **`check_cluster.py`** - Check cluster status and start if needed
-
-### Interactive Tools
-
-- **`interactive_sql.py`** - Interactive SQL shell for ad-hoc queries
-
-### Documentation
-
-- **`SETUP.md`** - Connection setup instructions
-- **`QUICK_START.md`** - Quick reference for daily usage
-- **`INSTRUCTIONS.md`** - Detailed workflow and best practices
-- **`README.md`** - This file
-
-## Configuration
-
-All connection settings are in `config.py`. To change your connection:
-
-1. Open `config.py`
-2. Update:
-   - `SERVER_HOSTNAME` - Your Databricks workspace hostname
-   - `HTTP_PATH` - SQL connector HTTP path (from SQL Warehouses)
-   - `TOKEN` - Your personal access token
-   - `CLUSTER_ID` - Your cluster ID
-   - `DATABRICKS_HOST` - Full workspace URL
-
-See [SETUP.md](./SETUP.md) for detailed instructions on finding these values.
-
-## Common Workflows
-
-### Before Running Any Scripts
-
-1. **Activate environment**:
-   ```bash
-   source databricks_env/bin/activate
-   cd cursor_databricks
+3. **Use Utilities**
+   ```python
+   from utils import DatabricksJobRunner, TableInspector
+   
+   # Run a notebook as a job
+   runner = DatabricksJobRunner()
+   result = runner.create_and_run(
+       notebook_path="/Workspace/path/to/notebook",
+       notebook_content="# Your notebook code",
+       job_name="My Job"
+   )
+   
+   # Inspect a table
+   inspector = TableInspector()
+   stats = inspector.get_table_stats("my_schema.my_table")
    ```
 
-2. **Check cluster status**:
-   ```bash
-   python check_cluster.py
-   ```
+## 📚 Utility Modules
 
-3. **Run your script** (see examples above)
+### Core Utilities
 
-### Creating a Table
+#### `databricks_job_runner.py`
+**Purpose**: Create and run Databricks notebooks as jobs programmatically.
 
-```bash
-# 1. Check cluster is running
-python check_cluster.py
+**Use Cases**:
+- Running notebooks as scheduled jobs
+- Automating notebook execution
+- Monitoring job status and output
 
-# 2. Create table from SQL file
-python create_table.py query.sql payments_hf.my_table --drop-if-exists
+**Key Classes**:
+- `DatabricksJobRunner`: Main class for job operations
 
-# 3. Verify table was created
-python query_util.py "SELECT COUNT(*) FROM payments_hf.my_table"
-```
+#### `databricks_workspace.py`
+**Purpose**: Workspace file operations (upload, download, list).
 
-### Exploring Data
+**Use Cases**:
+- Uploading files to Databricks workspace
+- Creating workspace directories
+- Managing workspace files
 
-```bash
-# Quick exploration
-python query_util.py "SELECT * FROM payments_hf.chargebacks_dashboard LIMIT 10"
+**Key Functions**:
+- `create_workspace_directory()`: Create directories
+- `upload_csv_to_workspace()`: Upload CSV files
 
-# More detailed exploration
-python interactive_sql.py
-```
+#### `table_inspector.py`
+**Purpose**: Table inspection, validation, and quality checks.
 
-## How It Works
+**Use Cases**:
+- Checking table schema and statistics
+- Finding duplicates
+- Detecting data conflicts
+- Comparing CSV files with tables
 
-This uses the [Databricks SQL Connector for Python](https://docs.databricks.com/aws/en/dev-tools/python-sql-connector) which:
-- Connects to your Databricks cluster via HTTP
-- Works with any cluster mode (Single User, Shared, User Isolation)
-- No need for Databricks Connect version matching
-- Simple and reliable
+**Key Classes**:
+- `TableInspector`: Main inspection class
 
-## Troubleshooting
+#### `csv_to_table.py`
+**Purpose**: Convert CSV files to Delta tables.
 
-### Connection Issues
-- Verify connection settings in `config.py`
-- Check cluster is running: `python check_cluster.py`
-- Test connection: `python query_util.py "SELECT 1"`
+**Use Cases**:
+- Bulk loading CSV data
+- Schema inference and table creation
+- Data transformation during import
 
-### Import Errors
-- Ensure virtual environment is activated
-- Reinstall: `pip install databricks-sql-connector[pyarrow]`
+#### `upload_csvs.py` & `unzip_csvs.py`
+**Purpose**: File management utilities.
 
-### Query Errors
-- Validate SQL syntax in Databricks UI first
-- Add LIMIT clauses for large datasets
-- Check cluster has sufficient resources
+**Use Cases**:
+- Extracting and preparing CSV files
+- Uploading multiple files to Databricks
 
-See [INSTRUCTIONS.md](./INSTRUCTIONS.md) for more detailed troubleshooting.
+### Query Utilities
 
-## Next Steps
+#### `query_util.py`, `interactive_sql.py`, `run_sql_file.py`
+**Purpose**: SQL query execution utilities.
 
-1. **First time setup**: Read [SETUP.md](./SETUP.md)
-2. **Daily usage**: See [QUICK_START.md](./QUICK_START.md)
-3. **Best practices**: Review [INSTRUCTIONS.md](./INSTRUCTIONS.md)
+**Use Cases**:
+- Running SQL queries programmatically
+- Executing SQL files
+- Interactive SQL sessions
+
+## 🔧 Projects
+
+### Adyen ML Project
+Located in `projects/adyen_ml/`, this contains:
+- ETL pipeline for Adyen payment data
+- Risk profile mapping
+- Data validation scripts
+
+See `projects/adyen_ml/README.md` for details.
+
+## 📖 Documentation
+
+- **SETUP.md**: Initial setup instructions
+- **QUICK_START.md**: Quick start guide
+- **docs/AI_UTILITY_GUIDE.md**: Guide for AI models to select utilities
+- **CSV_UPLOAD_README.md**: CSV upload process documentation
+
+## 🧪 Testing
+
+Test scripts are located in `tests/`. These are primarily for debugging and validation.
+
+## 🤖 For AI Models
+
+See `docs/AI_UTILITY_GUIDE.md` for a comprehensive guide on when to use which utility.
+
+## ⚙️ Configuration
+
+Edit `config.py` with your Databricks credentials:
+- `SERVER_HOSTNAME`: Your workspace hostname
+- `HTTP_PATH`: SQL warehouse HTTP path
+- `TOKEN`: Personal access token
+- `DATABRICKS_HOST`: Full workspace URL
+
+**⚠️ Never commit `config.py` with real credentials to version control!**
+
+## 📝 Best Practices
+
+1. **Use Generic Utilities**: Prefer utilities in `utils/` over project-specific code
+2. **Keep Projects Separate**: Project-specific code belongs in `projects/`
+3. **Document Dependencies**: Add docstrings and type hints
+4. **Test Utilities**: Validate utilities work before using in production
+5. **Handle Errors**: Always include error handling and logging
+
+## 🔄 Contributing
+
+When adding new utilities:
+1. Place generic utilities in `utils/`
+2. Follow existing patterns and naming conventions
+3. Add docstrings and type hints
+4. Update `docs/AI_UTILITY_GUIDE.md` if adding a new utility category
+
+## 📄 License
+
+Internal use only.
