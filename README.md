@@ -1,173 +1,350 @@
-# Databricks Python Utilities
+# Databricks Python Toolkit
 
-A collection of generic, reusable utilities for working with Databricks, plus project-specific implementations.
+A comprehensive, well-organized toolkit for working with Databricks. This repository provides utilities for running SQL queries, creating and executing notebooks, exploring tables, and building business solutions.
 
 ## 📁 Project Structure
 
 ```
 cursor_databricks/
-├── config.py                 # Databricks connection configuration
-├── utils/                    # Generic, reusable utilities
-│   ├── databricks_job_runner.py    # Job creation and execution
-│   ├── databricks_workspace.py    # Workspace file operations
-│   ├── table_inspector.py         # Table inspection and validation
-│   ├── csv_to_table.py            # CSV to Delta table conversion
-│   ├── upload_csvs.py             # CSV file upload utilities
-│   ├── unzip_csvs.py              # File extraction utilities
-│   └── query_util.py              # SQL query utilities
-├── projects/                 # Project-specific implementations
-│   └── adyen_ml/            # Adyen ML project files
-│       ├── run_adyen_ml_job.py
-│       └── ...
-├── tests/                    # Test and debugging scripts
-└── docs/                     # Documentation
-    └── AI_UTILITY_GUIDE.md  # AI model utility selection guide
+├── config.py                    # Databricks connection configuration (DO NOT COMMIT)
+├── config.py.example            # Template for config.py
+│
+├── core/                        # 🔧 Core reusable utilities
+│   ├── __init__.py              # Package exports
+│   ├── databricks_job_runner.py # Job creation and execution
+│   ├── databricks_workspace.py  # Workspace file operations
+│   ├── table_inspector.py       # Table inspection and validation
+│   ├── query_util.py            # SQL query execution utilities
+│   ├── interactive_sql.py       # Interactive SQL shell
+│   ├── run_sql_file.py          # Execute SQL from files
+│   ├── csv_to_table.py          # CSV to Delta table conversion
+│   ├── upload_csvs.py           # CSV upload utilities
+│   ├── unzip_csvs.py            # File extraction utilities
+│   └── create_table.py          # Table creation utilities
+│
+├── scripts/                     # 🚀 CLI entry points
+│   ├── run_sql.py              # Run SQL queries from files
+│   ├── interactive_sql.py      # Interactive SQL shell
+│   ├── inspect_table.py        # Inspect table schema and data
+│   └── create_notebook.py      # Create and run notebooks
+│
+├── notebooks/                   # 📓 Notebook management
+│   ├── README.md               # Notebook utilities documentation
+│   ├── create_and_run_databricks_job.py
+│   ├── get_job_output.py
+│   ├── get_notebook_content.py
+│   ├── get_notebook_from_job.py
+│   ├── get_notebook_from_url.py
+│   └── check_job_status.py
+│
+├── queries/                     # 📊 SQL query files
+│   ├── README.md               # Query organization guide
+│   └── [organize by use case or table]
+│
+├── exploration/                 # 🔍 Ad-hoc analysis & testing
+│   ├── README.md               # Exploration guidelines
+│   └── [test scripts, exploration notebooks]
+│
+├── projects/                    # 💼 Business use case implementations
+│   ├── adyen_ml/               # Adyen ML project
+│   │   ├── README.md
+│   │   └── [project-specific files]
+│   └── p0_metrics/             # P0 Metrics project
+│       └── [project-specific files]
+│
+└── docs/                        # 📚 Documentation
+    └── AI_UTILITY_GUIDE.md     # AI utility selection guide
 ```
 
 ## 🚀 Quick Start
 
-1. **Setup Configuration**
-   ```bash
-   cp config.py.example config.py
-   # Edit config.py with your Databricks credentials
-   ```
+### 📓 Create and Run Notebooks (Terminal Output)
 
-2. **Install Dependencies**
-   ```bash
-   pip install databricks-sql-connector requests
-   ```
+**Most Important**: To see output in terminal, notebooks must write to DBFS files.
 
-3. **Use Utilities**
-   ```python
-   from utils import DatabricksJobRunner, TableInspector
-   
-   # Run a notebook as a job
-   runner = DatabricksJobRunner()
-   result = runner.create_and_run(
-       notebook_path="/Workspace/path/to/notebook",
-       notebook_content="# Your notebook code",
-       job_name="My Job"
-   )
-   
-   # Inspect a table
-   inspector = TableInspector()
-   stats = inspector.get_table_stats("my_schema.my_table")
-   ```
+```bash
+# Run the example script
+python create_and_run_notebook_job.py
+```
 
-## 📚 Utility Modules
+**See `HOW_TO_CREATE_AND_RUN_NOTEBOOKS.md` for complete instructions!**
 
-### Core Utilities
+### 1. Setup Configuration
 
-#### `databricks_job_runner.py`
-**Purpose**: Create and run Databricks notebooks as jobs programmatically.
+```bash
+cp config.py.example config.py
+# Edit config.py with your Databricks credentials
+```
 
-**Use Cases**:
-- Running notebooks as scheduled jobs
-- Automating notebook execution
-- Monitoring job status and output
-
-**Key Classes**:
-- `DatabricksJobRunner`: Main class for job operations
-
-#### `databricks_workspace.py`
-**Purpose**: Workspace file operations (upload, download, list).
-
-**Use Cases**:
-- Uploading files to Databricks workspace
-- Creating workspace directories
-- Managing workspace files
-
-**Key Functions**:
-- `create_workspace_directory()`: Create directories
-- `upload_csv_to_workspace()`: Upload CSV files
-
-#### `table_inspector.py`
-**Purpose**: Table inspection, validation, and quality checks.
-
-**Use Cases**:
-- Checking table schema and statistics
-- Finding duplicates
-- Detecting data conflicts
-- Comparing CSV files with tables
-
-**Key Classes**:
-- `TableInspector`: Main inspection class
-
-#### `csv_to_table.py`
-**Purpose**: Convert CSV files to Delta tables.
-
-**Use Cases**:
-- Bulk loading CSV data
-- Schema inference and table creation
-- Data transformation during import
-
-#### `upload_csvs.py` & `unzip_csvs.py`
-**Purpose**: File management utilities.
-
-**Use Cases**:
-- Extracting and preparing CSV files
-- Uploading multiple files to Databricks
-
-### Query Utilities
-
-#### `query_util.py`, `interactive_sql.py`, `run_sql_file.py`
-**Purpose**: SQL query execution utilities.
-
-**Use Cases**:
-- Running SQL queries programmatically
-- Executing SQL files
-- Interactive SQL sessions
-
-## 🔧 Projects
-
-### Adyen ML Project
-Located in `projects/adyen_ml/`, this contains:
-- ETL pipeline for Adyen payment data
-- Risk profile mapping
-- Data validation scripts
-
-See `projects/adyen_ml/README.md` for details.
-
-## 📖 Documentation
-
-- **SETUP.md**: Initial setup instructions
-- **QUICK_START.md**: Quick start guide
-- **docs/AI_UTILITY_GUIDE.md**: Guide for AI models to select utilities
-- **CSV_UPLOAD_README.md**: CSV upload process documentation
-
-## 🧪 Testing
-
-Test scripts are located in `tests/`. These are primarily for debugging and validation.
-
-## 🤖 For AI Models
-
-See `docs/AI_UTILITY_GUIDE.md` for a comprehensive guide on when to use which utility.
-
-## ⚙️ Configuration
-
-Edit `config.py` with your Databricks credentials:
+**Required Configuration:**
 - `SERVER_HOSTNAME`: Your workspace hostname
 - `HTTP_PATH`: SQL warehouse HTTP path
 - `TOKEN`: Personal access token
 - `DATABRICKS_HOST`: Full workspace URL
 
-**⚠️ Never commit `config.py` with real credentials to version control!**
+### 2. Install Dependencies
 
-## 📝 Best Practices
+```bash
+pip install databricks-sql-connector requests pandas
+```
 
-1. **Use Generic Utilities**: Prefer utilities in `utils/` over project-specific code
-2. **Keep Projects Separate**: Project-specific code belongs in `projects/`
-3. **Document Dependencies**: Add docstrings and type hints
-4. **Test Utilities**: Validate utilities work before using in production
-5. **Handle Errors**: Always include error handling and logging
+### 3. Run SQL Queries
 
-## 🔄 Contributing
+**From SQL file:**
+```bash
+python scripts/run_sql.py queries/my_query.sql csv 1000
+```
 
-When adding new utilities:
-1. Place generic utilities in `utils/`
-2. Follow existing patterns and naming conventions
-3. Add docstrings and type hints
-4. Update `docs/AI_UTILITY_GUIDE.md` if adding a new utility category
+**Interactive SQL shell:**
+```bash
+python scripts/interactive_sql.py
+```
+
+**From Python:**
+```python
+from core.run_sql_file import run_sql_file
+run_sql_file('queries/my_query.sql', output_format='csv', limit=1000)
+```
+
+### 4. Inspect Tables
+
+```bash
+python scripts/inspect_table.py schema.table_name --stats --schema --sample 20
+```
+
+### 5. Create and Run Notebooks
+
+```python
+from core import DatabricksJobRunner
+
+runner = DatabricksJobRunner()
+result = runner.create_and_run(
+    notebook_path="/Workspace/path/to/notebook",
+    notebook_content="# Your notebook code",
+    job_name="My Job"
+)
+```
+
+## 📚 Core Utilities
+
+### Query Execution
+
+**`core.query_util`** - Execute SQL queries with formatted output
+```python
+from core.query_util import run_query, print_table
+results = run_query("SELECT * FROM table LIMIT 10")
+print_table(results)
+```
+
+**`core.run_sql_file`** - Execute SQL from files
+```python
+from core.run_sql_file import run_sql_file
+run_sql_file('queries/my_query.sql', output_format='csv')
+```
+
+**`core.interactive_sql`** - Interactive SQL shell
+```python
+from core.interactive_sql import main
+main()  # Starts interactive shell
+```
+
+### Job Management
+
+**`core.databricks_job_runner`** - Create and run Databricks jobs
+```python
+from core import DatabricksJobRunner
+
+runner = DatabricksJobRunner()
+result = runner.create_and_run(
+    notebook_path="/Workspace/notebooks/my_notebook",
+    notebook_content="# Databricks notebook code",
+    job_name="My Scheduled Job"
+)
+```
+
+### Table Inspection
+
+**`core.table_inspector`** - Inspect and validate tables
+```python
+from core import TableInspector
+
+inspector = TableInspector()
+schema = inspector.get_table_schema("schema.table")
+stats = inspector.get_table_stats("schema.table")
+sample = inspector.get_table_sample("schema.table", limit=10)
+```
+
+### Workspace Management
+
+**`core.databricks_workspace`** - Manage workspace files
+```python
+from core.databricks_workspace import create_workspace_directory, upload_csv_to_workspace
+
+create_workspace_directory("/Workspace/my_directory")
+upload_csv_to_workspace("local_file.csv", "/Workspace/my_directory/file.csv")
+```
+
+## 📓 Creating and Running Notebooks
+
+**Important**: To see notebook output in the terminal, notebooks must write output to DBFS files.
+
+### Quick Example
+
+```python
+from databricks_api import DatabricksAPI
+
+db = DatabricksAPI()
+
+# Notebook that writes output to DBFS
+notebook_content = """# Databricks notebook source
+query = "SELECT * FROM table LIMIT 10"
+result_df = spark.sql(query)
+
+# Write output to DBFS (required for terminal display)
+output_text = result_df.toPandas().to_string()
+dbutils.fs.put("/tmp/output.txt", output_text, overwrite=True)
+print(output_text)  # Also print for UI
+"""
+
+# Create and run
+result = db.job_runner.create_and_run(
+    notebook_path="/Shared/my_notebook",
+    notebook_content=notebook_content,
+    job_name="my_job"
+)
+
+# Read output from DBFS (script does this automatically)
+# See HOW_TO_CREATE_AND_RUN_NOTEBOOKS.md for details
+```
+
+**📖 See `HOW_TO_CREATE_AND_RUN_NOTEBOOKS.md` for complete instructions**
+
+## 🎯 Common Use Cases
+
+### 1. Run SQL Query via Databricks
+
+```bash
+# Save your SQL query in queries/my_analysis.sql
+python scripts/run_sql.py queries/my_analysis.sql csv
+```
+
+### 2. Create and Execute Databricks Notebook
+
+```python
+from core import DatabricksJobRunner
+
+notebook_content = """
+# Databricks notebook source
+# MAGIC %sql
+# MAGIC SELECT * FROM my_table LIMIT 100
+"""
+
+runner = DatabricksJobRunner()
+result = runner.create_and_run(
+    notebook_path="/Workspace/notebooks/my_analysis",
+    notebook_content=notebook_content,
+    job_name="Daily Analysis"
+)
+```
+
+### 3. Run Exploration Analysis on SQL Tables
+
+```python
+from core import TableInspector
+from core.query_util import run_query
+
+# Inspect table structure
+inspector = TableInspector()
+schema = inspector.get_table_schema("schema.table_name")
+print(schema)
+
+# Run exploration queries
+results = run_query("""
+    SELECT 
+        COUNT(*) as total_rows,
+        COUNT(DISTINCT id) as unique_ids,
+        MIN(created_at) as earliest,
+        MAX(created_at) as latest
+    FROM schema.table_name
+""")
+```
+
+### 4. Build Business Products (Notebooks)
+
+Create a new project in `projects/`:
+
+```python
+# projects/my_business_case/analysis_notebook.py
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from core import DatabricksJobRunner
+
+# Business logic here
+notebook_content = """
+# Databricks notebook source
+# Business-specific analysis
+"""
+
+runner = DatabricksJobRunner()
+runner.create_and_run(
+    notebook_path="/Workspace/projects/my_business_case",
+    notebook_content=notebook_content,
+    job_name="My Business Case Analysis"
+)
+```
+
+## 📖 Documentation
+
+- **`docs/AI_UTILITY_GUIDE.md`** - Guide for AI models to select utilities
+- **`queries/README.md`** - SQL query organization guide
+- **`notebooks/README.md`** - Notebook utilities documentation
+- **`exploration/README.md`** - Exploration guidelines
+- **`projects/*/README.md`** - Project-specific documentation
+
+## 🔧 Best Practices
+
+1. **Use Core Utilities**: Always use utilities from `core/` for reusable functionality
+2. **Organize Queries**: Store SQL queries in `queries/` organized by use case
+3. **Project Structure**: Keep business-specific code in `projects/`
+4. **Exploration**: Use `exploration/` for ad-hoc analysis and testing
+5. **Configuration**: Never commit `config.py` with real credentials
+6. **Documentation**: Update README files when adding new functionality
+
+## 🧪 Testing & Exploration
+
+Place test and exploration scripts in `exploration/`:
+- Test scripts: `test_*.py`
+- Validation scripts: `check_*.py`
+- Verification scripts: `verify_*.py`
+
+## 📝 Adding New Functionality
+
+### New Core Utility?
+1. Add to `core/` directory
+2. Update `core/__init__.py` to export it
+3. Update this README
+4. Add docstrings and type hints
+
+### New Project?
+1. Create `projects/my_project/`
+2. Add `projects/my_project/README.md`
+3. Import from `core/` as needed
+4. Keep project-specific logic isolated
+
+### New Query?
+1. Save in `queries/` directory
+2. Organize by use case or table
+3. Use descriptive names
+4. Document in query comments
+
+## ⚠️ Security Notes
+
+- **Never commit `config.py`** with real credentials
+- Use environment variables for sensitive data in production
+- Rotate tokens regularly
+- Follow your organization's security policies
 
 ## 📄 License
 
