@@ -10,7 +10,7 @@ import os
 # Add parent directory to path for config import
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
-from core.query_util import print_table
+from .query_util import print_table
 
 def run_sql_file(sql_file_path, output_format='show', limit=100):
     """
