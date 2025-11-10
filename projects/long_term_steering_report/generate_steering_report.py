@@ -826,6 +826,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
     # Week vs Prev Week - Level 1 (Overall summary)
     if week_prev_df is not None and not week_prev_df.empty:
         parts.append("**Current Week vs Prev Week:**")
+        parts.append("")  # Add blank line after section header
         
         # Process each reporting cluster - Level 1
         for rc in REPORTING_CLUSTERS:
@@ -849,6 +850,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         
         # Deep Insights - Level 2 (Dimensions and Business Units)
         parts.append("**Deep Insights**")
+        parts.append("")  # Add blank line after section header
         insights = []
         
         for rc in REPORTING_CLUSTERS:
@@ -1125,7 +1127,8 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
-            parts.append(f"<br>{header}")
+            parts.append(header)
+            parts.append("")  # Add blank line after section header
             
             # Add Overall if it exists
             if not overall_rows.empty:
@@ -1161,7 +1164,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[+50%] - Business Units: {', '.join(bu_items)}")
+                parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets.get('medium'):
@@ -1170,7 +1173,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets.get('high'):
@@ -1181,7 +1184,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[+50%] - Dimensions: {', '.join(dim_items)}")
+                parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets.get('medium'):
@@ -1192,17 +1195,21 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         else:
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
-            parts.append(f"<br>{header}<br>- No significant long-term impact (all changes <10%)")
+            parts.append(header)
+            parts.append("")  # Add blank line after section header
+            parts.append("- No significant long-term impact (all changes <10%)")
     else:
         header = "**Long Term Impact**"
         if quarter_range:
             header += f" ({quarter_range})"
-        parts.append(f"<br>{header}<br>- No significant long-term impact (all changes <10%)")
+        parts.append(header)
+        parts.append("")  # Add blank line after section header
+        parts.append("- No significant long-term impact (all changes <10%)")
     
     # Comparison vs Prev Year
     is_debug_metric_yoy = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
@@ -1321,7 +1328,8 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
-            parts.append(f"<br>{header}")
+            parts.append(header)
+            parts.append("")  # Add blank line after section header
             
             # Add Overall if it exists
             if not overall_yoy.empty:
@@ -1357,7 +1365,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[+50%] - Business Units: {', '.join(bu_items)}")
+                parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets_yoy.get('medium'):
@@ -1366,7 +1374,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets_yoy.get('high'):
@@ -1377,7 +1385,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[+50%] - Dimensions: {', '.join(dim_items)}")
+                parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets_yoy.get('medium'):
@@ -1388,21 +1396,25 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"<br>[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
-            parts.append(f"<br>{header}<br>- No year-over-year data available")
+            parts.append(header)
+            parts.append("")  # Add blank line after section header
+            parts.append("- No year-over-year data available")
     else:
         if is_debug_metric_yoy:
             debug_print(f"[DEBUG YOY] ⚠️  week_yoy_df is None or empty")
         header = "**Comparison vs Prev Year**"
         if year_range:
             header += f" ({year_range})"
-        parts.append(f"<br>{header}<br>- No year-over-year data available")
+        parts.append(header)
+        parts.append("")  # Add blank line after section header
+        parts.append("- No year-over-year data available")
     
     return "<br>".join(parts)
 
