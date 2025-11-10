@@ -1074,10 +1074,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                     prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                     curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                    if row['metric_type'] == 'ratio':
-                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                    # For extreme changes (>500%), also show absolute change in percentage points
+                    abs_change_pp = abs(curr_pct - prev_pct)
+                    if abs_change > 500:
+                        change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                     else:
-                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                    if row['metric_type'] == 'ratio':
+                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                    else:
+                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
             
             # Check PaymentMethod Unknown at Overall level
             pm_unknown = week_prev_df[
@@ -1093,10 +1099,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                     prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                     curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                    if row['metric_type'] == 'ratio':
-                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                    # For extreme changes (>500%), also show absolute change in percentage points
+                    abs_change_pp = abs(curr_pct - prev_pct)
+                    if abs_change > 500:
+                        change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                     else:
-                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                    if row['metric_type'] == 'ratio':
+                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                    else:
+                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
         
         if unknown_callouts:
             anomaly_parts.append("**Unknown Dimensions Callout:**")
@@ -1431,10 +1443,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                         prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                         curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                        if row['metric_type'] == 'ratio':
-                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        # For extreme changes (>500%), also show absolute change in percentage points
+                        abs_change_pp = abs(curr_pct - prev_pct)
+                        if abs_change > 500:
+                            change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                         else:
-                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                            change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                        else:
+                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
                 
                 # Check PaymentMethod Unknown at Overall level
                 pm_unknown_lt = df_metric[
@@ -1450,10 +1468,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                         prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                         curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                        if row['metric_type'] == 'ratio':
-                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        # For extreme changes (>500%), also show absolute change in percentage points
+                        abs_change_pp = abs(curr_pct - prev_pct)
+                        if abs_change > 500:
+                            change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                         else:
-                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                            change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                        else:
+                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
             
             if unknown_callouts_lt:
                 long_term_parts.append("**Unknown Dimensions Callout:**")
@@ -1687,10 +1711,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                         prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                         curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                        if row['metric_type'] == 'ratio':
-                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        # For extreme changes (>500%), also show absolute change in percentage points
+                        abs_change_pp = abs(curr_pct - prev_pct)
+                        if abs_change > 500:
+                            change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                         else:
-                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                            change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                        else:
+                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
                 
                 # Check PaymentMethod Unknown at Overall level
                 pm_unknown_yoy = week_yoy_df[
@@ -1706,10 +1736,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
                         prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                         curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                        if row['metric_type'] == 'ratio':
-                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        # For extreme changes (>500%), also show absolute change in percentage points
+                        abs_change_pp = abs(curr_pct - prev_pct)
+                        if abs_change > 500:
+                            change_str = f"({arrow}{abs_change:.2f}%, {arrow}{abs_change_pp:.2f}pp, vol: {volume})"
                         else:
-                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                            change_str = f"({arrow}{abs_change:.2f}%, vol: {volume})"
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% {change_str}")
+                        else:
+                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} {change_str}")
             
             if unknown_callouts_yoy:
                 long_term_parts.append("**Unknown Dimensions Callout:**")
