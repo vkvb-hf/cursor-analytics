@@ -1130,12 +1130,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 # Display dimensions by bucket
                 for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
                     if dim_buckets[bucket_name]:
-                        parts.append(f"<br>{bucket_label} - Dimensions:")
+                        dim_items = []
                         for dim_row in dim_buckets[bucket_name]:
                             arrow = format_arrow(dim_row['relative_change_pct'])
                             item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
                             rc_name = dim_row['reporting_cluster']
-                            parts.append(f"  - **{rc_name}** {item_name}: {arrow}{abs(dim_row['relative_change_pct']):.2f}%")
+                            dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                        parts.append(f"<br>{bucket_label} - Dimensions:<br>- {', '.join(dim_items)}")
             
             # Bucket and display business units
             if all_significant_bu:
@@ -1145,11 +1146,12 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 # Display business units by bucket
                 for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
                     if bu_buckets[bucket_name]:
-                        parts.append(f"<br>{bucket_label} - Business Units:")
+                        bu_items = []
                         for bu_row in bu_buckets[bucket_name]:
                             arrow = format_arrow(bu_row['relative_change_pct'])
                             bu_name = bu_row.get('business_unit', 'Unknown')
-                            parts.append(f"  - **{bu_name}**: {arrow}{abs(bu_row['relative_change_pct']):.2f}%")
+                            bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                        parts.append(f"<br>{bucket_label} - Business Units:<br>- {', '.join(bu_items)}")
         else:
             header = "**Long Term Impact**"
             if quarter_range:
@@ -1301,12 +1303,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 # Display dimensions by bucket
                 for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
                     if dim_buckets_yoy[bucket_name]:
-                        parts.append(f"<br>{bucket_label} - Dimensions:")
+                        dim_items = []
                         for dim_row in dim_buckets_yoy[bucket_name]:
                             arrow = format_arrow(dim_row['relative_change_pct'])
                             item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
                             rc_name = dim_row['reporting_cluster']
-                            parts.append(f"  - **{rc_name}** {item_name}: {arrow}{abs(dim_row['relative_change_pct']):.2f}%")
+                            dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                        parts.append(f"<br>{bucket_label} - Dimensions:<br>- {', '.join(dim_items)}")
             
             # Bucket and display business units
             if all_significant_bu_yoy:
@@ -1316,11 +1319,12 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 # Display business units by bucket
                 for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
                     if bu_buckets_yoy[bucket_name]:
-                        parts.append(f"<br>{bucket_label} - Business Units:")
+                        bu_items = []
                         for bu_row in bu_buckets_yoy[bucket_name]:
                             arrow = format_arrow(bu_row['relative_change_pct'])
                             bu_name = bu_row.get('business_unit', 'Unknown')
-                            parts.append(f"  - **{bu_name}**: {arrow}{abs(bu_row['relative_change_pct']):.2f}%")
+                            bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                        parts.append(f"<br>{bucket_label} - Business Units:<br>- {', '.join(bu_items)}")
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
