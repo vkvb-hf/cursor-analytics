@@ -822,11 +822,14 @@ def bucket_by_percentage(items_df, item_type='business_unit'):
 def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarter_prev_df, quarter_range="", year_range=""):
     """Build callout text for a metric following write_formatted_summaries pattern"""
     parts = []
+    is_first_section = True
     
     # Week vs Prev Week - Level 1 (Overall summary)
     if week_prev_df is not None and not week_prev_df.empty:
+        if not is_first_section:
+            parts.append("")  # Add blank line before section header
         parts.append("**Current Week vs Prev Week:**")
-        parts.append("")  # Add blank line after section header
+        is_first_section = False
         
         # Process each reporting cluster - Level 1
         for rc in REPORTING_CLUSTERS:
@@ -848,11 +851,14 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 else:
                     parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
         
-        # Deep Insights - Level 2 (Dimensions and Business Units)
+        # Deep Insights - Level 2 (Dimensions and Business Units) - Same format as Long Term Impact
+        if not is_first_section:
+            parts.append("")  # Add blank line before section header
         parts.append("**Deep Insights**")
-        parts.append("")  # Add blank line after section header
-        insights = []
+        is_first_section = False
         
+        # Collect all significant dimensions
+        all_significant_dims_deep = []
         for rc in REPORTING_CLUSTERS:
             # Level 2 - Dimensions
             level2_dims_rows = week_prev_df[
@@ -868,88 +874,103 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>10) | (sorted_dims['volume_impacted']>30)]
                 
                 for _, dim_row in filtered_dims.head(3).iterrows():
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    volume = format_number(dim_row.get('volume_impacted', 0))
-                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
-                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    
-                    if dim_row['metric_type'] == 'ratio':
-                        insights.append(f"- **{rc}** {item_name}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
-                    else:
-                        insights.append(f"- **{rc}** {item_name}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
-            
-            # Level 2 - Business Units (only for non-Overall clusters)
-            # This is where we get business unit data for Week vs Prev Week
+                    all_significant_dims_deep.append({
+                        'reporting_cluster': rc,
+                        'dimension_name': dim_row['dimension_name'],
+                        'dimension_value': dim_row['dimension_value'],
+                        'relative_change_pct': dim_row['relative_change_pct'],
+                        'abs_rel_change': dim_row['abs_rel_change'],
+                        'volume_impacted': dim_row['volume_impacted'],
+                        'prev_ratio': dim_row['prev_ratio'],
+                        'current_ratio': dim_row['current_ratio'],
+                        'metric_type': dim_row['metric_type']
+                    })
+        
+        # Collect all significant business units
+        all_significant_bu_deep = []
+        for rc in REPORTING_CLUSTERS:
             if rc != 'Overall':
-                # DEBUG: Check if we have business unit data for this metric
-                is_debug_metric = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
-                
-                if is_debug_metric:
-                    debug_print(f"\n[DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: {rc}")
-                    debug_print(f"[DEBUG] week_prev_df shape: {week_prev_df.shape}")
-                    debug_print(f"[DEBUG] week_prev_df reporting_cluster values: {week_prev_df['reporting_cluster'].unique()}")
-                    debug_print(f"[DEBUG] week_prev_df business_unit sample: {week_prev_df['business_unit'].head(10).tolist()}")
-                
                 # Get business units for this reporting cluster from country mapping
                 rc_bu = country_mapping_df[country_mapping_df['reporting_cluster'] == rc].business_unit.tolist()
                 
-                if is_debug_metric:
-                    debug_print(f"[DEBUG] Business units in {rc} from country_mapping_df: {len(rc_bu)} ({rc_bu[:10]}...)")
-                
                 # Filter week_prev_df for business units in this cluster
-                # Note: For week comparisons, business units might come from rows where
-                # reporting_cluster = rc (not 'bu_level'), so we filter by business_unit directly
                 level2_bu_rows = week_prev_df[week_prev_df['business_unit'].isin(rc_bu)]
-                
-                if is_debug_metric:
-                    debug_print(f"[DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): {len(level2_bu_rows)}")
-                    if not level2_bu_rows.empty:
-                        debug_print(f"[DEBUG] level2_bu_rows reporting_cluster values: {level2_bu_rows['reporting_cluster'].unique()}")
-                        debug_print(f"[DEBUG] level2_bu_rows business_unit values: {level2_bu_rows['business_unit'].unique()}")
-                        debug_print(f"[DEBUG] level2_bu_rows sample relative_change_pct: {level2_bu_rows['relative_change_pct'].head(10).tolist()}")
-                    else:
-                        debug_print(f"[DEBUG] ⚠️  level2_bu_rows is EMPTY! No business unit data found for {rc}")
-                        # Check if business units exist in week_prev_df at all
-                        all_bu_in_df = week_prev_df['business_unit'].unique()
-                        matching_bu = [bu for bu in rc_bu if bu in all_bu_in_df]
-                        debug_print(f"[DEBUG] Business units in week_prev_df that match {rc}: {len(matching_bu)} ({matching_bu[:10]}...)")
                 
                 if not level2_bu_rows.empty:
                     level2_bu_rows = level2_bu_rows.copy()
                     level2_bu_rows.loc[:, 'abs_rel_change'] = abs(level2_bu_rows['relative_change_pct'])
                     level2_bu_rows.loc[:, 'volume_impacted'] = level2_bu_rows['current_metric_value_denominator'] * level2_bu_rows['abs_rel_change'] / 100
-                    
-                    if is_debug_metric:
-                        debug_print(f"[DEBUG] After calculating abs_rel_change and volume_impacted")
-                        debug_print(f"[DEBUG] Sample abs_rel_change: {level2_bu_rows['abs_rel_change'].head(10).tolist()}")
-                        debug_print(f"[DEBUG] Sample volume_impacted: {level2_bu_rows['volume_impacted'].head(10).tolist()}")
-                    
                     sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
                     filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>10) | (sorted_bu['volume_impacted']>30)]
-                    
-                    if is_debug_metric:
-                        debug_print(f"[DEBUG] After filtering (abs_rel_change>10 OR volume_impacted>30): {len(filtered_bu)} rows")
-                        if not filtered_bu.empty:
-                            debug_print(f"[DEBUG] Significant business units for {rc}: {filtered_bu['business_unit'].tolist()}")
                     
                     for _, bu_row in filtered_bu.head(2).iterrows():
                         if bu_row['business_unit'] == "Null":
                             continue
-                        arrow = format_arrow(bu_row['relative_change_pct'])
-                        volume = format_number(bu_row.get('volume_impacted', 0))
-                        prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
-                        curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
-                        
-                        if bu_row['metric_type'] == 'ratio':
-                            insights.append(f"- **{rc}** {bu_row['business_unit']}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
-                        else:
-                            insights.append(f"- **{rc}** {bu_row['business_unit']}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
+                        all_significant_bu_deep.append({
+                            'business_unit': bu_row['business_unit'],
+                            'relative_change_pct': bu_row['relative_change_pct'],
+                            'abs_rel_change': bu_row['abs_rel_change'],
+                            'volume_impacted': bu_row['volume_impacted'],
+                            'prev_ratio': bu_row['prev_ratio'],
+                            'current_ratio': bu_row['current_ratio'],
+                            'metric_type': bu_row['metric_type']
+                        })
         
-        if insights:
-            parts.extend(insights[:5])
-        else:
+        # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
+        # First, bucket business units
+        bu_buckets_deep = {}
+        if all_significant_bu_deep:
+            bu_df_deep = pd.DataFrame(all_significant_bu_deep)
+            bu_buckets_deep = bucket_by_percentage(bu_df_deep, 'business_unit')
+        
+        # Then, bucket dimensions
+        dim_buckets_deep = {}
+        if all_significant_dims_deep:
+            dims_df_deep = pd.DataFrame(all_significant_dims_deep)
+            dim_buckets_deep = bucket_by_percentage(dims_df_deep, 'dimension')
+        
+        # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
+        # [+50%] - Business Units
+        if bu_buckets_deep.get('high'):
+            bu_items = []
+            for bu_row in bu_buckets_deep['high']:
+                arrow = format_arrow(bu_row['relative_change_pct'])
+                bu_name = bu_row.get('business_unit', 'Unknown')
+                bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+            parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+        
+        # [20% - 49%] - Business Units
+        if bu_buckets_deep.get('medium'):
+            bu_items = []
+            for bu_row in bu_buckets_deep['medium']:
+                arrow = format_arrow(bu_row['relative_change_pct'])
+                bu_name = bu_row.get('business_unit', 'Unknown')
+                bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+            parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+        
+        # [+50%] - Dimensions
+        if dim_buckets_deep.get('high'):
+            dim_items = []
+            for dim_row in dim_buckets_deep['high']:
+                arrow = format_arrow(dim_row['relative_change_pct'])
+                dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                rc_name = dim_row['reporting_cluster']
+                dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+            parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+        
+        # [20% - 49%] - Dimensions
+        if dim_buckets_deep.get('medium'):
+            dim_items = []
+            for dim_row in dim_buckets_deep['medium']:
+                arrow = format_arrow(dim_row['relative_change_pct'])
+                dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                rc_name = dim_row['reporting_cluster']
+                dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+            parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+        
+        if not bu_buckets_deep.get('high') and not bu_buckets_deep.get('medium') and not dim_buckets_deep.get('high') and not dim_buckets_deep.get('medium'):
             parts.append("- No significant insights")
     
     # ============================================================================
@@ -1124,11 +1145,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         
         if has_significant_overall or has_significant_bu or has_significant_dims:
             # Format header with range
+            if not is_first_section:
+                parts.append("")  # Add blank line before section header
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
             parts.append(header)
-            parts.append("")  # Add blank line after section header
+            is_first_section = False
             
             # Add Overall if it exists
             if not overall_rows.empty:
@@ -1197,18 +1220,22 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         else:
+            if not is_first_section:
+                parts.append("")  # Add blank line before section header
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
             parts.append(header)
-            parts.append("")  # Add blank line after section header
+            is_first_section = False
             parts.append("- No significant long-term impact (all changes <10%)")
     else:
+        if not is_first_section:
+            parts.append("")  # Add blank line before section header
         header = "**Long Term Impact**"
         if quarter_range:
             header += f" ({quarter_range})"
         parts.append(header)
-        parts.append("")  # Add blank line after section header
+        is_first_section = False
         parts.append("- No significant long-term impact (all changes <10%)")
     
     # Comparison vs Prev Year
@@ -1325,11 +1352,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         has_significant_dims_yoy = len(all_significant_dims_yoy) > 0
         if not overall_yoy.empty or all_significant_bu_yoy or has_significant_dims_yoy:
             # Format header with range
+            if not is_first_section:
+                parts.append("")  # Add blank line before section header
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
             parts.append(header)
-            parts.append("")  # Add blank line after section header
+            is_first_section = False
             
             # Add Overall if it exists
             if not overall_yoy.empty:
@@ -1400,20 +1429,24 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
+            if not is_first_section:
+                parts.append("")  # Add blank line before section header
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
             parts.append(header)
-            parts.append("")  # Add blank line after section header
+            is_first_section = False
             parts.append("- No year-over-year data available")
     else:
         if is_debug_metric_yoy:
             debug_print(f"[DEBUG YOY] ⚠️  week_yoy_df is None or empty")
+        if not is_first_section:
+            parts.append("")  # Add blank line before section header
         header = "**Comparison vs Prev Year**"
         if year_range:
             header += f" ({year_range})"
         parts.append(header)
-        parts.append("")  # Add blank line after section header
+        is_first_section = False
         parts.append("- No year-over-year data available")
     
     return "<br>".join(parts)
