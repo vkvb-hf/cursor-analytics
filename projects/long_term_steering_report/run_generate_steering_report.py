@@ -140,21 +140,54 @@ def main():
                             if len(lines) > 50:
                                 print(f"\n... ({len(lines) - 50} more lines)")
                             
+                            # Also try to download debug files
+                            debug_files = [item for item in folder_items 
+                                         if item.get('path', '').startswith('debug_') and item.get('path', '').endswith('.txt')]
+                            if debug_files:
+                                print(f"\n📄 Found {len(debug_files)} debug file(s)")
+                                for debug_file_item in debug_files:
+                                    debug_file_path = debug_file_item['path']
+                                    print(f"   Downloading: {debug_file_path}")
+                                    debug_export_response = requests.get(export_url, headers=headers, 
+                                                                        params={"path": debug_file_path, "format": "AUTO"})
+                                    if debug_export_response.status_code == 200:
+                                        debug_data = debug_export_response.json()
+                                        debug_content_b64 = debug_data.get('content', '')
+                                        debug_content = base64.b64decode(debug_content_b64).decode('utf-8')
+                                        
+                                        debug_output_file = Path(__file__).parent / Path(debug_file_path).name
+                                        with open(debug_output_file, 'w') as f:
+                                            f.write(debug_content)
+                                        print(f"   ✅ Downloaded: {debug_output_file.name}")
+                                        
+                                        # Show first 100 lines of debug output
+                                        print(f"\n   📋 Debug output preview (first 100 lines):")
+                                        print("   " + "="*76)
+                                        debug_lines = debug_content.split('\n')
+                                        for i, line in enumerate(debug_lines[:100]):
+                                            print(f"   {line}")
+                                        if len(debug_lines) > 100:
+                                            print(f"   ... ({len(debug_lines) - 100} more lines)")
+                            else:
+                                print(f"   ⚠️  No debug files found in {folder_path}")
+                            
                             return 0
                         else:
                             print(f"   ⚠️  Could not download file (status: {export_response.status_code})")
                     else:
                         # Try searching all steering folders for the file
-                        print(f"⚠️  No steering report files found in {folder_path}, searching all steering folders...")
-                        all_steering_files = []
-                        for folder_item in steering_folders:
-                            folder_path_to_search = folder_item['path']
-                            folder_resp = requests.get(folder_list_url, headers=headers, params={"path": folder_path_to_search})
-                            if folder_resp.status_code == 200:
-                                folder_items = folder_resp.json().get('objects', [])
-                                steering_files = [item for item in folder_items 
-                                                if item.get('path', '').endswith('_steering_report.md')]
-                                all_steering_files.extend(steering_files)
+                        if not steering_files:
+                               # Try searching all steering folders for the file
+                               print(f"⚠️  No steering report files found in {folder_path}, searching all steering folders...")
+                               all_steering_files = []
+                               for folder_item in steering_folders:
+                                   folder_path_to_search = folder_item['path']
+                                   folder_resp = requests.get(folder_list_url, headers=headers, params={"path": folder_path_to_search})
+                                   if folder_resp.status_code == 200:
+                                       folder_items = folder_resp.json().get('objects', [])
+                                       steering_files = [item for item in folder_items 
+                                                       if item.get('path', '').endswith('_steering_report.md')]
+                                       all_steering_files.extend(steering_files)
                         
                         if all_steering_files:
                             latest_file = sorted(all_steering_files, key=lambda x: x['path'], reverse=True)[0]
@@ -185,6 +218,43 @@ def main():
                                 print('\n'.join(preview_lines))
                                 if len(lines) > 50:
                                     print(f"\n... ({len(lines) - 50} more lines)")
+                                
+                                # Also download debug output file
+                                folder_path = str(Path(file_path).parent)
+                                folder_list_url = f"{DATABRICKS_HOST}/api/2.0/workspace/list"
+                                folder_resp = requests.get(folder_list_url, headers=headers, params={"path": folder_path})
+                                if folder_resp.status_code == 200:
+                                    folder_items = folder_resp.json().get('objects', [])
+                                    debug_files = [item for item in folder_items 
+                                                 if item.get('path', '').endswith('debug_output.txt')]
+                                    if debug_files:
+                                        debug_file_item = debug_files[0]
+                                        debug_file_path = debug_file_item['path']
+                                        debug_export_response = requests.get(export_url, headers=headers,
+                                                                             params={"path": debug_file_path, "format": "AUTO"})
+                                        if debug_export_response.status_code == 200:
+                                            debug_data = debug_export_response.json()
+                                            debug_content_b64 = debug_data.get('content', '')
+                                            debug_content = base64.b64decode(debug_content_b64).decode('utf-8')
+                                            
+                                            debug_output_file = Path(__file__).parent / Path(debug_file_path).name
+                                            with open(debug_output_file, 'w') as f:
+                                                f.write(debug_content)
+                                            
+                                            print(f"\n{'='*80}")
+                                            print(f"🐛 DEBUG OUTPUT")
+                                            print(f"{'='*80}")
+                                            print(f"✅ Downloaded debug output")
+                                            print(f"   Saved to: {debug_output_file.absolute()}")
+                                            print(f"\n{'='*80}")
+                                            print(f"📋 DEBUG OUTPUT CONTENT")
+                                            print(f"{'='*80}")
+                                            print(debug_content)
+                                            print(f"{'='*80}")
+                                        else:
+                                            print(f"⚠️  Could not download debug file (status: {debug_export_response.status_code})")
+                                    else:
+                                        print(f"⚠️  No debug_output.txt file found in folder")
                                 
                                 return 0
                         else:

@@ -17,6 +17,21 @@ import math
 from time import time
 import os
 import errno
+import pandas as pd
+import sys
+from io import StringIO
+
+# Set up debug output capture
+debug_output = StringIO()
+debug_original_stdout = sys.stdout
+
+def debug_print(*args, **kwargs):
+    """Print to both console and debug file"""
+    print(*args, **kwargs)  # Print to console
+    print(*args, **kwargs, file=debug_output)  # Print to debug file
+
+# Replace print with debug_print for debug statements
+# We'll use debug_print() for debug statements and regular print() for normal output
 
 # COMMAND ----------
 
@@ -383,13 +398,100 @@ week_yoy_data = spark.sql(week_yoy_query)
 week_yoy_processed = process_comparison_data(week_yoy_data, "Week vs Previous Year Week")
 print(f"   Processed {len(week_yoy_processed)} rows")
 
-# Quarter vs Prev Quarter
+# ============================================================================
+# Quarter vs Prev Quarter Processing
+# ============================================================================
+# This section:
+# 1. Queries current 13-week period data (data_current)
+# 2. Queries previous 13-week period data (data_prev)
+# 3. Joins them on: reporting_cluster, business_unit, metric_final_name, 
+#    dimension_name, dimension_value, flag_more_is_good, flag_is_p0, metric_type
+# 4. Processes the joined data to calculate changes
+# 
+# Note: Business units come from rows where reporting_cluster = 'bu_level'
+# (from the second UNION in build_metrics_query). These rows need to match
+# between current and previous periods for the join to succeed.
+# ============================================================================
 print("\n3. Processing Quarter vs Previous Quarter...")
+debug_print("   [DEBUG] Building queries for current and previous quarters...")
 query_current = build_metrics_query('13WEEKS', 'current', latest_13weeks_str, latest_13weeks_list)
 data_current = spark.sql(query_current)
+debug_print(f"   [DEBUG] data_current count: {data_current.count()}")
 
 query_prev = build_metrics_query('13WEEKS', 'current', prev_13weeks_str, prev_13weeks_list)
 data_prev = spark.sql(query_prev)
+debug_print(f"   [DEBUG] data_prev count: {data_prev.count()}")
+
+# DEBUG: Check reporting_cluster distribution BEFORE join
+debug_print("   [DEBUG] BEFORE JOIN - Checking reporting_cluster distribution:")
+debug_print(f"   [DEBUG] data_current reporting_cluster distribution:")
+data_current.groupBy('reporting_cluster').count().orderBy('reporting_cluster').show(truncate=False)
+debug_print(f"   [DEBUG] data_prev reporting_cluster distribution:")
+data_prev.groupBy('reporting_cluster').count().orderBy('reporting_cluster').show(truncate=False)
+
+# DEBUG: Check bu_level rows specifically
+bu_level_current_count = data_current.filter(F.col('reporting_cluster') == 'bu_level').count()
+bu_level_prev_count = data_prev.filter(F.col('reporting_cluster') == 'bu_level').count()
+debug_print(f"   [DEBUG] BEFORE JOIN - bu_level rows in data_current: {bu_level_current_count}")
+debug_print(f"   [DEBUG] BEFORE JOIN - bu_level rows in data_prev: {bu_level_prev_count}")
+
+# DEBUG: Check sample business unit in both datasets to see if join keys match
+test_metric_name = '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+test_bu = 'IT'
+test_dimension = '_Overall'
+
+bu_current_sample = data_current.filter(
+    (F.col('reporting_cluster') == 'bu_level') &
+    (F.col('business_unit') == test_bu) &
+    (F.col('metric_final_name') == test_metric_name) &
+    (F.col('dimension_name') == test_dimension)
+).limit(1)
+
+bu_prev_sample = data_prev.filter(
+    (F.col('reporting_cluster') == 'bu_level') &
+    (F.col('business_unit') == test_bu) &
+    (F.col('metric_final_name') == test_metric_name) &
+    (F.col('dimension_name') == test_dimension)
+).limit(1)
+
+if bu_current_sample.count() > 0:
+    current_row = bu_current_sample.collect()[0]
+    debug_print(f"   [DEBUG] Sample bu_level row in data_current (IT):")
+    debug_print(f"     - business_unit: {current_row['business_unit']}")
+    debug_print(f"     - metric_final_name: {current_row['metric_final_name']}")
+    debug_print(f"     - dimension_name: {current_row['dimension_name']}")
+    debug_print(f"     - dimension_value: {current_row['dimension_value']}")
+    debug_print(f"     - current_metric_value_numerator: {current_row['current_metric_value_numerator']}")
+    debug_print(f"     - current_metric_value_denominator: {current_row['current_metric_value_denominator']}")
+else:
+    debug_print(f"   [DEBUG] No bu_level row found in data_current for IT")
+
+if bu_prev_sample.count() > 0:
+    prev_row = bu_prev_sample.collect()[0]
+    debug_print(f"   [DEBUG] Sample bu_level row in data_prev (IT):")
+    debug_print(f"     - business_unit: {prev_row['business_unit']}")
+    debug_print(f"     - metric_final_name: {prev_row['metric_final_name']}")
+    debug_print(f"     - dimension_name: {prev_row['dimension_name']}")
+    debug_print(f"     - dimension_value: {prev_row['dimension_value']}")
+    debug_print(f"     - flag_more_is_good: {prev_row['flag_more_is_good']}")
+    debug_print(f"     - flag_is_p0: {prev_row['flag_is_p0']}")
+    debug_print(f"     - metric_type: {prev_row['metric_type']}")
+    debug_print(f"     - current_metric_value_numerator: {prev_row['current_metric_value_numerator']}")
+    debug_print(f"     - current_metric_value_denominator: {prev_row['current_metric_value_denominator']}")
+    
+    # Check if join keys match exactly
+    if bu_current_sample.count() > 0:
+        current_row = bu_current_sample.collect()[0]
+        debug_print(f"   [DEBUG] Comparing join keys for IT:")
+        debug_print(f"     - business_unit match: {current_row['business_unit'] == prev_row['business_unit']}")
+        debug_print(f"     - metric_final_name match: {current_row['metric_final_name'] == prev_row['metric_final_name']}")
+        debug_print(f"     - dimension_name match: {current_row['dimension_name'] == prev_row['dimension_name']}")
+        debug_print(f"     - dimension_value match: {current_row['dimension_value'] == prev_row['dimension_value']} (current: {current_row['dimension_value']}, prev: {prev_row['dimension_value']})")
+        debug_print(f"     - flag_more_is_good match: {current_row['flag_more_is_good'] == prev_row['flag_more_is_good']}")
+        debug_print(f"     - flag_is_p0 match: {current_row['flag_is_p0'] == prev_row['flag_is_p0']}")
+        debug_print(f"     - metric_type match: {current_row['metric_type'] == prev_row['metric_type']}")
+else:
+    debug_print(f"   [DEBUG] ⚠️  No bu_level row found in data_prev for IT - THIS IS THE PROBLEM!")
 
 # Process quarter comparison
 data_prev = data_prev.withColumnRenamed("current_metric_value_numerator", "prev_metric_value_numerator")
@@ -401,16 +503,69 @@ join_cols = ['reporting_cluster', 'business_unit', 'metric_final_name', 'dimensi
 data_current_clean = data_current.select([c for c in data_current.columns if c not in ['prev_metric_value_numerator', 'prev_metric_value_denominator']])
 data_prev_selected = data_prev.select(join_cols + ['prev_metric_value_numerator', 'prev_metric_value_denominator'])
 
+debug_print(f"   [DEBUG] BEFORE JOIN - data_current_clean count: {data_current_clean.count()}")
+debug_print(f"   [DEBUG] BEFORE JOIN - data_prev_selected count: {data_prev_selected.count()}")
+
+# Handle NULL values in join columns - convert NULL to empty string for consistent matching
 for col in join_cols:
     if col in data_current_clean.columns and col in data_prev_selected.columns:
-        data_current_clean = data_current_clean.withColumn(col, F.col(col).cast('string'))
-        data_prev_selected = data_prev_selected.withColumn(col, F.col(col).cast('string'))
+        # Cast to string and replace NULL with empty string for consistent matching
+        data_current_clean = data_current_clean.withColumn(
+            col, 
+            F.coalesce(F.col(col).cast('string'), F.lit(''))
+        )
+        data_prev_selected = data_prev_selected.withColumn(
+            col, 
+            F.coalesce(F.col(col).cast('string'), F.lit(''))
+        )
 
+debug_print("   [DEBUG] Performing LEFT JOIN on columns:", join_cols)
 data_combined = data_current_clean.join(data_prev_selected, on=join_cols, how='left')
+debug_print(f"   [DEBUG] AFTER JOIN - data_combined count: {data_combined.count()}")
+
+# DEBUG: Check bu_level rows after join
+bu_level_after_join = data_combined.filter(F.col('reporting_cluster') == 'bu_level').count()
+debug_print(f"   [DEBUG] AFTER JOIN - bu_level rows in data_combined: {bu_level_after_join}")
+
+# DEBUG: Check if prev values are NULL (meaning join didn't match) before fillna
+bu_level_before_fillna = data_combined.filter(F.col('reporting_cluster') == 'bu_level')
+null_prev_num = bu_level_before_fillna.filter(F.col('prev_metric_value_numerator').isNull()).count()
+null_prev_den = bu_level_before_fillna.filter(F.col('prev_metric_value_denominator').isNull()).count()
+debug_print(f"   [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_numerator: {null_prev_num}")
+debug_print(f"   [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_denominator: {null_prev_den}")
+
+# DEBUG: Check sample values before fillna for a specific business unit
+test_bu_sample = bu_level_before_fillna.filter(F.col('business_unit') == 'IT').limit(1)
+if test_bu_sample.count() > 0:
+    test_row = test_bu_sample.collect()[0]
+    debug_print(f"   [DEBUG] Sample bu_level row (IT) before fillna:")
+    debug_print(f"     - current_metric_value_numerator: {test_row['current_metric_value_numerator']}")
+    debug_print(f"     - current_metric_value_denominator: {test_row['current_metric_value_denominator']}")
+    debug_print(f"     - prev_metric_value_numerator: {test_row['prev_metric_value_numerator']}")
+    debug_print(f"     - prev_metric_value_denominator: {test_row['prev_metric_value_denominator']}")
+    debug_print(f"     - business_unit: {test_row['business_unit']}")
+    debug_print(f"     - metric_final_name: {test_row['metric_final_name']}")
+
 data_combined = data_combined.fillna(0, subset=['prev_metric_value_numerator', 'prev_metric_value_denominator'])
 
 quarter_prev_processed = process_comparison_data(data_combined, "Quarter vs Previous Quarter")
 print(f"   Processed {len(quarter_prev_processed)} rows")
+
+# DEBUG: Check if bu_level rows are present after processing
+if quarter_prev_processed is not None and not quarter_prev_processed.empty:
+    bu_level_count = len(quarter_prev_processed[quarter_prev_processed['reporting_cluster'] == 'bu_level'])
+    debug_print(f"   [DEBUG] AFTER PROCESSING - bu_level rows in quarter_prev_processed: {bu_level_count}")
+    debug_print(f"   [DEBUG] AFTER PROCESSING - reporting_cluster distribution:")
+    debug_print(str(quarter_prev_processed['reporting_cluster'].value_counts()))
+    
+    if bu_level_count > 0:
+        test_metric = '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+        test_metric_df = quarter_prev_processed[quarter_prev_processed['metric_final_name'] == test_metric]
+        debug_print(f"   [DEBUG] AFTER PROCESSING - test_metric_df count: {len(test_metric_df)}")
+        bu_level_in_test = test_metric_df[test_metric_df['reporting_cluster'] == 'bu_level']
+        debug_print(f"   [DEBUG] AFTER PROCESSING - bu_level rows for {test_metric}: {len(bu_level_in_test)}")
+        if not bu_level_in_test.empty:
+            debug_print(f"   [DEBUG] Sample bu_level business units: {bu_level_in_test['business_unit'].head(10).tolist()}")
 
 # COMMAND ----------
 
@@ -516,19 +671,24 @@ def generate_key_insights(week_prev_df, week_yoy_df, quarter_prev_df):
 
 # COMMAND ----------
 
-# Build callout for a metric
+# Build callout for a metric - rewritten from scratch following write_formatted_summaries pattern
 def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarter_prev_df):
-    """Build callout text for a metric"""
+    """Build callout text for a metric following write_formatted_summaries pattern"""
     parts = []
     
-    # Week vs Prev Week
+    # Week vs Prev Week - Level 1 (Overall summary)
     if week_prev_df is not None and not week_prev_df.empty:
         parts.append("**Current Week vs Prev Week:**")
         
-        for cluster in ['Overall', 'HF-NA', 'HF-INTL', 'RTE', 'WL']:
-            cluster_data = week_prev_df[week_prev_df['reporting_cluster'] == cluster]
-            if not cluster_data.empty:
-                row = cluster_data.iloc[0]
+        # Process each reporting cluster - Level 1
+        for rc in REPORTING_CLUSTERS:
+            level1_rows = week_prev_df[
+                (week_prev_df['reporting_cluster'] == rc) & 
+                (week_prev_df['dimension_name'] == '_Overall')
+            ]
+            
+            if not level1_rows.empty:
+                row = level1_rows.iloc[0]
                 arrow = format_arrow(row['relative_change_pct'])
                 sig = format_significance(row.get('significance_level', 0))
                 volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
@@ -536,63 +696,278 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **{cluster}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    parts.append(f"- **{rc}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
                 else:
-                    parts.append(f"- **{cluster}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
         
-        # Deep Insights - top business units
+        # Deep Insights - Level 2 (Dimensions and Business Units)
         parts.append("<br><br>**Deep Insights**")
         insights = []
-        for cluster in ['Overall', 'HF-NA', 'HF-INTL', 'RTE', 'WL']:
-            cluster_data = week_prev_df[week_prev_df['reporting_cluster'] == cluster]
-            if not cluster_data.empty:
-                # Get business units for this cluster
-                if cluster != 'Overall':
-                    rc_bu = country_mapping_df[country_mapping_df['reporting_cluster'] == cluster].business_unit.tolist()
-                    bu_data = week_prev_df[(week_prev_df['business_unit'].isin(rc_bu)) & 
-                                          (week_prev_df['metric_final_name'] == metric_full_name)]
-                else:
-                    bu_data = week_prev_df[(week_prev_df['reporting_cluster'] == 'bu_level') & 
-                                          (week_prev_df['metric_final_name'] == metric_full_name)]
+        
+        for rc in REPORTING_CLUSTERS:
+            # Level 2 - Dimensions
+            level2_dims_rows = week_prev_df[
+                (week_prev_df['reporting_cluster'] == rc) & 
+                (week_prev_df['dimension_name'] != '_Overall')
+            ]
+            
+            if not level2_dims_rows.empty:
+                level2_dims_rows = level2_dims_rows.copy()
+                level2_dims_rows.loc[:, 'abs_rel_change'] = abs(level2_dims_rows['relative_change_pct'])
+                level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
+                sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
+                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>10) | (sorted_dims['volume_impacted']>30)]
                 
-                if not bu_data.empty:
-                    bu_data = bu_data.copy()
-                    bu_data.loc[:, 'abs_rel_change'] = abs(bu_data['relative_change_pct'])
-                    top_bu = bu_data.nlargest(3, 'abs_rel_change', keep='all')
-                    for _, bu_row in top_bu.iterrows():
+                for _, dim_row in filtered_dims.head(3).iterrows():
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    volume = format_number(dim_row.get('volume_impacted', 0))
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    
+                    if dim_row['metric_type'] == 'ratio':
+                        insights.append(f"- **{rc}** {item_name}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        insights.append(f"- **{rc}** {item_name}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
+            
+            # Level 2 - Business Units (only for non-Overall clusters)
+            # This is where we get business unit data for Week vs Prev Week
+            if rc != 'Overall':
+                # DEBUG: Check if we have business unit data for this metric
+                is_debug_metric = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+                
+                if is_debug_metric:
+                    debug_print(f"\n[DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: {rc}")
+                    debug_print(f"[DEBUG] week_prev_df shape: {week_prev_df.shape}")
+                    debug_print(f"[DEBUG] week_prev_df reporting_cluster values: {week_prev_df['reporting_cluster'].unique()}")
+                    debug_print(f"[DEBUG] week_prev_df business_unit sample: {week_prev_df['business_unit'].head(10).tolist()}")
+                
+                # Get business units for this reporting cluster from country mapping
+                rc_bu = country_mapping_df[country_mapping_df['reporting_cluster'] == rc].business_unit.tolist()
+                
+                if is_debug_metric:
+                    debug_print(f"[DEBUG] Business units in {rc} from country_mapping_df: {len(rc_bu)} ({rc_bu[:10]}...)")
+                
+                # Filter week_prev_df for business units in this cluster
+                # Note: For week comparisons, business units might come from rows where
+                # reporting_cluster = rc (not 'bu_level'), so we filter by business_unit directly
+                level2_bu_rows = week_prev_df[week_prev_df['business_unit'].isin(rc_bu)]
+                
+                if is_debug_metric:
+                    debug_print(f"[DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): {len(level2_bu_rows)}")
+                    if not level2_bu_rows.empty:
+                        debug_print(f"[DEBUG] level2_bu_rows reporting_cluster values: {level2_bu_rows['reporting_cluster'].unique()}")
+                        debug_print(f"[DEBUG] level2_bu_rows business_unit values: {level2_bu_rows['business_unit'].unique()}")
+                        debug_print(f"[DEBUG] level2_bu_rows sample relative_change_pct: {level2_bu_rows['relative_change_pct'].head(10).tolist()}")
+                    else:
+                        debug_print(f"[DEBUG] ⚠️  level2_bu_rows is EMPTY! No business unit data found for {rc}")
+                        # Check if business units exist in week_prev_df at all
+                        all_bu_in_df = week_prev_df['business_unit'].unique()
+                        matching_bu = [bu for bu in rc_bu if bu in all_bu_in_df]
+                        debug_print(f"[DEBUG] Business units in week_prev_df that match {rc}: {len(matching_bu)} ({matching_bu[:10]}...)")
+                
+                if not level2_bu_rows.empty:
+                    level2_bu_rows = level2_bu_rows.copy()
+                    level2_bu_rows.loc[:, 'abs_rel_change'] = abs(level2_bu_rows['relative_change_pct'])
+                    level2_bu_rows.loc[:, 'volume_impacted'] = level2_bu_rows['current_metric_value_denominator'] * level2_bu_rows['abs_rel_change'] / 100
+                    
+                    if is_debug_metric:
+                        debug_print(f"[DEBUG] After calculating abs_rel_change and volume_impacted")
+                        debug_print(f"[DEBUG] Sample abs_rel_change: {level2_bu_rows['abs_rel_change'].head(10).tolist()}")
+                        debug_print(f"[DEBUG] Sample volume_impacted: {level2_bu_rows['volume_impacted'].head(10).tolist()}")
+                    
+                    sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
+                    filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>10) | (sorted_bu['volume_impacted']>30)]
+                    
+                    if is_debug_metric:
+                        debug_print(f"[DEBUG] After filtering (abs_rel_change>10 OR volume_impacted>30): {len(filtered_bu)} rows")
+                        if not filtered_bu.empty:
+                            debug_print(f"[DEBUG] Significant business units for {rc}: {filtered_bu['business_unit'].tolist()}")
+                    
+                    for _, bu_row in filtered_bu.head(2).iterrows():
+                        if bu_row['business_unit'] == "Null":
+                            continue
                         arrow = format_arrow(bu_row['relative_change_pct'])
-                        volume = format_number(bu_row.get('current_metric_value_denominator', 0) * abs(bu_row['relative_change_pct']) / 100)
+                        volume = format_number(bu_row.get('volume_impacted', 0))
                         prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
                         curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
                         
                         if bu_row['metric_type'] == 'ratio':
-                            insights.append(f"- **{cluster}** {bu_row['business_unit']}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
+                            insights.append(f"- **{rc}** {bu_row['business_unit']}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
                         else:
-                            insights.append(f"- **{cluster}** {bu_row['business_unit']}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
+                            insights.append(f"- **{rc}** {bu_row['business_unit']}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
         
         if insights:
             parts.extend(insights[:5])
         else:
-            parts.append("- No significant business unit insights")
+            parts.append("- No significant insights")
     
-    # Long Term Impact (Quarter)
+    # ============================================================================
+    # Long Term Impact (Quarter) - following write_formatted_summaries pattern
+    # ============================================================================
+    # This section processes quarter-over-quarter comparison data to identify
+    # significant business unit changes. The data flow is:
+    # 1. Input: quarter_prev_df (already filtered by metric)
+    # 2. Filter for bu_level rows (business units come from second UNION in query)
+    # 3. For each reporting cluster (HF-NA, HF-INTL, RTE, WL):
+    #    - Get business units from country_mapping_df
+    #    - Filter bu_level rows by business_unit.isin(rc_bu)
+    #    - Calculate abs_rel_change and volume_impacted
+    #    - Filter for significance: (abs_rel_change>10) | (volume_impacted>30)
+    # 4. Collect all significant business units
+    # 5. Display if has_significant_overall OR has_significant_bu
+    # ============================================================================
     if quarter_prev_df is not None and not quarter_prev_df.empty:
-        overall_q = quarter_prev_df[quarter_prev_df['reporting_cluster'] == 'Overall']
-        if not overall_q.empty:
-            row = overall_q.iloc[0]
-            if abs(row['relative_change_pct']) > 10:
+        # DEBUG: Track data flow for Payment Page Visit to Success
+        is_debug_metric = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+        
+        if is_debug_metric:
+            debug_print(f"\n[DEBUG build_callout_for_metric] Starting Long Term Impact for: {metric_full_name}")
+            debug_print(f"[DEBUG] STEP 1 - Input quarter_prev_df shape: {quarter_prev_df.shape}")
+            debug_print(f"[DEBUG] STEP 1 - Input quarter_prev_df reporting_cluster values: {quarter_prev_df['reporting_cluster'].unique()}")
+            bu_level_input = quarter_prev_df[quarter_prev_df['reporting_cluster'] == 'bu_level']
+            debug_print(f"[DEBUG] STEP 1 - bu_level rows in input: {len(bu_level_input)}")
+        
+        df_metric = quarter_prev_df.copy()
+        
+        # Ensure data types are consistent (should already be done, but be defensive)
+        if 'business_unit' in df_metric.columns:
+            df_metric['business_unit'] = df_metric['business_unit'].astype(str).str.strip()
+        if 'reporting_cluster' in df_metric.columns:
+            df_metric['reporting_cluster'] = df_metric['reporting_cluster'].astype(str).str.strip()
+        if 'dimension_name' in df_metric.columns:
+            df_metric['dimension_name'] = df_metric['dimension_name'].astype(str).str.strip()
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 2 - After data type normalization, df_metric shape: {df_metric.shape}")
+            debug_print(f"[DEBUG] STEP 2 - reporting_cluster distribution:")
+            debug_print(str(df_metric['reporting_cluster'].value_counts()))
+        
+        # Process each reporting cluster - Level 1 (Overall summary)
+        overall_rows = df_metric[
+            (df_metric['reporting_cluster'] == 'Overall') & 
+            (df_metric['dimension_name'] == '_Overall')
+        ]
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 3 - Overall rows count: {len(overall_rows)}")
+            if not overall_rows.empty:
+                debug_print(f"[DEBUG] STEP 3 - Overall relative_change_pct: {overall_rows.iloc[0]['relative_change_pct']:.2f}%")
+        
+        # Collect all significant business units from all clusters
+        # Business units come from rows where reporting_cluster = 'bu_level' (from second UNION)
+        # We need to filter for bu_level rows and map them to clusters using country_mapping_df
+        all_significant_bu = []
+        
+        # Get all business unit rows (reporting_cluster = 'bu_level')
+        # For non-special metrics, bu_level rows should have dimension_name = '_Overall'
+        # For special metrics, they should have dimension_value = 'Good'
+        # But since we're already filtering by metric, we can just get all bu_level rows
+        bu_level_rows = df_metric[df_metric['reporting_cluster'] == 'bu_level'].copy()
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 4 - bu_level_rows count: {len(bu_level_rows)}")
+            if not bu_level_rows.empty:
+                debug_print(f"[DEBUG] STEP 4 - bu_level_rows dimension_name values: {bu_level_rows['dimension_name'].unique()}")
+                debug_print(f"[DEBUG] STEP 4 - Sample business units: {bu_level_rows['business_unit'].head(10).tolist()}")
+                debug_print(f"[DEBUG] STEP 4 - Sample relative_change_pct values: {bu_level_rows['relative_change_pct'].head(10).tolist()}")
+        
+        # Also check if there are business units in other reporting_cluster rows (from first UNION)
+        # These would have actual reporting_cluster values (HF-NA, HF-INTL, etc.) and business_unit populated
+        # But based on the query structure, business units only come from bu_level rows
+        # So we only need to check bu_level
+        
+        if not bu_level_rows.empty:
+            if is_debug_metric:
+                debug_print(f"[DEBUG] STEP 5 - Processing reporting clusters to find business units...")
+            
+            # Process each reporting cluster to find its business units
+            for rc in REPORTING_CLUSTERS:
+                if rc != 'Overall':
+                    # Get business units for this reporting cluster from country mapping
+                    rc_bu = country_mapping_df[country_mapping_df['reporting_cluster'] == rc].business_unit.tolist()
+                    # Convert to string and strip for matching (country_mapping_df is already normalized, but be defensive)
+                    rc_bu = [str(bu).strip() for bu in rc_bu]
+                    
+                    if is_debug_metric:
+                        debug_print(f"[DEBUG] STEP 5.{rc} - Business units in {rc}: {len(rc_bu)} ({rc_bu[:5]}...)")
+                    
+                    # Filter bu_level rows for business units in this cluster
+                    # bu_level_rows is already normalized at the start of the function
+                    level2_bu_rows = bu_level_rows[bu_level_rows['business_unit'].isin(rc_bu)]
+                    
+                    if is_debug_metric:
+                        debug_print(f"[DEBUG] STEP 5.{rc} - After filtering by business_unit.isin(rc_bu): {len(level2_bu_rows)} rows")
+                    
+                    if not level2_bu_rows.empty:
+                        level2_bu_rows = level2_bu_rows.copy()
+                        level2_bu_rows.loc[:, 'abs_rel_change'] = abs(level2_bu_rows['relative_change_pct'])
+                        level2_bu_rows.loc[:, 'volume_impacted'] = level2_bu_rows['current_metric_value_denominator'] * level2_bu_rows['abs_rel_change'] / 100
+                        
+                        if is_debug_metric:
+                            debug_print(f"[DEBUG] STEP 5.{rc} - After calculating abs_rel_change and volume_impacted")
+                            debug_print(f"[DEBUG] STEP 5.{rc} - Sample abs_rel_change: {level2_bu_rows['abs_rel_change'].head(5).tolist()}")
+                            debug_print(f"[DEBUG] STEP 5.{rc} - Sample volume_impacted: {level2_bu_rows['volume_impacted'].head(5).tolist()}")
+                        
+                        sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
+                        filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>10) | (sorted_bu['volume_impacted']>30)]
+                        
+                        if is_debug_metric:
+                            debug_print(f"[DEBUG] STEP 5.{rc} - After filtering (abs_rel_change>10 OR volume_impacted>30): {len(filtered_bu)} rows")
+                            if not filtered_bu.empty:
+                                debug_print(f"[DEBUG] STEP 5.{rc} - Significant business units: {filtered_bu['business_unit'].tolist()}")
+                        
+                        for _, row in filtered_bu.iterrows():
+                            if row['business_unit'] == "Null" or pd.isna(row['business_unit']) or row['business_unit'] == '':
+                                continue
+                            all_significant_bu.append(row)
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 6 - Total significant business units collected: {len(all_significant_bu)}")
+            if all_significant_bu:
+                bu_names = [r['business_unit'] for r in all_significant_bu]
+                debug_print(f"[DEBUG] STEP 6 - Significant business units: {bu_names}")
+        
+        # Check if we should show Long Term Impact
+        has_significant_overall = not overall_rows.empty and abs(overall_rows.iloc[0]['relative_change_pct']) > 10
+        has_significant_bu = len(all_significant_bu) > 0
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 7 - has_significant_overall: {has_significant_overall}, has_significant_bu: {has_significant_bu}")
+        
+        if has_significant_overall or has_significant_bu:
+            parts.append("<br><br>**Long Term Impact**")
+            
+            # Add Overall if it exists
+            if not overall_rows.empty:
+                row = overall_rows.iloc[0]
                 arrow = format_arrow(row['relative_change_pct'])
                 volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
-                parts.append("<br><br>**Long Term Impact**")
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **Current Quarter vs Prev Quarter**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
                 else:
-                    parts.append(f"- **Current Quarter vs Prev Quarter**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-            else:
-                parts.append("<br><br>**Long Term Impact**<br>- No significant long-term impact (all changes <10%)")
+                    parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+            
+            # Add significant business units (sort by abs_rel_change for display)
+            if all_significant_bu:
+                # Convert to DataFrame for easier sorting
+                bu_df = pd.DataFrame(all_significant_bu)
+                bu_df = bu_df.sort_values('abs_rel_change', ascending=False)
+                
+                for _, bu_row in bu_df.head(15).iterrows():
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    volume = format_number(bu_row.get('volume_impacted', 0))
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    
+                    if bu_row['metric_type'] == 'ratio':
+                        parts.append(f"- **{bu_name}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        parts.append(f"- **{bu_name}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
         else:
             parts.append("<br><br>**Long Term Impact**<br>- No significant long-term impact (all changes <10%)")
     else:
@@ -600,7 +975,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
     
     # Comparison vs Prev Year
     if week_yoy_df is not None and not week_yoy_df.empty:
-        overall_yoy = week_yoy_df[week_yoy_df['reporting_cluster'] == 'Overall']
+        overall_yoy = week_yoy_df[
+            (week_yoy_df['reporting_cluster'] == 'Overall') & 
+            (week_yoy_df['dimension_name'] == '_Overall')
+        ]
         if not overall_yoy.empty:
             row = overall_yoy.iloc[0]
             if abs(row['relative_change_pct']) > 10:
@@ -630,6 +1008,9 @@ print("\n" + "="*80)
 print("Generating Steering Report...")
 print("="*80)
 
+# Define OUTPUT_BASE_FOLDER before calling build_callout_for_metric so it's available in the function
+OUTPUT_BASE_FOLDER = f'{WORKSPACE_FOLDER}/long-term-steering-{latest_week_str if latest_week_str else "unknown"}'
+
 week_num = latest_week_str.split('-W')[1] if latest_week_str else 'XX'
 report = f"# {latest_week_str} Weekly Payments Metrics Steering\n\n"
 report += "## Key Insights\n"
@@ -638,26 +1019,79 @@ report += "\n\n"
 report += "| Metrics | Anomaly/Callout | Notes |\n"
 report += "| :--- | :--- | :--- |\n"
 
+# Normalize data types once before the loop to ensure consistent filtering
+if quarter_prev_processed is not None and not quarter_prev_processed.empty:
+    quarter_prev_processed = quarter_prev_processed.copy()
+    quarter_prev_processed['metric_final_name'] = quarter_prev_processed['metric_final_name'].astype(str).str.strip()
+    quarter_prev_processed['reporting_cluster'] = quarter_prev_processed['reporting_cluster'].astype(str).str.strip()
+    quarter_prev_processed['business_unit'] = quarter_prev_processed['business_unit'].astype(str).str.strip()
+
+if week_prev_processed is not None and not week_prev_processed.empty:
+    week_prev_processed = week_prev_processed.copy()
+    week_prev_processed['metric_final_name'] = week_prev_processed['metric_final_name'].astype(str).str.strip()
+
+if week_yoy_processed is not None and not week_yoy_processed.empty:
+    week_yoy_processed = week_yoy_processed.copy()
+    week_yoy_processed['metric_final_name'] = week_yoy_processed['metric_final_name'].astype(str).str.strip()
+
 # Add each metric
 for metric_display, metric_full in METRIC_GROUPS:
+    # DEBUG for Payment Page Visit to Success - check BEFORE filtering
+    is_debug_metric = metric_full == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+    
+    if is_debug_metric:
+        debug_print(f"\n{'='*80}")
+        debug_print(f"[DEBUG METRIC FILTERING] Processing metric: {metric_full}")
+        debug_print(f"{'='*80}")
+        if quarter_prev_processed is not None and not quarter_prev_processed.empty:
+            debug_print(f"[DEBUG] BEFORE FILTERING - quarter_prev_processed shape: {quarter_prev_processed.shape}")
+            debug_print(f"[DEBUG] BEFORE FILTERING - Unique metric_final_name values (first 10):")
+            unique_metrics = quarter_prev_processed['metric_final_name'].unique()[:10]
+            for um in unique_metrics:
+                print(f"  - {um}")
+            debug_print(f"[DEBUG] BEFORE FILTERING - Checking if our metric exists in quarter_prev_processed:")
+            metric_exists = (quarter_prev_processed['metric_final_name'] == metric_full).any()
+            debug_print(f"[DEBUG] BEFORE FILTERING - Metric exists: {metric_exists}")
+            if metric_exists:
+                matching_rows = quarter_prev_processed[quarter_prev_processed['metric_final_name'] == metric_full]
+                debug_print(f"[DEBUG] BEFORE FILTERING - Matching rows count: {len(matching_rows)}")
+                debug_print(f"[DEBUG] BEFORE FILTERING - reporting_cluster distribution in matching rows:")
+                print(matching_rows['reporting_cluster'].value_counts())
+                bu_level_before = matching_rows[matching_rows['reporting_cluster'] == 'bu_level']
+                debug_print(f"[DEBUG] BEFORE FILTERING - bu_level rows in matching: {len(bu_level_before)}")
+    
     # Filter dataframes for this metric
     week_prev_metric = week_prev_processed[week_prev_processed['metric_final_name'] == metric_full] if week_prev_processed is not None and not week_prev_processed.empty else None
     week_yoy_metric = week_yoy_processed[week_yoy_processed['metric_final_name'] == metric_full] if week_yoy_processed is not None and not week_yoy_processed.empty else None
     quarter_prev_metric = quarter_prev_processed[quarter_prev_processed['metric_final_name'] == metric_full] if quarter_prev_processed is not None and not quarter_prev_processed.empty else None
     
+    # DEBUG for Payment Page Visit to Success - check AFTER filtering
+    if is_debug_metric:
+        debug_print(f"[DEBUG] AFTER FILTERING - quarter_prev_metric:")
+        if quarter_prev_metric is not None and not quarter_prev_metric.empty:
+            debug_print(f"[DEBUG] AFTER FILTERING - quarter_prev_metric shape: {quarter_prev_metric.shape}")
+            debug_print(f"[DEBUG] AFTER FILTERING - reporting_cluster values: {quarter_prev_metric['reporting_cluster'].unique()}")
+            debug_print(f"[DEBUG] AFTER FILTERING - reporting_cluster distribution:")
+            print(quarter_prev_metric['reporting_cluster'].value_counts())
+            bu_level_in_metric = quarter_prev_metric[quarter_prev_metric['reporting_cluster'] == 'bu_level']
+            debug_print(f"[DEBUG] AFTER FILTERING - bu_level rows in quarter_prev_metric: {len(bu_level_in_metric)}")
+            if not bu_level_in_metric.empty:
+                debug_print(f"[DEBUG] AFTER FILTERING - Sample business units: {bu_level_in_metric['business_unit'].head(10).tolist()}")
+                debug_print(f"[DEBUG] AFTER FILTERING - Sample relative_change_pct: {bu_level_in_metric['relative_change_pct'].head(10).tolist()}")
+        else:
+            debug_print(f"[DEBUG] AFTER FILTERING - quarter_prev_metric is None or empty!")
+    
     callout = build_callout_for_metric(metric_full, week_prev_metric, week_yoy_metric, quarter_prev_metric)
     
-    # Truncate if too long
-    if len(callout) > 1000:
-        callout = callout[:997] + "..."
+    # Truncate if too long (but allow more for Long Term Impact section)
+    if len(callout) > 2000:
+        callout = callout[:1997] + "..."
     
     report += f"| **{metric_display}** | {callout} | |\n"
 
 # COMMAND ----------
 
 # Write output
-OUTPUT_BASE_FOLDER = f'{WORKSPACE_FOLDER}/long-term-steering-{latest_week_str if latest_week_str else "unknown"}'
-
 output_folder = OUTPUT_BASE_FOLDER
 if not os.path.exists(output_folder):
     try:
@@ -678,3 +1112,18 @@ print(f"   Metrics processed: {len(METRIC_GROUPS)}")
 dbfs_path = f'/tmp/W{week_num}_steering_report.md'
 dbutils.fs.put(dbfs_path, report, overwrite=True)
 print(f"   Also saved to DBFS: {dbfs_path}")
+
+# Save debug output to file and DBFS
+debug_content = debug_output.getvalue()
+if debug_content:
+    debug_file = f'{output_folder}/debug_output.txt'
+    with open(debug_file, 'w') as f:
+        f.write(debug_content)
+    print(f"   Debug output saved to: {debug_file}")
+    
+    # Also save to DBFS
+    debug_dbfs_path = f'/tmp/W{week_num}_debug_output.txt'
+    dbutils.fs.put(debug_dbfs_path, debug_content, overwrite=True)
+    print(f"   Debug output also saved to DBFS: {debug_dbfs_path}")
+else:
+    print(f"   No debug output captured")
