@@ -820,16 +820,22 @@ def bucket_by_percentage(items_df, item_type='business_unit'):
 
 # Build callout for a metric - rewritten from scratch following write_formatted_summaries pattern
 def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarter_prev_df, quarter_range="", year_range=""):
-    """Build callout text for a metric following write_formatted_summaries pattern"""
-    parts = []
-    is_first_section = True
+    """Build callout text for a metric following write_formatted_summaries pattern
+    Returns: (anomaly_callout, long_term_callout) tuple
+    - anomaly_callout: Current Week vs Prev Week and Deep Insights
+    - long_term_callout: Long Term Impact and Comparison vs Prev Year
+    """
+    anomaly_parts = []
+    long_term_parts = []
+    is_first_anomaly_section = True
+    is_first_long_term_section = True
     
-    # Week vs Prev Week - Level 1 (Overall summary)
+    # Week vs Prev Week - Level 1 (Overall summary) - goes to Anomaly/Callout column
     if week_prev_df is not None and not week_prev_df.empty:
-        if not is_first_section:
-            parts.append("")  # Add blank line before section header
-        parts.append("**Current Week vs Prev Week:**")
-        is_first_section = False
+        if not is_first_anomaly_section:
+            anomaly_parts.append("")  # Add blank line before section header
+        anomaly_parts.append("**Current Week vs Prev Week:**")
+        is_first_anomaly_section = False
         
         # Process each reporting cluster - Level 1
         for rc in REPORTING_CLUSTERS:
@@ -847,15 +853,15 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **{rc}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    anomaly_parts.append(f"- **{rc}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
                 else:
-                    parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    anomaly_parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
         
-        # Deep Insights - Level 2 (Dimensions and Business Units) - Same format as Long Term Impact
-        if not is_first_section:
-            parts.append("")  # Add blank line before section header
-        parts.append("**Deep Insights**")
-        is_first_section = False
+        # Deep Insights - Level 2 (Dimensions and Business Units) - Same format as Long Term Impact - goes to Anomaly/Callout column
+        if not is_first_anomaly_section:
+            anomaly_parts.append("")  # Add blank line before section header
+        anomaly_parts.append("**Deep Insights**")
+        is_first_anomaly_section = False
         
         # Collect all significant dimensions
         all_significant_dims_deep = []
@@ -929,7 +935,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             dims_df_deep = pd.DataFrame(all_significant_dims_deep)
             dim_buckets_deep = bucket_by_percentage(dims_df_deep, 'dimension')
         
-        # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
+        # Display in specified order: [+50%] BU, [20-49%] BU, [10-19%] BU, [+50%] Dims, [20-49%] Dims, [10-19%] Dims
         # [+50%] - Business Units
         if bu_buckets_deep.get('high'):
             bu_items = []
@@ -937,7 +943,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 arrow = format_arrow(bu_row['relative_change_pct'])
                 bu_name = bu_row.get('business_unit', 'Unknown')
                 bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-            parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+            anomaly_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
         
         # [20% - 49%] - Business Units
         if bu_buckets_deep.get('medium'):
@@ -946,7 +952,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 arrow = format_arrow(bu_row['relative_change_pct'])
                 bu_name = bu_row.get('business_unit', 'Unknown')
                 bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-            parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+            anomaly_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+        
+        # [10% - 19%] - Business Units
+        if bu_buckets_deep.get('low'):
+            bu_items = []
+            for bu_row in bu_buckets_deep['low']:
+                arrow = format_arrow(bu_row['relative_change_pct'])
+                bu_name = bu_row.get('business_unit', 'Unknown')
+                bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+            anomaly_parts.append(f"[10% - 19%] - Business Units: {', '.join(bu_items)}")
         
         # [+50%] - Dimensions
         if dim_buckets_deep.get('high'):
@@ -957,7 +972,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                 rc_name = dim_row['reporting_cluster']
                 dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-            parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+            anomaly_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
         
         # [20% - 49%] - Dimensions
         if dim_buckets_deep.get('medium'):
@@ -968,10 +983,21 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                 rc_name = dim_row['reporting_cluster']
                 dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-            parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+            anomaly_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         
-        if not bu_buckets_deep.get('high') and not bu_buckets_deep.get('medium') and not dim_buckets_deep.get('high') and not dim_buckets_deep.get('medium'):
-            parts.append("- No significant insights")
+        # [10% - 19%] - Dimensions
+        if dim_buckets_deep.get('low'):
+            dim_items = []
+            for dim_row in dim_buckets_deep['low']:
+                arrow = format_arrow(dim_row['relative_change_pct'])
+                dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                rc_name = dim_row['reporting_cluster']
+                dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+            anomaly_parts.append(f"[10% - 19%] - Dimensions: {', '.join(dim_items)}")
+        
+        if not bu_buckets_deep.get('high') and not bu_buckets_deep.get('medium') and not bu_buckets_deep.get('low') and not dim_buckets_deep.get('high') and not dim_buckets_deep.get('medium') and not dim_buckets_deep.get('low'):
+            anomaly_parts.append("- No significant insights")
     
     # ============================================================================
     # Long Term Impact (Quarter) - following write_formatted_summaries pattern
@@ -1144,14 +1170,14 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 debug_print(f"[DEBUG] STEP 7 - Significant dimensions count: {len(all_significant_dims)}")
         
         if has_significant_overall or has_significant_bu or has_significant_dims:
-            # Format header with range
-            if not is_first_section:
-                parts.append("")  # Add blank line before section header
+            # Format header with range - goes to Long Term Impact column
+            if not is_first_long_term_section:
+                long_term_parts.append("")  # Add blank line before section header
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
-            parts.append(header)
-            is_first_section = False
+            long_term_parts.append(header)
+            is_first_long_term_section = False
             
             # Add Overall if it exists
             if not overall_rows.empty:
@@ -1162,9 +1188,9 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
                 else:
-                    parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
@@ -1187,7 +1213,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+                long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets.get('medium'):
@@ -1196,7 +1222,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets.get('high'):
@@ -1207,7 +1233,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+                long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets.get('medium'):
@@ -1218,25 +1244,25 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         else:
-            if not is_first_section:
-                parts.append("")  # Add blank line before section header
+            if not is_first_long_term_section:
+                long_term_parts.append("")  # Add blank line before section header
             header = "**Long Term Impact**"
             if quarter_range:
                 header += f" ({quarter_range})"
-            parts.append(header)
-            is_first_section = False
-            parts.append("- No significant long-term impact (all changes <10%)")
+            long_term_parts.append(header)
+            is_first_long_term_section = False
+            long_term_parts.append("- No significant long-term impact (all changes <10%)")
     else:
-        if not is_first_section:
-            parts.append("")  # Add blank line before section header
+        if not is_first_long_term_section:
+            long_term_parts.append("")  # Add blank line before section header
         header = "**Long Term Impact**"
         if quarter_range:
             header += f" ({quarter_range})"
-        parts.append(header)
-        is_first_section = False
-        parts.append("- No significant long-term impact (all changes <10%)")
+        long_term_parts.append(header)
+        is_first_long_term_section = False
+        long_term_parts.append("- No significant long-term impact (all changes <10%)")
     
     # Comparison vs Prev Year
     is_debug_metric_yoy = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
@@ -1348,17 +1374,17 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             debug_print(f"[DEBUG YOY] Total significant business units: {len(all_significant_bu_yoy)}")
             debug_print(f"[DEBUG YOY] Total significant dimensions: {len(all_significant_dims_yoy)}")
         
-        # Show year-over-year section if we have Overall data, significant business units, or dimensions
+        # Show year-over-year section if we have Overall data, significant business units, or dimensions - goes to Long Term Impact column
         has_significant_dims_yoy = len(all_significant_dims_yoy) > 0
         if not overall_yoy.empty or all_significant_bu_yoy or has_significant_dims_yoy:
             # Format header with range
-            if not is_first_section:
-                parts.append("")  # Add blank line before section header
+            if not is_first_long_term_section:
+                long_term_parts.append("")  # Add blank line before section header
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
-            parts.append(header)
-            is_first_section = False
+            long_term_parts.append(header)
+            is_first_long_term_section = False
             
             # Add Overall if it exists
             if not overall_yoy.empty:
@@ -1369,9 +1395,9 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
                 else:
-                    parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
@@ -1394,7 +1420,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+                long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets_yoy.get('medium'):
@@ -1403,7 +1429,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     arrow = format_arrow(bu_row['relative_change_pct'])
                     bu_name = bu_row.get('business_unit', 'Unknown')
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets_yoy.get('high'):
@@ -1414,7 +1440,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+                long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets_yoy.get('medium'):
@@ -1425,31 +1451,34 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
-            if not is_first_section:
-                parts.append("")  # Add blank line before section header
+            if not is_first_long_term_section:
+                long_term_parts.append("")  # Add blank line before section header
             header = "**Comparison vs Prev Year**"
             if year_range:
                 header += f" ({year_range})"
-            parts.append(header)
-            is_first_section = False
-            parts.append("- No year-over-year data available")
+            long_term_parts.append(header)
+            is_first_long_term_section = False
+            long_term_parts.append("- No year-over-year data available")
     else:
         if is_debug_metric_yoy:
             debug_print(f"[DEBUG YOY] ⚠️  week_yoy_df is None or empty")
-        if not is_first_section:
-            parts.append("")  # Add blank line before section header
+        if not is_first_long_term_section:
+            long_term_parts.append("")  # Add blank line before section header
         header = "**Comparison vs Prev Year**"
         if year_range:
             header += f" ({year_range})"
-        parts.append(header)
-        is_first_section = False
-        parts.append("- No year-over-year data available")
+        long_term_parts.append(header)
+        is_first_long_term_section = False
+        long_term_parts.append("- No year-over-year data available")
     
-    return "<br>".join(parts)
+    # Return both parts as tuple
+    anomaly_callout = "<br>".join(anomaly_parts) if anomaly_parts else ""
+    long_term_callout = "<br>".join(long_term_parts) if long_term_parts else ""
+    return (anomaly_callout, long_term_callout)
 
 # COMMAND ----------
 
@@ -1475,8 +1504,8 @@ report += "\n"
 report += "## Key Insights\n"
 report += generate_key_insights(week_prev_processed, week_yoy_processed, quarter_prev_processed)
 report += "\n\n"
-report += "| Metrics | Anomaly/Callout | Notes |\n"
-report += "| :--- | :--- | :--- |\n"
+report += "| Metrics | Anomaly/Callout | Long Term Impact | Notes |\n"
+report += "| :--- | :--- | :--- | :--- |\n"
 
 # Normalize data types once before the loop to ensure consistent filtering
 if quarter_prev_processed is not None and not quarter_prev_processed.empty:
@@ -1577,13 +1606,9 @@ for metric_display, metric_full in METRIC_GROUPS:
         else:
             debug_print(f"[DEBUG] AFTER FILTERING - quarter_prev_metric is None or empty!")
     
-    callout = build_callout_for_metric(metric_full, week_prev_metric, week_yoy_metric, quarter_prev_metric, quarter_range_str, year_range_str)
+    anomaly_callout, long_term_callout = build_callout_for_metric(metric_full, week_prev_metric, week_yoy_metric, quarter_prev_metric, quarter_range_str, year_range_str)
     
-    # Truncate if too long (but allow more for Long Term Impact section)
-    if len(callout) > 2000:
-        callout = callout[:1997] + "..."
-    
-    report += f"| **{metric_display}** | {callout} | |\n"
+    report += f"| **{metric_display}** | {anomaly_callout} | {long_term_callout} | |\n"
 
 # COMMAND ----------
 
