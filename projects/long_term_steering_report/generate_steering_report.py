@@ -825,12 +825,12 @@ def generate_key_insights(week_prev_df, week_yoy_df, quarter_prev_df):
 # Helper function to bucket items by relative_change_pct
 def bucket_by_percentage(items_df, item_type='business_unit'):
     """Bucket items into percentage ranges: [+50%], [20%-49%], [10%-19%]
-    Also includes items with volume_impacted > 30 even if abs_rel_change < 10
+    Only includes items with abs_rel_change >= 10%
     """
     buckets = {
         'high': [],  # >= 50%
         'medium': [],  # 20% - 49%
-        'low': []  # 10% - 19% OR volume_impacted > 30 with abs_rel_change < 10
+        'low': []  # 10% - 19%
     }
     
     if items_df is None or items_df.empty:
@@ -844,17 +844,12 @@ def bucket_by_percentage(items_df, item_type='business_unit'):
             rel_change = row['relative_change_pct']
             abs_rel_change = abs(rel_change) if pd.notna(rel_change) else 0
         
-        # Get volume_impacted if available
-        volume_impacted = row.get('volume_impacted', 0) if 'volume_impacted' in row and pd.notna(row.get('volume_impacted')) else 0
-        
+        # Only bucket items with abs_rel_change >= 10%
         if abs_rel_change >= 50:
             buckets['high'].append(row)
         elif abs_rel_change >= 20:
             buckets['medium'].append(row)
         elif abs_rel_change >= 10:
-            buckets['low'].append(row)
-        elif volume_impacted > 30:
-            # Include items with high volume impact even if percentage change is low
             buckets['low'].append(row)
     
     return buckets
@@ -1323,7 +1318,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
                 long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
-            # [10% - 19%] - Business Units (includes high volume impact items)
+            # [10% - 19%] - Business Units
             if bu_buckets.get('low'):
                 bu_items = []
                 for bu_row in bu_buckets['low']:
@@ -1354,7 +1349,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
             
-            # [10% - 19%] - Dimensions (includes high volume impact items)
+            # [10% - 19%] - Dimensions
             if dim_buckets.get('low'):
                 dim_items = []
                 for dim_row in dim_buckets['low']:
