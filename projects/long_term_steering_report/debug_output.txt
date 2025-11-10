@@ -280,3 +280,4 @@ Name: reporting_cluster, dtype: int64
 [DEBUG YOY] RTE - Significant business units: 8
 [DEBUG YOY] WL - Significant business units: 7
 [DEBUG YOY] Total significant business units: 32
+[DEBUG YOY] Total significant dimensions: 0
