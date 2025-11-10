@@ -1,0 +1,698 @@
+Steering Metrics - 13-Week Period vs Previous 13-Week Period
+================================================================================
+
+Current Quarter (13 weeks): 2025-W33, 2025-W34, 2025-W35, 2025-W36, 2025-W37, 2025-W38, 2025-W39, 2025-W40, 2025-W41, 2025-W42, 2025-W43, 2025-W44, 2025-W45
+Previous Quarter (13 weeks): 2025-W20, 2025-W21, 2025-W22, 2025-W23, 2025-W24, 2025-W25, 2025-W26, 2025-W27, 2025-W28, 2025-W29, 2025-W30, 2025-W31, 2025-W32
+
+================================================================================
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess increased from 30.41% to 32.05%, a slight 5.38% increase (volume impacted: 251.6K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- CA: 28.90% to 31.20% (7.98% increase, volume impacted: 18.8K)
+- US: 24.49% to 25.01% (2.14% increase, volume impacted: 14.4K)
+
+All business units by change magnitude:
+- FR: 25.32% to 27.16% (7.27% increase, volume impacted: 26.0K)
+- GB: 37.86% to 39.05% (3.14% increase, volume impacted: 11.4K)
+- DE: 35.20% to 36.91% (4.84% increase, volume impacted: 10.7K)
+- IT: 20.11% to 27.64% (37.42% increase, volume impacted: 9.5K)
+- NL: 35.01% to 42.21% (20.57% increase, volume impacted: 9.3K)
+- SE: 48.29% to 56.57% (17.15% increase, volume impacted: 8.3K)
+- IE: 31.01% to 34.45% (11.11% increase, volume impacted: 7.2K)
+- BE: 29.68% to 34.17% (15.12% increase, volume impacted: 6.8K)
+- NO: 42.46% to 49.01% (15.43% increase, volume impacted: 5.7K)
+- DK: 41.07% to 46.25% (12.61% increase, volume impacted: 5.1K)
+- AU: 38.11% to 39.04% (2.43% increase, volume impacted: 2.5K)
+- AT: 29.94% to 32.82% (9.61% increase, volume impacted: 1.9K)
+- CH: 16.12% to 19.22% (19.22% increase, volume impacted: 1.4K)
+- ES: 21.75% to 22.05% (1.42% increase, volume impacted: 557.4)
+- NZ: 32.76% to 33.10% (1.03% increase, volume impacted: 262.2)
+- LU: 36.12% to 38.18% (5.70% increase, volume impacted: 72.5)
+
+All business units by change magnitude:
+- FJ: 30.92% to 31.52% (1.93% increase, volume impacted: 25.4K)
+- YE: 47.80% to 50.04% (4.70% increase, volume impacted: 5.1K)
+- TO: 54.50% to 46.38% (14.89% decrease, volume impacted: 2.3K)
+- TT: 38.91% to 32.32% (16.94% decrease, volume impacted: 2.2K)
+- TZ: 31.03% to 28.55% (7.99% decrease, volume impacted: 2.2K)
+- TK: 51.90% to 45.17% (12.98% decrease, volume impacted: 1.4K)
+- CF: 45.72% to 46.14% (0.93% increase, volume impacted: 1.3K)
+- TV: 51.27% to 48.16% (6.07% decrease, volume impacted: 460.7)
+
+All business units by change magnitude:
+- CG: 27.13% to 30.80% (13.51% increase, volume impacted: 13.3K)
+- CK: 32.70% to 35.76% (9.34% increase, volume impacted: 6.9K)
+- ER: 23.11% to 23.89% (3.36% increase, volume impacted: 5.3K)
+- MR: 22.16% to 21.59% (2.59% decrease, volume impacted: 3.8K)
+- GN: 31.61% to 33.07% (4.62% increase, volume impacted: 3.2K)
+- KN: 20.25% to 19.75% (2.46% decrease, volume impacted: 2.8K)
+- AO: 36.35% to 41.20% (13.35% increase, volume impacted: 2.5K)
+
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 1_Checkout Funnel - 2_SelectToSuccess
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 1_Checkout Funnel - 2_SelectToSuccess decreased from 68.50% to 66.79%, a slight 2.50% decrease (volume impacted: 56.0K). This change is significant and has a negative business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- PaymentMethod Unknown: 0.83% to 12.62% (1418.57% increase, volume impacted: 191.0K)
+- PaymentMethod Apple Pay: 72.12% to 68.50% (5.02% decrease, volume impacted: 27.4K)
+- PaymentMethod Credit Card: 69.61% to 68.55% (1.53% decrease, volume impacted: 19.1K)
+- PaymentMethod Paypal: 62.11% to 59.65% (3.97% decrease, volume impacted: 14.9K)
+- PaymentMethod Others: 66.28% to 71.84% (8.38% increase, volume impacted: 4.5K)
+
+All business units by change magnitude:
+- US: 60.88% to 59.12% (2.89% decrease, volume impacted: 8.2K)
+- CA: 67.40% to 65.89% (2.23% decrease, volume impacted: 2.5K)
+
+All business units by change magnitude:
+- GB: 72.24% to 68.90% (4.63% decrease, volume impacted: 9.6K)
+- DE: 63.44% to 61.54% (3.00% decrease, volume impacted: 4.0K)
+- FR: 63.47% to 62.23% (1.96% decrease, volume impacted: 3.1K)
+- SE: 75.04% to 81.11% (8.09% increase, volume impacted: 2.7K)
+- NL: 68.17% to 73.81% (8.26% increase, volume impacted: 2.1K)
+- BE: 59.26% to 63.08% (6.45% increase, volume impacted: 1.6K)
+- IT: 46.90% to 51.89% (10.65% increase, volume impacted: 1.4K)
+- ES: 56.70% to 52.36% (7.65% decrease, volume impacted: 1.3K)
+- NO: 73.47% to 76.25% (3.79% increase, volume impacted: 898.5)
+- AU: 67.87% to 68.53% (0.97% increase, volume impacted: 573.0)
+- DK: 70.12% to 71.61% (2.13% increase, volume impacted: 552.4)
+- IE: 66.46% to 65.43% (1.54% decrease, volume impacted: 524.3)
+- NZ: 62.69% to 60.36% (3.72% decrease, volume impacted: 519.7)
+- AT: 63.06% to 60.41% (4.19% decrease, volume impacted: 448.1)
+- CH: 56.29% to 54.42% (3.33% decrease, volume impacted: 83.6)
+
+All business units by change magnitude:
+- FJ: 70.58% to 66.89% (5.23% decrease, volume impacted: 32.5K)
+- YE: 81.86% to 84.33% (3.02% increase, volume impacted: 1.9K)
+- CF: 85.38% to 87.53% (2.52% increase, volume impacted: 1.9K)
+- TZ: 58.68% to 52.04% (11.30% decrease, volume impacted: 1.7K)
+- TT: 54.80% to 49.09% (10.42% decrease, volume impacted: 901.2)
+- TO: 79.27% to 76.80% (3.11% decrease, volume impacted: 288.5)
+- TV: 68.84% to 69.95% (1.61% increase, volume impacted: 84.1)
+- TK: 82.48% to 81.44% (1.26% decrease, volume impacted: 76.2)
+
+All business units by change magnitude:
+- ER: 62.13% to 65.01% (4.63% increase, volume impacted: 2.7K)
+- MR: 77.06% to 74.00% (3.97% decrease, volume impacted: 1.7K)
+- GN: 58.66% to 60.81% (3.66% increase, volume impacted: 1.4K)
+- CG: 70.18% to 72.18% (2.85% increase, volume impacted: 1.2K)
+- CK: 65.55% to 63.84% (2.60% decrease, volume impacted: 1.1K)
+- AO: 78.15% to 77.05% (1.41% decrease, volume impacted: 139.6)
+- KN: 71.32% to 71.60% (0.38% increase, volume impacted: 121.7)
+- GQ: 62.89% to 68.14% (8.35% increase, volume impacted: 77.3)
+
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 1_Checkout Funnel (backend) - 1_PaymentPageVisitToSuccess
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 1_Checkout Funnel (backend) - 1_PaymentPageVisitToSuccess increased from 29.57% to 31.52%, a slight 6.59% increase (volume impacted: 390.6K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- CA: 30.77% to 32.98% (7.19% increase, volume impacted: 20.1K)
+- US: 25.95% to 26.01% (0.22% increase, volume impacted: 1.8K)
+
+All business units by change magnitude:
+- FR: 28.25% to 29.08% (2.96% increase, volume impacted: 14.2K)
+- IT: 23.47% to 30.61% (30.42% increase, volume impacted: 11.4K)
+- GB: 40.16% to 40.86% (1.75% increase, volume impacted: 8.5K)
+- IE: 33.50% to 36.55% (9.08% increase, volume impacted: 7.6K)
+- BE: 33.29% to 36.42% (9.39% increase, volume impacted: 5.6K)
+- DE: 39.80% to 40.51% (1.77% increase, volume impacted: 5.5K)
+- NO: 47.06% to 52.23% (10.98% increase, volume impacted: 5.2K)
+- SE: 52.14% to 56.23% (7.84% increase, volume impacted: 5.0K)
+- DK: 44.87% to 48.81% (8.76% increase, volume impacted: 4.7K)
+- ES: 24.56% to 23.90% (2.70% decrease, volume impacted: 1.4K)
+- NL: 43.53% to 44.48% (2.17% increase, volume impacted: 1.3K)
+- CH: 18.61% to 21.33% (14.61% increase, volume impacted: 1.3K)
+- AU: 39.93% to 39.54% (0.99% decrease, volume impacted: 1.2K)
+- AT: 34.22% to 35.68% (4.25% increase, volume impacted: 1.1K)
+- NZ: 34.41% to 33.55% (2.48% decrease, volume impacted: 736.5)
+- LU: 38.54% to 40.95% (6.24% increase, volume impacted: 116.9)
+
+All business units by change magnitude:
+- FJ: 27.78% to 29.10% (4.77% increase, volume impacted: 76.4K)
+- CF: 31.58% to 36.62% (15.95% increase, volume impacted: 32.3K)
+- YE: 34.48% to 37.47% (8.68% increase, volume impacted: 13.6K)
+- TZ: 17.74% to 20.80% (17.21% increase, volume impacted: 8.9K)
+- TV: 23.75% to 33.83% (42.42% increase, volume impacted: 6.2K)
+- TK: 24.83% to 29.44% (18.57% increase, volume impacted: 4.1K)
+- TT: 24.01% to 25.28% (5.31% increase, volume impacted: 1.5K)
+- TO: 31.64% to 30.95% (2.20% decrease, volume impacted: 652.1)
+
+All business units by change magnitude:
+- CK: 33.55% to 36.26% (8.08% increase, volume impacted: 6.9K)
+- GN: 30.06% to 32.10% (6.76% increase, volume impacted: 6.5K)
+- CG: 24.88% to 25.74% (3.47% increase, volume impacted: 4.5K)
+- ER: 22.97% to 23.50% (2.34% increase, volume impacted: 4.2K)
+- AO: 35.64% to 39.81% (11.68% increase, volume impacted: 2.8K)
+- MR: 19.89% to 19.64% (1.26% decrease, volume impacted: 2.3K)
+- KN: 19.89% to 19.70% (0.94% decrease, volume impacted: 1.2K)
+- GQ: 39.39% to 41.23% (4.67% increase, volume impacted: 126.0)
+
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 2_Voucher Fraud - 1_Total Duplicate Rate
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 2_Voucher Fraud - 1_Total Duplicate Rate decreased from 21.90% to 20.89%, a slight 4.61% decrease (volume impacted: 94.0K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- ChannelCategory Referral: 28.21% to 24.49% (13.20% decrease, volume impacted: 51.5K)
+- ChannelCategory Paid: 20.45% to 20.04% (2.00% decrease, volume impacted: 33.0K)
+
+All business units by change magnitude:
+- CA: 31.57% to 27.96% (11.45% decrease, volume impacted: 11.5K)
+- US: 27.93% to 27.09% (3.02% decrease, volume impacted: 7.2K)
+
+All business units by change magnitude:
+- GB: 36.58% to 38.55% (5.39% increase, volume impacted: 11.7K)
+- DE: 28.60% to 26.46% (7.45% decrease, volume impacted: 10.1K)
+- FR: 23.91% to 22.42% (6.25% decrease, volume impacted: 9.8K)
+- SE: 27.85% to 22.36% (19.74% decrease, volume impacted: 8.1K)
+- BE: 22.10% to 17.55% (20.58% decrease, volume impacted: 7.4K)
+- AU: 37.39% to 34.22% (8.48% decrease, volume impacted: 4.7K)
+- IE: 23.27% to 20.82% (10.55% decrease, volume impacted: 3.6K)
+- IT: 20.20% to 15.27% (24.37% decrease, volume impacted: 3.2K)
+- DK: 24.46% to 21.77% (11.00% decrease, volume impacted: 3.1K)
+- NO: 17.17% to 15.69% (8.64% decrease, volume impacted: 2.3K)
+- NL: 27.42% to 25.87% (5.65% decrease, volume impacted: 1.8K)
+- AT: 20.13% to 17.41% (13.52% decrease, volume impacted: 1.3K)
+- ES: 13.93% to 12.85% (7.77% decrease, volume impacted: 1.1K)
+- LU: 4.28% to 0.27% (93.58% decrease, volume impacted: 1.0K)
+- CH: 10.82% to 12.32% (13.81% increase, volume impacted: 285.9)
+- NZ: 38.25% to 37.54% (1.87% decrease, volume impacted: 225.1)
+
+All business units by change magnitude:
+- FJ: 13.03% to 12.13% (6.97% decrease, volume impacted: 33.8K)
+- CF: 13.65% to 10.06% (26.29% decrease, volume impacted: 20.5K)
+- YE: 17.74% to 14.96% (15.70% decrease, volume impacted: 9.8K)
+- TT: 12.39% to 8.24% (33.52% decrease, volume impacted: 3.1K)
+- TO: 5.51% to 4.39% (20.31% decrease, volume impacted: 2.0K)
+- TV: 9.21% to 6.52% (29.14% decrease, volume impacted: 1.7K)
+- TZ: 5.72% to 6.23% (8.98% increase, volume impacted: 1.0K)
+- TK: 5.29% to 5.53% (4.53% increase, volume impacted: 303.9)
+
+All business units by change magnitude:
+- GN: 13.74% to 9.66% (29.70% decrease, volume impacted: 9.7K)
+- KN: 11.05% to 8.03% (27.36% decrease, volume impacted: 7.4K)
+- CK: 31.01% to 24.21% (21.93% decrease, volume impacted: 7.2K)
+- CG: 14.91% to 12.58% (15.60% decrease, volume impacted: 5.5K)
+- MR: 5.14% to 4.53% (11.77% decrease, volume impacted: 4.4K)
+- ER: 21.35% to 19.83% (7.12% decrease, volume impacted: 3.2K)
+- AO: 24.65% to 21.63% (12.24% decrease, volume impacted: 1.3K)
+- GQ: 25.97% to 23.67% (8.84% decrease, volume impacted: 115.0)
+
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 2_Voucher Fraud - 2_Total Duplicate Block Rate
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 2_Voucher Fraud - 2_Total Duplicate Block Rate decreased from 4.05% to 3.91%, a slight 3.52% decrease (volume impacted: 71.9K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- ChannelCategory Paid: 1.08% to 0.96% (11.53% decrease, volume impacted: 190.5K)
+- ChannelCategory Referral: 16.97% to 16.40% (3.37% decrease, volume impacted: 13.1K)
+
+All business units by change magnitude:
+- US: 3.30% to 4.85% (47.03% increase, volume impacted: 111.7K)
+- CA: 2.83% to 3.27% (15.56% increase, volume impacted: 15.6K)
+
+All business units by change magnitude:
+- GB: 4.83% to 5.49% (13.57% increase, volume impacted: 29.3K)
+- AU: 11.46% to 5.65% (50.66% decrease, volume impacted: 27.9K)
+- FR: 8.38% to 6.94% (17.22% decrease, volume impacted: 26.9K)
+- SE: 4.65% to 3.00% (35.60% decrease, volume impacted: 14.5K)
+- NL: 3.94% to 5.03% (27.46% increase, volume impacted: 8.9K)
+- DK: 5.25% to 4.36% (16.97% decrease, volume impacted: 4.8K)
+- NZ: 11.97% to 7.82% (34.68% decrease, volume impacted: 4.2K)
+- NO: 3.55% to 4.07% (14.88% increase, volume impacted: 3.9K)
+- IE: 6.76% to 7.51% (11.07% increase, volume impacted: 3.8K)
+- IT: 10.28% to 7.58% (26.24% decrease, volume impacted: 3.4K)
+- DE: 3.64% to 3.71% (1.99% increase, volume impacted: 2.7K)
+- AT: 4.55% to 3.76% (17.28% decrease, volume impacted: 1.7K)
+- BE: 2.64% to 2.72% (2.96% increase, volume impacted: 1.1K)
+- ES: 5.50% to 5.30% (3.62% decrease, volume impacted: 498.6)
+- LU: 2.57% to 1.47% (42.93% decrease, volume impacted: 468.3)
+- CH: 2.50% to 2.56% (2.25% increase, volume impacted: 46.6)
+
+All business units by change magnitude:
+- FJ: 2.59% to 2.08% (19.87% decrease, volume impacted: 96.5K)
+- CF: 3.79% to 2.56% (32.59% decrease, volume impacted: 25.4K)
+- YE: 4.49% to 4.05% (9.83% decrease, volume impacted: 6.1K)
+- TK: 0.67% to 1.27% (89.82% increase, volume impacted: 6.0K)
+- TZ: 1.19% to 1.81% (51.61% increase, volume impacted: 5.8K)
+- TV: 3.84% to 5.79% (50.71% increase, volume impacted: 3.0K)
+- TT: 1.78% to 1.62% (9.04% decrease, volume impacted: 826.2)
+- TO: 0.86% to 0.89% (3.62% increase, volume impacted: 364.9)
+
+All business units by change magnitude:
+- CK: 3.76% to 2.75% (26.93% decrease, volume impacted: 8.9K)
+- KN: 9.27% to 6.45% (30.40% decrease, volume impacted: 8.2K)
+- ER: 3.34% to 2.85% (14.59% decrease, volume impacted: 6.6K)
+- CG: 3.52% to 3.16% (10.25% decrease, volume impacted: 3.6K)
+- GN: 2.74% to 2.46% (10.03% decrease, volume impacted: 3.3K)
+- AO: 7.36% to 5.77% (21.55% decrease, volume impacted: 2.3K)
+- MR: 0.67% to 0.69% (3.11% increase, volume impacted: 1.2K)
+- GQ: 8.59% to 6.84% (20.38% decrease, volume impacted: 265.1)
+
+
+
+================================================================================
+1_Activation (Paid + Referrals) - 3_Payment Fraud - 1_Payment Fraud Block Rate
+================================================================================
+
+For Overall cluster, the 1_Activation (Paid + Referrals) - 3_Payment Fraud - 1_Payment Fraud Block Rate decreased from 0.27% to 0.26%, a slight 4.58% decrease (volume impacted: 93.5K). This change is not statistically significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- ChannelCategory Referral: 0.08% to 0.34% (315.59% increase, volume impacted: 1.2M)
+- ChannelCategory Paid: 0.31% to 0.24% (23.93% decrease, volume impacted: 395.2K)
+
+All business units by change magnitude:
+- US: 1.58% to 1.06% (32.99% decrease, volume impacted: 78.3K)
+
+All business units by change magnitude:
+- GB: 0.00% to 0.00% (153.88% increase, volume impacted: 332.5K)
+
+All business units by change magnitude:
+- FJ: 0.13% to 0.32% (141.76% increase, volume impacted: 688.3K)
+- YE: 0.01% to 0.00% (100.00% decrease, volume impacted: 62.5K)
+
+All business units by change magnitude:
+- MR: 0.43% to 1.81% (323.25% increase, volume impacted: 119.6K)
+- ER: 0.09% to 0.25% (170.97% increase, volume impacted: 76.9K)
+- KN: 0.17% to 0.41% (147.56% increase, volume impacted: 39.7K)
+- CG: 0.38% to 0.63% (65.13% increase, volume impacted: 23.0K)
+
+
+
+================================================================================
+2_Reactivations - 1_ReactivationFunnel - 1_ReactivationRate
+================================================================================
+
+For Overall cluster, the 2_Reactivations - 1_ReactivationFunnel - 1_ReactivationRate increased from 88.10% to 89.00%, a slight 1.02% increase (volume impacted: 14.8K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- PaymentMethod Credit Card: 85.44% to 86.17% (0.85% increase, volume impacted: 7.2K)
+- PaymentMethod Apple Pay: 85.80% to 87.35% (1.80% increase, volume impacted: 3.4K)
+- PaymentMethod Paypal: 94.58% to 95.21% (0.66% increase, volume impacted: 2.2K)
+- PaymentMethod Others: 96.57% to 97.61% (1.08% increase, volume impacted: 840.6)
+
+All business units by change magnitude:
+- US: 85.38% to 86.51% (1.32% increase, volume impacted: 3.7K)
+- CA: 89.99% to 90.81% (0.90% increase, volume impacted: 704.4)
+
+All business units by change magnitude:
+- GB: 89.68% to 89.50% (0.20% decrease, volume impacted: 480.5)
+- FR: 87.35% to 86.99% (0.41% decrease, volume impacted: 458.8)
+- NZ: 83.39% to 84.62% (1.48% increase, volume impacted: 289.7)
+- SE: 92.73% to 93.50% (0.83% increase, volume impacted: 247.4)
+- NO: 84.15% to 85.44% (1.54% increase, volume impacted: 237.1)
+- DK: 90.18% to 89.46% (0.79% decrease, volume impacted: 198.2)
+- AU: 87.91% to 87.71% (0.22% decrease, volume impacted: 147.7)
+- IE: 87.33% to 88.31% (1.12% increase, volume impacted: 140.3)
+- BE: 91.67% to 91.25% (0.46% decrease, volume impacted: 131.6)
+- ES: 86.99% to 89.35% (2.72% increase, volume impacted: 124.6)
+- IT: 90.16% to 92.12% (2.18% increase, volume impacted: 89.1)
+- DE: 97.27% to 97.24% (0.03% decrease, volume impacted: 34.1)
+
+All business units by change magnitude:
+- YE: 86.42% to 94.51% (9.36% increase, volume impacted: 875.6)
+- FJ: 86.47% to 86.53% (0.08% increase, volume impacted: 188.0)
+- CF: 93.10% to 93.32% (0.24% increase, volume impacted: 36.4)
+
+All business units by change magnitude:
+- MR: 75.55% to 86.23% (14.14% increase, volume impacted: 893.6)
+- ER: 83.28% to 84.35% (1.28% increase, volume impacted: 613.0)
+- CK: 83.91% to 89.53% (6.69% increase, volume impacted: 360.5)
+- CG: 86.74% to 88.03% (1.48% increase, volume impacted: 317.5)
+- GN: 83.19% to 93.60% (12.52% increase, volume impacted: 172.2)
+- AO: 83.00% to 88.24% (6.31% increase, volume impacted: 115.3)
+- KN: 87.46% to 86.44% (1.17% decrease, volume impacted: 81.4)
+
+
+
+================================================================================
+3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR
+================================================================================
+
+For Overall cluster, the 3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR decreased from 91.45% to 91.43%, a slight 0.02% decrease (volume impacted: 5.6K). This change is not statistically significant and has a negative business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- PaymentProvider Adyen: 92.03% to 92.66% (0.69% increase, volume impacted: 58.9K)
+- CustomerQuality Good: 95.46% to 95.30% (0.17% decrease, volume impacted: 44.4K)
+- PaymentMethod Apple Pay: 85.65% to 86.34% (0.81% increase, volume impacted: 25.4K)
+- PaymentProvider Unknown: 16.11% to 1.54% (90.44% decrease, volume impacted: 17.0K)
+- PaymentMethod Others: 99.49% to 98.57% (0.92% decrease, volume impacted: 17.0K)
+- PaymentMethod Credit Card: 90.45% to 90.39% (0.06% decrease, volume impacted: 9.8K)
+- OrderType Initial: 91.86% to 91.39% (0.51% decrease, volume impacted: 9.2K)
+- PaymentProvider ProcessOut: 85.51% to 85.11% (0.46% decrease, volume impacted: 4.6K)
+- PaymentProvider Braintree: 91.17% to 91.19% (0.02% increase, volume impacted: 3.3K)
+- OrderType Recurring: 91.42% to 91.43% (0.01% increase, volume impacted: 2.8K)
+- CustomerQuality Bad: 7.60% to 7.59% (0.19% decrease, volume impacted: 2.2K)
+- PaymentMethod Paypal: 95.55% to 95.51% (0.04% decrease, volume impacted: 2.1K)
+- PaymentProvider No Payment: 99.24% to 99.97% (0.74% increase, volume impacted: 1.3K)
+
+All business units by change magnitude:
+- US: 89.68% to 90.02% (0.37% increase, volume impacted: 22.1K)
+- CA: 91.12% to 91.32% (0.22% increase, volume impacted: 2.5K)
+
+All business units by change magnitude:
+- GB: 91.94% to 92.46% (0.56% increase, volume impacted: 14.7K)
+- FR: 92.27% to 91.80% (0.51% decrease, volume impacted: 8.5K)
+- BE: 94.71% to 94.05% (0.69% decrease, volume impacted: 5.1K)
+- DE: 96.61% to 96.41% (0.21% decrease, volume impacted: 4.7K)
+- SE: 94.37% to 94.87% (0.53% increase, volume impacted: 2.4K)
+- NL: 99.27% to 99.09% (0.18% decrease, volume impacted: 1.9K)
+- DK: 95.96% to 95.55% (0.43% decrease, volume impacted: 1.8K)
+- IE: 89.49% to 89.78% (0.32% increase, volume impacted: 763.9)
+- NZ: 86.74% to 86.47% (0.31% decrease, volume impacted: 742.1)
+- NO: 88.47% to 88.63% (0.18% increase, volume impacted: 484.7)
+- ES: 88.75% to 89.39% (0.71% increase, volume impacted: 452.7)
+- AT: 93.98% to 93.77% (0.23% decrease, volume impacted: 314.1)
+- LU: 94.97% to 94.16% (0.85% decrease, volume impacted: 236.7)
+- IT: 87.76% to 87.49% (0.32% decrease, volume impacted: 190.3)
+- AU: 88.65% to 88.66% (0.01% increase, volume impacted: 163.3)
+- CH: 92.34% to 92.48% (0.15% increase, volume impacted: 37.7)
+
+All business units by change magnitude:
+- FJ: 92.03% to 91.59% (0.49% decrease, volume impacted: 22.9K)
+- YE: 84.80% to 83.88% (1.09% decrease, volume impacted: 5.7K)
+- CF: 93.60% to 93.23% (0.39% decrease, volume impacted: 2.0K)
+- TZ: 91.86% to 90.22% (1.78% decrease, volume impacted: 772.3)
+- TV: 91.25% to 93.06% (1.99% increase, volume impacted: 398.6)
+- TK: 91.66% to 90.64% (1.10% decrease, volume impacted: 298.6)
+- TT: 96.90% to 96.28% (0.64% decrease, volume impacted: 275.2)
+
+All business units by change magnitude:
+- MR: 77.98% to 74.79% (4.09% decrease, volume impacted: 8.3K)
+- ER: 83.93% to 83.15% (0.93% decrease, volume impacted: 7.9K)
+- CK: 91.53% to 90.72% (0.89% decrease, volume impacted: 3.2K)
+- KN: 85.16% to 83.43% (2.03% decrease, volume impacted: 2.4K)
+- CG: 92.49% to 92.38% (0.12% decrease, volume impacted: 567.0)
+- AO: 85.72% to 85.50% (0.25% decrease, volume impacted: 469.5)
+- GQ: 99.10% to 98.94% (0.16% decrease, volume impacted: 60.8)
+- GN: 91.54% to 91.56% (0.02% increase, volume impacted: 34.9)
+
+
+
+================================================================================
+3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR
+================================================================================
+
+For Overall cluster, the 3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR decreased from 91.86% to 91.39%, a slight 0.51% decrease (volume impacted: 9.2K). This change is significant and has a negative business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- PaymentProvider Unknown: 43.93% to 2.64% (94.00% decrease, volume impacted: 9.9K)
+- CustomerQuality Good: 91.86% to 91.39% (0.51% decrease, volume impacted: 9.2K)
+- PaymentMethod Others: 97.95% to 88.83% (9.31% decrease, volume impacted: 9.1K)
+- PaymentProvider Adyen: 89.93% to 91.99% (2.30% increase, volume impacted: 7.5K)
+- PaymentProvider Braintree: 92.61% to 92.51% (0.11% decrease, volume impacted: 1.3K)
+- PaymentProvider ProcessOut: 88.98% to 88.59% (0.44% decrease, volume impacted: 1.2K)
+- PaymentMethod Apple Pay: 91.24% to 91.10% (0.15% decrease, volume impacted: 676.4)
+- PaymentMethod Credit Card: 90.57% to 90.51% (0.07% decrease, volume impacted: 671.1)
+- PaymentMethod Paypal: 96.03% to 95.90% (0.13% decrease, volume impacted: 367.3)
+- PaymentProvider No Payment: 98.15% to 99.77% (1.65% increase, volume impacted: 347.0)
+- CustomerQuality Bad: 62.50% to 50.00% (20.00% decrease, volume impacted: 0.8)
+
+All business units by change magnitude:
+- US: 86.17% to 87.55% (1.60% increase, volume impacted: 3.3K)
+- CA: 89.53% to 90.38% (0.95% increase, volume impacted: 832.0)
+
+All business units by change magnitude:
+- BE: 90.39% to 93.11% (3.01% increase, volume impacted: 1.1K)
+- GB: 92.95% to 92.44% (0.55% decrease, volume impacted: 990.2)
+- AU: 83.52% to 82.67% (1.02% decrease, volume impacted: 463.4)
+- IE: 89.87% to 91.07% (1.34% increase, volume impacted: 407.7)
+- IT: 92.35% to 88.68% (3.98% decrease, volume impacted: 378.4)
+- FR: 94.41% to 94.20% (0.23% decrease, volume impacted: 280.9)
+- NL: 97.70% to 96.88% (0.84% decrease, volume impacted: 227.0)
+- DE: 95.01% to 94.87% (0.15% decrease, volume impacted: 181.5)
+- NO: 88.27% to 87.68% (0.67% decrease, volume impacted: 180.5)
+- NZ: 76.85% to 75.48% (1.78% decrease, volume impacted: 178.0)
+- SE: 92.64% to 93.05% (0.44% increase, volume impacted: 159.3)
+- AT: 93.53% to 93.01% (0.56% decrease, volume impacted: 49.7)
+- DK: 92.79% to 92.95% (0.18% increase, volume impacted: 48.1)
+- LU: 89.75% to 93.41% (4.08% increase, volume impacted: 39.6)
+
+All business units by change magnitude:
+- FJ: 94.60% to 93.33% (1.34% decrease, volume impacted: 6.3K)
+- YE: 88.99% to 86.78% (2.49% decrease, volume impacted: 1.5K)
+- TZ: 94.42% to 92.30% (2.25% decrease, volume impacted: 229.6)
+- TK: 93.84% to 92.62% (1.30% decrease, volume impacted: 80.0)
+- CF: 93.43% to 93.33% (0.10% decrease, volume impacted: 72.2)
+- TT: 97.48% to 96.89% (0.61% decrease, volume impacted: 40.4)
+
+All business units by change magnitude:
+- ER: 89.60% to 83.38% (6.95% decrease, volume impacted: 2.7K)
+- MR: 90.01% to 84.40% (6.24% decrease, volume impacted: 2.3K)
+- CG: 93.17% to 91.98% (1.28% decrease, volume impacted: 383.1)
+- KN: 96.50% to 95.20% (1.35% decrease, volume impacted: 336.7)
+- GN: 89.91% to 90.05% (0.16% increase, volume impacted: 44.7)
+
+
+
+================================================================================
+3_Active - 1_3_Loyalty: LL0 and LL1+ (Recurring charges) - 2_PreDunningAR
+================================================================================
+
+For Overall cluster, the 3_Active - 1_3_Loyalty: LL0 and LL1+ (Recurring charges) - 2_PreDunningAR increased from 91.42% to 91.43%, a slight 0.01% increase (volume impacted: 2.8K). This change is not statistically significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+Top dimensions by change magnitude (Overall cluster):
+- PaymentProvider Adyen: 92.13% to 92.69% (0.61% increase, volume impacted: 50.3K)
+- CustomerQuality Good: 95.71% to 95.60% (0.12% decrease, volume impacted: 28.5K)
+- PaymentMethod Apple Pay: 84.79% to 85.56% (0.91% increase, volume impacted: 24.5K)
+- PaymentProvider ProcessOut: 81.31% to 83.80% (3.06% increase, volume impacted: 22.1K)
+- PaymentMethod Credit Card: 90.44% to 90.39% (0.06% decrease, volume impacted: 9.2K)
+- PaymentProvider Unknown: 3.62% to 0.16% (95.69% decrease, volume impacted: 8.0K)
+- PaymentMethod Others: 99.54% to 99.11% (0.44% decrease, volume impacted: 7.6K)
+- PaymentProvider Braintree: 91.07% to 91.09% (0.02% increase, volume impacted: 3.6K)
+- CustomerQuality Bad: 7.60% to 7.59% (0.18% decrease, volume impacted: 2.2K)
+- PaymentMethod Paypal: 95.53% to 95.49% (0.04% decrease, volume impacted: 1.9K)
+
+All business units by change magnitude:
+- US: 89.80% to 90.10% (0.34% increase, volume impacted: 19.2K)
+- CA: 91.24% to 91.39% (0.17% increase, volume impacted: 1.9K)
+
+All business units by change magnitude:
+- GB: 91.88% to 92.46% (0.64% increase, volume impacted: 15.5K)
+- FR: 92.16% to 91.61% (0.60% decrease, volume impacted: 9.2K)
+- BE: 94.82% to 94.10% (0.76% decrease, volume impacted: 5.4K)
+- DE: 96.68% to 96.49% (0.19% decrease, volume impacted: 4.1K)
+- SE: 94.45% to 95.03% (0.62% increase, volume impacted: 2.5K)
+- NL: 99.30% to 99.15% (0.15% decrease, volume impacted: 1.6K)
+- DK: 96.08% to 95.73% (0.37% decrease, volume impacted: 1.5K)
+- AU: 88.85% to 88.92% (0.07% increase, volume impacted: 785.3)
+- NO: 88.48% to 88.73% (0.29% increase, volume impacted: 695.4)
+- NZ: 87.16% to 86.95% (0.24% decrease, volume impacted: 553.6)
+- IE: 89.45% to 89.59% (0.16% increase, volume impacted: 334.9)
+- ES: 88.38% to 88.93% (0.62% increase, volume impacted: 328.8)
+- AT: 94.00% to 93.82% (0.20% decrease, volume impacted: 256.3)
+- LU: 95.09% to 94.19% (0.94% decrease, volume impacted: 252.6)
+- CH: 92.47% to 92.70% (0.25% increase, volume impacted: 57.9)
+
+All business units by change magnitude:
+- FJ: 91.74% to 91.39% (0.38% decrease, volume impacted: 16.1K)
+- YE: 84.24% to 83.51% (0.86% decrease, volume impacted: 4.0K)
+- CF: 93.62% to 93.22% (0.43% decrease, volume impacted: 1.9K)
+- TZ: 91.11% to 89.58% (1.68% decrease, volume impacted: 556.1)
+- TV: 90.24% to 92.32% (2.30% increase, volume impacted: 350.1)
+- TK: 91.14% to 90.06% (1.18% decrease, volume impacted: 247.0)
+- TT: 96.82% to 96.17% (0.67% decrease, volume impacted: 245.4)
+- TO: 91.44% to 91.28% (0.18% decrease, volume impacted: 49.5)
+
+All business units by change magnitude:
+- ER: 83.64% to 83.14% (0.60% decrease, volume impacted: 4.8K)
+- MR: 74.87% to 72.70% (2.90% decrease, volume impacted: 4.8K)
+- CK: 91.69% to 90.84% (0.92% decrease, volume impacted: 3.0K)
+- KN: 81.40% to 80.25% (1.42% decrease, volume impacted: 1.3K)
+- AO: 85.79% to 85.55% (0.29% decrease, volume impacted: 509.9)
+- CG: 92.45% to 92.41% (0.04% decrease, volume impacted: 195.9)
+- GN: 91.79% to 91.83% (0.05% increase, volume impacted: 70.2)
+- GQ: 99.10% to 98.96% (0.14% decrease, volume impacted: 52.8)
+
+
+
+================================================================================
+3_Active - 2_1_Boxes Shipped - 0_ShipRate
+================================================================================
+
+For Overall cluster, the 3_Active - 2_1_Boxes Shipped - 0_ShipRate decreased from 52.95% to 52.87%, a slight 0.15% decrease (volume impacted: 1.7K). This change is not statistically significant and has a negative business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- CA: 41.09% to 43.05% (4.78% increase, volume impacted: 2.9K)
+- US: 45.10% to 45.77% (1.49% increase, volume impacted: 2.7K)
+
+All business units by change magnitude:
+- FR: 64.77% to 62.21% (3.95% decrease, volume impacted: 3.3K)
+- DE: 65.73% to 61.91% (5.82% decrease, volume impacted: 2.9K)
+- NO: 79.63% to 71.37% (10.37% decrease, volume impacted: 2.5K)
+- IE: 53.13% to 60.48% (13.83% increase, volume impacted: 2.4K)
+- AU: 76.16% to 74.10% (2.71% decrease, volume impacted: 2.1K)
+- GB: 54.64% to 53.96% (1.25% decrease, volume impacted: 1.5K)
+- IT: 39.99% to 30.38% (24.03% decrease, volume impacted: 1.3K)
+- NZ: 63.15% to 65.60% (3.88% increase, volume impacted: 744.6)
+- NL: 72.18% to 65.81% (8.83% decrease, volume impacted: 547.5)
+- BE: 85.51% to 84.27% (1.44% decrease, volume impacted: 520.4)
+- DK: 69.82% to 70.45% (0.90% increase, volume impacted: 132.5)
+- AT: 71.08% to 70.14% (1.33% decrease, volume impacted: 75.5)
+- CH: 79.21% to 74.81% (5.55% decrease, volume impacted: 74.7)
+- ES: 26.22% to 26.71% (1.86% increase, volume impacted: 72.9)
+
+All business units by change magnitude:
+- TZ: 0.10% to 13.18% (12488.64% increase, volume impacted: 302.2K)
+- TK: 1.06% to 28.74% (2606.45% increase, volume impacted: 43.9K)
+- TV: 1.01% to 27.08% (2594.79% increase, volume impacted: 22.4K)
+- FJ: 49.27% to 52.29% (6.13% increase, volume impacted: 12.1K)
+- YE: 66.11% to 56.69% (14.24% decrease, volume impacted: 7.7K)
+- CF: 29.85% to 31.23% (4.66% increase, volume impacted: 999.8)
+- TT: 35.00% to 37.26% (6.46% increase, volume impacted: 70.7)
+- TO: 30.66% to 31.51% (2.79% increase, volume impacted: 56.7)
+
+All business units by change magnitude:
+- MR: 1.74% to 0.64% (63.54% decrease, volume impacted: 14.9K)
+- ER: 24.87% to 23.29% (6.37% decrease, volume impacted: 2.7K)
+- KN: 11.93% to 14.59% (22.25% increase, volume impacted: 1.8K)
+- CK: 48.75% to 44.98% (7.74% decrease, volume impacted: 1.5K)
+- GN: 35.99% to 32.44% (9.86% decrease, volume impacted: 934.3)
+- AO: 67.72% to 71.37% (5.40% increase, volume impacted: 881.3)
+- CG: 40.15% to 37.84% (5.76% decrease, volume impacted: 708.0)
+
+
+
+================================================================================
+3_Active - 2_1_Boxes Shipped - 1_RecoveryW0
+================================================================================
+
+For Overall cluster, the 3_Active - 2_1_Boxes Shipped - 1_RecoveryW0 increased from 45.02% to 45.98%, a slight 2.12% increase (volume impacted: 12.7K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- US: 42.45% to 43.47% (2.39% increase, volume impacted: 2.0K)
+- CA: 34.28% to 34.38% (0.29% increase, volume impacted: 75.9)
+
+All business units by change magnitude:
+- DE: 37.22% to 41.85% (12.44% increase, volume impacted: 3.8K)
+- FR: 27.66% to 29.68% (7.29% increase, volume impacted: 3.8K)
+- GB: 43.75% to 44.87% (2.57% increase, volume impacted: 1.7K)
+- DK: 46.24% to 50.12% (8.37% increase, volume impacted: 872.6)
+- NO: 59.50% to 61.23% (2.91% increase, volume impacted: 506.6)
+- IE: 48.82% to 51.15% (4.77% increase, volume impacted: 493.8)
+- AU: 68.75% to 68.20% (0.81% decrease, volume impacted: 462.6)
+- AT: 47.77% to 52.05% (8.97% increase, volume impacted: 358.5)
+- NZ: 70.78% to 68.84% (2.75% decrease, volume impacted: 347.0)
+- BE: 42.37% to 42.00% (0.88% decrease, volume impacted: 266.4)
+- SE: 54.93% to 55.96% (1.87% increase, volume impacted: 209.9)
+- ES: 37.26% to 39.16% (5.09% increase, volume impacted: 53.3)
+- IT: 45.09% to 46.40% (2.91% increase, volume impacted: 46.5)
+- LU: 52.38% to 53.94% (2.98% increase, volume impacted: 37.8)
+
+All business units by change magnitude:
+- FJ: 38.35% to 40.55% (5.74% increase, volume impacted: 5.9K)
+- YE: 49.31% to 53.65% (8.81% increase, volume impacted: 2.7K)
+- CF: 47.36% to 51.41% (8.55% increase, volume impacted: 573.1)
+- TK: 41.67% to 22.31% (46.45% decrease, volume impacted: 224.8)
+- TZ: 50.00% to 16.61% (66.77% decrease, volume impacted: 213.0)
+- TT: 21.98% to 29.66% (34.94% increase, volume impacted: 142.6)
+- TV: 37.50% to 21.37% (43.02% decrease, volume impacted: 100.7)
+- TO: 42.51% to 37.13% (12.65% decrease, volume impacted: 81.1)
+
+All business units by change magnitude:
+- ER: 43.20% to 45.77% (5.95% increase, volume impacted: 577.6)
+- MR: 25.54% to 75.84% (196.90% increase, volume impacted: 293.4)
+- CG: 40.96% to 38.88% (5.07% decrease, volume impacted: 236.0)
+- KN: 31.65% to 37.23% (17.64% increase, volume impacted: 211.4)
+- GN: 43.49% to 41.77% (3.96% decrease, volume impacted: 121.8)
+- CK: 31.39% to 31.07% (1.02% decrease, volume impacted: 91.1)
+
+
+
+================================================================================
+3_Active - 2_2_Boxes Shipped - 12wk lag - 2_Recovery_12wkCohort
+================================================================================
+
+For Overall cluster, the 3_Active - 2_2_Boxes Shipped - 12wk lag - 2_Recovery_12wkCohort increased from 85.09% to 85.38%, a slight 0.33% increase (volume impacted: 1.8K). This change is significant and has a positive business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- CA: 83.91% to 85.10% (1.42% increase, volume impacted: 330.7)
+- US: 80.10% to 79.93% (0.22% decrease, volume impacted: 178.3)
+
+All business units by change magnitude:
+- GB: 84.19% to 86.62% (2.90% increase, volume impacted: 1.7K)
+- AU: 90.30% to 91.27% (1.07% increase, volume impacted: 660.9)
+- FR: 87.73% to 88.08% (0.40% increase, volume impacted: 169.7)
+- DE: 87.63% to 87.22% (0.47% decrease, volume impacted: 128.2)
+- BE: 93.68% to 93.93% (0.27% increase, volume impacted: 64.8)
+- IE: 78.43% to 79.10% (0.86% increase, volume impacted: 62.3)
+- NZ: 93.01% to 93.38% (0.40% increase, volume impacted: 49.4)
+- SE: 94.16% to 94.88% (0.77% increase, volume impacted: 48.0)
+- DK: 93.80% to 93.30% (0.53% decrease, volume impacted: 31.8)
+
+All business units by change magnitude:
+- FJ: 79.43% to 78.47% (1.21% decrease, volume impacted: 1.1K)
+- YE: 83.19% to 84.38% (1.43% increase, volume impacted: 451.9)
+- CF: 88.95% to 91.10% (2.42% increase, volume impacted: 114.5)
+- TK: 33.33% to 71.43% (114.29% increase, volume impacted: 16.0)
+- TZ: 50.00% to 100.00% (100.00% increase, volume impacted: 1)
+
+All business units by change magnitude:
+- AO: 86.87% to 89.35% (2.85% increase, volume impacted: 345.5)
+- CK: 80.36% to 82.25% (2.35% increase, volume impacted: 199.9)
+- MR: 61.67% to 43.47% (29.51% decrease, volume impacted: 110.7)
+- CG: 80.65% to 81.94% (1.60% increase, volume impacted: 76.3)
+- GN: 84.05% to 85.16% (1.32% increase, volume impacted: 38.1)
+
+
+
+================================================================================
+3_Active - 2_2_Boxes Shipped - 12wk lag - 3_DunningAvgNetProfit_12wkCohort
+================================================================================
+
+For Overall cluster, the 3_Active - 2_2_Boxes Shipped - 12wk lag - 3_DunningAvgNetProfit_12wkCohort decreased from €11.07 to €9.73, a notable 12.14% decrease (volume impacted: 110.8K). This change is significant and has a negative business impact. [13-Week Period vs Previous 13-Week Period]
+
+All business units by change magnitude:
+- US: €13.36 to €9.68 (27.54% decrease, volume impacted: 45.4K)
+- CA: €10.90 to €9.66 (11.37% decrease, volume impacted: 6.3K)
+
+All business units by change magnitude:
+- GB: €5.76 to €6.36 (10.47% increase, volume impacted: 10.8K)
+- AU: €16.03 to €16.97 (5.86% increase, volume impacted: 4.5K)
+- DE: €8.98 to €8.23 (8.39% decrease, volume impacted: 3.0K)
+- IE: €11.72 to €8.88 (24.19% decrease, volume impacted: 2.3K)
+- NO: €17.17 to €14.33 (16.57% decrease, volume impacted: 2.1K)
+- FR: €9.88 to €10.09 (2.04% increase, volume impacted: 1.3K)
+- DK: €19.60 to €17.88 (8.81% decrease, volume impacted: 607.1)
+- NZ: €11.17 to €11.53 (3.20% increase, volume impacted: 586.0)
+- SE: €15.51 to €14.49 (6.62% decrease, volume impacted: 499.7)
+- IT: €3.87 to €4.45 (14.99% increase, volume impacted: 422.7)
+- BE: €16.14 to €15.86 (1.74% decrease, volume impacted: 418.7)
+- LU: €20.55 to €26.39 (28.43% increase, volume impacted: 292.8)
+- ES: €1.52 to €1.71 (11.87% increase, volume impacted: 289.1)
+- NL: €12.60 to €12.16 (3.46% decrease, volume impacted: 142.9)
+- AT: €9.60 to €9.74 (1.43% increase, volume impacted: 64.9)
+- CH: €30.84 to €29.79 (3.40% decrease, volume impacted: 37.0)
+
+All business units by change magnitude:
+- FJ: €11.97 to €9.07 (24.21% decrease, volume impacted: 43.3K)
+- YE: €6.73 to €8.36 (24.09% increase, volume impacted: 10.4K)
+- CF: €7.55 to €6.48 (14.16% decrease, volume impacted: 2.1K)
+
+All business units by change magnitude:
+- ER: €4.81 to €3.53 (26.62% decrease, volume impacted: 8.2K)
+- CK: €7.75 to €6.40 (17.41% decrease, volume impacted: 2.8K)
+- AO: €6.29 to €7.23 (14.93% increase, volume impacted: 2.5K)
+- CG: €11.99 to €11.06 (7.73% decrease, volume impacted: 835.1)
+- GN: €7.55 to €7.91 (4.76% increase, volume impacted: 311.1)
+
+
