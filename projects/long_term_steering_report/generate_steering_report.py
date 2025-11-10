@@ -1122,36 +1122,57 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 else:
                     parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
-            # Bucket and display dimensions
-            if all_significant_dims:
-                dims_df = pd.DataFrame(all_significant_dims)
-                dim_buckets = bucket_by_percentage(dims_df, 'dimension')
-                
-                # Display dimensions by bucket
-                for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
-                    if dim_buckets[bucket_name]:
-                        dim_items = []
-                        for dim_row in dim_buckets[bucket_name]:
-                            arrow = format_arrow(dim_row['relative_change_pct'])
-                            item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
-                            rc_name = dim_row['reporting_cluster']
-                            dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                        parts.append(f"<br>{bucket_label} - Dimensions:<br>- {', '.join(dim_items)}")
-            
-            # Bucket and display business units
+            # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
+            # First, bucket business units
+            bu_buckets = {}
             if all_significant_bu:
                 bu_df = pd.DataFrame(all_significant_bu)
                 bu_buckets = bucket_by_percentage(bu_df, 'business_unit')
-                
-                # Display business units by bucket
-                for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
-                    if bu_buckets[bucket_name]:
-                        bu_items = []
-                        for bu_row in bu_buckets[bucket_name]:
-                            arrow = format_arrow(bu_row['relative_change_pct'])
-                            bu_name = bu_row.get('business_unit', 'Unknown')
-                            bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                        parts.append(f"<br>{bucket_label} - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # Then, bucket dimensions
+            dim_buckets = {}
+            if all_significant_dims:
+                dims_df = pd.DataFrame(all_significant_dims)
+                dim_buckets = bucket_by_percentage(dims_df, 'dimension')
+            
+            # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
+            # [+50%] - Business Units
+            if bu_buckets.get('high'):
+                bu_items = []
+                for bu_row in bu_buckets['high']:
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[+50%] - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # [20% - 49%] - Business Units
+            if bu_buckets.get('medium'):
+                bu_items = []
+                for bu_row in bu_buckets['medium']:
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[20% - 49%] - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # [+50%] - Dimensions
+            if dim_buckets.get('high'):
+                dim_items = []
+                for dim_row in dim_buckets['high']:
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[+50%] - Dimensions:<br>- {', '.join(dim_items)}")
+            
+            # [20% - 49%] - Dimensions
+            if dim_buckets.get('medium'):
+                dim_items = []
+                for dim_row in dim_buckets['medium']:
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[20% - 49%] - Dimensions:<br>- {', '.join(dim_items)}")
         else:
             header = "**Long Term Impact**"
             if quarter_range:
@@ -1295,36 +1316,57 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 else:
                     parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
-            # Bucket and display dimensions
-            if all_significant_dims_yoy:
-                dims_df_yoy = pd.DataFrame(all_significant_dims_yoy)
-                dim_buckets_yoy = bucket_by_percentage(dims_df_yoy, 'dimension')
-                
-                # Display dimensions by bucket
-                for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
-                    if dim_buckets_yoy[bucket_name]:
-                        dim_items = []
-                        for dim_row in dim_buckets_yoy[bucket_name]:
-                            arrow = format_arrow(dim_row['relative_change_pct'])
-                            item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
-                            rc_name = dim_row['reporting_cluster']
-                            dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                        parts.append(f"<br>{bucket_label} - Dimensions:<br>- {', '.join(dim_items)}")
-            
-            # Bucket and display business units
+            # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
+            # First, bucket business units
+            bu_buckets_yoy = {}
             if all_significant_bu_yoy:
                 bu_df_yoy = pd.DataFrame(all_significant_bu_yoy)
                 bu_buckets_yoy = bucket_by_percentage(bu_df_yoy, 'business_unit')
-                
-                # Display business units by bucket
-                for bucket_name, bucket_label in [('high', '[+50%]'), ('medium', '[20% - 49%]'), ('low', '[10% - 19%]')]:
-                    if bu_buckets_yoy[bucket_name]:
-                        bu_items = []
-                        for bu_row in bu_buckets_yoy[bucket_name]:
-                            arrow = format_arrow(bu_row['relative_change_pct'])
-                            bu_name = bu_row.get('business_unit', 'Unknown')
-                            bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                        parts.append(f"<br>{bucket_label} - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # Then, bucket dimensions
+            dim_buckets_yoy = {}
+            if all_significant_dims_yoy:
+                dims_df_yoy = pd.DataFrame(all_significant_dims_yoy)
+                dim_buckets_yoy = bucket_by_percentage(dims_df_yoy, 'dimension')
+            
+            # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
+            # [+50%] - Business Units
+            if bu_buckets_yoy.get('high'):
+                bu_items = []
+                for bu_row in bu_buckets_yoy['high']:
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[+50%] - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # [20% - 49%] - Business Units
+            if bu_buckets_yoy.get('medium'):
+                bu_items = []
+                for bu_row in bu_buckets_yoy['medium']:
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[20% - 49%] - Business Units:<br>- {', '.join(bu_items)}")
+            
+            # [+50%] - Dimensions
+            if dim_buckets_yoy.get('high'):
+                dim_items = []
+                for dim_row in dim_buckets_yoy['high']:
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[+50%] - Dimensions:<br>- {', '.join(dim_items)}")
+            
+            # [20% - 49%] - Dimensions
+            if dim_buckets_yoy.get('medium'):
+                dim_items = []
+                for dim_row in dim_buckets_yoy['medium']:
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                parts.append(f"<br>[20% - 49%] - Dimensions:<br>- {', '.join(dim_items)}")
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
