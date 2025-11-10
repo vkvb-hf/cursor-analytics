@@ -710,50 +710,80 @@ def format_arrow(rel_change):
 
 def format_significance(sig_level):
     """Format significance"""
-    return 'significant' if sig_level >= 3 else 'not significant'
+    return 'sig.' if sig_level >= 3 else 'not sig.'
 
 # COMMAND ----------
 
 # Generate key insights
+def get_metric_display_name(metric_final_name):
+    """Get human-readable metric name from METRIC_GROUPS"""
+    for display_name, full_name in METRIC_GROUPS:
+        if full_name == metric_final_name:
+            return display_name
+    # Fallback to last part of metric name if not found
+    return metric_final_name.split(' - ')[-1]
+
+def format_metric_value(prev_val, curr_val, metric_type, relative_change_pct):
+    """Format metric value based on type (ratio or dollar-ratio)"""
+    if metric_type == 'ratio':
+        return f"{prev_val*100:.2f}% to {curr_val*100:.2f}%"
+    else:
+        # For dollar-ratio (euros), don't multiply by 100
+        return f"€{prev_val:.2f} to €{curr_val:.2f}"
+
 def generate_key_insights(week_prev_df, week_yoy_df, quarter_prev_df):
     """Generate key insights section"""
     insights = []
     
-    # Critical Issues
+    # Critical Issues - metrics with significant decreases (week vs prev week)
     critical = []
     if week_prev_df is not None and not week_prev_df.empty:
-        overall = week_prev_df[week_prev_df['reporting_cluster'] == 'Overall']
+        overall = week_prev_df[
+            (week_prev_df['reporting_cluster'] == 'Overall') & 
+            (week_prev_df['dimension_name'] == '_Overall')
+        ]
         if not overall.empty:
             for _, row in overall.iterrows():
                 if row['relative_change_pct'] < -5:
-                    metric_short = row.get('metric_final_name', '').split(' - ')[-1]
-                    critical.append(f"{metric_short} decreased {abs(row['relative_change_pct']):.2f}% ({row['prev_ratio']*100:.2f}% to {row['current_ratio']*100:.2f}%)")
+                    metric_name = get_metric_display_name(row.get('metric_final_name', ''))
+                    value_str = format_metric_value(row['prev_ratio'], row['current_ratio'], row.get('metric_type', 'ratio'), row['relative_change_pct'])
+                    critical.append(f"{metric_name} decreased {abs(row['relative_change_pct']):.2f}% ({value_str})")
     
     if critical:
-        insights.append(f"- **Critical Issues:** {', '.join(critical[:2])}")
+        insights.append(f"**Critical Issues:** {', '.join(critical)}")
     else:
-        insights.append("- **Critical Issues:** None identified")
+        insights.append("**Critical Issues:** None identified")
     
-    # Positive Trends
+    # Positive Trends - metrics with significant increases (week vs prev week)
     positive = []
     if week_prev_df is not None and not week_prev_df.empty:
-        overall = week_prev_df[week_prev_df['reporting_cluster'] == 'Overall']
+        overall = week_prev_df[
+            (week_prev_df['reporting_cluster'] == 'Overall') & 
+            (week_prev_df['dimension_name'] == '_Overall')
+        ]
         if not overall.empty:
             for _, row in overall.iterrows():
                 if row['relative_change_pct'] > 5:
-                    metric_short = row.get('metric_final_name', '').split(' - ')[-1]
-                    positive.append(f"{metric_short} increased {row['relative_change_pct']:.2f}% ({row['prev_ratio']*100:.2f}% to {row['current_ratio']*100:.2f}%)")
+                    metric_name = get_metric_display_name(row.get('metric_final_name', ''))
+                    value_str = format_metric_value(row['prev_ratio'], row['current_ratio'], row.get('metric_type', 'ratio'), row['relative_change_pct'])
+                    positive.append(f"{metric_name} increased {row['relative_change_pct']:.2f}% ({value_str})")
     
     if positive:
-        insights.append(f"- **Positive Trends:** {', '.join(positive[:2])}")
+        insights.append(f"**Positive Trends:** {', '.join(positive)}")
     else:
-        insights.append("- **Positive Trends:** Overall metrics stable")
+        insights.append("**Positive Trends:** Overall metrics stable")
     
-    # Risk Shifts
+    # Risk Shifts - metrics showing diverging trends between HF-NA and HF-INTL
     risks = []
     if week_prev_df is not None and not week_prev_df.empty:
-        hfna = week_prev_df[week_prev_df['reporting_cluster'] == 'HF-NA']
-        hfintl = week_prev_df[week_prev_df['reporting_cluster'] == 'HF-INTL']
+        hfna = week_prev_df[
+            (week_prev_df['reporting_cluster'] == 'HF-NA') & 
+            (week_prev_df['dimension_name'] == '_Overall')
+        ]
+        hfintl = week_prev_df[
+            (week_prev_df['reporting_cluster'] == 'HF-INTL') & 
+            (week_prev_df['dimension_name'] == '_Overall')
+        ]
         if not hfna.empty and not hfintl.empty:
             for metric in hfna['metric_final_name'].unique():
                 hfna_metric = hfna[hfna['metric_final_name'] == metric]
@@ -762,28 +792,31 @@ def generate_key_insights(week_prev_df, week_yoy_df, quarter_prev_df):
                     hfna_change = hfna_metric.iloc[0]['relative_change_pct']
                     hfintl_change = hfintl_metric.iloc[0]['relative_change_pct']
                     if (hfna_change > 0 and hfintl_change < 0) or (hfna_change < 0 and hfintl_change > 0):
-                        metric_short = metric.split(' - ')[-1]
-                        risks.append(f"{metric_short} showing diverging trends")
+                        metric_name = get_metric_display_name(metric)
+                        risks.append(f"{metric_name} showing diverging trends")
     
     if risks:
-        insights.append(f"- **Risk Shifts:** {', '.join(risks[:1])}")
+        insights.append(f"**Risk Shifts:** {', '.join(risks)}")
     else:
-        insights.append("- **Risk Shifts:** No major shifts detected")
+        insights.append("**Risk Shifts:** No major shifts detected")
     
-    # Emerging Concerns
+    # Emerging Concerns - metrics down YoY
     concerns = []
     if week_yoy_df is not None and not week_yoy_df.empty:
-        overall = week_yoy_df[week_yoy_df['reporting_cluster'] == 'Overall']
+        overall = week_yoy_df[
+            (week_yoy_df['reporting_cluster'] == 'Overall') & 
+            (week_yoy_df['dimension_name'] == '_Overall')
+        ]
         if not overall.empty:
             for _, row in overall.iterrows():
                 if row['relative_change_pct'] < -10:
-                    metric_short = row.get('metric_final_name', '').split(' - ')[-1]
-                    concerns.append(f"{metric_short} down {abs(row['relative_change_pct']):.2f}% YoY")
+                    metric_name = get_metric_display_name(row.get('metric_final_name', ''))
+                    concerns.append(f"{metric_name} down {abs(row['relative_change_pct']):.2f}% YoY")
     
     if concerns:
-        insights.append(f"- **Emerging Concerns:** {', '.join(concerns[:1])}")
+        insights.append(f"**Emerging Concerns:** {', '.join(concerns)}")
     else:
-        insights.append("- **Emerging Concerns:** Monitor long-term trends")
+        insights.append("**Emerging Concerns:** Monitor long-term trends")
     
     return "\n".join(insights)
 
@@ -853,9 +886,9 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
                 if row['metric_type'] == 'ratio':
-                    anomaly_parts.append(f"- **{rc}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    anomaly_parts.append(f"- **{rc}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, vol: {volume})")
                 else:
-                    anomaly_parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, volume: {volume})")
+                    anomaly_parts.append(f"- **{rc}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, {sig}, vol: {volume})")
         
         # Deep Insights - Level 2 (Dimensions and Business Units) - Same format as Long Term Impact - goes to Anomaly/Callout column
         if not is_first_anomaly_section:
