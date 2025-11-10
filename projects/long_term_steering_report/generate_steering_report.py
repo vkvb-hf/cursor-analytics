@@ -926,6 +926,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                             debug_print(f"  {idx+1}. {row['dimension_name']} {row['dimension_value']}: {row['abs_rel_change']:.2f}%, vol: {row['volume_impacted']:.2f}")
                 
                 for _, dim_row in filtered_dims.head(3).iterrows():
+                    # Exclude PaymentProvider Unknown and PaymentMethod Unknown from insights
+                    if (dim_row['dimension_name'] == 'PaymentProvider' and dim_row['dimension_value'] == 'Unknown') or \
+                       (dim_row['dimension_name'] == 'PaymentMethod' and dim_row['dimension_value'] == 'Unknown'):
+                        continue
                     all_significant_dims_deep.append({
                         'reporting_cluster': rc,
                         'dimension_name': dim_row['dimension_name'],
@@ -1053,12 +1057,58 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
             anomaly_parts.append(f"[10% - 19%] - Dimensions: {', '.join(dim_items)}")
         
+        # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown
+        unknown_callouts = []
+        if week_prev_df is not None and not week_prev_df.empty:
+            # Check PaymentProvider Unknown at Overall level
+            pp_unknown = week_prev_df[
+                (week_prev_df['reporting_cluster'] == 'Overall') &
+                (week_prev_df['dimension_name'] == 'PaymentProvider') &
+                (week_prev_df['dimension_value'] == 'Unknown')
+            ]
+            if not pp_unknown.empty:
+                row = pp_unknown.iloc[0]
+                abs_change = abs(row['relative_change_pct'])
+                if abs_change >= 10:  # Only show if significant change
+                    arrow = format_arrow(row['relative_change_pct'])
+                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                    prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                    curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                    if row['metric_type'] == 'ratio':
+                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                    else:
+                        unknown_callouts.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+            
+            # Check PaymentMethod Unknown at Overall level
+            pm_unknown = week_prev_df[
+                (week_prev_df['reporting_cluster'] == 'Overall') &
+                (week_prev_df['dimension_name'] == 'PaymentMethod') &
+                (week_prev_df['dimension_value'] == 'Unknown')
+            ]
+            if not pm_unknown.empty:
+                row = pm_unknown.iloc[0]
+                abs_change = abs(row['relative_change_pct'])
+                if abs_change >= 10:  # Only show if significant change
+                    arrow = format_arrow(row['relative_change_pct'])
+                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                    prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                    curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                    if row['metric_type'] == 'ratio':
+                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                    else:
+                        unknown_callouts.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+        
+        if unknown_callouts:
+            anomaly_parts.append("**Unknown Dimensions Callout:**")
+            anomaly_parts.extend(unknown_callouts)
+        
         if not bu_buckets_deep.get('high') and not bu_buckets_deep.get('medium') and not bu_buckets_deep.get('low') and not dim_buckets_deep.get('high') and not dim_buckets_deep.get('medium') and not dim_buckets_deep.get('low'):
             if is_debug_ar:
                 debug_print(f"[DEBUG AR] ⚠️  No significant insights found!")
                 debug_print(f"[DEBUG AR] - all_significant_dims_deep count: {len(all_significant_dims_deep)}")
                 debug_print(f"[DEBUG AR] - all_significant_bu_deep count: {len(all_significant_bu_deep)}")
-            anomaly_parts.append("- No significant insights")
+            if not unknown_callouts:  # Only show "No significant insights" if there are no Unknown callouts either
+                anomaly_parts.append("- No significant insights")
     
     # ============================================================================
     # Long Term Impact (Quarter) - following write_formatted_summaries pattern
@@ -1241,6 +1291,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 
                 # Collect significant dimensions
                 for _, dim_row in filtered_dims.head(3).iterrows():
+                    # Exclude PaymentProvider Unknown and PaymentMethod Unknown from insights
+                    if (dim_row['dimension_name'] == 'PaymentProvider' and dim_row['dimension_value'] == 'Unknown') or \
+                       (dim_row['dimension_name'] == 'PaymentMethod' and dim_row['dimension_value'] == 'Unknown'):
+                        continue
                     all_significant_dims.append({
                         'reporting_cluster': rc,
                         'dimension_name': dim_row['dimension_name'],
@@ -1359,6 +1413,51 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 long_term_parts.append(f"[10% - 19%] - Dimensions: {', '.join(dim_items)}")
+            
+            # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Long Term Impact)
+            unknown_callouts_lt = []
+            if df_metric is not None and not df_metric.empty:
+                # Check PaymentProvider Unknown at Overall level
+                pp_unknown_lt = df_metric[
+                    (df_metric['reporting_cluster'] == 'Overall') &
+                    (df_metric['dimension_name'] == 'PaymentProvider') &
+                    (df_metric['dimension_value'] == 'Unknown')
+                ]
+                if not pp_unknown_lt.empty:
+                    row = pp_unknown_lt.iloc[0]
+                    abs_change = abs(row['relative_change_pct'])
+                    if abs_change >= 10:  # Only show if significant change
+                        arrow = format_arrow(row['relative_change_pct'])
+                        volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                        prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                        curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        else:
+                            unknown_callouts_lt.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                
+                # Check PaymentMethod Unknown at Overall level
+                pm_unknown_lt = df_metric[
+                    (df_metric['reporting_cluster'] == 'Overall') &
+                    (df_metric['dimension_name'] == 'PaymentMethod') &
+                    (df_metric['dimension_value'] == 'Unknown')
+                ]
+                if not pm_unknown_lt.empty:
+                    row = pm_unknown_lt.iloc[0]
+                    abs_change = abs(row['relative_change_pct'])
+                    if abs_change >= 10:  # Only show if significant change
+                        arrow = format_arrow(row['relative_change_pct'])
+                        volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                        prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                        curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        else:
+                            unknown_callouts_lt.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+            
+            if unknown_callouts_lt:
+                long_term_parts.append("**Unknown Dimensions Callout:**")
+                long_term_parts.extend(unknown_callouts_lt)
         else:
             if not is_first_long_term_section:
                 long_term_parts.append("")  # Add blank line before section header
@@ -1472,6 +1571,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 
                 # Collect significant dimensions
                 for _, dim_row in filtered_dims.head(3).iterrows():
+                    # Exclude PaymentProvider Unknown and PaymentMethod Unknown from insights
+                    if (dim_row['dimension_name'] == 'PaymentProvider' and dim_row['dimension_value'] == 'Unknown') or \
+                       (dim_row['dimension_name'] == 'PaymentMethod' and dim_row['dimension_value'] == 'Unknown'):
+                        continue
                     all_significant_dims_yoy.append({
                         'reporting_cluster': rc,
                         'dimension_name': dim_row['dimension_name'],
@@ -1566,6 +1669,51 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     rc_name = dim_row['reporting_cluster']
                     dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+            
+            # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Year-over-Year)
+            unknown_callouts_yoy = []
+            if week_yoy_df is not None and not week_yoy_df.empty:
+                # Check PaymentProvider Unknown at Overall level
+                pp_unknown_yoy = week_yoy_df[
+                    (week_yoy_df['reporting_cluster'] == 'Overall') &
+                    (week_yoy_df['dimension_name'] == 'PaymentProvider') &
+                    (week_yoy_df['dimension_value'] == 'Unknown')
+                ]
+                if not pp_unknown_yoy.empty:
+                    row = pp_unknown_yoy.iloc[0]
+                    abs_change = abs(row['relative_change_pct'])
+                    if abs_change >= 10:  # Only show if significant change
+                        arrow = format_arrow(row['relative_change_pct'])
+                        volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                        prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                        curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        else:
+                            unknown_callouts_yoy.append(f"**Overall PaymentProvider Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+                
+                # Check PaymentMethod Unknown at Overall level
+                pm_unknown_yoy = week_yoy_df[
+                    (week_yoy_df['reporting_cluster'] == 'Overall') &
+                    (week_yoy_df['dimension_name'] == 'PaymentMethod') &
+                    (week_yoy_df['dimension_value'] == 'Unknown')
+                ]
+                if not pm_unknown_yoy.empty:
+                    row = pm_unknown_yoy.iloc[0]
+                    abs_change = abs(row['relative_change_pct'])
+                    if abs_change >= 10:  # Only show if significant change
+                        arrow = format_arrow(row['relative_change_pct'])
+                        volume = format_number(row.get('current_metric_value_denominator', 0) * abs_change / 100)
+                        prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
+                        curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                        if row['metric_type'] == 'ratio':
+                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs_change:.2f}%, vol: {volume})")
+                        else:
+                            unknown_callouts_yoy.append(f"**Overall PaymentMethod Unknown**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs_change:.2f}%, vol: {volume})")
+            
+            if unknown_callouts_yoy:
+                long_term_parts.append("**Unknown Dimensions Callout:**")
+                long_term_parts.extend(unknown_callouts_yoy)
         else:
             if is_debug_metric_yoy:
                 debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")

@@ -19,12 +19,12 @@
    [DEBUG YOY] AFTER PROCESSING - reporting_cluster distribution:
 bu_level        578
 Overall          71
+WL               71
+INTL-mature      71
 HF-INTL          71
 HF-TOTAL         71
-INTL-mature      71
-WL               71
-RTE              70
 INTL-growing     70
+RTE              70
 HF-NA            69
 INTL-startup     69
 US-HF            68
@@ -74,12 +74,12 @@ Name: reporting_cluster, dtype: int64
    [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_numerator: 0
    [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_denominator: 0
    [DEBUG] Sample bu_level row (IT) before fillna:
-     - current_metric_value_numerator: 8426.0
-     - current_metric_value_denominator: 9502.0
-     - prev_metric_value_numerator: 4119.0
-     - prev_metric_value_denominator: 4460.0
+     - current_metric_value_numerator: 52727.0
+     - current_metric_value_denominator: 60269.0
+     - prev_metric_value_numerator: 42918.0
+     - prev_metric_value_denominator: 48902.0
      - business_unit: IT
-     - metric_final_name: 3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR
+     - metric_final_name: 3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR
    [DEBUG] AFTER PROCESSING - bu_level rows in quarter_prev_processed: 578
    [DEBUG] AFTER PROCESSING - reporting_cluster distribution:
 bu_level        578
@@ -116,13 +116,13 @@ Name: reporting_cluster, dtype: int64
 [DEBUG YOY FILTERING] reporting_cluster distribution:
 [DEBUG YOY FILTERING] After filtering:
 [DEBUG YOY FILTERING] week_yoy_metric shape: (44, 23)
-[DEBUG YOY FILTERING] reporting_cluster values: ['Overall' 'INTL-startup' 'HF-INTL' 'RTE' 'HF-TOTAL' 'WL' 'US-HF'
- 'INTL-mature' 'HF-NA' 'INTL-growing' 'bu_level']
+[DEBUG YOY FILTERING] reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG YOY FILTERING] Overall rows with _Overall dimension: 1
 [DEBUG YOY FILTERING] Sample relative_change_pct: -8.369636549881387
 [DEBUG] AFTER FILTERING - quarter_prev_metric:
 [DEBUG] AFTER FILTERING - quarter_prev_metric shape: (44, 23)
-[DEBUG] AFTER FILTERING - reporting_cluster values: ['WL' 'HF-NA' 'INTL-startup' 'HF-TOTAL' 'RTE' 'INTL-growing' 'US-HF'
+[DEBUG] AFTER FILTERING - reporting_cluster values: ['HF-NA' 'WL' 'INTL-startup' 'HF-TOTAL' 'RTE' 'INTL-growing' 'US-HF'
  'INTL-mature' 'Overall' 'HF-INTL' 'bu_level']
 [DEBUG] AFTER FILTERING - reporting_cluster distribution:
 [DEBUG] AFTER FILTERING - bu_level rows in quarter_prev_metric: 34
@@ -131,15 +131,15 @@ Name: reporting_cluster, dtype: int64
 
 [DEBUG build_callout_for_metric] Starting Long Term Impact for: 1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess
 [DEBUG] STEP 1 - Input quarter_prev_df shape: (44, 23)
-[DEBUG] STEP 1 - Input quarter_prev_df reporting_cluster values: ['WL' 'HF-NA' 'INTL-startup' 'HF-TOTAL' 'RTE' 'INTL-growing' 'US-HF'
+[DEBUG] STEP 1 - Input quarter_prev_df reporting_cluster values: ['HF-NA' 'WL' 'INTL-startup' 'HF-TOTAL' 'RTE' 'INTL-growing' 'US-HF'
  'INTL-mature' 'Overall' 'HF-INTL' 'bu_level']
 [DEBUG] STEP 1 - bu_level rows in input: 34
 [DEBUG] STEP 1 - Business units in other reporting_cluster rows: 0
 [DEBUG] STEP 2 - After data type normalization, df_metric shape: (44, 23)
 [DEBUG] STEP 2 - reporting_cluster distribution:
 bu_level        34
-WL               1
 HF-NA            1
+WL               1
 INTL-startup     1
 HF-TOTAL         1
 RTE              1
@@ -200,8 +200,8 @@ Name: reporting_cluster, dtype: int64
 [DEBUG YOY] week_yoy_df is None: False
 [DEBUG YOY] week_yoy_df.empty: False
 [DEBUG YOY] week_yoy_df.shape: (44, 23)
-[DEBUG YOY] week_yoy_df reporting_cluster values: ['Overall' 'INTL-startup' 'HF-INTL' 'RTE' 'HF-TOTAL' 'WL' 'US-HF'
- 'INTL-mature' 'HF-NA' 'INTL-growing' 'bu_level']
+[DEBUG YOY] week_yoy_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG YOY] week_yoy_df dimension_name values: ['_Overall']
 [DEBUG YOY] overall_yoy.empty: False
 [DEBUG YOY] overall_yoy.shape: (1, 23)
@@ -276,7 +276,7 @@ Name: reporting_cluster, dtype: int64
 
 [DEBUG build_callout_for_metric] Starting Long Term Impact for: 3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR
 [DEBUG] STEP 1 - Input quarter_prev_df shape: (174, 23)
-[DEBUG] STEP 1 - Input quarter_prev_df reporting_cluster values: ['US-HF' 'RTE' 'WL' 'HF-INTL' 'HF-TOTAL' 'INTL-growing' 'INTL-mature'
+[DEBUG] STEP 1 - Input quarter_prev_df reporting_cluster values: ['US-HF' 'RTE' 'WL' 'HF-TOTAL' 'HF-INTL' 'INTL-growing' 'INTL-mature'
  'HF-NA' 'Overall' 'INTL-startup' 'bu_level']
 [DEBUG] STEP 1 - bu_level rows in input: 34
 [DEBUG] STEP 1 - Business units in other reporting_cluster rows: 0
@@ -324,4 +324,4 @@ Name: reporting_cluster, dtype: int64
 [DEBUG] STEP 6 - Total significant business units collected: 33
 [DEBUG] STEP 6 - Significant business units: ['US', 'CA', 'GB', 'FR', 'BE', 'DE', 'SE', 'NL', 'DK', 'IE', 'NZ', 'NO', 'ES', 'AT', 'LU', 'IT', 'AU', 'CH', 'FJ', 'YE', 'CF', 'TZ', 'TV', 'TK', 'TT', 'MR', 'ER', 'CK', 'KN', 'CG', 'AO', 'GQ', 'GN']
 [DEBUG] STEP 7 - has_significant_overall: False, has_significant_bu: True, has_significant_dims: True
-[DEBUG] STEP 7 - Significant dimensions count: 18
+[DEBUG] STEP 7 - Significant dimensions count: 14
