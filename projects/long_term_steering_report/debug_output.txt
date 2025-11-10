@@ -1,3 +1,38 @@
+   [DEBUG YOY] Building query for year-over-year comparison...
+   [DEBUG YOY] Query built for date_value: 2025-W45
+   [DEBUG YOY] Raw query returned 1279 rows
+   [DEBUG YOY] Columns in week_yoy_data: ['date_value', 'date_granularity', 'comparison_type', 'comparison_label', 'reporting_cluster', 'business_unit', 'metric_final_name', 'dimension_name', 'dimension_value', 'flag_more_is_good', 'flag_is_p0', 'metric_type', 'current_metric_value_numerator', 'current_metric_value_denominator', 'prev_metric_value_numerator', 'prev_metric_value_denominator']
+   [DEBUG YOY] Rows with NULL prev_metric_value_numerator: 0
+   [DEBUG YOY] Rows with NULL prev_metric_value_denominator: 0
+   [DEBUG YOY] Sample row:
+     - reporting_cluster: Overall
+     - business_unit: Null
+     - metric_final_name: 3_Active - 1_1_Overall Total Box Candidates - 2_Pr...
+     - current_metric_value_numerator: 1912661.0
+     - current_metric_value_denominator: 2081663.0
+     - prev_metric_value_numerator: 2153466.0
+     - prev_metric_value_denominator: 2342794.0
+   [DEBUG YOY] reporting_cluster distribution:
+   [DEBUG YOY] bu_level rows: 578
+   [DEBUG YOY] Overall rows: 71
+   [DEBUG YOY] AFTER PROCESSING - week_yoy_processed shape: (1279, 23)
+   [DEBUG YOY] AFTER PROCESSING - reporting_cluster distribution:
+bu_level        578
+Overall          71
+WL               71
+INTL-mature      71
+HF-INTL          71
+HF-TOTAL         71
+INTL-growing     70
+RTE              70
+HF-NA            69
+INTL-startup     69
+US-HF            68
+Name: reporting_cluster, dtype: int64
+   [DEBUG YOY] AFTER PROCESSING - Overall rows with _Overall dimension: 17
+   [DEBUG YOY] Sample Overall row relative_change_pct: -0.040594784129497775
+   [DEBUG YOY] Sample Overall row prev_ratio: 0.9191870902862138
+   [DEBUG YOY] Sample Overall row current_ratio: 0.9188139482711659
    [DEBUG] Building queries for current and previous quarters...
    [DEBUG] data_current count: 1281
    [DEBUG] data_prev count: 1282
@@ -39,17 +74,17 @@
    [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_numerator: 0
    [DEBUG] BEFORE fillna - bu_level rows with NULL prev_metric_value_denominator: 0
    [DEBUG] Sample bu_level row (IT) before fillna:
-     - current_metric_value_numerator: 8426.0
-     - current_metric_value_denominator: 9502.0
-     - prev_metric_value_numerator: 4119.0
-     - prev_metric_value_denominator: 4460.0
+     - current_metric_value_numerator: 52727.0
+     - current_metric_value_denominator: 60269.0
+     - prev_metric_value_numerator: 42918.0
+     - prev_metric_value_denominator: 48902.0
      - business_unit: IT
-     - metric_final_name: 3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR
+     - metric_final_name: 3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR
    [DEBUG] AFTER PROCESSING - bu_level rows in quarter_prev_processed: 578
    [DEBUG] AFTER PROCESSING - reporting_cluster distribution:
 bu_level        578
-HF-INTL          71
 INTL-mature      71
+HF-INTL          71
 Overall          71
 WL               71
 HF-TOTAL         71
@@ -73,6 +108,18 @@ Name: reporting_cluster, dtype: int64
 [DEBUG] BEFORE FILTERING - Matching rows count: 44
 [DEBUG] BEFORE FILTERING - reporting_cluster distribution in matching rows:
 [DEBUG] BEFORE FILTERING - bu_level rows in matching: 34
+[DEBUG YOY FILTERING] Before filtering for 1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess:
+[DEBUG YOY FILTERING] week_yoy_processed shape: (1279, 23)
+[DEBUG YOY FILTERING] Unique metric_final_name values (first 5):
+[DEBUG YOY FILTERING] Metric exists in week_yoy_processed: True
+[DEBUG YOY FILTERING] Matching rows count: 44
+[DEBUG YOY FILTERING] reporting_cluster distribution:
+[DEBUG YOY FILTERING] After filtering:
+[DEBUG YOY FILTERING] week_yoy_metric shape: (44, 23)
+[DEBUG YOY FILTERING] reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
+[DEBUG YOY FILTERING] Overall rows with _Overall dimension: 1
+[DEBUG YOY FILTERING] Sample relative_change_pct: -8.369636549881387
 [DEBUG] AFTER FILTERING - quarter_prev_metric:
 [DEBUG] AFTER FILTERING - quarter_prev_metric shape: (44, 23)
 [DEBUG] AFTER FILTERING - reporting_cluster values: ['HF-NA' 'WL' 'INTL-startup' 'HF-TOTAL' 'RTE' 'INTL-growing' 'US-HF'
@@ -84,8 +131,8 @@ Name: reporting_cluster, dtype: int64
 
 [DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: HF-NA
 [DEBUG] week_prev_df shape: (44, 23)
-[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'RTE' 'INTL-growing' 'US-HF' 'HF-NA'
- 'INTL-mature' 'HF-INTL' 'WL' 'HF-TOTAL' 'bu_level']
+[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG] week_prev_df business_unit sample: ['Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null']
 [DEBUG] Business units in HF-NA from country_mapping_df: 2 (['CA', 'US']...)
 [DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): 2
@@ -100,50 +147,60 @@ Name: reporting_cluster, dtype: int64
 
 [DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: HF-INTL
 [DEBUG] week_prev_df shape: (44, 23)
-[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'RTE' 'INTL-growing' 'US-HF' 'HF-NA'
- 'INTL-mature' 'HF-INTL' 'WL' 'HF-TOTAL' 'bu_level']
+[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG] week_prev_df business_unit sample: ['Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null']
 [DEBUG] Business units in HF-INTL from country_mapping_df: 16 (['AT', 'AU', 'BE', 'CH', 'DE', 'DK', 'ES', 'FR', 'GB', 'IE']...)
 [DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): 16
 [DEBUG] level2_bu_rows reporting_cluster values: ['bu_level']
-[DEBUG] level2_bu_rows business_unit values: ['IT' 'CH' 'DE' 'NO' 'IE' 'AU' 'NL' 'DK' 'FR' 'AT' 'ES' 'NZ' 'SE' 'GB'
- 'LU' 'BE']
-[DEBUG] level2_bu_rows sample relative_change_pct: [-11.794620965567416, -10.42775478020895, -4.4138648177885305, -13.631940530250667, 0.4745803026303691, 0.7716935706674032, -0.9775449081807459, -4.124455796982651, -1.728568291453654, 0.3138366916690508]
+[DEBUG] level2_bu_rows business_unit values: ['ES' 'NZ' 'SE' 'GB' 'LU' 'IT' 'CH' 'DE' 'NO' 'IE' 'AU' 'NL' 'DK' 'BE'
+ 'AT' 'FR']
+[DEBUG] level2_bu_rows sample relative_change_pct: [-9.549033348447994, -0.5367301323884507, -0.8850472896602303, 1.5796079675742418, -20.37037037037038, -11.794620965567416, -10.42775478020895, -4.4138648177885305, -13.631940530250667, 0.4745803026303691]
 [DEBUG] After calculating abs_rel_change and volume_impacted
-[DEBUG] Sample abs_rel_change: [11.794620965567416, 10.42775478020895, 4.4138648177885305, 13.631940530250667, 0.4745803026303691, 0.7716935706674032, 0.9775449081807459, 4.124455796982651, 1.728568291453654, 0.3138366916690508]
-[DEBUG] Sample volume_impacted: [133.39716312056748, 35.662921348314605, 510.9489913072003, 165.21911922663807, 12.571632216678477, 45.12092307692306, 20.293832293832285, 63.80533117932161, 266.73537305421337, 3.125813449023746]
+[DEBUG] Sample abs_rel_change: [9.549033348447994, 0.5367301323884507, 0.8850472896602303, 1.5796079675742418, 20.37037037037038, 11.794620965567416, 10.42775478020895, 4.4138648177885305, 13.631940530250667, 0.4745803026303691]
+[DEBUG] Sample volume_impacted: [136.26470588235287, 5.565891472868234, 14.904196357878277, 254.52223181523757, 12.83333333333334, 133.39716312056748, 35.662921348314605, 510.9489913072003, 165.21911922663807, 12.571632216678477]
 [DEBUG] After filtering (abs_rel_change>10 OR volume_impacted>30): 10 rows
 [DEBUG] Significant business units for HF-INTL: ['DE', 'FR', 'GB', 'NO', 'ES', 'IT', 'DK', 'AU', 'CH', 'LU']
 
+[DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: US-HF
+[DEBUG] week_prev_df shape: (44, 23)
+[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
+[DEBUG] week_prev_df business_unit sample: ['Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null']
+[DEBUG] Business units in US-HF from country_mapping_df: 0 ([]...)
+[DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): 0
+[DEBUG] ⚠️  level2_bu_rows is EMPTY! No business unit data found for US-HF
+[DEBUG] Business units in week_prev_df that match US-HF: 0 ([]...)
+
 [DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: RTE
 [DEBUG] week_prev_df shape: (44, 23)
-[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'RTE' 'INTL-growing' 'US-HF' 'HF-NA'
- 'INTL-mature' 'HF-INTL' 'WL' 'HF-TOTAL' 'bu_level']
+[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG] week_prev_df business_unit sample: ['Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null']
 [DEBUG] Business units in RTE from country_mapping_df: 8 (['CF', 'FJ', 'TO', 'TT', 'YE', 'TV', 'TK', 'TZ']...)
 [DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): 8
 [DEBUG] level2_bu_rows reporting_cluster values: ['bu_level']
-[DEBUG] level2_bu_rows business_unit values: ['CF' 'TT' 'TO' 'FJ' 'YE' 'TZ' 'TV' 'TK']
-[DEBUG] level2_bu_rows sample relative_change_pct: [16.227387138030817, -1.73315183080808, 9.179282180133509, 6.456341805367642, -1.988686799195942, 11.925564506978322, 17.83835616438357, 10.576039296638394]
+[DEBUG] level2_bu_rows business_unit values: ['TK' 'CF' 'TT' 'TO' 'FJ' 'YE' 'TZ' 'TV']
+[DEBUG] level2_bu_rows sample relative_change_pct: [10.576039296638394, 16.227387138030817, -1.73315183080808, 9.179282180133509, 6.456341805367642, -1.988686799195942, 11.925564506978322, 17.83835616438357]
 [DEBUG] After calculating abs_rel_change and volume_impacted
-[DEBUG] Sample abs_rel_change: [16.227387138030817, 1.73315183080808, 9.179282180133509, 6.456341805367642, 1.988686799195942, 11.925564506978322, 17.83835616438357, 10.576039296638394]
-[DEBUG] Sample volume_impacted: [1136.2416474049178, 12.201388888888882, 87.47855917667233, 2953.84093937375, 100.09060660353175, 150.14285714285708, 65.11000000000003, 52.77443609022558]
+[DEBUG] Sample abs_rel_change: [10.576039296638394, 16.227387138030817, 1.73315183080808, 9.179282180133509, 6.456341805367642, 1.988686799195942, 11.925564506978322, 17.83835616438357]
+[DEBUG] Sample volume_impacted: [52.77443609022558, 1136.2416474049178, 12.201388888888882, 87.47855917667233, 2953.84093937375, 100.09060660353175, 150.14285714285708, 65.11000000000003]
 [DEBUG] After filtering (abs_rel_change>10 OR volume_impacted>30): 7 rows
 [DEBUG] Significant business units for RTE: ['FJ', 'CF', 'TZ', 'YE', 'TO', 'TV', 'TK']
 
 [DEBUG Week vs Prev Week - Level 2 BU] Processing reporting cluster: WL
 [DEBUG] week_prev_df shape: (44, 23)
-[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'RTE' 'INTL-growing' 'US-HF' 'HF-NA'
- 'INTL-mature' 'HF-INTL' 'WL' 'HF-TOTAL' 'bu_level']
+[DEBUG] week_prev_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
 [DEBUG] week_prev_df business_unit sample: ['Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null', 'Null']
 [DEBUG] Business units in WL from country_mapping_df: 8 (['AO', 'CG', 'CK', 'ER', 'GN', 'GQ', 'KN', 'MR']...)
 [DEBUG] level2_bu_rows count after filtering by business_unit.isin(rc_bu): 8
 [DEBUG] level2_bu_rows reporting_cluster values: ['bu_level']
-[DEBUG] level2_bu_rows business_unit values: ['GN' 'ER' 'CK' 'KN' 'GQ' 'AO' 'MR' 'CG']
-[DEBUG] level2_bu_rows sample relative_change_pct: [10.940779752040294, 12.00758681062153, 18.351062426589053, 2.494264797295429, 4.312668463611864, 4.209097905780373, 10.177831593459672, 10.1011555660975]
+[DEBUG] level2_bu_rows business_unit values: ['MR' 'GN' 'ER' 'CG' 'CK' 'KN' 'GQ' 'AO']
+[DEBUG] level2_bu_rows sample relative_change_pct: [10.177831593459672, 10.940779752040294, 12.00758681062153, 10.1011555660975, 18.351062426589053, 2.494264797295429, 4.312668463611864, 4.209097905780373]
 [DEBUG] After calculating abs_rel_change and volume_impacted
-[DEBUG] Sample abs_rel_change: [10.940779752040294, 12.00758681062153, 18.351062426589053, 2.494264797295429, 4.312668463611864, 4.209097905780373, 10.177831593459672, 10.1011555660975]
-[DEBUG] Sample volume_impacted: [327.78576137112725, 572.5217391304345, 881.9520602218699, 134.14156079854817, 2.285714285714288, 32.83096366508691, 817.5852119026154, 437.5820591233437]
+[DEBUG] Sample abs_rel_change: [10.177831593459672, 10.940779752040294, 12.00758681062153, 10.1011555660975, 18.351062426589053, 2.494264797295429, 4.312668463611864, 4.209097905780373]
+[DEBUG] Sample volume_impacted: [817.5852119026154, 327.78576137112725, 572.5217391304345, 437.5820591233437, 881.9520602218699, 134.14156079854817, 2.285714285714288, 32.83096366508691]
 [DEBUG] After filtering (abs_rel_change>10 OR volume_impacted>30): 7 rows
 [DEBUG] Significant business units for WL: ['CK', 'MR', 'ER', 'CG', 'GN', 'KN', 'AO']
 
@@ -187,6 +244,8 @@ Name: reporting_cluster, dtype: int64
 [DEBUG] STEP 5.HF-INTL - Sample volume_impacted: [25992.637541981516, 1890.8944124897298, 9254.074581430745, 262.19332659251756, 6842.994389027431]
 [DEBUG] STEP 5.HF-INTL - After filtering (abs_rel_change>10 OR volume_impacted>30): 16 rows
 [DEBUG] STEP 5.HF-INTL - Significant business units: ['FR', 'GB', 'DE', 'IT', 'NL', 'SE', 'IE', 'BE', 'NO', 'DK', 'AU', 'AT', 'CH', 'ES', 'NZ', 'LU']
+[DEBUG] STEP 5.US-HF - Business units in US-HF: 0 ([]...)
+[DEBUG] STEP 5.US-HF - After filtering by business_unit.isin(rc_bu): 0 rows
 [DEBUG] STEP 5.RTE - Business units in RTE: 8 (['CF', 'FJ', 'TO', 'TT', 'YE']...)
 [DEBUG] STEP 5.RTE - After filtering by business_unit.isin(rc_bu): 8 rows
 [DEBUG] STEP 5.RTE - After calculating abs_rel_change and volume_impacted
@@ -203,4 +262,21 @@ Name: reporting_cluster, dtype: int64
 [DEBUG] STEP 5.WL - Significant business units: ['CG', 'CK', 'ER', 'MR', 'GN', 'KN', 'AO']
 [DEBUG] STEP 6 - Total significant business units collected: 33
 [DEBUG] STEP 6 - Significant business units: ['CA', 'US', 'FR', 'GB', 'DE', 'IT', 'NL', 'SE', 'IE', 'BE', 'NO', 'DK', 'AU', 'AT', 'CH', 'ES', 'NZ', 'LU', 'FJ', 'YE', 'TO', 'TT', 'TZ', 'TK', 'CF', 'TV', 'CG', 'CK', 'ER', 'MR', 'GN', 'KN', 'AO']
-[DEBUG] STEP 7 - has_significant_overall: False, has_significant_bu: True
+[DEBUG] STEP 7 - has_significant_overall: False, has_significant_bu: True, has_significant_dims: False
+
+[DEBUG YOY - build_callout_for_metric] Processing metric: 1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess
+[DEBUG YOY] week_yoy_df is None: False
+[DEBUG YOY] week_yoy_df.empty: False
+[DEBUG YOY] week_yoy_df.shape: (44, 23)
+[DEBUG YOY] week_yoy_df reporting_cluster values: ['INTL-startup' 'Overall' 'US-HF' 'INTL-mature' 'HF-NA' 'HF-INTL' 'RTE'
+ 'HF-TOTAL' 'WL' 'INTL-growing' 'bu_level']
+[DEBUG YOY] week_yoy_df dimension_name values: ['_Overall']
+[DEBUG YOY] overall_yoy.empty: False
+[DEBUG YOY] overall_yoy.shape: (1, 23)
+[DEBUG YOY] overall_yoy.iloc[0] relative_change_pct: -8.369636549881387
+[DEBUG YOY] bu_level_rows_yoy count: 34
+[DEBUG YOY] HF-NA - Significant business units: 2
+[DEBUG YOY] HF-INTL - Significant business units: 15
+[DEBUG YOY] RTE - Significant business units: 8
+[DEBUG YOY] WL - Significant business units: 7
+[DEBUG YOY] Total significant business units: 32

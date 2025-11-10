@@ -37,7 +37,7 @@ def debug_print(*args, **kwargs):
 
 # Configuration - same as main notebook
 VALID_REPORTING_CLUSTERS = ['HF-NA', 'HF-INTL', 'RTE', 'WL', 'Overall']
-REPORTING_CLUSTERS = ['Overall', 'HF-NA', 'HF-INTL', 'RTE', 'WL']
+REPORTING_CLUSTERS = ['Overall', 'HF-NA', 'HF-INTL', 'US-HF', 'RTE', 'WL']
 
 EXCLUDED_METRICS = [
     '1_ChargeBackRate', 
@@ -393,10 +393,74 @@ print(f"   Processed {len(week_prev_processed)} rows")
 
 # Week vs Prev Year Week
 print("\n2. Processing Week vs Previous Year Week...")
+debug_print("   [DEBUG YOY] Building query for year-over-year comparison...")
 week_yoy_query = build_metrics_query('WEEK', 'prev_year', latest_week_str)
+debug_print(f"   [DEBUG YOY] Query built for date_value: {latest_week_str}")
 week_yoy_data = spark.sql(week_yoy_query)
+debug_print(f"   [DEBUG YOY] Raw query returned {week_yoy_data.count()} rows")
+debug_print(f"   [DEBUG YOY] Columns in week_yoy_data: {week_yoy_data.columns}")
+
+# DEBUG: Check if prev_metric_value columns exist and have data
+if 'prev_metric_value_numerator' in week_yoy_data.columns:
+    null_prev_num = week_yoy_data.filter(F.col('prev_metric_value_numerator').isNull()).count()
+    null_prev_den = week_yoy_data.filter(F.col('prev_metric_value_denominator').isNull()).count()
+    debug_print(f"   [DEBUG YOY] Rows with NULL prev_metric_value_numerator: {null_prev_num}")
+    debug_print(f"   [DEBUG YOY] Rows with NULL prev_metric_value_denominator: {null_prev_den}")
+    
+    # Check sample row
+    sample_row = week_yoy_data.limit(1)
+    if sample_row.count() > 0:
+        row = sample_row.collect()[0]
+        debug_print(f"   [DEBUG YOY] Sample row:")
+        try:
+            debug_print(f"     - reporting_cluster: {row['reporting_cluster']}")
+            debug_print(f"     - business_unit: {row['business_unit']}")
+            metric_name = str(row['metric_final_name'])[:50] if row['metric_final_name'] else 'N/A'
+            debug_print(f"     - metric_final_name: {metric_name}...")
+            debug_print(f"     - current_metric_value_numerator: {row['current_metric_value_numerator']}")
+            debug_print(f"     - current_metric_value_denominator: {row['current_metric_value_denominator']}")
+            debug_print(f"     - prev_metric_value_numerator: {row['prev_metric_value_numerator']}")
+            debug_print(f"     - prev_metric_value_denominator: {row['prev_metric_value_denominator']}")
+        except Exception as e:
+            debug_print(f"     - Error accessing row fields: {e}")
+    
+    # Check reporting_cluster distribution
+    debug_print(f"   [DEBUG YOY] reporting_cluster distribution:")
+    week_yoy_data.groupBy('reporting_cluster').count().orderBy('reporting_cluster').show(truncate=False)
+    
+    # Check bu_level rows
+    bu_level_count = week_yoy_data.filter(F.col('reporting_cluster') == 'bu_level').count()
+    debug_print(f"   [DEBUG YOY] bu_level rows: {bu_level_count}")
+    
+    # Check Overall rows
+    overall_count = week_yoy_data.filter(F.col('reporting_cluster') == 'Overall').count()
+    debug_print(f"   [DEBUG YOY] Overall rows: {overall_count}")
+else:
+    debug_print(f"   [DEBUG YOY] ⚠️  prev_metric_value_numerator column NOT FOUND in week_yoy_data!")
+
 week_yoy_processed = process_comparison_data(week_yoy_data, "Week vs Previous Year Week")
 print(f"   Processed {len(week_yoy_processed)} rows")
+
+# DEBUG: Check processed data
+if week_yoy_processed is not None and not week_yoy_processed.empty:
+    debug_print(f"   [DEBUG YOY] AFTER PROCESSING - week_yoy_processed shape: {week_yoy_processed.shape}")
+    debug_print(f"   [DEBUG YOY] AFTER PROCESSING - reporting_cluster distribution:")
+    debug_print(str(week_yoy_processed['reporting_cluster'].value_counts()))
+    
+    # Check Overall rows with _Overall dimension
+    overall_yoy = week_yoy_processed[
+        (week_yoy_processed['reporting_cluster'] == 'Overall') & 
+        (week_yoy_processed['dimension_name'] == '_Overall')
+    ]
+    debug_print(f"   [DEBUG YOY] AFTER PROCESSING - Overall rows with _Overall dimension: {len(overall_yoy)}")
+    if not overall_yoy.empty:
+        debug_print(f"   [DEBUG YOY] Sample Overall row relative_change_pct: {overall_yoy.iloc[0]['relative_change_pct']}")
+        debug_print(f"   [DEBUG YOY] Sample Overall row prev_ratio: {overall_yoy.iloc[0]['prev_ratio']}")
+        debug_print(f"   [DEBUG YOY] Sample Overall row current_ratio: {overall_yoy.iloc[0]['current_ratio']}")
+    else:
+        debug_print(f"   [DEBUG YOY] ⚠️  No Overall rows with _Overall dimension found!")
+else:
+    debug_print(f"   [DEBUG YOY] ⚠️  week_yoy_processed is None or empty!")
 
 # ============================================================================
 # Quarter vs Prev Quarter Processing
@@ -932,10 +996,47 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         has_significant_overall = not overall_rows.empty and abs(overall_rows.iloc[0]['relative_change_pct']) > 10
         has_significant_bu = len(all_significant_bu) > 0
         
-        if is_debug_metric:
-            debug_print(f"[DEBUG] STEP 7 - has_significant_overall: {has_significant_overall}, has_significant_bu: {has_significant_bu}")
+        # Collect significant dimensions (similar to Deep Insights)
+        all_significant_dims = []
         
-        if has_significant_overall or has_significant_bu:
+        # Process each reporting cluster for dimensions
+        for rc in REPORTING_CLUSTERS:
+            # Level 2 - Dimensions (excluding _Overall)
+            level2_dims_rows = df_metric[
+                (df_metric['reporting_cluster'] == rc) & 
+                (df_metric['dimension_name'] != '_Overall')
+            ]
+            
+            if not level2_dims_rows.empty:
+                level2_dims_rows = level2_dims_rows.copy()
+                level2_dims_rows.loc[:, 'abs_rel_change'] = abs(level2_dims_rows['relative_change_pct'])
+                level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
+                sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
+                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>10) | (sorted_dims['volume_impacted']>30)]
+                
+                # Collect significant dimensions
+                for _, dim_row in filtered_dims.head(3).iterrows():
+                    all_significant_dims.append({
+                        'reporting_cluster': rc,
+                        'dimension_name': dim_row['dimension_name'],
+                        'dimension_value': dim_row['dimension_value'],
+                        'relative_change_pct': dim_row['relative_change_pct'],
+                        'abs_rel_change': dim_row['abs_rel_change'],
+                        'volume_impacted': dim_row['volume_impacted'],
+                        'prev_ratio': dim_row['prev_ratio'],
+                        'current_ratio': dim_row['current_ratio'],
+                        'metric_type': dim_row['metric_type']
+                    })
+        
+        # Check if we should show Long Term Impact (including dimensions)
+        has_significant_dims = len(all_significant_dims) > 0
+        
+        if is_debug_metric:
+            debug_print(f"[DEBUG] STEP 7 - has_significant_overall: {has_significant_overall}, has_significant_bu: {has_significant_bu}, has_significant_dims: {has_significant_dims}")
+            if all_significant_dims:
+                debug_print(f"[DEBUG] STEP 7 - Significant dimensions count: {len(all_significant_dims)}")
+        
+        if has_significant_overall or has_significant_bu or has_significant_dims:
             parts.append("<br><br>**Long Term Impact**")
             
             # Add Overall if it exists
@@ -950,6 +1051,24 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
                 else:
                     parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+            
+            # Add significant dimensions (sort by volume_impacted for display)
+            if all_significant_dims:
+                dims_df = pd.DataFrame(all_significant_dims)
+                dims_df = dims_df.sort_values('volume_impacted', ascending=False)
+                
+                for _, dim_row in dims_df.head(5).iterrows():
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    volume = format_number(dim_row.get('volume_impacted', 0))
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    item_name = f"{dim_row['dimension_name']} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    
+                    if dim_row['metric_type'] == 'ratio':
+                        parts.append(f"- **{rc_name}** {item_name}: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        parts.append(f"- **{rc_name}** {item_name}: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Add significant business units (sort by abs_rel_change for display)
             if all_significant_bu:
@@ -974,30 +1093,123 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         parts.append("<br><br>**Long Term Impact**<br>- No significant long-term impact (all changes <10%)")
     
     # Comparison vs Prev Year
+    is_debug_metric_yoy = metric_full_name == '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess'
+    
+    if is_debug_metric_yoy:
+        debug_print(f"\n[DEBUG YOY - build_callout_for_metric] Processing metric: {metric_full_name}")
+        debug_print(f"[DEBUG YOY] week_yoy_df is None: {week_yoy_df is None}")
+        if week_yoy_df is not None:
+            debug_print(f"[DEBUG YOY] week_yoy_df.empty: {week_yoy_df.empty}")
+            debug_print(f"[DEBUG YOY] week_yoy_df.shape: {week_yoy_df.shape}")
+            debug_print(f"[DEBUG YOY] week_yoy_df reporting_cluster values: {week_yoy_df['reporting_cluster'].unique()}")
+            debug_print(f"[DEBUG YOY] week_yoy_df dimension_name values: {week_yoy_df['dimension_name'].unique()}")
+    
     if week_yoy_df is not None and not week_yoy_df.empty:
+        # Normalize data types for consistent filtering
+        week_yoy_df = week_yoy_df.copy()
+        week_yoy_df['reporting_cluster'] = week_yoy_df['reporting_cluster'].astype(str).str.strip()
+        week_yoy_df['business_unit'] = week_yoy_df['business_unit'].astype(str).str.strip()
+        
         overall_yoy = week_yoy_df[
             (week_yoy_df['reporting_cluster'] == 'Overall') & 
             (week_yoy_df['dimension_name'] == '_Overall')
         ]
-        if not overall_yoy.empty:
-            row = overall_yoy.iloc[0]
-            if abs(row['relative_change_pct']) > 10:
+        
+        if is_debug_metric_yoy:
+            debug_print(f"[DEBUG YOY] overall_yoy.empty: {overall_yoy.empty}")
+            debug_print(f"[DEBUG YOY] overall_yoy.shape: {overall_yoy.shape}")
+            if not overall_yoy.empty:
+                debug_print(f"[DEBUG YOY] overall_yoy.iloc[0] relative_change_pct: {overall_yoy.iloc[0]['relative_change_pct']}")
+        
+        # Collect significant business units (similar to Long Term Impact)
+        all_significant_bu_yoy = []
+        
+        # Get bu_level rows
+        bu_level_rows_yoy = week_yoy_df[week_yoy_df['reporting_cluster'] == 'bu_level']
+        
+        if is_debug_metric_yoy:
+            debug_print(f"[DEBUG YOY] bu_level_rows_yoy count: {len(bu_level_rows_yoy)}")
+        
+        if not bu_level_rows_yoy.empty:
+            # Process each reporting cluster to find business units
+            for rc in REPORTING_CLUSTERS:
+                if rc == 'Overall':
+                    continue
+                
+                # Get business units for this reporting cluster
+                rc_bu = country_mapping_df[country_mapping_df['reporting_cluster'] == rc].business_unit.tolist()
+                
+                # Filter bu_level rows for this cluster's business units
+                rc_bu_rows = bu_level_rows_yoy[bu_level_rows_yoy['business_unit'].isin(rc_bu)]
+                
+                if not rc_bu_rows.empty:
+                    rc_bu_rows = rc_bu_rows.copy()
+                    rc_bu_rows.loc[:, 'abs_rel_change'] = abs(rc_bu_rows['relative_change_pct'])
+                    rc_bu_rows.loc[:, 'volume_impacted'] = rc_bu_rows['current_metric_value_denominator'] * rc_bu_rows['abs_rel_change'] / 100
+                    
+                    # Filter for significant business units
+                    filtered_bu = rc_bu_rows[(rc_bu_rows['abs_rel_change'] > 10) | (rc_bu_rows['volume_impacted'] > 30)]
+                    
+                    if is_debug_metric_yoy:
+                        debug_print(f"[DEBUG YOY] {rc} - Significant business units: {len(filtered_bu)}")
+                    
+                    # Collect significant business units
+                    for _, bu_row in filtered_bu.iterrows():
+                        if bu_row['business_unit'] != "Null":
+                            all_significant_bu_yoy.append({
+                                'business_unit': bu_row['business_unit'],
+                                'relative_change_pct': bu_row['relative_change_pct'],
+                                'abs_rel_change': bu_row['abs_rel_change'],
+                                'volume_impacted': bu_row['volume_impacted'],
+                                'prev_ratio': bu_row['prev_ratio'],
+                                'current_ratio': bu_row['current_ratio'],
+                                'metric_type': bu_row['metric_type']
+                            })
+        
+        if is_debug_metric_yoy:
+            debug_print(f"[DEBUG YOY] Total significant business units: {len(all_significant_bu_yoy)}")
+        
+        # Show year-over-year section if we have Overall data or significant business units
+        if not overall_yoy.empty or all_significant_bu_yoy:
+            parts.append("<br><br>**Comparison vs Prev Year**")
+            
+            # Add Overall if it exists
+            if not overall_yoy.empty:
+                row = overall_yoy.iloc[0]
                 arrow = format_arrow(row['relative_change_pct'])
                 volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
                 
-                parts.append("<br><br>**Comparison vs Prev Year**")
                 if row['metric_type'] == 'ratio':
-                    parts.append(f"- **Current Week vs Prev Year Week**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
                 else:
-                    parts.append(f"- **Current Week vs Prev Year Week**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-            else:
-                parts.append("<br><br>**Comparison vs Prev Year**<br>- No significant year-over-year impact (all changes <10%)")
+                    parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+            
+            # Add significant business units (sort by abs_rel_change for display)
+            if all_significant_bu_yoy:
+                bu_df_yoy = pd.DataFrame(all_significant_bu_yoy)
+                bu_df_yoy = bu_df_yoy.sort_values('abs_rel_change', ascending=False)
+                
+                for _, bu_row in bu_df_yoy.head(15).iterrows():
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    volume = format_number(bu_row.get('volume_impacted', 0))
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    
+                    if bu_row['metric_type'] == 'ratio':
+                        parts.append(f"- **{bu_name}**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        parts.append(f"- **{bu_name}**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(bu_row['relative_change_pct']):.2f}%, volume: {volume})")
         else:
-            parts.append("<br><br>**Comparison vs Prev Year**<br>- No significant year-over-year impact (all changes <10%)")
+            if is_debug_metric_yoy:
+                debug_print(f"[DEBUG YOY] ⚠️  No Overall data and no significant business units")
+            parts.append("<br><br>**Comparison vs Prev Year**<br>- No year-over-year data available")
     else:
-        parts.append("<br><br>**Comparison vs Prev Year**<br>- No significant year-over-year impact (all changes <10%)")
+        if is_debug_metric_yoy:
+            debug_print(f"[DEBUG YOY] ⚠️  week_yoy_df is None or empty")
+        parts.append("<br><br>**Comparison vs Prev Year**<br>- No year-over-year data available")
     
     return "<br>".join(parts)
 
@@ -1062,7 +1274,44 @@ for metric_display, metric_full in METRIC_GROUPS:
     
     # Filter dataframes for this metric
     week_prev_metric = week_prev_processed[week_prev_processed['metric_final_name'] == metric_full] if week_prev_processed is not None and not week_prev_processed.empty else None
+    
+    # DEBUG for year-over-year filtering
+    if is_debug_metric:
+        debug_print(f"[DEBUG YOY FILTERING] Before filtering for {metric_full}:")
+        if week_yoy_processed is not None and not week_yoy_processed.empty:
+            debug_print(f"[DEBUG YOY FILTERING] week_yoy_processed shape: {week_yoy_processed.shape}")
+            debug_print(f"[DEBUG YOY FILTERING] Unique metric_final_name values (first 5):")
+            unique_yoy_metrics = week_yoy_processed['metric_final_name'].unique()[:5]
+            for um in unique_yoy_metrics:
+                print(f"  - {um}")
+            metric_exists_yoy = (week_yoy_processed['metric_final_name'] == metric_full).any()
+            debug_print(f"[DEBUG YOY FILTERING] Metric exists in week_yoy_processed: {metric_exists_yoy}")
+            if metric_exists_yoy:
+                matching_yoy = week_yoy_processed[week_yoy_processed['metric_final_name'] == metric_full]
+                debug_print(f"[DEBUG YOY FILTERING] Matching rows count: {len(matching_yoy)}")
+                debug_print(f"[DEBUG YOY FILTERING] reporting_cluster distribution:")
+                print(matching_yoy['reporting_cluster'].value_counts())
+        else:
+            debug_print(f"[DEBUG YOY FILTERING] week_yoy_processed is None or empty!")
+    
     week_yoy_metric = week_yoy_processed[week_yoy_processed['metric_final_name'] == metric_full] if week_yoy_processed is not None and not week_yoy_processed.empty else None
+    
+    # DEBUG for year-over-year after filtering
+    if is_debug_metric:
+        debug_print(f"[DEBUG YOY FILTERING] After filtering:")
+        if week_yoy_metric is not None and not week_yoy_metric.empty:
+            debug_print(f"[DEBUG YOY FILTERING] week_yoy_metric shape: {week_yoy_metric.shape}")
+            debug_print(f"[DEBUG YOY FILTERING] reporting_cluster values: {week_yoy_metric['reporting_cluster'].unique()}")
+            overall_yoy_check = week_yoy_metric[
+                (week_yoy_metric['reporting_cluster'] == 'Overall') & 
+                (week_yoy_metric['dimension_name'] == '_Overall')
+            ]
+            debug_print(f"[DEBUG YOY FILTERING] Overall rows with _Overall dimension: {len(overall_yoy_check)}")
+            if not overall_yoy_check.empty:
+                debug_print(f"[DEBUG YOY FILTERING] Sample relative_change_pct: {overall_yoy_check.iloc[0]['relative_change_pct']}")
+        else:
+            debug_print(f"[DEBUG YOY FILTERING] ⚠️  week_yoy_metric is None or empty after filtering!")
+    
     quarter_prev_metric = quarter_prev_processed[quarter_prev_processed['metric_final_name'] == metric_full] if quarter_prev_processed is not None and not quarter_prev_processed.empty else None
     
     # DEBUG for Payment Page Visit to Success - check AFTER filtering
