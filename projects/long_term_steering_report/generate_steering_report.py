@@ -79,8 +79,45 @@ def is_ar_metric(metric_full_name):
     """Check if a metric is an AR metric that uses 5% threshold"""
     return metric_full_name in AR_METRICS
 
+def get_threshold_for_comparison(metric_full_name, comparison_type):
+    """
+    Get threshold based on metric type and comparison type
+    
+    Parameters:
+    -----------
+    metric_full_name : str
+        Full name of the metric
+    comparison_type : str
+        Type of comparison: 'week_prev' (Current Week vs Prev Week), 
+                           'long_term' (Long Term Impact), 
+                           'yoy' (Comparison vs Prev Year)
+    
+    Returns:
+    --------
+    int
+        Threshold percentage for the metric and comparison type
+        - AR metrics: 5% for all comparisons
+        - Other metrics: 10% for week_prev, 20% for long_term and yoy
+    """
+    is_ar = is_ar_metric(metric_full_name)
+    
+    if is_ar:
+        # AR metrics use 5% threshold for all comparisons
+        return 5
+    else:
+        # Other metrics use different thresholds based on comparison type
+        if comparison_type == 'week_prev':
+            return 10  # Current Week vs Prev Week
+        elif comparison_type in ['long_term', 'yoy']:
+            return 20  # Long Term Impact and Comparison vs Prev Year
+        else:
+            # Default to 10% if comparison_type is not recognized
+            return 10
+
 def get_significance_threshold(metric_full_name):
-    """Get the significance threshold for a metric (5% for AR metrics, 10% for others)"""
+    """Get the significance threshold for a metric (5% for AR metrics, 10% for others)
+    DEPRECATED: Use get_threshold_for_comparison() instead for comparison-specific thresholds
+    """
     return 5 if is_ar_metric(metric_full_name) else 10
 
 # Dimension abbreviations mapping
@@ -838,18 +875,33 @@ def generate_key_insights(week_prev_df, week_yoy_df, quarter_prev_df):
 # COMMAND ----------
 
 # Helper function to bucket items by relative_change_pct
-def bucket_by_percentage(items_df, item_type='business_unit', metric_full_name=None):
+def bucket_by_percentage(items_df, item_type='business_unit', metric_full_name=None, comparison_type='week_prev'):
     """Bucket items into percentage ranges: [+50%], [20%-49%], [10%-19%] (or [5%-19%] for AR metrics)
-    For AR metrics: includes items with abs_rel_change >= 5%
-    For other metrics: includes items with abs_rel_change >= 10%
+    
+    Parameters:
+    -----------
+    items_df : pandas.DataFrame
+        DataFrame containing items to bucket
+    item_type : str
+        Type of item ('business_unit' or 'dimension')
+    metric_full_name : str
+        Full name of the metric
+    comparison_type : str
+        Type of comparison: 'week_prev' (Current Week vs Prev Week), 
+                           'long_term' (Long Term Impact), 
+                           'yoy' (Comparison vs Prev Year)
+    
+    Returns:
+    --------
+    dict
+        Dictionary with 'high', 'medium', 'low' buckets containing items
     """
-    is_ar = is_ar_metric(metric_full_name) if metric_full_name else False
-    min_threshold = 5 if is_ar else 10
+    min_threshold = get_threshold_for_comparison(metric_full_name, comparison_type) if metric_full_name else 10
     
     buckets = {
         'high': [],  # >= 50%
         'medium': [],  # 20% - 49%
-        'low': []  # 5% - 19% (AR) or 10% - 19% (others)
+        'low': []  # min_threshold% - 19%
     }
     
     if items_df is None or items_df.empty:
@@ -935,7 +987,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'abs_rel_change'] = abs(level2_dims_rows['relative_change_pct'])
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
-                threshold = get_significance_threshold(metric_full_name)
+                threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
                 filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 if is_debug_ar:
@@ -988,7 +1040,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     level2_bu_rows.loc[:, 'abs_rel_change'] = abs(level2_bu_rows['relative_change_pct'])
                     level2_bu_rows.loc[:, 'volume_impacted'] = level2_bu_rows['current_metric_value_denominator'] * level2_bu_rows['abs_rel_change'] / 100
                     sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
-                    threshold = get_significance_threshold(metric_full_name)
+                    threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
                     filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>threshold) | (sorted_bu['volume_impacted']>30)]
                     
                     for _, bu_row in filtered_bu.head(2).iterrows():
@@ -1009,13 +1061,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         bu_buckets_deep = {}
         if all_significant_bu_deep:
             bu_df_deep = pd.DataFrame(all_significant_bu_deep)
-            bu_buckets_deep = bucket_by_percentage(bu_df_deep, 'business_unit', metric_full_name)
+            bu_buckets_deep = bucket_by_percentage(bu_df_deep, 'business_unit', metric_full_name, 'week_prev')
         
         # Then, bucket dimensions
         dim_buckets_deep = {}
         if all_significant_dims_deep:
             dims_df_deep = pd.DataFrame(all_significant_dims_deep)
-            dim_buckets_deep = bucket_by_percentage(dims_df_deep, 'dimension', metric_full_name)
+            dim_buckets_deep = bucket_by_percentage(dims_df_deep, 'dimension', metric_full_name, 'week_prev')
         
         # Display in specified order: [+50%] BU, [20-49%] BU, [10-19%] BU, [+50%] Dims, [20-49%] Dims, [10-19%] Dims
         # [+50%] - Business Units
@@ -1043,7 +1095,8 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 arrow = format_arrow(bu_row['relative_change_pct'])
                 bu_name = bu_row.get('business_unit', 'Unknown')
                 bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-            bucket_label = "[5% - 19%]" if is_ar_metric(metric_full_name) else "[10% - 19%]"
+            threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
+            bucket_label = f"[{threshold}% - 19%]"
             anomaly_parts.append(f"{bucket_label} - Business Units: {', '.join(bu_items)}")
         
         # [+50%] - Dimensions
@@ -1077,7 +1130,8 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
                 rc_name = dim_row['reporting_cluster']
                 dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-            bucket_label = "[5% - 19%]" if is_ar_metric(metric_full_name) else "[10% - 19%]"
+            threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
+            bucket_label = f"[{threshold}% - 19%]"
             anomaly_parts.append(f"{bucket_label} - Dimensions: {', '.join(dim_items)}")
         
         # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown
@@ -1283,7 +1337,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                             debug_print(f"[DEBUG] STEP 5.{rc} - Sample volume_impacted: {level2_bu_rows['volume_impacted'].head(5).tolist()}")
                         
                         sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
-                        threshold = get_significance_threshold(metric_full_name)
+                        threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
                         filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>threshold) | (sorted_bu['volume_impacted']>30)]
                         
                         if is_debug_metric or is_debug_ar_lt:
@@ -1304,7 +1358,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 debug_print(f"[DEBUG] STEP 6 - Significant business units: {bu_names}")
         
         # Check if we should show Long Term Impact
-        threshold = get_significance_threshold(metric_full_name)
+        threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
         has_significant_overall = not overall_rows.empty and abs(overall_rows.iloc[0]['relative_change_pct']) > threshold
         has_significant_bu = len(all_significant_bu) > 0
         
@@ -1324,7 +1378,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'abs_rel_change'] = abs(level2_dims_rows['relative_change_pct'])
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
-                threshold = get_significance_threshold(metric_full_name)
+                threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
                 filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 # Collect significant dimensions
@@ -1383,13 +1437,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             bu_buckets = {}
             if all_significant_bu:
                 bu_df = pd.DataFrame(all_significant_bu)
-                bu_buckets = bucket_by_percentage(bu_df, 'business_unit', metric_full_name)
+                bu_buckets = bucket_by_percentage(bu_df, 'business_unit', metric_full_name, 'long_term')
             
             # Then, bucket dimensions
             dim_buckets = {}
             if all_significant_dims:
                 dims_df = pd.DataFrame(all_significant_dims)
-                dim_buckets = bucket_by_percentage(dims_df, 'dimension', metric_full_name)
+                dim_buckets = bucket_by_percentage(dims_df, 'dimension', metric_full_name, 'long_term')
             
             # Display in specified order: [+50%] BU, [20-49%] BU, [10-19%] BU, [+50%] Dims, [20-49%] Dims, [10-19%] Dims
             # Filter: Only show items where absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
@@ -1424,19 +1478,16 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [5% - 19%] (AR) or [10% - 19%] (others) - Business Units
+            # Note: No >= 20pp filter for low bucket - items are already filtered by relative change percentage
             if bu_buckets.get('low'):
                 bu_items = []
                 for bu_row in bu_buckets['low']:
-                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
-                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
-                    abs_diff_pp = abs(curr_pct - prev_pct)
-                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
-                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
-                        arrow = format_arrow(bu_row['relative_change_pct'])
-                        bu_name = bu_row.get('business_unit', 'Unknown')
-                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
                 if bu_items:
-                    bucket_label = "[5% - 19%]" if is_ar_metric(metric_full_name) else "[10% - 19%]"
+                    threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
+                    bucket_label = f"[{threshold}% - 19%]"
                     long_term_parts.append(f"{bucket_label} - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
@@ -1474,21 +1525,18 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
             
             # [5% - 19%] (AR) or [10% - 19%] (others) - Dimensions
+            # Note: No >= 20pp filter for low bucket - items are already filtered by relative change percentage
             if dim_buckets.get('low'):
                 dim_items = []
                 for dim_row in dim_buckets['low']:
-                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
-                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
-                    abs_diff_pp = abs(curr_pct - prev_pct)
-                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
-                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
-                        arrow = format_arrow(dim_row['relative_change_pct'])
-                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                        rc_name = dim_row['reporting_cluster']
-                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 if dim_items:
-                    bucket_label = "[5% - 19%]" if is_ar_metric(metric_full_name) else "[10% - 19%]"
+                    threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
+                    bucket_label = f"[{threshold}% - 19%]"
                     long_term_parts.append(f"{bucket_label} - Dimensions: {', '.join(dim_items)}")
             
             # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Long Term Impact)
@@ -1555,7 +1603,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 header += f" ({quarter_range})"
             long_term_parts.append(header)
             is_first_long_term_section = False
-            threshold = get_significance_threshold(metric_full_name)
+            threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
             long_term_parts.append(f"- No significant long-term impact (all changes <{threshold}%)")
     else:
         if not is_first_long_term_section:
@@ -1623,7 +1671,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     rc_bu_rows.loc[:, 'volume_impacted'] = rc_bu_rows['current_metric_value_denominator'] * rc_bu_rows['abs_rel_change'] / 100
                     
                     # Filter for significant business units
-                    threshold = get_significance_threshold(metric_full_name)
+                    threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
                     filtered_bu = rc_bu_rows[(rc_bu_rows['abs_rel_change'] > threshold) | (rc_bu_rows['volume_impacted'] > 30)]
                     
                     if is_debug_metric_yoy:
@@ -1658,7 +1706,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'abs_rel_change'] = abs(level2_dims_rows['relative_change_pct'])
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
-                threshold = get_significance_threshold(metric_full_name)
+                threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
                 filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 # Collect significant dimensions
@@ -1713,13 +1761,13 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             bu_buckets_yoy = {}
             if all_significant_bu_yoy:
                 bu_df_yoy = pd.DataFrame(all_significant_bu_yoy)
-                bu_buckets_yoy = bucket_by_percentage(bu_df_yoy, 'business_unit', metric_full_name)
+                bu_buckets_yoy = bucket_by_percentage(bu_df_yoy, 'business_unit', metric_full_name, 'yoy')
             
             # Then, bucket dimensions
             dim_buckets_yoy = {}
             if all_significant_dims_yoy:
                 dims_df_yoy = pd.DataFrame(all_significant_dims_yoy)
-                dim_buckets_yoy = bucket_by_percentage(dims_df_yoy, 'dimension', metric_full_name)
+                dim_buckets_yoy = bucket_by_percentage(dims_df_yoy, 'dimension', metric_full_name, 'yoy')
             
             # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
             # Filter: Only show items where absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
