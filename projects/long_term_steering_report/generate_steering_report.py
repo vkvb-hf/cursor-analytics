@@ -1339,18 +1339,22 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             long_term_parts.append(header)
             is_first_long_term_section = False
             
-            # Add Overall if it exists
+            # Add Overall if it exists and absolute difference >= 20pp
             if not overall_rows.empty:
                 row = overall_rows.iloc[0]
-                arrow = format_arrow(row['relative_change_pct'])
-                volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                abs_diff_pp = abs(curr_pct - prev_pct)
                 
-                if row['metric_type'] == 'ratio':
-                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-                else:
-                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                # Only show if absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
+                if (row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                    arrow = format_arrow(row['relative_change_pct'])
+                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
+                    
+                    if row['metric_type'] == 'ratio':
+                        long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
@@ -1366,65 +1370,102 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 dim_buckets = bucket_by_percentage(dims_df, 'dimension')
             
             # Display in specified order: [+50%] BU, [20-49%] BU, [10-19%] BU, [+50%] Dims, [20-49%] Dims, [10-19%] Dims
+            # Filter: Only show items where absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
             # [+50%] - Business Units
             if bu_buckets.get('high'):
                 bu_items = []
                 for bu_row in bu_buckets['high']:
-                    arrow = format_arrow(bu_row['relative_change_pct'])
-                    bu_name = bu_row.get('business_unit', 'Unknown')
-                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(bu_row['relative_change_pct'])
+                        bu_name = bu_row.get('business_unit', 'Unknown')
+                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets.get('medium'):
                 bu_items = []
                 for bu_row in bu_buckets['medium']:
-                    arrow = format_arrow(bu_row['relative_change_pct'])
-                    bu_name = bu_row.get('business_unit', 'Unknown')
-                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(bu_row['relative_change_pct'])
+                        bu_name = bu_row.get('business_unit', 'Unknown')
+                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [10% - 19%] - Business Units
             if bu_buckets.get('low'):
                 bu_items = []
                 for bu_row in bu_buckets['low']:
-                    arrow = format_arrow(bu_row['relative_change_pct'])
-                    bu_name = bu_row.get('business_unit', 'Unknown')
-                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[10% - 19%] - Business Units: {', '.join(bu_items)}")
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(bu_row['relative_change_pct'])
+                        bu_name = bu_row.get('business_unit', 'Unknown')
+                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    long_term_parts.append(f"[10% - 19%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets.get('high'):
                 dim_items = []
                 for dim_row in dim_buckets['high']:
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    rc_name = dim_row['reporting_cluster']
-                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(dim_row['relative_change_pct'])
+                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                        rc_name = dim_row['reporting_cluster']
+                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets.get('medium'):
                 dim_items = []
                 for dim_row in dim_buckets['medium']:
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    rc_name = dim_row['reporting_cluster']
-                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(dim_row['relative_change_pct'])
+                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                        rc_name = dim_row['reporting_cluster']
+                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
             
             # [10% - 19%] - Dimensions
             if dim_buckets.get('low'):
                 dim_items = []
                 for dim_row in dim_buckets['low']:
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    rc_name = dim_row['reporting_cluster']
-                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[10% - 19%] - Dimensions: {', '.join(dim_items)}")
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(dim_row['relative_change_pct'])
+                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                        rc_name = dim_row['reporting_cluster']
+                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    long_term_parts.append(f"[10% - 19%] - Dimensions: {', '.join(dim_items)}")
             
             # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Long Term Impact)
             unknown_callouts_lt = []
@@ -1627,18 +1668,22 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             long_term_parts.append(header)
             is_first_long_term_section = False
             
-            # Add Overall if it exists
+            # Add Overall if it exists and absolute difference >= 20pp
             if not overall_yoy.empty:
                 row = overall_yoy.iloc[0]
-                arrow = format_arrow(row['relative_change_pct'])
-                volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
+                abs_diff_pp = abs(curr_pct - prev_pct)
                 
-                if row['metric_type'] == 'ratio':
-                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-                else:
-                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                # Only show if absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
+                if (row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                    arrow = format_arrow(row['relative_change_pct'])
+                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
+                    
+                    if row['metric_type'] == 'ratio':
+                        long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                    else:
+                        long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
@@ -1654,45 +1699,70 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 dim_buckets_yoy = bucket_by_percentage(dims_df_yoy, 'dimension')
             
             # Display in specified order: [+50%] BU, [20-49%] BU, [+50%] Dims, [20-49%] Dims
+            # Filter: Only show items where absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
             # [+50%] - Business Units
             if bu_buckets_yoy.get('high'):
                 bu_items = []
                 for bu_row in bu_buckets_yoy['high']:
-                    arrow = format_arrow(bu_row['relative_change_pct'])
-                    bu_name = bu_row.get('business_unit', 'Unknown')
-                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(bu_row['relative_change_pct'])
+                        bu_name = bu_row.get('business_unit', 'Unknown')
+                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    long_term_parts.append(f"[+50%] - Business Units: {', '.join(bu_items)}")
             
             # [20% - 49%] - Business Units
             if bu_buckets_yoy.get('medium'):
                 bu_items = []
                 for bu_row in bu_buckets_yoy['medium']:
-                    arrow = format_arrow(bu_row['relative_change_pct'])
-                    bu_name = bu_row.get('business_unit', 'Unknown')
-                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
+                    prev_pct = bu_row['prev_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['prev_ratio']
+                    curr_pct = bu_row['current_ratio'] * 100 if bu_row['metric_type'] == 'ratio' else bu_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (bu_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (bu_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(bu_row['relative_change_pct'])
+                        bu_name = bu_row.get('business_unit', 'Unknown')
+                        bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
             # [+50%] - Dimensions
             if dim_buckets_yoy.get('high'):
                 dim_items = []
                 for dim_row in dim_buckets_yoy['high']:
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    rc_name = dim_row['reporting_cluster']
-                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(dim_row['relative_change_pct'])
+                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                        rc_name = dim_row['reporting_cluster']
+                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    long_term_parts.append(f"[+50%] - Dimensions: {', '.join(dim_items)}")
             
             # [20% - 49%] - Dimensions
             if dim_buckets_yoy.get('medium'):
                 dim_items = []
                 for dim_row in dim_buckets_yoy['medium']:
-                    arrow = format_arrow(dim_row['relative_change_pct'])
-                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
-                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
-                    rc_name = dim_row['reporting_cluster']
-                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
-                long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+                    prev_pct = dim_row['prev_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['prev_ratio']
+                    curr_pct = dim_row['current_ratio'] * 100 if dim_row['metric_type'] == 'ratio' else dim_row['current_ratio']
+                    abs_diff_pp = abs(curr_pct - prev_pct)
+                    # Only include if absolute difference >= 20pp (ratio) or >= 20 euros (dollar-ratio)
+                    if (dim_row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (dim_row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
+                        arrow = format_arrow(dim_row['relative_change_pct'])
+                        dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                        item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                        rc_name = dim_row['reporting_cluster']
+                        dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
             
             # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Year-over-Year)
             unknown_callouts_yoy = []
