@@ -21,3 +21,4 @@ if __name__ == "__main__":
     
     run_sql_file(sql_file, output_format, limit)
 
+

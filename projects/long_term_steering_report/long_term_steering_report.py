@@ -889,6 +889,20 @@ def write_output(comp_info, output_folder, comparison_type):
                             f.write("\n")
             
             f.write("\n")
+        
+        # Explicitly flush and sync to ensure file is written to disk (BEFORE closing)
+        f.flush()
+        try:
+            os.fsync(f.fileno())  # Force write to disk
+        except (OSError, AttributeError):
+            pass  # Some file systems don't support fsync
+    
+    # Verify file exists and has content (AFTER file is closed)
+    if os.path.exists(detailed_summary_path):
+        file_size = os.path.getsize(detailed_summary_path)
+        print(f"  ✅ File written successfully: {detailed_summary_path} ({file_size} bytes)")
+    else:
+        print(f"  ⚠️  Warning: File not found after writing: {detailed_summary_path}")
     
     return detailed_summary_path
 
@@ -910,6 +924,13 @@ if 'comparison_info' in locals() and comparison_info is not None:
     print(f"\nGenerating report for {COMPARISON_TYPE}...")
     file_path = write_output(comparison_info, OUTPUT_BASE_FOLDER, COMPARISON_TYPE)
     print(f"  ✅ Generated: {file_path}")
+    
+    # Verify file exists and is accessible
+    if os.path.exists(file_path):
+        file_size = os.path.getsize(file_path)
+        print(f"  ✅ File verified: {file_size} bytes")
+    else:
+        print(f"  ⚠️  Warning: File not found: {file_path}")
     
     total_time = time() - start_time
     print(f"\n✅ Steering metrics generation completed!")

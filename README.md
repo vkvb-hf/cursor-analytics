@@ -82,8 +82,22 @@ cp config.py.example config.py
 - `TOKEN`: Personal access token
 - `DATABRICKS_HOST`: Full workspace URL
 
-### 2. Install Dependencies
+### 2. Setup Virtual Environment (Recommended)
 
+**Important**: Always use the virtual environment for running scripts.
+
+```bash
+# Navigate to databricks directory
+cd /path/to/databricks
+
+# Activate virtual environment
+source databricks_env/bin/activate
+
+# Install dependencies (if not already installed)
+pip install -r cursor_databricks/requirements.txt
+```
+
+**Alternative**: Install dependencies globally (not recommended):
 ```bash
 pip install databricks-sql-connector requests pandas
 ```
@@ -314,6 +328,32 @@ runner.create_and_run(
 
 ## 🧪 Testing & Exploration
 
+### Running Tests
+
+**Manual tests (no pytest required):**
+```bash
+python tests/test_manual.py
+```
+
+**Full test suite (requires pytest):**
+```bash
+pip install pytest pytest-mock
+pytest tests/ -v
+```
+
+**Comprehensive integration test:**
+```bash
+pytest tests/test_all_functions_integration.py -v
+```
+
+The test suite includes:
+- ✅ Import tests for all core modules
+- ✅ Function unit tests
+- ✅ Integration tests with sample use cases
+- ✅ Error handling tests
+
+### Exploration Scripts
+
 Place test and exploration scripts in `exploration/`:
 - Test scripts: `test_*.py`
 - Validation scripts: `check_*.py`
@@ -338,6 +378,25 @@ Place test and exploration scripts in `exploration/`:
 2. Organize by use case or table
 3. Use descriptive names
 4. Document in query comments
+
+## 🔧 Recent Updates
+
+### Import Fixes (Latest)
+- ✅ Fixed relative import issues in `core/interactive_sql.py`
+- ✅ Fixed relative import issues in `core/upload_csvs.py`
+- ✅ All imports now use absolute paths for better compatibility
+- ✅ Comprehensive import tests added to verify all modules work
+
+### Testing Improvements
+- ✅ Added `test_all_functions_integration.py` - comprehensive test using all functions
+- ✅ Enhanced `test_manual.py` with complete import coverage
+- ✅ All core functions tested with sample use cases
+- ✅ Error handling tests added
+
+### Known Issues Fixed
+- ✅ Import errors when running modules as scripts
+- ✅ Relative imports causing `ImportError` in some contexts
+- ✅ Missing test coverage for import functionality
 
 ## ⚠️ Security Notes
 

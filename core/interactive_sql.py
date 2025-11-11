@@ -8,7 +8,7 @@ import os
 # Add parent directory to path for config import
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
-from .query_util import print_table
+from core.query_util import print_table
 
 def main():
     print("="*80)

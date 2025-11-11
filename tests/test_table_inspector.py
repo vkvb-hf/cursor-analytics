@@ -81,3 +81,4 @@ class TestTableInspector:
         
         assert duplicates is not None
 
+

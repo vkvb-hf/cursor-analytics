@@ -46,3 +46,4 @@ The script now:
 
 **To enable output capture: Configure cluster log delivery to DBFS.**
 
+

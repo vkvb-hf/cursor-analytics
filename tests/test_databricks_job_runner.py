@@ -99,3 +99,4 @@ class TestDatabricksJobRunner:
         assert status['state']['life_cycle_state'] == 'RUNNING'
         mock_get.assert_called_once()
 
+

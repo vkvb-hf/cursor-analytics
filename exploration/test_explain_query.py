@@ -5,6 +5,12 @@ Test SQL query with EXPLAIN FORMATTED to check for syntax errors
 from databricks import sql
 from pathlib import Path
 import sys
+import os
+
+# Add parent directory to path to import config
+script_dir = Path(__file__).parent
+parent_dir = script_dir.parent
+sys.path.insert(0, str(parent_dir))
 
 # Try to import config, fall back to example if not available
 try:
@@ -22,7 +28,12 @@ def test_explain_formatted(sql_file_path):
     print(f"Testing SQL file: {sql_file_path}")
     print("="*80)
     
-    # Read SQL file
+    # Read SQL file - handle both Path objects and strings
+    sql_file_path = Path(sql_file_path)
+    if not sql_file_path.is_absolute():
+        # If relative path, try to resolve from current working directory
+        sql_file_path = Path.cwd() / sql_file_path
+    
     try:
         with open(sql_file_path, 'r') as f:
             sql_query = f.read()
@@ -65,7 +76,11 @@ def test_explain_formatted(sql_file_path):
                     for row in result:
                         # Databricks returns explain plan as rows
                         # Each row is typically a string representation
-                        print(row)
+                        if isinstance(row, (list, tuple)) and len(row) > 0:
+                            # If it's a row with columns, print the first column (usually the plan text)
+                            print(row[0] if isinstance(row[0], str) else str(row[0]))
+                        else:
+                            print(str(row))
                     
                     print("\n" + "="*80)
                     print("✓ No syntax errors found!")

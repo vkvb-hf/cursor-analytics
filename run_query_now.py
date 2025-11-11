@@ -24,3 +24,4 @@ if results:
 else:
     print("\n✗ Query failed or returned no results")
 
+

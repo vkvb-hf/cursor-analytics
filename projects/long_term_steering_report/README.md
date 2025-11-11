@@ -16,12 +16,65 @@ The project consists of a single parameterized notebook that can generate two ty
 
 ## Files
 
-- `long_term_steering_report.py` - Parameterized notebook for both comparison types
+### Active Files (Final Working Version)
+- `long_term_steering_report.py` - Main parameterized notebook for both comparison types
+- `run_long_term_steering.py` - Runner script to execute all comparison types
+- `validate_output.py` - Validates generated report files
+- `check_unknown_dimension.py` - Utility to check for unknown dimensions in data
 - `README.md` - This file
+
+### Archived Files
+Old and duplicate versions have been moved to `archive/` directory:
+- `generate_steering_report.py` - Old full-featured version (1948 lines)
+- `generate_steering_report_notebook.py` - Old simplified version (427 lines)
+- `generate_steering_report_from_source.py` - Incomplete alternative approach (338 lines)
+- `run_generate_steering_report.py` - Runner for old generate_steering_report.py
+
+See `WHY_MANY_FILES.md` for details on why these files existed.
 
 ## Usage
 
-### Running the Notebook
+### ⚠️ Important: Use Virtual Environment
+
+**Always activate the virtual environment before running scripts:**
+
+```bash
+# Navigate to databricks directory
+cd /path/to/databricks
+
+# Activate virtual environment
+source databricks_env/bin/activate
+
+# Then run scripts
+cd cursor_databricks/projects/long_term_steering_report
+python run_long_term_steering.py
+```
+
+The virtual environment (`databricks_env`) contains all required dependencies (requests, databricks-sql-connector, pandas, etc.).
+
+### Running the Report
+
+#### Option 1: Using the Runner Script (Recommended)
+
+```bash
+# Activate virtual environment first
+source databricks_env/bin/activate
+
+# Run all comparison types
+cd cursor_databricks/projects/long_term_steering_report
+python run_long_term_steering.py
+
+# Or run specific comparison types
+python run_long_term_steering.py week_yoy quarter_prev
+```
+
+This will:
+1. Create/update the notebook in Databricks workspace
+2. Run it as a job for each comparison type
+3. Download output files to the project directory
+4. Save files to `output/` directory
+
+#### Option 2: Running the Notebook Directly in Databricks
 
 The notebook can be run directly in Databricks. To select the comparison type, set the `COMPARISON_TYPE` parameter at the top of the notebook:
 
@@ -40,12 +93,16 @@ The notebook will:
 
 The notebook generates a detailed summary text file based on the comparison type:
 
+- **Week vs Previous Week** (`week_prev`): `detailed_summary_week_vs_prev_week.txt`
 - **Week vs Previous Year Week** (`week_yoy`): `detailed_summary_week_vs_prev_yr_week.txt`
 - **Quarter vs Previous Quarter** (`quarter_prev`): `detailed_summary_quarter_vs_prev_quarter.txt`
 
 Output files are saved to:
-- Local workspace: `/Workspace/Users/visal.kumar@hellofresh.com/long-term-steering-{type}-{week}`
-- DBFS: `/tmp/{filename}`
+- **Local project directory**: `output/` folder (when using runner script)
+- **Databricks workspace**: `/Workspace/Users/visal.kumar@hellofresh.com/long-term-steering-{week}`
+- **DBFS**: `/tmp/{filename}`
+
+**Note**: When using `run_long_term_steering.py`, files are automatically downloaded to the `output/` directory.
 
 ## Metrics Included
 
@@ -102,6 +159,17 @@ Metrics are analyzed across the following reporting clusters:
 - The notebooks filter for P0 metrics only (`flag_is_p0 = 'TRUE'`)
 - Only ratio and dollar-ratio metric types are included
 - Certain metrics and dimensions are excluded (see code for details)
+
+## Quick Reference
+
+### Always Use Virtual Environment
+```bash
+source databricks_env/bin/activate
+cd cursor_databricks/projects/long_term_steering_report
+python run_long_term_steering.py
+```
+
+See `USAGE.md` for detailed usage instructions.
 
 ## Related Projects
 

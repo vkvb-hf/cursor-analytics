@@ -35,7 +35,7 @@ def main():
     # Path to the notebook file
     # Use parametrized version by default
     notebook_file = Path(__file__).parent / "steering_output_generation_parametrized.py"
-    notebook_path = "/Workspace/Users/elizaveta.dmitrieva@hellofresh.com/steering_output_generation_parametrized"
+    notebook_path = "/Workspace/Users/visal.kumar@hellofresh.com/steering_output_generation_parametrized"
     
     # Read the notebook content
     print("📖 Reading notebook file...")
@@ -75,17 +75,24 @@ def main():
     if final_status.get('result_state') == 'SUCCESS':
         print(f"\n✅ Job completed successfully!")
         
-        # Try to download the detailed_summary.txt from workspace
-        print(f"\n📥 Attempting to download detailed_summary.txt...")
+        # Try to download the detailed_summary files from workspace
+        print(f"\n📥 Attempting to download detailed_summary files...")
         
-        # The notebook writes to OUTPUT_FOLDER/steering-{latest_date_str}/detailed_summary.txt
+        # The notebook writes to OUTPUT_FOLDER/steering-{latest_date_str}/detailed_summary_*.txt
         # We need to find the latest steering folder
-        workspace_base = "/Workspace/Users/elizaveta.dmitrieva@hellofresh.com"
+        workspace_base = "/Workspace/Users/visal.kumar@hellofresh.com"
         
-        # Try to find the latest steering folder
+        # Try to find the latest steering folder and download all 3 files
         headers = {"Authorization": f"Bearer {TOKEN}"}
         list_url = f"{DATABRICKS_HOST}/api/2.0/workspace/list"
-        
+
+        # List of files to download (3 main files)
+        files_to_download = [
+            'detailed_summary.txt',
+            'long_term.txt',
+            'comparison_prev_yr.txt'
+        ]
+
         try:
             # List workspace directory to find steering folders
             response = requests.get(list_url, headers=headers, params={"path": workspace_base})
@@ -93,50 +100,51 @@ def main():
                 items = response.json().get('objects', [])
                 # Look for both parametrized and regular steering folders
                 steering_folders = [item for item in items if item.get('path', '').startswith(f"{workspace_base}/steering-")]
-                
+
                 if steering_folders:
                     # Sort by path (which includes date) and get the latest
                     latest_folder = sorted(steering_folders, key=lambda x: x['path'], reverse=True)[0]
                     steering_path = latest_folder['path']
-                    # Try combined summary first, then fall back to regular
-                    detailed_summary_path = f"{steering_path}/detailed_summary_combined.txt"
                     
                     print(f"📁 Found steering folder: {steering_path}")
-                    print(f"📄 Attempting to download: {detailed_summary_path}")
                     
-                    # Download the file
+                    # Download each file
                     export_url = f"{DATABRICKS_HOST}/api/2.0/workspace/export"
-                    export_response = requests.get(export_url, headers=headers, params={"path": detailed_summary_path, "format": "AUTO"})
+                    downloaded_count = 0
                     
-                    # If combined file doesn't exist, try regular one
-                    if export_response.status_code != 200:
-                        detailed_summary_path = f"{steering_path}/detailed_summary.txt"
-                        print(f"📄 Combined file not found, trying: {detailed_summary_path}")
-                        export_response = requests.get(export_url, headers=headers, params={"path": detailed_summary_path, "format": "AUTO"})
+                    for filename in files_to_download:
+                        file_path = f"{steering_path}/{filename}"
+                        print(f"📄 Attempting to download: {filename}")
+                        
+                        export_response = requests.get(export_url, headers=headers, params={"path": file_path, "format": "AUTO"})
+                        
+                        if export_response.status_code == 200:
+                            data = export_response.json()
+                            content_b64 = data.get('content', '')
+                            content = base64.b64decode(content_b64).decode('utf-8')
+                            
+                            # Save to local file
+                            output_file = Path(__file__).parent / filename
+                            with open(output_file, 'w') as f:
+                                f.write(content)
+                            
+                            print(f"   ✅ Successfully downloaded {filename}")
+                            print(f"      Saved to: {output_file.absolute()}")
+                            downloaded_count += 1
+                        else:
+                            print(f"   ⚠️  Could not download {filename} (status: {export_response.status_code})")
                     
-                    if export_response.status_code == 200:
-                        data = export_response.json()
-                        content_b64 = data.get('content', '')
-                        content = base64.b64decode(content_b64).decode('utf-8')
-                        
-                        # Save to local file
-                        output_filename = "detailed_summary_combined.txt" if "combined" in detailed_summary_path else "detailed_summary.txt"
-                        output_file = Path(__file__).parent / output_filename
-                        with open(output_file, 'w') as f:
-                            f.write(content)
-                        
-                        print(f"✅ Successfully downloaded {output_filename}")
-                        print(f"   Saved to: {output_file.absolute()}")
+                    if downloaded_count > 0:
+                        print(f"\n✅ Successfully downloaded {downloaded_count} out of {len(files_to_download)} files")
                         return 0
                     else:
-                        print(f"⚠️  Could not download file (status: {export_response.status_code})")
-                        print(f"   Response: {export_response.text}")
+                        print(f"\n⚠️  Could not download any files")
                 else:
                     print(f"⚠️  No steering folders found in workspace")
             else:
                 print(f"⚠️  Could not list workspace (status: {response.status_code})")
         except Exception as e:
-            print(f"⚠️  Error downloading file: {e}")
+            print(f"⚠️  Error downloading files: {e}")
             import traceback
             traceback.print_exc()
         
@@ -144,8 +152,8 @@ def main():
         print(f"\n💡 Manual download instructions:")
         print(f"   1. Go to Databricks workspace: {DATABRICKS_HOST}")
         print(f"   2. Navigate to: {workspace_base}")
-        print(f"   3. Look for folder: steering-YYYY-Www")
-        print(f"   4. Download detailed_summary.txt from that folder")
+        print(f"   3. Look for folder: steering-parametrized-YYYY-Www")
+        print(f"   4. Download all 6 detailed_summary_*.txt files from that folder")
         
         return 0
     else:

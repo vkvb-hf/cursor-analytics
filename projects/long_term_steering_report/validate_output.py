@@ -336,11 +336,12 @@ def main():
     
     script_dir = Path(__file__).parent
     
-    # Find all report files
+    # Find all report files (now in output/ directory)
+    output_dir = script_dir / 'output'
     report_files = {
-        'week_prev': script_dir / 'detailed_summary_week_vs_prev_week.txt',
-        'week_yoy': script_dir / 'detailed_summary_week_vs_prev_yr_week.txt',
-        'quarter_prev': script_dir / 'detailed_summary_quarter_vs_prev_quarter.txt'
+        'week_prev': output_dir / 'detailed_summary_week_vs_prev_week.txt',
+        'week_yoy': output_dir / 'detailed_summary_week_vs_prev_yr_week.txt',
+        'quarter_prev': output_dir / 'detailed_summary_quarter_vs_prev_quarter.txt'
     }
     
     print("🔍 Validating Steering Report Files")

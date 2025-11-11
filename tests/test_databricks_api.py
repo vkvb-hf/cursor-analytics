@@ -99,3 +99,4 @@ class TestConvenienceFunctions:
         assert result is not None
         mock_api.inspect_table.assert_called_once()
 
+

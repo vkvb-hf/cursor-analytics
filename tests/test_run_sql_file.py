@@ -58,3 +58,4 @@ class TestRunSQLFile:
         output_file = tmp_path / "test_output.csv"
         # Note: This test would need to be adjusted based on actual implementation
 
+

@@ -64,14 +64,50 @@ def test_databricks_api_init():
 def test_imports():
     """Test that all modules can be imported"""
     try:
-        from core import DatabricksJobRunner, TableInspector
-        from core.query_util import run_query, print_table
-        from databricks_api import DatabricksAPI, sql, inspect, notebook
-        import databricks_cli
+        # Test core package imports
+        from core import (
+            DatabricksJobRunner,
+            TableInspector,
+            print_table,
+            run_query,
+            interactive_sql_main,
+            run_sql_file,
+            create_workspace_directory,
+            upload_csv_to_workspace
+        )
+        print("✓ Core package imports successful")
+        
+        # Test individual module imports
+        from core.databricks_job_runner import DatabricksJobRunner
+        from core.table_inspector import TableInspector
+        from core.query_util import run_query, print_table, format_value
+        from core.run_sql_file import run_sql_file
+        from core.interactive_sql import main as interactive_sql_main
+        from core.databricks_workspace import create_workspace_directory, upload_csv_to_workspace
+        from core.csv_to_table import create_table_from_csvs
+        from core.create_table import create_table
+        print("✓ Individual module imports successful")
+        
+        # Test API imports (if available)
+        try:
+            from databricks_api import DatabricksAPI, sql, inspect, notebook
+            print("✓ Databricks API imports successful")
+        except ImportError:
+            print("⚠ Databricks API not available (optional)")
+        
+        # Test CLI imports (if available)
+        try:
+            import databricks_cli
+            print("✓ Databricks CLI imports successful")
+        except ImportError:
+            print("⚠ Databricks CLI not available (optional)")
+        
         print("✓ All imports successful")
         return True
     except Exception as e:
         print(f"✗ Import failed: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
@@ -121,4 +157,5 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
 

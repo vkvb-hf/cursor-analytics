@@ -74,3 +74,4 @@ db.run_sql_file("queries/sample_adyen_ml_cust_data.sql", output_format="csv", li
 python databricks_cli.py sql --query "SELECT * FROM payments_hf.adyen_ml_test_cust_data WHERE customer_uuid IS NOT NULL LIMIT 10"
 ```
 
+

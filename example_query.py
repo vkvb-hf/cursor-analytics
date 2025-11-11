@@ -29,3 +29,4 @@ results = db.run_sql(query, limit=10, display=True)
 
 print(f"\n✓ Retrieved {len(results) if results else 0} records")
 
+
