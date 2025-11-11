@@ -988,10 +988,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
                 threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
-                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
+                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>=threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 if is_debug_ar:
-                    debug_print(f"[DEBUG AR] {rc} - After filtering (abs_rel_change>{threshold} OR volume_impacted>30): {len(filtered_dims)} rows")
+                    debug_print(f"[DEBUG AR] {rc} - After filtering (abs_rel_change>={threshold} OR volume_impacted>30): {len(filtered_dims)} rows")
                     if not filtered_dims.empty:
                         debug_print(f"[DEBUG AR] {rc} - Top filtered dimensions:")
                         for idx, (_, row) in enumerate(filtered_dims.head(5).iterrows()):
@@ -1041,7 +1041,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     level2_bu_rows.loc[:, 'volume_impacted'] = level2_bu_rows['current_metric_value_denominator'] * level2_bu_rows['abs_rel_change'] / 100
                     sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
                     threshold = get_threshold_for_comparison(metric_full_name, 'week_prev')
-                    filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>threshold) | (sorted_bu['volume_impacted']>30)]
+                    filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>=threshold) | (sorted_bu['volume_impacted']>30)]
                     
                     for _, bu_row in filtered_bu.head(2).iterrows():
                         if bu_row['business_unit'] == "Null":
@@ -1338,10 +1338,10 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         
                         sorted_bu = level2_bu_rows.sort_values('volume_impacted', ascending=False)
                         threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
-                        filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>threshold) | (sorted_bu['volume_impacted']>30)]
+                        filtered_bu = sorted_bu[(sorted_bu['abs_rel_change']>=threshold) | (sorted_bu['volume_impacted']>30)]
                         
                         if is_debug_metric or is_debug_ar_lt:
-                            debug_print(f"[DEBUG] STEP 5.{rc} - After filtering (abs_rel_change>{threshold} OR volume_impacted>30): {len(filtered_bu)} rows")
+                            debug_print(f"[DEBUG] STEP 5.{rc} - After filtering (abs_rel_change>={threshold} OR volume_impacted>30): {len(filtered_bu)} rows")
                             if not filtered_bu.empty:
                                 debug_print(f"[DEBUG] STEP 5.{rc} - Significant business units: {filtered_bu['business_unit'].tolist()}")
                                 debug_print(f"[DEBUG] STEP 5.{rc} - Sample volume_impacted: {filtered_bu['volume_impacted'].head(5).tolist()}")
@@ -1359,7 +1359,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
         
         # Check if we should show Long Term Impact
         threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
-        has_significant_overall = not overall_rows.empty and abs(overall_rows.iloc[0]['relative_change_pct']) > threshold
+        has_significant_overall = not overall_rows.empty and abs(overall_rows.iloc[0]['relative_change_pct']) >= threshold
         has_significant_bu = len(all_significant_bu) > 0
         
         # Collect significant dimensions (similar to Deep Insights)
@@ -1379,7 +1379,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
                 threshold = get_threshold_for_comparison(metric_full_name, 'long_term')
-                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
+                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>=threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 # Collect significant dimensions
                 for _, dim_row in filtered_dims.head(3).iterrows():
@@ -1672,7 +1672,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                     
                     # Filter for significant business units
                     threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
-                    filtered_bu = rc_bu_rows[(rc_bu_rows['abs_rel_change'] > threshold) | (rc_bu_rows['volume_impacted'] > 30)]
+                    filtered_bu = rc_bu_rows[(rc_bu_rows['abs_rel_change'] >= threshold) | (rc_bu_rows['volume_impacted'] > 30)]
                     
                     if is_debug_metric_yoy:
                         debug_print(f"[DEBUG YOY] {rc} - Significant business units: {len(filtered_bu)}")
@@ -1707,7 +1707,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 level2_dims_rows.loc[:, 'volume_impacted'] = level2_dims_rows['current_metric_value_denominator'] * level2_dims_rows['abs_rel_change'] / 100
                 sorted_dims = level2_dims_rows.sort_values(['dimension_name', 'volume_impacted'], ascending=False)
                 threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
-                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>threshold) | (sorted_dims['volume_impacted']>30)]
+                filtered_dims = sorted_dims[(sorted_dims['abs_rel_change']>=threshold) | (sorted_dims['volume_impacted']>30)]
                 
                 # Collect significant dimensions
                 for _, dim_row in filtered_dims.head(3).iterrows():
@@ -1801,6 +1801,19 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                 if bu_items:
                     long_term_parts.append(f"[20% - 49%] - Business Units: {', '.join(bu_items)}")
             
+            # [5% - 19%] (AR) or [20% - 19%] (others) - Business Units
+            # Note: No >= 20pp filter for low bucket - items are already filtered by relative change percentage
+            if bu_buckets_yoy.get('low'):
+                bu_items = []
+                for bu_row in bu_buckets_yoy['low']:
+                    arrow = format_arrow(bu_row['relative_change_pct'])
+                    bu_name = bu_row.get('business_unit', 'Unknown')
+                    bu_items.append(f"**{bu_name}** ({arrow}{abs(bu_row['relative_change_pct']):.2f}%)")
+                if bu_items:
+                    threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
+                    bucket_label = f"[{threshold}% - 19%]"
+                    long_term_parts.append(f"{bucket_label} - Business Units: {', '.join(bu_items)}")
+            
             # [+50%] - Dimensions
             if dim_buckets_yoy.get('high'):
                 dim_items = []
@@ -1834,6 +1847,21 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
                         dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
                 if dim_items:
                     long_term_parts.append(f"[20% - 49%] - Dimensions: {', '.join(dim_items)}")
+            
+            # [5% - 19%] (AR) or [20% - 19%] (others) - Dimensions
+            # Note: No >= 20pp filter for low bucket - items are already filtered by relative change percentage
+            if dim_buckets_yoy.get('low'):
+                dim_items = []
+                for dim_row in dim_buckets_yoy['low']:
+                    arrow = format_arrow(dim_row['relative_change_pct'])
+                    dim_abbrev = abbreviate_dimension_name(dim_row['dimension_name'])
+                    item_name = f"{dim_abbrev} {dim_row['dimension_value']}"
+                    rc_name = dim_row['reporting_cluster']
+                    dim_items.append(f"**{rc_name}** {item_name} ({arrow}{abs(dim_row['relative_change_pct']):.2f}%)")
+                if dim_items:
+                    threshold = get_threshold_for_comparison(metric_full_name, 'yoy')
+                    bucket_label = f"[{threshold}% - 19%]"
+                    long_term_parts.append(f"{bucket_label} - Dimensions: {', '.join(dim_items)}")
             
             # Check for Overall-level changes in PaymentProvider Unknown and PaymentMethod Unknown (Year-over-Year)
             unknown_callouts_yoy = []
