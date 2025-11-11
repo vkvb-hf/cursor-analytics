@@ -1339,22 +1339,18 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             long_term_parts.append(header)
             is_first_long_term_section = False
             
-            # Add Overall if it exists and absolute difference >= 20pp
+            # Add Overall if it exists (always show, regardless of absolute difference)
             if not overall_rows.empty:
                 row = overall_rows.iloc[0]
+                arrow = format_arrow(row['relative_change_pct'])
+                volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                abs_diff_pp = abs(curr_pct - prev_pct)
                 
-                # Only show if absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
-                if (row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
-                    arrow = format_arrow(row['relative_change_pct'])
-                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
-                    
-                    if row['metric_type'] == 'ratio':
-                        long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-                    else:
-                        long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                if row['metric_type'] == 'ratio':
+                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                else:
+                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
@@ -1668,22 +1664,18 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
             long_term_parts.append(header)
             is_first_long_term_section = False
             
-            # Add Overall if it exists and absolute difference >= 20pp
+            # Add Overall if it exists (always show, regardless of absolute difference)
             if not overall_yoy.empty:
                 row = overall_yoy.iloc[0]
+                arrow = format_arrow(row['relative_change_pct'])
+                volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
                 prev_pct = row['prev_ratio'] * 100 if row['metric_type'] == 'ratio' else row['prev_ratio']
                 curr_pct = row['current_ratio'] * 100 if row['metric_type'] == 'ratio' else row['current_ratio']
-                abs_diff_pp = abs(curr_pct - prev_pct)
                 
-                # Only show if absolute difference >= 20pp (for ratio) or >= 20 euros (for dollar-ratio)
-                if (row['metric_type'] == 'ratio' and abs_diff_pp >= 20) or (row['metric_type'] != 'ratio' and abs_diff_pp >= 20):
-                    arrow = format_arrow(row['relative_change_pct'])
-                    volume = format_number(row.get('current_metric_value_denominator', 0) * abs(row['relative_change_pct']) / 100)
-                    
-                    if row['metric_type'] == 'ratio':
-                        long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
-                    else:
-                        long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                if row['metric_type'] == 'ratio':
+                    long_term_parts.append(f"- **Overall**: {prev_pct:.2f}% to {curr_pct:.2f}% ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
+                else:
+                    long_term_parts.append(f"- **Overall**: €{prev_pct:.2f} to €{curr_pct:.2f} ({arrow}{abs(row['relative_change_pct']):.2f}%, volume: {volume})")
             
             # Bucket and display in specific order: BU [+50%], BU [20-49%], Dims [+50%], Dims [20-49%]
             # First, bucket business units
