@@ -14,7 +14,7 @@
 ## Key Insights
 **Critical Issues:** Dunning Profit decreased 13.16% (€9.66 to €8.39), Payment Fraud Block Rate decreased 15.37% (0.18% to 0.15%), 3_PaymentProcessingFees% decreased 100.00% (1.31% to 0.00%)
 **Positive Trends:** Recovery W0 increased 17.69% (45.17% to 53.16%), Total Duplicate Block Rate increased 13.52% (4.72% to 5.36%)
-**Risk Shifts:** Acceptance LL0 (Initial Charge) showing diverging trends, Recovery W12 showing diverging trends, 5_DunningBadDebtRate_12wkCohort showing diverging trends, Total Duplicate Rate showing diverging trends, Reactivation Rate showing diverging trends
+**Risk Shifts:** Recovery W12 showing diverging trends, Acceptance LL0 (Initial Charge) showing diverging trends, 5_DunningBadDebtRate_12wkCohort showing diverging trends, Total Duplicate Rate showing diverging trends, Reactivation Rate showing diverging trends
 **Emerging Concerns:** 6_TotalBadDebtRate_12wkCohort down 10.94% YoY, Select to Success down 12.51% YoY, 3_PaymentProcessingFees% down 100.00% YoY
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
