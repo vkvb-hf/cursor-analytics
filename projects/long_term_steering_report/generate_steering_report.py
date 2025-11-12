@@ -215,7 +215,7 @@ print(f"Previous 13 weeks: {len(prev_13weeks_list)} weeks")
 
 # Format week ranges for display
 def format_quarter_range(current_weeks, prev_weeks):
-    """Format quarter range as '2025 W14-26 vs 2025 W1-13'"""
+    """Format quarter range as '2025 W1-13 vs 2025 W14-26' (prev vs current)"""
     if not current_weeks or not prev_weeks:
         return ""
     # Get first and last week from each list
@@ -237,14 +237,14 @@ def format_quarter_range(current_weeks, prev_weeks):
     if current_first_num and current_last_num and prev_first_num and prev_last_num:
         current_year = current_first.split('-W')[0]
         prev_year = prev_first.split('-W')[0]
-        return f"{current_year} W{current_first_num}-{current_last_num} vs {prev_year} W{prev_first_num}-{prev_last_num}"
+        return f"{prev_year} W{prev_first_num}-{prev_last_num} vs {current_year} W{current_first_num}-{current_last_num}"
     return ""
 
 def format_year_range(current_week, prev_year_week):
-    """Format year range as '2025 W45 vs 2024 W45'"""
+    """Format year range as '2024 W45 vs 2025 W45' (prev vs current)"""
     if not current_week or not prev_year_week:
         return ""
-    return f"{current_week} vs {prev_year_week}"
+    return f"{prev_year_week} vs {current_week}"
 
 # Create formatted ranges
 quarter_range_str = format_quarter_range(latest_13weeks_list, prev_13weeks_list)
@@ -944,7 +944,7 @@ def build_callout_for_metric(metric_full_name, week_prev_df, week_yoy_df, quarte
     if week_prev_df is not None and not week_prev_df.empty:
         if not is_first_anomaly_section:
             anomaly_parts.append("")  # Add blank line before section header
-        anomaly_parts.append("**Current Week vs Prev Week:**")
+        anomaly_parts.append("**Prev Week vs Current Week:**")
         is_first_anomaly_section = False
         
         # Process each reporting cluster - Level 1
