@@ -68,7 +68,22 @@ METRIC_GROUPS = [
 
 WORKSPACE_FOLDER = '/Workspace/Users/visal.kumar@hellofresh.com'
 
-# AR metrics that use 5% threshold instead of 10%
+# Metrics that use 5% threshold for week_prev, long_term, and yoy
+METRICS_5_PCT = [
+    '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 1_PaymentPageVisitToSuccess',
+    '1_Activation (Paid + Referrals) - 1_Checkout Funnel (backend) - 1_PaymentPageVisitToSuccess',
+    '1_Activation (Paid + Referrals) - 1_Checkout Funnel - 2_SelectToSuccess'
+]
+
+# Metrics that use 2.5% threshold for week_prev, long_term, and yoy
+METRICS_2_5_PCT = [
+    '2_Reactivations - 1_ReactivationFunnel - 1_ReactivationRate',
+    '3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR',
+    '3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR',
+    '3_Active - 1_3_Loyalty: LL0 and LL1+ (Recurring charges) - 2_PreDunningAR'
+]
+
+# AR metrics (kept for backward compatibility)
 AR_METRICS = [
     '3_Active - 1_1_Overall Total Box Candidates - 2_PreDunningAR',
     '3_Active - 1_2_Loyalty: LL0 (Initial charges) - 2_PreDunningAR',
@@ -76,12 +91,15 @@ AR_METRICS = [
 ]
 
 def is_ar_metric(metric_full_name):
-    """Check if a metric is an AR metric that uses 5% threshold"""
+    """Check if a metric is an AR metric (for backward compatibility)"""
     return metric_full_name in AR_METRICS
 
 def get_threshold_for_comparison(metric_full_name, comparison_type):
     """
     Get threshold based on metric type and comparison type
+    
+    This function can use data-driven thresholds if USE_DATA_DRIVEN_THRESHOLDS is True,
+    otherwise falls back to fixed thresholds.
     
     Parameters:
     -----------
@@ -94,31 +112,425 @@ def get_threshold_for_comparison(metric_full_name, comparison_type):
     
     Returns:
     --------
-    int
+    float
         Threshold percentage for the metric and comparison type
-        - AR metrics: 5% for all comparisons
-        - Other metrics: 10% for week_prev, 20% for long_term and yoy
+        - If USE_DATA_DRIVEN_THRESHOLDS is True: Uses historical trend analysis
+        - Otherwise: Fixed thresholds
+          - Metrics in METRICS_5_PCT: 5% for all comparisons (week_prev, long_term, yoy)
+          - Metrics in METRICS_2_5_PCT: 2.5% for all comparisons (week_prev, long_term, yoy)
+          - Other metrics: 10% for week_prev, 20% for long_term and yoy
     """
-    is_ar = is_ar_metric(metric_full_name)
+    # If data-driven thresholds are enabled, try to use them first
+    if USE_DATA_DRIVEN_THRESHOLDS:
+        data_driven_threshold = get_data_driven_threshold(
+            metric_full_name, 
+            comparison_type, 
+            method='hybrid'  # Can be changed to test different methods: 'std_dev', 'percentile', 'z_score', 'hybrid', 'conservative', 'aggressive'
+        )
+        
+        if data_driven_threshold is not None:
+            return data_driven_threshold
     
-    if is_ar:
-        # AR metrics use 5% threshold for all comparisons
-        return 5
+    # Fall back to fixed threshold logic
+    # Check for 5% metrics first
+    if metric_full_name in METRICS_5_PCT:
+        # 5% for all comparison types (week_prev, long_term, yoy)
+        if comparison_type == 'week_prev':
+            return 5.0
+        elif comparison_type == 'long_term':
+            return 5.0
+        elif comparison_type == 'yoy':
+            return 5.0
+        else:
+            return 5.0  # Default to 5% if comparison_type is not recognized
+    
+    # Check for 2.5% metrics
+    elif metric_full_name in METRICS_2_5_PCT:
+        # 2.5% for all comparison types (week_prev, long_term, yoy)
+        if comparison_type == 'week_prev':
+            return 2.5
+        elif comparison_type == 'long_term':
+            return 2.5
+        elif comparison_type == 'yoy':
+            return 2.5
+        else:
+            return 2.5  # Default to 2.5% if comparison_type is not recognized
+    
     else:
         # Other metrics use different thresholds based on comparison type
         if comparison_type == 'week_prev':
-            return 10  # Current Week vs Prev Week
-        elif comparison_type in ['long_term', 'yoy']:
-            return 20  # Long Term Impact and Comparison vs Prev Year
+            return 10.0  # Current Week vs Prev Week
+        elif comparison_type == 'long_term':
+            return 20.0  # Long Term Impact
+        elif comparison_type == 'yoy':
+            return 20.0  # Comparison vs Prev Year
         else:
             # Default to 10% if comparison_type is not recognized
-            return 10
+            return 10.0
 
 def get_significance_threshold(metric_full_name):
     """Get the significance threshold for a metric (5% for AR metrics, 10% for others)
     DEPRECATED: Use get_threshold_for_comparison() instead for comparison-specific thresholds
     """
     return 5 if is_ar_metric(metric_full_name) else 10
+
+# ============================================================================
+# DATA-DRIVEN THRESHOLD ANALYSIS (MODULAR - CAN BE SWAPPED IN/OUT)
+# ============================================================================
+# This section provides alternative threshold calculation methods based on
+# historical trend analysis. Use USE_DATA_DRIVEN_THRESHOLDS flag to enable.
+# ============================================================================
+
+# Flag to enable/disable data-driven thresholds (set to True to use new method)
+USE_DATA_DRIVEN_THRESHOLDS = False
+
+# Number of historical weeks to analyze (default: 52 weeks = 1 year)
+HISTORICAL_WEEKS_FOR_ANALYSIS = 52
+
+def get_historical_metric_data(metric_full_name, num_weeks=52):
+    """
+    Get historical metric data at Overall level for trend analysis.
+    
+    Parameters:
+    -----------
+    metric_full_name : str
+        Full name of the metric
+    num_weeks : int
+        Number of historical weeks to retrieve (default: 52)
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        DataFrame with columns: date_value, metric_value (ratio), week_num
+        Returns empty DataFrame if no data found
+    """
+    try:
+        # Extract metric components from metric_final_name
+        # Format: "focus_group - metric_group - metric_name"
+        parts = metric_full_name.split(' - ')
+        if len(parts) < 3:
+            debug_print(f"[THRESHOLD ANALYSIS] Could not parse metric name: {metric_full_name}")
+            return pd.DataFrame()
+        
+        focus_group = parts[0]
+        metric_group = parts[1]
+        metric_name = parts[2]
+        
+        # Build query to get historical data at Overall level
+        historical_query = f"""
+        SELECT 
+            a.date_value,
+            CASE 
+                WHEN a.current_metric_value_denominator > 0 
+                THEN a.current_metric_value_numerator / a.current_metric_value_denominator
+                ELSE 0 
+            END AS metric_value,
+            a.current_metric_value_numerator,
+            a.current_metric_value_denominator
+        FROM payments_hf.payments_p0_metrics a
+        WHERE 1=1
+            AND a.focus_group = '{focus_group}'
+            AND a.metric_group = '{metric_group}'
+            AND a.metric_name = '{metric_name}'
+            AND a.metric_type IN ('ratio', 'dollar-ratio')
+            AND a.flag_is_p0 = 'TRUE'
+            AND a.date_granularity = 'WEEK'
+            AND a.reporting_cluster = 'Overall'
+            AND (
+                (a.metric_name not IN ({','.join([f"'{m}'" for m in SPECIAL_METRICS])})) 
+                OR (a.metric_name IN ({','.join([f"'{m}'" for m in SPECIAL_METRICS])}) AND a.dimension_value in ('Good'))
+            )
+            AND (
+                (a.metric_name not IN ({','.join([f"'{m}'" for m in SPECIAL_METRICS])}) AND a.dimension_name = '_Overall')
+                OR (a.metric_name IN ({','.join([f"'{m}'" for m in SPECIAL_METRICS])}) AND a.dimension_value = 'Good')
+            )
+            AND DATE(a.date_string_backwards) < CURRENT_DATE()
+        ORDER BY a.date_value DESC
+        LIMIT {num_weeks}
+        """
+        
+        result_df = spark.sql(historical_query).toPandas()
+        
+        if result_df.empty:
+            debug_print(f"[THRESHOLD ANALYSIS] No historical data found for: {metric_full_name}")
+            return pd.DataFrame()
+        
+        # Calculate week-over-week changes
+        result_df = result_df.sort_values('date_value')
+        result_df['prev_metric_value'] = result_df['metric_value'].shift(1)
+        result_df['week_over_week_change_pct'] = (
+            (result_df['metric_value'] - result_df['prev_metric_value']) / 
+            result_df['prev_metric_value'] * 100
+        ).fillna(0)
+        result_df['abs_week_over_week_change_pct'] = result_df['week_over_week_change_pct'].abs()
+        
+        debug_print(f"[THRESHOLD ANALYSIS] Retrieved {len(result_df)} weeks of historical data for: {metric_full_name}")
+        
+        return result_df
+        
+    except Exception as e:
+        debug_print(f"[THRESHOLD ANALYSIS] Error getting historical data for {metric_full_name}: {e}")
+        return pd.DataFrame()
+
+def calculate_threshold_std_dev(historical_df, std_dev_multiplier=2.0):
+    """
+    Calculate threshold based on standard deviation of week-over-week changes.
+    
+    Parameters:
+    -----------
+    historical_df : pandas.DataFrame
+        Historical metric data with 'abs_week_over_week_change_pct' column
+    std_dev_multiplier : float
+        Multiplier for standard deviation (default: 2.0 = ~95% confidence)
+    
+    Returns:
+    --------
+    float
+        Threshold percentage
+    """
+    if historical_df.empty or 'abs_week_over_week_change_pct' not in historical_df.columns:
+        return None
+    
+    # Remove NaN values
+    changes = historical_df['abs_week_over_week_change_pct'].dropna()
+    
+    if len(changes) < 10:  # Need at least 10 data points
+        return None
+    
+    mean_change = changes.mean()
+    std_dev = changes.std()
+    
+    # Threshold = mean + (std_dev_multiplier * std_dev)
+    threshold = mean_change + (std_dev_multiplier * std_dev)
+    
+    return max(threshold, 1.0)  # Minimum threshold of 1%
+
+def calculate_threshold_percentile(historical_df, percentile=95):
+    """
+    Calculate threshold based on percentile of week-over-week changes.
+    
+    Parameters:
+    -----------
+    historical_df : pandas.DataFrame
+        Historical metric data with 'abs_week_over_week_change_pct' column
+    percentile : float
+        Percentile to use (default: 95 = 95th percentile)
+    
+    Returns:
+    --------
+    float
+        Threshold percentage
+    """
+    if historical_df.empty or 'abs_week_over_week_change_pct' not in historical_df.columns:
+        return None
+    
+    changes = historical_df['abs_week_over_week_change_pct'].dropna()
+    
+    if len(changes) < 10:
+        return None
+    
+    threshold = changes.quantile(percentile / 100.0)
+    
+    return max(threshold, 1.0)  # Minimum threshold of 1%
+
+def calculate_threshold_z_score(historical_df, z_score_threshold=2.576):
+    """
+    Calculate threshold based on z-score (statistical significance).
+    Uses 2.576 for 99% confidence, 1.96 for 95% confidence.
+    
+    Parameters:
+    -----------
+    historical_df : pandas.DataFrame
+        Historical metric data with 'abs_week_over_week_change_pct' column
+    z_score_threshold : float
+        Z-score threshold (default: 2.576 = 99% confidence)
+    
+    Returns:
+    --------
+    float
+        Threshold percentage
+    """
+    if historical_df.empty or 'abs_week_over_week_change_pct' not in historical_df.columns:
+        return None
+    
+    changes = historical_df['abs_week_over_week_change_pct'].dropna()
+    
+    if len(changes) < 10:
+        return None
+    
+    mean_change = changes.mean()
+    std_dev = changes.std()
+    
+    if std_dev == 0:
+        return max(mean_change, 1.0)
+    
+    # Threshold = mean + (z_score * std_dev)
+    threshold = mean_change + (z_score_threshold * std_dev)
+    
+    return max(threshold, 1.0)  # Minimum threshold of 1%
+
+def calculate_threshold_combined(historical_df, method='hybrid'):
+    """
+    Calculate threshold using a combination of methods.
+    
+    Parameters:
+    -----------
+    historical_df : pandas.DataFrame
+        Historical metric data
+    method : str
+        'hybrid' (uses both std dev and percentile), 
+        'conservative' (uses higher of the two),
+        'aggressive' (uses lower of the two)
+    
+    Returns:
+    --------
+    float
+        Threshold percentage
+    """
+    std_dev_threshold = calculate_threshold_std_dev(historical_df, std_dev_multiplier=2.0)
+    percentile_threshold = calculate_threshold_percentile(historical_df, percentile=95)
+    
+    if std_dev_threshold is None and percentile_threshold is None:
+        return None
+    
+    if std_dev_threshold is None:
+        return percentile_threshold
+    
+    if percentile_threshold is None:
+        return std_dev_threshold
+    
+    if method == 'conservative':
+        return max(std_dev_threshold, percentile_threshold)
+    elif method == 'aggressive':
+        return min(std_dev_threshold, percentile_threshold)
+    else:  # hybrid - average
+        return (std_dev_threshold + percentile_threshold) / 2.0
+
+# Cache for historical data (to avoid re-querying for same metric)
+_historical_data_cache = {}
+
+def get_data_driven_threshold(metric_full_name, comparison_type, method='hybrid'):
+    """
+    Get data-driven threshold based on historical trend analysis.
+    
+    This function analyzes historical week-over-week changes at Overall level
+    and calculates a meaningful threshold based on the metric's natural variability.
+    
+    Parameters:
+    -----------
+    metric_full_name : str
+        Full name of the metric
+    comparison_type : str
+        Type of comparison: 'week_prev', 'long_term', 'yoy'
+    method : str
+        Method to use: 'std_dev', 'percentile', 'z_score', 'hybrid', 'conservative', 'aggressive'
+        Default: 'hybrid' (averages std dev and percentile methods)
+    
+    Returns:
+    --------
+    float
+        Threshold percentage, or None if analysis fails
+    """
+    # Check cache first
+    cache_key = f"{metric_full_name}_{comparison_type}_{method}"
+    if cache_key in _historical_data_cache:
+        return _historical_data_cache[cache_key]
+    
+    # Get historical data
+    historical_df = get_historical_metric_data(metric_full_name, HISTORICAL_WEEKS_FOR_ANALYSIS)
+    
+    if historical_df.empty:
+        debug_print(f"[THRESHOLD ANALYSIS] No historical data, falling back to default threshold")
+        return None
+    
+    # Calculate threshold based on method
+    if method == 'std_dev':
+        threshold = calculate_threshold_std_dev(historical_df, std_dev_multiplier=2.0)
+    elif method == 'percentile':
+        threshold = calculate_threshold_percentile(historical_df, percentile=95)
+    elif method == 'z_score':
+        threshold = calculate_threshold_z_score(historical_df, z_score_threshold=2.576)
+    elif method in ['hybrid', 'conservative', 'aggressive']:
+        threshold = calculate_threshold_combined(historical_df, method=method)
+    else:
+        debug_print(f"[THRESHOLD ANALYSIS] Unknown method: {method}, using hybrid")
+        threshold = calculate_threshold_combined(historical_df, method='hybrid')
+    
+    # Adjust threshold based on comparison type
+    if threshold is not None:
+        if comparison_type == 'week_prev':
+            # Week-over-week: use as-is
+            pass
+        elif comparison_type in ['long_term', 'yoy']:
+            # Long-term and YoY: multiply by factor (longer periods have more variability)
+            threshold = threshold * 1.5  # 50% higher threshold for longer periods
+        
+        # Round to 1 decimal place
+        threshold = round(threshold, 1)
+        
+        # Cache the result
+        _historical_data_cache[cache_key] = threshold
+        
+        debug_print(f"[THRESHOLD ANALYSIS] {metric_full_name} ({comparison_type}): threshold={threshold}% (method={method})")
+    
+    return threshold
+
+def get_threshold_for_comparison_v2(metric_full_name, comparison_type, fallback_to_default=True):
+    """
+    Enhanced threshold function that can use data-driven analysis or fall back to defaults.
+    
+    This is a drop-in replacement for get_threshold_for_comparison() that:
+    1. Uses data-driven thresholds if USE_DATA_DRIVEN_THRESHOLDS is True
+    2. Falls back to original logic if data-driven analysis fails or is disabled
+    
+    Parameters:
+    -----------
+    metric_full_name : str
+        Full name of the metric
+    comparison_type : str
+        Type of comparison: 'week_prev', 'long_term', 'yoy'
+    fallback_to_default : bool
+        If True, falls back to original threshold logic if data-driven fails
+    
+    Returns:
+    --------
+    float
+        Threshold percentage
+    """
+    # If data-driven thresholds are enabled, try to use them
+    if USE_DATA_DRIVEN_THRESHOLDS:
+        data_driven_threshold = get_data_driven_threshold(
+            metric_full_name, 
+            comparison_type, 
+            method='hybrid'  # Can be changed to test different methods
+        )
+        
+        if data_driven_threshold is not None:
+            return data_driven_threshold
+    
+    # Fall back to original logic
+    if fallback_to_default:
+        return get_threshold_for_comparison(metric_full_name, comparison_type)
+    
+    return None
+
+# ============================================================================
+# END DATA-DRIVEN THRESHOLD ANALYSIS
+# ============================================================================
+
+# ============================================================================
+# THRESHOLD CONFIGURATION
+# ============================================================================
+# To enable data-driven thresholds:
+# 1. Set USE_DATA_DRIVEN_THRESHOLDS = True (see line ~131)
+# 2. Optionally adjust HISTORICAL_WEEKS_FOR_ANALYSIS (see line ~134)
+# 3. Optionally change the method in get_threshold_for_comparison() (see line ~112)
+#    Methods: 'std_dev', 'percentile', 'z_score', 'hybrid', 'conservative', 'aggressive'
+#
+# The get_threshold_for_comparison() function will automatically use data-driven
+# thresholds if enabled, otherwise falls back to fixed thresholds.
+# No other code changes needed!
+# ============================================================================
 
 # Dimension abbreviations mapping
 DIMENSION_ABBREVIATIONS = {
