@@ -13,7 +13,8 @@ def inject_notebook_output(
     notebook_content: str,
     output_path: Optional[str] = None,
     job_name: Optional[str] = None,
-    auto_write: bool = True
+    auto_write: bool = True,
+    use_universal_capture: bool = True  # New: Use simpler stdout/stderr capture
 ) -> str:
     """
     Inject NotebookOutput framework into notebook content.
@@ -283,29 +284,69 @@ except Exception as init_error:
 # COMMAND ----------
 '''
     
-    # Find the insertion point (after first COMMAND ---------- or at the beginning)
-    insertion_point = find_insertion_point(notebook_content)
-    
-    # Inject the framework
-    if insertion_point == 0:
-        # Insert at the beginning
-        modified_content = notebook_output_class + "\n" + notebook_content
+    # Choose injection method
+    if use_universal_capture:
+        # Use simpler stdout/stderr redirection (universal, works for any notebook)
+        from core.universal_output_capture import get_output_capture_code
+        
+        capture_code = get_output_capture_code(output_path)
+        
+        # Find insertion point
+        insertion_point = find_insertion_point(notebook_content)
+        
+        # Inject at the beginning
+        if insertion_point == 0:
+            modified_content = capture_code + "\n" + notebook_content
+        else:
+            modified_content = (
+                notebook_content[:insertion_point] + 
+                capture_code + 
+                notebook_content[insertion_point:]
+            )
+        
+        # Add auto-write at the end
+        if auto_write:
+            # Add call to write output at the end
+            auto_write_code = '''
+
+# Auto-injected: Write captured output to DBFS
+_write_output_to_dbfs()
+'''
+            # Find last COMMAND marker
+            last_command = modified_content.rfind("# COMMAND ----------")
+            if last_command != -1:
+                end_of_section = modified_content.find("\n", last_command)
+                if end_of_section != -1:
+                    modified_content = modified_content[:end_of_section + 1] + auto_write_code + modified_content[end_of_section + 1:]
+            else:
+                modified_content = modified_content + auto_write_code
+        
+        return modified_content
     else:
-        # Insert after first COMMAND ----------
-        modified_content = (
-            notebook_content[:insertion_point] + 
-            notebook_output_class + 
-            notebook_content[insertion_point:]
-        )
-    
-    # Add print interception setup at the start of each user cell
-    modified_content = add_print_interception_to_cells(modified_content)
-    
-    # Add auto-write at the end if requested
-    if auto_write:
-        modified_content = add_auto_write(modified_content)
-    
-    return modified_content
+        # Use NotebookOutput framework (original approach)
+        # Find the insertion point (after first COMMAND ---------- or at the beginning)
+        insertion_point = find_insertion_point(notebook_content)
+        
+        # Inject the framework
+        if insertion_point == 0:
+            # Insert at the beginning
+            modified_content = notebook_output_class + "\n" + notebook_content
+        else:
+            # Insert after first COMMAND ----------
+            modified_content = (
+                notebook_content[:insertion_point] + 
+                notebook_output_class + 
+                notebook_content[insertion_point:]
+            )
+        
+        # Add print interception setup at the start of each user cell
+        modified_content = add_print_interception_to_cells(modified_content)
+        
+        # Add auto-write at the end if requested
+        if auto_write:
+            modified_content = add_auto_write(modified_content)
+        
+        return modified_content
 
 
 def find_insertion_point(notebook_content: str) -> int:

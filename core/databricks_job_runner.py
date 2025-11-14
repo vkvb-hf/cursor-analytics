@@ -271,7 +271,10 @@ class DatabricksJobRunner:
             time.sleep(poll_interval)
     
     def _collect_outputs(self, status: Dict) -> List[Dict]:
-        """Collect outputs from all tasks in a job run."""
+        """
+        Collect and display outputs from all tasks in a job run.
+        Uses Databricks native API to get notebook cell outputs - works universally for any notebook.
+        """
         outputs = []
         
         # Try to get task outputs
@@ -288,9 +291,10 @@ class DatabricksJobRunner:
                             'output': task_output
                         })
         
-        # Display outputs
+        # Display outputs in a readable format
         if outputs:
-            print("\n📋 Job Output:")
+            print("\n" + "=" * 80)
+            print("📋 NOTEBOOK OUTPUT (from Databricks API)")
             print("=" * 80)
             
             for output_info in outputs:
@@ -300,28 +304,56 @@ class DatabricksJobRunner:
                 print(f"\n📌 Task: {task_key}")
                 print("-" * 80)
                 
-                # Extract notebook output
+                # Extract notebook output - this is the universal way to get output
                 if 'notebook_output' in output and 'result' in output['notebook_output']:
                     result = output['notebook_output']['result']
                     
-                    # Print text output
+                    # Print all text output (print statements, query results, etc.)
                     if result.get('data'):
                         for item in result.get('data', []):
+                            # Handle text/plain output (most common - print statements, query results)
                             if 'text/plain' in item:
                                 print(item['text/plain'])
+                            # Handle text/html (DataFrame displays, etc.)
+                            elif 'text/html' in item:
+                                # For HTML, try to extract text content
+                                # In most cases, HTML contains formatted tables that we can't easily parse
+                                # But we can at least indicate it's there
+                                html_content = item['text/html']
+                                # Try to extract text from simple HTML
+                                import re
+                                # Remove HTML tags for basic text extraction
+                                text = re.sub(r'<[^>]+>', '', html_content)
+                                if text.strip():
+                                    print(text.strip())
+                            # Handle other output types
+                            elif 'application/vnd.databricks.result-v1+json' in item:
+                                # Structured data - try to format it
+                                try:
+                                    import json
+                                    data = item['application/vnd.databricks.result-v1+json']
+                                    if isinstance(data, str):
+                                        data = json.loads(data)
+                                    print(json.dumps(data, indent=2))
+                                except:
+                                    print(str(item))
                     
-                    # Show errors
+                    # Show errors if any
                     if result.get('errorSummary'):
                         print(f"\n❌ Error: {result['errorSummary']}")
                     if result.get('cause'):
                         print(f"   Cause: {result['cause']}")
                 
+                # Handle direct error in output
                 elif 'error' in output:
                     print(f"❌ Error: {output['error']}")
                     if 'error_trace' in output:
                         print(f"   Trace: {output['error_trace']}")
                 
                 print("-" * 80)
+        else:
+            # No outputs found - might still be processing
+            print("\n⚠️  No output available yet (job may still be processing)")
         
         return outputs
     
