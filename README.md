@@ -6,8 +6,13 @@ A comprehensive, well-organized toolkit for working with Databricks. This reposi
 
 ```
 cursor_databricks/
-├── config.py                    # Databricks connection configuration (DO NOT COMMIT)
-├── config.py.example            # Template for config.py
+├── config.py                    # ✅ Databricks connection configuration (DO NOT COMMIT)
+├── config.py.example            # ✅ Template for config.py
+├── README.md                    # ✅ Main documentation (this file)
+├── databricks_api.py            # ✅ Main Python API entry point
+├── databricks_cli.py            # ✅ Main CLI entry point
+├── requirements.txt             # ✅ Python dependencies
+├── requirements-test.txt        # ✅ Test dependencies
 │
 ├── core/                        # 🔧 Core reusable utilities
 │   ├── __init__.py              # Package exports
@@ -15,7 +20,7 @@ cursor_databricks/
 │   ├── databricks_workspace.py  # Workspace file operations
 │   ├── table_inspector.py       # Table inspection and validation
 │   ├── query_util.py            # SQL query execution utilities
-│   ├── interactive_sql.py       # Interactive SQL shell
+│   ├── interactive_sql.py      # Interactive SQL shell
 │   ├── run_sql_file.py          # Execute SQL from files
 │   ├── csv_to_table.py          # CSV to Delta table conversion
 │   ├── upload_csvs.py           # CSV upload utilities
@@ -26,34 +31,58 @@ cursor_databricks/
 │   ├── run_sql.py              # Run SQL queries from files
 │   ├── interactive_sql.py      # Interactive SQL shell
 │   ├── inspect_table.py        # Inspect table schema and data
-│   └── create_notebook.py      # Create and run notebooks
+│   ├── create_notebook.py      # Create and run notebooks
+│   ├── run_query_now.py        # Quick query runner
+│   └── verify_setup.py         # Setup verification utility
 │
-├── notebooks/                   # 📓 Notebook management
+├── notebooks/                   # 📓 Notebook utilities (reusable only)
 │   ├── README.md               # Notebook utilities documentation
-│   ├── create_and_run_databricks_job.py
-│   ├── get_job_output.py
-│   ├── get_notebook_content.py
-│   ├── get_notebook_from_job.py
-│   ├── get_notebook_from_url.py
-│   └── check_job_status.py
+│   └── [reusable notebook utilities]
 │
-├── queries/                     # 📊 SQL query files
-│   ├── README.md               # Query organization guide
-│   └── [organize by use case or table]
+├── examples/                    # 📝 Example scripts and templates
+│   ├── example_notebook_with_output.py
+│   ├── example_query.py
+│   └── notebook_template.py
 │
-├── exploration/                 # 🔍 Ad-hoc analysis & testing
-│   ├── README.md               # Exploration guidelines
-│   └── [test scripts, exploration notebooks]
+├── data/                        # 📊 Data files (CSV, exports, etc.)
+│   └── [data files]
 │
 ├── projects/                    # 💼 Business use case implementations
+│   ├── adhoc/                  # 🔍 Ad-hoc investigations and analysis
+│   │   ├── exploration/        # Temporary exploration/test scripts
+│   │   ├── notebooks/          # One-time notebook tasks
+│   │   ├── queries/            # One-time investigation queries
+│   │   └── [other investigation files]
 │   ├── adyen_ml/               # Adyen ML project
 │   │   ├── README.md
 │   │   └── [project-specific files]
 │   └── p0_metrics/             # P0 Metrics project
 │       └── [project-specific files]
 │
-└── docs/                        # 📚 Documentation
-    └── AI_UTILITY_GUIDE.md     # AI utility selection guide
+├── tests/                       # 🧪 Test files
+│   ├── README.md
+│   └── [all test files]
+│
+└── docs/                        # 📚 Documentation (organized)
+    ├── AI_UTILITY_GUIDE.md     # AI utility selection guide
+    ├── ARCHITECTURE.md          # Architecture documentation
+    ├── guides/                  # User guides
+    │   ├── SETUP.md
+    │   ├── QUICK_START.md
+    │   ├── INSTRUCTIONS.md
+    │   └── [other guides]
+    ├── reference/               # Reference documentation
+    │   ├── PROJECT_STRUCTURE.md
+    │   └── CORE_FUNCTIONS_LIST.md
+    ├── status/                  # Status and cleanup docs
+    │   ├── CLEANUP_COMPLETE.md
+    │   └── [other status docs]
+    ├── notes/                   # Notes and summaries
+    │   └── [notes files]
+    ├── examples/                # Example documentation
+    │   └── USAGE_EXAMPLE.md
+    └── guidelines/              # Guidelines
+        └── AI_DATASET_EXPLORATION_GUIDELINES.md
 ```
 
 ## 🚀 Quick Start
@@ -311,20 +340,42 @@ runner.create_and_run(
 
 ## 📖 Documentation
 
+Documentation is organized in the `docs/` directory:
+
+### Quick Start & Guides
+- **`docs/guides/QUICK_START.md`** - Quick start guide
+- **`docs/guides/SETUP.md`** - Setup instructions
+- **`docs/guides/INSTRUCTIONS.md`** - Detailed workflow instructions
+- **`docs/guides/HOW_TO_CREATE_AND_RUN_NOTEBOOKS.md`** - Notebook creation guide
+- **`docs/guides/TESTING.md`** - Testing guide
+
+### Reference
+- **`docs/reference/PROJECT_STRUCTURE.md`** - Complete project structure reference
+- **`docs/reference/CORE_FUNCTIONS_LIST.md`** - Core functions listing
+- **`docs/ARCHITECTURE.md`** - Architecture documentation
+
+### Other Documentation
 - **`docs/AI_UTILITY_GUIDE.md`** - Guide for AI models to select utilities
-- **`queries/README.md`** - SQL query organization guide
 - **`notebooks/README.md`** - Notebook utilities documentation
-- **`exploration/README.md`** - Exploration guidelines
+- **`projects/adhoc/`** - Temporary investigation and analysis scripts
+  - `projects/adhoc/exploration/` - Temporary exploration/test scripts
+  - `projects/adhoc/notebooks/` - One-time notebook tasks
+  - `projects/adhoc/queries/` - One-time investigation queries
 - **`projects/*/README.md`** - Project-specific documentation
 
 ## 🔧 Best Practices
 
 1. **Use Core Utilities**: Always use utilities from `core/` for reusable functionality
-2. **Organize Queries**: Store SQL queries in `queries/` organized by use case
-3. **Project Structure**: Keep business-specific code in `projects/`
-4. **Exploration**: Use `exploration/` for ad-hoc analysis and testing
-5. **Configuration**: Never commit `config.py` with real credentials
-6. **Documentation**: Update README files when adding new functionality
+2. **Project Structure**: Keep business-specific code in `projects/`
+3. **Temporary Files**: Place one-time tasks, exploration scripts, and investigation queries in `projects/adhoc/`
+4. **Notebook Utilities**: Use `notebooks/` only for reusable notebook utilities (not one-time tasks)
+5. **Examples**: Reference `examples/` directory for templates and sample code
+6. **Documentation**: Place documentation in `docs/` with appropriate subdirectories
+7. **Tests**: All test files should be in `tests/` directory
+8. **Data Files**: Store data files (CSV, exports) in `data/` directory
+9. **Configuration**: Never commit `config.py` with real credentials
+10. **Cleanup**: Regularly review and delete files in `projects/adhoc/` when no longer needed
+11. **Validation**: Always run `python scripts/validate_file_placement.py` after creating files to ensure correct placement
 
 ## 🧪 Testing & Exploration
 

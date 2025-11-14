@@ -372,8 +372,216 @@ All utilities should:
 
 ---
 
-**Last Updated**: 2024-11-03
-**Version**: 1.0
+## 📁 File Organization Rules for AI
+
+**CRITICAL**: When creating or saving files, you MUST follow these rules. Use the validation script to check your work.
+
+### Root Directory Rules
+
+**✅ ALLOWED in Root** (Only these 7 files):
+- `config.py` - Configuration (DO NOT COMMIT)
+- `config.py.example` - Template
+- `README.md` - Main documentation
+- `databricks_api.py` - Main Python API entry point
+- `databricks_cli.py` - Main CLI entry point
+- `requirements.txt` - Dependencies
+- `requirements-test.txt` - Test dependencies
+
+**❌ NEVER create in Root**:
+- Test files (`.py` files starting with `test_`)
+- Documentation files (`.md` files except `README.md`)
+- Example files (`.py` files starting with `example_`)
+- Data files (`.csv`, `.json`, etc.)
+- One-time scripts
+- Investigation/analysis scripts
+
+### Directory-Specific Rules
+
+#### `core/` - Core Reusable Utilities
+**✅ PUT HERE**:
+- Reusable utilities that work across all projects
+- Generic, project-agnostic functions
+- Well-tested, documented code
+
+**❌ DON'T PUT HERE**:
+- Project-specific code
+- One-time scripts
+- Test files
+- Business logic
+
+**Example**: `core/query_util.py`, `core/table_inspector.py`
+
+#### `scripts/` - CLI Entry Points
+**✅ PUT HERE**:
+- Command-line scripts
+- Executable utilities
+- Scripts that use `argparse`
+
+**❌ DON'T PUT HERE**:
+- One-time task scripts
+- Investigation scripts
+- Test scripts
+
+**Example**: `scripts/run_sql.py`, `scripts/interactive_sql.py`
+
+#### `notebooks/` - Reusable Notebook Utilities
+**✅ PUT HERE**:
+- Reusable notebook utilities (ONLY)
+- Functions for creating/managing notebooks
+- Generic notebook helpers
+
+**❌ DON'T PUT HERE**:
+- One-time notebook tasks
+- Analysis notebooks
+- Test notebooks
+- Task-specific notebooks
+
+**Example**: `notebooks/create_and_run_databricks_job.py`
+
+#### `tests/` - Test Files
+**✅ PUT HERE**:
+- All test files (`test_*.py`)
+- Test fixtures
+- Test utilities
+
+**❌ DON'T PUT HERE**:
+- Production code
+- Scripts
+- Documentation
+
+#### `examples/` - Example Scripts
+**✅ PUT HERE**:
+- Example scripts
+- Templates
+- Sample code
+
+**Example**: `examples/example_notebook_with_output.py`
+
+#### `data/` - Data Files
+**✅ PUT HERE**:
+- CSV files
+- JSON exports
+- Data dumps
+- Generated data files
+
+**❌ DON'T PUT HERE**:
+- Code files
+- Configuration files
+
+#### `projects/` - Project-Specific Code
+**✅ PUT HERE**:
+- Business-specific implementations
+- Project-specific logic
+- One-time analysis scripts
+
+**Subdirectories**:
+- `projects/adhoc/` - Temporary/one-time files
+  - `projects/adhoc/exploration/` - Temporary exploration/test scripts
+  - `projects/adhoc/notebooks/` - One-time notebook tasks
+  - `projects/adhoc/queries/` - One-time investigation queries
+- `projects/adyen_ml/` - Adyen ML project
+- `projects/p0_metrics/` - P0 Metrics project
+
+**❌ DON'T PUT HERE**:
+- Reusable utilities (use `core/`)
+- CLI scripts (use `scripts/`)
+
+#### `docs/` - Documentation
+**✅ PUT HERE**:
+- All documentation files (`.md`)
+- Organized by subdirectory:
+  - `docs/guides/` - User guides
+  - `docs/reference/` - Reference documentation
+  - `docs/status/` - Status/cleanup docs
+  - `docs/notes/` - Notes
+  - `docs/examples/` - Example documentation
+  - `docs/guidelines/` - Guidelines
+
+**❌ DON'T PUT HERE**:
+- Code files
+- Data files
+- Configuration files
+
+### Decision Tree for File Placement
+
+```
+What type of file are you creating?
+│
+├─ Reusable utility function?
+│  └─ → core/
+│
+├─ CLI script (command-line tool)?
+│  └─ → scripts/
+│
+├─ Reusable notebook utility?
+│  └─ → notebooks/
+│
+├─ Test file?
+│  └─ → tests/
+│
+├─ Example/template?
+│  └─ → examples/
+│
+├─ Data file (CSV, JSON)?
+│  └─ → data/
+│
+├─ Documentation?
+│  └─ → docs/ (with appropriate subdirectory)
+│
+├─ One-time task/analysis?
+│  └─ → projects/adhoc/
+│     ├─ Exploration/test script? → projects/adhoc/exploration/
+│     ├─ One-time notebook? → projects/adhoc/notebooks/
+│     └─ Investigation query? → projects/adhoc/queries/
+│
+└─ Project-specific code?
+   └─ → projects/[project_name]/
+```
+
+### File Naming Conventions
+
+- **Python files**: `snake_case.py`
+- **Test files**: `test_*.py` (must be in `tests/`)
+- **Example files**: `example_*.py` (must be in `examples/`)
+- **SQL files**: `descriptive_name.sql`
+- **Documentation**: `UPPERCASE.md` or `snake_case.md`
+
+### Validation
+
+**ALWAYS run the validation script after creating files**:
+```bash
+python scripts/validate_file_placement.py
+```
+
+This will check:
+- ✅ No files in root (except allowed 7)
+- ✅ Test files in `tests/`
+- ✅ Examples in `examples/`
+- ✅ Data files in `data/`
+- ✅ Documentation in `docs/`
+- ✅ One-time tasks in `projects/adhoc/`
+
+### Common Mistakes to Avoid
+
+❌ **DON'T**: Create test files in root
+✅ **DO**: Put in `tests/`
+
+❌ **DON'T**: Create one-time scripts in `notebooks/`
+✅ **DO**: Put in `projects/adhoc/notebooks/`
+
+❌ **DON'T**: Create investigation queries in root
+✅ **DO**: Put in `projects/adhoc/queries/`
+
+❌ **DON'T**: Create documentation in root
+✅ **DO**: Put in `docs/` with appropriate subdirectory
+
+❌ **DON'T**: Create reusable utilities in `projects/`
+✅ **DO**: Put in `core/`
+
+---
+
+**Last Updated**: 2025-01-XX
+**Version**: 2.0
 
 
 

@@ -17,14 +17,14 @@ def format_value(value: Any) -> str:
     """Format a value for display"""
     if value is None:
         return 'NULL'
+    if isinstance(value, bool):
+        return str(value)  # Check bool before int (since bool is subclass of int)
     if isinstance(value, Decimal):
         return str(value)
     if isinstance(value, (int, float)):
         if isinstance(value, int):
             return f"{value:,}"
         return f"{value:.2f}"
-    if isinstance(value, bool):
-        return str(value)
     return str(value)
 
 def print_table(results: List[Any], column_names: List[str] = None, limit: Optional[int] = None, title: Optional[str] = None):

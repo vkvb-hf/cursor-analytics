@@ -1,6 +1,8 @@
 # Notebooks Directory
 
-This directory contains utilities and templates for creating and managing Databricks notebooks.
+This directory contains **reusable utilities** for creating and managing Databricks notebooks.
+
+> **Note**: One-time notebook tasks and analysis scripts have been moved to `projects/adhoc/notebooks/`
 
 ## Files
 
