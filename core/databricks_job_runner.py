@@ -431,6 +431,25 @@ class DatabricksJobRunner:
         
         # Step 5: Read output from DBFS if requested
         if auto_read_output and result.get('success'):
+            # Try to read from standard output location first
+            standard_output_path = f"/tmp/notebook_outputs/{job_name.replace(' ', '_')}_output.txt" if job_name else None
+            if standard_output_path:
+                # Check if standard output file exists
+                try:
+                    from core.notebook_output_reader import NotebookOutputReader
+                    reader = NotebookOutputReader()
+                    content = reader.read_output(standard_output_path)
+                    if content:
+                        print("\n" + "=" * 80)
+                        print("📊 NOTEBOOK OUTPUT (from DBFS)")
+                        print("=" * 80)
+                        print(content)
+                        print("=" * 80)
+                        return result
+                except:
+                    pass  # Fall back to regular output reading
+            
+            # Fall back to regular output reading
             self._read_notebook_output(job_name, run_id, output_path)
         
         return result
