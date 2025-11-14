@@ -54,6 +54,10 @@ class TeeOutput:
             # Get all captured output
             output_text = ''.join(self.captured_lines)
             
+            # If no output captured, add a note
+            if not output_text.strip():
+                output_text = \"⚠️  No output was captured. This may indicate stdout/stderr redirection did not work.\\n\"
+            
             # Add header
             header = f\"\"\"{'=' * 100}
 NOTEBOOK OUTPUT
@@ -67,9 +71,11 @@ Generated: {{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}}
             
             # Write to DBFS
             dbutils.fs.put(self.output_path, full_output, overwrite=True)
-            print(f\"\\n✅ Output written to: {{self.output_path}}\")
+            # Use original stdout to avoid recursion
+            self.original_stream.write(f\"\\n✅ Output written to: {{self.output_path}}\\n\")
         except Exception as e:
-            print(f\"⚠️  Error writing output to DBFS: {{e}}\")
+            # Use original stderr to avoid recursion
+            self.original_stream.write(f\"⚠️  Error writing output to DBFS: {{e}}\\n\")
 
 # Redirect stdout and stderr
 _original_stdout = sys.stdout
