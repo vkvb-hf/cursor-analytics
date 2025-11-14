@@ -158,6 +158,26 @@ try:
     output = NotebookOutput(output_path="{output_path}")
     # Verify it worked - this print will show in job output if there's an issue
     print("✅ NotebookOutput framework initialized - output variable available")
+    
+    # Intercept regular print() statements to capture them automatically
+    import builtins
+    _original_print = builtins.print
+    
+    def _capturing_print(*args, **kwargs):
+        """Wrapper around print() that captures output."""
+        # Call original print
+        _original_print(*args, **kwargs)
+        # Also capture for output file
+        try:
+            message = ' '.join(str(arg) for arg in args)
+            if message.strip():
+                output.add_section("Print Output", message.strip())
+        except:
+            pass  # Don't break if capture fails
+    
+    # Replace built-in print with our capturing version
+    builtins.print = _capturing_print
+    
 except Exception as init_error:
     # If initialization fails, create a minimal fallback
     print(f"⚠️  NotebookOutput initialization failed: {{init_error}}")
