@@ -36,7 +36,10 @@ class NotebookOutput:
     def print(self, *args, sep=" ", end="\\n"):
         message = sep.join(str(arg) for arg in args) + end
         print(message, end="")  # Print to console
-        self.add_section("Print Output", message.strip())  # Capture for file
+        # Only capture if message has content
+        message_stripped = message.strip()
+        if message_stripped:
+            self.add_section("Print Output", message_stripped)  # Capture for file
     
     def write_to_dbfs(self):
         # Ensure directory exists
@@ -52,9 +55,14 @@ class NotebookOutput:
         output_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         output_lines.append("")
         
-        for i, section in enumerate(self.sections, 1):
+        # Filter out empty sections
+        section_num = 0
+        for section in self.sections:
+            if not section.get('content', '').strip():
+                continue
+            section_num += 1
             output_lines.append("-" * 100)
-            output_lines.append(f"📊 [{i}] {section['title']}")
+            output_lines.append(f"📊 [{section_num}] {section['title']}")
             output_lines.append("-" * 100)
             output_lines.append(section['content'])
             output_lines.append("")

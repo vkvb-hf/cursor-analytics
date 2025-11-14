@@ -165,8 +165,10 @@ class NotebookOutput:
         message = sep.join(str(arg) for arg in args) + end
         # Also print to console (for UI visibility)
         print(message, end="")
-        # Capture for output file
-        self.add_section("Print Output", message.strip(), format="text")
+        # Capture for output file (only if message has content)
+        message_stripped = message.strip()
+        if message_stripped:  # Only add section if message has content
+            self.add_section("Print Output", message_stripped, format="text")
     
     def write_to_dbfs(self, also_print: bool = True):
         """
@@ -204,10 +206,15 @@ class NotebookOutput:
                         output_lines.append(f"{key}: {value}")
                 output_lines.append("")
             
-            # Add sections
-            for i, section in enumerate(self.sections, 1):
+            # Add sections (filter out empty content)
+            section_num = 0
+            for section in self.sections:
+                # Skip sections with empty content
+                if not section.get('content', '').strip():
+                    continue
+                section_num += 1
                 output_lines.append("-" * 100)
-                output_lines.append(f"📊 [{i}] {section['title']}")
+                output_lines.append(f"📊 [{section_num}] {section['title']}")
                 output_lines.append("-" * 100)
                 output_lines.append(section['content'])
                 output_lines.append("")
