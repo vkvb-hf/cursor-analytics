@@ -335,7 +335,8 @@ class DatabricksJobRunner:
         max_wait: int = 3600,
         show_output: bool = True,
         auto_read_output: bool = True,
-        output_path: str = None
+        output_path: str = None,
+        auto_inject_output: bool = True
     ) -> Dict:
         """
         Complete workflow: create notebook, create job, run job, and monitor.
@@ -350,6 +351,7 @@ class DatabricksJobRunner:
             show_output: Show job output
             auto_read_output: Automatically read output from DBFS after job completes
             output_path: Specific output path to read (if None, auto-detect)
+            auto_inject_output: Automatically inject NotebookOutput framework (default: True)
         
         Returns:
             Dictionary with job status and outputs
@@ -357,6 +359,21 @@ class DatabricksJobRunner:
         print("=" * 80)
         print("Databricks Notebook & Job Runner")
         print("=" * 80)
+        
+        # Step 0: Auto-inject NotebookOutput framework if enabled
+        if auto_inject_output:
+            try:
+                from core.notebook_output_injector import inject_notebook_output
+                notebook_content = inject_notebook_output(
+                    notebook_content,
+                    output_path=output_path,
+                    job_name=job_name,
+                    auto_write=True
+                )
+                print("✅ NotebookOutput framework auto-injected")
+            except Exception as e:
+                print(f"⚠️  Warning: Could not inject NotebookOutput: {e}")
+                print("   Continuing without auto-injection...")
         
         # Step 1: Create notebook
         if not self.create_notebook(notebook_path, notebook_content):
