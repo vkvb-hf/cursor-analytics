@@ -173,7 +173,8 @@ class DatabricksAPI:
         return self.job_runner.create_notebook(notebook_path, content, overwrite)
     
     def run_notebook_job(self, notebook_path: str, notebook_content: str, 
-                        job_name: str, auto_inject_output: bool = True) -> Optional[Dict[str, Any]]:
+                        job_name: str, auto_inject_output: bool = True,
+                        auto_read_output: bool = True, **kwargs) -> Optional[Dict[str, Any]]:
         """
         Create and run a notebook as a Databricks job.
         
@@ -182,6 +183,8 @@ class DatabricksAPI:
             notebook_content: Notebook content
             job_name: Name for the job
             auto_inject_output: Automatically inject NotebookOutput framework (default: True)
+            auto_read_output: Automatically read output from DBFS after job completes (default: True)
+            **kwargs: Additional arguments passed to create_and_run()
         
         Returns:
             Dictionary with job_id and run_id, or None on error
@@ -190,7 +193,9 @@ class DatabricksAPI:
             notebook_path=notebook_path,
             notebook_content=notebook_content,
             job_name=job_name,
-            auto_inject_output=auto_inject_output
+            auto_inject_output=auto_inject_output,
+            auto_read_output=auto_read_output,
+            **kwargs
         )
     
     def get_job_status(self, run_id: int) -> Optional[Dict[str, Any]]:
