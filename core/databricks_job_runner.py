@@ -333,7 +333,9 @@ class DatabricksJobRunner:
         timeout_seconds: int = 3600,
         poll_interval: int = 10,
         max_wait: int = 3600,
-        show_output: bool = True
+        show_output: bool = True,
+        auto_read_output: bool = True,
+        output_path: str = None
     ) -> Dict:
         """
         Complete workflow: create notebook, create job, run job, and monitor.
@@ -346,6 +348,8 @@ class DatabricksJobRunner:
             poll_interval: Status check interval
             max_wait: Maximum wait time
             show_output: Show job output
+            auto_read_output: Automatically read output from DBFS after job completes
+            output_path: Specific output path to read (if None, auto-detect)
         
         Returns:
             Dictionary with job status and outputs
@@ -372,9 +376,54 @@ class DatabricksJobRunner:
         result = self.monitor_job(run_id, poll_interval, max_wait, show_output)
         result['job_id'] = job_id
         result['notebook_path'] = notebook_path
+        result['run_id'] = run_id
         result['success'] = result.get('result_state') == 'SUCCESS'
         
+        # Step 5: Read output from DBFS if requested
+        if auto_read_output and result.get('success'):
+            self._read_notebook_output(job_name, run_id, output_path)
+        
         return result
+    
+    def _read_notebook_output(self, job_name: str = None, run_id: str = None, output_path: str = None):
+        """
+        Read and display notebook output from DBFS.
+        
+        Args:
+            job_name: Job name to find output file
+            run_id: Run ID for output file
+            output_path: Specific output path (if provided, use this)
+        """
+        try:
+            from core.notebook_output_reader import NotebookOutputReader
+            
+            reader = NotebookOutputReader()
+            
+            if output_path:
+                # Use specific path
+                reader.display_output(output_path)
+            else:
+                # Try to find output file
+                if job_name:
+                    # Try to find by job name
+                    latest = reader.get_latest_output(job_name=job_name)
+                    if latest:
+                        reader.display_output(latest)
+                        return
+                
+                # Try to find latest output
+                latest = reader.get_latest_output()
+                if latest:
+                    reader.display_output(latest)
+                else:
+                    print("\n⚠️  No output file found in /tmp/notebook_outputs/")
+                    print("   Make sure your notebook uses NotebookOutput.write_to_dbfs()")
+                    
+        except ImportError:
+            print("\n⚠️  Could not import NotebookOutputReader")
+            print("   Output reading disabled")
+        except Exception as e:
+            print(f"\n⚠️  Error reading output: {e}")
 
 
 def main():
