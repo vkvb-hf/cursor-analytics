@@ -153,31 +153,27 @@ class NotebookOutput:
         print("\\n✅ Output written to:", self.output_path)
 
 # Initialize output handler (available as 'output' variable)
-# This must be in the same cell as the class definition to ensure it's available
+# IMPORTANT: This must execute successfully for output variable to be available
 try:
     output = NotebookOutput(output_path="{output_path}")
-    # Verify initialization worked
-    if 'output' in locals() or 'output' in globals():
-        print("✅ NotebookOutput initialized successfully")
-    else:
-        raise Exception("output variable not in scope after initialization")
-except Exception as e:
-    # Fallback: create a minimal output handler that at least works
-    print(f"⚠️  Warning: Could not initialize NotebookOutput: {{e}}")
-    print("   Creating fallback output handler...")
+    # Verify it worked - this print will show in job output if there's an issue
+    print("✅ NotebookOutput framework initialized - output variable available")
+except Exception as init_error:
+    # If initialization fails, create a minimal fallback
+    print(f"⚠️  NotebookOutput initialization failed: {{init_error}}")
+    print("   Creating minimal fallback...")
     class MinimalOutput:
         def __init__(self):
             self.sections = []
             self.errors = []
             self.output_path = "{output_path}"
         def print(self, *args, sep=" ", end="\\n"):
-            message = sep.join(str(arg) for arg in args) + end
-            print(message, end="")
+            # Just print, don't capture
+            print(*args, sep=sep, end=end)
         def add_section(self, title, content):
-            self.sections.append({{'title': title, 'content': content}})
+            pass
         def write_to_dbfs(self):
-            # Minimal implementation - just print
-            print("\\n⚠️  Minimal output handler - output not written to DBFS")
+            print("⚠️  Minimal output handler - output not saved to DBFS")
     output = MinimalOutput()
     print("✅ Fallback output handler created")
 
