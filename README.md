@@ -87,6 +87,18 @@ cursor_databricks/
 
 ## 🚀 Quick Start
 
+### 🎯 **NEW: Using Cursor Effectively**
+
+**Want to maximize your productivity?** Read the **[Cursor Mastery Guide](docs/guides/CURSOR_MASTERY_GUIDE.md)** first!
+
+**Key insight**: Instead of writing code manually, **ask Cursor to do it**:
+```
+You: "Query the duplicate_customers table for clusters > 100"
+Cursor: [Uses databricks_api automatically and shows results]
+```
+
+**10x faster** than writing code yourself!
+
 ### 📓 Create and Run Notebooks (Terminal Output)
 
 **Most Important**: To see output in terminal, notebooks must write to DBFS files.
@@ -348,6 +360,11 @@ Documentation is organized in the `docs/` directory:
 - **`docs/guides/INSTRUCTIONS.md`** - Detailed workflow instructions
 - **`docs/guides/HOW_TO_CREATE_AND_RUN_NOTEBOOKS.md`** - Notebook creation guide
 - **`docs/guides/TESTING.md`** - Testing guide
+
+### 🚀 Cursor Mastery (NEW!)
+- **`docs/guides/CURSOR_MASTERY_GUIDE.md`** - ⭐ **START HERE** - How to use Cursor effectively with this toolkit
+- **`docs/guides/CURSOR_WORKFLOW_EXAMPLES.md`** - Real-world workflow examples
+- **`docs/guides/CURSOR_USAGE.md`** - Basic Cursor integration guide
 
 ### Reference
 - **`docs/reference/PROJECT_STRUCTURE.md`** - Complete project structure reference
