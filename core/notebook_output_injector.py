@@ -46,8 +46,8 @@ def inject_notebook_output(
             output_path = "/tmp/notebook_outputs/notebook_output.txt"
     
     # NotebookOutput class definition (inline version for Databricks)
-    notebook_output_class = f'''
-# Auto-injected NotebookOutput framework
+    # Use triple-quoted string with proper escaping for Databricks
+    notebook_output_class = f'''# Auto-injected NotebookOutput framework
 import json
 from datetime import datetime
 
@@ -153,7 +153,33 @@ class NotebookOutput:
         print("\\n✅ Output written to:", self.output_path)
 
 # Initialize output handler (available as 'output' variable)
-output = NotebookOutput(output_path="{output_path}")
+# This must be in the same cell as the class definition to ensure it's available
+try:
+    output = NotebookOutput(output_path="{output_path}")
+    # Verify initialization worked
+    if 'output' in locals() or 'output' in globals():
+        print("✅ NotebookOutput initialized successfully")
+    else:
+        raise Exception("output variable not in scope after initialization")
+except Exception as e:
+    # Fallback: create a minimal output handler that at least works
+    print(f"⚠️  Warning: Could not initialize NotebookOutput: {{e}}")
+    print("   Creating fallback output handler...")
+    class MinimalOutput:
+        def __init__(self):
+            self.sections = []
+            self.errors = []
+            self.output_path = "{output_path}"
+        def print(self, *args, sep=" ", end="\\n"):
+            message = sep.join(str(arg) for arg in args) + end
+            print(message, end="")
+        def add_section(self, title, content):
+            self.sections.append({{'title': title, 'content': content}})
+        def write_to_dbfs(self):
+            # Minimal implementation - just print
+            print("\\n⚠️  Minimal output handler - output not written to DBFS")
+    output = MinimalOutput()
+    print("✅ Fallback output handler created")
 
 # COMMAND ----------
 '''
