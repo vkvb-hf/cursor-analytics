@@ -99,9 +99,39 @@ Cursor: [Uses databricks_api automatically and shows results]
 
 **10x faster** than writing code yourself!
 
-### 📓 Create and Run Notebooks (Terminal Output)
+### 📓 Create and Run Notebooks (Terminal Output) ⭐ NEW!
+
+**NEW: Notebook Output Framework** - See all print statements in terminal automatically!
 
 **Most Important**: To see output in terminal, notebooks must write to DBFS files.
+
+**Easy Solution**: Use the `NotebookOutput` framework - it handles everything automatically!
+
+```python
+from databricks_api import DatabricksAPI
+
+db = DatabricksAPI()
+
+# Your notebook with NotebookOutput framework
+notebook = """
+# Use NotebookOutput to capture all print statements
+output = NotebookOutput()
+output.print("Hello World")
+output.print("Starting analysis...")
+output.write_to_dbfs()  # Write to DBFS
+"""
+
+# Run with automatic output retrieval
+result = db.job_runner.create_and_run(
+    notebook_path="/Workspace/path/to/notebook",
+    notebook_content=notebook,
+    job_name="My Analysis",
+    auto_read_output=True  # Automatically reads and displays output!
+)
+# Output automatically displayed in terminal! 🎉
+```
+
+**See**: [Notebook Output Framework Guide](docs/guides/NOTEBOOK_OUTPUT_FRAMEWORK.md) for complete documentation.
 
 ```bash
 # Run the example script
