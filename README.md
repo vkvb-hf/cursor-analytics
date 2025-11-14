@@ -101,37 +101,46 @@ Cursor: [Uses databricks_api automatically and shows results]
 
 ### 📓 Create and Run Notebooks (Terminal Output) ⭐ NEW!
 
-**NEW: Notebook Output Framework** - See all print statements in terminal automatically!
+**NEW: Auto-Injected DBFS Output Helpers** - See all output in terminal automatically!
 
-**Most Important**: To see output in terminal, notebooks must write to DBFS files.
+**Most Important**: All notebooks automatically have DBFS output writing configured!
 
-**Easy Solution**: Use the `NotebookOutput` framework - it handles everything automatically!
+**Easy Solution**: Use the auto-injected helper functions - they're available in every notebook!
 
 ```python
 from databricks_api import DatabricksAPI
 
 db = DatabricksAPI()
 
-# Your notebook with NotebookOutput framework
+# Your notebook - helper functions are auto-injected!
 notebook = """
-# Use NotebookOutput to capture all print statements
-output = NotebookOutput()
-output.print("Hello World")
-output.print("Starting analysis...")
-output.write_to_dbfs()  # Write to DBFS
+# Helper functions automatically available:
+# - show_output(title, content)
+# - show_query_results(title, pandas_df, summary=None)
+
+show_output("Analysis", "Starting analysis...")
+
+result_df = spark.sql("SELECT * FROM table LIMIT 10")
+pandas_df = result_df.toPandas()
+
+# Show results (automatically written to DBFS!)
+show_query_results("Query Results", pandas_df)
+
+# Output automatically written to DBFS at the end!
 """
 
 # Run with automatic output retrieval
-result = db.job_runner.create_and_run(
+result = db.run_notebook_job(
     notebook_path="/Workspace/path/to/notebook",
     notebook_content=notebook,
-    job_name="My Analysis",
-    auto_read_output=True  # Automatically reads and displays output!
+    job_name="My Analysis"
+    # auto_inject_output=True by default
+    # auto_read_output=True by default
 )
 # Output automatically displayed in terminal! 🎉
 ```
 
-**See**: [Notebook Output Framework Guide](docs/guides/NOTEBOOK_OUTPUT_FRAMEWORK.md) for complete documentation.
+**See**: [Auto DBFS Output Guide](docs/guides/AUTO_DBFS_OUTPUT.md) for complete documentation.
 
 ```bash
 # Run the example script
@@ -271,7 +280,7 @@ upload_csv_to_workspace("local_file.csv", "/Workspace/my_directory/file.csv")
 
 ## 📓 Creating and Running Notebooks
 
-**Important**: To see notebook output in the terminal, notebooks must write output to DBFS files.
+**Important**: All notebooks automatically have DBFS output helpers injected! Just use `show_output()` or `show_query_results()`.
 
 ### Quick Example
 
@@ -280,22 +289,22 @@ from databricks_api import DatabricksAPI
 
 db = DatabricksAPI()
 
-# Notebook that writes output to DBFS
+# Notebook with auto-injected helpers
 notebook_content = """# Databricks notebook source
 query = "SELECT * FROM table LIMIT 10"
 result_df = spark.sql(query)
+pandas_df = result_df.toPandas()
 
-# Write output to DBFS (required for terminal display)
-output_text = result_df.toPandas().to_string()
-dbutils.fs.put("/tmp/output.txt", output_text, overwrite=True)
-print(output_text)  # Also print for UI
+# Use auto-injected helper (output automatically written to DBFS!)
+show_query_results("Query Results", pandas_df)
 """
 
-# Create and run
-result = db.job_runner.create_and_run(
+# Create and run (auto-injection and output reading enabled by default)
+result = db.run_notebook_job(
     notebook_path="/Shared/my_notebook",
     notebook_content=notebook_content,
     job_name="my_job"
+    # Output automatically displayed in terminal! 🎉
 )
 
 # Read output from DBFS (script does this automatically)
