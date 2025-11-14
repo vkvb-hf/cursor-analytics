@@ -392,20 +392,17 @@ class DatabricksJobRunner:
         print("Databricks Notebook & Job Runner")
         print("=" * 80)
         
-        # Step 0: Auto-inject NotebookOutput framework if enabled
+        # Step 0: Auto-inject DBFS output writing (WORKING approach)
         if auto_inject_output:
             try:
-                from core.notebook_output_injector import inject_notebook_output
-                notebook_content = inject_notebook_output(
+                from core.dbfs_output_injector import inject_dbfs_output
+                notebook_content = inject_dbfs_output(
                     notebook_content,
-                    output_path=output_path,
-                    job_name=job_name,
-                    auto_write=True,
-                    use_universal_capture=False  # Use NotebookOutput framework (reliable, easy to use)
+                    job_name=job_name
                 )
-                print("✅ NotebookOutput framework auto-injected (use output.print() for terminal output)")
+                print("✅ DBFS output writing auto-injected (output will be visible in terminal)")
             except Exception as e:
-                print(f"⚠️  Warning: Could not inject output capture: {e}")
+                print(f"⚠️  Warning: Could not inject DBFS output: {e}")
                 print("   Continuing without auto-injection...")
         
         # Step 1: Create notebook
@@ -431,23 +428,23 @@ class DatabricksJobRunner:
         
         # Step 5: Read output from DBFS if requested
         if auto_read_output and result.get('success'):
-            # Try to read from standard output location first
-            standard_output_path = f"/tmp/notebook_outputs/{job_name.replace(' ', '_')}_output.txt" if job_name else None
-            if standard_output_path:
-                # Check if standard output file exists
-                try:
-                    from core.notebook_output_reader import NotebookOutputReader
-                    reader = NotebookOutputReader()
-                    content = reader.read_output(standard_output_path)
-                    if content:
-                        print("\n" + "=" * 80)
-                        print("📊 NOTEBOOK OUTPUT (from DBFS)")
-                        print("=" * 80)
-                        print(content)
-                        print("=" * 80)
-                        return result
-                except:
-                    pass  # Fall back to regular output reading
+            # Try to read from standard output location first (used by DBFS injector)
+            standard_output_path = f"/tmp/notebook_outputs/{job_name.replace(' ', '_')}_output.txt" if job_name else "/tmp/notebook_outputs/notebook_output.txt"
+            
+            try:
+                from core.notebook_output_reader import NotebookOutputReader
+                reader = NotebookOutputReader()
+                content = reader.read_output(standard_output_path)
+                if content:
+                    print("\n" + "=" * 80)
+                    print("📊 NOTEBOOK OUTPUT (from DBFS)")
+                    print("=" * 80)
+                    print(content)
+                    print("=" * 80)
+                    return result
+            except Exception as e:
+                # Fall back to regular output reading
+                pass
             
             # Fall back to regular output reading
             self._read_notebook_output(job_name, run_id, output_path)
