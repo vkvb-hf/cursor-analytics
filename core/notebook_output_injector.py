@@ -388,35 +388,35 @@ def add_output_restoration_to_cells(notebook_content: str) -> str:
         Modified notebook content with output restoration in each cell
     """
     # Code to restore output variable from persistent storage
+    # IMPORTANT: This must be at the START of each cell, before any user code
     restoration_code = '''
 # Auto-injected: Restore output variable (ensures it's available in this cell)
-try:
-    import sys as _sys_module
-    _main_mod = _sys_module.modules.get('__main__', None)
-    if _main_mod and hasattr(_main_mod, 'output'):
-        # Restore from __main__ module
-        output = _main_mod.output
-    elif _main_mod and hasattr(_main_mod, '_notebook_output_handler'):
-        # Restore from handler
-        output = _main_mod._notebook_output_handler
-        _main_mod.output = output  # Also set directly
-    elif 'output' not in globals():
-        # Try to get from globals
-        try:
-            output = globals()['output']
-        except:
-            # Last resort: create a minimal fallback
-            class MinimalOutput:
-                def print(self, *args, **kwargs):
-                    print(*args, **kwargs)  # Just print, don't capture
-                def add_section(self, *args, **kwargs):
-                    pass
-                def write_to_dbfs(self):
-                    pass
-            output = MinimalOutput()
-            print("⚠️  Warning: output variable not properly initialized, using minimal fallback")
-except Exception as e:
-    print(f"⚠️  Warning: Could not restore output variable: {e}")
+# This MUST execute before any user code that uses 'output'
+import sys as _sys_module
+_main_mod = _sys_module.modules.get('__main__', None)
+
+if _main_mod and hasattr(_main_mod, 'output'):
+    # Restore from __main__ module (primary method)
+    output = _main_mod.output
+elif _main_mod and hasattr(_main_mod, '_notebook_output_handler'):
+    # Restore from handler (backup method)
+    output = _main_mod._notebook_output_handler
+    _main_mod.output = output  # Also set directly for future cells
+else:
+    # Last resort: create a minimal fallback that at least doesn't crash
+    class MinimalOutput:
+        def __init__(self):
+            self.sections = []
+        def print(self, *args, **kwargs):
+            # Just print, don't capture (better than crashing)
+            print(*args, **kwargs)
+        def add_section(self, *args, **kwargs):
+            pass
+        def write_to_dbfs(self):
+            pass
+    output = MinimalOutput()
+    print("⚠️  WARNING: output variable not properly initialized - using minimal fallback")
+    print("   This means output.print() will NOT be captured!")
 
 '''
     
