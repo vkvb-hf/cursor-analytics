@@ -397,17 +397,16 @@ except:
         # No COMMAND markers, return as is
         return notebook_content
     
-    # Add setup code at the start of each cell (except the first one which has the class definition)
-    result_parts = [parts[0]]  # First part (before first COMMAND) - keep as is
+    # Add setup code at the start of each user cell
+    # The first part (before first COMMAND) contains the NotebookOutput class - keep as is
+    result_parts = [parts[0]]
     
-    for i, part in enumerate(parts[1:], 1):
-        # Skip if this is the cell with NotebookOutput class (it already has setup)
-        if i == 1 and "class NotebookOutput" in parts[0]:
-            # This is the cell right after NotebookOutput class - it already has setup
-            result_parts.append("# COMMAND ----------" + part)
-        else:
-            # Add setup code at the start of this cell
-            result_parts.append("# COMMAND ----------" + setup_code + part)
+    # Add setup code to ALL subsequent cells (user cells)
+    # This ensures print interception is re-initialized in each cell
+    for part in parts[1:]:
+        # Always add setup code at the start of each user cell
+        # This re-initializes print interception in case Databricks reset it
+        result_parts.append("# COMMAND ----------" + setup_code + part)
     
     return "".join(result_parts)
 
