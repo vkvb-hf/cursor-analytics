@@ -401,9 +401,9 @@ class DatabricksJobRunner:
                     output_path=output_path,
                     job_name=job_name,
                     auto_write=True,
-                    use_universal_capture=True  # Use stdout/stderr redirection (universal approach)
+                    use_universal_capture=False  # Use NotebookOutput framework (reliable, easy to use)
                 )
-                print("✅ Universal output capture auto-injected")
+                print("✅ NotebookOutput framework auto-injected (use output.print() for terminal output)")
             except Exception as e:
                 print(f"⚠️  Warning: Could not inject output capture: {e}")
                 print("   Continuing without auto-injection...")

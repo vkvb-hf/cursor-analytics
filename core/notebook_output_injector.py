@@ -177,10 +177,12 @@ class NotebookOutput:
 
 # Initialize output handler (available as 'output' variable)
 # IMPORTANT: This must execute successfully for output variable to be available
+# The 'output' variable is now available throughout the notebook!
+# Use output.print() instead of print() to see output in terminal
 try:
     output = NotebookOutput(output_path="{output_path}")
     # Verify it worked - this print will show in job output if there's an issue
-    print("✅ NotebookOutput framework initialized - output variable available")
+    print("✅ NotebookOutput framework initialized - use 'output.print()' for terminal output")
     
     # Intercept regular print() statements to capture them automatically
     # IMPORTANT: Store output in a way that persists across cells
@@ -339,8 +341,12 @@ _write_output_to_dbfs()
                 notebook_content[insertion_point:]
             )
         
-        # Add print interception setup at the start of each user cell
-        modified_content = add_print_interception_to_cells(modified_content)
+        # Add output variable restoration at the start of each user cell
+        # This ensures output variable is available in every cell
+        modified_content = add_output_restoration_to_cells(modified_content)
+        
+        # Add print interception setup at the start of each user cell (optional)
+        # modified_content = add_print_interception_to_cells(modified_content)
         
         # Add auto-write at the end if requested
         if auto_write:
@@ -368,6 +374,71 @@ def find_insertion_point(notebook_content: str) -> int:
     
     # If no COMMAND marker, insert at the beginning
     return 0
+
+
+def add_output_restoration_to_cells(notebook_content: str) -> str:
+    """
+    Add output variable restoration at the start of each user cell.
+    This ensures the output variable is available in every cell.
+    
+    Args:
+        notebook_content: Notebook content
+    
+    Returns:
+        Modified notebook content with output restoration in each cell
+    """
+    # Code to restore output variable from persistent storage
+    restoration_code = '''
+# Auto-injected: Restore output variable (ensures it's available in this cell)
+try:
+    import sys as _sys_module
+    _main_mod = _sys_module.modules.get('__main__', None)
+    if _main_mod and hasattr(_main_mod, 'output'):
+        # Restore from __main__ module
+        output = _main_mod.output
+    elif _main_mod and hasattr(_main_mod, '_notebook_output_handler'):
+        # Restore from handler
+        output = _main_mod._notebook_output_handler
+        _main_mod.output = output  # Also set directly
+    elif 'output' not in globals():
+        # Try to get from globals
+        try:
+            output = globals()['output']
+        except:
+            # Last resort: create a minimal fallback
+            class MinimalOutput:
+                def print(self, *args, **kwargs):
+                    print(*args, **kwargs)  # Just print, don't capture
+                def add_section(self, *args, **kwargs):
+                    pass
+                def write_to_dbfs(self):
+                    pass
+            output = MinimalOutput()
+            print("⚠️  Warning: output variable not properly initialized, using minimal fallback")
+except Exception as e:
+    print(f"⚠️  Warning: Could not restore output variable: {e}")
+
+'''
+    
+    # Split by COMMAND markers
+    parts = notebook_content.split("# COMMAND ----------")
+    
+    if len(parts) <= 1:
+        return notebook_content
+    
+    # Add restoration code at the start of each user cell (except the first one with class definition)
+    result_parts = [parts[0]]  # First part (before first COMMAND) - keep as is
+    
+    for i, part in enumerate(parts[1:], 1):
+        # Skip if this is the cell with NotebookOutput class (it already has output)
+        if i == 1 and "class NotebookOutput" in parts[0]:
+            # This is the cell right after NotebookOutput class - it already has output
+            result_parts.append("# COMMAND ----------" + part)
+        else:
+            # Add restoration code at the start of this cell
+            result_parts.append("# COMMAND ----------" + restoration_code + part)
+    
+    return "".join(result_parts)
 
 
 def add_print_interception_to_cells(notebook_content: str) -> str:
