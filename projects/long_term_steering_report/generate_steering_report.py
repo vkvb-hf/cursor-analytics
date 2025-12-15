@@ -2557,12 +2557,38 @@ def upload_steering_report_to_git(report_content, week_num, latest_week_str):
     GIT_BRANCH = "feature/long-term-steering-report"
     REPORT_PATH = f"projects/long_term_steering_report/W{week_num}_steering_report.md"
     
-    # Get GitHub token from Databricks secrets
+    # Get GitHub token - try multiple methods
+    git_token = None
+    
+    # Method 1: Try Databricks secrets
     try:
         git_token = dbutils.secrets.get(scope="github", key="token")
+        print("   Using GitHub token from Databricks secrets")
     except Exception as e:
-        print(f"⚠️  Could not get GitHub token from secrets: {e}")
-        print("   Skipping Git upload. Please set up Databricks secrets with scope='github', key='token'")
+        pass
+    
+    # Method 2: Try environment variable
+    if not git_token:
+        git_token = os.environ.get('GITHUB_TOKEN')
+        if git_token:
+            print("   Using GitHub token from environment variable")
+    
+    # Method 3: Use widget if available
+    if not git_token:
+        try:
+            git_token = dbutils.widgets.get("github_token")
+            if git_token:
+                print("   Using GitHub token from widget")
+        except:
+            pass
+    
+    if not git_token:
+        print(f"⚠️  Could not get GitHub token")
+        print("   To enable Git upload, set up one of:")
+        print("   1. Databricks secret: scope='github', key='token'")
+        print("   2. Environment variable: GITHUB_TOKEN")
+        print("   3. Widget: dbutils.widgets.text('github_token', '')")
+        print("   Skipping Git upload.")
         return False
     
     # Create a temporary directory for Git operations
