@@ -2527,3 +2527,134 @@ if debug_content:
     print(f"   Debug output also saved to DBFS: {debug_dbfs_path}")
 else:
     print(f"   No debug output captured")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Upload Steering Report to Git Repository
+# MAGIC 
+# MAGIC This cell automatically commits and pushes the generated steering report to the Git repository.
+
+# COMMAND ----------
+
+import subprocess
+import os
+import tempfile
+import shutil
+
+def upload_steering_report_to_git(report_content, week_num, latest_week_str):
+    """
+    Upload the steering report to Git repository.
+    
+    This function:
+    1. Clones the repository
+    2. Creates/updates the steering report file
+    3. Commits and pushes the changes
+    """
+    
+    # Git configuration
+    GIT_REPO_URL = "https://github.com/vkvb-hf/cursor-databricks.git"
+    GIT_BRANCH = "feature/long-term-steering-report"
+    REPORT_PATH = f"projects/long_term_steering_report/W{week_num}_steering_report.md"
+    
+    # Get GitHub token from Databricks secrets
+    try:
+        git_token = dbutils.secrets.get(scope="github", key="token")
+    except Exception as e:
+        print(f"⚠️  Could not get GitHub token from secrets: {e}")
+        print("   Skipping Git upload. Please set up Databricks secrets with scope='github', key='token'")
+        return False
+    
+    # Create a temporary directory for Git operations
+    temp_dir = tempfile.mkdtemp()
+    
+    try:
+        print(f"\n📤 Uploading steering report to Git...")
+        
+        # Configure Git with token in URL
+        repo_url_with_token = GIT_REPO_URL.replace("https://", f"https://{git_token}@")
+        
+        # Clone the repository (shallow clone for speed)
+        print(f"   Cloning repository...")
+        result = subprocess.run(
+            ["git", "clone", "--depth", "1", "--branch", GIT_BRANCH, repo_url_with_token, temp_dir],
+            capture_output=True,
+            text=True
+        )
+        
+        if result.returncode != 0:
+            print(f"   ❌ Failed to clone repository: {result.stderr}")
+            return False
+        
+        # Create the report file
+        report_full_path = os.path.join(temp_dir, REPORT_PATH)
+        os.makedirs(os.path.dirname(report_full_path), exist_ok=True)
+        
+        with open(report_full_path, 'w') as f:
+            f.write(report_content)
+        
+        print(f"   Created report file: {REPORT_PATH}")
+        
+        # Configure Git user
+        subprocess.run(["git", "-C", temp_dir, "config", "user.email", "visal.kumar@hellofresh.com"], capture_output=True)
+        subprocess.run(["git", "-C", temp_dir, "config", "user.name", "Visal Kumar (Databricks)"], capture_output=True)
+        
+        # Add the file
+        subprocess.run(["git", "-C", temp_dir, "add", REPORT_PATH], capture_output=True)
+        
+        # Check if there are changes to commit
+        status_result = subprocess.run(
+            ["git", "-C", temp_dir, "status", "--porcelain"],
+            capture_output=True,
+            text=True
+        )
+        
+        if not status_result.stdout.strip():
+            print(f"   ℹ️  No changes to commit (report already up to date)")
+            return True
+        
+        # Commit the changes
+        commit_message = f"Add W{week_num} steering report ({latest_week_str})\\n\\nAuto-generated from Databricks notebook"
+        result = subprocess.run(
+            ["git", "-C", temp_dir, "commit", "-m", commit_message],
+            capture_output=True,
+            text=True
+        )
+        
+        if result.returncode != 0:
+            print(f"   ❌ Failed to commit: {result.stderr}")
+            return False
+        
+        print(f"   Committed changes")
+        
+        # Push the changes
+        result = subprocess.run(
+            ["git", "-C", temp_dir, "push", "origin", GIT_BRANCH],
+            capture_output=True,
+            text=True
+        )
+        
+        if result.returncode != 0:
+            print(f"   ❌ Failed to push: {result.stderr}")
+            return False
+        
+        print(f"   ✅ Successfully pushed W{week_num} steering report to Git")
+        print(f"      Repository: {GIT_REPO_URL}")
+        print(f"      Branch: {GIT_BRANCH}")
+        print(f"      File: {REPORT_PATH}")
+        
+        return True
+        
+    except Exception as e:
+        print(f"   ❌ Error uploading to Git: {e}")
+        return False
+        
+    finally:
+        # Clean up temporary directory
+        try:
+            shutil.rmtree(temp_dir)
+        except:
+            pass
+
+# Upload the report to Git
+upload_steering_report_to_git(report, week_num, latest_week_str)
