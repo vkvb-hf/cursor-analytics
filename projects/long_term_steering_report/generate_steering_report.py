@@ -2682,5 +2682,172 @@ def upload_steering_report_to_git(report_content, week_num, latest_week_str):
         except:
             pass
 
-# Upload the report to Git
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Validate Steering Report Against Requirements
+# MAGIC 
+# MAGIC This cell validates the generated report against REPORT_PROMPT_V2.md and Payments P0 Metrics.md requirements using Claude API.
+
+# COMMAND ----------
+
+import requests
+import json
+
+# Report requirements from REPORT_PROMPT_V2.md
+REPORT_REQUIREMENTS = """
+# Report Requirements (from REPORT_PROMPT_V2.md)
+
+**Format Requirements:**
+- Use proper Markdown bullet points (`-`) NOT unicode bullets (`•`)
+- Use `<br>` for line breaks within table cells
+- Use unicode arrows: ↑ for increases, ↓ for decreases
+- Keep all content in table cells under 1000 characters
+
+**Content Requirements:**
+- Always show the performance of Reporting Clusters: ['Overall', 'HF-NA', 'HF-INTL', 'US-HF', 'RTE', 'WL']
+- Main comparison: Show progression from previous week to current week (format: "prev% to current%")
+- Show significance scores for each change
+- For Ship Rate, Recovery W0, Recovery W12, Dunning Profit: Only report on Good Customers Performance
+
+**Key Insights Section:**
+- Add above the table
+- Maximum 1000 characters
+- Use proper Markdown bullet points (`-`) NOT unicode bullets
+- Include 3-4 key insights covering: Critical issues, Positive trends, Risk shifts, Emerging concerns
+
+**Metrics to Report (from Payments P0 Metrics.md):**
+1. Payment Page Visit to Success (frontend, backend)
+2. Select to Success
+3. Duplicate Rate/Duplicate Block Rate
+4. Payment Fraud Block Rate
+5. Reactivation Rate
+6. AR Pre Dunning (Acceptance Rate Before Risk Assessment)
+7. Acceptance LL0 (Initial Charge)
+8. Acceptance LL0 and LL1+ (Recurring Charge)
+9. Ship Rate
+10. Recovery W0, Recovery W12
+11. Dunning Profit
+
+**Metrics OUT OF SCOPE (should NOT be in Key Insights):**
+- Payment Processing Fees % (3_PaymentProcessingFees%)
+- Cash Credits / Top-Ups
+
+**Metric Naming:**
+- Use leadership-friendly names, NOT technical codes
+- Replace 5_DunningBadDebtRate_12wkCohort with "Dunning Bad Debt Rate"
+- Replace 6_TotalBadDebtRate_12wkCohort with "Total Bad Debt Rate"
+"""
+
+def validate_report_with_claude(report_content, week_num):
+    """
+    Validate the steering report against requirements using Claude API.
+    Returns the validated/corrected report.
+    """
+    
+    # Get Claude API key from Databricks secrets
+    try:
+        api_key = dbutils.secrets.get(scope="anthropic", key="api_key")
+    except Exception as e:
+        print(f"⚠️  Could not get Claude API key from secrets: {e}")
+        print("   Skipping validation. Please set up Databricks secrets with scope='anthropic', key='api_key'")
+        return report_content, False
+    
+    print(f"\n🔍 Validating steering report against requirements...")
+    
+    validation_prompt = f"""You are a report validator. Review the following steering report and ensure it meets ALL requirements.
+
+{REPORT_REQUIREMENTS}
+
+## STEERING REPORT TO VALIDATE:
+
+{report_content}
+
+## YOUR TASK:
+
+1. Check if the Key Insights section:
+   - Uses proper Markdown bullet points (`-`) NOT unicode bullets
+   - Is under 1000 characters
+   - Does NOT mention Payment Processing Fees % (out of scope)
+   - Uses leadership-friendly metric names (not technical codes like 5_DunningBadDebtRate_12wkCohort)
+   - Has 3-4 insights covering: Critical issues, Positive trends, Risk shifts, Emerging concerns
+
+2. If any issues are found, FIX them and return the corrected report.
+
+3. Return ONLY the corrected Key Insights section (from "## Key Insights" to before the table starts).
+
+If the report already meets all requirements, return the Key Insights section unchanged.
+
+IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Key Insights" and end before the table."""
+
+    try:
+        response = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers={
+                "x-api-key": api_key,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json"
+            },
+            json={
+                "model": "claude-sonnet-4-20250514",
+                "max_tokens": 1500,
+                "messages": [
+                    {"role": "user", "content": validation_prompt}
+                ]
+            },
+            timeout=60
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            validated_insights = result['content'][0]['text'].strip()
+            
+            # Replace the Key Insights section in the report
+            insights_start = report_content.find("## Key Insights")
+            table_start = report_content.find("| Metrics |")
+            
+            if insights_start != -1 and table_start != -1:
+                # Construct the new report with validated insights
+                before_insights = report_content[:insights_start]
+                after_insights = report_content[table_start:]
+                
+                validated_report = before_insights + validated_insights + "\n\n" + after_insights
+                
+                print(f"   ✅ Report validated and updated")
+                return validated_report, True
+            else:
+                print(f"   ⚠️  Could not locate Key Insights section, returning original")
+                return report_content, False
+        else:
+            print(f"   ❌ API error: {response.status_code}")
+            print(f"   Response: {response.text[:200]}")
+            return report_content, False
+            
+    except Exception as e:
+        print(f"   ❌ Error calling Claude API: {e}")
+        return report_content, False
+
+# Validate the report
+validated_report, was_validated = validate_report_with_claude(report, week_num)
+
+# Update the report variable if validation was successful
+if was_validated:
+    report = validated_report
+    
+    # Also update the saved files
+    with open(output_file, 'w') as f:
+        f.write(report)
+    print(f"   Updated local file: {output_file}")
+    
+    dbutils.fs.put(dbfs_path, report, overwrite=True)
+    print(f"   Updated DBFS file: {dbfs_path}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Upload Validated Report to Git
+
+# COMMAND ----------
+
+# Upload the validated report to Git
 upload_steering_report_to_git(report, week_num, latest_week_str)
