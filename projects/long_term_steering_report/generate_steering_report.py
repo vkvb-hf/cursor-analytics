@@ -2691,6 +2691,10 @@ def upload_steering_report_to_git(report_content, week_num, latest_week_str):
 
 # COMMAND ----------
 
+print("\n" + "=" * 70)
+print("STARTING VALIDATION CELL")
+print("=" * 70)
+
 import json
 
 # Report requirements from REPORT_PROMPT_V2.md
@@ -2740,11 +2744,13 @@ REPORT_REQUIREMENTS = """
 
 def validate_report_with_bedrock(report_content, week_num):
     """
-    Validate the steering report against requirements using AWS Bedrock (Claude).
+    Validate the steering report against requirements using AWS Bedrock (Claude Opus 4.5).
     Returns the validated/corrected report.
     """
     
-    print(f"\n🔍 Validating steering report against requirements using AWS Bedrock...")
+    print(f"\n" + "=" * 70)
+    print(f"🔍 VALIDATING STEERING REPORT USING AWS BEDROCK (Claude Opus 4.5)")
+    print(f"=" * 70)
     
     # Try to import boto3 for AWS Bedrock
     try:
@@ -2791,8 +2797,10 @@ IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Ke
             aws_access_key = dbutils.secrets.get(scope="aws", key="access_key_id")
             aws_secret_key = dbutils.secrets.get(scope="aws", key="secret_access_key")
             aws_session_token = dbutils.secrets.get(scope="aws", key="session_token")
-            print("   Using AWS credentials from Databricks secrets")
-        except Exception:
+            print("   ✅ Retrieved AWS credentials from Databricks secrets (scope='aws')")
+            print(f"   Access Key ID: {aws_access_key[:8]}...{aws_access_key[-4:]}")
+        except Exception as e:
+            print(f"   ⚠️  Could not get credentials from Databricks secrets: {e}")
             # Fall back to environment variables or instance profile
             aws_access_key = os.environ.get('AWS_ACCESS_KEY_ID')
             aws_secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -2800,7 +2808,7 @@ IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Ke
             if aws_access_key:
                 print("   Using AWS credentials from environment variables")
             else:
-                print("   Using AWS instance profile credentials")
+                print("   ⚠️  No AWS credentials found, using instance profile")
         
         # Create Bedrock client
         if aws_access_key and aws_secret_key:
@@ -2826,10 +2834,9 @@ IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Ke
             ]
         })
         
-        # Call Bedrock with Claude model
-        # Using Claude 3 Sonnet - adjust model ID if you have access to different models
+        # Call Bedrock with Claude Opus 4.5 (cross-region inference)
         response = bedrock.invoke_model(
-            modelId='anthropic.claude-3-sonnet-20240229-v1:0',
+            modelId='eu.anthropic.claude-opus-4-5-20251101-v1:0',
             contentType='application/json',
             accept='application/json',
             body=body
@@ -2850,23 +2857,40 @@ IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Ke
             
             validated_report = before_insights + validated_insights + "\n\n" + after_insights
             
-            print(f"   ✅ Report validated and updated using AWS Bedrock")
+            print(f"   ✅ Report validated and updated using AWS Bedrock (Claude Opus 4.5)")
+            print(f"\n   VALIDATED KEY INSIGHTS:")
+            print(f"   {'-' * 60}")
+            print(validated_insights[:500])
+            if len(validated_insights) > 500:
+                print("   ...")
+            print(f"   {'-' * 60}")
             return validated_report, True
         else:
-            print(f"   ⚠️  Could not locate Key Insights section, returning original")
+            print(f"   ⚠️  Could not locate Key Insights section in report")
+            print(f"   insights_start: {insights_start}, table_start: {table_start}")
             return report_content, False
             
-    except bedrock.exceptions.AccessDeniedException as e:
-        print(f"   ❌ Access denied to Bedrock: {e}")
-        print("   Please ensure your Databricks cluster has IAM permissions for Bedrock")
-        return report_content, False
     except Exception as e:
-        print(f"   ❌ Error calling AWS Bedrock: {e}")
-        print(f"   Error type: {type(e).__name__}")
+        error_type = type(e).__name__
+        if 'AccessDenied' in error_type or 'AccessDenied' in str(e):
+            print(f"   ❌ Access denied to Bedrock: {e}")
+            print("   Please ensure your Databricks cluster has IAM permissions for Bedrock")
+        else:
+            print(f"   ❌ Error calling AWS Bedrock: {e}")
+            print(f"   Error type: {error_type}")
         return report_content, False
 
 # Validate the report using AWS Bedrock
-validated_report, was_validated = validate_report_with_bedrock(report, week_num)
+print("\n📋 Calling validate_report_with_bedrock()...")
+try:
+    validated_report, was_validated = validate_report_with_bedrock(report, week_num)
+    print(f"   Validation result: was_validated={was_validated}")
+except Exception as e:
+    print(f"   ❌ Exception during validation: {e}")
+    import traceback
+    traceback.print_exc()
+    validated_report = report
+    was_validated = False
 
 # Update the report variable if validation was successful
 if was_validated:
