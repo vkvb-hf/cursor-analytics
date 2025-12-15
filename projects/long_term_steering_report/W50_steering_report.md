@@ -12,11 +12,10 @@
 | RG | Region |
 
 ## Key Insights
-
 - **Critical Issues:** Total Bad Debt Rate decreased 6.64% (0.43% to 0.40%), Dunning Bad Debt Rate decreased 15.53% (17.89% to 15.11%)
 - **Positive Trends:** Dunning Profit increased 19.04% (€8.76 to €10.43), Payment Fraud Block Rate increased 7.66% (0.48% to 0.51%)
-- **Risk Shifts:** Ship Rate, Select to Success, Total Duplicate Block Rate, Payment Page Visit to Success (Backend), Reactivation Rate, Payment Page Visit to Success, and Payment Fraud Block Rate all showing diverging trends across reporting clusters
-- **Emerging Concerns:** Payment Page Visit to Success declined significantly in RTE (↓9.05%) and HF-INTL (↓4.30%); Select to Success dropped in RTE (↓5.45%) and WL (↓4.10%)
+- **Risk Shifts:** Ship Rate showing diverging trends across clusters, Select to Success showing diverging trends, Payment Page Visit to Success (Backend) showing diverging trends
+- **Emerging Concerns:** Reactivation Rate down across HF-NA (↓2.42%) and US-HF (↓2.59%), Payment Page Visit to Success down ↓3.38% overall with RTE showing significant decline (↓9.05%)
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
 | :--- | :--- | :--- | :--- |
