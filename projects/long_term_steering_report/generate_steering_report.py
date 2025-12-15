@@ -2781,12 +2781,41 @@ If the report already meets all requirements, return the Key Insights section un
 IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Key Insights" and end before the table."""
 
     try:
-        # Initialize Bedrock client
-        # AWS credentials should be configured via instance profile or environment variables
-        bedrock = boto3.client(
-            service_name='bedrock-runtime',
-            region_name='eu-west-1'  # Change to your region if different
-        )
+        # Initialize Bedrock client with explicit credentials
+        # Try to get credentials from Databricks secrets first, then fall back to environment
+        aws_access_key = None
+        aws_secret_key = None
+        aws_session_token = None
+        
+        try:
+            aws_access_key = dbutils.secrets.get(scope="aws", key="access_key_id")
+            aws_secret_key = dbutils.secrets.get(scope="aws", key="secret_access_key")
+            aws_session_token = dbutils.secrets.get(scope="aws", key="session_token")
+            print("   Using AWS credentials from Databricks secrets")
+        except Exception:
+            # Fall back to environment variables or instance profile
+            aws_access_key = os.environ.get('AWS_ACCESS_KEY_ID')
+            aws_secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
+            aws_session_token = os.environ.get('AWS_SESSION_TOKEN')
+            if aws_access_key:
+                print("   Using AWS credentials from environment variables")
+            else:
+                print("   Using AWS instance profile credentials")
+        
+        # Create Bedrock client
+        if aws_access_key and aws_secret_key:
+            bedrock = boto3.client(
+                service_name='bedrock-runtime',
+                region_name='eu-west-1',
+                aws_access_key_id=aws_access_key,
+                aws_secret_access_key=aws_secret_key,
+                aws_session_token=aws_session_token
+            )
+        else:
+            bedrock = boto3.client(
+                service_name='bedrock-runtime',
+                region_name='eu-west-1'
+            )
         
         # Prepare the request for Claude on Bedrock
         body = json.dumps({
