@@ -2687,11 +2687,10 @@ def upload_steering_report_to_git(report_content, week_num, latest_week_str):
 # MAGIC %md
 # MAGIC ## Validate Steering Report Against Requirements
 # MAGIC 
-# MAGIC This cell validates the generated report against REPORT_PROMPT_V2.md and Payments P0 Metrics.md requirements using Claude API.
+# MAGIC This cell validates the generated report against REPORT_PROMPT_V2.md and Payments P0 Metrics.md requirements using AWS Bedrock (Claude).
 
 # COMMAND ----------
 
-import requests
 import json
 
 # Report requirements from REPORT_PROMPT_V2.md
@@ -2739,21 +2738,22 @@ REPORT_REQUIREMENTS = """
 - Replace 6_TotalBadDebtRate_12wkCohort with "Total Bad Debt Rate"
 """
 
-def validate_report_with_claude(report_content, week_num):
+def validate_report_with_bedrock(report_content, week_num):
     """
-    Validate the steering report against requirements using Claude API.
+    Validate the steering report against requirements using AWS Bedrock (Claude).
     Returns the validated/corrected report.
     """
     
-    # Get Claude API key from Databricks secrets
-    try:
-        api_key = dbutils.secrets.get(scope="anthropic", key="api_key")
-    except Exception as e:
-        print(f"⚠️  Could not get Claude API key from secrets: {e}")
-        print("   Skipping validation. Please set up Databricks secrets with scope='anthropic', key='api_key'")
-        return report_content, False
+    print(f"\n🔍 Validating steering report against requirements using AWS Bedrock...")
     
-    print(f"\n🔍 Validating steering report against requirements...")
+    # Try to import boto3 for AWS Bedrock
+    try:
+        import boto3
+    except ImportError:
+        print("⚠️  boto3 not available. Installing...")
+        import subprocess
+        subprocess.run(["pip", "install", "boto3", "-q"], check=True)
+        import boto3
     
     validation_prompt = f"""You are a report validator. Review the following steering report and ensure it meets ALL requirements.
 
@@ -2781,54 +2781,63 @@ If the report already meets all requirements, return the Key Insights section un
 IMPORTANT: Return ONLY the Key Insights section, nothing else. Start with "## Key Insights" and end before the table."""
 
     try:
-        response = requests.post(
-            "https://api.anthropic.com/v1/messages",
-            headers={
-                "x-api-key": api_key,
-                "anthropic-version": "2023-06-01",
-                "content-type": "application/json"
-            },
-            json={
-                "model": "claude-sonnet-4-20250514",
-                "max_tokens": 1500,
-                "messages": [
-                    {"role": "user", "content": validation_prompt}
-                ]
-            },
-            timeout=60
+        # Initialize Bedrock client
+        # AWS credentials should be configured via instance profile or environment variables
+        bedrock = boto3.client(
+            service_name='bedrock-runtime',
+            region_name='eu-west-1'  # Change to your region if different
         )
         
-        if response.status_code == 200:
-            result = response.json()
-            validated_insights = result['content'][0]['text'].strip()
+        # Prepare the request for Claude on Bedrock
+        body = json.dumps({
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 1500,
+            "messages": [
+                {"role": "user", "content": validation_prompt}
+            ]
+        })
+        
+        # Call Bedrock with Claude model
+        # Using Claude 3 Sonnet - adjust model ID if you have access to different models
+        response = bedrock.invoke_model(
+            modelId='anthropic.claude-3-sonnet-20240229-v1:0',
+            contentType='application/json',
+            accept='application/json',
+            body=body
+        )
+        
+        # Parse the response
+        response_body = json.loads(response['body'].read())
+        validated_insights = response_body['content'][0]['text'].strip()
+        
+        # Replace the Key Insights section in the report
+        insights_start = report_content.find("## Key Insights")
+        table_start = report_content.find("| Metrics |")
+        
+        if insights_start != -1 and table_start != -1:
+            # Construct the new report with validated insights
+            before_insights = report_content[:insights_start]
+            after_insights = report_content[table_start:]
             
-            # Replace the Key Insights section in the report
-            insights_start = report_content.find("## Key Insights")
-            table_start = report_content.find("| Metrics |")
+            validated_report = before_insights + validated_insights + "\n\n" + after_insights
             
-            if insights_start != -1 and table_start != -1:
-                # Construct the new report with validated insights
-                before_insights = report_content[:insights_start]
-                after_insights = report_content[table_start:]
-                
-                validated_report = before_insights + validated_insights + "\n\n" + after_insights
-                
-                print(f"   ✅ Report validated and updated")
-                return validated_report, True
-            else:
-                print(f"   ⚠️  Could not locate Key Insights section, returning original")
-                return report_content, False
+            print(f"   ✅ Report validated and updated using AWS Bedrock")
+            return validated_report, True
         else:
-            print(f"   ❌ API error: {response.status_code}")
-            print(f"   Response: {response.text[:200]}")
+            print(f"   ⚠️  Could not locate Key Insights section, returning original")
             return report_content, False
             
+    except bedrock.exceptions.AccessDeniedException as e:
+        print(f"   ❌ Access denied to Bedrock: {e}")
+        print("   Please ensure your Databricks cluster has IAM permissions for Bedrock")
+        return report_content, False
     except Exception as e:
-        print(f"   ❌ Error calling Claude API: {e}")
+        print(f"   ❌ Error calling AWS Bedrock: {e}")
+        print(f"   Error type: {type(e).__name__}")
         return report_content, False
 
-# Validate the report
-validated_report, was_validated = validate_report_with_claude(report, week_num)
+# Validate the report using AWS Bedrock
+validated_report, was_validated = validate_report_with_bedrock(report, week_num)
 
 # Update the report variable if validation was successful
 if was_validated:
