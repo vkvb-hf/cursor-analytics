@@ -2695,6 +2695,17 @@ print("\n" + "=" * 70)
 print("STARTING VALIDATION CELL")
 print("=" * 70)
 
+# Upgrade boto3 to support bedrock-runtime (requires boto3 >= 1.28.57)
+import subprocess
+subprocess.run(["pip", "install", "--upgrade", "boto3>=1.34.0", "botocore>=1.34.0", "-q"], check=True)
+print("✅ Upgraded boto3 for Bedrock support")
+
+# Import boto3 after upgrade to ensure new version is used
+import importlib
+import boto3
+importlib.reload(boto3)
+print(f"   boto3 version: {boto3.__version__}")
+
 import json
 
 # Report requirements from REPORT_PROMPT_V2.md
