@@ -12,10 +12,11 @@
 | RG | Region |
 
 ## Key Insights
-**Critical Issues:** Payment Page Visit to Success (Backend) decreased 6.94% (33.97% to 31.62%), Payment Fraud Block Rate decreased 9.33% (0.53% to 0.48%), Total Duplicate Rate decreased 8.25% (24.58% to 22.55%), Total Duplicate Block Rate decreased 13.41% (5.88% to 5.09%), Payment Page Visit to Success decreased 6.33% (33.26% to 31.16%), 3_PaymentProcessingFees% decreased 100.00% (1.45% to 0.00%)
-**Positive Trends:** Overall metrics stable
-**Risk Shifts:** AR Pre Dunning showing diverging trends, 6_TotalBadDebtRate_12wkCohort showing diverging trends, 6_PaymentApprovalRate showing diverging trends, Select to Success showing diverging trends, 6_PaymentApprovalRate showing diverging trends, Acceptance LL0 and LL1+ (Recurring Charge) showing diverging trends, Recovery W0 showing diverging trends, 5_DunningBadDebtRate_12wkCohort showing diverging trends, 5_PaymentCheckoutApprovalRate showing diverging trends
-**Emerging Concerns:** 3_PaymentProcessingFees% down 100.00% YoY
+
+- **Critical Issues:** Payment Page Visit to Success (Backend) decreased 6.94% (33.97% to 31.62%), Payment Page Visit to Success decreased 6.33% (33.26% to 31.16%), Total Duplicate Block Rate decreased 13.41% (5.88% to 5.09%)
+- **Positive Trends:** Ship Rate improved 1.52% (60.16% to 61.08%), long-term Payment Page Visit to Success showing 8.44% improvement
+- **Risk Shifts:** Recovery W0 showing diverging trends across clusters (HF-NA ↑12.22%, HF-INTL ↓10.25%), AR Pre Dunning and Acceptance metrics showing mixed regional performance
+- **Emerging Concerns:** Payment Fraud Block Rate up 93.25% YoY, Total Duplicate Block Rate up 34.42% YoY indicating increased fraud pressure
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
 | :--- | :--- | :--- | :--- |
