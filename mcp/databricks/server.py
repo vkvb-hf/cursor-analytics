@@ -91,8 +91,80 @@ def get_job_runner() -> DatabricksJobRunner:
 # HELPER FUNCTIONS
 # =============================================================================
 
-def format_results(results: list, limit: int = 100) -> str:
-    """Format query results for display."""
+import time as _time
+
+def format_results_structured(results: list, limit: int = 100, 
+                               execution_time_ms: float = None,
+                               query: str = None) -> dict:
+    """
+    Format query results as structured JSON for AI agents.
+    
+    Returns a dictionary with:
+    - success: bool
+    - row_count: int
+    - columns: list of column names
+    - data: list of row dictionaries
+    - truncated: bool (if results were limited)
+    - execution_time_ms: float (optional)
+    """
+    if not results:
+        return {
+            "success": True,
+            "row_count": 0,
+            "columns": [],
+            "data": [],
+            "truncated": False,
+            "message": "Query returned 0 rows",
+            "execution_time_ms": execution_time_ms
+        }
+    
+    # Extract column names - handle both namedtuple and Databricks Row
+    columns = []
+    first_row = results[0]
+    if hasattr(first_row, '_fields'):
+        columns = list(first_row._fields)
+    elif hasattr(first_row, 'asDict'):
+        # Databricks Row object
+        columns = list(first_row.asDict().keys())
+    
+    # Convert rows to dictionaries
+    data = []
+    for row in results[:limit]:
+        row_dict = {}
+        
+        # Handle Databricks Row (has asDict method)
+        if hasattr(row, 'asDict'):
+            row_dict = row.asDict()
+        # Handle namedtuple (has _asdict method)
+        elif hasattr(row, '_asdict'):
+            row_dict = dict(row._asdict())
+        # Handle namedtuple with _fields
+        elif hasattr(row, '_fields'):
+            row_dict = {col: val for col, val in zip(row._fields, row)}
+        # Fallback
+        else:
+            row_dict = {"value": str(row)}
+        
+        # Convert non-serializable types to strings
+        for k, v in row_dict.items():
+            if v is not None and not isinstance(v, (str, int, float, bool, list, dict)):
+                row_dict[k] = str(v)
+        
+        data.append(row_dict)
+    
+    return {
+        "success": True,
+        "row_count": len(results),
+        "rows_returned": len(data),
+        "columns": columns,
+        "data": data,
+        "truncated": len(results) > limit,
+        "execution_time_ms": execution_time_ms
+    }
+
+
+def format_results_text(results: list, limit: int = 100) -> str:
+    """Format query results as readable text (legacy format)."""
     if not results:
         return "Query returned 0 rows."
     
@@ -124,6 +196,16 @@ def add_limit_if_needed(query: str, limit: int) -> str:
     return query
 
 
+def make_response(success: bool, data: dict = None, error: str = None) -> dict:
+    """Create a standardized response structure."""
+    response = {"success": success}
+    if data:
+        response.update(data)
+    if error:
+        response["error"] = error
+    return response
+
+
 # =============================================================================
 # MCP TOOL DEFINITIONS
 # =============================================================================
@@ -144,7 +226,7 @@ Common patterns:
 - Profile column: SELECT COUNT(*), COUNT(col), COUNT(DISTINCT col) FROM table
 - Create table: CREATE TABLE new_table AS SELECT ...
 
-Returns formatted results with column headers.""",
+Returns JSON with: success, row_count, columns, data[], execution_time_ms, truncated.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -156,12 +238,15 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="run_sql_file",
-            description="Execute SQL from a local file. Useful for complex queries stored in .sql files.",
+            description="""Execute SQL from a local file. Useful for complex queries stored in .sql files.
+
+Returns JSON with: success, row_count, columns, data[], file_path, execution_time_ms.
+Use output_format='show' for legacy text output.""",
             inputSchema={
                 "type": "object",
                 "properties": {
                     "file_path": {"type": "string", "description": "Path to the SQL file"},
-                    "output_format": {"type": "string", "enum": ["show", "csv", "json"], "default": "show"},
+                    "output_format": {"type": "string", "enum": ["json", "show"], "default": "json", "description": "Output format: json (structured) or show (text)"},
                     "limit": {"type": "integer", "description": "Maximum rows to return", "default": 100}
                 },
                 "required": ["file_path"]
@@ -169,7 +254,9 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="create_notebook",
-            description="Create a Python notebook in Databricks workspace.",
+            description="""Create a Python notebook in Databricks workspace.
+
+Returns JSON with: success, notebook_path, action, overwrite.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -182,7 +269,9 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="run_notebook",
-            description="Create and run a notebook as a Databricks job. Waits for completion and returns output.",
+            description="""Create and run a notebook as a Databricks job. Waits for completion and returns output.
+
+Returns JSON with: success, notebook_path, job_name, job_id, run_id, state, result_state, outputs[].""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -195,7 +284,9 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="get_job_status",
-            description="Get the status of a Databricks job run.",
+            description="""Get the status of a Databricks job run.
+
+Returns JSON with: success, run_id, life_cycle_state, result_state, is_running, is_complete, is_success.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -206,7 +297,9 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="sync_to_workspace",
-            description="Sync local files to Databricks workspace.",
+            description="""Sync local files to Databricks workspace.
+
+Returns JSON with: success, action, local_dir, workspace_dir, files_synced, dry_run.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -220,7 +313,9 @@ Returns formatted results with column headers.""",
         ),
         Tool(
             name="sync_from_workspace",
-            description="Sync files from Databricks workspace to local directory.",
+            description="""Sync files from Databricks workspace to local directory.
+
+Returns JSON with: success, action, local_dir, workspace_dir, files_synced, dry_run.""",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -240,7 +335,7 @@ Returns formatted results with column headers.""",
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
-    """Handle tool calls."""
+    """Handle tool calls with structured JSON responses."""
     try:
         # -----------------------------------------------------------------
         # SQL Operations (using core.connection_pool)
@@ -250,17 +345,28 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             limit = arguments.get("limit", 100)
             
             # Add LIMIT if SELECT without LIMIT
+            original_query = query
             query = add_limit_if_needed(query, limit)
             
-            # Execute using shared connection pool
+            # Execute with timing
+            start_time = _time.time()
             results = _pool.execute(query)
+            execution_time_ms = round((_time.time() - start_time) * 1000, 2)
             
-            return [TextContent(type="text", text=format_results(results, limit))]
+            # Return structured response
+            response = format_results_structured(
+                results, 
+                limit=limit,
+                execution_time_ms=execution_time_ms
+            )
+            response["query"] = original_query[:200] + "..." if len(original_query) > 200 else original_query
+            
+            return [TextContent(type="text", text=json.dumps(response, indent=2, default=str))]
         
         # -----------------------------------------------------------------
         elif name == "run_sql_file":
             file_path = arguments["file_path"]
-            output_format = arguments.get("output_format", "show")
+            output_format = arguments.get("output_format", "json")  # Default to JSON now
             limit = arguments.get("limit", 100)
             
             # Read SQL file
@@ -268,38 +374,60 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 query = f.read()
             
             query = add_limit_if_needed(query, limit)
+            
+            # Execute with timing
+            start_time = _time.time()
             results = _pool.execute(query)
+            execution_time_ms = round((_time.time() - start_time) * 1000, 2)
             
-            if not results:
-                return [TextContent(type="text", text="Query returned 0 rows.")]
-            
-            if output_format == 'json':
-                data = [dict(r._asdict()) if hasattr(r, '_asdict') else str(r) for r in results]
-                return [TextContent(type="text", text=json.dumps(data, indent=2, default=str))]
+            if output_format == 'show':
+                # Legacy text format
+                text_output = format_results_text(results, limit)
+                response = make_response(True, {
+                    "file_path": file_path,
+                    "output_format": "text",
+                    "execution_time_ms": execution_time_ms,
+                    "output": text_output
+                })
             else:
-                return [TextContent(type="text", text=format_results(results, limit))]
+                # Structured JSON format (default)
+                response = format_results_structured(
+                    results,
+                    limit=limit,
+                    execution_time_ms=execution_time_ms
+                )
+                response["file_path"] = file_path
+            
+            return [TextContent(type="text", text=json.dumps(response, indent=2, default=str))]
         
         # -----------------------------------------------------------------
         # Notebook Operations (using core.databricks_job_runner)
         # -----------------------------------------------------------------
         elif name == "create_notebook":
             runner = get_job_runner()
+            notebook_path = arguments["notebook_path"]
+            
             success = runner.create_notebook(
-                arguments["notebook_path"],
+                notebook_path,
                 arguments["content"],
                 arguments.get("overwrite", True)
             )
-            if success:
-                return [TextContent(type="text", text=f"✅ Notebook created at {arguments['notebook_path']}")]
-            else:
-                return [TextContent(type="text", text="❌ Failed to create notebook")]
+            
+            response = make_response(
+                success=success,
+                data={
+                    "notebook_path": notebook_path,
+                    "action": "created" if success else "failed",
+                    "overwrite": arguments.get("overwrite", True)
+                },
+                error=None if success else "Failed to create notebook"
+            )
+            return [TextContent(type="text", text=json.dumps(response, indent=2, default=str))]
         
         # -----------------------------------------------------------------
         elif name == "run_notebook":
             runner = get_job_runner()
             
-            # Use the create_and_run method from DatabricksJobRunner
-            # But we need a simpler version for MCP that doesn't print to stdout
             result = _run_notebook_simple(
                 runner,
                 arguments["notebook_path"],
@@ -311,11 +439,26 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
         # -----------------------------------------------------------------
         elif name == "get_job_status":
             runner = get_job_runner()
-            status = runner.get_run_status(str(arguments["run_id"]))
+            run_id = arguments["run_id"]
+            status = runner.get_run_status(str(run_id))
+            
             if status:
-                return [TextContent(type="text", text=json.dumps(status, indent=2, default=str))]
+                # Extract key info for easier parsing
+                state = status.get('state', {})
+                response = make_response(True, {
+                    "run_id": run_id,
+                    "life_cycle_state": state.get('life_cycle_state'),
+                    "result_state": state.get('result_state'),
+                    "state_message": state.get('state_message'),
+                    "is_running": state.get('life_cycle_state') in ['PENDING', 'RUNNING', 'TERMINATING'],
+                    "is_complete": state.get('life_cycle_state') in ['TERMINATED', 'SKIPPED', 'INTERNAL_ERROR'],
+                    "is_success": state.get('result_state') == 'SUCCESS',
+                    "full_status": status
+                })
             else:
-                return [TextContent(type="text", text=f"Could not get status for run {arguments['run_id']}")]
+                response = make_response(False, {"run_id": run_id}, f"Could not get status for run {run_id}")
+            
+            return [TextContent(type="text", text=json.dumps(response, indent=2, default=str))]
         
         # -----------------------------------------------------------------
         # Workspace Sync Operations (using core.workspace_sync)
@@ -329,6 +472,16 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 pattern=arguments.get("pattern", "**/*.py"),
                 dry_run=arguments.get("dry_run", False)
             )
+            
+            # Ensure structured response
+            if not isinstance(result, dict):
+                result = {"result": result}
+            result["success"] = result.get("success", True)
+            result["action"] = "sync_to_workspace"
+            result["local_dir"] = arguments["local_dir"]
+            result["workspace_dir"] = arguments["workspace_dir"]
+            result["dry_run"] = arguments.get("dry_run", False)
+            
             return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
         
         # -----------------------------------------------------------------
@@ -340,15 +493,31 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             result = sync.sync_from_workspace(
                 dry_run=arguments.get("dry_run", False)
             )
+            
+            # Ensure structured response
+            if not isinstance(result, dict):
+                result = {"result": result}
+            result["success"] = result.get("success", True)
+            result["action"] = "sync_from_workspace"
+            result["local_dir"] = arguments["local_dir"]
+            result["workspace_dir"] = arguments["workspace_dir"]
+            result["dry_run"] = arguments.get("dry_run", False)
+            
             return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
         
         # -----------------------------------------------------------------
         else:
-            return [TextContent(type="text", text=f"Unknown tool: {name}")]
+            response = make_response(False, {"tool": name}, f"Unknown tool: {name}")
+            return [TextContent(type="text", text=json.dumps(response, indent=2))]
     
     except Exception as e:
         import traceback
-        return [TextContent(type="text", text=f"Error: {str(e)}\n{traceback.format_exc()}")]
+        response = make_response(False, {
+            "tool": name,
+            "arguments": arguments,
+            "traceback": traceback.format_exc()
+        }, str(e))
+        return [TextContent(type="text", text=json.dumps(response, indent=2, default=str))]
 
 
 def _run_notebook_simple(runner: DatabricksJobRunner, notebook_path: str, 

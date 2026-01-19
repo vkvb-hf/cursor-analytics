@@ -1,38 +1,18 @@
 # Cursor Analytics
 
-A toolkit for working with Databricks and other data services via MCP (Model Context Protocol).
-
-## Project Structure
-
-```
-cursor-analytics/
-├── mcp/                        # MCP Servers (primary interface)
-│   ├── databricks/server.py    # Databricks MCP (7 tools)
-│   ├── google_sheets/server.py # Google Sheets MCP (4 tools)
-│   ├── atlassian/              # Atlassian MCP docs
-│   ├── atlan/                  # Atlan MCP docs
-│   └── github/                 # GitHub MCP docs
-│
-├── core/                       # Pure functions (6 modules)
-│   ├── databricks_job_runner.py
-│   ├── table_inspector.py
-│   ├── query_util.py
-│   ├── workspace_sync.py
-│   ├── run_sql_file.py
-│   └── _config.py
-│
-├── use_cases/                  # Composite scripts
-├── scripts/                    # CLI tools
-├── tests/                      # Test files
-├── docs/                       # Documentation
-└── archive/                    # Historical reference
-```
+A toolkit for product analysts to work with Databricks and data services via MCP (Model Context Protocol) in Cursor IDE.
 
 ## Quick Start
 
-### 1. Configure Databricks
+### 1. Install
 
-Create `.env` in `mcp/databricks/`:
+```bash
+pip install -e .
+```
+
+### 2. Configure
+
+Create `mcp/databricks/.env`:
 
 ```bash
 DATABRICKS_HOST=https://your-workspace.cloud.databricks.com
@@ -41,24 +21,124 @@ DATABRICKS_HTTP_PATH=/sql/1.0/warehouses/your-warehouse
 CLUSTER_ID=your-cluster-id
 ```
 
-### 2. Use with Cursor
+### 3. Add to Cursor
 
-MCP servers are configured in `~/.cursor/mcp.json`. Restart Cursor to load them.
+Add to `~/.cursor/mcp.json`:
 
-## MCP Servers
+```json
+{
+  "mcpServers": {
+    "databricks": {
+      "command": "python",
+      "args": ["/path/to/cursor-analytics/mcp/databricks/server.py"],
+      "cwd": "/path/to/cursor-analytics/mcp/databricks"
+    }
+  }
+}
+```
 
-| Server | Type | Tools | Description |
-|--------|------|-------|-------------|
-| **Databricks** | Local | 7 | SQL, notebooks, workspace sync |
-| **Google Sheets** | Local | 4 | Read spreadsheets |
-| **Atlassian** | Remote | 28 | Jira, Confluence |
-| **Atlan** | Remote | 12 | Data catalog, lineage |
-| **GitHub** | NPM | 26 | Repos, PRs, issues |
+### 4. Restart Cursor
 
-See `mcp/README.md` for detailed documentation.
+The MCP tools are now available in Cursor.
+
+---
+
+## MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `execute_sql` | Run any SQL query |
+| `run_sql_file` | Execute SQL from .sql files |
+| `create_notebook` | Create Databricks notebooks |
+| `run_notebook` | Run notebooks as jobs |
+| `get_job_status` | Check job status |
+| `sync_to_workspace` | Upload files to Databricks |
+| `sync_from_workspace` | Download files from Databricks |
+
+All tools return structured JSON with `success`, `data`, `row_count`, etc.
+
+---
+
+## Project Structure
+
+```
+cursor-analytics/
+├── mcp/                    # MCP Servers
+│   ├── databricks/         # Databricks MCP (7 tools)
+│   └── google_sheets/      # Google Sheets MCP (4 tools)
+├── core/                   # Core utilities
+├── scripts/                # CLI tools
+├── tests/                  # Tests
+├── docs/                   # Documentation
+│   ├── SETUP.md           # Setup instructions
+│   └── MCP_GUIDE.md       # MCP tools reference
+└── archive/                # Historical (ignore)
+```
+
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [docs/SETUP.md](docs/SETUP.md) | Complete setup instructions |
+| [docs/MCP_GUIDE.md](docs/MCP_GUIDE.md) | MCP tools reference |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Design philosophy |
+| [.cursorrules](.cursorrules) | AI agent guidance |
+
+---
 
 ## Testing
 
 ```bash
+# Quick validation
 python scripts/smoke_test.py --quick
+
+# Full test suite
+pytest tests/ -v
 ```
+
+---
+
+## Common Workflows
+
+### Query Data
+
+```sql
+-- Via MCP execute_sql tool
+SELECT * FROM schema.table LIMIT 10
+```
+
+### Find Duplicates
+
+```sql
+SELECT column, COUNT(*) 
+FROM table 
+GROUP BY column 
+HAVING COUNT(*) > 1
+```
+
+### Create Table
+
+```sql
+CREATE TABLE schema.new_table AS
+SELECT * FROM source WHERE condition
+```
+
+---
+
+## External MCPs
+
+| MCP | Tools | Description |
+|-----|-------|-------------|
+| Atlassian | 28 | Jira, Confluence |
+| Atlan | 12 | Data catalog, lineage |
+| GitHub | 26 | Repos, PRs, issues |
+
+See [docs/MCP_GUIDE.md](docs/MCP_GUIDE.md) for configuration.
+
+---
+
+## License
+
+Proprietary - Product Analytics Team

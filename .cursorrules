@@ -1,41 +1,215 @@
 # Cursor Rules for cursor-analytics
+# Last Updated: 2026-01-19
 
-## Repository Overview
-MCP servers for Cursor AI integration with Databricks and other services.
+## Repository Purpose
+This is a **Product Analytics Toolkit** for working with Databricks and data services via MCP (Model Context Protocol). It enables AI agents to execute SQL, manage notebooks, sync workspaces, and interact with data catalogs.
 
-## MCP Servers (Primary Interface)
-All MCP servers are in `mcp/`:
-- `mcp/databricks/server.py` - SQL, notebooks, workspace sync (7 tools)
-- `mcp/google_sheets/server.py` - Read spreadsheets (4 tools)
-- `mcp/atlassian/` - Jira, Confluence (external, 28 tools)
-- `mcp/atlan/` - Data catalog (external, 12 tools)
-- `mcp/github/` - GitHub operations (external, 26 tools)
+---
+
+## MCP Tools Reference (Primary Interface)
+
+### Databricks MCP (7 tools) - `user-databricks`
+Use these tools for ALL Databricks operations:
+
+| Tool | When to Use | Example |
+|------|-------------|---------|
+| `execute_sql` | Run any SQL query | `SELECT * FROM schema.table LIMIT 10` |
+| `run_sql_file` | Execute SQL from .sql files | Complex queries stored in files |
+| `create_notebook` | Create Python notebooks | Setup analysis notebooks |
+| `run_notebook` | Create + run notebook as job | Long-running analysis |
+| `get_job_status` | Check job run status | Monitor notebook execution |
+| `sync_to_workspace` | Upload local files to Databricks | Deploy code changes |
+| `sync_from_workspace` | Download Databricks files | Backup or review code |
+
+### Google Sheets MCP (4 tools) - `user-google-sheets`
+| Tool | When to Use |
+|------|-------------|
+| `read_sheet` | Read data from a spreadsheet |
+| `get_sheet_info` | Get sheet names and metadata |
+| `read_multiple_ranges` | Read multiple ranges at once |
+| `read_comments` | Extract cell comments |
+
+### External MCPs (configured separately)
+| MCP | Tools | Use For |
+|-----|-------|---------|
+| `user-atlassian` | 28 | Jira tickets, Confluence docs |
+| `user-Atlan` | 12 | Data catalog, lineage, metadata |
+| `user-github` | 26 | Repos, PRs, issues |
+
+---
+
+## Common Workflows
+
+### 1. Data Exploration
+```
+1. Use `execute_sql` with: SHOW TABLES IN schema_name
+2. Use `execute_sql` with: DESCRIBE table_name
+3. Use `execute_sql` with: SELECT * FROM table LIMIT 10
+4. Profile columns: SELECT COUNT(*), COUNT(DISTINCT col) FROM table
+```
+
+### 2. Find Duplicates
+```sql
+SELECT column, COUNT(*) as cnt 
+FROM schema.table 
+GROUP BY column 
+HAVING COUNT(*) > 1
+ORDER BY cnt DESC
+```
+
+### 3. Run Complex Analysis
+```
+1. Write SQL in a .sql file
+2. Use `run_sql_file` tool with the file path
+3. Or use `run_notebook` for Spark-based analysis
+```
+
+### 4. Create Tables
+```sql
+CREATE TABLE schema.new_table AS
+SELECT ... FROM existing_table WHERE ...
+```
+
+### 5. Data Quality Checks
+```sql
+-- Null check
+SELECT COUNT(*) as total, COUNT(column) as non_null FROM table
+
+-- Uniqueness check  
+SELECT column, COUNT(*) FROM table GROUP BY column HAVING COUNT(*) > 1
+
+-- Cross-column conflicts
+SELECT id, COUNT(DISTINCT status) FROM table GROUP BY id HAVING COUNT(DISTINCT status) > 1
+```
+
+---
 
 ## File Organization
 
-| Type | Location |
-|------|----------|
-| MCP servers | `mcp/` |
-| Core functions | `core/` |
-| Use case scripts | `use_cases/` |
-| CLI scripts | `scripts/` |
-| Tests | `tests/` |
-| Historical | `archive/` |
+### Directory Structure
+```
+cursor-analytics/
+├── mcp/                    # MCP Servers (DO NOT MODIFY without testing)
+│   ├── databricks/         # Databricks MCP server
+│   └── google_sheets/      # Google Sheets MCP server
+├── core/                   # Pure functions (reusable utilities)
+├── use_cases/              # Composite scripts (combine core functions)
+├── scripts/                # CLI tools
+├── tests/                  # Test files only
+├── docs/                   # Documentation only
+└── archive/                # Historical reference (IGNORE)
+```
 
-## Key Files
-- `mcp/databricks/server.py` - Main Databricks MCP server
-- `mcp/google_sheets/server.py` - Google Sheets MCP server
-- `core/__init__.py` - Core package exports
+### Where to Put New Files
+| File Type | Location | Example |
+|-----------|----------|---------|
+| Reusable utility | `core/` | `core/new_util.py` |
+| CLI script | `scripts/` | `scripts/new_tool.py` |
+| Test file | `tests/` | `tests/test_new_util.py` |
+| Documentation | `docs/` | `docs/guides/NEW_GUIDE.md` |
+| One-time analysis | DO NOT CREATE | Use MCP tools instead |
+
+---
+
+## Critical Rules
+
+### DO
+- Use MCP tools for all Databricks operations
+- Run `python scripts/smoke_test.py --quick` after any code change
+- Add type hints to new functions
+- Return structured responses from any new utilities
+
+### DO NOT
+- Modify `mcp/databricks/server.py` without running full test suite
+- Create files at repository root level
+- Commit credentials or `.env` files
+- Browse or modify `archive/` folder (it's dead code)
+- Create one-time scripts (use MCP tools directly)
+
+---
+
+## Response Format Guidelines
+
+When building utilities that return data, use this structure:
+```python
+{
+    "success": True,           # Always include
+    "data": [...],             # The actual results
+    "row_count": 100,          # Metadata
+    "columns": ["col1", "col2"],
+    "execution_time_ms": 234,  # Optional timing
+    "error": None              # Or error message if success=False
+}
+```
+
+---
+
+## Key Schemas & Tables
+
+### Common Databricks Schemas
+- `payments_hf` - Payments data
+- `analytics` - Analytics tables
+- `staging` - Staging/temp tables
+
+### Useful System Commands
+```sql
+SHOW SCHEMAS
+SHOW TABLES IN schema_name
+DESCRIBE schema.table
+DESCRIBE EXTENDED schema.table  -- includes stats
+SHOW CREATE TABLE schema.table
+```
+
+---
 
 ## Testing
 
-After any change:
+### Quick Validation
 ```bash
 python scripts/smoke_test.py --quick
 ```
 
-## Do NOT
+### Full Test Suite
+```bash
+pytest tests/ -v
+```
 
-- Modify MCP servers without testing
-- Create files at root level
-- Commit credentials
+### Test a Specific Module
+```bash
+pytest tests/test_query_util.py -v
+```
+
+---
+
+## Troubleshooting
+
+### MCP Connection Issues
+1. Check `~/.cursor/mcp.json` configuration
+2. Verify environment variables in `.env`
+3. Restart Cursor IDE
+
+### Query Timeouts
+1. Add LIMIT clause to SELECT queries
+2. Check cluster status via Databricks UI
+3. Use `run_notebook` for long-running queries
+
+### Import Errors
+1. Ensure virtual environment is activated
+2. Run `pip install -e .` from repo root
+
+---
+
+## Agent Optimization Tips
+
+1. **Batch SQL operations**: Combine multiple SELECTs into one query when possible
+2. **Use LIMIT**: Always add LIMIT to exploratory queries
+3. **Check before creating**: Use SHOW TABLES before CREATE TABLE
+4. **Prefer MCP tools**: Don't write Python scripts for one-time queries
+5. **Structured output**: Parse JSON responses, don't rely on text parsing
+
+---
+
+## Version Info
+- Repository: cursor-analytics v1.0.0
+- Python: >=3.9
+- Key Dependencies: databricks-sql-connector, mcp, pandas
