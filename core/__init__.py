@@ -1,25 +1,31 @@
 """
 Databricks Core Utilities Package
 
-Generic, reusable utilities for working with Databricks.
+Pure functions for working with Databricks.
+These are the essential building blocks used by MCP servers and CLI tools.
+
+Modules:
+- databricks_job_runner: Create and run Databricks jobs
+- table_inspector: Inspect table schemas and data
+- query_util: Execute SQL queries
+- workspace_sync: Sync files with Databricks workspace
+- run_sql_file: Execute SQL from files
+- _config: Configuration loading
+
+For use cases (composite scripts), see the use_cases/ folder.
 """
 
 from .databricks_job_runner import DatabricksJobRunner
-from .databricks_workspace import create_workspace_directory, upload_csv_to_workspace
 from .table_inspector import TableInspector
 from .query_util import print_table, run_query
-from .interactive_sql import main as interactive_sql_main
 from .run_sql_file import run_sql_file
+from .workspace_sync import WorkspaceSync
 
 __all__ = [
     'DatabricksJobRunner',
-    'create_workspace_directory',
-    'upload_csv_to_workspace',
     'TableInspector',
     'print_table',
     'run_query',
-    'interactive_sql_main',
     'run_sql_file',
+    'WorkspaceSync',
 ]
-
-

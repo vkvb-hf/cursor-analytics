@@ -30,8 +30,8 @@ from core import (
     run_query,
     print_table,
     run_sql_file,
-    interactive_sql_main
 )
+from use_cases import interactive_sql_main
 from core.query_util import run_query as run_query_with_display
 
 

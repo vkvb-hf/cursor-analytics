@@ -61,7 +61,7 @@ def main():
     # =========================================
     print("📁 Testing Directory Structure (CRITICAL)...")
     
-    required_dirs = ['core', 'scripts', 'tests', 'docs', 'projects']
+    required_dirs = ['core', 'scripts', 'tests', 'docs', 'projects', 'mcp', 'use_cases']
     for dir_name in required_dirs:
         def make_dir_test(d):
             def test_func():

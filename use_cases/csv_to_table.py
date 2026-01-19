@@ -239,8 +239,9 @@ def create_table_schema_sql(
     
     location_clause = f"\nLOCATION '{table_location}'" if table_location else ""
     
+    col_defs_str = ',\n'.join(col_defs)
     sql = f"""CREATE OR REPLACE TABLE {table_name} (
-{',\n'.join(col_defs)}
+{col_defs_str}
 )
 USING DELTA{location_clause}
     """
