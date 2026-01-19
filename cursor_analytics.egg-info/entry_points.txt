@@ -1,0 +1,3 @@
+[console_scripts]
+cursor-inspect = scripts.inspect_table:main
+cursor-sql = scripts.run_sql:main
