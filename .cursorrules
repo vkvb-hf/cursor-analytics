@@ -1,0 +1,117 @@
+# Cursor Rules for cursor-analytics
+
+## Repository Overview
+This is a Databricks toolkit for product analytics at HelloFresh. It provides:
+- Python API for Databricks operations (`databricks_api.py`)
+- CLI tool for command-line usage (`databricks_cli.py`)
+- MCP server for Cursor AI integration (`mcp_server.py`)
+
+## Primary Entry Points
+
+### For Python Scripts
+```python
+from databricks_api import DatabricksAPI
+db = DatabricksAPI()
+results = db.run_sql("SELECT * FROM table LIMIT 10")
+```
+
+### For MCP/Agent Usage
+Use the Databricks MCP tools:
+- `execute_sql` - Run SQL queries
+- `describe_table` - Get table schema
+- `sample_table` - Get sample data
+- `run_notebook` - Execute notebooks
+
+## File Organization
+
+### Where to Put New Code
+| Type | Location | Example |
+|------|----------|---------|
+| Reusable utility | `core/` | `core/new_utility.py` |
+| CLI script | `scripts/` | `scripts/new_script.py` |
+| Project-specific | `projects/{name}/` | `projects/my_analysis/` |
+| One-off analysis | `projects/adhoc/` | `projects/adhoc/quick_check.py` |
+| Tests | `tests/` | `tests/test_new_feature.py` |
+
+### Key Files (Do Not Delete)
+- `databricks_api.py` - Main Python API
+- `databricks_cli.py` - CLI entry point
+- `mcp_server.py` - MCP server for Cursor
+- `core/__init__.py` - Core package exports
+- `config.py` - Credentials (gitignored)
+
+## Coding Patterns
+
+### Adding to Core
+1. Create file in `core/`
+2. Add export to `core/__init__.py`
+3. Add syntax test to `scripts/smoke_test.py`
+
+### Running SQL
+```python
+# Via API
+from databricks_api import DatabricksAPI
+db = DatabricksAPI()
+db.run_sql("SELECT * FROM table")
+
+# Via MCP (preferred for agents)
+# Use execute_sql tool
+```
+
+### Creating Notebooks
+```python
+from databricks_api import DatabricksAPI
+db = DatabricksAPI()
+db.run_notebook_job(
+    notebook_path="/Workspace/path",
+    notebook_content="# notebook code",
+    job_name="my_job"
+)
+```
+
+## Testing
+
+### After Any Change
+```bash
+python scripts/smoke_test.py --quick
+```
+
+### Full Test (requires dependencies)
+```bash
+python scripts/smoke_test.py
+```
+
+## Common Tables
+
+### Payments Domain
+- `hive_metastore.payments_hf.f_orders` - Orders fact table
+- `hive_metastore.payments_hf.d_customers` - Customer dimension
+- `hive_metastore.payments_hf.f_transactions` - Transaction fact
+
+### Analytics
+- `hive_metastore.analytics.duplicate_customers` - Duplicate detection results
+
+## MCP Server Configuration
+
+The MCP server is configured in `~/.cursor/mcp.json`:
+```json
+{
+  "databricks": {
+    "command": "python",
+    "args": ["/path/to/cursor-analytics/mcp_server.py"]
+  }
+}
+```
+
+## Do NOT
+
+- Delete files in `core/` without checking dependencies
+- Modify `mcp_server.py` without testing MCP functionality
+- Commit `config.py` (contains credentials)
+- Create files at root level (use appropriate subdirectory)
+- Skip running smoke test after changes
+
+## Refactoring in Progress
+
+This repo is undergoing cleanup. See `REFACTOR_PLAN.md` for details.
+Current status: Phase 0 (Preparation)
