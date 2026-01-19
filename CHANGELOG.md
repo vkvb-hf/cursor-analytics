@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-01-19
+
+### Added
+- `mcp_server_standalone.py` - Completely self-contained MCP server with NO external dependencies
+  - All functionality inlined (no imports from `core/` modules)
+  - Config loaded directly from environment variables
+  - DatabricksClient class with all REST API operations
+  - ConnectionPool for efficient SQL execution
+  - WorkspaceSync operations for file synchronization
+
+### Changed
+- MCP server no longer requires `PYTHONPATH` environment variable
+- Removed `sys.path.insert` hack - proper Python module structure
+- Simplified mcp.json configuration (just command, args, cwd)
+
+### Architecture
+- Phase 1 complete: MCP server is now fully isolated and portable
+- Can be moved to any location without breaking imports
+- Ready for Phase 2: Clean repo structure
+
 ## [0.2.0] - 2026-01-19
 
 ### Security
