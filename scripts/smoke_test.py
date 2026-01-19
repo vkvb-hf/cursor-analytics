@@ -80,7 +80,7 @@ def main():
         'requirements.txt',
         'databricks_api.py',
         'databricks_cli.py',
-        'mcp_server.py',
+        'mcp/databricks/server.py',
         'core/__init__.py',
         'config.py.example',
     ]
@@ -101,7 +101,7 @@ def main():
     critical_python_files = [
         'databricks_api.py',
         'databricks_cli.py',
-        'mcp_server.py',
+        'mcp/databricks/server.py',
         'core/__init__.py',
         'core/databricks_job_runner.py',
         'core/table_inspector.py',
@@ -138,12 +138,10 @@ def main():
     # =========================================
     print("\n🔌 Testing MCP Server Files...")
     
-    mcp_files = ['mcp_server.py']
-    # Check if other MCP files exist (they may be archived later)
-    if os.path.exists(os.path.join(ROOT_DIR, 'mcp_server_optimized.py')):
-        mcp_files.append('mcp_server_optimized.py')
-    if os.path.exists(os.path.join(ROOT_DIR, 'mcp_server_standalone.py')):
-        mcp_files.append('mcp_server_standalone.py')
+    mcp_files = ['mcp/databricks/server.py']
+    # Check if Google Sheets MCP exists
+    if os.path.exists(os.path.join(ROOT_DIR, 'mcp/google_sheets/server.py')):
+        mcp_files.append('mcp/google_sheets/server.py')
     
     for mcp_file in mcp_files:
         def make_mcp_test(filepath):
