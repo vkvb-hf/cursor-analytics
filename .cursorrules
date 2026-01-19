@@ -90,14 +90,12 @@ SELECT id, COUNT(DISTINCT status) FROM table GROUP BY id HAVING COUNT(DISTINCT s
 ```
 cursor-analytics/
 ├── mcp/                    # MCP Servers (DO NOT MODIFY without testing)
-│   ├── databricks/         # Databricks MCP server
-│   └── google_sheets/      # Google Sheets MCP server
+│   ├── databricks/         # Databricks MCP server (7 tools)
+│   └── google_sheets/      # Google Sheets MCP server (4 tools)
 ├── core/                   # Pure functions (reusable utilities)
-├── use_cases/              # Composite scripts (combine core functions)
 ├── scripts/                # CLI tools
 ├── tests/                  # Test files only
-├── docs/                   # Documentation only
-└── archive/                # Historical reference (IGNORE)
+└── docs/                   # Documentation (SETUP.md, MCP_GUIDE.md, ARCHITECTURE.md)
 ```
 
 ### Where to Put New Files
@@ -123,7 +121,6 @@ cursor-analytics/
 - Modify `mcp/databricks/server.py` without running full test suite
 - Create files at repository root level
 - Commit credentials or `.env` files
-- Browse or modify `archive/` folder (it's dead code)
 - Create one-time scripts (use MCP tools directly)
 
 ---
