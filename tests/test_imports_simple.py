@@ -39,10 +39,10 @@ def check_dependencies():
         print(f"  pip install {' '.join(missing)}")
         print("\nOr install all requirements:")
         print("  pip install -r requirements.txt")
-        return False
+        assert False
     else:
         print("✅ All dependencies installed!")
-        return True
+        assert True
 
 
 def test_imports_with_graceful_failure():
@@ -169,12 +169,12 @@ def test_functionality_with_mocks():
         print_table(sample_data, column_names=['id', 'name', 'value'], limit=5)
         print("    ✅ print_table executed successfully")
         
-        return all_passed
+        assert all_passed
     except Exception as e:
         print(f"  ❌ Error: {e}")
         import traceback
         traceback.print_exc()
-        return False
+        assert False
 
 
 def main():

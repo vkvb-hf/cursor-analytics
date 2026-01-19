@@ -4,7 +4,8 @@ Tests for table_inspector.py
 import pytest
 import sys
 import os
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import Mock, MagicMock, patch, PropertyMock
+from collections import namedtuple
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -23,62 +24,85 @@ class TestTableInspector:
         )
     
     @patch('core.table_inspector.sql.connect')
-    def test_get_table_schema(self, mock_connect, inspector, mock_sql_connection):
-        mock_conn, mock_cursor = mock_sql_connection
-        mock_connect.return_value.__enter__.return_value = mock_conn
-        
-        # Mock DESCRIBE query result
+    def test_get_table_schema(self, mock_connect, inspector):
+        # Create proper mock cursor with named tuple results
+        mock_cursor = MagicMock()
+        Row = namedtuple('Row', ['col_name', 'data_type', 'comment'])
         mock_cursor.fetchall.return_value = [
-            Mock(col_name='id', data_type='bigint', comment=None),
-            Mock(col_name='name', data_type='string', comment=None)
+            Row('id', 'bigint', None),
+            Row('name', 'string', 'User name')
         ]
+        
+        mock_conn = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_connect.return_value.__enter__.return_value = mock_conn
         
         schema = inspector.get_table_schema('schema.table')
         
         assert schema is not None
-        mock_cursor.execute.assert_called()
+        assert len(schema) == 2
+        assert schema[0]['column'] == 'id'
+        assert schema[1]['column'] == 'name'
     
     @patch('core.table_inspector.sql.connect')
-    def test_get_table_stats(self, mock_connect, inspector, mock_sql_connection):
-        mock_conn, mock_cursor = mock_sql_connection
-        mock_connect.return_value.__enter__.return_value = mock_conn
+    def test_get_table_stats(self, mock_connect, inspector):
+        # Create proper mock cursor
+        mock_cursor = MagicMock()
         
-        # Mock stats query result
+        # fetchone returns a tuple-like object for COUNT(*)
+        mock_cursor.fetchone.return_value = (100,)
+        
+        # fetchall for schema query
+        Row = namedtuple('Row', ['col_name', 'data_type', 'comment'])
         mock_cursor.fetchall.return_value = [
-            Mock(count=100, size_bytes=1024)
+            Row('id', 'bigint', None),
+            Row('name', 'string', None)
         ]
+        
+        mock_conn = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_connect.return_value.__enter__.return_value = mock_conn
         
         stats = inspector.get_table_stats('schema.table')
         
         assert stats is not None
+        assert stats['total_rows'] == 100
+        assert stats['column_count'] == 2
     
     @patch('core.table_inspector.sql.connect')
-    def test_get_table_sample(self, mock_connect, inspector, mock_sql_connection):
-        mock_conn, mock_cursor = mock_sql_connection
-        mock_connect.return_value.__enter__.return_value = mock_conn
+    def test_inspect_table(self, mock_connect, inspector):
+        """Test the main inspect_table method"""
+        mock_cursor = MagicMock()
         
+        # Schema query result
+        Row = namedtuple('Row', ['col_name', 'data_type', 'comment'])
         mock_cursor.fetchall.return_value = [
-            Mock(id=1, name='test1'),
-            Mock(id=2, name='test2')
+            Row('id', 'bigint', None),
+            Row('name', 'string', None)
         ]
         
-        sample = inspector.get_table_sample('schema.table', limit=2)
+        mock_conn = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_connect.return_value.__enter__.return_value = mock_conn
         
-        assert sample is not None
-        assert len(sample) == 2
+        result = inspector.inspect_table('schema.table')
+        
+        assert result is not None
     
     @patch('core.table_inspector.sql.connect')
-    def test_find_duplicates(self, mock_connect, inspector, mock_sql_connection):
-        mock_conn, mock_cursor = mock_sql_connection
-        mock_connect.return_value.__enter__.return_value = mock_conn
-        
+    def test_check_duplicates_by_column(self, mock_connect, inspector):
+        """Test duplicate checking"""
+        mock_cursor = MagicMock()
+        Row = namedtuple('Row', ['key_column', 'count'])
         mock_cursor.fetchall.return_value = [
-            Mock(key_column='value1', count=2),
-            Mock(key_column='value2', count=3)
+            Row('value1', 2),
+            Row('value2', 3)
         ]
         
-        duplicates = inspector.find_duplicates('schema.table', 'key_column', limit=10)
+        mock_conn = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_connect.return_value.__enter__.return_value = mock_conn
+        
+        duplicates = inspector.check_duplicates_by_column('schema.table', 'key_column')
         
         assert duplicates is not None
-
-

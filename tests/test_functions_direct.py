@@ -48,7 +48,7 @@ def test_format_value_direct():
             all_passed = False
             print(f"      Expected: {repr(expected)}")
     
-    return all_passed
+    assert all_passed
 
 
 def test_print_table_logic():
@@ -105,7 +105,7 @@ def test_print_table_logic():
                       limit=10, title="Sample Test Table")
     print("  ✅ print_table logic works correctly")
     
-    return True
+    assert True
 
 
 def test_sql_query_mock():
@@ -160,10 +160,10 @@ def test_sql_query_mock():
                 if result:
                     print(f"\n  ✅ Query executed successfully!")
                     print(f"  ✅ Returned {len(result)} rows")
-                    return True
+                    assert True
                 else:
                     print("  ❌ Query returned None")
-                    return False
+                    assert False
         else:
             # Show what the function would do
             print("  ℹ️  run_query function would:")
@@ -172,13 +172,13 @@ def test_sql_query_mock():
             print("    3. Fetch results")
             print("    4. Format and display results")
             print("  ✅ Function structure verified")
-            return True
+            assert True
             
     except Exception as e:
         print(f"  ❌ Error: {e}")
         import traceback
         traceback.print_exc()
-        return False
+        assert False
 
 
 def test_run_sql_file_logic():
@@ -216,10 +216,10 @@ def test_run_sql_file_logic():
         print("    3. Output results in specified format (show/csv/json)")
         print("  ✅ Function logic verified")
         
-        return True
+        assert True
     except Exception as e:
         print(f"  ❌ Error: {e}")
-        return False
+        assert False
     finally:
         # Clean up
         try:
@@ -260,16 +260,16 @@ def test_table_inspector_structure():
             print("    - check_cross_column_conflicts(table, id_col, check_cols)")
             print("    - compare_csv_to_table(table, csv_counts, id_col)")
             print("    - inspect_table(table_name, sample_rows)")
-            return True
+            assert True
         else:
             print("  ℹ️  TableInspector class structure:")
             print("    - Initializes with server_hostname, http_path, token")
             print("    - Has methods for table inspection")
             print("  ✅ Class structure verified")
-            return True
+            assert True
     except Exception as e:
         print(f"  ❌ Error: {e}")
-        return False
+        assert False
 
 
 def test_job_runner_structure():
@@ -304,16 +304,16 @@ def test_job_runner_structure():
             print("    - get_run_status(run_id)")
             print("    - monitor_job(run_id, poll_interval, max_wait)")
             print("    - create_and_run(path, content, job_name)")
-            return True
+            assert True
         else:
             print("  ℹ️  DatabricksJobRunner class structure:")
             print("    - Initializes with host, token, cluster_id")
             print("    - Has methods for job management")
             print("  ✅ Class structure verified")
-            return True
+            assert True
     except Exception as e:
         print(f"  ❌ Error: {e}")
-        return False
+        assert False
 
 
 def main():
