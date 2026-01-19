@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-01-19
+
+### Added
+- `MCP_GUIDE.md` - Comprehensive guide for all MCP servers
+  - Quick reference table: task-to-MCP mapping
+  - Decision tree for choosing the right MCP server
+  - Workflow examples for common analysis tasks
+  - Best practices for MCP usage
+
+### Documentation
+- Updated `.cursorrules` with MCP selection logic (Section 0)
+- Added MCP tool reference table to Section 8
+
 ## [0.3.0] - 2026-01-19
 
 ### Added
