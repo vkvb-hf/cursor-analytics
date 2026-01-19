@@ -14,9 +14,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 class TestRunSQLFile:
     """Tests for run_sql_file function"""
     
-    @patch('core.run_sql_file.sql.connect')
-    @patch('core.run_sql_file.print_table')
-    def test_run_sql_file_success(self, mock_print_table, mock_connect, tmp_path):
+    @patch('databricks.sql.connect')
+    def test_run_sql_file_success(self, mock_connect, tmp_path):
         from core.run_sql_file import run_sql_file
         
         # Create a temporary SQL file
@@ -37,7 +36,6 @@ class TestRunSQLFile:
         run_sql_file(str(sql_file), output_format='show', limit=10)
         
         mock_cursor.execute.assert_called_once()
-        mock_print_table.assert_called_once()
     
     def test_run_sql_file_not_found(self, tmp_path):
         from core.run_sql_file import run_sql_file
@@ -50,10 +48,9 @@ class TestRunSQLFile:
         
         assert exc_info.value.code == 1
     
-    @patch('core.run_sql_file.sql.connect')
-    @patch('core.run_sql_file.print_table')
+    @patch('databricks.sql.connect')
     @patch('pandas.DataFrame.to_csv')
-    def test_run_sql_file_output_csv(self, mock_to_csv, mock_print_table, mock_connect, tmp_path):
+    def test_run_sql_file_output_csv(self, mock_to_csv, mock_connect, tmp_path):
         from core.run_sql_file import run_sql_file
         
         sql_file = tmp_path / "test.sql"

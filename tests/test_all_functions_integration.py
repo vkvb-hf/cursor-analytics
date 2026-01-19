@@ -61,7 +61,7 @@ class TestAllImports:
 class TestQueryUtilities:
     """Test query utility functions"""
     
-    @patch('core.query_util.sql.connect')
+    @patch('databricks.sql.connect')
     def test_run_query_function(self, mock_connect, mock_sql_connection):
         """Test run_query function with mocked connection"""
         from core.query_util import run_query
@@ -117,7 +117,7 @@ class TestTableInspector:
             token='test-token'
         )
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_table_inspector_initialization(self, mock_connect, inspector, mock_sql_connection):
         """Test TableInspector can be initialized"""
         assert inspector is not None
@@ -125,7 +125,7 @@ class TestTableInspector:
         assert inspector.http_path == 'test-path'
         assert inspector.token == 'test-token'
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_get_table_schema(self, mock_connect, inspector, mock_sql_connection):
         """Test get_table_schema method"""
         mock_conn, mock_cursor = mock_sql_connection
@@ -144,7 +144,7 @@ class TestTableInspector:
         assert schema[0]['data_type'] == 'bigint'
         mock_cursor.execute.assert_called()
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_get_table_stats(self, mock_connect, inspector, mock_sql_connection):
         """Test get_table_stats method"""
         mock_conn, mock_cursor = mock_sql_connection
@@ -230,7 +230,7 @@ class TestWorkspaceFunctions:
 class TestRunSQLFile:
     """Test run_sql_file function"""
     
-    @patch('core.run_sql_file.sql.connect')
+    @patch('databricks.sql.connect')
     def test_run_sql_file_function(self, mock_connect, mock_sql_connection, tmp_path):
         """Test run_sql_file function"""
         from core.run_sql_file import run_sql_file
@@ -253,8 +253,8 @@ class TestRunSQLFile:
 class TestSampleUseCase:
     """Test a realistic use case combining multiple functions"""
     
-    @patch('core.query_util.sql.connect')
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
+    @patch('databricks.sql.connect')
     def test_complete_workflow(self, mock_table_connect, mock_query_connect):
         """Test a complete workflow using multiple utilities"""
         from core import TableInspector, run_query
@@ -294,7 +294,7 @@ class TestSampleUseCase:
 class TestErrorHandling:
     """Test error handling in functions"""
     
-    @patch('core.query_util.sql.connect')
+    @patch('databricks.sql.connect')
     def test_run_query_handles_errors(self, mock_connect):
         """Test run_query handles connection errors gracefully"""
         from core.query_util import run_query

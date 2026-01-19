@@ -131,7 +131,7 @@ def test_sql_query_mock():
             print(f"\n  Sample query: {sample_query}")
             print("  Testing with mock connection...")
             
-            with patch('core.query_util.sql.connect') as mock_connect:
+            with patch('databricks.sql.connect') as mock_connect:
                 mock_conn = MagicMock()
                 mock_cursor = MagicMock()
                 

@@ -3,7 +3,6 @@
 Databricks Query Utility - Main query tool for exploring tables
 Run SQL queries against Databricks with formatted output
 """
-from databricks import sql
 import sys
 import os
 import argparse
@@ -182,6 +181,9 @@ def run_query(query: str, limit: Optional[int] = None, title: Optional[str] = No
     Returns:
         List of Row objects
     """
+    # Lazy import to avoid ImportError when databricks-sql-connector not installed
+    from databricks import sql
+    
     print("="*100)
     print("Connecting to Databricks...")
     print("="*100)

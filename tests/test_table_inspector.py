@@ -23,7 +23,7 @@ class TestTableInspector:
             token='test-token'
         )
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_get_table_schema(self, mock_connect, inspector):
         # Create proper mock cursor with named tuple results
         mock_cursor = MagicMock()
@@ -44,7 +44,7 @@ class TestTableInspector:
         assert schema[0]['column'] == 'id'
         assert schema[1]['column'] == 'name'
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_get_table_stats(self, mock_connect, inspector):
         # Create proper mock cursor
         mock_cursor = MagicMock()
@@ -69,7 +69,7 @@ class TestTableInspector:
         assert stats['total_rows'] == 100
         assert stats['column_count'] == 2
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_inspect_table(self, mock_connect, inspector):
         """Test the main inspect_table method"""
         mock_cursor = MagicMock()
@@ -89,7 +89,7 @@ class TestTableInspector:
         
         assert result is not None
     
-    @patch('core.table_inspector.sql.connect')
+    @patch('databricks.sql.connect')
     def test_check_duplicates_by_column(self, mock_connect, inspector):
         """Test duplicate checking"""
         mock_cursor = MagicMock()

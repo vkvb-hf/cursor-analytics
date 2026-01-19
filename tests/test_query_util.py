@@ -62,7 +62,7 @@ class TestPrintTable:
 class TestRunQuery:
     """Tests for run_query function"""
     
-    @patch('core.query_util.sql.connect')
+    @patch('databricks.sql.connect')
     @patch('core.query_util.SERVER_HOSTNAME', 'test-host')
     @patch('core.query_util.HTTP_PATH', 'test-path')
     @patch('core.query_util.TOKEN', 'test-token')
@@ -75,7 +75,7 @@ class TestRunQuery:
         assert result is not None
         mock_cursor.execute.assert_called_once_with("SELECT * FROM test")
     
-    @patch('core.query_util.sql.connect')
+    @patch('databricks.sql.connect')
     @patch('core.query_util.SERVER_HOSTNAME', 'test-host')
     @patch('core.query_util.HTTP_PATH', 'test-path')
     @patch('core.query_util.TOKEN', 'test-token')

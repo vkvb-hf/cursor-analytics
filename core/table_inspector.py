@@ -9,7 +9,6 @@ checking for duplicates, verifying data quality, and analyzing conflicts.
 import sys
 import os
 from typing import Dict, List, Optional, Tuple
-from databricks import sql
 
 # Import config - works both when installed as package and when run directly
 try:
@@ -37,6 +36,8 @@ class TableInspector:
     
     def get_connection(self):
         """Get a database connection."""
+        # Lazy import to avoid ImportError when databricks-sql-connector not installed
+        from databricks import sql
         return sql.connect(
             server_hostname=self.server_hostname,
             http_path=self.http_path,

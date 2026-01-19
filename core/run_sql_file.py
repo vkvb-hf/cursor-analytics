@@ -3,7 +3,6 @@
 Execute SQL from files
 Usage: python run_sql_file.py <sql_file> [output_format] [limit]
 """
-from databricks import sql
 from pathlib import Path
 import sys
 import os
@@ -22,6 +21,9 @@ def run_sql_file(sql_file_path, output_format='show', limit=100):
     """
     Run a SQL file against Databricks
     """
+    # Lazy import to avoid ImportError when databricks-sql-connector not installed
+    from databricks import sql
+    
     print("="*80)
     print(f"Reading SQL file: {sql_file_path}")
     print("="*80)

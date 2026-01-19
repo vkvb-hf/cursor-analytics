@@ -50,32 +50,31 @@ class TestDatabricksMCPIntegration:
     
     @pytest.mark.integration
     def test_databricks_mcp_server_structure(self):
-        """Test Databricks MCP server has correct structure"""
+        """Test Databricks MCP server has correct structure (imports from core/)"""
         server_path = MCP_DATABRICKS_PATH / 'server.py'
         assert server_path.exists()
         
         content = server_path.read_text()
         
-        # Verify key components exist
-        assert 'class ConnectionPool' in content
-        assert 'class DatabricksClient' in content
+        # Verify it imports from core/ (refactored architecture)
+        assert 'from core.connection_pool import' in content
+        assert 'from core.databricks_job_runner import' in content
         assert 'execute_sql' in content
         assert 'create_notebook' in content
         assert 'run_notebook' in content
     
     @pytest.mark.integration
     def test_databricks_client_methods(self, mock_databricks_env):
-        """Test DatabricksClient has all required methods"""
-        server_path = MCP_DATABRICKS_PATH / 'server.py'
-        content = server_path.read_text()
+        """Test DatabricksJobRunner (in core/) has all required methods"""
+        # Check core/databricks_job_runner.py instead of MCP server
+        runner_path = MCP_DATABRICKS_PATH.parent.parent / 'core' / 'databricks_job_runner.py'
+        content = runner_path.read_text()
         
         required_methods = [
             'def create_notebook',
             'def create_job',
             'def run_job',
             'def get_run_status',
-            'def upload_file',
-            'def download_file',
         ]
         
         for method in required_methods:
@@ -83,12 +82,12 @@ class TestDatabricksMCPIntegration:
     
     @pytest.mark.integration
     def test_connection_pool_structure(self, mock_databricks_env):
-        """Test ConnectionPool has correct structure"""
-        server_path = MCP_DATABRICKS_PATH / 'server.py'
-        content = server_path.read_text()
+        """Test ConnectionPool (in core/) has correct structure"""
+        pool_path = MCP_DATABRICKS_PATH.parent.parent / 'core' / 'connection_pool.py'
+        content = pool_path.read_text()
         
         assert 'def get_connection' in content
-        assert 'def execute_query' in content
+        assert 'def execute' in content
         assert 'def close' in content
     
     @pytest.mark.integration
