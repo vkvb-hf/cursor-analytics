@@ -78,8 +78,6 @@ def main():
     key_files = [
         'README.md',
         'requirements.txt',
-        'databricks_api.py',
-        'databricks_cli.py',
         'mcp/databricks/server.py',
         'core/__init__.py',
         'config.py.example',
@@ -99,8 +97,6 @@ def main():
     print("\n🐍 Testing Python Syntax (CRITICAL)...")
     
     critical_python_files = [
-        'databricks_api.py',
-        'databricks_cli.py',
         'mcp/databricks/server.py',
         'core/__init__.py',
         'core/databricks_job_runner.py',

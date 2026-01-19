@@ -1,15 +1,15 @@
 # Cursor Rules for cursor-analytics
 
 ## Repository Overview
-This is a Databricks toolkit with MCP servers for Cursor AI integration.
+MCP servers for Cursor AI integration with Databricks and other services.
 
 ## MCP Servers (Primary Interface)
 All MCP servers are in `mcp/`:
-- `mcp/databricks/server.py` - SQL, notebooks, workspace sync
-- `mcp/google_sheets/server.py` - Read spreadsheets
-- `mcp/atlassian/` - Jira, Confluence (external)
-- `mcp/atlan/` - Data catalog (external)
-- `mcp/github/` - GitHub operations (external)
+- `mcp/databricks/server.py` - SQL, notebooks, workspace sync (7 tools)
+- `mcp/google_sheets/server.py` - Read spreadsheets (4 tools)
+- `mcp/atlassian/` - Jira, Confluence (external, 28 tools)
+- `mcp/atlan/` - Data catalog (external, 12 tools)
+- `mcp/github/` - GitHub operations (external, 26 tools)
 
 ## File Organization
 
@@ -22,22 +22,10 @@ All MCP servers are in `mcp/`:
 | Tests | `tests/` |
 | Historical | `archive/` |
 
-### Key Files
-- `mcp/databricks/server.py` - Main MCP server
+## Key Files
+- `mcp/databricks/server.py` - Main Databricks MCP server
+- `mcp/google_sheets/server.py` - Google Sheets MCP server
 - `core/__init__.py` - Core package exports
-- `config.py` - Credentials (gitignored)
-
-## Coding Patterns
-
-### Running SQL (via MCP)
-Use the `execute_sql` tool - it's the primary interface.
-
-### Running SQL (via Python)
-```python
-from databricks_api import DatabricksAPI
-db = DatabricksAPI()
-db.run_sql("SELECT * FROM table")
-```
 
 ## Testing
 
@@ -48,7 +36,6 @@ python scripts/smoke_test.py --quick
 
 ## Do NOT
 
-- Delete files in `core/` without checking dependencies
-- Modify `mcp/databricks/server.py` without testing
-- Commit `config.py` (contains credentials)
-- Create files at root level (use appropriate subdirectory)
+- Modify MCP servers without testing
+- Create files at root level
+- Commit credentials
