@@ -1,0 +1,566 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Validate pre_spider_graph_data vs checkout_funnel_backend
+# MAGIC 
+# MAGIC **Base 1:** `checkout_funnel_backend` where `event_spider_identified_voucher_abuse = 1` AND `size(parent_ids_with_checkout_success) > 1`
+# MAGIC 
+# MAGIC **Base 2:** `payments_hf.pre_spider_graph_data`
+# MAGIC 
+# MAGIC **Validations:**
+# MAGIC 1. Are all Base 1 customers present in Base 2?
+# MAGIC 2. For customers in both: count of same parent UUIDs, Base 1 more, Base 2 more
+# MAGIC 3. Distribution of `size(parent_ids_with_checkout_success)` for mismatches
+# MAGIC 4. Sample mismatches - check if concentrated on specific dates or business units
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Setup
+
+# COMMAND ----------
+
+from pyspark.sql import functions as F
+from pyspark.sql.types import ArrayType, StringType
+
+# Base S3 path for output
+base_s3_path = "s3://hf-payments-data-lake-live-main/payments_hf/validation"
+
+def save_temp(df, name):
+    """Save DataFrame as temp table."""
+    s3_path = f"{base_s3_path}/{name}"
+    table_name = f"payments_hf.{name}"
+    print(f'\n💾 Dropping table if exists: {table_name}')
+    spark.sql(f'DROP TABLE IF EXISTS {table_name}')
+    print(f"📤 Writing to {s3_path}")
+    df.write.mode("overwrite") \
+        .option("path", s3_path) \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(table_name)
+    print(f"✅ Saved {table_name}")
+
+print("=" * 80)
+print("Validate pre_spider_graph_data vs checkout_funnel_backend")
+print("=" * 80)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 1: Create Base 1 - checkout_funnel_backend with spider abuse and multiple parents
+
+# COMMAND ----------
+
+print("\n📥 Step 1: Creating Base 1 from checkout_funnel_backend...")
+print("   Filter: event_spider_identified_voucher_abuse = 1 AND size(parent_ids_with_checkout_success) >= 1")
+
+base1_df = spark.sql("""
+    SELECT 
+        country,
+        customer_id,
+        customer_uuid,
+        event_date,
+        -- Extract parent IDs from raw_payload
+        FROM_JSON(
+            spider_logs_last_payload.raw_payload,
+            'struct<parent_ids_with_checkout_success:array<struct<id:string, matching_attributes:array<struct<attribute_name:string>>>>>'
+        ).parent_ids_with_checkout_success AS parent_ids_with_checkout_success_struct,
+        -- Extract just the parent UUIDs (format is "country_uuid")
+        TRANSFORM(
+            FROM_JSON(
+                spider_logs_last_payload.raw_payload,
+                'struct<parent_ids_with_checkout_success:array<struct<id:string>>>'
+            ).parent_ids_with_checkout_success,
+            x -> SPLIT(x.id, '_')[1]
+        ) AS base1_parent_uuids,
+        -- Size of parent list
+        SIZE(
+            FROM_JSON(
+                spider_logs_last_payload.raw_payload,
+                'struct<parent_ids_with_checkout_success:array<struct<id:string>>>'
+            ).parent_ids_with_checkout_success
+        ) AS base1_parent_count
+    FROM payments_hf.checkout_funnel_backend
+    WHERE event_spider_identified_voucher_abuse = 1
+""")
+
+# Filter for size >= 1
+base1_df = base1_df.filter(F.col("base1_parent_count") >= 1)
+
+base1_count = base1_df.count()
+print(f"\n   Base 1 total records: {base1_count:,}")
+
+# Save Base 1
+save_temp(base1_df, "temp_validation_base1")
+
+# Show sample
+print("\n📊 Sample Base 1 records:")
+base1_df.select(
+    "country", 
+    "customer_id", 
+    "event_date",
+    "base1_parent_count",
+    "base1_parent_uuids"
+).show(10, truncate=50)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 2: Load Base 2 - pre_spider_graph_data
+
+# COMMAND ----------
+
+print("\n📥 Step 2: Loading Base 2 from pre_spider_graph_data...")
+
+base2_df = spark.table("payments_hf.pre_spider_graph_data").select(
+    F.col("country"),
+    F.col("customer_id"),
+    F.col("customer_uuid"),
+    F.col("created_at"),
+    F.col("parent_uuid_list").alias("base2_parent_uuids"),
+    F.size(F.coalesce(F.col("parent_uuid_list"), F.array())).alias("base2_parent_count")
+)
+
+base2_count = base2_df.count()
+print(f"   Base 2 total records: {base2_count:,}")
+
+# Show sample
+print("\n📊 Sample Base 2 records:")
+base2_df.filter(F.col("base2_parent_count") > 0).select(
+    "country", 
+    "customer_id", 
+    "base2_parent_count",
+    "base2_parent_uuids"
+).show(10, truncate=50)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 3: Check - Are all Base 1 customers present in Base 2?
+
+# COMMAND ----------
+
+print("\n🔍 Step 3: Checking if all Base 1 customers are present in Base 2...")
+
+# Join Base 1 with Base 2
+joined_df = base1_df.alias("b1").join(
+    base2_df.alias("b2"),
+    on=[
+        F.col("b1.country") == F.col("b2.country"),
+        F.col("b1.customer_id") == F.col("b2.customer_id")
+    ],
+    how="left"
+).select(
+    F.col("b1.country"),
+    F.col("b1.customer_id"),
+    F.col("b1.customer_uuid"),
+    F.col("b1.event_date"),
+    F.col("b1.base1_parent_uuids"),
+    F.col("b1.base1_parent_count"),
+    F.col("b2.base2_parent_uuids"),
+    F.col("b2.base2_parent_count"),
+    F.col("b2.customer_id").isNotNull().alias("found_in_base2")
+)
+
+total_base1 = joined_df.count()
+found_in_base2 = joined_df.filter(F.col("found_in_base2") == True).count()
+not_found_in_base2 = joined_df.filter(F.col("found_in_base2") == False).count()
+
+print("\n" + "=" * 80)
+print("VALIDATION 1: Are all Base 1 customers present in Base 2?")
+print("=" * 80)
+print(f"\n   Total Base 1 customers: {total_base1:,}")
+print(f"   ✅ Found in Base 2: {found_in_base2:,} ({found_in_base2/total_base1*100:.1f}%)")
+print(f"   ❌ NOT found in Base 2: {not_found_in_base2:,} ({not_found_in_base2/total_base1*100:.1f}%)")
+
+# Show sample of not found
+if not_found_in_base2 > 0:
+    print("\n   Sample customers NOT found in Base 2:")
+    joined_df.filter(F.col("found_in_base2") == False).select(
+        "country", "customer_id", "customer_uuid", "event_date", "base1_parent_count"
+    ).show(10, truncate=False)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 4: Compare Parent UUID Lists for Customers in Both Bases
+
+# COMMAND ----------
+
+print("\n🔍 Step 4: Comparing parent UUID lists...")
+
+# Filter to only customers found in both bases
+comparison_df = joined_df.filter(F.col("found_in_base2") == True)
+
+# Add comparison columns
+comparison_df = comparison_df.withColumn(
+    # Sort both arrays for comparison
+    "base1_sorted",
+    F.array_sort(F.coalesce(F.col("base1_parent_uuids"), F.array()))
+).withColumn(
+    "base2_sorted", 
+    F.array_sort(F.coalesce(F.col("base2_parent_uuids"), F.array()))
+).withColumn(
+    # Parents in Base 1 but NOT in Base 2
+    "in_base1_not_base2",
+    F.array_except(
+        F.coalesce(F.col("base1_parent_uuids"), F.array()),
+        F.coalesce(F.col("base2_parent_uuids"), F.array())
+    )
+).withColumn(
+    # Parents in Base 2 but NOT in Base 1
+    "in_base2_not_base1",
+    F.array_except(
+        F.coalesce(F.col("base2_parent_uuids"), F.array()),
+        F.coalesce(F.col("base1_parent_uuids"), F.array())
+    )
+).withColumn(
+    # Common parents
+    "common_parents",
+    F.array_intersect(
+        F.coalesce(F.col("base1_parent_uuids"), F.array()),
+        F.coalesce(F.col("base2_parent_uuids"), F.array())
+    )
+).withColumn(
+    # Comparison result
+    "comparison_result",
+    F.when(
+        F.arrays_overlap(F.col("base1_sorted"), F.col("base2_sorted")) == False,
+        "NO_OVERLAP"
+    ).when(
+        (F.size(F.col("in_base1_not_base2")) == 0) & (F.size(F.col("in_base2_not_base1")) == 0),
+        "EXACT_MATCH"
+    ).when(
+        (F.size(F.col("in_base1_not_base2")) > 0) & (F.size(F.col("in_base2_not_base1")) == 0),
+        "BASE1_MORE"
+    ).when(
+        (F.size(F.col("in_base1_not_base2")) == 0) & (F.size(F.col("in_base2_not_base1")) > 0),
+        "BASE2_MORE"
+    ).otherwise("BOTH_HAVE_UNIQUE")
+).withColumn(
+    "count_in_base1_not_base2",
+    F.size(F.col("in_base1_not_base2"))
+).withColumn(
+    "count_in_base2_not_base1",
+    F.size(F.col("in_base2_not_base1"))
+).withColumn(
+    "count_common",
+    F.size(F.col("common_parents"))
+)
+
+# Save comparison results
+save_temp(comparison_df, "temp_validation_comparison")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 5: Summary - Count Distribution
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("VALIDATION 2: Comparison of Parent UUID Lists")
+print("=" * 80)
+
+# Get comparison result distribution
+print("\n📊 Comparison Result Distribution:")
+comparison_df.groupBy("comparison_result").agg(
+    F.count("*").alias("count"),
+    F.round(F.count("*") * 100.0 / comparison_df.count(), 1).alias("percentage")
+).orderBy(F.desc("count")).show()
+
+# Detailed stats
+stats = comparison_df.groupBy("comparison_result").count().collect()
+stats_dict = {row['comparison_result']: row['count'] for row in stats}
+
+total_compared = comparison_df.count()
+print(f"\n📊 Detailed Statistics (customers in both bases):")
+print(f"   Total compared: {total_compared:,}")
+print(f"   ✅ EXACT_MATCH (same parent list): {stats_dict.get('EXACT_MATCH', 0):,}")
+print(f"   ➡️  BASE1_MORE (Base1 has extra parents): {stats_dict.get('BASE1_MORE', 0):,}")
+print(f"   ⬅️  BASE2_MORE (Base2 has extra parents): {stats_dict.get('BASE2_MORE', 0):,}")
+print(f"   ↔️  BOTH_HAVE_UNIQUE (both have unique parents): {stats_dict.get('BOTH_HAVE_UNIQUE', 0):,}")
+print(f"   ❌ NO_OVERLAP (completely different): {stats_dict.get('NO_OVERLAP', 0):,}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 6: Distribution of base1_parent_count for Mismatches
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("VALIDATION 3: Distribution of size(parent_ids_with_checkout_success) for Mismatches")
+print("=" * 80)
+
+# Filter to mismatches only
+mismatches = comparison_df.filter(F.col("comparison_result") != "EXACT_MATCH")
+
+print(f"\n   Total mismatches: {mismatches.count():,}")
+
+# Distribution by comparison_result and base1_parent_count
+print("\n📊 Distribution of Base1 parent count by mismatch type:")
+mismatches.groupBy("comparison_result", "base1_parent_count").agg(
+    F.count("*").alias("count")
+).orderBy("comparison_result", "base1_parent_count").show(50)
+
+# Pivot table for clearer view
+print("\n📊 Pivot: Base1 parent count distribution by mismatch type:")
+pivot_df = mismatches.groupBy("base1_parent_count").pivot("comparison_result").count().fillna(0)
+pivot_df.orderBy("base1_parent_count").show(30)
+
+# Summary stats by mismatch type
+print("\n📊 Summary statistics by mismatch type:")
+mismatches.groupBy("comparison_result").agg(
+    F.count("*").alias("count"),
+    F.min("base1_parent_count").alias("min_base1_parents"),
+    F.max("base1_parent_count").alias("max_base1_parents"),
+    F.round(F.avg("base1_parent_count"), 1).alias("avg_base1_parents"),
+    F.round(F.avg("base2_parent_count"), 1).alias("avg_base2_parents"),
+    F.round(F.avg("count_common"), 1).alias("avg_common_parents")
+).orderBy(F.desc("count")).show()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 7: Check if Mismatches are Concentrated on Specific Dates
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("VALIDATION 4a: Are mismatches concentrated on specific dates?")
+print("=" * 80)
+
+# Mismatches by event_date
+print("\n📊 Mismatches by event_date (top 20):")
+mismatches.groupBy("event_date").agg(
+    F.count("*").alias("mismatch_count"),
+    F.sum(F.when(F.col("comparison_result") == "BASE1_MORE", 1).otherwise(0)).alias("base1_more"),
+    F.sum(F.when(F.col("comparison_result") == "BASE2_MORE", 1).otherwise(0)).alias("base2_more"),
+    F.sum(F.when(F.col("comparison_result") == "BOTH_HAVE_UNIQUE", 1).otherwise(0)).alias("both_unique"),
+    F.sum(F.when(F.col("comparison_result") == "NO_OVERLAP", 1).otherwise(0)).alias("no_overlap")
+).orderBy(F.desc("mismatch_count")).show(20)
+
+# Date range analysis
+print("\n📊 Mismatch date range:")
+mismatches.agg(
+    F.min("event_date").alias("earliest_date"),
+    F.max("event_date").alias("latest_date"),
+    F.countDistinct("event_date").alias("distinct_dates")
+).show()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 8: Check if Mismatches are Concentrated on Specific Business Units
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("VALIDATION 4b: Are mismatches concentrated on specific business units?")
+print("=" * 80)
+
+# Mismatches by country
+print("\n📊 Mismatches by country:")
+mismatch_by_country = mismatches.groupBy("country").agg(
+    F.count("*").alias("mismatch_count"),
+    F.sum(F.when(F.col("comparison_result") == "BASE1_MORE", 1).otherwise(0)).alias("base1_more"),
+    F.sum(F.when(F.col("comparison_result") == "BASE2_MORE", 1).otherwise(0)).alias("base2_more"),
+    F.sum(F.when(F.col("comparison_result") == "BOTH_HAVE_UNIQUE", 1).otherwise(0)).alias("both_unique"),
+    F.sum(F.when(F.col("comparison_result") == "NO_OVERLAP", 1).otherwise(0)).alias("no_overlap")
+).orderBy(F.desc("mismatch_count"))
+
+mismatch_by_country.show(30)
+
+# Compare with overall Base1 distribution
+print("\n📊 Mismatch rate by country (compared to Base1 total):")
+base1_by_country = base1_df.groupBy("country").count().withColumnRenamed("count", "base1_total")
+comparison_by_country = comparison_df.groupBy("country").agg(
+    F.count("*").alias("compared_total"),
+    F.sum(F.when(F.col("comparison_result") == "EXACT_MATCH", 1).otherwise(0)).alias("exact_match"),
+    F.sum(F.when(F.col("comparison_result") != "EXACT_MATCH", 1).otherwise(0)).alias("mismatch")
+)
+
+country_analysis = base1_by_country.join(comparison_by_country, "country", "left").withColumn(
+    "match_rate",
+    F.round(F.col("exact_match") * 100.0 / F.col("compared_total"), 1)
+).withColumn(
+    "mismatch_rate",
+    F.round(F.col("mismatch") * 100.0 / F.col("compared_total"), 1)
+).orderBy(F.desc("base1_total"))
+
+country_analysis.show(30)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 9: Sample Mismatches for Investigation
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("SAMPLE MISMATCHES FOR INVESTIGATION")
+print("=" * 80)
+
+# Sample BASE1_MORE (Base1 has parents not in Base2)
+print("\n📋 Sample: BASE1_MORE (checkout_funnel_backend has parents NOT in pre_spider_graph_data):")
+base1_more_samples = mismatches.filter(F.col("comparison_result") == "BASE1_MORE").select(
+    "country",
+    "customer_id",
+    "customer_uuid",
+    "event_date",
+    "base1_parent_count",
+    "base2_parent_count",
+    "count_common",
+    "count_in_base1_not_base2",
+    "base1_parent_uuids",
+    "base2_parent_uuids",
+    "in_base1_not_base2"
+).limit(10)
+base1_more_samples.show(10, truncate=50)
+
+# Sample BASE2_MORE (Base2 has parents not in Base1)
+print("\n📋 Sample: BASE2_MORE (pre_spider_graph_data has parents NOT in checkout_funnel_backend):")
+base2_more_samples = mismatches.filter(F.col("comparison_result") == "BASE2_MORE").select(
+    "country",
+    "customer_id",
+    "customer_uuid", 
+    "event_date",
+    "base1_parent_count",
+    "base2_parent_count",
+    "count_common",
+    "count_in_base2_not_base1",
+    "base1_parent_uuids",
+    "base2_parent_uuids",
+    "in_base2_not_base1"
+).limit(10)
+base2_more_samples.show(10, truncate=50)
+
+# Sample NO_OVERLAP (completely different parent lists)
+print("\n📋 Sample: NO_OVERLAP (completely different parent lists):")
+no_overlap_samples = mismatches.filter(F.col("comparison_result") == "NO_OVERLAP").select(
+    "country",
+    "customer_id",
+    "customer_uuid",
+    "event_date",
+    "base1_parent_count",
+    "base2_parent_count",
+    "base1_parent_uuids",
+    "base2_parent_uuids"
+).limit(10)
+no_overlap_samples.show(10, truncate=50)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 10: Deep Dive - Investigate Specific Mismatches
+
+# COMMAND ----------
+
+print("\n🔍 Step 10: Deep dive into specific mismatches...")
+
+# Get a few NO_OVERLAP cases for investigation
+no_overlap_cases = mismatches.filter(F.col("comparison_result") == "NO_OVERLAP").limit(3).collect()
+
+if len(no_overlap_cases) > 0:
+    for i, row in enumerate(no_overlap_cases):
+        print(f"\n{'='*80}")
+        print(f"NO_OVERLAP CASE #{i+1}")
+        print(f"{'='*80}")
+        print(f"Customer: {row['country']}_{row['customer_id']}")
+        print(f"Customer UUID: {row['customer_uuid']}")
+        print(f"Event Date: {row['event_date']}")
+        print(f"\nBase1 Parents (from checkout_funnel_backend): {row['base1_parent_count']}")
+        print(f"   UUIDs: {row['base1_parent_uuids']}")
+        print(f"\nBase2 Parents (from pre_spider_graph_data): {row['base2_parent_count']}")
+        print(f"   UUIDs: {row['base2_parent_uuids']}")
+        
+        # Check if Base1 parents exist in pre_spider_graph_data at all
+        if row['base1_parent_uuids']:
+            print(f"\n   Checking Base1 parents in pre_spider_graph_data...")
+            for parent_uuid in row['base1_parent_uuids'][:3]:
+                if parent_uuid:
+                    parent_check = spark.sql(f"""
+                        SELECT country, customer_id, customer_uuid, 
+                               SIZE(parent_uuid_list) as their_parent_count
+                        FROM payments_hf.pre_spider_graph_data
+                        WHERE customer_uuid = '{parent_uuid}'
+                    """).collect()
+                    
+                    if parent_check:
+                        p = parent_check[0]
+                        print(f"   ✅ {parent_uuid}: Found as {p['country']}_{p['customer_id']}")
+                    else:
+                        print(f"   ❌ {parent_uuid}: NOT in pre_spider_graph_data")
+
+# Get a few BASE1_MORE cases
+base1_more_cases = mismatches.filter(F.col("comparison_result") == "BASE1_MORE").limit(3).collect()
+
+if len(base1_more_cases) > 0:
+    for i, row in enumerate(base1_more_cases):
+        print(f"\n{'='*80}")
+        print(f"BASE1_MORE CASE #{i+1}")
+        print(f"{'='*80}")
+        print(f"Customer: {row['country']}_{row['customer_id']}")
+        print(f"Event Date: {row['event_date']}")
+        print(f"Common parents: {row['count_common']}")
+        print(f"Only in Base1: {row['count_in_base1_not_base2']}")
+        print(f"Parents only in Base1: {row['in_base1_not_base2']}")
+        
+        # Check why these parents are not in Base2
+        if row['in_base1_not_base2']:
+            print(f"\n   Why are these parents not in Base2?")
+            for parent_uuid in row['in_base1_not_base2'][:3]:
+                if parent_uuid:
+                    # Check if parent is in different business unit
+                    parent_info = spark.sql(f"""
+                        SELECT country, customer_id, customer_uuid
+                        FROM payments_hf.pre_spider_graph_data
+                        WHERE customer_uuid = '{parent_uuid}'
+                    """).collect()
+                    
+                    if parent_info:
+                        p = parent_info[0]
+                        if p['country'] != row['country']:
+                            print(f"   ⚠️  {parent_uuid}: Different BU ({p['country']} vs {row['country']})")
+                        else:
+                            print(f"   ❓ {parent_uuid}: Same BU but not in parent list")
+                    else:
+                        print(f"   ❌ {parent_uuid}: Not found in pre_spider_graph_data")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Summary
+
+# COMMAND ----------
+
+print("\n" + "=" * 80)
+print("VALIDATION SUMMARY")
+print("=" * 80)
+
+print(f"""
+📊 Base 1: checkout_funnel_backend (spider abuse with >1 parent)
+   Total records: {base1_count:,}
+
+📊 Base 2: pre_spider_graph_data
+   Total records: {base2_count:,}
+
+🔍 VALIDATION 1: Customer Presence
+   Base1 customers found in Base2: {found_in_base2:,} ({found_in_base2/total_base1*100:.1f}%)
+   Base1 customers NOT in Base2: {not_found_in_base2:,} ({not_found_in_base2/total_base1*100:.1f}%)
+
+🔍 VALIDATION 2: Parent List Comparison (for {total_compared:,} customers in both)
+   EXACT_MATCH: {stats_dict.get('EXACT_MATCH', 0):,}
+   BASE1_MORE: {stats_dict.get('BASE1_MORE', 0):,}
+   BASE2_MORE: {stats_dict.get('BASE2_MORE', 0):,}
+   BOTH_HAVE_UNIQUE: {stats_dict.get('BOTH_HAVE_UNIQUE', 0):,}
+   NO_OVERLAP: {stats_dict.get('NO_OVERLAP', 0):,}
+
+📋 Output Tables:
+   - payments_hf.temp_validation_base1: Base1 records
+   - payments_hf.temp_validation_comparison: Full comparison results
+
+🔑 Key Insights:
+   - BASE1_MORE likely due to cross-business-unit parents (PSG only includes same BU)
+   - BASE2_MORE means graph found additional connections via shared identifiers
+   - NO_OVERLAP needs investigation - could be data timing or identifier differences
+""")

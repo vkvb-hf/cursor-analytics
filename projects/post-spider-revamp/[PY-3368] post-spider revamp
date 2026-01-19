@@ -1,0 +1,1943 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Graph Duplicate Detection - Post Spider Revamp
+# MAGIC 
+# MAGIC This notebook:
+# MAGIC 1. Reads edges and vertices from S3 CSV files (created by Neptune Backfill)
+# MAGIC 2. Converts CSV data back to `customer_identifiers` format
+# MAGIC 3. Finds max created_at date in CSV files
+# MAGIC 4. Processes `payments_hf.checkout_customer_details_spider_20251121` for dates after max CSV date
+# MAGIC 5. Combines CSV customer_identifiers with newly processed spider customer_identifiers
+# MAGIC 6. Creates full pipeline: customer_identifiers -> connected_components -> graph_customers -> graph_customers_with_match_reasons
+# MAGIC 
+# MAGIC **Sources**: 
+# MAGIC - S3 CSV files from Neptune backfill (historical data, already processed)
+# MAGIC - `payments_hf.checkout_customer_details_spider_20251121` (new data after CSV max date, processed through AttributeProcessor)
+# MAGIC **Output**: `payments_hf.customer_identifiers_20251121` and downstream tables
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Configuration
+
+# COMMAND ----------
+
+from pyspark.sql import functions as F, types as T
+from pyspark.sql.window import Window
+from pyspark.sql import DataFrame
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType, MapType
+from datetime import datetime
+
+# S3 path containing edges and vertices CSV files
+save_path = "s3://hf-payments-data-lake-live-main/voucher_abuse/neptune_backfill/20250305"
+
+# Output table name
+output_table = "payments_hf.customer_identifiers_20251121"
+
+# Base S3 path for output
+base_s3_path = "s3://hf-payments-data-lake-live-main/payments_hf/duplicate_customer_graph"
+spark.sparkContext.setCheckpointDir(f"{base_s3_path}/checkpoints")
+
+print("=" * 80)
+print("Graph Duplicate Detection - Post Spider Revamp")
+print("=" * 80)
+print(f"\n📥 Source S3 Path: {save_path}")
+print(f"📤 Output Table: {output_table}")
+print(f"💾 Output S3 Path: {base_s3_path}/customer_identifiers_20251121")
+print("=" * 80)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Helper Functions
+
+# COMMAND ----------
+
+def save(df, name):
+    """Save DataFrame to S3 and register as table in Glue."""
+    s3_path = f"{base_s3_path}/{name}"
+    table_name = f"payments_hf.{name}"
+    print(f'\n💾 Dropping table if exists: {table_name}')
+    spark.sql(f'drop table if exists {table_name}')
+    print(f"📤 Writing dataframe to S3 at {s3_path}")
+    print(f"📋 Registering as table {table_name} in Glue")
+
+    df.write.mode("overwrite") \
+        .option("path", s3_path) \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(table_name)
+    
+    print(f"✅ Successfully saved {table_name}")
+
+def load(name):
+    """Load table as DataFrame."""
+    return spark.table(f"payments_hf.{name}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## UDF Definition for Pre-Processor
+
+# COMMAND ----------
+
+# Install required dependencies
+# MAGIC %pip install phonenumbers
+
+# COMMAND ----------
+
+# AttributeProcessor class (embedded from voucher_fraud.preprocessor.preprocessor)
+import datetime
+import unicodedata
+import re
+from typing import Callable
+import phonenumbers
+
+class AttributeProcessor:
+    """Class for cleaning and transforming attributes using a single UDF."""
+
+    ADDRESS_ABBREVIATIONS = {
+        "en": {
+            "aly": "alley", "ave": "avenue", "av": "avenue", "blvd": "boulevard",
+            "cswy": "causeway", "ctr": "center", "cir": "circle", "ct": "court",
+            "xing": "crossing", "dr": "drive", "expy": "expressway", "ext": "extension",
+            "fwy": "freeway", "grv": "grove", "hwy": "highway", "ln": "lane",
+            "pl": "place", "plz": "plaza", "pkwy": "parkway", "pt": "point",
+            "rd": "road", "rte": "route", "rt": "route", "sq": "square",
+            "str": "street", "st": "street", "trl": "trail", "ter": "terrace",
+            "apt": "apartment", "fl": "floor", "ste": "suite", "vlg": "village",
+            "nw": "northwest", "ne": "northeast", "sw": "southwest", "se": "southeast",
+            "n": "north", "s": "south", "w": "west", "e": "east",
+        },
+        "de": {
+            "str": "strasse", "pl": "platz", "wg": "weg", "nr": "nummer",
+            "bhf": "bahnhof", "hbf": "hauptbahnhof",
+        },
+    }
+    COUNTRY_PHONE_LENGTHS = {
+        "AT": 11, "AU": 9, "BE": 9, "CA": 10, "CH": 9, "DE": 10, "DK": 8,
+        "ES": 9, "FR": 9, "GB": 10, "IE": 9, "IT": 10, "LU": 9, "NL": 9,
+        "NO": 8, "NZ": 9, "SE": 7, "US": 10,
+    }
+    ATTRIBUTE_CONFIGS = [
+        {
+            "name": "address",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [
+                    AttributeProcessor._alphanumeric_only(customer.get("postcode")),
+                    AttributeProcessor._alphanumeric_only(
+                        AttributeProcessor._normalize_address_abbreviations(
+                            customer.get("address"), customer.get("country"),
+                        )
+                    ),
+                ], "_",
+            ),
+        },
+        {
+            "name": "address2",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [
+                    AttributeProcessor._alphanumeric_only(customer.get("postcode")),
+                    AttributeProcessor._alphanumeric_only(
+                        AttributeProcessor._normalize_address_abbreviations(
+                            customer.get("address"), customer.get("country"),
+                        )
+                    ),
+                    AttributeProcessor._alphanumeric_only(
+                        AttributeProcessor._normalize_address_abbreviations(
+                            customer.get("address2"), customer.get("country"),
+                        )
+                    ),
+                ], "_",
+            ),
+        },
+        {
+            "name": "name",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [
+                    AttributeProcessor._alpha_only(customer.get("first_name")),
+                    AttributeProcessor._alpha_only(customer.get("last_name")),
+                ]
+            ),
+        },
+        {
+            "name": "last_name",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [AttributeProcessor._alpha_only(customer.get("last_name"))]
+            ),
+        },
+        {
+            "name": "card",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [
+                    AttributeProcessor._validate_exact_length(
+                        AttributeProcessor._digit_only(customer.get("card_first_6")), 6,
+                    ),
+                    AttributeProcessor._validate_exact_length(
+                        AttributeProcessor._digit_only(customer.get("card_last_2")), 2,
+                    ),
+                ]
+            ),
+        },
+        {
+            "name": "shopper_email",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [AttributeProcessor._clean_email(customer.get("shopper_email"))]
+            ),
+        },
+        {
+            "name": "account_email",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [AttributeProcessor._clean_email(customer.get("account_email"))]
+            ),
+        },
+        {
+            "name": "phone",
+            "processor": lambda customer: AttributeProcessor.concat_and_validate(
+                [
+                    AttributeProcessor._check_if_random_number(
+                        AttributeProcessor._format_phone(
+                            AttributeProcessor._digit_only(customer.get("phone")),
+                            customer.get("country"),
+                        )
+                    ),
+                ]
+            ),
+        },
+    ]
+    MIN_LENGTH = 3
+    IDENTIFIER_DELIMITER = "_"
+    IDENTIFIER_PREFIX_DELIMITER = ":"
+    CUSTOMER_NODE = "customer:{business_unit}_{customer_uuid}"
+    IDENTIFIER_CONFIGS = [
+        {"identifier_type": "phone", "columns": ["phone"]},
+        {"identifier_type": "email", "columns": ["shopper_email"]},
+        {"identifier_type": "email", "columns": ["account_email"]},
+        {"identifier_type": "name_card", "columns": ["name", "card"]},
+        {"identifier_type": "card_address", "columns": ["card", "address"]},
+        {"identifier_type": "last_name_address", "columns": ["last_name", "address"]},
+        {"identifier_type": "card_address2", "columns": ["card", "address2"]},
+        {"identifier_type": "last_name_address2", "columns": ["last_name", "address2"]},
+    ]
+
+    @staticmethod
+    def concat_and_validate(values, delimiter=""):
+        if any(val is None or val.strip() == "" for val in values):
+            return None
+        return AttributeProcessor._validate_length(delimiter.join(values))
+
+    @staticmethod
+    def _normalize_to_ascii(value: str) -> str:
+        if value is None:
+            return None
+        value = value.replace("ß", "ss").replace("ẞ", "ss")
+        normalized = unicodedata.normalize("NFD", value)
+        return "".join([c for c in normalized if not unicodedata.combining(c)])
+
+    @staticmethod
+    def _clean_email(email: str) -> str:
+        email = AttributeProcessor._trim_lower(email)
+        if not email or "@" not in email:
+            return email
+        local_part, domain = email.split("@", 1)
+        if domain == "gmail.com":
+            local_part = local_part.replace(".", "").split("+")[0]
+        elif domain == "outlook.com" and "+" in local_part:
+            local_part = local_part.split("+")[0]
+        return AttributeProcessor._trim_lower(f"{local_part}@{domain}")
+
+    @staticmethod
+    def _get_language_by_country(country: str):
+        country_language_map = {
+            "AT": "de", "AU": "en", "BE": "nl", "CA": "en", "CH": "de", "DE": "de",
+            "DK": "da", "ES": "es", "FR": "fr", "GB": "en", "IE": "en", "IT": "it",
+            "LU": "fr", "NL": "nl", "NO": "no", "NZ": "en", "SE": "sv", "US": "en"
+        }
+        return country_language_map.get(country)
+
+    @staticmethod
+    def _normalize_address_abbreviations(value: str, country: str) -> str:
+        if value is None:
+            return None
+        language = AttributeProcessor._get_language_by_country(country)
+        value = AttributeProcessor._trim_lower(
+            AttributeProcessor._normalize_to_ascii(value)
+        )
+        abbreviations = AttributeProcessor.ADDRESS_ABBREVIATIONS.get(language, {})
+        sorted_abbreviations = sorted(abbreviations.items(), key=lambda x: -len(x[1]))
+        result = value
+        for short, long in sorted_abbreviations:
+            if language == "de" and short == "str":
+                result = re.sub(rf"{short}\b", long, result, flags=re.IGNORECASE)
+            else:
+                result = re.sub(rf"\b{short}\b", long, result, flags=re.IGNORECASE)
+        return result
+
+    @staticmethod
+    def _format_phone(phone: str, country: str):
+        try:
+            country_code_number = str(phonenumbers.parse(phone, country).country_code)
+            country_code_length = len(country_code_number)
+            national_phone_number = str(
+                phonenumbers.parse(phone, country).national_number
+            )
+            country_phone_length = AttributeProcessor.COUNTRY_PHONE_LENGTHS.get(country)
+            formatted_phone = (
+                national_phone_number[country_code_length:]
+                if (
+                    len(national_phone_number) > country_phone_length
+                    and national_phone_number[:country_code_length] == country_code_number
+                )
+                else national_phone_number
+            )
+            formatted_phone = (
+                country_code_number + formatted_phone
+                if len(formatted_phone) > 1
+                else phone
+            )
+            return formatted_phone
+        except phonenumbers.NumberParseException:
+            return phone
+
+    @staticmethod
+    def _trim_lower(value: str) -> str:
+        if value is None:
+            return None
+        return value.strip().lower()
+
+    @staticmethod
+    def _keep_only(value: str, condition: Callable[[str], bool]) -> str:
+        if value is None:
+            return None
+        value = AttributeProcessor._trim_lower(
+            AttributeProcessor._normalize_to_ascii(value)
+        )
+        return "".join(c for c in value if condition(c))
+
+    @staticmethod
+    def _alphanumeric_only(value: str) -> str:
+        return AttributeProcessor._keep_only(value, lambda c: c.isalnum())
+
+    @staticmethod
+    def _alpha_only(value: str) -> str:
+        return AttributeProcessor._keep_only(value, lambda c: c.isalpha())
+
+    @staticmethod
+    def _digit_only(value: str) -> str:
+        return AttributeProcessor._keep_only(value, lambda c: c.isdigit())
+
+    @staticmethod
+    def _validate_length(value: str) -> str:
+        if value is None or len(value) < AttributeProcessor.MIN_LENGTH:
+            return None
+        return value
+
+    @staticmethod
+    def _validate_exact_length(value: str, length: int) -> str:
+        if value is None or len(value) != length:
+            return None
+        return value
+
+    @staticmethod
+    def _generate_identifiers(cleaned_data: dict) -> list:
+        identifiers = []
+        for config in AttributeProcessor.IDENTIFIER_CONFIGS:
+            identifier_type = config["identifier_type"]
+            columns = config["columns"]
+            values = [cleaned_data.get(col, "") for col in columns]
+            if any(value is None for value in values):
+                continue
+            identifier_value = AttributeProcessor.IDENTIFIER_DELIMITER.join(values)
+            identifiers.append({
+                "identifier": AttributeProcessor.IDENTIFIER_PREFIX_DELIMITER.join(
+                    [identifier_type, identifier_value]
+                ),
+                "identifier_source": "_".join(columns),
+            })
+        return identifiers
+
+    @staticmethod
+    def _check_sequence_numbers(phone_number: str) -> bool:
+        if phone_number is None or phone_number == '':
+            return False
+        return True if '123456' in phone_number or '98765' in phone_number else False
+
+    @staticmethod
+    def _check_repeating_numbers(phone_number: str) -> bool:
+        if phone_number is None or phone_number == '':
+            return False
+        n = None
+        counter = 0
+        for i in phone_number:
+            n = i if n is None else n
+            if n != i:
+                counter = 0
+                n = i
+            else:
+                counter += 1
+            if counter > 5:
+                return True
+        return False
+
+    @staticmethod
+    def _check_less_than_3_dist_numbers(phone_number: str) -> bool:
+        if phone_number is None or phone_number == '':
+            return False
+        unique_numbers = set(phone_number)
+        return True if len(unique_numbers) < 3 else False
+
+    @staticmethod
+    def _check_less_than_5_digits(phone_number: str) -> bool:
+        if phone_number is None or phone_number == '':
+            return False
+        return True if len(phone_number) < 5 else False
+
+    @staticmethod
+    def _check_if_random_number(phone_number: str) -> str:
+        return None if (
+            AttributeProcessor._check_sequence_numbers(phone_number)
+            or AttributeProcessor._check_repeating_numbers(phone_number)
+            or AttributeProcessor._check_less_than_3_dist_numbers(phone_number)
+            or AttributeProcessor._check_less_than_5_digits(phone_number)
+        ) else phone_number
+
+    @staticmethod
+    def _process(row_dict: dict) -> dict:
+        processed_dict = {}
+        processed_dict["attributes"] = {
+            item["name"]: item["processor"](row_dict)
+            for item in AttributeProcessor.ATTRIBUTE_CONFIGS
+        }
+        processed_dict["identifiers"] = AttributeProcessor._generate_identifiers(
+            processed_dict["attributes"]
+        )
+        processed_dict["customer"] = AttributeProcessor.CUSTOMER_NODE.format(
+            business_unit=row_dict["business_unit"],
+            customer_uuid=row_dict["customer_uuid"],
+        )
+        processed_dict["created_at"] = datetime.datetime.fromisoformat(
+            row_dict["checkout_time_utc_iso"]
+        ).isoformat(timespec="milliseconds")
+        return processed_dict
+
+print("✅ AttributeProcessor class loaded successfully")
+
+def _process_row(row) -> dict:
+    """Processes a single row, generates cleaned columns, and identifiers based on cleaned columns."""
+    return AttributeProcessor._process(row.asDict())
+
+def process_all_udf():
+    """Creates a Spark UDF to process all columns in a row."""
+    schema = StructType(
+        [
+            StructField(
+                "attributes",
+                StructType(
+                    [
+                        StructField(
+                            ATTRIBUTE_CONFIG.get("name"), StringType(), True
+                        )
+                        for ATTRIBUTE_CONFIG in AttributeProcessor.ATTRIBUTE_CONFIGS
+                    ]
+                ),
+                True,
+            ),
+        ]
+        + [
+            StructField(
+                "identifiers", ArrayType(MapType(StringType(), StringType())), True
+            ),
+        ]
+        + [
+            StructField(
+                "created_at", StringType(), True
+            ),
+        ]
+        + [
+            StructField(
+                "customer", StringType(), True
+            ),
+        ]
+    )
+
+    return F.udf(_process_row, schema)
+
+def process_all(df: DataFrame) -> DataFrame:
+    """Applies the UDF to the entire DataFrame and flattens the struct output."""
+    df = df.withColumn(
+        "cleaned_data", process_all_udf()(F.struct(*df.columns))
+    )
+    
+    flattened_df = df.select(
+        *[F.col(col) for col in df.columns],
+        F.col("cleaned_data.customer").alias("customer"),
+        F.col("cleaned_data.created_at").alias("created_at"),
+        F.col("cleaned_data.identifiers").alias("identifiers"),
+        F.col("cleaned_data.attributes").alias("attributes"),
+    ).drop("cleaned_data")
+
+    return flattened_df
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 1: Read CSV Files and Convert to customer_identifiers Format
+
+# COMMAND ----------
+
+print("\n📥 Step 1: Reading CSV files from S3 or saved tables...")
+print(f"   S3 Path: {save_path}")
+
+# Try to load from saved tables first, fall back to S3 if tables don't exist
+try:
+    print("   Attempting to load from saved tables...")
+    vertices_df = spark.table("payments_hf.customer_vertices_20251121")
+    csv_edges_df = spark.table("payments_hf.customer_edges_20251121")
+    vertices_count = vertices_df.count()
+    edges_count = csv_edges_df.count()
+    print(f"   ✅ Loaded from saved tables: {vertices_count:,} vertices, {edges_count:,} edges")
+except Exception as e:
+    print(f"   ⚠️  Tables not found ({str(e)}), reading from S3 CSV files...")
+    # Read vertices CSV
+    vertices_df = (
+        spark.read
+        .option("header", "true")
+        .option("inferSchema", "false")
+        .csv(f"{save_path}/vertices")
+    )
+
+    vertices_count = vertices_df.count()
+    print(f"✅ Read {vertices_count:,} vertices from S3")
+    
+    if vertices_count == 0:
+        raise ValueError(f"❌ ERROR: No vertices found in {save_path}/vertices")
+    
+    # Read edges CSV
+    csv_edges_df = (
+        spark.read
+        .option("header", "true")
+        .option("inferSchema", "false")
+        .csv(f"{save_path}/edges")
+    )
+    
+    edges_count = csv_edges_df.count()
+    print(f"✅ Read {edges_count:,} edges from S3")
+    
+    if edges_count == 0:
+        raise ValueError(f"❌ ERROR: No edges found in {save_path}/edges")
+    
+    # Save raw CSV data as tables for reuse
+    print("\n💾 Saving raw CSV data as tables for reuse...")
+    print("   Saving customer_vertices_20251121...")
+    save(vertices_df, "customer_vertices_20251121")
+    print(f"   ✅ Saved {vertices_count:,} vertices")
+    
+    print("   Saving customer_edges_20251121...")
+    save(csv_edges_df, "customer_edges_20251121")
+    print(f"   ✅ Saved {edges_count:,} edges")
+    
+    print("✅ Raw CSV tables saved. Future runs can use these tables instead of reading from S3.")
+
+# Save raw CSV data as tables for reuse
+print("\n💾 Saving raw CSV data as tables for reuse...")
+print("   Saving customer_vertices_20251121...")
+save(vertices_df, "customer_vertices_20251121")
+print(f"   ✅ Saved {vertices_count:,} vertices")
+
+print("   Saving customer_edges_20251121...")
+save(csv_edges_df, "customer_edges_20251121")
+print(f"   ✅ Saved {edges_count:,} edges")
+
+print("✅ Raw CSV tables saved. Future runs can use these tables instead of reading from S3.")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Convert CSV Edges to customer_identifiers Format
+
+# COMMAND ----------
+
+print("\n🔧 Step 2: Converting CSV edges to customer_identifiers format...")
+
+# Convert Neptune format to customer_identifiers format
+# ~from → src, ~to → dst, ~label → identifier_source
+csv_customer_identifiers = csv_edges_df.select(
+    F.col("~from").alias("src"),
+    F.col("~to").alias("dst"),
+    F.col("~label").alias("identifier_source")
+)
+
+# CSV src format is already normalized: customer:{business_unit}_{customer_uuid}
+# Extract business_unit and customer_uuid from src
+# Example: "customer:AT_b8abb0a9-ef0d-4169-a442-ec0b75f73ff4"
+csv_customer_identifiers = csv_customer_identifiers.withColumn(
+    "src_without_prefix",
+    F.regexp_replace(F.col("src"), "^customer:", "")
+).withColumn(
+    "src_parts",
+    F.split(F.col("src_without_prefix"), "_", 2)
+).withColumn(
+    "business_unit",
+    F.col("src_parts")[0]
+).withColumn(
+    "customer_uuid",
+    F.when(
+        F.size(F.col("src_parts")) > 1,
+        F.col("src_parts")[1]
+    ).otherwise(F.lit(None))
+).drop("src_parts", "src_without_prefix")
+
+# Join with public_edw_base_grain_live.customer to get customer_id
+# Join on customer_uuid (not customer_id) since CSV already has customer_uuid in src
+print("   Joining with public_edw_base_grain_live.customer to get customer_id...")
+spark.sql("REFRESH TABLE public_edw_base_grain_live.customer")
+
+customer_lookup = (
+    spark.table("public_edw_base_grain_live.customer")
+    .select(
+        F.col("bob_entity_code").alias("business_unit"),
+        F.col("customer_id").cast("bigint").alias("customer_id"),
+        F.col("customer_uuid")
+    )
+    .distinct()
+)
+
+csv_customer_identifiers = csv_customer_identifiers.join(
+    customer_lookup,
+    on=["business_unit", "customer_uuid"],
+    how="left"
+)
+
+# Join with vertices to get created_at
+# Vertices CSV ~id format is already: customer:{business_unit}_{customer_uuid}
+customer_vertices = vertices_df.filter(
+    (F.col("~label") == "customer") & F.col("created_at").isNotNull()
+).select(
+    F.col("~id").alias("src"),  # Already in format: customer:{business_unit}_{customer_uuid}
+    F.col("created_at")
+)
+
+# Join on src (already normalized format)
+csv_customer_identifiers = csv_customer_identifiers.join(
+    customer_vertices,
+    on="src",
+    how="left"
+)
+
+# src is already in normalized format (customer:{business_unit}_{customer_uuid}), no need to normalize
+
+# Add required columns (no relationship calculations yet - will be done after combining with Spider)
+csv_customer_identifiers = csv_customer_identifiers.withColumn(
+    "subscribed_at_local", F.to_timestamp(F.col("created_at"))
+)
+
+# Log join results (getting customer_id from customer_uuid)
+matched_count = csv_customer_identifiers.filter(F.col("customer_id").isNotNull()).count()
+total_count = csv_customer_identifiers.count()
+print(f"   ✅ Matched {matched_count:,} / {total_count:,} CSV records with customer_id")
+if matched_count < total_count:
+    print(f"   ⚠️  {total_count - matched_count:,} records could not be matched (customer_id not found in customer table)")
+
+print(f"✅ Converted CSV to customer_identifiers format: {csv_customer_identifiers.count():,} edges")
+
+# Count unique CSV customers for summary
+csv_count = csv_customer_identifiers.select("src").distinct().count()
+
+# Select only the columns we need for combining (no relationship columns yet)
+# Explicitly cast to ensure type consistency with Spider data
+csv_customer_identifiers = csv_customer_identifiers.select(
+    F.col("business_unit").cast("string").alias("business_unit"),
+    F.col("customer_id").cast("bigint").alias("customer_id"),
+    F.col("customer_uuid").cast("string").alias("customer_uuid"),
+    F.col("created_at").cast("string").alias("created_at"),
+    F.col("subscribed_at_local").cast("timestamp").alias("subscribed_at_local"),
+    F.col("src").cast("string").alias("src"),
+    F.col("dst").cast("string").alias("dst"),
+    F.col("identifier_source").cast("string").alias("identifier_source")
+)
+
+# Verification: Show sample records to verify normalization
+print("\n" + "=" * 80)
+print("VERIFICATION: Sample Normalized Records")
+print("=" * 80)
+print("\n📊 Sample records showing normalization:")
+sample_normalized = csv_customer_identifiers.select(
+    "src",
+    "business_unit",
+    "customer_id",
+    "customer_uuid",
+    "dst",
+    "identifier_source",
+    "created_at"
+).limit(10)
+sample_normalized.show(10, truncate=False)
+
+# Check join statistics
+matched_count = csv_customer_identifiers.filter(F.col("customer_id").isNotNull()).count()
+total_count = csv_customer_identifiers.count()
+print(f"\n📈 Customer ID Join Statistics:")
+print(f"   Total edges: {total_count:,}")
+print(f"   Successfully matched with customer_id: {matched_count:,} ({matched_count/total_count*100:.1f}%)")
+print(f"   Not matched (customer_id not found): {total_count - matched_count:,} ({(total_count - matched_count)/total_count*100:.1f}%)")
+
+if matched_count < total_count:
+    print("\n⚠️  Sample records that could not be matched:")
+    csv_customer_identifiers.filter(F.col("customer_id").isNull()).select(
+        "src", "business_unit", "customer_uuid"
+    ).limit(5).show(truncate=False)
+
+# Verify src format matches Spider format
+print("\n✅ Format Verification:")
+print(f"   CSV src format: customer:{{business_unit}}_{{customer_uuid}} (e.g., 'customer:AT_b8abb0a9-ef0d-4169-a442-ec0b75f73ff4')")
+print(f"   Spider src format: customer:{{business_unit}}_{{customer_uuid}} (from AttributeProcessor)")
+print(f"   ✅ Formats already match - CSV is already normalized!")
+
+# Get max created_at date from CSV
+max_date_result = csv_customer_identifiers.agg(
+    F.max("created_at").alias("max_created_at")
+).collect()[0]
+
+max_csv_date_str = max_date_result['max_created_at']
+print(f"\n📅 Max created_at in CSV files: {max_csv_date_str}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 2: Process Spider Data After Max CSV Date
+
+# COMMAND ----------
+
+print("\n🔄 Step 2: Processing spider data after max CSV date...")
+
+spark.sql("REFRESH TABLE payments_hf.business_units")
+spark.sql("REFRESH TABLE payments_hf.checkout_customer_details_spider_20251121")
+
+# Convert max_csv_date_str to timestamp for proper comparison
+max_csv_date_ts = F.to_timestamp(F.lit(max_csv_date_str))
+
+# Get spider data after max CSV date
+columns = ['customer_uuid', 'business_unit', 'customer_id', 'subscribed_at_local', 
+           'first_name', 'last_name', 'phone', 'postcode', 'address', 
+           'account_email', 'card_first_6', 'card_last_2', 'shopper_email', 'ip']
+
+spider_df = (
+    spark.table("payments_hf.checkout_customer_details_spider_20251121")
+    .filter(F.col("subscribed_at_local") > max_csv_date_ts)
+    .select(columns)
+)
+
+spider_count = spider_df.count()
+print(f"✅ Found {spider_count:,} records in spider table after {max_csv_date_str}")
+
+if spider_count > 0:
+    print(f"   Processing {spider_count:,} new records through AttributeProcessor...")
+    
+    # Join with business units
+    cd_df = (
+        spider_df.join(spark.table("payments_hf.business_units_view"), "business_unit", "left")
+        .withColumn("checkout_time_utc_iso", F.col("subscribed_at_local").cast('string'))
+        .where("checkout_time_utc_iso is not null")
+        .withColumn("country", F.col("country"))
+        .withColumn("language", F.col("language"))
+    )
+    
+    # Process with AttributeProcessor
+    cd_df = process_all(cd_df)
+    
+    # Add customer node
+    cd1_df = cd_df.withColumn(
+        "customer_node",
+        F.col('customer')
+    )
+    
+    # Create attribute nodes array
+    cd2_df = cd1_df.withColumn(
+        "attribute_nodes",
+        F.col('identifiers')
+).withColumn(
+        "attribute_nodes",
+        F.filter("attribute_nodes", lambda x: x["identifier"].isNotNull()),
+    )
+    
+    # Explode attribute nodes
+    cd3_df = cd2_df.withColumn("attribute_node", F.explode("attribute_nodes"))
+    
+    # Create edges DataFrame from spider data (no relationship calculations yet - will be done after combining)
+    # Explicitly cast to ensure type consistency with CSV data
+    spider_customer_identifiers = cd3_df.select(
+        F.col("business_unit").cast("string").alias("business_unit"),
+        F.col("customer_id").cast("bigint").alias("customer_id"),
+        F.col("customer_uuid").cast("string").alias("customer_uuid"),
+        F.col("created_at").cast("string").alias("created_at"),
+        F.col("subscribed_at_local").cast("timestamp").alias("subscribed_at_local"),
+        F.col("customer_node").cast("string").alias("src"),
+        F.col("attribute_node.identifier").cast("string").alias("dst"),
+        F.col("attribute_node.identifier_source").cast("string").alias("identifier_source")
+    )
+    
+    print(f"✅ Processed spider data: {spider_customer_identifiers.count():,} edges created")
+else:
+    spider_customer_identifiers = None
+    print("⏭️  No new spider data to process. Using only CSV data.")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 3: Combine CSV and Spider Data
+
+# COMMAND ----------
+
+print("\n🔗 Step 3: Combining CSV and spider customer_identifiers...")
+
+if spider_customer_identifiers is not None and spider_count > 0:
+    # Union CSV and spider data
+    combined_customer_identifiers = csv_customer_identifiers.unionByName(
+        spider_customer_identifiers, 
+        allowMissingColumns=True
+    )
+    print(f"✅ Combined data: {combined_customer_identifiers.count():,} total edges")
+    print(f"   CSV edges: {csv_customer_identifiers.count():,}")
+    print(f"   Spider edges: {spider_customer_identifiers.count():,}")
+else:
+    combined_customer_identifiers = csv_customer_identifiers
+    print(f"✅ Using only CSV data: {combined_customer_identifiers.count():,} edges")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 4: Calculate Relationships on Combined Data
+
+# COMMAND ----------
+
+print("\n📊 Step 4: Calculating relationships on combined data...")
+
+# Calculate parent relationships
+identifier_key_array = ["dst"]
+
+# Use subscribed_at_local for ordering (matches original notebook logic)
+# subscribed_at_local is already a timestamp column in both CSV and Spider data
+window_spec = (
+    Window.partitionBy(*identifier_key_array)
+    .orderBy("subscribed_at_local")
+    .rowsBetween(Window.unboundedPreceding, -1)
+)
+
+window_spec_bu = (
+    Window.partitionBy(*(["business_unit"] + identifier_key_array))
+    .orderBy("subscribed_at_local")
+    .rowsBetween(Window.unboundedPreceding, -1)
+)
+
+self_id_col = F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id"))
+
+# Calculate parent relationships
+combined_customer_identifiers = combined_customer_identifiers.withColumn(
+    "has_direct_parent_in_business_unit",
+    F.first(F.lit(True)).over(window_spec_bu).isNotNull(),
+).withColumn(
+    "direct_parent_in_business_unit",
+    F.first(
+        F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id"))
+    ).over(window_spec_bu),
+).withColumn(
+    "has_direct_parent", 
+    F.first(F.lit(True)).over(window_spec).isNotNull()
+).withColumn(
+    "direct_parent",
+    F.first(
+        F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id"))
+    ).over(window_spec),
+).withColumn(
+    "count_connections",
+    F.count("*").over(Window.partitionBy(*identifier_key_array))
+)
+
+# Nullify self-references
+final_df = combined_customer_identifiers.withColumn(
+    "direct_parent_in_business_unit",
+    F.when(
+        self_id_col == F.col("direct_parent_in_business_unit"), 
+        F.lit(None)
+    ).otherwise(F.col("direct_parent_in_business_unit"))
+).withColumn(
+    "direct_parent",
+    F.when(
+        self_id_col == F.col("direct_parent"), 
+        F.lit(None)
+    ).otherwise(F.col("direct_parent"))
+)
+
+print(f"✅ Calculated relationships on combined data")
+print(f"   Total edges: {final_df.count():,}")
+print(f"   Customers with direct_parent_in_business_unit: {final_df.filter(F.col('direct_parent_in_business_unit').isNotNull()).count():,}")
+print(f"   Customers with direct_parent: {final_df.filter(F.col('direct_parent').isNotNull()).count():,}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Select Final Columns
+
+# COMMAND ----------
+
+print("\n📋 Step 5: Selecting final columns...")
+
+final_df = final_df.select(
+    "business_unit",
+    "customer_id",
+    "customer_uuid",
+    "created_at",
+    "subscribed_at_local",
+    "src",
+    "dst",
+    "identifier_source",
+    "has_direct_parent_in_business_unit",
+    "direct_parent_in_business_unit",
+    "has_direct_parent",
+    "direct_parent",
+    "count_connections"
+)
+
+print(f"✅ Final DataFrame prepared")
+print(f"   Total rows: {final_df.count():,}")
+print(f"   Columns: {', '.join(final_df.columns)}")
+
+# Display sample
+print("\n📊 Sample data:")
+final_df.show(10, truncate=False)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 5: Save customer_identifiers Table
+
+# COMMAND ----------
+
+print("\n💾 Step 6: Saving customer_identifiers table...")
+save(final_df, "customer_identifiers_20251121")
+
+# Build summary output
+total_rows = final_df.count()
+from datetime import datetime
+output_lines = []
+output_lines.append("=" * 100)
+output_lines.append("POST-SPIDER REVAMP - EXECUTION SUMMARY")
+output_lines.append("=" * 100)
+output_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+output_lines.append("")
+output_lines.append("✅ COMPLETE!")
+output_lines.append("")
+output_lines.append(f"📊 Table created: {output_table}")
+output_lines.append(f"💾 S3 location: {base_s3_path}/customer_identifiers_20251121")
+output_lines.append(f"📈 Total rows: {total_rows:,}")
+output_lines.append(f"📅 CSV max date: {max_csv_date_str}")
+output_lines.append(f"📅 CSV customers: {csv_count:,}")
+output_lines.append(f"📅 Spider customers: {spider_count:,}")
+output_lines.append("")
+output_lines.append("=" * 100)
+
+# Write summary to DBFS for terminal output
+output_path = f"/tmp/notebook_outputs/post_spider_revamp_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+dbutils.fs.mkdirs("/tmp/notebook_outputs")
+dbutils.fs.put(output_path, "\n".join(output_lines), overwrite=True)
+print(f"\n✅ Output written to DBFS: {output_path}")
+
+print("\n" + "=" * 80)
+print("✅ Complete!")
+print("=" * 80)
+print(f"📊 Table created: {output_table}")
+print(f"💾 S3 location: {base_s3_path}/customer_identifiers_20251121")
+print(f"📈 Total rows: {total_rows:,}")
+print(f"📅 CSV max date: {max_csv_date_str}")
+print(f"📅 CSV customers: {csv_count:,}")
+print(f"📅 Spider customers: {spider_count:,}")
+print("=" * 80)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 5: Create Connected Components
+
+# COMMAND ----------
+
+# MAGIC %pip install graphframes
+
+# COMMAND ----------
+
+print("\n🔗 Step 7: Creating connected components...")
+
+from graphframes import GraphFrame
+
+# Create graph edges from customer_identifiers
+edges_df = (
+    spark.table(output_table)
+    .filter(F.col('count_connections') > 1)
+    .select('src', 'dst')
+    .dropDuplicates()
+)
+
+print(f"✅ Created {edges_df.count():,} edges")
+
+# Create vertices
+vertices_df = (
+    edges_df.withColumn(
+        "id_array",
+        F.array(
+            F.struct(F.col("src").alias("id"), F.lit(True).alias("is_customer")),
+            F.struct(F.col("dst").alias("id"), F.lit(False).alias("is_customer"))
+        )
+    )
+    .withColumn("exploded_id", F.explode("id_array"))
+    .select("exploded_id.*")
+    .dropDuplicates()
+)
+
+print(f"✅ Created {vertices_df.count():,} vertices")
+
+# Create graph and find connected components
+g = GraphFrame(vertices_df, edges_df)
+connected_components_df = g.connectedComponents()
+
+print(f"✅ Found connected components")
+
+# Save connected components
+save(connected_components_df, "connected_components_20251121")
+
+print(f"✅ Saved connected_components_20251121")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 6: Create Graph Customers
+
+# COMMAND ----------
+
+print("\n👥 Step 8: Creating graph_customers...")
+
+# Load necessary tables
+connected_components_df = spark.table("payments_hf.connected_components_20251121")
+customer_identifiers_df = spark.table(output_table)
+
+# Get customer features from customer_identifiers table
+# After normalization, all src formats are: customer:{business_unit}_{customer_uuid}
+# So we can extract directly from customer_identifiers_20251121
+spark.sql("REFRESH TABLE payments_hf.checkout_customer_details_spider_20251121")
+
+# Extract customer features from source tables (not just customer_identifiers)
+# This ensures we include ALL customers, even those without identifiers
+# CSV customers: from saved vertices table (src format is customer:{business_unit}_{customer_uuid})
+spark.sql("REFRESH TABLE payments_hf.customer_vertices_20251121")
+csv_vertices_df = spark.table("payments_hf.customer_vertices_20251121")
+
+csv_customer_features = (
+    csv_vertices_df
+    .filter(F.col("~label") == "customer")
+    .withColumn(
+        "src_without_prefix",
+        F.regexp_replace(F.col("~id"), "^customer:", "")
+    )
+    .withColumn(
+        "src_parts",
+        F.split(F.col("src_without_prefix"), "_", 2)
+    )
+    .withColumn(
+        "business_unit",
+        F.col("src_parts")[0]
+    )
+    .withColumn(
+        "customer_uuid",
+        F.when(
+            F.size(F.col("src_parts")) > 1,
+            F.col("src_parts")[1]
+        ).otherwise(F.lit(None))
+    )
+    .filter(F.col("customer_uuid").isNotNull())
+    .join(
+        spark.table("public_edw_base_grain_live.customer")
+        .select(
+            F.col("bob_entity_code").alias("business_unit"),
+            F.col("customer_id").cast("bigint").alias("customer_id"),
+            F.col("customer_uuid")
+        )
+        .distinct(),
+        on=["business_unit", "customer_uuid"],
+        how="left"
+    )
+    .filter(F.col("customer_id").isNotNull())
+    .withColumn(
+        "subscribed_at_local",
+        F.to_timestamp(F.col("created_at"))
+    )
+    .select("business_unit", "customer_id", "subscribed_at_local")
+    .distinct()
+)
+
+# Spider customers: from checkout_customer_details_spider (after max CSV date)
+spider_customer_features = (
+    spark.table("payments_hf.checkout_customer_details_spider_20251121")
+    .filter(F.col("subscribed_at_local") > max_csv_date_ts)
+    .select("business_unit", "customer_id", "subscribed_at_local")
+    .distinct()
+)
+
+# Union both sources to get all customer features
+customer_features_df = csv_customer_features.unionByName(spider_customer_features)
+
+print(f"   Total customer features: {customer_features_df.count():,}")
+
+# Filter identifiers where not a customer
+identifiers_with_component = connected_components_df.filter(~F.col("is_customer"))
+
+# Join to get customers with component
+customers_with_component = (
+    identifiers_with_component.alias("ic")
+    .join(customer_identifiers_df.alias("i"), F.col("ic.id") == F.col("i.dst"))
+    .groupBy("i.business_unit", "i.customer_id")
+    .agg(
+        F.struct(
+            F.first("ic.component").cast("string").alias("component"),
+            F.max("i.has_direct_parent_in_business_unit").alias("has_direct_parent_in_business_unit"),
+            F.max("i.direct_parent_in_business_unit").alias("direct_parent_in_business_unit"),
+            F.max("i.has_direct_parent").alias("has_direct_parent"),
+            F.max("i.direct_parent").alias("direct_parent"),
+        ).alias("payload")
+    )
+)
+
+# Join with customer features
+customers_with_component = (
+    customer_features_df.groupBy("business_unit", "customer_id")
+    .agg(F.min("subscribed_at_local").alias("subscribed_at_local"))
+    .alias("cf")
+    .join(
+        customers_with_component.alias("cw"),
+        on=(
+            (F.col("cf.business_unit") == F.col("cw.business_unit"))
+            & (F.col("cf.customer_id") == F.col("cw.customer_id"))
+        ),
+        how="left",
+    )
+    .select(
+        F.struct("cf.business_unit", "cf.customer_id", "cf.subscribed_at_local").alias("cf"),
+        F.when(F.col("cw.payload").isNotNull(), F.col("cw.payload"))
+        .otherwise(
+            F.struct(
+                F.concat(F.lit("distinct_"), "cf.business_unit", F.lit("_"), "cf.customer_id").alias("component"),
+                F.lit(False).alias("has_direct_parent_in_business_unit"),
+                F.lit(None).cast("string").alias("direct_parent_in_business_unit"),
+                F.lit(False).alias("has_direct_parent"),
+                F.lit(None).cast("string").alias("direct_parent"),
+            )
+        )
+        .alias("payload"),
+    )
+    .select("cf.*", "payload.*")
+)
+
+# Add window functions for ordering
+window_root_cluster = Window.partitionBy("component")
+window_root_business_unit = Window.partitionBy("business_unit", "component")
+window_component = window_root_cluster.orderBy("subscribed_at_local")
+window_business_unit_component = window_root_business_unit.orderBy("subscribed_at_local")
+
+# Add row numbers and cluster sizes
+cwc2_df = (
+    customers_with_component.withColumn("nth_in_cluster", F.row_number().over(window_component))
+    .withColumn("cluster_size", F.count("*").over(window_root_cluster))
+    .withColumn("nth_in_business_unit", F.row_number().over(window_business_unit_component))
+    .withColumn("business_unit_cluster_size", F.count("*").over(window_root_business_unit))
+)
+
+# Add root and duplicate flags
+graph_customers_df = (
+    cwc2_df.withColumn(
+        "root_in_cluster",
+        F.first(
+            F.when(
+                F.col("nth_in_cluster") == 1,
+                F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id")),
+            ),
+            True,
+        ).over(window_root_cluster),
+    )
+    .withColumn(
+        "root_in_business_unit",
+        F.first(
+            F.when(
+                F.col("nth_in_business_unit") == 1,
+                F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id")),
+            ),
+            True,
+        ).over(window_root_business_unit),
+    )
+    .withColumn("is_root_in_business_unit", F.col("nth_in_business_unit") == 1)
+    .withColumn("is_root_in_cluster", F.col("nth_in_cluster") == 1)
+    .withColumn("is_duplicate_in_business_unit", F.col("nth_in_business_unit") > 1)
+    .withColumn(
+        "is_cross_business_unit_duplicate",
+        (F.col("nth_in_business_unit") > 1) & (~F.col("has_direct_parent_in_business_unit")),
+    )
+    .withColumn("is_duplicate_in_cluster", F.col("nth_in_cluster") > 1)
+    .orderBy("component", "subscribed_at_local")
+)
+
+# Save graph_customers
+save(graph_customers_df, "graph_customers_20251121")
+
+print(f"✅ Saved graph_customers_20251121")
+print(f"   Total customers: {graph_customers_df.count():,}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 7: Create Graph Customers with Match Reasons
+
+# COMMAND ----------
+
+print("\n🔍 Step 9: Creating graph_customers_with_match_reasons...")
+
+# Use SQL to create graph_customers_with_match_reasons (same logic as original)
+spark.sql(f"""
+    CREATE OR REPLACE TEMP VIEW graph_customers_with_match_reasons_20251121_temp AS
+    WITH i AS (
+    SELECT 
+        CONCAT(business_unit, '_', customer_id) AS business_unit_customer_id,
+        ARRAY_AGG(STRUCT(identifier_source, dst)) AS identifiers
+      FROM
+        {output_table}
+      WHERE
+        count_connections > 1
+      GROUP BY
+        business_unit_customer_id
+    ),
+    d AS (
+      SELECT
+        *,
+        CONCAT(business_unit, '_', customer_id) AS child_id,
+        direct_parent_in_business_unit AS parent_id
+      FROM
+        payments_hf.graph_customers_20251121
+    )
+    SELECT 
+      d.*,
+      array_sort(
+        array_distinct(
+          FILTER(
+            TRANSFORM(
+              ic.identifiers,
+              ci -> CASE
+                WHEN EXISTS(ip.identifiers, pi -> pi.dst = ci.dst) THEN ci.identifier_source
+                ELSE NULL
+              END
+            ),
+            x -> x IS NOT NULL
+          )
+        )
+      ) AS match_reasons
+    FROM
+      d
+        LEFT JOIN i ic
+          ON d.direct_parent_in_business_unit IS NOT NULL
+          AND d.child_id = ic.business_unit_customer_id
+        LEFT JOIN i ip
+          ON d.direct_parent_in_business_unit IS NOT NULL
+          AND d.parent_id = ip.business_unit_customer_id
+""")
+
+# Save as table
+graph_customers_with_match_reasons_df = spark.table("graph_customers_with_match_reasons_20251121_temp")
+save(graph_customers_with_match_reasons_df, "graph_customers_with_match_reasons_20251121")
+
+print(f"✅ Saved graph_customers_with_match_reasons_20251121")
+print(f"   Total customers: {graph_customers_with_match_reasons_df.count():,}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 10: Create Graph Customers with Successful Conversions Only
+
+# COMMAND ----------
+
+print("\n🔍 Step 10: Creating gc_checkout_success_20251121 (ensuring root_in_business_unit is always successful conversion)...")
+
+# Refresh checkout_funnel_backend table
+spark.sql("REFRESH TABLE payments_hf.checkout_funnel_backend")
+
+# Load graph_customers_with_match_reasons_20251121 (all customers)
+graph_customers_with_match_reasons_df = spark.table("payments_hf.graph_customers_with_match_reasons_20251121")
+
+print(f"   Total customers in graph: {graph_customers_with_match_reasons_df.count():,}")
+
+# Load checkout_funnel_backend and filter for successful conversions
+checkout_success_df = (
+    spark.table("payments_hf.checkout_funnel_backend")
+    .filter(
+        (F.col("event_successful_conversion") == 1) | 
+        (F.col("event_checkout_success") == 1)
+    )
+    .select("customer_id", "country")
+    .distinct()
+)
+
+print(f"   Customers with successful conversions: {checkout_success_df.count():,}")
+
+# Parse root_in_business_unit to extract business_unit and customer_id for the root
+# We need to do this early to check root's successful conversion
+graph_customers_with_root_parsed_early = (
+    graph_customers_with_match_reasons_df
+    .withColumn(
+        "root_parts_early",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.split(F.col("root_in_business_unit"), "_", 2)
+        )
+    )
+    .withColumn(
+        "root_business_unit_early",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("root_parts_early")[0]
+        )
+    )
+    .withColumn(
+        "root_customer_id_early",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("root_parts_early")[1]
+        ).cast("bigint")
+    )
+    .drop("root_parts_early")
+)
+
+# Mark which customers have successful conversions based on their ROOT customer
+# The root_id (root_in_business_unit) is like a cluster id, and we check if the root has successful conversion
+# Also check if the customer themselves has a successful conversion (needed for finding new roots)
+# We need customer_self_has_success to:
+# 1. Find the first successful conversion customer in each business_unit + component to use as new root
+# 2. Check if there are any successful conversions in the BU when updating root_in_business_unit
+graph_customers_with_success_flag = (
+    graph_customers_with_root_parsed_early.alias("gc")
+    .join(
+        checkout_success_df.alias("cs_root"),
+        on=(
+            (F.col("gc.root_business_unit_early") == F.col("cs_root.country")) &
+            (F.col("gc.root_customer_id_early") == F.col("cs_root.customer_id"))
+        ),
+        how="left"
+    )
+    .withColumn(
+        "has_successful_conversion",
+        F.col("cs_root.customer_id").isNotNull()
+    )
+    .drop("cs_root.customer_id", "cs_root.country")
+    .join(
+        checkout_success_df.alias("cs_self"),
+        on=(
+            (F.col("gc.business_unit") == F.col("cs_self.country")) &
+            (F.col("gc.customer_id").cast("bigint") == F.col("cs_self.customer_id"))
+        ),
+        how="left"
+    )
+    .withColumn(
+        "customer_self_has_success",
+        F.col("cs_self.customer_id").isNotNull()
+    )
+    .select("gc.*", "has_successful_conversion", "customer_self_has_success")
+    .drop("root_business_unit_early", "root_customer_id_early", "cs_self.customer_id", "cs_self.country")
+)
+
+print(f"   Customers with successful conversion flag (based on root): {graph_customers_with_success_flag.filter(F.col('has_successful_conversion')).count():,}")
+print(f"   Customers with successful conversion themselves: {graph_customers_with_success_flag.filter(F.col('customer_self_has_success')).count():,}")
+
+# Create a lookup of successful conversion customer IDs (business_unit_customer_id format)
+# Use customer_self_has_success to find customers who themselves have successful conversions
+successful_customer_ids = (
+    graph_customers_with_success_flag
+    .filter(F.col("customer_self_has_success"))
+    .select(
+        F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id")).alias("bu_customer_id")
+    )
+    .distinct()
+)
+
+# Create window functions for root_in_business_unit
+# We need to find the first successful conversion customer among customers sharing the same root_in_business_unit
+window_by_root = Window.partitionBy("root_in_business_unit").orderBy("subscribed_at_local")
+
+# For each root_in_business_unit, find the first successful conversion customer
+# This will be used as the new root_in_business_unit when the current root is not a successful conversion
+# Use customer_self_has_success (not has_successful_conversion) to find customers who themselves have successful conversions
+graph_customers_with_new_root = (
+    graph_customers_with_success_flag
+    .withColumn(
+        "first_successful_in_root",
+        F.first(
+            F.when(
+                F.col("customer_self_has_success"),
+                F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id"))
+            ),
+            True
+        ).over(window_by_root)
+    )
+    .withColumn(
+        "has_successful_in_root",
+        F.max(F.col("customer_self_has_success").cast("int")).over(Window.partitionBy("root_in_business_unit")) > 0
+    )
+)
+
+# Create business_unit_customer_id for each customer
+graph_customers_with_bu_id = (
+    graph_customers_with_new_root
+    .withColumn(
+        "bu_customer_id",
+        F.concat(F.col("business_unit"), F.lit("_"), F.col("customer_id"))
+    )
+)
+
+# Parse root_in_business_unit to extract business_unit and customer_id for the root
+# Format: "business_unit_customer_id" -> split by "_" to get parts
+graph_customers_with_root_parsed = (
+    graph_customers_with_bu_id
+    .withColumn(
+        "root_parts",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.split(F.col("root_in_business_unit"), "_", 2)
+        )
+    )
+    .withColumn(
+        "root_business_unit",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("root_parts")[0]
+        )
+    )
+    .withColumn(
+        "root_customer_id",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("root_parts")[1]
+        ).cast("bigint")
+    )
+    .drop("root_parts")
+)
+
+# Join with checkout_success_df to check if root_in_business_unit has successful conversion
+graph_customers_with_root_check = (
+    graph_customers_with_root_parsed
+    .join(
+        checkout_success_df.alias("cs"),
+        on=(
+            (F.col("root_business_unit") == F.col("cs.country")) &
+            (F.col("root_customer_id") == F.col("cs.customer_id"))
+        ),
+        how="left"
+    )
+    .withColumn("root_has_success", F.col("cs.customer_id").isNotNull())
+    .drop("cs.customer_id", "cs.country", "root_business_unit", "root_customer_id")
+)
+
+# Step 3: Identify root_in_business_unit that are not successful conversions
+# (Already done above with root_has_success flag)
+
+# Update root_in_business_unit based on the logic
+graph_customers_final = (
+    graph_customers_with_root_check
+    .withColumn(
+        "root_in_business_unit",
+            F.when(
+            # If current root is not a successful conversion and root_in_business_unit is not null
+            (~F.col("root_has_success")) & F.col("root_in_business_unit").isNotNull(),
+            F.when(
+                # If cluster size = 1, set to business_unit + customer_id (the customer itself)
+                F.col("business_unit_cluster_size") == 1,
+                F.col("bu_customer_id")
+            ).otherwise(
+                # If business_unit_cluster_size > 1:
+                # Filter all customers in the same root_in_business_unit
+                # Find first customer (by subscribed_at_local) who has a successful conversion
+                # Set them as root, otherwise set to the customer itself
+                F.when(
+                    F.col("has_successful_in_root"),
+                    F.col("first_successful_in_root")
+                ).otherwise(F.col("bu_customer_id"))
+            )
+        ).otherwise(
+            # Keep original root if it's a successful conversion or is null
+            F.col("root_in_business_unit")
+        )
+    )
+    .withColumn(
+        "is_duplicate_in_business_unit",
+            F.when(
+            # If root_in_business_unit is null, keep original value
+            F.col("root_in_business_unit").isNull(),
+            F.col("is_duplicate_in_business_unit")
+        ).when(
+            # If root_in_business_unit equals the customer itself, set to false
+            F.col("root_in_business_unit") == F.col("bu_customer_id"),
+            F.lit(False)
+        ).otherwise(
+            # If root_in_business_unit is different and not null, set to true
+            F.lit(True)
+        )
+    )
+)
+
+# After updating root_in_business_unit, recalculate has_successful_conversion based on the NEW root
+# Parse the updated root_in_business_unit
+graph_customers_final_synced = (
+    graph_customers_final
+    .withColumn(
+        "updated_root_parts",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.split(F.col("root_in_business_unit"), "_", 2)
+        )
+    )
+    .withColumn(
+        "updated_root_business_unit",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("updated_root_parts")[0]
+        )
+    )
+    .withColumn(
+        "updated_root_customer_id",
+        F.when(
+            F.col("root_in_business_unit").isNotNull(),
+            F.col("updated_root_parts")[1]
+        ).cast("bigint")
+    )
+    .drop("updated_root_parts")
+)
+
+# Join with checkout_success_df to check if the updated root_in_business_unit has successful conversion
+# First, select only the columns we need from graph_customers_final_synced to avoid ambiguity
+# We need to keep updated_root_business_unit and updated_root_customer_id for the join, then drop them
+graph_customers_final_clean = graph_customers_final_synced.select(
+    # Original columns from graph_customers_with_match_reasons (excluding temporary columns added in Step 10)
+    F.col("business_unit"),
+    F.col("customer_id"),
+    F.col("subscribed_at_local"),
+    F.col("component"),
+    F.col("has_direct_parent_in_business_unit"),
+    F.col("direct_parent_in_business_unit"),
+    F.col("has_direct_parent"),
+    F.col("direct_parent"),
+    F.col("nth_in_cluster"),
+    F.col("cluster_size"),
+    F.col("nth_in_business_unit"),
+    F.col("business_unit_cluster_size"),
+    F.col("root_in_cluster"),
+    F.col("root_in_business_unit"),  # This was updated in Step 10
+    F.col("is_root_in_business_unit"),
+    F.col("is_root_in_cluster"),
+    F.col("is_duplicate_in_business_unit"),  # This was updated in Step 10
+    F.col("is_cross_business_unit_duplicate"),
+    F.col("is_duplicate_in_cluster"),
+    F.col("match_reasons"),
+    # Temporary columns needed for the join (will be dropped after)
+    F.col("updated_root_business_unit"),
+    F.col("updated_root_customer_id")
+)
+
+# Now join with checkout_success_df
+graph_customers_final_with_synced_success = (
+    graph_customers_final_clean
+    .join(
+        checkout_success_df.alias("cs_updated_root"),
+        on=(
+            (F.col("updated_root_business_unit") == F.col("cs_updated_root.country")) &
+            (F.col("updated_root_customer_id") == F.col("cs_updated_root.customer_id"))
+        ),
+        how="left"
+    )
+    .withColumn(
+        "has_successful_conversion",
+        F.col("cs_updated_root.customer_id").isNotNull()
+    )
+    # Select final columns, dropping temporary ones
+    .select(
+        F.col("business_unit"),
+        F.col("customer_id"),
+        F.col("subscribed_at_local"),
+        F.col("component"),
+        F.col("has_direct_parent_in_business_unit"),
+        F.col("direct_parent_in_business_unit"),
+        F.col("has_direct_parent"),
+        F.col("direct_parent"),
+        F.col("nth_in_cluster"),
+        F.col("cluster_size"),
+        F.col("nth_in_business_unit"),
+        F.col("business_unit_cluster_size"),
+        F.col("root_in_cluster"),
+        F.col("root_in_business_unit"),
+        F.col("is_root_in_business_unit"),
+        F.col("is_root_in_cluster"),
+        F.col("is_duplicate_in_business_unit"),
+        F.col("is_cross_business_unit_duplicate"),
+        F.col("is_duplicate_in_cluster"),
+        F.col("match_reasons"),
+        F.col("has_successful_conversion")
+    )
+)
+
+graph_customers_final = graph_customers_final_with_synced_success
+
+print(f"   Updated root_in_business_unit for non-successful roots")
+print(f"   Total customers: {graph_customers_final.count():,}")
+
+# Create temp view from DataFrame for SQL processing
+graph_customers_final.createOrReplaceTempView("graph_customers_success_recalc")
+
+# Recalculate match_reasons using SQL (same logic as original)
+spark.sql(f"""
+    CREATE OR REPLACE TEMP VIEW graph_customers_success_match_reasons_temp AS
+    WITH i AS (
+    SELECT 
+        CONCAT(business_unit, '_', customer_id) AS business_unit_customer_id,
+        ARRAY_AGG(STRUCT(identifier_source, dst)) AS identifiers
+      FROM
+        {output_table}
+      WHERE
+        count_connections > 1
+      GROUP BY
+        business_unit_customer_id
+    ),
+    d AS (
+      SELECT
+        *,
+        CONCAT(business_unit, '_', customer_id) AS child_id,
+        direct_parent_in_business_unit AS parent_id
+      FROM
+        graph_customers_success_recalc
+    )
+    SELECT 
+      d.*,
+      array_sort(
+        array_distinct(
+          FILTER(
+            TRANSFORM(
+              ic.identifiers,
+              ci -> CASE
+                WHEN EXISTS(ip.identifiers, pi -> pi.dst = ci.dst) THEN ci.identifier_source
+                ELSE NULL
+              END
+            ),
+            x -> x IS NOT NULL
+          )
+        )
+      ) AS match_reasons
+    FROM
+      d
+        LEFT JOIN i ic
+          ON d.direct_parent_in_business_unit IS NOT NULL
+          AND d.child_id = ic.business_unit_customer_id
+        LEFT JOIN i ip
+          ON d.direct_parent_in_business_unit IS NOT NULL
+          AND d.parent_id = ip.business_unit_customer_id
+""")
+
+# Save as final table
+gc_checkout_success_df = spark.table("graph_customers_success_match_reasons_temp")
+save(gc_checkout_success_df, "gc_checkout_success_20251121")
+
+print(f"✅ Saved gc_checkout_success_20251121")
+print(f"   Total customers: {gc_checkout_success_df.count():,}")
+
+# Update output summary
+output_lines.append("")
+output_lines.append("-" * 100)
+output_lines.append("📊 DOWNSTREAM TABLES CREATED")
+output_lines.append("-" * 100)
+output_lines.append(f"✅ connected_components_20251121")
+output_lines.append(f"✅ graph_customers_20251121")
+output_lines.append(f"✅ graph_customers_with_match_reasons_20251121")
+output_lines.append(f"✅ gc_checkout_success_20251121")
+output_lines.append("")
+
+# Write updated summary to DBFS
+dbutils.fs.put(output_path, "\n".join(output_lines), overwrite=True)
+print(f"\n✅ Updated summary written to DBFS: {output_path}")
+
+print("\n" + "=" * 80)
+print("✅ ALL STEPS COMPLETE!")
+print("=" * 80)
+print(f"📊 Tables created:")
+print(f"   - {output_table}")
+print(f"   - payments_hf.connected_components_20251121")
+print(f"   - payments_hf.graph_customers_20251121")
+print(f"   - payments_hf.graph_customers_with_match_reasons_20251121")
+print(f"   - payments_hf.gc_checkout_success_20251121")
+print("=" * 80)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 11: Create Pre-Spider Graph Data Table
+# MAGIC 
+# MAGIC This table contains, for every customer, ALL previously created customers who share ANY identifier.
+# MAGIC 
+# MAGIC **Schema:**
+# MAGIC - `country`: Business unit code
+# MAGIC - `customer_id`: Customer ID
+# MAGIC - `customer_uuid`: Customer UUID
+# MAGIC - `event_date`: Event date (DATE of created_at)
+# MAGIC - `parent_uuid_list`: Array of all parent customer UUIDs (same business unit) who share any identifier and were created before this customer
+# MAGIC - `sc_cluster_size`: Size of parent list (number of parents)
+# MAGIC - `cluster_id`: Cluster ID - the first/root parent UUID (earliest created parent)
+# MAGIC - `cluster_min_sub_date`: Minimum subscription date within the cluster (earliest parent's created_at)
+
+# COMMAND ----------
+
+print("\n🔗 Step 11: Creating pre_spider_graph_data table...")
+print("   This table finds ALL connections across business units, but only lists parents from SAME business unit")
+
+# Get all customer-identifier pairs with created_at for ordering
+customer_identifier_pairs = (
+    spark.table(output_table)
+    .select(
+        F.col("business_unit").alias("country"),
+        F.col("customer_id"),
+        F.col("customer_uuid"),
+        F.col("created_at"),
+        F.col("dst").alias("identifier"),
+        F.col("identifier_source")
+    )
+)
+
+print(f"   Total customer-identifier pairs: {customer_identifier_pairs.count():,}")
+
+# Self-join on identifier to find ALL customers sharing same identifier (ACROSS all business units)
+# Customer A joins with Customer B where they share an identifier and B was created before A
+# NO business unit filter here - find all connections globally
+shared_identifiers = (
+    customer_identifier_pairs.alias("a")
+    .join(
+        customer_identifier_pairs.alias("b"),
+        F.col("a.identifier") == F.col("b.identifier")  # Match on identifier only (cross-BU)
+    )
+    .filter(
+        # Parent (b) was created BEFORE customer (a) - using created_at
+        (F.col("b.created_at") < F.col("a.created_at")) &
+        # Not the same customer (by UUID to handle cross-BU)
+        (F.col("a.customer_uuid") != F.col("b.customer_uuid"))
+    )
+    .select(
+        # Customer A (the one we're finding parents for)
+        F.col("a.country").alias("country"),
+        F.col("a.customer_id").alias("customer_id"),
+        F.col("a.customer_uuid").alias("customer_uuid"),
+        F.col("a.created_at").alias("created_at"),
+        # Parent info (could be any business unit)
+        F.col("b.country").alias("parent_country"),
+        F.col("b.customer_id").alias("parent_customer_id"),
+        F.col("b.customer_uuid").alias("parent_customer_uuid"),
+        F.col("b.created_at").alias("parent_created_at"),
+        # Flag if parent is in same business unit
+        (F.col("a.country") == F.col("b.country")).alias("is_same_bu")
+    )
+)
+
+print(f"   Shared identifier relationships found (all business units): {shared_identifiers.count():,}")
+print(f"   Same business unit relationships: {shared_identifiers.filter(F.col('is_same_bu')).count():,}")
+
+# Aggregate all parents per customer with cluster info
+# Only include parents from SAME business unit in parent_uuid_list
+# Order parent_uuid_list from oldest to newest (by parent_created_at)
+pre_spider_graph_data = (
+    shared_identifiers
+    .groupBy("country", "customer_id", "customer_uuid")
+    .agg(
+        F.min("created_at").alias("created_at"),
+        # Collect parent UUIDs with their created_at for sorting (same BU only)
+        F.collect_list(
+            F.when(
+                F.col("is_same_bu"),
+                F.struct(
+                    F.col("parent_created_at").alias("created_at"),
+                    F.col("parent_customer_uuid").alias("uuid")
+                )
+            )
+        ).alias("parent_structs_raw"),
+        # Cluster ID = UUID of the earliest parent in SAME BU (root customer)
+        F.min_by(
+            F.when(F.col("is_same_bu"), F.col("parent_customer_uuid")),
+            F.when(F.col("is_same_bu"), F.col("parent_created_at"))
+        ).alias("cluster_id"),
+        # Cluster min sub date = earliest parent's created_at in SAME BU
+        F.min(
+            F.when(F.col("is_same_bu"), F.col("parent_created_at"))
+        ).alias("cluster_min_sub_date")
+    )
+    # Filter out NULL values and sort by created_at (oldest to newest), then extract UUIDs
+    .withColumn(
+        "parent_structs_filtered",
+        F.filter(F.col("parent_structs_raw"), lambda x: x.isNotNull())
+    )
+    .withColumn(
+        "parent_structs_sorted",
+        F.array_sort(F.col("parent_structs_filtered"))  # Sorts by created_at (first field)
+    )
+    .withColumn(
+        "parent_uuid_list",
+        F.array_distinct(
+            F.transform(F.col("parent_structs_sorted"), lambda x: x.uuid)
+        )
+    )
+    .withColumn(
+        "sc_cluster_size",
+        F.size(F.col("parent_uuid_list"))
+    )
+    .drop("parent_structs_raw", "parent_structs_filtered", "parent_structs_sorted")
+)
+
+# Add customers with no parents (they still need to be in the table with empty array)
+all_customers = (
+    spark.table(output_table)
+    .select(
+        F.col("business_unit").alias("country"),
+        F.col("customer_id"),
+        F.col("customer_uuid"),
+        F.to_date(F.col("created_at")).alias("event_date")
+    )
+    .groupBy("country", "customer_id", "customer_uuid")
+    .agg(F.min("event_date").alias("event_date"))
+)
+
+# Left join to include customers without parents
+pre_spider_graph_data_complete = (
+    all_customers.alias("c")
+    .join(
+        pre_spider_graph_data.alias("p"),
+        on=["country", "customer_id", "customer_uuid"],
+        how="left"
+    )
+    .select(
+        F.col("c.country"),
+        F.col("c.customer_id"),
+        F.col("c.customer_uuid"),
+        F.col("c.event_date"),
+        F.when(
+            F.col("p.parent_uuid_list").isNotNull(),
+            F.col("p.parent_uuid_list")
+        ).otherwise(F.array().cast("array<string>")).alias("parent_uuid_list"),
+        # sc_cluster_size: 0 if no parents, otherwise the count
+        F.coalesce(F.col("p.sc_cluster_size"), F.lit(0)).alias("sc_cluster_size"),
+        # cluster_id: NULL if no parents, otherwise the root parent UUID
+        F.col("p.cluster_id").alias("cluster_id"),
+        # cluster_min_sub_date: NULL if no parents, otherwise earliest parent date
+        F.col("p.cluster_min_sub_date").alias("cluster_min_sub_date")
+    )
+)
+
+# Show sample data
+print("\n📊 Sample data (customers WITH parents):")
+pre_spider_graph_data_complete.filter(F.col("sc_cluster_size") > 0).select(
+    "country",
+    "customer_id",
+    "customer_uuid",
+    "event_date",
+    "parent_uuid_list",
+    "sc_cluster_size",
+    "cluster_id",
+    "cluster_min_sub_date"
+).show(10, truncate=50)
+
+# Show statistics
+total_customers = pre_spider_graph_data_complete.count()
+customers_with_parents = pre_spider_graph_data_complete.filter(F.col("sc_cluster_size") > 0).count()
+max_parents = pre_spider_graph_data_complete.agg(F.max("sc_cluster_size")).collect()[0][0]
+avg_parents = pre_spider_graph_data_complete.filter(F.col("sc_cluster_size") > 0).agg(F.avg("sc_cluster_size")).collect()[0][0]
+
+print(f"\n📈 Statistics:")
+print(f"   Total customers: {total_customers:,}")
+print(f"   Customers with parents: {customers_with_parents:,} ({customers_with_parents/total_customers*100:.1f}%)")
+print(f"   Customers without parents: {total_customers - customers_with_parents:,}")
+print(f"   Max cluster size: {max_parents}")
+print(f"   Avg cluster size (for those with parents): {avg_parents:.1f}")
+
+# Save the table
+save(pre_spider_graph_data_complete, "pre_spider_graph_data")
+
+print(f"\n✅ Saved payments_hf.pre_spider_graph_data")
+print(f"   Total rows: {total_customers:,}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Verify pre_spider_graph_data Table
+
+# COMMAND ----------
+
+# Verify the table was created correctly
+print("\n🔍 Verifying pre_spider_graph_data table...")
+
+# Check schema
+print("\n📋 Schema:")
+spark.table("payments_hf.pre_spider_graph_data").printSchema()
+
+# Sample with parents
+print("\n📊 Sample customers WITH parents:")
+spark.sql("""
+    SELECT 
+        country,
+        customer_id,
+        customer_uuid,
+        event_date,
+        sc_cluster_size,
+        cluster_id,
+        cluster_min_sub_date,
+        parent_uuid_list
+    FROM payments_hf.pre_spider_graph_data
+    WHERE sc_cluster_size > 0
+    ORDER BY sc_cluster_size DESC
+    LIMIT 10
+""").show(truncate=50)
+
+# Distribution of cluster sizes
+print("\n📊 Distribution of cluster sizes:")
+spark.sql("""
+    SELECT 
+        cluster_size_bucket,
+        customer_count
+    FROM (
+        SELECT 
+            CASE 
+                WHEN sc_cluster_size = 0 THEN '0 (no parents)'
+                WHEN sc_cluster_size = 1 THEN '1 parent'
+                WHEN sc_cluster_size BETWEEN 2 AND 5 THEN '2-5 parents'
+                WHEN sc_cluster_size BETWEEN 6 AND 10 THEN '6-10 parents'
+                WHEN sc_cluster_size BETWEEN 11 AND 50 THEN '11-50 parents'
+                ELSE '50+ parents'
+            END AS cluster_size_bucket,
+            CASE 
+                WHEN sc_cluster_size = 0 THEN 0
+                WHEN sc_cluster_size = 1 THEN 1
+                WHEN sc_cluster_size BETWEEN 2 AND 5 THEN 2
+                WHEN sc_cluster_size BETWEEN 6 AND 10 THEN 3
+                WHEN sc_cluster_size BETWEEN 11 AND 50 THEN 4
+                ELSE 5
+            END AS sort_order,
+            COUNT(*) AS customer_count
+        FROM payments_hf.pre_spider_graph_data
+        GROUP BY 1, 2
+    )
+    ORDER BY sort_order
+""").show()
+
+# By country
+print("\n📊 Cluster statistics by country:")
+spark.sql("""
+    SELECT 
+        country,
+        COUNT(*) AS total_customers,
+        SUM(CASE WHEN sc_cluster_size > 0 THEN 1 ELSE 0 END) AS customers_with_parents,
+        ROUND(100.0 * SUM(CASE WHEN sc_cluster_size > 0 THEN 1 ELSE 0 END) / COUNT(*), 1) AS pct_with_parents,
+        MAX(sc_cluster_size) AS max_cluster_size,
+        ROUND(AVG(CASE WHEN sc_cluster_size > 0 THEN sc_cluster_size END), 1) AS avg_cluster_size
+    FROM payments_hf.pre_spider_graph_data
+    GROUP BY country
+    ORDER BY total_customers DESC
+""").show()
+
+print("\n✅ Verification complete!")
