@@ -206,6 +206,156 @@ pytest tests/test_query_util.py -v
 
 ---
 
+## Exploratory Data Analysis (EDA) Guidelines
+
+### Required Context for EDA Requests
+
+When the user requests data exploration or analysis, gather this information BEFORE writing queries:
+
+#### 1. Data Source Identification
+| Need | How to Get It | Example |
+|------|---------------|---------|
+| **Table name** | Ask user or check referenced files | `payments_hf.checkout_funnel_backend` |
+| **Schema/DDL** | Read the SQL file that creates the table, or run `DESCRIBE EXTENDED table` | User provides `@checkout_funnel_backend.sql` |
+| **Sample data** | Run `SELECT * FROM table LIMIT 10` via MCP | Understand data types, nulls, nested structs |
+
+#### 2. Field Mapping & Business Logic
+| Need | Why Critical | Example |
+|------|--------------|---------|
+| **Exact field paths** | Nested structs require precise paths | `spider_logs_first_payload.block` vs `spider_logs_first_payload.voucher_fraud_decision_block` |
+| **Field semantics** | Same field name can mean different things | `block = 'true'` (string) vs `block = true` (boolean) |
+| **Composite definitions** | Business logic often requires AND/OR conditions | `(voucher_fraud_decision_block = true AND is_fraud = 'true')` |
+| **Event flags** | Understand what 0/1 flags mean | `event_checkout_success = 1` means conversion |
+
+#### 3. Filters & Scope
+| Need | Default Assumption | User Should Specify |
+|------|-------------------|---------------------|
+| **Country/region** | None - MUST ask | `country = 'NL'` |
+| **Date range** | Last 30 days | `event_date >= '2025-09-01'` |
+| **Customer segments** | All customers | "Initially blocked customers only" |
+| **Exclusions** | None | Test accounts, internal users |
+
+#### 4. Aggregation & Output
+| Need | Options | User Should Specify |
+|------|---------|---------------------|
+| **Time granularity** | Daily, Weekly, Monthly | "ISO week level" |
+| **Metrics** | Counts, rates, averages | "Count of attempts, blocked, conversions" |
+| **Visualization** | Tables, line plots, bar charts | "Plot the trend" |
+| **Comparison groups** | Single view vs segmented | "Another plot filtered for initially blocked" |
+
+### EDA Workflow Checklist
+
+```
+□ 1. UNDERSTAND THE DATA SOURCE
+   - Read the SQL file / schema definition if provided
+   - Run DESCRIBE EXTENDED on the table
+   - Sample 10-20 rows to see actual data
+   
+□ 2. VALIDATE FIELD ASSUMPTIONS
+   - Check data types (string 'true' vs boolean true)
+   - Check for nulls in key fields
+   - Run GROUP BY to see distinct values
+   - Example: SELECT field, COUNT(*) FROM table GROUP BY field
+   
+□ 3. CLARIFY BUSINESS DEFINITIONS
+   - Ask: "What defines a 'blocked' customer?"
+   - Ask: "What defines a 'conversion'?"
+   - Ask: "Should I use first occurrence or last occurrence?"
+   
+□ 4. CONFIRM FILTERS BEFORE RUNNING
+   - Country/region filter
+   - Date range
+   - Any segment filters
+   
+□ 5. PROTOTYPE WITH SMALL QUERIES
+   - Test field paths work: SELECT nested.field FROM table LIMIT 1
+   - Test filters work: SELECT COUNT(*) FROM table WHERE filters
+   - Test aggregation logic before full run
+   
+□ 6. CREATE NOTEBOOK FOR COMPLEX ANALYSIS
+   - Use Databricks notebooks for plots
+   - Use temp folder for ad-hoc analysis (not cursor-analytics repo)
+   - Include markdown documentation in notebook
+```
+
+### Sample Data Validation Queries
+
+Before building analysis, run these via `execute_sql`:
+
+```sql
+-- 1. Check field values distribution
+SELECT 
+    spider_logs_first_payload.block AS old_definition,
+    spider_logs_first_payload.voucher_fraud_decision_block AS spider_voucher,
+    fraudservice_first_payload.is_fraud AS fs_fraud,
+    COUNT(*) as cnt
+FROM payments_hf.checkout_funnel_backend
+WHERE country = 'NL' AND event_date >= '2025-09-01'
+GROUP BY 1, 2, 3
+ORDER BY cnt DESC
+
+-- 2. Check for nulls in key fields
+SELECT 
+    COUNT(*) as total,
+    COUNT(spider_logs_first_payload.block) as has_block,
+    COUNT(event_checkout_success) as has_conversion
+FROM table WHERE filters
+
+-- 3. Validate date range has data
+SELECT MIN(event_date), MAX(event_date), COUNT(*)
+FROM table WHERE filters
+```
+
+### Common Pitfalls to Avoid
+
+| Pitfall | Impact | Prevention |
+|---------|--------|------------|
+| String vs Boolean comparison | `'true'` != `true`, query returns 0 rows | Check data types first with sample query |
+| Missing nested struct path | Query fails or returns nulls | Read schema SQL file, test path with LIMIT 1 |
+| Wrong aggregation level | Misleading metrics | Confirm: "Do you want daily, weekly, or monthly?" |
+| Forgetting country filter | Mixing data from multiple markets | Always ask for country filter |
+| Using old field definitions | Analysis doesn't match business intent | Ask user to confirm field definitions |
+
+### Notebook Best Practices for EDA
+
+```python
+# 1. Document the analysis objective at the top
+# MAGIC %md
+# MAGIC # Analysis Title
+# MAGIC **Objective:** What question are we answering?
+# MAGIC **Data Source:** schema.table
+# MAGIC **Key Definitions:**
+# MAGIC - field_a = definition
+# MAGIC - field_b = definition
+# MAGIC **Filters:** country, date range
+
+# 2. Use try/except for plot styles (cluster compatibility)
+try:
+    plt.style.use('seaborn-v0_8-whitegrid')
+except:
+    plt.style.use('seaborn-whitegrid')
+
+# 3. Print record counts at each step
+print(f"Total records: {df.count():,}")
+
+# 4. Display intermediate results
+display(df_aggregated)
+
+# 5. Include summary statistics
+print(f"Conversion Rate: {conversions/attempts*100:.2f}%")
+```
+
+### Where to Save Analysis Files
+
+| Type | Location | Reason |
+|------|----------|--------|
+| Ad-hoc EDA notebooks | `/Users/visal.kumar/Documents/temp/` | Keep cursor-analytics clean |
+| Databricks notebooks | `/Workspace/Users/{email}/temp/` | Easy to run and share |
+| Reusable analysis code | `cursor-analytics/use_cases/` | Only if it will be reused |
+| One-time queries | Don't save - use MCP directly | Avoid file clutter |
+
+---
+
 ## Version Info
 - Repository: cursor-analytics v1.0.0
 - Python: >=3.9
