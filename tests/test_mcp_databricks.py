@@ -2,7 +2,7 @@
 Tests for Databricks MCP Server (mcp/databricks/server.py)
 
 Tests the MCP server components without requiring actual connections.
-Updated to reflect the refactored architecture where MCP imports from core/.
+Updated to reflect the FastMCP architecture.
 """
 import pytest
 import sys
@@ -34,24 +34,55 @@ class TestDatabricksMCPServerSyntax:
         # This will raise SyntaxError if invalid
         ast.parse(content)
     
-    def test_server_has_required_components(self):
-        """Test server.py contains required MCP components"""
+    def test_server_uses_fastmcp(self):
+        """Test server.py uses FastMCP pattern"""
         server_path = MCP_PATH / 'server.py'
         with open(server_path, 'r') as f:
             content = f.read()
         
-        # Check for key components - now imports from core/
-        assert 'from core.connection_pool import' in content, "Should import from core.connection_pool"
-        assert 'from core.databricks_job_runner import' in content, "Should import from core.databricks_job_runner"
-        assert 'def list_tools' in content
-        assert 'def call_tool' in content
-        assert 'execute_sql' in content
-        assert 'run_notebook' in content
-        assert 'sync_to_workspace' in content
+        # Check for FastMCP pattern
+        assert 'from mcp.server.fastmcp import FastMCP' in content, "Should import FastMCP"
+        assert 'mcp = FastMCP' in content, "Should initialize FastMCP"
+        assert '@mcp.tool()' in content, "Should use @mcp.tool() decorator"
+    
+    def test_server_has_required_tools(self):
+        """Test server.py contains all required tool definitions"""
+        server_path = MCP_PATH / 'server.py'
+        with open(server_path, 'r') as f:
+            content = f.read()
+        
+        required_tools = [
+            'def execute_sql',
+            'def run_sql_file',
+            'def create_notebook',
+            'def run_notebook',
+            'def get_job_status',
+            'def sync_to_workspace',
+            'def sync_from_workspace'
+        ]
+        
+        for tool in required_tools:
+            assert tool in content, f"Missing tool: {tool}"
+    
+    def test_server_imports_from_core(self):
+        """Test server imports from core modules"""
+        server_path = MCP_PATH / 'server.py'
+        with open(server_path, 'r') as f:
+            content = f.read()
+        
+        expected_imports = [
+            'from core._config import',
+            'from core.connection_pool import',
+            'from core.databricks_job_runner import',
+            'from core.workspace_sync import',
+        ]
+        
+        for imp in expected_imports:
+            assert imp in content, f"Missing import: {imp}"
 
 
 class TestCoreModulesExist:
-    """Test that core modules have required classes (refactored architecture)"""
+    """Test that core modules have required classes"""
     
     def test_connection_pool_exists(self):
         """Test ConnectionPool class exists in core/"""
@@ -106,38 +137,6 @@ class TestCoreModulesExist:
             assert method in content, f"Missing method in DatabricksJobRunner: {method}"
 
 
-class TestMCPToolDefinitions:
-    """Test MCP tool definitions"""
-    
-    def test_all_tools_defined(self):
-        """Test all expected tools are defined in server"""
-        server_path = MCP_PATH / 'server.py'
-        with open(server_path, 'r') as f:
-            content = f.read()
-        
-        expected_tools = [
-            'execute_sql',
-            'run_sql_file',
-            'create_notebook',
-            'run_notebook',
-            'get_job_status',
-            'sync_to_workspace',
-            'sync_from_workspace'
-        ]
-        
-        for tool in expected_tools:
-            assert f'name="{tool}"' in content, f"Missing tool definition: {tool}"
-    
-    def test_tool_descriptions_exist(self):
-        """Test tools have descriptions"""
-        server_path = MCP_PATH / 'server.py'
-        with open(server_path, 'r') as f:
-            content = f.read()
-        
-        # Each Tool should have a description
-        assert content.count('description=') >= 7, "Not all tools have descriptions"
-
-
 class TestConfigLoading:
     """Test configuration loading logic"""
     
@@ -169,26 +168,20 @@ class TestConfigLoading:
         
         for var in expected_vars:
             assert var in content, f"Missing env var: {var}"
-
-
-class TestMCPServerImports:
-    """Test that MCP server correctly imports from core/"""
     
-    def test_imports_from_core(self):
-        """Test server imports from core modules"""
-        server_path = MCP_PATH / 'server.py'
-        with open(server_path, 'r') as f:
+    def test_config_no_hardcoded_defaults(self):
+        """Test config doesn't have hardcoded sensitive defaults"""
+        config_path = CORE_PATH / '_config.py'
+        with open(config_path, 'r') as f:
             content = f.read()
         
-        expected_imports = [
-            'from core._config import',
-            'from core.connection_pool import',
-            'from core.databricks_job_runner import',
-            'from core.workspace_sync import',
-        ]
-        
-        for imp in expected_imports:
-            assert imp in content, f"Missing import: {imp}"
+        # Should NOT contain hardcoded workspace URLs or IDs
+        assert 'hf-gp.cloud.databricks.com' not in content, "Should not have hardcoded hostname"
+        assert '4157495209488006' not in content, "Should not have hardcoded workspace ID"
+
+
+class TestMCPServerNoCodeDuplication:
+    """Test that MCP server doesn't duplicate code from core/"""
     
     def test_no_duplicated_classes(self):
         """Test server doesn't duplicate classes from core/"""
@@ -198,4 +191,31 @@ class TestMCPServerImports:
         
         # These should NOT be in the MCP server (they're in core/)
         assert 'class ConnectionPool:' not in content, "ConnectionPool should be imported, not defined"
-        assert 'class DatabricksClient:' not in content, "DatabricksClient should not exist (use DatabricksJobRunner)"
+        assert 'class DatabricksJobRunner:' not in content, "DatabricksJobRunner should be imported, not defined"
+        assert 'class WorkspaceSync:' not in content, "WorkspaceSync should be imported, not defined"
+
+
+class TestEnvExampleExists:
+    """Test that environment example files exist"""
+    
+    def test_databricks_env_example_exists(self):
+        """Test env.example exists for Databricks MCP"""
+        env_example = MCP_PATH / 'env.example'
+        assert env_example.exists(), "mcp/databricks/env.example should exist"
+    
+    def test_env_example_has_required_vars(self):
+        """Test env.example contains all required variables"""
+        env_example = MCP_PATH / 'env.example'
+        with open(env_example, 'r') as f:
+            content = f.read()
+        
+        required_vars = [
+            'DATABRICKS_HOST',
+            'DATABRICKS_TOKEN',
+            'DATABRICKS_HTTP_PATH',
+            'DATABRICKS_SERVER_HOSTNAME',
+            'CLUSTER_ID',
+        ]
+        
+        for var in required_vars:
+            assert var in content, f"Missing variable in env.example: {var}"

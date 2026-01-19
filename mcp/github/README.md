@@ -1,66 +1,20 @@
-# GitHub MCP Server
+# GitHub MCP Configuration
 
-NPM-based MCP server for GitHub operations.
+GitHub MCP is provided as an NPM package for repository, PR, and issue operations.
 
-## Type
+## Setup
 
-**NPM Package** - Uses `@modelcontextprotocol/server-github`
+### 1. Create a GitHub Personal Access Token
 
-## Tools (26 total)
+1. Go to GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+2. Click **Generate new token (classic)**
+3. Select scopes:
+   - `repo` (Full control of private repositories)
+   - `read:org` (Read org membership)
+   - `read:user` (Read user profile)
+4. Generate and copy the token (shown only once)
 
-### Repository Tools
-| Tool | Description |
-|------|-------------|
-| `create_repository` | Create a new repository |
-| `fork_repository` | Fork a repository |
-| `search_repositories` | Search for repositories |
-| `get_file_contents` | Get file contents |
-| `create_or_update_file` | Create or update a file |
-| `push_files` | Push multiple files |
-| `create_branch` | Create a new branch |
-| `list_commits` | List commits |
-| `search_code` | Search code |
-
-### Issue Tools
-| Tool | Description |
-|------|-------------|
-| `create_issue` | Create a new issue |
-| `get_issue` | Get issue details |
-| `update_issue` | Update an issue |
-| `list_issues` | List issues |
-| `search_issues` | Search issues |
-| `add_issue_comment` | Add comment to issue |
-
-### Pull Request Tools
-| Tool | Description |
-|------|-------------|
-| `create_pull_request` | Create a PR |
-| `get_pull_request` | Get PR details |
-| `list_pull_requests` | List PRs |
-| `get_pull_request_files` | Get files changed in PR |
-| `get_pull_request_comments` | Get PR comments |
-| `get_pull_request_reviews` | Get PR reviews |
-| `get_pull_request_status` | Get PR status checks |
-| `create_pull_request_review` | Create a review |
-| `merge_pull_request` | Merge a PR |
-| `update_pull_request_branch` | Update PR branch |
-
-### User Tools
-| Tool | Description |
-|------|-------------|
-| `search_users` | Search for users |
-
-## Configuration
-
-### 1. Create Personal Access Token
-
-1. Go to GitHub Settings → Developer settings → Personal access tokens
-2. Generate a new token with required scopes:
-   - `repo` (for private repos)
-   - `public_repo` (for public repos only)
-   - `read:org` (for organization access)
-
-### 2. Cursor Configuration
+### 2. Configure in Cursor
 
 Add to `~/.cursor/mcp.json`:
 
@@ -68,7 +22,6 @@ Add to `~/.cursor/mcp.json`:
 {
   "mcpServers": {
     "github": {
-      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
@@ -79,43 +32,181 @@ Add to `~/.cursor/mcp.json`:
 }
 ```
 
-## Dependencies
+Replace `ghp_your_token_here` with your actual token.
 
-Requires Node.js and npm installed.
+### 3. Restart Cursor
 
-## Usage Examples
+Restart Cursor IDE to load the MCP server.
 
-### Create Issue
-```
-Use create_issue with:
-- owner: your-org
-- repo: your-repo
-- title: Bug: Login fails on Safari
-- body: Steps to reproduce...
-- labels: ["bug", "priority-high"]
-```
+## Available Tools (26)
 
-### Create Pull Request
-```
-Use create_pull_request with:
-- owner: your-org
-- repo: your-repo
-- title: feat: Add user authentication
-- head: feature/auth
-- base: main
-- body: This PR adds...
-```
+### Repository Tools
 
-### Search Code
-```
-Use search_code with:
-- q: "def authenticate" language:python org:your-org
-```
+| Tool | Description |
+|------|-------------|
+| `get_repository` | Get repository information |
+| `list_repositories` | List repositories for a user/org |
+| `search_repositories` | Search repositories |
+| `get_file_contents` | Get file contents from a repo |
+| `list_directory` | List directory contents |
+| `get_readme` | Get repository README |
+| `get_branches` | List repository branches |
+| `get_commits` | Get commit history |
+| `get_commit` | Get specific commit details |
 
-### Get File Contents
+### Pull Request Tools
+
+| Tool | Description |
+|------|-------------|
+| `list_pull_requests` | List PRs for a repository |
+| `get_pull_request` | Get PR details |
+| `create_pull_request` | Create a new PR |
+| `update_pull_request` | Update PR title/body |
+| `merge_pull_request` | Merge a PR |
+| `get_pull_request_diff` | Get PR diff |
+| `get_pull_request_files` | Get files changed in PR |
+| `add_pull_request_comment` | Add comment to PR |
+| `request_reviewers` | Request PR reviewers |
+
+### Issue Tools
+
+| Tool | Description |
+|------|-------------|
+| `list_issues` | List repository issues |
+| `get_issue` | Get issue details |
+| `create_issue` | Create a new issue |
+| `update_issue` | Update issue |
+| `add_issue_comment` | Add comment to issue |
+| `search_issues` | Search issues across repos |
+
+### Other Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_user` | Get user profile |
+| `search_code` | Search code across GitHub |
+
+## Example Usage
+
+### Repository Operations
+
 ```
+# Get repository info
+Use get_repository with:
+  owner: "your-org"
+  repo: "your-repo"
+
+# Get file contents
 Use get_file_contents with:
-- owner: your-org
-- repo: your-repo
-- path: src/main.py
+  owner: "your-org"
+  repo: "your-repo"
+  path: "src/main.py"
+
+# Search repositories
+Use search_repositories with:
+  query: "language:python topic:analytics"
 ```
+
+### Pull Request Operations
+
+```
+# List open PRs
+Use list_pull_requests with:
+  owner: "your-org"
+  repo: "your-repo"
+  state: "open"
+
+# Create a PR
+Use create_pull_request with:
+  owner: "your-org"
+  repo: "your-repo"
+  title: "Add new feature"
+  body: "Description of changes..."
+  head: "feature-branch"
+  base: "main"
+
+# Get PR diff
+Use get_pull_request_diff with:
+  owner: "your-org"
+  repo: "your-repo"
+  pull_number: 123
+```
+
+### Issue Operations
+
+```
+# Search issues
+Use search_issues with:
+  query: "repo:your-org/your-repo is:open label:bug"
+
+# Create an issue
+Use create_issue with:
+  owner: "your-org"
+  repo: "your-repo"
+  title: "Bug: Something is broken"
+  body: "Steps to reproduce..."
+  labels: ["bug", "priority:high"]
+```
+
+## Search Query Syntax
+
+GitHub search supports powerful query syntax:
+
+```
+# Repository search
+language:python stars:>100 topic:data-science
+
+# Code search
+filename:config.py extension:py org:your-org
+
+# Issue/PR search
+repo:owner/repo is:open is:pr review:required
+repo:owner/repo is:issue label:bug assignee:username
+repo:owner/repo is:pr merged:>2024-01-01
+```
+
+## Environment Variables (Alternative)
+
+Instead of hardcoding in mcp.json, set environment variable:
+
+```bash
+# .env or shell profile
+export GITHUB_PERSONAL_ACCESS_TOKEN=ghp_your_token_here
+```
+
+Then reference in mcp.json:
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+## Troubleshooting
+
+### Authentication Failed
+- Verify your token is correct and not expired
+- Check that the token has required scopes
+- Regenerate token if needed
+
+### Rate Limiting
+- GitHub API has rate limits (5000 requests/hour for authenticated)
+- Check rate limit status: `curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/rate_limit`
+- Add delays between bulk operations
+
+### Permission Denied
+- Verify you have access to the repository
+- Check if the repo is private and token has `repo` scope
+- For org repos, ensure you have org membership
+
+### NPX Issues
+- Ensure Node.js and npm are installed
+- Try clearing npm cache: `npm cache clean --force`
+- Install package globally: `npm install -g @modelcontextprotocol/server-github`

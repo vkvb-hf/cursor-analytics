@@ -31,8 +31,7 @@ cursor-sql = "scripts.run_sql:main"
 cursor-inspect = "scripts.inspect_table:main"
 
 [tool.setuptools]
-packages = ["core", "scripts"]
-py-modules = ["databricks_api", "databricks_cli", "config"]
+packages = ["core", "scripts", "use_cases"]
 
 [tool.setuptools.package-data]
 "*" = ["*.md", "*.txt", "*.example"]

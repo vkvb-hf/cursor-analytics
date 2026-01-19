@@ -1,85 +1,55 @@
 # Architecture & Design Philosophy
 
-## Re-thinking the Architecture for Cursor IDE
+## MCP-First Architecture for Cursor IDE
 
-You asked: "Is having different .py files the best way to do these things? In the end I want to do the main goals, just from Cursor."
+This repository is designed around **Model Context Protocol (MCP)** as the primary interface for AI agents in Cursor IDE. Instead of traditional Python APIs or CLI tools, all Databricks operations are exposed as MCP tools that Cursor can invoke directly.
 
-**Short answer:** For Cursor IDE usage, having separate .py files is actually a good approach, but we've improved it with unified entry points.
+## Why MCP-First?
 
-## Why This Architecture Works for Cursor
-
-### 1. **Unified Entry Points** (New)
-
-Instead of remembering multiple scripts, you now have:
-
-#### Option A: Python API (`databricks_api.py`)
+**Traditional approach (not used):**
 ```python
-# In Cursor, just type:
-from databricks_api import DatabricksAPI, sql, inspect, notebook
-
-# Quick SQL execution
-results = sql("SELECT * FROM table LIMIT 10")
-
-# Inspect table
-schema = inspect("schema.table", sample=10)
-
-# Create notebook job
-job = notebook("/Workspace/path", content, "my_job")
+# Would require manual script execution
+from some_api import sql
+results = sql("SELECT * FROM table")
 ```
 
-#### Option B: Unified CLI (`databricks_cli.py`)
-```bash
-# All operations through one command
-python databricks_cli.py sql --query "SELECT * FROM table"
-python databricks_cli.py table inspect schema.table --stats
-python databricks_cli.py notebook run /Workspace/path --file notebook.py
+**MCP approach (what we use):**
+```
+# Cursor AI can directly call MCP tools
+Use execute_sql tool with query: "SELECT * FROM table"
 ```
 
-### 2. **Modular Core Utilities** (Existing)
-
-The `core/` directory contains reusable utilities that:
-- Can be imported individually if needed
-- Are well-tested and documented
-- Follow single responsibility principle
-- Can be composed together
-
-### 3. **Why Not a Single Monolithic File?**
-
-**Problems with a single file:**
-- ❌ Hard to maintain (1000+ lines)
-- ❌ Hard to test (everything mixed together)
-- ❌ Hard to reuse (can't import just what you need)
-- ❌ Hard to understand (too many responsibilities)
-
-**Benefits of modular approach:**
-- ✅ Easy to test (each module has focused tests)
-- ✅ Easy to reuse (import only what you need)
-- ✅ Easy to maintain (clear separation of concerns)
-- ✅ Easy to extend (add new utilities without breaking existing)
+**Benefits of MCP-first:**
+- ✅ AI agents can invoke tools directly without code
+- ✅ Structured JSON responses for reliable parsing
+- ✅ No import/setup required in user scripts
+- ✅ Tools are discoverable by Cursor IDE
+- ✅ Consistent interface across all operations
 
 ## Architecture Layers
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  Cursor IDE / Your Scripts                      │
-│  (Use databricks_api.py or databricks_cli.py)   │
+│  Cursor IDE / AI Agent                          │
+│  (Invokes MCP tools directly)                   │
 └─────────────────────────────────────────────────┘
                     │
                     ▼
 ┌─────────────────────────────────────────────────┐
-│  Unified Entry Points                            │
-│  • databricks_api.py (Python API)               │
-│  • databricks_cli.py (CLI tool)                 │
+│  MCP Servers (mcp/)                             │
+│  • databricks/server.py - 7 tools               │
+│  • google_sheets/server.py - 4 tools            │
+│  • External: Atlassian, Atlan, GitHub           │
 └─────────────────────────────────────────────────┘
                     │
                     ▼
 ┌─────────────────────────────────────────────────┐
 │  Core Utilities (core/)                         │
-│  • query_util.py - SQL execution                │
-│  • databricks_job_runner.py - Job management   │
+│  • connection_pool.py - SQL connections         │
+│  • databricks_job_runner.py - Job management    │
 │  • table_inspector.py - Table inspection        │
-│  • databricks_workspace.py - Workspace ops     │
-│  • ... (other utilities)                        │
+│  • workspace_sync.py - Workspace operations     │
+│  • query_util.py - Query formatting             │
 └─────────────────────────────────────────────────┘
                     │
                     ▼
@@ -93,111 +63,157 @@ The `core/` directory contains reusable utilities that:
 
 ## Usage Patterns in Cursor
 
-### Pattern 1: Quick One-liners (API)
-```python
-from databricks_api import sql, inspect
+### Pattern 1: MCP Tools (Primary - Recommended)
 
-# Run query
-results = sql("SELECT COUNT(*) FROM schema.table")
+All Databricks operations should go through MCP tools:
 
-# Inspect table
-info = inspect("schema.table", sample=5)
+```
+# Via Cursor AI - just describe what you want:
+"Run this SQL: SELECT * FROM payments_hf.chargebacks LIMIT 10"
+"Create a notebook at /Workspace/Users/me/analysis with this content..."
+"Sync my local files to Databricks workspace"
 ```
 
-### Pattern 2: Full Control (API Class)
-```python
-from databricks_api import DatabricksAPI
+The AI will use the appropriate MCP tool (`execute_sql`, `create_notebook`, `sync_to_workspace`).
 
-db = DatabricksAPI()
-results = db.run_sql("SELECT * FROM table", limit=100, display=False)
-schema = db.inspect_table("schema.table", include_stats=True)
-```
+### Pattern 2: Direct Core Import (Advanced/Scripts)
 
-### Pattern 3: CLI from Terminal
-```bash
-python databricks_cli.py sql --query "SELECT * FROM table"
-python databricks_cli.py table inspect schema.table --stats
-```
+For custom scripts or advanced use cases, import from `core/`:
 
-### Pattern 4: Direct Core Import (Advanced)
 ```python
 from core import DatabricksJobRunner, TableInspector
-from core.query_util import run_query
+from core.connection_pool import get_pool
 
 # Use specific utilities directly
+pool = get_pool()
+results = pool.execute("SELECT * FROM table")
 ```
 
-## File Organization Rationale
+### Pattern 3: Use Cases (Composite Operations)
+
+For complex workflows, use the `use_cases/` modules:
+
+```python
+from use_cases.csv_to_table import create_table_from_csvs
+
+create_table_from_csvs(
+    workspace_path="/Workspace/data",
+    table_name="schema.my_table"
+)
+```
+
+## File Organization
+
+### `mcp/` - MCP Servers (Primary Interface)
+- **databricks/server.py** - Main Databricks MCP server (7 tools)
+- **google_sheets/server.py** - Google Sheets MCP server (4 tools)
+- **External MCPs** - Configuration docs for Atlassian, Atlan, GitHub
 
 ### `core/` - Reusable Utilities
 - **Why separate files?** Each utility has a single, clear purpose
 - **Why not one big file?** Would be 2000+ lines, hard to navigate
-- **Benefit:** Easy to find what you need, easy to test
+- **Benefit:** MCP servers import from here; no code duplication
 
-### `databricks_api.py` - Unified Python Interface
-- **Why?** Provides a clean, simple API for Cursor usage
-- **Benefit:** One import, all functionality
+### `scripts/` - CLI Tools
+- Standalone scripts for specific tasks
+- Can be run directly from terminal
+- Useful for automation outside of Cursor
 
-### `databricks_cli.py` - Unified CLI
-- **Why?** Single command for all operations from terminal
-- **Benefit:** Easy to remember, consistent interface
+### `use_cases/` - Composite Operations
+- Complex workflows combining multiple core utilities
+- Example: `csv_to_table.py` - Create tables from CSV files
 
-### `scripts/` - Legacy Scripts (Optional)
-- **Why keep?** Backward compatibility, some users prefer direct scripts
-- **Can be deprecated:** Eventually all functionality is in CLI/API
+### `tests/` - Test Suite
+- Unit tests for core modules
+- Integration tests for MCP servers
+- Run with `pytest tests/ -v`
 
-## Alternative Approaches Considered
+## Design Principles
 
-### ❌ Single `databricks.py` file
-**Problems:**
-- 2000+ lines in one file
-- Hard to navigate and maintain
-- Can't import just what you need
-- All tests in one place
+### 1. MCP Tools Return Structured JSON
 
-### ❌ Plugin-based architecture
-**Problems:**
-- Over-engineered for the use case
-- Harder for Cursor to discover functionality
-- More complex setup
+All MCP tools return consistent JSON:
 
-### ✅ Current approach (Modular + Unified Entry Points)
-**Benefits:**
-- Clean separation of concerns
-- Easy to use from Cursor (API)
-- Easy to extend (modular)
-- Easy to test (focused tests)
-- Best of both worlds
+```json
+{
+  "success": true,
+  "data": [...],
+  "row_count": 100,
+  "columns": ["col1", "col2"],
+  "execution_time_ms": 234,
+  "error": null
+}
+```
 
-## Recommendations for Cursor Usage
+### 2. Core Modules Are Pure Functions
 
-### For Quick Tasks:
+Core utilities should:
+- Have no side effects beyond their stated purpose
+- Be independently testable
+- Accept configuration via parameters (not globals)
+
+### 3. MCP Servers Import from Core
+
+MCP servers should NOT duplicate logic:
+
 ```python
-from databricks_api import sql, inspect, notebook
+# Good - import from core
+from core.connection_pool import get_pool
+results = get_pool().execute(query)
+
+# Bad - duplicating logic in MCP server
+def execute_query(query):
+    # ... reimplementing connection logic
 ```
 
-### For Complex Workflows:
+### 4. Configuration via Environment
+
+All configuration comes from environment variables:
+- No hardcoded defaults for sensitive values
+- `.env` files for local development
+- Clear error messages when config is missing
+
+## Extending the Architecture
+
+### Adding a New MCP Tool
+
+1. Add the tool definition in `mcp/databricks/server.py`:
 ```python
-from databricks_api import DatabricksAPI
-
-db = DatabricksAPI()
-# Build up complex operations
+Tool(
+    name="new_tool",
+    description="...",
+    inputSchema={...}
+)
 ```
 
-### For Scripts:
-```bash
-python databricks_cli.py [command] [options]
+2. Add the handler in `call_tool()`:
+```python
+elif name == "new_tool":
+    # Implementation using core utilities
 ```
+
+3. Add tests in `tests/test_mcp_databricks.py`
+
+### Adding a New Core Utility
+
+1. Create `core/new_utility.py`
+2. Export in `core/__init__.py`
+3. Add tests in `tests/test_new_utility.py`
+4. Use in MCP server if needed
+
+### Adding a New MCP Server
+
+1. Create `mcp/new_service/server.py`
+2. Add `mcp/new_service/README.md` with setup instructions
+3. Add configuration to `~/.cursor/mcp.json`
+4. Add tests in `tests/test_mcp_new_service.py`
 
 ## Conclusion
 
-The current architecture is optimal for Cursor IDE because:
+This architecture prioritizes:
 
-1. **Simple API** (`databricks_api.py`) for quick usage
-2. **Modular core** for maintainability and testing
-3. **Unified CLI** for terminal operations
-4. **Flexible** - use what you need, when you need it
-
-You don't need to know about all the core utilities - just use the API or CLI. The modular structure is there for maintainability and extensibility.
-
-
+1. **MCP-first** - AI agents interact via MCP tools
+2. **Modular core** - Reusable utilities with no duplication
+3. **Structured responses** - Consistent JSON for reliable parsing
+4. **Secure configuration** - No hardcoded credentials
+5. **Extensibility** - Easy to add new tools and services

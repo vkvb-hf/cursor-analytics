@@ -1,0 +1,82 @@
+# requirements.lock - Pinned dependencies for reproducible builds
+# Generated: 2026-01-19
+# 
+# To regenerate this file:
+#   pip install -r requirements.txt
+#   pip freeze > requirements.lock
+#
+# To install from this file:
+#   pip install -r requirements.lock
+
+# Core dependencies
+databricks-sql-connector==3.6.0
+requests==2.32.3
+pandas==2.2.3
+python-dotenv==1.0.1
+
+# MCP Server dependencies
+mcp==1.2.0
+
+# Testing dependencies
+pytest==8.3.4
+pytest-mock==3.14.0
+pytest-asyncio==0.24.0
+
+# Transitive dependencies (auto-resolved)
+# These are pinned to ensure reproducibility
+
+# databricks-sql-connector dependencies
+thrift==0.20.0
+pyarrow==18.1.0
+lz4==4.3.3
+oauthlib==3.2.2
+numpy==2.2.1
+
+# requests dependencies
+certifi==2024.12.14
+charset-normalizer==3.4.1
+idna==3.10
+urllib3==2.3.0
+
+# pandas dependencies
+python-dateutil==2.9.0.post0
+pytz==2024.2
+tzdata==2024.2
+six==1.17.0
+
+# MCP dependencies
+anyio==4.8.0
+httpx==0.28.1
+httpx-sse==0.4.0
+pydantic==2.10.5
+pydantic-core==2.27.2
+starlette==0.45.3
+uvicorn==0.34.0
+sse-starlette==2.2.1
+typing-extensions==4.12.2
+annotated-types==0.7.0
+sniffio==1.3.1
+h11==0.14.0
+httpcore==1.0.7
+click==8.1.8
+
+# pytest dependencies
+iniconfig==2.0.0
+packaging==24.2
+pluggy==1.5.0
+exceptiongroup==1.2.2
+tomli==2.2.1
+
+# Google Sheets MCP dependencies (optional)
+google-api-python-client==2.159.0
+google-auth==2.37.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.1
+httplib2==0.22.0
+googleapis-common-protos==1.66.0
+protobuf==5.29.3
+cachetools==5.5.1
+pyasn1==0.6.1
+pyasn1-modules==0.4.1
+rsa==4.9
+uritemplate==4.1.1

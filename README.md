@@ -63,16 +63,18 @@ All tools return structured JSON with `success`, `data`, `row_count`, etc.
 
 ```
 cursor-analytics/
-├── mcp/                    # MCP Servers
+├── mcp/                    # MCP Servers (primary interface)
 │   ├── databricks/         # Databricks MCP (7 tools)
-│   └── google_sheets/      # Google Sheets MCP (4 tools)
-├── core/                   # Core utilities
+│   ├── google_sheets/      # Google Sheets MCP (4 tools)
+│   └── */README.md         # External MCP setup guides
+├── core/                   # Core utilities (imported by MCP servers)
 ├── scripts/                # CLI tools
-├── tests/                  # Tests
-├── docs/                   # Documentation
-│   ├── SETUP.md           # Setup instructions
-│   └── MCP_GUIDE.md       # MCP tools reference
-└── archive/                # Historical (ignore)
+├── use_cases/              # Composite operations
+├── tests/                  # Test suite
+└── docs/                   # Documentation
+    ├── SETUP.md            # Setup instructions
+    ├── MCP_GUIDE.md        # MCP tools reference
+    └── ARCHITECTURE.md     # Design philosophy
 ```
 
 ---

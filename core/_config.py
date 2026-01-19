@@ -49,22 +49,58 @@ def get_config() -> DatabricksConfig:
     """
     Get Databricks configuration from environment variables.
     
+    All configuration values MUST be set via environment variables or .env file.
+    No defaults are provided for security reasons.
+    
+    Required environment variables:
+        - DATABRICKS_TOKEN: Personal access token
+        - DATABRICKS_SERVER_HOSTNAME: Workspace hostname (e.g., your-workspace.cloud.databricks.com)
+        - DATABRICKS_HTTP_PATH: SQL warehouse HTTP path
+        - DATABRICKS_HOST: Full workspace URL (e.g., https://your-workspace.cloud.databricks.com)
+        - CLUSTER_ID: Cluster ID for notebook jobs
+    
     Returns:
         DatabricksConfig namedtuple with all connection settings
+    
+    Raises:
+        ValueError: If required configuration is missing
     """
     _load_dotenv()
     
+    # Check for required configuration
+    missing = []
+    
     token = os.getenv('DATABRICKS_TOKEN')
     if not token:
-        print("⚠️  WARNING: DATABRICKS_TOKEN not set!", file=sys.stderr)
-        print("   Create a .env file with your token or set the environment variable.", file=sys.stderr)
+        missing.append('DATABRICKS_TOKEN')
+    
+    server_hostname = os.getenv('DATABRICKS_SERVER_HOSTNAME')
+    if not server_hostname:
+        missing.append('DATABRICKS_SERVER_HOSTNAME')
+    
+    http_path = os.getenv('DATABRICKS_HTTP_PATH')
+    if not http_path:
+        missing.append('DATABRICKS_HTTP_PATH')
+    
+    databricks_host = os.getenv('DATABRICKS_HOST')
+    if not databricks_host:
+        missing.append('DATABRICKS_HOST')
+    
+    cluster_id = os.getenv('CLUSTER_ID')
+    if not cluster_id:
+        missing.append('CLUSTER_ID')
+    
+    if missing:
+        print(f"⚠️  WARNING: Missing required configuration: {', '.join(missing)}", file=sys.stderr)
+        print("   Create a .env file or set environment variables.", file=sys.stderr)
+        print("   See docs/SETUP.md for configuration instructions.", file=sys.stderr)
     
     return DatabricksConfig(
-        SERVER_HOSTNAME=os.getenv('DATABRICKS_SERVER_HOSTNAME', 'hf-gp.cloud.databricks.com'),
-        HTTP_PATH=os.getenv('DATABRICKS_HTTP_PATH', 'sql/protocolv1/o/4157495209488006/0319-154505-47yntzz2'),
+        SERVER_HOSTNAME=server_hostname or '',
+        HTTP_PATH=http_path or '',
         TOKEN=token or '',
-        DATABRICKS_HOST=os.getenv('DATABRICKS_HOST', 'https://hf-gp.cloud.databricks.com'),
-        CLUSTER_ID=os.getenv('CLUSTER_ID', '0319-154505-47yntzz2'),
+        DATABRICKS_HOST=databricks_host or '',
+        CLUSTER_ID=cluster_id or '',
     )
 
 

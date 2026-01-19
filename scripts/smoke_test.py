@@ -61,7 +61,7 @@ def main():
     # =========================================
     print("📁 Testing Directory Structure (CRITICAL)...")
     
-    required_dirs = ['core', 'scripts', 'tests', 'docs', 'mcp', 'use_cases', 'archive']
+    required_dirs = ['core', 'scripts', 'tests', 'docs', 'mcp', 'use_cases']
     for dir_name in required_dirs:
         def make_dir_test(d):
             def test_func():
@@ -145,22 +145,6 @@ def main():
                 check_syntax(filepath)
             return test_func
         test(f"MCP syntax valid: {mcp_file}", make_mcp_test(mcp_file), critical=True)
-    
-    # =========================================
-    # PHASE 6: Archive Structure Sanity
-    # =========================================
-    print("\n📂 Testing Archive Structure...")
-    
-    # Check that archive directories exist
-    archive_dirs = ['archive/projects', 'archive/core_unused', 'archive/core_notebook_output']
-    for arch_dir in archive_dirs:
-        def make_arch_test(d):
-            def test_func():
-                dir_path = os.path.join(ROOT_DIR, d)
-                if not os.path.isdir(dir_path):
-                    raise FileNotFoundError(f"Archive directory {d} not found")
-            return test_func
-        test(f"Archive exists: {arch_dir}", make_arch_test(arch_dir), critical=False)
     
     # =========================================
     # RESULTS SUMMARY
