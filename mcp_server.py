@@ -1,31 +1,85 @@
 #!/usr/bin/env python3
 """
-Databricks MCP Server (Optimized)
+Databricks MCP Server - Standalone Edition
 
-A Model Context Protocol server that exposes Databricks functionality to AI assistants.
-This wraps the existing cursor_databricks toolkit with connection pooling for speed.
+A completely self-contained Model Context Protocol server for Databricks.
+NO external dependencies on local modules - everything is inlined.
 
-Optimizations:
-- Persistent SQL connection (reused across queries)
-- Eager initialization on startup
-- Connection health checks with auto-reconnect
+Tools:
+- execute_sql: Run any SQL query
+- run_sql_file: Execute SQL from a local file
+- create_notebook: Create notebooks in Databricks workspace
+- run_notebook: Create and run notebooks as jobs
+- get_job_status: Check job run status
+- sync_to_workspace: Upload local files to Databricks
+- sync_from_workspace: Download Databricks files locally
+
+Configuration:
+- Set environment variables or create a .env file:
+  - DATABRICKS_HOST: Full workspace URL (e.g., https://xxx.cloud.databricks.com)
+  - DATABRICKS_TOKEN: Personal access token
+  - DATABRICKS_HTTP_PATH: SQL warehouse HTTP path
+  - DATABRICKS_SERVER_HOSTNAME: Workspace hostname (without https://)
+  - CLUSTER_ID: Cluster ID for notebook jobs
 
 Usage:
-    python mcp_server.py
+    python mcp_server_standalone.py
 
 Configure in ~/.cursor/mcp.json to use with Cursor.
 """
 
-import sys
 import os
+import sys
 import json
 import asyncio
 import atexit
-from typing import Any, Optional
-from contextlib import contextmanager
+import base64
+import time
+import re
+from pathlib import Path
+from typing import Optional, Dict, List, Any
 
-# Add current directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# =============================================================================
+# CONFIGURATION - Load from environment variables
+# =============================================================================
+
+def load_config():
+    """Load configuration from environment variables or .env file."""
+    # Try to load from .env file
+    try:
+        from dotenv import load_dotenv
+        # Look for .env in same directory as this script
+        env_path = Path(__file__).parent / '.env'
+        if env_path.exists():
+            load_dotenv(env_path)
+    except ImportError:
+        pass  # dotenv not installed, use system env vars
+    
+    config = {
+        'DATABRICKS_HOST': os.getenv('DATABRICKS_HOST', ''),
+        'TOKEN': os.getenv('DATABRICKS_TOKEN', ''),
+        'HTTP_PATH': os.getenv('DATABRICKS_HTTP_PATH', ''),
+        'SERVER_HOSTNAME': os.getenv('DATABRICKS_SERVER_HOSTNAME', ''),
+        'CLUSTER_ID': os.getenv('CLUSTER_ID', ''),
+    }
+    
+    # Derive SERVER_HOSTNAME from DATABRICKS_HOST if not set
+    if not config['SERVER_HOSTNAME'] and config['DATABRICKS_HOST']:
+        config['SERVER_HOSTNAME'] = config['DATABRICKS_HOST'].replace('https://', '').replace('http://', '')
+    
+    # Validate required config
+    missing = [k for k in ['DATABRICKS_HOST', 'TOKEN', 'HTTP_PATH'] if not config.get(k)]
+    if missing:
+        print(f"⚠️  Missing required config: {', '.join(missing)}", file=sys.stderr)
+        print("   Set environment variables or create .env file", file=sys.stderr)
+    
+    return config
+
+CONFIG = load_config()
+
+# =============================================================================
+# MCP SERVER SETUP
+# =============================================================================
 
 try:
     from mcp.server import Server
@@ -35,60 +89,50 @@ except ImportError:
     print("MCP SDK not installed. Install with: pip install mcp", file=sys.stderr)
     sys.exit(1)
 
-# Import config
-from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN, DATABRICKS_HOST, CLUSTER_ID
-
-# Initialize MCP server
 server = Server("databricks-mcp")
 
+# =============================================================================
+# CONNECTION POOL - Persistent SQL connections
+# =============================================================================
 
 class ConnectionPool:
-    """
-    Persistent connection pool for Databricks SQL.
-    Maintains a single connection that's reused across queries.
-    """
+    """Persistent connection pool for Databricks SQL."""
     
     def __init__(self):
         self._connection = None
-        self._cursor = None
         self._initialized = False
     
     def _create_connection(self):
-        """Create a new Databricks SQL connection"""
         from databricks import sql
         return sql.connect(
-            server_hostname=SERVER_HOSTNAME,
-            http_path=HTTP_PATH,
-            access_token=TOKEN,
-            timeout_seconds=300  # 5 minute timeout for long queries
+            server_hostname=CONFIG['SERVER_HOSTNAME'],
+            http_path=CONFIG['HTTP_PATH'],
+            access_token=CONFIG['TOKEN'],
+            timeout_seconds=300
         )
     
     def initialize(self):
-        """Initialize the connection pool (call once at startup)"""
-        if not self._initialized:
+        if not self._initialized and CONFIG['TOKEN']:
             try:
                 self._connection = self._create_connection()
                 self._initialized = True
-                print("Databricks connection initialized", file=sys.stderr)
+                print("✅ Databricks SQL connection initialized", file=sys.stderr)
             except Exception as e:
-                print(f"Failed to initialize connection: {e}", file=sys.stderr)
+                print(f"❌ Failed to initialize connection: {e}", file=sys.stderr)
     
     def get_connection(self):
-        """Get a connection, creating one if needed"""
         if self._connection is None:
             self._connection = self._create_connection()
             self._initialized = True
         return self._connection
     
     def execute_query(self, query: str) -> list:
-        """Execute a query using the pooled connection"""
         try:
             conn = self.get_connection()
             with conn.cursor() as cursor:
                 cursor.execute(query)
                 return cursor.fetchall()
         except Exception as e:
-            # Connection might be stale, try to reconnect once
             print(f"Query failed, attempting reconnect: {e}", file=sys.stderr)
             self._connection = None
             conn = self.get_connection()
@@ -97,7 +141,6 @@ class ConnectionPool:
                 return cursor.fetchall()
     
     def close(self):
-        """Close the connection"""
         if self._connection:
             try:
                 self._connection.close()
@@ -106,762 +149,475 @@ class ConnectionPool:
             self._connection = None
             self._initialized = False
 
-
-# Global connection pool - initialized once, reused forever
 _pool = ConnectionPool()
-
-# Register cleanup on exit
 atexit.register(_pool.close)
 
+# =============================================================================
+# DATABRICKS REST API CLIENT - Inlined from core/databricks_job_runner.py
+# =============================================================================
 
-class OptimizedDatabricksAPI:
+class DatabricksClient:
     """
-    Optimized Databricks API using connection pooling.
-    Much faster than creating new connections for each query.
+    Databricks REST API client for notebook and job operations.
+    Completely self-contained - no external dependencies.
     """
     
     def __init__(self):
-        # Import heavy modules once
-        self._job_runner = None
+        self.host = CONFIG['DATABRICKS_HOST']
+        self.token = CONFIG['TOKEN']
+        self.cluster_id = CONFIG['CLUSTER_ID']
+        self.headers = {"Authorization": f"Bearer {self.token}"}
     
-    @property
-    def job_runner(self):
-        """Lazy load job runner"""
-        if self._job_runner is None:
-            from core import DatabricksJobRunner
-            self._job_runner = DatabricksJobRunner(
-                host=DATABRICKS_HOST,
-                token=TOKEN,
-                cluster_id=CLUSTER_ID
-            )
-        return self._job_runner
-    
-    def run_sql(self, query: str, display: bool = False) -> Optional[list]:
-        """Execute SQL using the connection pool (fast!)"""
+    def _request(self, method: str, endpoint: str, **kwargs) -> Optional[Dict]:
+        """Make HTTP request to Databricks API."""
+        import requests
+        url = f"{self.host}{endpoint}"
         try:
-            return _pool.execute_query(query)
+            response = requests.request(method, url, headers=self.headers, **kwargs)
+            response.raise_for_status()
+            return response.json() if response.text else {}
         except Exception as e:
-            print(f"Error executing query: {e}", file=sys.stderr)
+            print(f"❌ API error: {e}", file=sys.stderr)
             return None
     
-    def run_sql_file(self, file_path: str, output_format: str = 'show', limit: int = 100) -> int:
-        """Execute SQL from a file"""
-        try:
-            with open(file_path, 'r') as f:
-                query = f.read()
-            
-            # Add limit if SELECT and no limit
-            query_upper = query.strip().upper()
-            if query_upper.startswith("SELECT") and "LIMIT" not in query_upper:
-                query = f"{query.rstrip(';')} LIMIT {limit}"
-            
-            results = self.run_sql(query)
-            
-            if results is None:
-                return 1
-            
-            if output_format == 'json':
-                print(json.dumps([dict(r._asdict()) if hasattr(r, '_asdict') else str(r) for r in results], indent=2, default=str))
-            elif output_format == 'csv':
-                if results and hasattr(results[0], '_fields'):
-                    print(','.join(results[0]._fields))
-                for row in results:
-                    if hasattr(row, '_fields'):
-                        print(','.join(str(v) for v in row))
-                    else:
-                        print(str(row))
-            else:
-                for row in results:
-                    print(row)
-            
-            return 0
-        except Exception as e:
-            print(f"Error: {e}", file=sys.stderr)
-            return 1
+    # -------------------------------------------------------------------------
+    # Notebook Operations
+    # -------------------------------------------------------------------------
     
     def create_notebook(self, notebook_path: str, content: str, overwrite: bool = True) -> bool:
-        """Create a notebook in workspace"""
-        return self.job_runner.create_notebook(notebook_path, content, overwrite)
-    
-    def run_notebook_job(self, notebook_path: str, notebook_content: str, 
-                        job_name: str, **kwargs) -> Optional[dict]:
-        """Create and run a notebook job"""
-        return self.job_runner.create_and_run(
-            notebook_path=notebook_path,
-            notebook_content=notebook_content,
-            job_name=job_name,
-            **kwargs
-        )
-    
-    def get_job_status(self, run_id: int) -> Optional[dict]:
-        """Get job status"""
-        return self.job_runner.get_run_status(str(run_id))
-    
-    def sync_to_workspace(self, local_dir: str, workspace_dir: str,
-                         pattern: str = "**/*.py", dry_run: bool = False) -> dict:
-        """Sync local files to workspace"""
-        from core.workspace_sync import WorkspaceSync
-        sync = WorkspaceSync(local_dir, workspace_dir)
-        return sync.sync_to_workspace(pattern=pattern, dry_run=dry_run)
-    
-    def sync_from_workspace(self, local_dir: str, workspace_dir: str,
-                           dry_run: bool = False) -> dict:
-        """Sync workspace files to local"""
-        from core.workspace_sync import WorkspaceSync
-        sync = WorkspaceSync(local_dir, workspace_dir)
-        return sync.sync_from_workspace(dry_run=dry_run)
-    
-    def find_duplicates(self, table_name: str, key_column: str, limit: int = 20) -> Optional[list]:
-        """Find duplicate rows"""
-        query = f"""
-            SELECT {key_column}, COUNT(*) as cnt
-            FROM {table_name}
-            GROUP BY {key_column}
-            HAVING COUNT(*) > 1
-            ORDER BY cnt DESC
-            LIMIT {limit}
-        """
-        return self.run_sql(query)
-    
-    def describe_table(self, table_name: str) -> Optional[list]:
-        """Get table schema with column names, types, and comments"""
-        return self.run_sql(f"DESCRIBE {table_name}")
-    
-    def sample_table(self, table_name: str, limit: int = 10, where_clause: str = None) -> Optional[list]:
-        """Get sample rows from a table with optional filter"""
-        query = f"SELECT * FROM {table_name}"
-        if where_clause:
-            query += f" WHERE {where_clause}"
-        query += f" LIMIT {limit}"
-        return self.run_sql(query)
-    
-    def profile_column(self, table_name: str, column_name: str) -> dict:
-        """Get statistics for a specific column"""
-        # Get basic stats
-        stats_query = f"""
-            SELECT 
-                COUNT(*) as total_rows,
-                COUNT({column_name}) as non_null_count,
-                COUNT(*) - COUNT({column_name}) as null_count,
-                COUNT(DISTINCT {column_name}) as distinct_count
-            FROM {table_name}
-        """
-        stats = self.run_sql(stats_query)
+        """Create a notebook in Databricks workspace."""
+        content_b64 = base64.b64encode(content.encode('utf-8')).decode('utf-8')
         
-        # Get value distribution (top 10)
-        dist_query = f"""
-            SELECT {column_name}, COUNT(*) as cnt
-            FROM {table_name}
-            GROUP BY {column_name}
-            ORDER BY cnt DESC
-            LIMIT 10
+        result = self._request('POST', '/api/2.0/workspace/import', json={
+            "path": notebook_path,
+            "content": content_b64,
+            "format": "SOURCE",
+            "language": "PYTHON",
+            "overwrite": overwrite
+        })
+        return result is not None
+    
+    # -------------------------------------------------------------------------
+    # Job Operations
+    # -------------------------------------------------------------------------
+    
+    def create_job(self, notebook_path: str, job_name: str, timeout_seconds: int = 3600) -> Optional[str]:
+        """Create a Databricks job that runs a notebook."""
+        result = self._request('POST', '/api/2.1/jobs/create', json={
+            "name": job_name,
+            "tasks": [{
+                "task_key": "run_notebook",
+                "notebook_task": {"notebook_path": notebook_path},
+                "existing_cluster_id": self.cluster_id,
+                "timeout_seconds": timeout_seconds,
+                "max_retries": 0
+            }],
+            "timeout_seconds": timeout_seconds,
+            "max_concurrent_runs": 1
+        })
+        return result.get('job_id') if result else None
+    
+    def run_job(self, job_id: str) -> Optional[str]:
+        """Start a job run."""
+        result = self._request('POST', '/api/2.1/jobs/run-now', json={"job_id": job_id})
+        return result.get('run_id') if result else None
+    
+    def get_run_status(self, run_id: str) -> Optional[Dict]:
+        """Get job run status."""
+        return self._request('GET', f'/api/2.1/jobs/runs/get?run_id={run_id}')
+    
+    def get_task_output(self, task_run_id: str) -> Optional[Dict]:
+        """Get output from a task run."""
+        return self._request('GET', f'/api/2.1/jobs/runs/get-output?run_id={task_run_id}')
+    
+    def create_and_run_notebook(self, notebook_path: str, notebook_content: str, 
+                                 job_name: str, timeout_seconds: int = 3600,
+                                 poll_interval: int = 10, max_wait: int = 3600) -> Dict:
         """
-        distribution = self.run_sql(dist_query)
-        
-        return {
-            'stats': stats[0] if stats else None,
-            'top_values': distribution
+        Complete workflow: create notebook, create job, run job, and monitor.
+        Returns dictionary with job status and outputs.
+        """
+        result = {
+            'success': False,
+            'notebook_path': notebook_path,
+            'job_name': job_name
         }
-    
-    def create_table_as_select(self, new_table_name: str, select_query: str, 
-                               replace: bool = False) -> bool:
-        """Create a new table from a SELECT query (for dashboard data sources)"""
-        try:
-            if replace:
-                self.run_sql(f"DROP TABLE IF EXISTS {new_table_name}")
-            
-            create_query = f"CREATE TABLE {new_table_name} AS {select_query}"
-            self.run_sql(create_query)
-            return True
-        except Exception as e:
-            print(f"Error creating table: {e}", file=sys.stderr)
-            return False
-    
-    def generate_exploratory_notebook(self, table_name: str, analysis_goal: str = None) -> str:
-        """Generate a Databricks notebook for exploratory data analysis"""
-        notebook = f'''# Databricks notebook source
-# MAGIC %md
-# MAGIC # Exploratory Data Analysis: {table_name}
-# MAGIC 
-# MAGIC **Generated:** {{datetime.now().strftime('%Y-%m-%d %H:%M')}}
-# MAGIC 
-# MAGIC **Goal:** {analysis_goal or 'Explore and understand the data'}
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 1. Data Overview
-
-# COMMAND ----------
-
-# Load the data
-df = spark.table("{table_name}")
-print(f"Total rows: {{df.count():,}}")
-print(f"Total columns: {{len(df.columns)}}")
-
-# COMMAND ----------
-
-# Schema
-df.printSchema()
-
-# COMMAND ----------
-
-# Sample data
-display(df.limit(20))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 2. Column Statistics
-
-# COMMAND ----------
-
-# Summary statistics for numeric columns
-display(df.describe())
-
-# COMMAND ----------
-
-# Null counts per column
-from pyspark.sql.functions import col, sum as spark_sum, when, count
-
-null_counts = df.select([
-    spark_sum(when(col(c).isNull(), 1).otherwise(0)).alias(c) 
-    for c in df.columns
-])
-display(null_counts)
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 3. Value Distributions
-
-# COMMAND ----------
-
-# Get categorical columns (string type)
-string_cols = [f.name for f in df.schema.fields if str(f.dataType) == 'StringType()']
-
-for col_name in string_cols[:5]:  # First 5 string columns
-    print(f"\\n=== {{col_name}} ===")
-    display(df.groupBy(col_name).count().orderBy("count", ascending=False).limit(10))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 4. Date/Time Analysis (if applicable)
-
-# COMMAND ----------
-
-# Find date columns
-date_cols = [f.name for f in df.schema.fields if 'Date' in str(f.dataType) or 'Timestamp' in str(f.dataType)]
-
-for col_name in date_cols[:3]:
-    print(f"\\n=== {{col_name}} range ===")
-    display(df.select(
-        min(col_name).alias("min_date"),
-        max(col_name).alias("max_date")
-    ))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 5. Key Insights
-# MAGIC 
-# MAGIC _Add your observations here after running the analysis_
-
-# COMMAND ----------
-
-# Custom analysis - add your queries here
-# Example: 
-# display(df.filter(col("status") == "active").groupBy("country").count())
-'''
-        return notebook
-    
-    def generate_pipeline_notebook(self, source_tables: list, target_table: str, 
-                                   transformation_description: str = None) -> str:
-        """Generate a Databricks notebook for data pipeline/ETL"""
-        sources_list = ", ".join(source_tables)
-        notebook = f'''# Databricks notebook source
-# MAGIC %md
-# MAGIC # Data Pipeline: {target_table}
-# MAGIC 
-# MAGIC **Source Tables:** {sources_list}
-# MAGIC **Target Table:** {target_table}
-# MAGIC 
-# MAGIC **Description:** {transformation_description or 'Data transformation pipeline'}
-# MAGIC 
-# MAGIC **Generated:** {{datetime.now().strftime('%Y-%m-%d %H:%M')}}
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Configuration
-
-# COMMAND ----------
-
-# Pipeline configuration
-TARGET_TABLE = "{target_table}"
-WRITE_MODE = "overwrite"  # or "append"
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 1. Load Source Data
-
-# COMMAND ----------
-
-'''
-        # Add source table loading
-        for i, table in enumerate(source_tables):
-            table_alias = table.split('.')[-1]
-            notebook += f'''# Load {table}
-df_{table_alias} = spark.table("{table}")
-print(f"{table}: {{df_{table_alias}.count():,}} rows")
-
-# COMMAND ----------
-
-'''
         
-        notebook += f'''# MAGIC %md
-# MAGIC ## 2. Data Transformations
+        # Step 1: Create notebook
+        if not self.create_notebook(notebook_path, notebook_content):
+            result['error'] = 'Failed to create notebook'
+            return result
+        
+        # Step 2: Create job
+        job_id = self.create_job(notebook_path, job_name, timeout_seconds)
+        if not job_id:
+            result['error'] = 'Failed to create job'
+            return result
+        result['job_id'] = job_id
+        
+        # Step 3: Run job
+        run_id = self.run_job(job_id)
+        if not run_id:
+            result['error'] = 'Failed to run job'
+            return result
+        result['run_id'] = run_id
+        
+        # Step 4: Monitor job
+        start_time = time.time()
+        while True:
+            status = self.get_run_status(run_id)
+            if not status:
+                result['error'] = 'Failed to get job status'
+                return result
+            
+            state = status.get('state', {})
+            life_cycle_state = state.get('life_cycle_state', 'UNKNOWN')
+            result_state = state.get('result_state')
+            
+            # Job finished
+            if life_cycle_state in ['TERMINATED', 'SKIPPED', 'INTERNAL_ERROR']:
+                result['state'] = life_cycle_state
+                result['result_state'] = result_state
+                result['success'] = result_state == 'SUCCESS'
+                
+                # Collect output
+                if 'tasks' in status:
+                    outputs = []
+                    for task in status.get('tasks', []):
+                        task_run_id = task.get('run_id')
+                        if task_run_id:
+                            task_output = self.get_task_output(task_run_id)
+                            if task_output:
+                                outputs.append(task_output)
+                    result['outputs'] = outputs
+                
+                return result
+            
+            # Timeout check
+            if time.time() - start_time > max_wait:
+                result['error'] = 'Job timed out'
+                result['state'] = 'TIMEOUT'
+                return result
+            
+            time.sleep(poll_interval)
+    
+    # -------------------------------------------------------------------------
+    # Workspace Sync Operations - Inlined from core/workspace_sync.py
+    # -------------------------------------------------------------------------
+    
+    def _create_workspace_dirs(self, workspace_path: str):
+        """Create directory structure in workspace."""
+        import requests
+        path_parts = workspace_path.strip('/').split('/')
+        for i in range(1, len(path_parts)):
+            parent_path = '/' + '/'.join(path_parts[:i])
+            try:
+                requests.post(
+                    f"{self.host}/api/2.0/workspace/mkdirs",
+                    headers=self.headers,
+                    json={"path": parent_path}
+                )
+            except:
+                pass
+    
+    def upload_file(self, local_path: Path, workspace_path: str, overwrite: bool = True) -> Dict:
+        """Upload a single file to Databricks workspace."""
+        import requests
+        
+        if not local_path.exists():
+            return {'success': False, 'error': f'File not found: {local_path}'}
+        
+        try:
+            with open(local_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except Exception as e:
+            return {'success': False, 'error': f'Error reading file: {e}'}
+        
+        # Create directory structure
+        workspace_dir = '/'.join(workspace_path.split('/')[:-1])
+        self._create_workspace_dirs(workspace_dir)
+        
+        # Determine language from extension
+        ext = local_path.suffix.lower()
+        language = {'py': 'PYTHON', '.sql': 'SQL', '.scala': 'SCALA', '.r': 'R'}.get(ext, 'PYTHON')
+        
+        # Upload
+        content_b64 = base64.b64encode(content.encode('utf-8')).decode('utf-8')
+        try:
+            response = requests.post(
+                f"{self.host}/api/2.0/workspace/import",
+                headers=self.headers,
+                json={
+                    "path": workspace_path,
+                    "content": content_b64,
+                    "format": "SOURCE",
+                    "language": language,
+                    "overwrite": overwrite
+                }
+            )
+            response.raise_for_status()
+            return {'success': True, 'local_path': str(local_path), 'workspace_path': workspace_path}
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+    
+    def download_file(self, workspace_path: str, local_path: Path, overwrite: bool = True) -> Dict:
+        """Download a file from Databricks workspace."""
+        import requests
+        
+        if local_path.exists() and not overwrite:
+            return {'success': False, 'error': f'File exists: {local_path}'}
+        
+        local_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        try:
+            response = requests.get(
+                f"{self.host}/api/2.0/workspace/export",
+                headers=self.headers,
+                params={"path": workspace_path, "format": "SOURCE"}
+            )
+            response.raise_for_status()
+            
+            content_b64 = response.json().get('content', '')
+            content = base64.b64decode(content_b64).decode('utf-8')
+            
+            with open(local_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            return {'success': True, 'workspace_path': workspace_path, 'local_path': str(local_path)}
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+    
+    def list_workspace_files(self, workspace_dir: str, recursive: bool = True) -> List[str]:
+        """List all files in workspace directory."""
+        import requests
+        files = []
+        
+        try:
+            response = requests.get(
+                f"{self.host}/api/2.0/workspace/list",
+                headers=self.headers,
+                params={"path": workspace_dir}
+            )
+            response.raise_for_status()
+            
+            for item in response.json().get('objects', []):
+                path = item['path']
+                obj_type = item.get('object_type', '')
+                
+                if obj_type in ['NOTEBOOK', 'FILE']:
+                    files.append(path)
+                elif obj_type == 'DIRECTORY' and recursive:
+                    files.extend(self.list_workspace_files(path, recursive=True))
+        except Exception as e:
+            print(f"⚠️  Error listing workspace: {e}", file=sys.stderr)
+        
+        return files
+    
+    def sync_to_workspace(self, local_dir: str, workspace_dir: str, 
+                          pattern: str = "**/*.py", dry_run: bool = False) -> Dict:
+        """Sync local files to Databricks workspace."""
+        local_path = Path(local_dir).expanduser().resolve()
+        files = list(local_path.glob(pattern))
+        
+        results = {'success': [], 'failed': [], 'total': len(files)}
+        
+        for file_path in files:
+            if file_path.is_file():
+                relative = file_path.relative_to(local_path)
+                ws_path = f"{workspace_dir.rstrip('/')}/{relative.as_posix()}"
+                
+                if dry_run:
+                    results['success'].append({'local': str(file_path), 'workspace': ws_path, 'dry_run': True})
+                else:
+                    result = self.upload_file(file_path, ws_path)
+                    if result['success']:
+                        results['success'].append(result)
+                    else:
+                        results['failed'].append(result)
+        
+        return results
+    
+    def sync_from_workspace(self, local_dir: str, workspace_dir: str, dry_run: bool = False) -> Dict:
+        """Sync workspace files to local directory."""
+        local_path = Path(local_dir).expanduser().resolve()
+        local_path.mkdir(parents=True, exist_ok=True)
+        
+        workspace_files = self.list_workspace_files(workspace_dir)
+        results = {'success': [], 'failed': [], 'total': len(workspace_files)}
+        
+        for ws_path in workspace_files:
+            if ws_path.startswith(workspace_dir):
+                relative = ws_path.replace(workspace_dir, '').lstrip('/')
+                file_path = local_path / relative
+                
+                if dry_run:
+                    results['success'].append({'workspace': ws_path, 'local': str(file_path), 'dry_run': True})
+                else:
+                    result = self.download_file(ws_path, file_path)
+                    if result['success']:
+                        results['success'].append(result)
+                    else:
+                        results['failed'].append(result)
+        
+        return results
 
-# COMMAND ----------
+# Global client instance
+_client = DatabricksClient()
 
-from pyspark.sql.functions import *
-
-# TODO: Add your transformations here
-# Example joins, filters, aggregations
-
-# Starting with first source table
-df_result = df_{source_tables[0].split('.')[-1]}
-
-# Example transformation:
-# df_result = df_result.filter(col("status") == "active")
-# df_result = df_result.withColumn("processed_date", current_date())
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 3. Data Quality Checks
-
-# COMMAND ----------
-
-# Row count check
-print(f"Output rows: {{df_result.count():,}}")
-
-# Null check on key columns
-# df_result.select([count(when(col(c).isNull(), c)).alias(c) for c in df_result.columns]).show()
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 4. Write Output
-
-# COMMAND ----------
-
-# Write to target table
-df_result.write.mode(WRITE_MODE).saveAsTable(TARGET_TABLE)
-print(f"✅ Data written to {{TARGET_TABLE}}")
-
-# COMMAND ----------
-
-# Verify output
-spark.table(TARGET_TABLE).limit(5).display()
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## 5. Pipeline Summary
-
-# COMMAND ----------
-
-# Final stats
-final_count = spark.table(TARGET_TABLE).count()
-print(f"Pipeline completed successfully!")
-print(f"Target table: {{TARGET_TABLE}}")
-print(f"Total rows: {{final_count:,}}")
-
-dbutils.notebook.exit(f"SUCCESS: {{final_count}} rows")
-'''
-        return notebook
-
-
-# Global optimized API instance
-_api = OptimizedDatabricksAPI()
-
+# =============================================================================
+# MCP TOOL DEFINITIONS
+# =============================================================================
 
 @server.list_tools()
 async def list_tools():
-    """List available Databricks tools"""
+    """List available Databricks tools."""
     return [
         Tool(
             name="execute_sql",
-            description="Execute a SQL query on Databricks and return results. Use for SELECT queries, data exploration, and analysis.",
+            description="""Execute any SQL query on Databricks. This is the primary tool for all data operations.
+
+Common patterns:
+- List tables: SHOW TABLES IN schema_name
+- Describe table: DESCRIBE table_name
+- Sample data: SELECT * FROM table LIMIT 10
+- Find duplicates: SELECT col, COUNT(*) FROM table GROUP BY col HAVING COUNT(*) > 1
+- Profile column: SELECT COUNT(*), COUNT(col), COUNT(DISTINCT col) FROM table
+- Create table: CREATE TABLE new_table AS SELECT ...
+
+Returns formatted results with column headers.""",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "SQL query to execute"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "description": "Maximum number of rows to return (default: 100)",
-                        "default": 100
-                    }
+                    "query": {"type": "string", "description": "SQL query to execute"},
+                    "limit": {"type": "integer", "description": "Max rows to return (default: 100)", "default": 100}
                 },
                 "required": ["query"]
             }
         ),
         Tool(
             name="run_sql_file",
-            description="Execute SQL from a local file on Databricks",
+            description="Execute SQL from a local file. Useful for complex queries stored in .sql files.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "file_path": {
-                        "type": "string",
-                        "description": "Path to the SQL file"
-                    },
-                    "output_format": {
-                        "type": "string",
-                        "description": "Output format: 'show', 'csv', or 'json'",
-                        "enum": ["show", "csv", "json"],
-                        "default": "show"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "description": "Maximum number of rows",
-                        "default": 100
-                    }
+                    "file_path": {"type": "string", "description": "Path to the SQL file"},
+                    "output_format": {"type": "string", "enum": ["show", "csv", "json"], "default": "show"},
+                    "limit": {"type": "integer", "description": "Maximum rows to return", "default": 100}
                 },
                 "required": ["file_path"]
             }
         ),
         Tool(
-            name="list_tables",
-            description="List tables in a Databricks schema/database",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "schema_name": {
-                        "type": "string",
-                        "description": "Schema/database name to list tables from"
-                    },
-                    "catalog": {
-                        "type": "string",
-                        "description": "Catalog name (optional, defaults to current catalog)"
-                    }
-                },
-                "required": ["schema_name"]
-            }
-        ),
-        Tool(
             name="create_notebook",
-            description="Create a Python notebook in Databricks workspace",
+            description="Create a Python notebook in Databricks workspace.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "notebook_path": {
-                        "type": "string",
-                        "description": "Path in Databricks workspace (e.g., /Workspace/Users/user@example.com/my_notebook)"
-                    },
-                    "content": {
-                        "type": "string",
-                        "description": "Python notebook content"
-                    },
-                    "overwrite": {
-                        "type": "boolean",
-                        "description": "Overwrite if notebook exists",
-                        "default": True
-                    }
+                    "notebook_path": {"type": "string", "description": "Path in Databricks workspace"},
+                    "content": {"type": "string", "description": "Python notebook content"},
+                    "overwrite": {"type": "boolean", "default": True}
                 },
                 "required": ["notebook_path", "content"]
             }
         ),
         Tool(
             name="run_notebook",
-            description="Create and run a notebook as a Databricks job. Returns job output when complete.",
+            description="Create and run a notebook as a Databricks job. Waits for completion and returns output.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "notebook_path": {
-                        "type": "string",
-                        "description": "Path in Databricks workspace for the notebook"
-                    },
-                    "notebook_content": {
-                        "type": "string",
-                        "description": "Python notebook content to execute"
-                    },
-                    "job_name": {
-                        "type": "string",
-                        "description": "Name for the Databricks job"
-                    }
+                    "notebook_path": {"type": "string", "description": "Path in Databricks workspace"},
+                    "notebook_content": {"type": "string", "description": "Python notebook content"},
+                    "job_name": {"type": "string", "description": "Name for the Databricks job"}
                 },
                 "required": ["notebook_path", "notebook_content", "job_name"]
             }
         ),
         Tool(
             name="get_job_status",
-            description="Get the status of a Databricks job run",
+            description="Get the status of a Databricks job run.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "run_id": {
-                        "type": "integer",
-                        "description": "Databricks job run ID"
-                    }
+                    "run_id": {"type": "integer", "description": "Databricks job run ID"}
                 },
                 "required": ["run_id"]
             }
         ),
         Tool(
             name="sync_to_workspace",
-            description="Sync local files to Databricks workspace",
+            description="Sync local files to Databricks workspace.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "local_dir": {
-                        "type": "string",
-                        "description": "Local directory path"
-                    },
-                    "workspace_dir": {
-                        "type": "string",
-                        "description": "Databricks workspace directory path"
-                    },
-                    "pattern": {
-                        "type": "string",
-                        "description": "File pattern to sync (e.g., '**/*.py')",
-                        "default": "**/*.py"
-                    },
-                    "dry_run": {
-                        "type": "boolean",
-                        "description": "If true, only show what would be synced",
-                        "default": False
-                    }
+                    "local_dir": {"type": "string", "description": "Local directory path"},
+                    "workspace_dir": {"type": "string", "description": "Databricks workspace directory"},
+                    "pattern": {"type": "string", "default": "**/*.py"},
+                    "dry_run": {"type": "boolean", "default": False}
                 },
                 "required": ["local_dir", "workspace_dir"]
             }
         ),
         Tool(
             name="sync_from_workspace",
-            description="Sync files from Databricks workspace to local directory",
+            description="Sync files from Databricks workspace to local directory.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "local_dir": {
-                        "type": "string",
-                        "description": "Local directory path"
-                    },
-                    "workspace_dir": {
-                        "type": "string",
-                        "description": "Databricks workspace directory path"
-                    },
-                    "dry_run": {
-                        "type": "boolean",
-                        "description": "If true, only show what would be synced",
-                        "default": False
-                    }
+                    "local_dir": {"type": "string", "description": "Local directory path"},
+                    "workspace_dir": {"type": "string", "description": "Databricks workspace directory"},
+                    "dry_run": {"type": "boolean", "default": False}
                 },
                 "required": ["local_dir", "workspace_dir"]
-            }
-        ),
-        Tool(
-            name="find_duplicates",
-            description="Find duplicate rows in a table based on a key column",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "table_name": {
-                        "type": "string",
-                        "description": "Table name in format 'schema.table'"
-                    },
-                    "key_column": {
-                        "type": "string",
-                        "description": "Column to check for duplicates"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "description": "Maximum number of duplicate rows to return",
-                        "default": 20
-                    }
-                },
-                "required": ["table_name", "key_column"]
-            }
-        ),
-        Tool(
-            name="describe_table",
-            description="Get table schema with column names, data types, and comments. Use this to understand table structure before querying.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "table_name": {
-                        "type": "string",
-                        "description": "Full table name (e.g., 'hive_metastore.payments_hf.f_orders')"
-                    }
-                },
-                "required": ["table_name"]
-            }
-        ),
-        Tool(
-            name="sample_table",
-            description="Get sample rows from a table. Quick way to see what data looks like.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "table_name": {
-                        "type": "string",
-                        "description": "Full table name"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "description": "Number of rows to return",
-                        "default": 10
-                    },
-                    "where_clause": {
-                        "type": "string",
-                        "description": "Optional WHERE clause filter (without 'WHERE' keyword)"
-                    }
-                },
-                "required": ["table_name"]
-            }
-        ),
-        Tool(
-            name="profile_column",
-            description="Get statistics and value distribution for a specific column. Useful for data exploration.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "table_name": {
-                        "type": "string",
-                        "description": "Full table name"
-                    },
-                    "column_name": {
-                        "type": "string",
-                        "description": "Column to profile"
-                    }
-                },
-                "required": ["table_name", "column_name"]
-            }
-        ),
-        Tool(
-            name="create_dashboard_table",
-            description="Create a new table from a SELECT query. Use for creating dashboard data sources or materialized views.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "new_table_name": {
-                        "type": "string",
-                        "description": "Name for the new table (e.g., 'hive_metastore.payments_hf.my_dashboard_data')"
-                    },
-                    "select_query": {
-                        "type": "string",
-                        "description": "SELECT query that defines the table data"
-                    },
-                    "replace_if_exists": {
-                        "type": "boolean",
-                        "description": "If true, drop and recreate the table if it exists",
-                        "default": False
-                    }
-                },
-                "required": ["new_table_name", "select_query"]
-            }
-        ),
-        Tool(
-            name="create_exploratory_notebook",
-            description="Generate a Databricks notebook template for exploratory data analysis on a table. Creates a complete EDA workflow.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "table_name": {
-                        "type": "string",
-                        "description": "Table to analyze"
-                    },
-                    "notebook_path": {
-                        "type": "string",
-                        "description": "Path in Databricks workspace to save the notebook"
-                    },
-                    "analysis_goal": {
-                        "type": "string",
-                        "description": "Description of what you want to learn from the data"
-                    }
-                },
-                "required": ["table_name", "notebook_path"]
-            }
-        ),
-        Tool(
-            name="create_pipeline_notebook",
-            description="Generate a Databricks notebook template for data pipeline/ETL. Creates a structured pipeline with source loading, transformations, quality checks, and output.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "source_tables": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": "List of source table names"
-                    },
-                    "target_table": {
-                        "type": "string",
-                        "description": "Name of the output table"
-                    },
-                    "notebook_path": {
-                        "type": "string",
-                        "description": "Path in Databricks workspace to save the notebook"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Description of what the pipeline does"
-                    }
-                },
-                "required": ["source_tables", "target_table", "notebook_path"]
             }
         )
     ]
 
+# =============================================================================
+# MCP TOOL HANDLERS
+# =============================================================================
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
-    """Handle tool calls"""
+    """Handle tool calls."""
     try:
+        # ---------------------------------------------------------------------
+        # SQL Operations
+        # ---------------------------------------------------------------------
         if name == "execute_sql":
             query = arguments["query"]
             limit = arguments.get("limit", 100)
             
-            # Add LIMIT if not present and it's a SELECT query
+            # Add LIMIT if SELECT without LIMIT
             query_upper = query.strip().upper()
             if query_upper.startswith("SELECT") and "LIMIT" not in query_upper:
                 query = f"{query.rstrip(';')} LIMIT {limit}"
             
-            results = _api.run_sql(query)
+            results = _pool.execute_query(query)
             
-            if results is None:
-                return [TextContent(type="text", text="Query execution failed. Check the query syntax.")]
-            
-            if len(results) == 0:
+            if not results:
                 return [TextContent(type="text", text="Query returned 0 rows.")]
             
-            # Format results as a table
-            output_lines = []
-            output_lines.append(f"Query returned {len(results)} rows:\n")
-            
+            # Format results
+            lines = [f"Query returned {len(results)} rows:\n"]
             if hasattr(results[0], '_fields'):
-                headers = results[0]._fields
-                output_lines.append(" | ".join(str(h) for h in headers))
-                output_lines.append("-" * 80)
+                lines.append(" | ".join(str(h) for h in results[0]._fields))
+                lines.append("-" * 80)
             
             for row in results[:limit]:
                 if hasattr(row, '_fields'):
-                    output_lines.append(" | ".join(str(v) for v in row))
+                    lines.append(" | ".join(str(v) for v in row))
                 else:
-                    output_lines.append(str(row))
+                    lines.append(str(row))
             
-            return [TextContent(type="text", text="\n".join(output_lines))]
+            return [TextContent(type="text", text="\n".join(lines))]
         
+        # ---------------------------------------------------------------------
         elif name == "run_sql_file":
             file_path = arguments["file_path"]
             output_format = arguments.get("output_format", "show")
             limit = arguments.get("limit", 100)
             
-            # Read and execute the file
             with open(file_path, 'r') as f:
                 query = f.read()
             
@@ -869,254 +625,92 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             if query_upper.startswith("SELECT") and "LIMIT" not in query_upper:
                 query = f"{query.rstrip(';')} LIMIT {limit}"
             
-            results = _api.run_sql(query)
+            results = _pool.execute_query(query)
             
-            if results is None:
-                return [TextContent(type="text", text="SQL file execution failed.")]
+            if not results:
+                return [TextContent(type="text", text="Query returned 0 rows.")]
             
-            # Format based on output_format
             if output_format == 'json':
-                data = []
-                for r in results:
-                    if hasattr(r, '_asdict'):
-                        data.append(dict(r._asdict()))
-                    else:
-                        data.append(str(r))
+                data = [dict(r._asdict()) if hasattr(r, '_asdict') else str(r) for r in results]
                 return [TextContent(type="text", text=json.dumps(data, indent=2, default=str))]
             else:
-                output_lines = [f"Query returned {len(results)} rows:\n"]
+                lines = [f"Query returned {len(results)} rows:\n"]
                 if results and hasattr(results[0], '_fields'):
-                    output_lines.append(" | ".join(results[0]._fields))
-                    output_lines.append("-" * 80)
+                    lines.append(" | ".join(results[0]._fields))
+                    lines.append("-" * 80)
                 for row in results:
-                    if hasattr(row, '_fields'):
-                        output_lines.append(" | ".join(str(v) for v in row))
-                    else:
-                        output_lines.append(str(row))
-                return [TextContent(type="text", text="\n".join(output_lines))]
+                    lines.append(" | ".join(str(v) for v in row) if hasattr(row, '_fields') else str(row))
+                return [TextContent(type="text", text="\n".join(lines))]
         
-        elif name == "list_tables":
-            schema_name = arguments["schema_name"]
-            catalog = arguments.get("catalog", "")
-            
-            if catalog:
-                query = f"SHOW TABLES IN {catalog}.{schema_name}"
-            else:
-                query = f"SHOW TABLES IN {schema_name}"
-            
-            results = _api.run_sql(query)
-            
-            if results:
-                tables = [str(row) for row in results]
-                return [TextContent(type="text", text=f"Tables in {schema_name}:\n" + "\n".join(tables))]
-            else:
-                return [TextContent(type="text", text=f"No tables found in {schema_name}")]
-        
+        # ---------------------------------------------------------------------
+        # Notebook Operations
+        # ---------------------------------------------------------------------
         elif name == "create_notebook":
-            notebook_path = arguments["notebook_path"]
-            content = arguments["content"]
-            overwrite = arguments.get("overwrite", True)
-            
-            success = _api.create_notebook(notebook_path, content, overwrite)
-            
-            if success:
-                return [TextContent(type="text", text=f"Notebook created successfully at {notebook_path}")]
-            else:
-                return [TextContent(type="text", text=f"Failed to create notebook at {notebook_path}")]
-        
-        elif name == "run_notebook":
-            notebook_path = arguments["notebook_path"]
-            notebook_content = arguments["notebook_content"]
-            job_name = arguments["job_name"]
-            
-            result = _api.run_notebook_job(
-                notebook_path=notebook_path,
-                notebook_content=notebook_content,
-                job_name=job_name
+            success = _client.create_notebook(
+                arguments["notebook_path"],
+                arguments["content"],
+                arguments.get("overwrite", True)
             )
-            
-            if result:
-                return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
+            if success:
+                return [TextContent(type="text", text=f"✅ Notebook created at {arguments['notebook_path']}")]
             else:
-                return [TextContent(type="text", text="Failed to run notebook job")]
+                return [TextContent(type="text", text=f"❌ Failed to create notebook")]
         
+        # ---------------------------------------------------------------------
+        elif name == "run_notebook":
+            result = _client.create_and_run_notebook(
+                arguments["notebook_path"],
+                arguments["notebook_content"],
+                arguments["job_name"]
+            )
+            return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
+        
+        # ---------------------------------------------------------------------
         elif name == "get_job_status":
-            run_id = arguments["run_id"]
-            
-            status = _api.get_job_status(run_id)
-            
+            status = _client.get_run_status(str(arguments["run_id"]))
             if status:
                 return [TextContent(type="text", text=json.dumps(status, indent=2, default=str))]
             else:
-                return [TextContent(type="text", text=f"Could not get status for run {run_id}")]
+                return [TextContent(type="text", text=f"Could not get status for run {arguments['run_id']}")]
         
+        # ---------------------------------------------------------------------
+        # Workspace Sync Operations
+        # ---------------------------------------------------------------------
         elif name == "sync_to_workspace":
-            local_dir = arguments["local_dir"]
-            workspace_dir = arguments["workspace_dir"]
-            pattern = arguments.get("pattern", "**/*.py")
-            dry_run = arguments.get("dry_run", False)
-            
-            result = _api.sync_to_workspace(local_dir, workspace_dir, pattern, dry_run)
+            result = _client.sync_to_workspace(
+                arguments["local_dir"],
+                arguments["workspace_dir"],
+                arguments.get("pattern", "**/*.py"),
+                arguments.get("dry_run", False)
+            )
             return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
         
+        # ---------------------------------------------------------------------
         elif name == "sync_from_workspace":
-            local_dir = arguments["local_dir"]
-            workspace_dir = arguments["workspace_dir"]
-            dry_run = arguments.get("dry_run", False)
-            
-            result = _api.sync_from_workspace(local_dir, workspace_dir, dry_run)
+            result = _client.sync_from_workspace(
+                arguments["local_dir"],
+                arguments["workspace_dir"],
+                arguments.get("dry_run", False)
+            )
             return [TextContent(type="text", text=json.dumps(result, indent=2, default=str))]
         
-        elif name == "find_duplicates":
-            table_name = arguments["table_name"]
-            key_column = arguments["key_column"]
-            limit = arguments.get("limit", 20)
-            
-            results = _api.find_duplicates(table_name, key_column, limit)
-            
-            if results:
-                output_lines = [f"Duplicates found ({len(results)} groups):\n"]
-                if hasattr(results[0], '_fields'):
-                    output_lines.append(" | ".join(str(h) for h in results[0]._fields))
-                    output_lines.append("-" * 40)
-                for row in results:
-                    if hasattr(row, '_fields'):
-                        output_lines.append(" | ".join(str(v) for v in row))
-                    else:
-                        output_lines.append(str(row))
-                return [TextContent(type="text", text="\n".join(output_lines))]
-            else:
-                return [TextContent(type="text", text=f"No duplicates found for {key_column} in {table_name}")]
-        
-        elif name == "describe_table":
-            table_name = arguments["table_name"]
-            results = _api.describe_table(table_name)
-            
-            if results:
-                output = f"Schema for {table_name}:\n\n"
-                output += f"{'Column':<40} {'Type':<30} {'Comment'}\n"
-                output += "-" * 100 + "\n"
-                for row in results:
-                    col_name = str(row[0]) if row[0] else ""
-                    col_type = str(row[1]) if len(row) > 1 and row[1] else ""
-                    comment = str(row[2]) if len(row) > 2 and row[2] else ""
-                    output += f"{col_name:<40} {col_type:<30} {comment}\n"
-                return [TextContent(type="text", text=output)]
-            else:
-                return [TextContent(type="text", text=f"Could not describe table {table_name}")]
-        
-        elif name == "sample_table":
-            table_name = arguments["table_name"]
-            limit = arguments.get("limit", 10)
-            where_clause = arguments.get("where_clause")
-            
-            results = _api.sample_table(table_name, limit, where_clause)
-            
-            if results:
-                output_lines = [f"Sample from {table_name} ({len(results)} rows):\n"]
-                if hasattr(results[0], '_fields'):
-                    output_lines.append(" | ".join(str(h) for h in results[0]._fields))
-                    output_lines.append("-" * 100)
-                for row in results:
-                    if hasattr(row, '_fields'):
-                        output_lines.append(" | ".join(str(v)[:50] for v in row))
-                    else:
-                        output_lines.append(str(row))
-                return [TextContent(type="text", text="\n".join(output_lines))]
-            else:
-                return [TextContent(type="text", text=f"No data found in {table_name}")]
-        
-        elif name == "profile_column":
-            table_name = arguments["table_name"]
-            column_name = arguments["column_name"]
-            
-            profile = _api.profile_column(table_name, column_name)
-            
-            output = f"Profile for {table_name}.{column_name}:\n\n"
-            
-            if profile['stats']:
-                stats = profile['stats']
-                output += "=== Statistics ===\n"
-                output += f"Total Rows:     {stats[0]:,}\n"
-                output += f"Non-Null:       {stats[1]:,}\n"
-                output += f"Null Count:     {stats[2]:,}\n"
-                output += f"Distinct Count: {stats[3]:,}\n"
-                if stats[0] > 0:
-                    output += f"Null %:         {(stats[2]/stats[0])*100:.2f}%\n"
-                    output += f"Cardinality:    {(stats[3]/stats[0])*100:.2f}%\n"
-            
-            if profile['top_values']:
-                output += "\n=== Top 10 Values ===\n"
-                for row in profile['top_values']:
-                    output += f"{str(row[0])[:50]:<50} {row[1]:>10,}\n"
-            
-            return [TextContent(type="text", text=output)]
-        
-        elif name == "create_dashboard_table":
-            new_table_name = arguments["new_table_name"]
-            select_query = arguments["select_query"]
-            replace = arguments.get("replace_if_exists", False)
-            
-            success = _api.create_table_as_select(new_table_name, select_query, replace)
-            
-            if success:
-                # Get row count
-                count_result = _api.run_sql(f"SELECT COUNT(*) FROM {new_table_name}")
-                row_count = count_result[0][0] if count_result else "unknown"
-                return [TextContent(type="text", text=f"✅ Table {new_table_name} created successfully!\nRows: {row_count:,}")]
-            else:
-                return [TextContent(type="text", text=f"❌ Failed to create table {new_table_name}")]
-        
-        elif name == "create_exploratory_notebook":
-            table_name = arguments["table_name"]
-            notebook_path = arguments["notebook_path"]
-            analysis_goal = arguments.get("analysis_goal")
-            
-            # Generate notebook content
-            content = _api.generate_exploratory_notebook(table_name, analysis_goal)
-            
-            # Create the notebook
-            success = _api.create_notebook(notebook_path, content)
-            
-            if success:
-                return [TextContent(type="text", text=f"✅ Exploratory notebook created at {notebook_path}\n\nThe notebook includes:\n- Data overview (row count, columns)\n- Schema inspection\n- Sample data preview\n- Column statistics\n- Null analysis\n- Value distributions\n- Date range analysis\n\nOpen it in Databricks to run the analysis!")]
-            else:
-                return [TextContent(type="text", text=f"❌ Failed to create notebook at {notebook_path}")]
-        
-        elif name == "create_pipeline_notebook":
-            source_tables = arguments["source_tables"]
-            target_table = arguments["target_table"]
-            notebook_path = arguments["notebook_path"]
-            description = arguments.get("description")
-            
-            # Generate notebook content
-            content = _api.generate_pipeline_notebook(source_tables, target_table, description)
-            
-            # Create the notebook
-            success = _api.create_notebook(notebook_path, content)
-            
-            if success:
-                sources_str = ", ".join(source_tables)
-                return [TextContent(type="text", text=f"✅ Pipeline notebook created at {notebook_path}\n\nPipeline:\n- Sources: {sources_str}\n- Target: {target_table}\n\nThe notebook includes:\n- Source data loading\n- Transformation template\n- Data quality checks\n- Output writing\n- Pipeline summary\n\nOpen it in Databricks to customize and run!")]
-            else:
-                return [TextContent(type="text", text=f"❌ Failed to create notebook at {notebook_path}")]
-        
+        # ---------------------------------------------------------------------
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
     
     except Exception as e:
         import traceback
-        return [TextContent(type="text", text=f"Error executing {name}: {str(e)}\n{traceback.format_exc()}")]
+        return [TextContent(type="text", text=f"Error: {str(e)}\n{traceback.format_exc()}")]
 
+# =============================================================================
+# MAIN ENTRY POINT
+# =============================================================================
 
 async def main():
-    """Run the MCP server"""
-    # Initialize connection pool eagerly on startup
+    """Run the MCP server."""
     _pool.initialize()
-    
     async with stdio_server() as (read_stream, write_stream):
         await server.run(read_stream, write_stream, server.create_initialization_options())
-
 
 if __name__ == "__main__":
     asyncio.run(main())
