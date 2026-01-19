@@ -27,19 +27,15 @@ class TestAllImports:
             TableInspector,
             print_table,
             run_query,
-            interactive_sql_main,
             run_sql_file,
-            create_workspace_directory,
-            upload_csv_to_workspace
+            WorkspaceSync
         )
         assert DatabricksJobRunner is not None
         assert TableInspector is not None
         assert print_table is not None
         assert run_query is not None
-        assert interactive_sql_main is not None
         assert run_sql_file is not None
-        assert create_workspace_directory is not None
-        assert upload_csv_to_workspace is not None
+        assert WorkspaceSync is not None
     
     def test_individual_module_imports(self):
         """Test importing from individual modules"""
@@ -47,10 +43,9 @@ class TestAllImports:
         from core.table_inspector import TableInspector
         from core.query_util import run_query, print_table, format_value
         from core.run_sql_file import run_sql_file
-        from core.interactive_sql import main as interactive_sql_main
-        from core.databricks_workspace import create_workspace_directory, upload_csv_to_workspace
-        from core.csv_to_table import create_table_from_csvs
-        from core.create_table import create_table
+        from use_cases.interactive_sql import main as interactive_sql_main
+        from use_cases.csv_to_table import create_table_from_csvs
+        from use_cases.create_table import create_table
         
         assert DatabricksJobRunner is not None
         assert TableInspector is not None
@@ -59,8 +54,6 @@ class TestAllImports:
         assert format_value is not None
         assert run_sql_file is not None
         assert interactive_sql_main is not None
-        assert create_workspace_directory is not None
-        assert upload_csv_to_workspace is not None
         assert create_table_from_csvs is not None
         assert create_table is not None
 
@@ -226,19 +219,12 @@ class TestDatabricksJobRunner:
 class TestWorkspaceFunctions:
     """Test workspace utility functions"""
     
-    def test_create_workspace_directory_function(self):
-        """Test create_workspace_directory function exists and can be called"""
-        from core.databricks_workspace import create_workspace_directory
+    def test_workspace_sync_class(self):
+        """Test WorkspaceSync class exists and can be instantiated"""
+        from core.workspace_sync import WorkspaceSync
         
-        assert create_workspace_directory is not None
-        assert callable(create_workspace_directory)
-    
-    def test_upload_csv_to_workspace_function(self):
-        """Test upload_csv_to_workspace function exists and can be called"""
-        from core.databricks_workspace import upload_csv_to_workspace
-        
-        assert upload_csv_to_workspace is not None
-        assert callable(upload_csv_to_workspace)
+        assert WorkspaceSync is not None
+        # Can't instantiate without credentials, but class should exist
 
 
 class TestRunSQLFile:
