@@ -11,16 +11,19 @@ import os
 from typing import Dict, List, Optional, Tuple
 from databricks import sql
 
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+# Import config - works both when installed as package and when run directly
 try:
-    from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+    from core._config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
 except ImportError:
-    # Fallback if config is not available
-    SERVER_HOSTNAME = None
-    HTTP_PATH = None
-    TOKEN = None
+    # Fallback for direct script execution
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+    except ImportError:
+        # Last resort fallback
+        SERVER_HOSTNAME = None
+        HTTP_PATH = None
+        TOKEN = None
 
 
 class TableInspector:

@@ -11,9 +11,15 @@ import sys
 import argparse
 import tempfile
 from typing import Dict
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import DATABRICKS_HOST, TOKEN
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import DATABRICKS_HOST, TOKEN
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import DATABRICKS_HOST, TOKEN
+
 from core.databricks_workspace import create_workspace_directory, upload_csv_to_workspace
 
 

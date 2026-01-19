@@ -5,9 +5,15 @@ Interactive SQL Shell for Databricks
 from databricks import sql
 import sys
 import os
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+
 from core.query_util import print_table
 
 def main():

@@ -13,9 +13,14 @@ import shutil
 import argparse
 import tempfile
 from pathlib import Path
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import DATABRICKS_HOST, TOKEN
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import DATABRICKS_HOST, TOKEN
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import DATABRICKS_HOST, TOKEN
 
 
 def unzip_and_rename_csvs(source_dir: str, output_dir: str) -> dict:

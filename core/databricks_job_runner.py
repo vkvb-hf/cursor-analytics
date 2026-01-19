@@ -16,9 +16,14 @@ import sys
 import os
 import base64
 from typing import Optional, Dict, List
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import DATABRICKS_HOST, TOKEN, CLUSTER_ID
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import DATABRICKS_HOST, TOKEN, CLUSTER_ID
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import DATABRICKS_HOST, TOKEN, CLUSTER_ID
 
 
 class DatabricksJobRunner:

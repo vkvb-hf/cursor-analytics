@@ -9,9 +9,14 @@ import os
 import argparse
 from decimal import Decimal
 from typing import List, Any, Optional
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN
 
 def format_value(value: Any) -> str:
     """Format a value for display"""

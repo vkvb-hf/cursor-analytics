@@ -6,8 +6,13 @@ import requests
 import sys
 import os
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import DATABRICKS_HOST, TOKEN
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import DATABRICKS_HOST, TOKEN
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import DATABRICKS_HOST, TOKEN
 
 
 def get_cluster_logs(cluster_id: str, run_id: str = None):

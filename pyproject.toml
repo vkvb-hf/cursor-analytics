@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cursor-analytics"
+version = "1.0.0"
+description = "Databricks toolkit for product analytics"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Proprietary"}
+authors = [
+    {name = "Product Analytics Team"}
+]
+
+dependencies = [
+    "databricks-sql-connector>=3.0.0",
+    "requests>=2.28.0",
+    "pandas>=1.5.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.0.0"]
+test = ["pytest>=7.0.0", "pytest-mock>=3.10.0"]
+dev = ["cursor-analytics[mcp,test]"]
+
+[project.scripts]
+# CLI entry points
+cursor-sql = "scripts.run_sql:main"
+cursor-inspect = "scripts.inspect_table:main"
+
+[tool.setuptools]
+packages = ["core", "scripts"]
+py-modules = ["databricks_api", "databricks_cli", "config"]
+
+[tool.setuptools.package-data]
+"*" = ["*.md", "*.txt", "*.example"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v"

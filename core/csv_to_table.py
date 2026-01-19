@@ -18,9 +18,14 @@ import requests
 import tempfile
 from typing import List, Dict, Callable, Optional, Tuple
 from databricks import sql
-# Add parent directory to path for config import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN, DATABRICKS_HOST
+
+# Import config - works both when installed as package and when run directly
+try:
+    from core._config import SERVER_HOSTNAME, HTTP_PATH, TOKEN, DATABRICKS_HOST
+except ImportError:
+    # Fallback for direct script execution
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import SERVER_HOSTNAME, HTTP_PATH, TOKEN, DATABRICKS_HOST
 
 
 def get_csv_files_from_workspace(workspace_path: str, workspace_host: str, token: str) -> List[str]:
