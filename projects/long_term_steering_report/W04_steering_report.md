@@ -12,10 +12,11 @@
 | RG | Region |
 
 ## Key Insights
-**Critical Issues:** 5_DunningBadDebtRate_12wkCohort decreased 6.57% (15.74% to 14.71%), 3_PaymentProcessingFees% decreased 100.00% (1.30% to 0.00%)
-**Positive Trends:** Dunning Profit increased 10.24% (€10.21 to €11.26), Payment Fraud Block Rate increased 38.74% (0.25% to 0.35%), Total Duplicate Block Rate increased 20.37% (4.44% to 5.35%), Payment Page Visit to Success increased 6.56% (31.44% to 33.50%)
-**Risk Shifts:** AR Pre Dunning showing diverging trends, Ship Rate showing diverging trends, 6_TotalBadDebtRate_12wkCohort showing diverging trends, 5_DunningBadDebtRate_12wkCohort showing diverging trends, 6_PaymentApprovalRate showing diverging trends, Acceptance LL0 and LL1+ (Recurring Charge) showing diverging trends, Payment Approval Rate showing diverging trends, Recovery W12 showing diverging trends, Select to Success showing diverging trends, Reactivation Rate showing diverging trends, Payment Page Visit to Success showing diverging trends, Payment Page Visit to Success (Backend) showing diverging trends
-**Emerging Concerns:** 3_PaymentProcessingFees% down 100.00% YoY
+
+- **Critical Issues:** Dunning Bad Debt Rate decreased 6.57% (15.74% to 14.71%), Payment Checkout Approval Rate down 1.26% across all clusters
+- **Positive Trends:** Dunning Profit increased 10.24% (€10.21 to €11.26), Payment Fraud Block Rate up 38.74%, Total Duplicate Block Rate up 20.37%, Payment Page Visit to Success improved 6.56%
+- **Risk Shifts:** AR Pre Dunning, Ship Rate, Payment Approval Rate, and Recovery W12 showing diverging trends across clusters
+- **Emerging Concerns:** Fraud Approval Rate declined 0.82% WoW and 2.71% YoY, Select to Success down 9.08% YoY
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
 | :--- | :--- | :--- | :--- |
