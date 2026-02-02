@@ -12,10 +12,11 @@
 | RG | Region |
 
 ## Key Insights
-**Critical Issues:** 3_PaymentProcessingFees% decreased 100.00% (1.30% to 0.00%)
-**Positive Trends:** Dunning Profit increased 7.34% (€11.26 to €12.09), Payment Fraud Block Rate increased 1043.71% (0.33% to 3.80%)
-**Risk Shifts:** Select to Success showing diverging trends, Ship Rate showing diverging trends, Recovery W0 showing diverging trends, Payment Fraud Block Rate showing diverging trends, Reactivation Rate showing diverging trends, 5_DunningBadDebtRate_12wkCohort showing diverging trends, Fraud Approval Rate showing diverging trends
-**Emerging Concerns:** 3_PaymentProcessingFees% down 100.00% YoY
+
+- **Critical Issues:** Payment Checkout Approval Rate declined significantly across clusters, with WL showing the steepest drop (↓8.41% to 87.74%). Overall down 1.53% week-over-week.
+- **Positive Trends:** Dunning Profit increased 7.34% (€11.26 to €12.09), with RTE showing strongest improvement at ↑25.48%. Recovery W12 remains stable at 86.70%.
+- **Risk Shifts:** Select to Success, Ship Rate, Recovery W0, and Fraud Approval Rate showing diverging trends across reporting clusters, requiring monitoring.
+- **Emerging Concerns:** Payment Fraud Block Rate spiked 1043.71% overall (driven by WL cluster), potentially indicating fraud attack or detection system changes requiring investigation.
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
 | :--- | :--- | :--- | :--- |
