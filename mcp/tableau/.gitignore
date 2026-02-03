@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output (we commit index.js separately)
+build/
+
+# Test output
+junit/
+coverage/
+
+# IDE
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
