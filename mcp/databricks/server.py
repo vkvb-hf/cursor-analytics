@@ -13,6 +13,7 @@ Tools:
 - get_job_status: Check job run status
 - sync_to_workspace: Upload local files to Databricks
 - sync_from_workspace: Download Databricks files locally
+- create_workspace_folder: Create a folder in Databricks workspace
 
 Configuration:
 - Set environment variables or create a .env file in this directory:
@@ -32,6 +33,7 @@ import os
 import sys
 import json
 import time
+import requests
 from pathlib import Path
 from typing import Optional, Any
 
@@ -524,34 +526,91 @@ def sync_to_workspace(
 def sync_from_workspace(
     local_dir: str, 
     workspace_dir: str, 
+    pattern: str = None,
     dry_run: bool = False
 ) -> dict[str, Any]:
     """
     Sync files from Databricks workspace to local directory.
+    
+    If workspace_dir points to a single file (e.g., ends with .py), downloads just that file.
+    Otherwise, downloads all files in the directory.
 
     Args:
         local_dir: Local directory path
-        workspace_dir: Databricks workspace directory
+        workspace_dir: Databricks workspace path (can be a file or directory)
+        pattern: Optional filename pattern to filter (e.g., "*.py")
         dry_run: If True, preview without downloading (default: False)
 
     Returns:
         JSON with: success, action, local_dir, workspace_dir, files_synced, dry_run
     """
     try:
-        sync = WorkspaceSync(local_dir=local_dir, workspace_dir=workspace_dir)
-        result = sync.sync_from_workspace(dry_run=dry_run)
+        import base64
+        import requests
+        from pathlib import Path
         
-        # Ensure structured response
-        if not isinstance(result, dict):
-            result = {"result": result}
+        # Check if workspace_dir is a single file (has extension)
+        is_single_file = any(workspace_dir.endswith(ext) for ext in ['.py', '.sql', '.scala', '.r', '.R'])
         
-        result["success"] = result.get("success", True)
-        result["action"] = "sync_from_workspace"
-        result["local_dir"] = local_dir
-        result["workspace_dir"] = workspace_dir
-        result["dry_run"] = dry_run
-        
-        return result
+        if is_single_file:
+            # Download single file directly
+            local_path = Path(local_dir) / Path(workspace_dir).name
+            local_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            if dry_run:
+                return {
+                    "success": True,
+                    "action": "sync_from_workspace",
+                    "dry_run": True,
+                    "would_download": [{"workspace": workspace_dir, "local": str(local_path)}]
+                }
+            
+            # Use Databricks API directly for single file
+            host = os.environ.get("DATABRICKS_HOST")
+            token = os.environ.get("DATABRICKS_TOKEN")
+            headers = {"Authorization": f"Bearer {token}"}
+            
+            export_url = f"{host}/api/2.0/workspace/export"
+            params = {"path": workspace_dir, "format": "SOURCE"}
+            
+            response = requests.get(export_url, headers=headers, params=params)
+            response.raise_for_status()
+            
+            data = response.json()
+            content_b64 = data.get('content', '')
+            content = base64.b64decode(content_b64).decode('utf-8')
+            
+            with open(local_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            return {
+                "success": True,
+                "action": "sync_from_workspace",
+                "local_dir": local_dir,
+                "workspace_dir": workspace_dir,
+                "dry_run": False,
+                "files_downloaded": [{
+                    "workspace_path": workspace_dir,
+                    "local_path": str(local_path),
+                    "size_kb": len(content.encode('utf-8')) / 1024
+                }]
+            }
+        else:
+            # Directory sync - use WorkspaceSync
+            sync = WorkspaceSync(local_dir=local_dir, workspace_dir=workspace_dir)
+            result = sync.sync_from_workspace(dry_run=dry_run)
+            
+            # Ensure structured response
+            if not isinstance(result, dict):
+                result = {"result": result}
+            
+            result["success"] = result.get("success", True)
+            result["action"] = "sync_from_workspace"
+            result["local_dir"] = local_dir
+            result["workspace_dir"] = workspace_dir
+            result["dry_run"] = dry_run
+            
+            return result
         
     except Exception as e:
         return {
@@ -560,6 +619,91 @@ def sync_from_workspace(
             "local_dir": local_dir,
             "workspace_dir": workspace_dir,
             "dry_run": dry_run,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def create_workspace_folder(
+    folder_path: str
+) -> dict[str, Any]:
+    """
+    Create a folder (directory) in Databricks workspace.
+    
+    Creates the folder and all parent directories if they don't exist.
+    This is useful for setting up folder structures before syncing files.
+
+    Args:
+        folder_path: Full path in Databricks workspace (e.g., /Workspace/Users/user@example.com/my_project/subfolder)
+
+    Returns:
+        JSON with: success, folder_path, action, message
+    
+    Examples:
+        - create_workspace_folder("/Workspace/Users/user@example.com/analytics")
+        - create_workspace_folder("/Workspace/Users/user@example.com/project/src/utils")
+    """
+    try:
+        host = os.environ.get("DATABRICKS_HOST")
+        token = os.environ.get("DATABRICKS_TOKEN")
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        # Normalize path
+        folder_path = folder_path.rstrip('/')
+        
+        # Use mkdirs API to create folder and all parents
+        mkdir_url = f"{host}/api/2.0/workspace/mkdirs"
+        payload = {"path": folder_path}
+        
+        response = requests.post(mkdir_url, headers=headers, json=payload)
+        
+        if response.status_code == 200:
+            return {
+                "success": True,
+                "folder_path": folder_path,
+                "action": "created",
+                "message": f"Folder created successfully: {folder_path}"
+            }
+        elif response.status_code == 400:
+            # Check if it's because folder already exists
+            error_data = response.json()
+            if "RESOURCE_ALREADY_EXISTS" in str(error_data):
+                return {
+                    "success": True,
+                    "folder_path": folder_path,
+                    "action": "already_exists",
+                    "message": f"Folder already exists: {folder_path}"
+                }
+            else:
+                return {
+                    "success": False,
+                    "folder_path": folder_path,
+                    "action": "failed",
+                    "error": error_data.get("message", str(error_data))
+                }
+        else:
+            response.raise_for_status()
+            
+    except requests.exceptions.HTTPError as e:
+        error_msg = str(e)
+        try:
+            error_detail = e.response.json()
+            error_msg = f"{e}: {error_detail}"
+        except:
+            if hasattr(e, 'response') and hasattr(e.response, 'text'):
+                error_msg = f"{e}: {e.response.text}"
+        
+        return {
+            "success": False,
+            "folder_path": folder_path,
+            "action": "failed",
+            "error": error_msg
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "folder_path": folder_path,
+            "action": "failed",
             "error": str(e)
         }
 

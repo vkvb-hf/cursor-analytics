@@ -17,6 +17,11 @@ import os
 import base64
 from typing import Optional, Dict, List
 
+# Use stderr for logging to avoid corrupting MCP JSON responses on stdout
+def _log(message: str):
+    """Log to stderr to avoid corrupting MCP stdout JSON responses."""
+    print(message, file=sys.stderr)
+
 # Import config - works both when installed as package and when run directly
 try:
     from core._config import DATABRICKS_HOST, TOKEN, CLUSTER_ID
@@ -47,7 +52,7 @@ class DatabricksJobRunner:
         Returns:
             True if successful, False otherwise
         """
-        print(f"📝 Creating notebook: {notebook_path}")
+        _log(f"📝 Creating notebook: {notebook_path}")
         
         # Encode content as base64
         content_b64 = base64.b64encode(content.encode('utf-8')).decode('utf-8')
@@ -64,12 +69,12 @@ class DatabricksJobRunner:
         try:
             response = requests.post(url, headers=self.headers, json=payload)
             response.raise_for_status()
-            print(f"✅ Notebook created successfully!")
+            _log(f"✅ Notebook created successfully!")
             return True
         except Exception as e:
-            print(f"❌ Error creating notebook: {e}")
+            _log(f"❌ Error creating notebook: {e}")
             if hasattr(e, 'response') and hasattr(e.response, 'text'):
-                print(f"   Response: {e.response.text}")
+                _log(f"   Response: {e.response.text}")
             return False
     
     def create_job(
@@ -94,7 +99,7 @@ class DatabricksJobRunner:
         if not job_name:
             job_name = f"Run {notebook_path.split('/')[-1]}"
         
-        print(f"🚀 Creating Databricks job: {job_name}")
+        _log(f"🚀 Creating Databricks job: {job_name}")
         
         url = f"{self.host}/api/2.1/jobs/create"
         payload = {
@@ -117,12 +122,12 @@ class DatabricksJobRunner:
             response.raise_for_status()
             job_data = response.json()
             job_id = job_data['job_id']
-            print(f"✅ Job created! Job ID: {job_id}")
+            _log(f"✅ Job created! Job ID: {job_id}")
             return job_id
         except Exception as e:
-            print(f"❌ Error creating job: {e}")
+            _log(f"❌ Error creating job: {e}")
             if hasattr(e, 'response') and hasattr(e.response, 'text'):
-                print(f"   Response: {e.response.text}")
+                _log(f"   Response: {e.response.text}")
             return None
     
     def run_job(self, job_id: str) -> Optional[str]:
@@ -135,7 +140,7 @@ class DatabricksJobRunner:
         Returns:
             Run ID if successful, None otherwise
         """
-        print(f"▶️  Starting job run...")
+        _log(f"▶️  Starting job run...")
         
         url = f"{self.host}/api/2.1/jobs/run-now"
         payload = {"job_id": job_id}
@@ -145,12 +150,12 @@ class DatabricksJobRunner:
             response.raise_for_status()
             run_data = response.json()
             run_id = run_data['run_id']
-            print(f"✅ Job run started! Run ID: {run_id}")
+            _log(f"✅ Job run started! Run ID: {run_id}")
             return run_id
         except Exception as e:
-            print(f"❌ Error running job: {e}")
+            _log(f"❌ Error running job: {e}")
             if hasattr(e, 'response') and hasattr(e.response, 'text'):
-                print(f"   Response: {e.response.text}")
+                _log(f"   Response: {e.response.text}")
             return None
     
     def get_run_status(self, run_id: str) -> Optional[Dict]:
@@ -162,7 +167,7 @@ class DatabricksJobRunner:
             response.raise_for_status()
             return response.json()
         except Exception as e:
-            print(f"❌ Error getting run status: {e}")
+            _log(f"❌ Error getting run status: {e}")
             return None
     
     def get_task_output(self, task_run_id: str) -> Optional[Dict]:
@@ -196,8 +201,8 @@ class DatabricksJobRunner:
         Returns:
             Dictionary with final status and output
         """
-        print(f"\n📊 Monitoring job run: {run_id}")
-        print("=" * 80)
+        _log(f"\n📊 Monitoring job run: {run_id}")
+        _log("=" * 80)
         
         states = {
             'PENDING': '⏳ Pending',
@@ -230,20 +235,20 @@ class DatabricksJobRunner:
             # Show state change
             if state != last_state:
                 state_display = states.get(state, state)
-                print(f"\n{state_display}: {state}")
+                _log(f"\n{state_display}: {state}")
                 if result_state:
                     result_display = result_states.get(result_state, result_state)
-                    print(f"   Result: {result_display}")
+                    _log(f"   Result: {result_display}")
                 last_state = state
                 
                 # If running, show elapsed time
                 if state == 'RUNNING':
                     elapsed = int(time.time() - start_time)
-                    print(f"   ⏱️  Elapsed: {elapsed}s")
+                    _log(f"   ⏱️  Elapsed: {elapsed}s")
             
             # If job is finished
             if state in ['TERMINATED', 'SKIPPED', 'INTERNAL_ERROR']:
-                print("\n" + "=" * 80)
+                _log("\n" + "=" * 80)
                 
                 # Collect output from all tasks
                 if show_output:
@@ -251,9 +256,9 @@ class DatabricksJobRunner:
                 
                 # Final status
                 if result_state == 'SUCCESS':
-                    print("\n✅ Job completed successfully!")
+                    _log("\n✅ Job completed successfully!")
                 else:
-                    print(f"\n⚠️  Job finished with state: {result_state}")
+                    _log(f"\n⚠️  Job finished with state: {result_state}")
                 
                 return {
                     'run_id': run_id,
@@ -264,8 +269,8 @@ class DatabricksJobRunner:
             
             # Check timeout
             if time.time() - start_time > max_wait:
-                print("\n⏱️  Timeout reached. Job may still be running.")
-                print(f"   Check job status in Databricks UI")
+                _log("\n⏱️  Timeout reached. Job may still be running.")
+                _log(f"   Check job status in Databricks UI")
                 return {
                     'run_id': run_id,
                     'state': 'TIMEOUT',
@@ -298,16 +303,16 @@ class DatabricksJobRunner:
         
         # Display outputs in a readable format
         if outputs:
-            print("\n" + "=" * 80)
-            print("📋 NOTEBOOK OUTPUT (from Databricks API)")
-            print("=" * 80)
+            _log("\n" + "=" * 80)
+            _log("📋 NOTEBOOK OUTPUT (from Databricks API)")
+            _log("=" * 80)
             
             for output_info in outputs:
                 task_key = output_info['task_key']
                 output = output_info['output']
                 
-                print(f"\n📌 Task: {task_key}")
-                print("-" * 80)
+                _log(f"\n📌 Task: {task_key}")
+                _log("-" * 80)
                 
                 # Extract notebook output - this is the universal way to get output
                 if 'notebook_output' in output and 'result' in output['notebook_output']:
@@ -318,7 +323,7 @@ class DatabricksJobRunner:
                         for item in result.get('data', []):
                             # Handle text/plain output (most common - print statements, query results)
                             if 'text/plain' in item:
-                                print(item['text/plain'])
+                                _log(item['text/plain'])
                             # Handle text/html (DataFrame displays, etc.)
                             elif 'text/html' in item:
                                 # For HTML, try to extract text content
@@ -330,7 +335,7 @@ class DatabricksJobRunner:
                                 # Remove HTML tags for basic text extraction
                                 text = re.sub(r'<[^>]+>', '', html_content)
                                 if text.strip():
-                                    print(text.strip())
+                                    _log(text.strip())
                             # Handle other output types
                             elif 'application/vnd.databricks.result-v1+json' in item:
                                 # Structured data - try to format it
@@ -339,26 +344,26 @@ class DatabricksJobRunner:
                                     data = item['application/vnd.databricks.result-v1+json']
                                     if isinstance(data, str):
                                         data = json.loads(data)
-                                    print(json.dumps(data, indent=2))
+                                    _log(json.dumps(data, indent=2))
                                 except:
-                                    print(str(item))
+                                    _log(str(item))
                     
                     # Show errors if any
                     if result.get('errorSummary'):
-                        print(f"\n❌ Error: {result['errorSummary']}")
+                        _log(f"\n❌ Error: {result['errorSummary']}")
                     if result.get('cause'):
-                        print(f"   Cause: {result['cause']}")
+                        _log(f"   Cause: {result['cause']}")
                 
                 # Handle direct error in output
                 elif 'error' in output:
-                    print(f"❌ Error: {output['error']}")
+                    _log(f"❌ Error: {output['error']}")
                     if 'error_trace' in output:
-                        print(f"   Trace: {output['error_trace']}")
+                        _log(f"   Trace: {output['error_trace']}")
                 
-                print("-" * 80)
+                _log("-" * 80)
         else:
             # No outputs found - might still be processing
-            print("\n⚠️  No output available yet (job may still be processing)")
+            _log("\n⚠️  No output available yet (job may still be processing)")
         
         return outputs
     
@@ -393,9 +398,9 @@ class DatabricksJobRunner:
         Returns:
             Dictionary with job status and outputs
         """
-        print("=" * 80)
-        print("Databricks Notebook & Job Runner")
-        print("=" * 80)
+        _log("=" * 80)
+        _log("Databricks Notebook & Job Runner")
+        _log("=" * 80)
         
         # Step 0: Auto-inject DBFS output writing (WORKING approach)
         if auto_inject_output:
@@ -405,10 +410,10 @@ class DatabricksJobRunner:
                     notebook_content,
                     job_name=job_name
                 )
-                print("✅ DBFS output writing auto-injected (output will be visible in terminal)")
+                _log("✅ DBFS output writing auto-injected (output will be visible in terminal)")
             except Exception as e:
-                print(f"⚠️  Warning: Could not inject DBFS output: {e}")
-                print("   Continuing without auto-injection...")
+                _log(f"⚠️  Warning: Could not inject DBFS output: {e}")
+                _log("   Continuing without auto-injection...")
         
         # Step 1: Create notebook
         if not self.create_notebook(notebook_path, notebook_content):
@@ -441,11 +446,11 @@ class DatabricksJobRunner:
                 reader = NotebookOutputReader()
                 content = reader.read_output(standard_output_path)
                 if content:
-                    print("\n" + "=" * 80)
-                    print("📊 NOTEBOOK OUTPUT (from DBFS)")
-                    print("=" * 80)
-                    print(content)
-                    print("=" * 80)
+                    _log("\n" + "=" * 80)
+                    _log("📊 NOTEBOOK OUTPUT (from DBFS)")
+                    _log("=" * 80)
+                    _log(content)
+                    _log("=" * 80)
                     return result
             except Exception as e:
                 # Fall back to regular output reading
@@ -487,14 +492,14 @@ class DatabricksJobRunner:
                 if latest:
                     reader.display_output(latest)
                 else:
-                    print("\n⚠️  No output file found in /tmp/notebook_outputs/")
-                    print("   Make sure your notebook uses NotebookOutput.write_to_dbfs()")
+                    _log("\n⚠️  No output file found in /tmp/notebook_outputs/")
+                    _log("   Make sure your notebook uses NotebookOutput.write_to_dbfs()")
                     
         except ImportError:
-            print("\n⚠️  Could not import NotebookOutputReader")
-            print("   Output reading disabled")
+            _log("\n⚠️  Could not import NotebookOutputReader")
+            _log("   Output reading disabled")
         except Exception as e:
-            print(f"\n⚠️  Error reading output: {e}")
+            _log(f"\n⚠️  Error reading output: {e}")
 
 
 def main():

@@ -8,6 +8,7 @@ This folder contains all Model Context Protocol (MCP) servers used with Cursor I
 |------------|------|-------|--------|
 | [Databricks](databricks/) | Local Python | 7 tools | Active |
 | [Google Sheets](google_sheets/) | Local Python | 4 tools | Active |
+| [Tableau](tableau/) | Pre-built Node.js | 12 tools | Active |
 | [Atlassian](atlassian/) | Remote SaaS | 28 tools | Active |
 | [Atlan](atlan/) | Remote SaaS | 12 tools | Active |
 | [GitHub](github/) | NPM Package | 26 tools | Active |
@@ -42,6 +43,29 @@ This folder contains all Model Context Protocol (MCP) servers used with Cursor I
    }
    ```
 
+### Pre-built MCPs (Tableau)
+
+No build required - just configure:
+
+```json
+{
+  "mcpServers": {
+    "tableau": {
+      "command": "node",
+      "args": ["/path/to/cursor-analytics/mcp/tableau/index.js"],
+      "env": {
+        "SERVER": "https://tableau.hellofresh.io",
+        "SITE_NAME": "",
+        "PAT_NAME": "Cursor MCP",
+        "PAT_VALUE": "your-pat-token-here"
+      }
+    }
+  }
+}
+```
+
+See [Tableau README](tableau/README.md) for PAT setup instructions.
+
 ### External MCPs (Atlassian, Atlan, GitHub)
 
 See individual README files for setup:
@@ -67,6 +91,16 @@ Complete `~/.cursor/mcp.json` with all MCPs:
       "cwd": "/path/to/cursor-analytics/mcp/google_sheets",
       "env": {
         "GOOGLE_SERVICE_ACCOUNT_FILE": "/path/to/service-account.json"
+      }
+    },
+    "tableau": {
+      "command": "node",
+      "args": ["/path/to/cursor-analytics/mcp/tableau/index.js"],
+      "env": {
+        "SERVER": "https://tableau.hellofresh.io",
+        "SITE_NAME": "",
+        "PAT_NAME": "Cursor MCP",
+        "PAT_VALUE": "your-pat-token-here"
       }
     },
     "atlassian": {

@@ -210,6 +210,41 @@ Extract cell comments from a sheet.
 
 ## External MCPs
 
+### Tableau (12 tools)
+
+Pre-built server for HelloFresh Tableau Server. See [mcp/tableau/README.md](../mcp/tableau/README.md).
+
+**Workbooks & Views:**
+| Tool | Description |
+|------|-------------|
+| `list-workbooks` | List workbooks with filtering |
+| `get-workbook` | Get workbook details and views |
+| `list-views` | List views across workbooks |
+| `get-view-image` | Get screenshot of a view |
+| `get-view-data` | Get view data as CSV |
+| `refresh-workbook-extract` | Trigger extract refresh (custom) |
+
+**Datasources:**
+| Tool | Description |
+|------|-------------|
+| `list-datasources` | List published datasources |
+| `get-datasource-metadata` | Get field metadata |
+| `query-datasource` | Run VizQL queries |
+
+**Jobs & Search:**
+| Tool | Description |
+|------|-------------|
+| `get-job-status` | Check async job status (custom) |
+| `search-content` | Search across all content types |
+
+**Example Usage:**
+```
+"List the first 10 Tableau workbooks"
+"Refresh the Payments P0 Metrics dashboard"
+"Check status of job abc-123"
+"Show me an image of the Sales Overview view"
+```
+
 ### Atlassian (28 tools)
 
 Configured via `mcp.atlassian.com`. Tools for:

@@ -13,6 +13,7 @@ A standalone Model Context Protocol server for Databricks operations.
 | `get_job_status` | Check job run status |
 | `sync_to_workspace` | Upload local files to Databricks |
 | `sync_from_workspace` | Download files from Databricks |
+| `create_workspace_folder` | Create a folder in Databricks workspace |
 
 ## Configuration
 
@@ -67,4 +68,10 @@ Use run_sql_file with file_path: /path/to/query.sql
 Use sync_to_workspace with:
 - local_dir: /path/to/local/notebooks
 - workspace_dir: /Workspace/Users/you@company.com/project
+```
+
+### Create Workspace Folder
+```
+Use create_workspace_folder with:
+- folder_path: /Workspace/Users/you@company.com/my_project/subfolder
 ```

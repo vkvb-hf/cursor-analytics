@@ -93,6 +93,22 @@ MCP tools are now available. Ask Cursor AI to run SQL queries directly.
 | `read_multiple_ranges` | Read multiple ranges at once |
 | `read_comments` | Extract cell comments |
 
+### Tableau (12 tools)
+
+| Tool | Purpose |
+|------|---------|
+| `list-workbooks` | List workbooks with filtering |
+| `get-workbook` | Get workbook details and views |
+| `list-views` | List views across workbooks |
+| `get-view-image` | Get screenshot of a view |
+| `get-view-data` | Get view data as CSV |
+| `refresh-workbook-extract` | Trigger extract refresh |
+| `list-datasources` | List published datasources |
+| `get-datasource-metadata` | Get field metadata |
+| `query-datasource` | Run VizQL queries |
+| `get-job-status` | Check async job status |
+| `search-content` | Search across content types |
+
 ### External MCPs (configured separately)
 
 | MCP | Tools | Use For |
