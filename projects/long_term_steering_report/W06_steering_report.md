@@ -12,10 +12,10 @@
 | RG | Region |
 
 ## Key Insights
-**Critical Issues:** Dunning Profit decreased 7.50% (€12.09 to €11.18), Payment Fraud Block Rate decreased 86.24% (3.25% to 0.45%), 3_PaymentProcessingFees% decreased 100.00% (1.28% to 0.00%)
-**Positive Trends:** 6_TotalBadDebtRate_12wkCohort increased 10.72% (0.40% to 0.44%), 5_DunningBadDebtRate_12wkCohort increased 20.50% (14.40% to 17.36%), Recovery W0 increased 18.17% (42.77% to 50.54%), Total Duplicate Rate increased 6.97% (21.28% to 22.76%), Total Duplicate Block Rate increased 15.32% (5.08% to 5.86%)
-**Risk Shifts:** Payment Fraud Block Rate showing diverging trends, Payment Checkout Approval Rate showing diverging trends, Dunning Profit showing diverging trends, Acceptance LL0 (Initial Charge) showing diverging trends, 6_PaymentApprovalRate showing diverging trends, Payment Approval Rate showing diverging trends, 6_PaymentApprovalRate showing diverging trends, Reactivation Rate showing diverging trends
-**Emerging Concerns:** 3_PaymentProcessingFees% down 100.00% YoY
+- **Critical Issues:** Dunning Profit decreased 7.50% (€12.09 to €11.18), Payment Fraud Block Rate decreased 86.24% (3.25% to 0.45%)
+- **Positive Trends:** Recovery W0 increased 18.17% (42.77% to 50.54%), Total Duplicate Block Rate increased 15.32% (5.08% to 5.86%)
+- **Risk Shifts:** Payment Fraud Block Rate showing diverging trends across clusters, Payment Checkout Approval Rate showing mixed performance, Dunning Profit declining in RTE (-16.16%)
+- **Emerging Concerns:** Total Bad Debt Rate increased 10.72% (0.40% to 0.44%), Dunning Bad Debt Rate increased 20.50% (14.40% to 17.36%) indicating potential collection challenges
 
 | Metrics | Anomaly/Callout | Long Term Impact | Notes |
 | :--- | :--- | :--- | :--- |
