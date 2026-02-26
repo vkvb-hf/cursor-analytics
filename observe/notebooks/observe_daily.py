@@ -50,6 +50,7 @@ class Metric:
     denominator: str = None
     is_p0: bool = False
     team_ownership: str = ""
+    increase_is_good: bool = True
 
 @dataclass
 class RuleConfig:
