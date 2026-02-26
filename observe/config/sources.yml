@@ -1,0 +1,30 @@
+version: 1
+
+sources:
+  - name: verifications
+    database: payments_hf
+    table: verifications
+    description: "Payment verification records"
+    date_column: created_at
+    columns:
+      - name: country
+      - name: status
+      - name: provider
+      - name: payment_method
+      - name: workflow
+    filters: []
+
+  - name: checkout_funnel
+    database: payments_hf
+    table: payments_p0_metrics_checkout_funnel
+    description: "Checkout funnel metrics"
+    date_column: date_string_backwards
+    columns:
+      - name: country
+      - name: payment_method_reporting
+      - name: customer_count
+      - name: is_pay_visit
+      - name: is_success
+      - name: is_select
+    filters:
+      - "is_different_checkout = FALSE"

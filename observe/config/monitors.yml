@@ -1,0 +1,76 @@
+version: 1
+
+defaults:
+  lookback_days: 30
+  min_volume: 15
+  alert_channels:
+    - "#payments-analytics-alerts"
+
+monitors:
+  - name: verifications_overall
+    description: "Overall verification health"
+    severity: critical
+    metrics:
+      - verification_count
+      - tokenisation_success_rate
+    dimensions:
+      - []
+      - [country]
+    rules:
+      data_presence:
+        enabled: true
+        min_records: 1
+        severity: critical
+      period_over_period:
+        enabled: true
+        period_days: 7
+        max_change_pct: 0.3
+        severity: warning
+      day_over_year:
+        enabled: true
+        max_change_pct: 0.5
+        severity: info
+
+  - name: verifications_by_dimension
+    description: "Verification health by dimensions"
+    severity: warning
+    min_volume: 15
+    metrics:
+      - verification_count
+      - tokenisation_success_rate
+    dimensions:
+      - [country, payment_method]
+      - [country, provider]
+    rules:
+      data_presence:
+        enabled: true
+        min_records: 1
+      period_over_period:
+        enabled: true
+        period_days: 7
+        max_change_pct: 0.3
+
+  - name: checkout_funnel_overall
+    description: "Overall checkout funnel health"
+    severity: critical
+    metrics:
+      - payment_page_visit
+      - payment_page_visit_to_success
+      - select_to_success
+    dimensions:
+      - []
+      - [country]
+    rules:
+      data_presence:
+        enabled: true
+        min_records: 1
+        severity: critical
+      period_over_period:
+        enabled: true
+        period_days: 7
+        max_change_pct: 0.2
+        severity: warning
+      day_over_year:
+        enabled: true
+        max_change_pct: 0.4
+        severity: info
