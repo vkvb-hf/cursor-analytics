@@ -93,7 +93,12 @@ print("DBFS directories ready")
 # COMMAND ----------
 
 # Copy config from repo to DBFS
-repo_path = "/Workspace" + dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get().rsplit("/", 2)[0]
+notebook_path = dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()
+# Handle both /Repos/... and /Workspace/... paths
+if notebook_path.startswith("/Repos"):
+    repo_path = notebook_path.rsplit("/", 2)[0]
+else:
+    repo_path = "/Workspace" + notebook_path.rsplit("/", 2)[0]
 config_path = f"{repo_path}/config"
 
 print(f"Syncing config from: {config_path}")
