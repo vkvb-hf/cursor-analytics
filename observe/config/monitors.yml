@@ -3,7 +3,7 @@ version: 1
 defaults:
   historical_lookback_days: 720
   refresh_lookback_days: 30
-  min_volume: 15
+  min_volume: 1
   alert_channels:
     - "#growth-pa-payments-alerts"
 
@@ -25,31 +25,12 @@ monitors:
       period_over_period:
         enabled: true
         period_days: 7
-        max_change_pct: 0.3
+        max_change_pct: 0.03
         severity: warning
       day_over_year:
         enabled: true
-        max_change_pct: 0.5
+        max_change_pct: 0.10
         severity: info
-
-  - name: verifications_by_dimension
-    description: "Verification health by dimensions"
-    severity: warning
-    min_volume: 15
-    metrics:
-      - verification_count
-      - tokenisation_success_rate
-    dimensions:
-      - [country, payment_method]
-      - [country, provider]
-    rules:
-      data_presence:
-        enabled: true
-        min_records: 1
-      period_over_period:
-        enabled: true
-        period_days: 7
-        max_change_pct: 0.3
 
   - name: checkout_funnel_overall
     description: "Overall checkout funnel health"

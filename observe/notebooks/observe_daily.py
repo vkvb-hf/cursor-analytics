@@ -167,9 +167,34 @@ if not config_synced:
 # Ensure tables exist
 spark.sql("""
 CREATE TABLE IF NOT EXISTS payments_hf.observe_metrics_daily (
-    date DATE, monitor_name STRING, source_name STRING, metric_name STRING,
-    metric_type STRING, dimension_key STRING, dimension_value STRING,
-    metric_value DOUBLE, numerator DOUBLE, denominator DOUBLE, computed_at TIMESTAMP
+    -- Keys
+    date DATE COMMENT 'Date of the metric',
+    monitor_name STRING COMMENT 'Name of the monitor',
+    metric_name STRING COMMENT 'Name of the metric',
+    dimension_key STRING COMMENT 'Comma-separated dimension column names',
+    dimension_value STRING COMMENT 'Comma-separated dimension values',
+    
+    -- Daily values
+    metric_value DOUBLE COMMENT 'Computed metric value',
+    metric_numerator DOUBLE COMMENT 'Numerator for ratio metrics',
+    metric_denominator DOUBLE COMMENT 'Denominator for ratio metrics',
+    
+    -- Rolling 7-day
+    rolling_7d_avg DOUBLE COMMENT 'Rolling 7-day average',
+    rolling_7d_prev_avg DOUBLE COMMENT 'Previous 7-day average (8-14 days ago)',
+    rolling_7d_change_pct DOUBLE COMMENT 'Percent change between rolling periods',
+    
+    -- Year-over-year
+    yoy_metric_value DOUBLE COMMENT 'Same day last year metric value',
+    yoy_change_pct DOUBLE COMMENT 'Year-over-year percent change',
+    
+    -- Volume filtering
+    historical_avg_denominator DOUBLE COMMENT 'Historical average denominator for volume filtering',
+    
+    -- Metadata
+    source_name STRING COMMENT 'Name of the source',
+    metric_type STRING COMMENT 'Type of metric (count, ratio)',
+    computed_at TIMESTAMP COMMENT 'When this metric was computed'
 ) USING DELTA PARTITIONED BY (date)
 """)
 
@@ -668,9 +693,97 @@ end_date = target_date.strftime("%Y-%m-%d")
 spark.sql(f"DELETE FROM payments_hf.observe_metrics_daily WHERE date BETWEEN '{start_date}' AND '{end_date}'")
 print(f"Cleared metrics for {start_date} to {end_date}")
 
-# Write new metrics
-metrics_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_metrics_daily")
-print(f"Written {metrics_count} metrics")
+# COMMAND ----------
+
+# Enrich ALL days with rolling/YoY values using window functions
+from pyspark.sql.window import Window
+
+# Define window for rolling calculations (7 days ending on current row)
+rolling_window = Window.partitionBy(
+    "monitor_name", "metric_name", "dimension_key", "dimension_value"
+).orderBy("date").rowsBetween(-6, 0)
+
+# Define window for previous period (days -13 to -7)
+prev_window = Window.partitionBy(
+    "monitor_name", "metric_name", "dimension_key", "dimension_value"
+).orderBy("date").rowsBetween(-13, -7)
+
+# Add rolling 7-day averages
+enriched_metrics = metrics_df.withColumn(
+    "rolling_7d_avg", F.avg("metric_value").over(rolling_window)
+).withColumn(
+    "rolling_7d_prev_avg", F.avg("metric_value").over(prev_window)
+).withColumn(
+    "rolling_7d_change_pct",
+    F.when(
+        (F.col("rolling_7d_prev_avg").isNotNull()) & (F.col("rolling_7d_prev_avg") != 0),
+        (F.col("rolling_7d_avg") - F.col("rolling_7d_prev_avg")) / F.col("rolling_7d_prev_avg")
+    )
+)
+
+# For YoY, we need to self-join with data from 365 days ago
+metrics_with_date = enriched_metrics.withColumn("date_str", F.col("date").cast("string"))
+
+yoy_metrics = metrics_df.select(
+    "monitor_name", "metric_name", "dimension_key", "dimension_value",
+    F.date_add(F.col("date"), 365).alias("yoy_join_date"),
+    F.col("metric_value").alias("yoy_metric_value")
+)
+
+enriched_metrics = metrics_with_date.join(
+    yoy_metrics,
+    on=[
+        metrics_with_date["monitor_name"] == yoy_metrics["monitor_name"],
+        metrics_with_date["metric_name"] == yoy_metrics["metric_name"],
+        metrics_with_date["dimension_key"] == yoy_metrics["dimension_key"],
+        metrics_with_date["dimension_value"] == yoy_metrics["dimension_value"],
+        metrics_with_date["date"] == yoy_metrics["yoy_join_date"]
+    ],
+    how="left"
+).select(
+    metrics_with_date["*"],
+    yoy_metrics["yoy_metric_value"]
+).drop("date_str")
+
+# Compute YoY change percent
+enriched_metrics = enriched_metrics.withColumn(
+    "yoy_change_pct",
+    F.when(
+        (F.col("yoy_metric_value").isNotNull()) & (F.col("yoy_metric_value") != 0),
+        (F.col("metric_value") - F.col("yoy_metric_value")) / F.col("yoy_metric_value")
+    )
+)
+
+# Compute historical average denominator for volume filtering
+hist_avg_denom = metrics_df.groupBy(
+    "monitor_name", "metric_name", "dimension_key", "dimension_value"
+).agg(
+    F.avg("denominator").alias("historical_avg_denominator")
+)
+
+enriched_metrics = enriched_metrics.join(
+    hist_avg_denom,
+    on=["monitor_name", "metric_name", "dimension_key", "dimension_value"],
+    how="left"
+)
+
+# Select final columns matching schema
+enriched_metrics = enriched_metrics.select(
+    "date", "monitor_name", "metric_name", "dimension_key", "dimension_value",
+    "metric_value",
+    F.col("numerator").alias("metric_numerator"),
+    F.col("denominator").alias("metric_denominator"),
+    "rolling_7d_avg", "rolling_7d_prev_avg", "rolling_7d_change_pct",
+    "yoy_metric_value", "yoy_change_pct",
+    "historical_avg_denominator",
+    "source_name", "metric_type",
+    F.current_timestamp().alias("computed_at")
+)
+
+# Write all enriched metrics
+enriched_metrics.write.format("delta").mode("append").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
+enriched_count = enriched_metrics.count()
+print(f"Written {enriched_count} enriched metrics for {start_date} to {end_date}")
 
 # COMMAND ----------
 
