@@ -93,23 +93,74 @@ print("DBFS directories ready")
 
 # COMMAND ----------
 
-# Copy config from repo to DBFS
+# Sync config to DBFS
+# Try multiple methods: Repos path, Workspace files API, or skip if already on DBFS
 notebook_path = dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()
-# Handle both /Repos/... and /Workspace/... paths
+
+config_synced = False
+
+# Method 1: If running from Repos, read directly
 if notebook_path.startswith("/Repos"):
     repo_path = notebook_path.rsplit("/", 2)[0]
-else:
-    repo_path = "/Workspace" + notebook_path.rsplit("/", 2)[0]
-config_path = f"{repo_path}/config"
+    config_path = f"{repo_path}/config"
+    print(f"Syncing config from Repos: {config_path}")
+    try:
+        for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
+            with open(f"{config_path}/{config_file}") as f:
+                content = f.read()
+            with open(f"/dbfs/observe/config/{config_file}", "w") as f:
+                f.write(content)
+            print(f"  Synced: {config_file}")
+        config_synced = True
+    except Exception as e:
+        print(f"  Failed: {e}")
 
-print(f"Syncing config from: {config_path}")
+# Method 2: If running from Workspace, use Workspace REST API
+if not config_synced and "/Users/" in notebook_path:
+    import requests
+    import base64
+    
+    # Get the workspace base path from notebook_path
+    workspace_base = notebook_path.rsplit("/", 2)[0]  # /Users/user@example.com/observe
+    config_ws_path = f"{workspace_base}/config"
+    print(f"Syncing config from Workspace API: {config_ws_path}")
+    
+    try:
+        # Get workspace host and token from notebook context
+        ctx = dbutils.notebook.entry_point.getDbutils().notebook().getContext()
+        host = ctx.apiUrl().get()
+        token = ctx.apiToken().get()
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
+            ws_file_path = f"{config_ws_path}/{config_file}"
+            export_url = f"{host}/api/2.0/workspace/export"
+            params = {"path": ws_file_path, "format": "SOURCE"}
+            
+            response = requests.get(export_url, headers=headers, params=params)
+            response.raise_for_status()
+            
+            content_b64 = response.json().get('content', '')
+            content = base64.b64decode(content_b64).decode('utf-8')
+            
+            with open(f"/dbfs/observe/config/{config_file}", "w") as f:
+                f.write(content)
+            print(f"  Synced: {config_file}")
+        config_synced = True
+    except Exception as e:
+        print(f"  Failed: {e}")
 
-for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
-    with open(f"{config_path}/{config_file}") as f:
-        content = f.read()
-    with open(f"/dbfs/observe/config/{config_file}", "w") as f:
-        f.write(content)
-    print(f"  Synced: {config_file}")
+# Method 3: Check if configs already exist on DBFS
+if not config_synced:
+    print("Checking for existing configs on DBFS...")
+    try:
+        for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
+            with open(f"/dbfs/observe/config/{config_file}") as f:
+                _ = f.read()
+        print("  Using existing DBFS configs")
+        config_synced = True
+    except:
+        raise Exception("No config files found! Please sync configs to /dbfs/observe/config/ first.")
 
 # COMMAND ----------
 
