@@ -6,6 +6,8 @@ metrics:
     type: count
     expression: "F.count('*')"
     description: "Total verification attempts"
+    increase_is_good: true
+    is_p0: false
     team_ownership: "Payment Offering Squad"
 
   - name: tokenisation_success_rate
@@ -14,6 +16,7 @@ metrics:
     numerator: "F.sum(F.when(F.col('status') == 'Success', 1).otherwise(0))"
     denominator: "F.count('*')"
     description: "Tokenisation success rate"
+    increase_is_good: true
     is_p0: true
     team_ownership: "Payment Offering Squad"
 
@@ -22,6 +25,8 @@ metrics:
     type: count
     expression: "F.sum(F.when(F.col('is_pay_visit') == 1, F.col('customer_count')).otherwise(0))"
     description: "Total payment page visits"
+    increase_is_good: true
+    is_p0: false
     team_ownership: "Payment Offering Squad"
 
   - name: payment_page_visit_to_success
@@ -30,6 +35,7 @@ metrics:
     numerator: "F.sum(F.when((F.col('is_pay_visit') == 1) & (F.col('is_success') == 1), F.col('customer_count')).otherwise(0))"
     denominator: "F.sum(F.when(F.col('is_pay_visit') == 1, F.col('customer_count')).otherwise(0))"
     description: "Conversion rate from payment page visit to success"
+    increase_is_good: true
     is_p0: true
     team_ownership: "Payment Offering Squad"
 
@@ -39,5 +45,6 @@ metrics:
     numerator: "F.sum(F.when((F.col('is_select') == 1) & (F.col('is_success') == 1), F.col('customer_count')).otherwise(0))"
     denominator: "F.sum(F.when(F.col('is_select') == 1, F.col('customer_count')).otherwise(0))"
     description: "Conversion rate from payment selection to success"
+    increase_is_good: true
     is_p0: true
     team_ownership: "Payment Offering Squad"
