@@ -374,6 +374,7 @@ print("Computing metrics...")
 metrics_df = compute_all_metrics(config, target_date, monitor_lookbacks)
 
 if metrics_df:
+    metrics_df.cache()  # Cache for reuse in rule evaluation
     metrics_count = metrics_df.count()
     print(f"\nTotal: {metrics_count} metric records")
 else:
@@ -383,176 +384,215 @@ else:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 6: Evaluate Rules
+# MAGIC ## Step 6: Evaluate Rules (Single Query)
 
 # COMMAND ----------
 
-def check_period_over_period(
-    metrics_df: DataFrame,
-    target_date: datetime,
-    period_days: int = 7,
-    max_change_pct: float = 0.3,
-    min_volume: int = 15
-) -> List[Dict]:
-    """Compare last N days avg with previous N days avg"""
-    alerts = []
+def compute_rule_aggregations(metrics_df: DataFrame, target_date: datetime, period_days: int = 7) -> DataFrame:
+    """
+    Compute all aggregations needed for rules in ONE query.
+    Returns DataFrame with: current_avg, previous_avg, target_day_value, yoy_value per metric/dimension combo.
+    """
+    target_date_lit = F.lit(target_date.strftime("%Y-%m-%d")).cast("date")
     
-    current_start = target_date - timedelta(days=period_days - 1)
-    previous_start = current_start - timedelta(days=period_days)
-    previous_end = current_start - timedelta(days=1)
+    # Date boundaries
+    current_start = (target_date - timedelta(days=period_days - 1)).strftime("%Y-%m-%d")
+    previous_start = (target_date - timedelta(days=2 * period_days - 1)).strftime("%Y-%m-%d")
+    previous_end = (target_date - timedelta(days=period_days)).strftime("%Y-%m-%d")
+    yoy_date = (target_date - timedelta(days=365)).strftime("%Y-%m-%d")
+    target_date_str = target_date.strftime("%Y-%m-%d")
     
-    for row in metrics_df.select("monitor_name", "metric_name", "dimension_key", "dimension_value").distinct().collect():
-        slice_df = metrics_df.filter(
-            (F.col("monitor_name") == row.monitor_name) &
-            (F.col("metric_name") == row.metric_name) &
-            (F.col("dimension_key") == row.dimension_key) &
-            (F.col("dimension_value") == row.dimension_value)
+    # Single aggregation query
+    agg_df = metrics_df.groupBy(
+        "monitor_name", "metric_name", "dimension_key", "dimension_value"
+    ).agg(
+        # Period over period: current period avg (last 7 days)
+        F.avg(F.when(
+            (F.col("date") >= current_start) & (F.col("date") <= target_date_str),
+            F.col("metric_value")
+        )).alias("current_avg"),
+        
+        # Period over period: current period count
+        F.sum(F.when(
+            (F.col("date") >= current_start) & (F.col("date") <= target_date_str),
+            F.lit(1)
+        ).otherwise(0)).alias("current_count"),
+        
+        # Period over period: previous period avg (7 days before that)
+        F.avg(F.when(
+            (F.col("date") >= previous_start) & (F.col("date") <= previous_end),
+            F.col("metric_value")
+        )).alias("previous_avg"),
+        
+        # Period over period: previous period count
+        F.sum(F.when(
+            (F.col("date") >= previous_start) & (F.col("date") <= previous_end),
+            F.lit(1)
+        ).otherwise(0)).alias("previous_count"),
+        
+        # Day over year: target day value
+        F.first(F.when(
+            F.col("date") == target_date_str,
+            F.col("metric_value")
+        )).alias("target_day_value"),
+        
+        # Day over year: same day last year value
+        F.first(F.when(
+            F.col("date") == yoy_date,
+            F.col("metric_value")
+        )).alias("yoy_value")
+    )
+    
+    # Compute deviations
+    agg_df = agg_df.withColumn(
+        "pop_change_pct",
+        F.when(
+            (F.col("previous_avg").isNotNull()) & (F.col("previous_avg") != 0),
+            (F.col("current_avg") - F.col("previous_avg")) / F.col("previous_avg")
         )
-        
-        current_avg = slice_df.filter(
-            (F.col("date") >= current_start) & (F.col("date") <= target_date)
-        ).agg(F.avg("metric_value").alias("avg"), F.count("*").alias("cnt")).collect()[0]
-        
-        previous_avg = slice_df.filter(
-            (F.col("date") >= previous_start) & (F.col("date") <= previous_end)
-        ).agg(F.avg("metric_value").alias("avg"), F.count("*").alias("cnt")).collect()[0]
-        
-        if current_avg.cnt < min_volume or previous_avg.cnt < min_volume:
-            continue
-        if current_avg.avg is None or previous_avg.avg is None or previous_avg.avg == 0:
-            continue
-        
-        change_pct = (current_avg.avg - previous_avg.avg) / previous_avg.avg
-        
-        if abs(change_pct) > max_change_pct:
-            direction = "increased" if change_pct > 0 else "decreased"
-            alerts.append({
-                "monitor_name": row.monitor_name,
-                "metric_name": row.metric_name,
-                "dimension_key": row.dimension_key,
-                "dimension_value": row.dimension_value,
-                "rule_name": "period_over_period",
-                "alert_type": "anomaly",
-                "current_value": current_avg.avg,
-                "expected_value": previous_avg.avg,
-                "deviation_pct": change_pct * 100,
-                "message": f"{row.metric_name} {direction} by {abs(change_pct)*100:.1f}% (current: {current_avg.avg:.4f}, previous: {previous_avg.avg:.4f})"
-            })
-    
-    return alerts
-
-
-def check_day_over_year(
-    metrics_df: DataFrame,
-    target_date: datetime,
-    max_change_pct: float = 0.5
-) -> List[Dict]:
-    """Compare today with same day last year"""
-    alerts = []
-    yoy_date = target_date - timedelta(days=365)
-    
-    for row in metrics_df.select("monitor_name", "metric_name", "dimension_key", "dimension_value").distinct().collect():
-        slice_df = metrics_df.filter(
-            (F.col("monitor_name") == row.monitor_name) &
-            (F.col("metric_name") == row.metric_name) &
-            (F.col("dimension_key") == row.dimension_key) &
-            (F.col("dimension_value") == row.dimension_value)
+    ).withColumn(
+        "yoy_change_pct",
+        F.when(
+            (F.col("yoy_value").isNotNull()) & (F.col("yoy_value") != 0),
+            (F.col("target_day_value") - F.col("yoy_value")) / F.col("yoy_value")
         )
-        
-        current = slice_df.filter(F.col("date") == target_date).select("metric_value").collect()
-        yoy = slice_df.filter(F.col("date") == yoy_date).select("metric_value").collect()
-        
-        if not current or not yoy:
-            continue
-        current_val, yoy_val = current[0].metric_value, yoy[0].metric_value
-        if current_val is None or yoy_val is None or yoy_val == 0:
-            continue
-        
-        change_pct = (current_val - yoy_val) / yoy_val
-        
-        if abs(change_pct) > max_change_pct:
-            direction = "increased" if change_pct > 0 else "decreased"
-            alerts.append({
-                "monitor_name": row.monitor_name,
-                "metric_name": row.metric_name,
-                "dimension_key": row.dimension_key,
-                "dimension_value": row.dimension_value,
-                "rule_name": "day_over_year",
-                "alert_type": "anomaly",
-                "current_value": current_val,
-                "expected_value": yoy_val,
-                "deviation_pct": change_pct * 100,
-                "message": f"{row.metric_name} {direction} by {abs(change_pct)*100:.1f}% YoY (current: {current_val:.4f}, last year: {yoy_val:.4f})"
-            })
+    )
     
-    return alerts
+    return agg_df
 
+# COMMAND ----------
 
-def evaluate_all_rules(config: Config, metrics_df: DataFrame, target_date: datetime) -> DataFrame:
-    """Evaluate all rules and return alerts DataFrame"""
-    all_alerts = []
-    
+def build_monitor_thresholds(config: Config) -> DataFrame:
+    """Build a DataFrame of monitor thresholds from config"""
+    rows = []
     for monitor in config.monitors:
-        monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+        row = {
+            "monitor_name": monitor.name,
+            "min_volume": monitor.min_volume,
+            "pop_enabled": False,
+            "pop_max_change_pct": 0.3,
+            "pop_severity": "warning",
+            "yoy_enabled": False,
+            "yoy_max_change_pct": 0.5,
+            "yoy_severity": "info"
+        }
         
-        if "period_over_period" in monitor.rules and monitor.rules["period_over_period"].enabled:
+        if "period_over_period" in monitor.rules:
             rule = monitor.rules["period_over_period"]
-            alerts = check_period_over_period(
-                monitor_metrics, target_date,
-                period_days=rule.period_days,
-                max_change_pct=rule.max_change_pct,
-                min_volume=monitor.min_volume
-            )
-            for a in alerts:
-                a["severity"] = rule.severity
-            all_alerts.extend(alerts)
+            row["pop_enabled"] = rule.enabled
+            row["pop_max_change_pct"] = rule.max_change_pct
+            row["pop_severity"] = rule.severity
         
-        if "day_over_year" in monitor.rules and monitor.rules["day_over_year"].enabled:
+        if "day_over_year" in monitor.rules:
             rule = monitor.rules["day_over_year"]
-            alerts = check_day_over_year(
-                monitor_metrics, target_date,
-                max_change_pct=rule.max_change_pct
-            )
-            for a in alerts:
-                a["severity"] = rule.severity
-            all_alerts.extend(alerts)
+            row["yoy_enabled"] = rule.enabled
+            row["yoy_max_change_pct"] = rule.max_change_pct
+            row["yoy_severity"] = rule.severity
+        
+        rows.append(row)
     
-    if not all_alerts:
-        return None
+    return spark.createDataFrame(rows)
+
+# COMMAND ----------
+
+def evaluate_rules_single_query(metrics_df: DataFrame, config: Config, target_date: datetime) -> DataFrame:
+    """
+    Evaluate all rules in a single pass:
+    1. Compute all aggregations in one query
+    2. Join with thresholds
+    3. Filter where deviation > threshold
+    """
+    # Step 1: Compute aggregations
+    print("Computing aggregations...")
+    agg_df = compute_rule_aggregations(metrics_df, target_date)
     
-    schema = StructType([
-        StructField("monitor_name", StringType()),
-        StructField("metric_name", StringType()),
-        StructField("dimension_key", StringType()),
-        StructField("dimension_value", StringType()),
-        StructField("rule_name", StringType()),
-        StructField("severity", StringType()),
-        StructField("alert_type", StringType()),
-        StructField("current_value", DoubleType()),
-        StructField("expected_value", DoubleType()),
-        StructField("deviation_pct", DoubleType()),
-        StructField("message", StringType()),
-    ])
+    # Step 2: Build thresholds DataFrame
+    thresholds_df = build_monitor_thresholds(config)
     
-    alerts_df = spark.createDataFrame(all_alerts, schema)
-    alerts_df = alerts_df.withColumn("date", F.lit(target_date.strftime("%Y-%m-%d")).cast("date"))
-    alerts_df = alerts_df.withColumn("lower_bound", F.lit(None).cast("double"))
-    alerts_df = alerts_df.withColumn("upper_bound", F.lit(None).cast("double"))
-    alerts_df = alerts_df.withColumn("created_at", F.current_timestamp())
+    # Step 3: Join aggregations with thresholds
+    joined_df = agg_df.join(thresholds_df, on="monitor_name", how="inner")
     
-    return alerts_df
+    # Step 4: Generate period_over_period alerts
+    pop_alerts = joined_df.filter(
+        (F.col("pop_enabled") == True) &
+        (F.col("current_count") >= F.col("min_volume")) &
+        (F.col("previous_count") >= F.col("min_volume")) &
+        (F.col("pop_change_pct").isNotNull()) &
+        (F.abs(F.col("pop_change_pct")) > F.col("pop_max_change_pct"))
+    ).select(
+        F.col("monitor_name"),
+        F.col("metric_name"),
+        F.col("dimension_key"),
+        F.col("dimension_value"),
+        F.lit("period_over_period").alias("rule_name"),
+        F.col("pop_severity").alias("severity"),
+        F.lit("anomaly").alias("alert_type"),
+        F.col("current_avg").alias("current_value"),
+        F.col("previous_avg").alias("expected_value"),
+        (F.col("pop_change_pct") * 100).alias("deviation_pct"),
+        F.concat(
+            F.col("metric_name"),
+            F.when(F.col("pop_change_pct") > 0, F.lit(" increased by ")).otherwise(F.lit(" decreased by ")),
+            F.format_string("%.1f", F.abs(F.col("pop_change_pct") * 100)),
+            F.lit("% (current: "),
+            F.format_string("%.4f", F.col("current_avg")),
+            F.lit(", previous: "),
+            F.format_string("%.4f", F.col("previous_avg")),
+            F.lit(")")
+        ).alias("message")
+    )
+    
+    # Step 5: Generate day_over_year alerts
+    yoy_alerts = joined_df.filter(
+        (F.col("yoy_enabled") == True) &
+        (F.col("target_day_value").isNotNull()) &
+        (F.col("yoy_value").isNotNull()) &
+        (F.col("yoy_change_pct").isNotNull()) &
+        (F.abs(F.col("yoy_change_pct")) > F.col("yoy_max_change_pct"))
+    ).select(
+        F.col("monitor_name"),
+        F.col("metric_name"),
+        F.col("dimension_key"),
+        F.col("dimension_value"),
+        F.lit("day_over_year").alias("rule_name"),
+        F.col("yoy_severity").alias("severity"),
+        F.lit("anomaly").alias("alert_type"),
+        F.col("target_day_value").alias("current_value"),
+        F.col("yoy_value").alias("expected_value"),
+        (F.col("yoy_change_pct") * 100).alias("deviation_pct"),
+        F.concat(
+            F.col("metric_name"),
+            F.when(F.col("yoy_change_pct") > 0, F.lit(" increased by ")).otherwise(F.lit(" decreased by ")),
+            F.format_string("%.1f", F.abs(F.col("yoy_change_pct") * 100)),
+            F.lit("% YoY (current: "),
+            F.format_string("%.4f", F.col("target_day_value")),
+            F.lit(", last year: "),
+            F.format_string("%.4f", F.col("yoy_value")),
+            F.lit(")")
+        ).alias("message")
+    )
+    
+    # Step 6: Union all alerts
+    all_alerts = pop_alerts.unionByName(yoy_alerts)
+    
+    # Add metadata columns
+    all_alerts = all_alerts.withColumn("date", F.lit(target_date.strftime("%Y-%m-%d")).cast("date"))
+    all_alerts = all_alerts.withColumn("lower_bound", F.lit(None).cast("double"))
+    all_alerts = all_alerts.withColumn("upper_bound", F.lit(None).cast("double"))
+    all_alerts = all_alerts.withColumn("created_at", F.current_timestamp())
+    
+    return all_alerts
 
 # COMMAND ----------
 
 print("Evaluating rules...")
-alerts_df = evaluate_all_rules(config, metrics_df, target_date)
+alerts_df = evaluate_rules_single_query(metrics_df, config, target_date)
+alerts_count = alerts_df.count()
 
-if alerts_df:
-    alerts_count = alerts_df.count()
+if alerts_count > 0:
     print(f"Generated {alerts_count} alerts")
     display(alerts_df)
 else:
-    alerts_count = 0
     print("No alerts generated")
 
 # COMMAND ----------
@@ -578,7 +618,7 @@ print(f"Written {metrics_count} metrics")
 # COMMAND ----------
 
 # Write alerts (only for target date)
-if alerts_df:
+if alerts_count > 0:
     spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{end_date}'")
     alerts_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_alerts_daily")
     print(f"Written {alerts_count} alerts")
@@ -588,6 +628,9 @@ if alerts_df:
 # Save hashes for next run
 save_hashes(new_hashes)
 print("Saved monitor hashes")
+
+# Unpersist cached DataFrame
+metrics_df.unpersist()
 
 # COMMAND ----------
 
