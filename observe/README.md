@@ -7,46 +7,49 @@ A config-driven monitoring system for tracking metrics and detecting anomalies i
 Observe monitors daily metrics across different dimensions and alerts when values deviate from expected patterns using:
 - **Period-over-Period**: Compare last 7 days avg vs previous 7 days avg
 - **Year-over-Year**: Compare today vs same day last year
-- **Data Presence**: Ensure minimum records exist
 
-## Architecture
+## How It Works
 
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  Config (YAML)  │────▶│  observe_daily  │────▶│  Delta Tables   │
-│  sources.yml    │     │    notebook     │     │  metrics_daily  │
-│  metrics.yml    │     │                 │     │  alerts_daily   │
-│  monitors.yml   │     └─────────────────┘     └─────────────────┘
-└─────────────────┘
-```
+**One notebook does everything**: `observe_daily`
+
+1. Syncs config from repo to DBFS
+2. Creates tables if they don't exist
+3. Checks if monitor config changed (hash of metrics, dimensions, source)
+   - **Changed** → backfill 720 days (configurable)
+   - **Unchanged** → refresh last 30 days (configurable)
+4. Evaluates rules and generates alerts
+5. Writes to Delta tables
 
 ## Quick Start
 
 ### 1. Connect Repo to Databricks
-- Go to Databricks → Repos → Add Repo
-- Connect this GitHub repo
-- Notebooks will be at `/Repos/<user>/cursor-analytics/observe/notebooks/`
+- Databricks → Repos → Add Repo
+- Connect: `https://github.com/vkvb-hf/cursor-analytics.git`
 
-### 2. Run Setup (One-time)
-Run `observe_setup` notebook to:
-- Create DBFS config folder (`/dbfs/observe/config/`)
-- Write YAML configs to DBFS
-- Create Delta tables
+### 2. Run Daily Monitoring
+Run `observe/notebooks/observe_daily` - it handles everything automatically.
 
-### 3. Run Daily Monitoring
-Run `observe_daily` notebook manually or schedule as a job:
 ```
 Parameters:
   target_date: YYYY-MM-DD (optional, defaults to yesterday)
 ```
 
-### 4. Backfill Historical Data
-Run `observe_backfill` notebook to process a date range.
+First run will backfill 720 days of history. Subsequent runs refresh 30 days.
 
 ## Configuration
 
-### sources.yml
-Define data sources with their location and date column:
+### monitors.yml - Defaults
+
+```yaml
+defaults:
+  historical_lookback_days: 720  # Days to backfill when config changes
+  refresh_lookback_days: 30      # Days to refresh on normal runs
+  min_volume: 15                 # Minimum data points for rules
+  alert_channels:
+    - "#growth-pa-payments-alerts"
+```
+
+### sources.yml - Data Sources
 
 ```yaml
 sources:
@@ -57,8 +60,7 @@ sources:
     filters: []
 ```
 
-### metrics.yml
-Define metrics with PySpark expressions:
+### metrics.yml - Metric Definitions
 
 ```yaml
 metrics:
@@ -74,8 +76,7 @@ metrics:
     denominator: "F.count('*')"
 ```
 
-### monitors.yml
-Group metrics with dimensions and rules:
+### monitors.yml - Monitor Configurations
 
 ```yaml
 monitors:
@@ -97,6 +98,23 @@ monitors:
         max_change_pct: 0.5       # Alert if >50% YoY change
 ```
 
+## Smart Backfill Logic
+
+The notebook tracks a hash of each monitor's **data-affecting** config:
+- Metrics (name, expression, source)
+- Dimensions
+- Source table and filters
+
+**Rule thresholds are NOT included** - changing `max_change_pct` won't trigger a backfill.
+
+| Scenario | Action |
+|----------|--------|
+| First run | 720 days backfill |
+| Add new metric | 720 days backfill |
+| Add new dimension | 720 days backfill |
+| Change alert threshold | 30 days refresh (no backfill) |
+| Normal daily run | 30 days refresh |
+
 ## Output Tables
 
 ### payments_hf.observe_metrics_daily
@@ -114,7 +132,7 @@ monitors:
 |--------|-------------|
 | date | Alert date |
 | metric_name | Metric that triggered |
-| rule_name | Rule that fired (period_over_period, day_over_year) |
+| rule_name | Rule that fired |
 | severity | critical, warning, info |
 | current_value | Current metric value |
 | expected_value | Expected/baseline value |
@@ -123,10 +141,11 @@ monitors:
 
 ## Adding New Metrics
 
-1. **Add source** (if new table) in `config/sources.yml`
-2. **Add metric** in `config/metrics.yml`
-3. **Add to monitor** in `config/monitors.yml`
-4. **Sync config to DBFS**: Re-run `observe_setup` or manually copy files
+1. Edit `config/metrics.yml` - add metric definition
+2. Edit `config/monitors.yml` - add metric to a monitor
+3. Push to GitHub
+4. Pull in Databricks Repos
+5. Run `observe_daily` - it auto-detects the change and backfills
 
 ## Folder Structure
 
@@ -138,21 +157,18 @@ observe/
 │   ├── metrics.yml      # Metric definitions
 │   └── monitors.yml     # Monitor configurations
 └── notebooks/
-    ├── observe_setup.py    # One-time setup
-    ├── observe_daily.py    # Daily monitoring job
-    └── observe_backfill.py # Backfill historical data
+    └── observe_daily.py # Single notebook that does everything
 ```
 
 ## Scheduling
 
-Create a Databricks Job to run `observe_daily` notebook:
+Create a Databricks Job:
+- **Notebook**: `/Repos/<user>/cursor-analytics/observe/notebooks/observe_daily`
 - **Schedule**: Daily at 6:00 AM UTC
 - **Cluster**: Any shared cluster
-- **Parameters**: Leave `target_date` empty for yesterday
 
 ## Future Enhancements
 
-- [ ] Prophet-based anomaly detection
 - [ ] Slack alert integration
+- [ ] Prophet-based anomaly detection
 - [ ] Streamlit dashboard
-- [ ] AI-powered alert summarization

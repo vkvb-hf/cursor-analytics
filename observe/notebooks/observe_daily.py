@@ -2,11 +2,10 @@
 # MAGIC %md
 # MAGIC # Observe Daily Monitoring
 # MAGIC 
-# MAGIC Daily monitoring notebook that:
-# MAGIC 1. Loads config from DBFS
-# MAGIC 2. Computes all metrics for each monitor/dimension
-# MAGIC 3. Evaluates rules (data_presence, period_over_period, day_over_year)
-# MAGIC 4. Writes results to Delta tables
+# MAGIC Single notebook that handles everything:
+# MAGIC 1. Setup (config sync, table creation)
+# MAGIC 2. Smart backfill (720 days if config changed, 30 days otherwise)
+# MAGIC 3. Rule evaluation and alerting
 
 # COMMAND ----------
 
@@ -15,8 +14,10 @@ dbutils.widgets.text("target_date", "", "Target Date (YYYY-MM-DD)")
 # COMMAND ----------
 
 import yaml
+import hashlib
+import json
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from datetime import datetime, timedelta
 from pyspark.sql import functions as F, DataFrame
 from pyspark.sql.types import *
@@ -78,7 +79,57 @@ class Config:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Config Loader
+# MAGIC ## Step 1: Setup (Config Sync + Table Creation)
+
+# COMMAND ----------
+
+import os
+
+# Create DBFS directories
+os.makedirs("/dbfs/observe/config", exist_ok=True)
+os.makedirs("/dbfs/observe/state", exist_ok=True)
+print("DBFS directories ready")
+
+# COMMAND ----------
+
+# Copy config from repo to DBFS
+repo_path = "/Workspace" + dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get().rsplit("/", 2)[0]
+config_path = f"{repo_path}/config"
+
+print(f"Syncing config from: {config_path}")
+
+for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
+    with open(f"{config_path}/{config_file}") as f:
+        content = f.read()
+    with open(f"/dbfs/observe/config/{config_file}", "w") as f:
+        f.write(content)
+    print(f"  Synced: {config_file}")
+
+# COMMAND ----------
+
+# Ensure tables exist
+spark.sql("""
+CREATE TABLE IF NOT EXISTS payments_hf.observe_metrics_daily (
+    date DATE, monitor_name STRING, source_name STRING, metric_name STRING,
+    metric_type STRING, dimension_key STRING, dimension_value STRING,
+    metric_value DOUBLE, numerator DOUBLE, denominator DOUBLE, computed_at TIMESTAMP
+) USING DELTA PARTITIONED BY (date)
+""")
+
+spark.sql("""
+CREATE TABLE IF NOT EXISTS payments_hf.observe_alerts_daily (
+    date DATE, monitor_name STRING, metric_name STRING, dimension_key STRING,
+    dimension_value STRING, rule_name STRING, severity STRING, alert_type STRING,
+    current_value DOUBLE, expected_value DOUBLE, lower_bound DOUBLE, upper_bound DOUBLE,
+    deviation_pct DOUBLE, message STRING, created_at TIMESTAMP
+) USING DELTA PARTITIONED BY (date)
+""")
+print("Tables ready")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 2: Load Config
 
 # COMMAND ----------
 
@@ -114,10 +165,105 @@ def load_config() -> Config:
     
     return Config(sources=sources, metrics=metrics, monitors=monitors, defaults=defaults)
 
+config = load_config()
+print(f"Loaded {len(config.sources)} sources, {len(config.metrics)} metrics, {len(config.monitors)} monitors")
+
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Metric Computation
+# MAGIC ## Step 3: Compute Monitor Hash (Data-Affecting Parts Only)
+
+# COMMAND ----------
+
+def compute_monitor_hash(monitor: Monitor, config: Config) -> str:
+    """Hash only data-affecting parts: metrics, dimensions, source configs"""
+    hash_input = {
+        "monitor_name": monitor.name,
+        "metrics": [],
+        "dimensions": monitor.dimensions
+    }
+    
+    for metric_name in monitor.metrics:
+        metric = config.metrics.get(metric_name)
+        if metric:
+            source = config.sources.get(metric.source)
+            hash_input["metrics"].append({
+                "name": metric.name,
+                "source": metric.source,
+                "type": metric.type,
+                "expression": metric.expression,
+                "numerator": metric.numerator,
+                "denominator": metric.denominator,
+                "source_table": f"{source.database}.{source.table}" if source else None,
+                "source_filters": source.filters if source else []
+            })
+    
+    hash_str = json.dumps(hash_input, sort_keys=True)
+    return hashlib.md5(hash_str.encode()).hexdigest()
+
+
+def load_stored_hashes() -> Dict[str, str]:
+    """Load previously stored hashes"""
+    hash_file = "/dbfs/observe/state/monitor_hashes.json"
+    try:
+        with open(hash_file) as f:
+            return json.load(f)
+    except:
+        return {}
+
+
+def save_hashes(hashes: Dict[str, str]):
+    """Save current hashes"""
+    hash_file = "/dbfs/observe/state/monitor_hashes.json"
+    with open(hash_file, "w") as f:
+        json.dump(hashes, f)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 4: Determine Lookback Per Monitor
+
+# COMMAND ----------
+
+# Get target date
+target_date_str = dbutils.widgets.get("target_date")
+if target_date_str:
+    target_date = datetime.strptime(target_date_str, "%Y-%m-%d")
+else:
+    target_date = datetime.now() - timedelta(days=1)
+
+print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
+
+# COMMAND ----------
+
+# Determine lookback for each monitor
+stored_hashes = load_stored_hashes()
+new_hashes = {}
+monitor_lookbacks = {}
+
+historical_days = config.defaults.get('historical_lookback_days', 720)
+refresh_days = config.defaults.get('refresh_lookback_days', 30)
+
+print(f"\nConfig: historical={historical_days} days, refresh={refresh_days} days")
+print("-" * 50)
+
+for monitor in config.monitors:
+    current_hash = compute_monitor_hash(monitor, config)
+    stored_hash = stored_hashes.get(monitor.name)
+    new_hashes[monitor.name] = current_hash
+    
+    if stored_hash != current_hash:
+        monitor_lookbacks[monitor.name] = historical_days
+        reason = "NEW" if not stored_hash else "CHANGED"
+        print(f"{monitor.name}: {reason} → {historical_days} days backfill")
+    else:
+        monitor_lookbacks[monitor.name] = refresh_days
+        print(f"{monitor.name}: unchanged → {refresh_days} days refresh")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 5: Compute Metrics
 
 # COMMAND ----------
 
@@ -126,7 +272,7 @@ def compute_metric(
     metric: Metric,
     dimensions: List[str],
     target_date: datetime,
-    lookback_days: int = 30
+    lookback_days: int
 ) -> DataFrame:
     """Compute a single metric for given dimensions over lookback period"""
     source = config.sources[metric.source]
@@ -182,12 +328,14 @@ def compute_metric(
 
 # COMMAND ----------
 
-def compute_all_metrics(config: Config, target_date: datetime) -> DataFrame:
-    """Compute all metrics for all monitors"""
-    lookback = config.defaults.get('lookback_days', 30)
+def compute_all_metrics(config: Config, target_date: datetime, monitor_lookbacks: Dict[str, int]) -> DataFrame:
+    """Compute all metrics for all monitors with appropriate lookback"""
     all_results = []
     
     for monitor in config.monitors:
+        lookback = monitor_lookbacks[monitor.name]
+        print(f"\nComputing {monitor.name} ({lookback} days)...")
+        
         for metric_name in monitor.metrics:
             metric = config.metrics.get(metric_name)
             if not metric:
@@ -197,8 +345,9 @@ def compute_all_metrics(config: Config, target_date: datetime) -> DataFrame:
                     result = compute_metric(config, metric, dims, target_date, lookback)
                     result = result.withColumn("monitor_name", F.lit(monitor.name))
                     all_results.append(result)
+                    print(f"  ✓ {metric_name} [{','.join(dims) or 'global'}]")
                 except Exception as e:
-                    print(f"Error computing {metric_name} for {dims}: {e}")
+                    print(f"  ✗ {metric_name} [{','.join(dims) or 'global'}]: {e}")
     
     if not all_results:
         return None
@@ -221,8 +370,20 @@ def compute_all_metrics(config: Config, target_date: datetime) -> DataFrame:
 
 # COMMAND ----------
 
+print("Computing metrics...")
+metrics_df = compute_all_metrics(config, target_date, monitor_lookbacks)
+
+if metrics_df:
+    metrics_count = metrics_df.count()
+    print(f"\nTotal: {metrics_count} metric records")
+else:
+    print("No metrics computed")
+    dbutils.notebook.exit("No metrics")
+
+# COMMAND ----------
+
 # MAGIC %md
-# MAGIC ## Rule Evaluation
+# MAGIC ## Step 6: Evaluate Rules
 
 # COMMAND ----------
 
@@ -280,7 +441,6 @@ def check_period_over_period(
     
     return alerts
 
-# COMMAND ----------
 
 def check_day_over_year(
     metrics_df: DataFrame,
@@ -327,7 +487,6 @@ def check_day_over_year(
     
     return alerts
 
-# COMMAND ----------
 
 def evaluate_all_rules(config: Config, metrics_df: DataFrame, target_date: datetime) -> DataFrame:
     """Evaluate all rules and return alerts DataFrame"""
@@ -336,7 +495,6 @@ def evaluate_all_rules(config: Config, metrics_df: DataFrame, target_date: datet
     for monitor in config.monitors:
         monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
         
-        # Period over period
         if "period_over_period" in monitor.rules and monitor.rules["period_over_period"].enabled:
             rule = monitor.rules["period_over_period"]
             alerts = check_period_over_period(
@@ -349,7 +507,6 @@ def evaluate_all_rules(config: Config, metrics_df: DataFrame, target_date: datet
                 a["severity"] = rule.severity
             all_alerts.extend(alerts)
         
-        # Day over year
         if "day_over_year" in monitor.rules and monitor.rules["day_over_year"].enabled:
             rule = monitor.rules["day_over_year"]
             alerts = check_day_over_year(
@@ -387,44 +544,9 @@ def evaluate_all_rules(config: Config, metrics_df: DataFrame, target_date: datet
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC ## Main Execution
-
-# COMMAND ----------
-
-# Get target date
-target_date_str = dbutils.widgets.get("target_date")
-if target_date_str:
-    target_date = datetime.strptime(target_date_str, "%Y-%m-%d")
-else:
-    target_date = datetime.now() - timedelta(days=1)
-
-print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
-
-# COMMAND ----------
-
-# Load config
-config = load_config()
-print(f"Loaded {len(config.sources)} sources, {len(config.metrics)} metrics, {len(config.monitors)} monitors")
-
-# COMMAND ----------
-
-# Compute metrics
-print("Computing metrics...")
-metrics_df = compute_all_metrics(config, target_date)
-if metrics_df:
-    metrics_count = metrics_df.count()
-    print(f"Computed {metrics_count} metric records")
-    display(metrics_df.limit(20))
-else:
-    print("No metrics computed")
-    dbutils.notebook.exit("No metrics")
-
-# COMMAND ----------
-
-# Evaluate rules
 print("Evaluating rules...")
 alerts_df = evaluate_all_rules(config, metrics_df, target_date)
+
 if alerts_df:
     alerts_count = alerts_df.count()
     print(f"Generated {alerts_count} alerts")
@@ -435,29 +557,53 @@ else:
 
 # COMMAND ----------
 
-# Write metrics to Delta
-target_date_str = target_date.strftime("%Y-%m-%d")
+# MAGIC %md
+# MAGIC ## Step 7: Write Results
 
-spark.sql(f"DELETE FROM payments_hf.observe_metrics_daily WHERE date = '{target_date_str}'")
+# COMMAND ----------
+
+# Get date range to delete (based on max lookback used)
+max_lookback = max(monitor_lookbacks.values())
+start_date = (target_date - timedelta(days=max_lookback)).strftime("%Y-%m-%d")
+end_date = target_date.strftime("%Y-%m-%d")
+
+# Delete existing data for the date range
+spark.sql(f"DELETE FROM payments_hf.observe_metrics_daily WHERE date BETWEEN '{start_date}' AND '{end_date}'")
+print(f"Cleared metrics for {start_date} to {end_date}")
+
+# Write new metrics
 metrics_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_metrics_daily")
-print(f"Written {metrics_count} metrics to payments_hf.observe_metrics_daily")
+print(f"Written {metrics_count} metrics")
 
 # COMMAND ----------
 
-# Write alerts to Delta
+# Write alerts (only for target date)
 if alerts_df:
-    spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{target_date_str}'")
+    spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{end_date}'")
     alerts_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_alerts_daily")
-    print(f"Written {alerts_count} alerts to payments_hf.observe_alerts_daily")
+    print(f"Written {alerts_count} alerts")
 
 # COMMAND ----------
 
-# Summary
+# Save hashes for next run
+save_hashes(new_hashes)
+print("Saved monitor hashes")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Summary
+
+# COMMAND ----------
+
 print(f"\n{'='*50}")
-print(f"OBSERVE DAILY COMPLETE - {target_date_str}")
+print(f"OBSERVE DAILY COMPLETE - {end_date}")
 print(f"{'='*50}")
 print(f"Metrics computed: {metrics_count}")
 print(f"Alerts generated: {alerts_count}")
-print(f"Tables updated:")
+print(f"\nMonitor lookbacks used:")
+for name, days in monitor_lookbacks.items():
+    print(f"  - {name}: {days} days")
+print(f"\nTables updated:")
 print(f"  - payments_hf.observe_metrics_daily")
 print(f"  - payments_hf.observe_alerts_daily")

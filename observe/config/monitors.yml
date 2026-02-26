@@ -1,10 +1,11 @@
 version: 1
 
 defaults:
-  lookback_days: 30
+  historical_lookback_days: 720
+  refresh_lookback_days: 30
   min_volume: 15
   alert_channels:
-    - "#payments-analytics-alerts"
+    - "#growth-pa-payments-alerts"
 
 monitors:
   - name: verifications_overall
