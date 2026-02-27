@@ -8,7 +8,10 @@ A standalone Model Context Protocol server for Databricks operations.
 |------|-------------|
 | `execute_sql` | Run any SQL query on Databricks |
 | `run_sql_file` | Execute SQL from a local .sql file |
-| `create_notebook` | Create a notebook in Databricks workspace |
+| `write_workspace_file` | Create or update a file in Databricks workspace |
+| `read_workspace_file` | Read file content from Databricks workspace |
+| `delete_workspace_file` | Delete a file or folder from Databricks workspace |
+| `list_workspace` | List contents of a workspace directory |
 | `run_notebook` | Create and run a notebook as a job |
 | `get_job_status` | Check job run status |
 | `sync_to_workspace` | Upload local files to Databricks |
@@ -52,6 +55,25 @@ pip install mcp databricks-sql-connector python-dotenv requests
 ```
 
 ## Usage Examples
+
+### Workspace File Operations (CRUD)
+
+```
+# List workspace contents
+list_workspace("/Workspace/Users/you@company.com/project")
+
+# Read a file
+read_workspace_file("/Workspace/Users/you@company.com/project/etl.py")
+
+# Write/update a file
+write_workspace_file("/Workspace/Users/you@company.com/project/etl.py", content="# Updated code...")
+
+# Delete a file
+delete_workspace_file("/Workspace/Users/you@company.com/project/old_script.py")
+
+# Delete a folder (recursive)
+delete_workspace_file("/Workspace/Users/you@company.com/project/archive/", recursive=True)
+```
 
 ### Execute SQL
 ```

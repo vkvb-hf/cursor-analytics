@@ -8,7 +8,10 @@ Uses FastMCP for cleaner tool definitions.
 Tools:
 - execute_sql: Run any SQL query
 - run_sql_file: Execute SQL from a local file
-- create_notebook: Create notebooks in Databricks workspace
+- write_workspace_file: Create/update files in Databricks workspace
+- read_workspace_file: Read file content from Databricks workspace
+- delete_workspace_file: Delete files/folders from Databricks workspace
+- list_workspace: List contents of a workspace directory
 - run_notebook: Create and run notebooks as jobs
 - get_job_status: Check job run status
 - sync_to_workspace: Upload local files to Databricks
@@ -33,9 +36,10 @@ import os
 import sys
 import json
 import time
+import base64
 import requests
 from pathlib import Path
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 # Add parent directories to path for imports
 _REPO_ROOT = Path(__file__).parent.parent.parent
@@ -305,35 +309,242 @@ def run_sql_file(file_path: str, output_format: str = "json", limit: int = 100) 
 
 
 @mcp.tool()
-def create_notebook(notebook_path: str, content: str, overwrite: bool = True) -> dict[str, Any]:
+def write_workspace_file(path: str, content: str, overwrite: bool = True) -> dict[str, Any]:
     """
-    Create a Python notebook in Databricks workspace.
+    Create or update a file in Databricks workspace.
+    
+    Supports .py, .sql, .scala, .r files - language is auto-detected from extension.
 
     Args:
-        notebook_path: Path in Databricks workspace (e.g., /Workspace/Users/user@example.com/my_notebook)
-        content: Python notebook content
-        overwrite: If True, overwrite existing notebook (default: True)
+        path: Path in Databricks workspace (e.g., /Workspace/Users/user@example.com/my_notebook.py)
+        content: File content
+        overwrite: If True, overwrite existing file (default: True)
 
     Returns:
-        JSON with: success, notebook_path, action, overwrite
+        JSON with: success, path, action, overwrite
     """
     try:
         runner = get_job_runner()
-        success = runner.create_notebook(notebook_path, content, overwrite)
+        success = runner.create_notebook(path, content, overwrite)
         
         return {
             "success": success,
-            "notebook_path": notebook_path,
+            "path": path,
             "action": "created" if success else "failed",
             "overwrite": overwrite,
-            "error": None if success else "Failed to create notebook"
+            "error": None if success else "Failed to write file"
         }
         
     except Exception as e:
         return {
             "success": False,
-            "notebook_path": notebook_path,
+            "path": path,
             "action": "failed",
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def read_workspace_file(path: str) -> dict[str, Any]:
+    """
+    Read content of a file from Databricks workspace.
+    
+    Supports notebooks (.py, .sql, .scala, .r) and other text files.
+
+    Args:
+        path: Path in Databricks workspace (e.g., /Workspace/Users/user@example.com/my_notebook.py)
+
+    Returns:
+        JSON with: success, path, content, language, size_kb
+    """
+    try:
+        host = os.environ.get("DATABRICKS_HOST")
+        token = os.environ.get("DATABRICKS_TOKEN")
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        export_url = f"{host}/api/2.0/workspace/export"
+        params = {"path": path, "format": "SOURCE"}
+        
+        response = requests.get(export_url, headers=headers, params=params)
+        response.raise_for_status()
+        
+        data = response.json()
+        content_b64 = data.get('content', '')
+        content = base64.b64decode(content_b64).decode('utf-8')
+        
+        # Detect language from extension
+        ext = Path(path).suffix.lower()
+        language_map = {'.py': 'PYTHON', '.sql': 'SQL', '.scala': 'SCALA', '.r': 'R'}
+        language = language_map.get(ext, 'UNKNOWN')
+        
+        return {
+            "success": True,
+            "path": path,
+            "content": content,
+            "language": language,
+            "size_kb": round(len(content.encode('utf-8')) / 1024, 2)
+        }
+        
+    except requests.exceptions.HTTPError as e:
+        error_msg = str(e)
+        try:
+            error_detail = e.response.json()
+            error_msg = error_detail.get("message", str(error_detail))
+        except:
+            pass
+        
+        return {
+            "success": False,
+            "path": path,
+            "error": error_msg
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "path": path,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def delete_workspace_file(path: str, recursive: bool = False) -> dict[str, Any]:
+    """
+    Delete a file or folder from Databricks workspace.
+
+    Args:
+        path: Path in Databricks workspace to delete
+        recursive: If True, delete folder and all contents. Required for non-empty directories.
+                   Default is False for safety.
+
+    Returns:
+        JSON with: success, path, action, recursive
+    """
+    try:
+        host = os.environ.get("DATABRICKS_HOST")
+        token = os.environ.get("DATABRICKS_TOKEN")
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        delete_url = f"{host}/api/2.0/workspace/delete"
+        payload = {"path": path, "recursive": recursive}
+        
+        response = requests.post(delete_url, headers=headers, json=payload)
+        response.raise_for_status()
+        
+        return {
+            "success": True,
+            "path": path,
+            "action": "deleted",
+            "recursive": recursive
+        }
+        
+    except requests.exceptions.HTTPError as e:
+        error_msg = str(e)
+        try:
+            error_detail = e.response.json()
+            error_msg = error_detail.get("message", str(error_detail))
+            
+            # Provide helpful message for non-empty directory
+            if "DIRECTORY_NOT_EMPTY" in str(error_detail):
+                error_msg = "Directory is not empty. Set recursive=True to delete folder and all contents."
+        except:
+            pass
+        
+        return {
+            "success": False,
+            "path": path,
+            "action": "failed",
+            "recursive": recursive,
+            "error": error_msg
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "path": path,
+            "action": "failed",
+            "recursive": recursive,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def list_workspace(path: str, recursive: bool = False) -> dict[str, Any]:
+    """
+    List contents of a Databricks workspace directory.
+
+    Args:
+        path: Path in Databricks workspace (e.g., /Workspace/Users/user@example.com)
+        recursive: If True, list all files recursively. Default is False.
+
+    Returns:
+        JSON with: success, path, items[] (each with path, object_type, language)
+    """
+    def _list_dir(dir_path: str, recurse: bool) -> List[dict]:
+        """Helper to list a single directory."""
+        host = os.environ.get("DATABRICKS_HOST")
+        token = os.environ.get("DATABRICKS_TOKEN")
+        headers = {"Authorization": f"Bearer {token}"}
+        
+        list_url = f"{host}/api/2.0/workspace/list"
+        params = {"path": dir_path}
+        
+        response = requests.get(list_url, headers=headers, params=params)
+        response.raise_for_status()
+        
+        data = response.json()
+        items = []
+        
+        for obj in data.get('objects', []):
+            item = {
+                "path": obj.get('path'),
+                "object_type": obj.get('object_type'),  # NOTEBOOK, FILE, DIRECTORY, REPO
+            }
+            
+            # Add language for notebooks
+            if obj.get('language'):
+                item["language"] = obj.get('language')
+            
+            items.append(item)
+            
+            # Recurse into directories
+            if recurse and obj.get('object_type') == 'DIRECTORY':
+                try:
+                    sub_items = _list_dir(obj.get('path'), recurse=True)
+                    items.extend(sub_items)
+                except:
+                    pass  # Skip directories we can't access
+        
+        return items
+    
+    try:
+        items = _list_dir(path, recursive)
+        
+        return {
+            "success": True,
+            "path": path,
+            "recursive": recursive,
+            "count": len(items),
+            "items": items
+        }
+        
+    except requests.exceptions.HTTPError as e:
+        error_msg = str(e)
+        try:
+            error_detail = e.response.json()
+            error_msg = error_detail.get("message", str(error_detail))
+        except:
+            pass
+        
+        return {
+            "success": False,
+            "path": path,
+            "recursive": recursive,
+            "error": error_msg
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "path": path,
+            "recursive": recursive,
             "error": str(e)
         }
 
