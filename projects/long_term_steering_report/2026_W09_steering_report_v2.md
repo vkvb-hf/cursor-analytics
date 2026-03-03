@@ -10,8 +10,8 @@ _AI-generated summary will be added here_
 
 | Metric | Anomaly Detection | Long Term Impact | Notes |
 |--------|-------------------|------------------|-------|
-| **Payment Checkout Approval Rate** | Error: The truth value of a Series is ambiguous. Use a.em | | |
+| **Payment Checkout Approval Rate** | Error: Expected a 1D array, got an array with shape (248, | | |
 
 ---
 
-_Generated in 7.9s_
+_Generated in 7.7s_
