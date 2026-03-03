@@ -2,7 +2,10 @@
 
 ## Key Insights
 
-_AI-generated summary will be added here_
+- **Critical Issues:** Payment Fraud Block Rate surged +35% WoW across all clusters, with HF-INTL seeing +50% increase driven by GB, BE, DK, AU, NL. Long-term trend shows +200% QoQ and +430% YoY, indicating sustained fraud pressure requiring immediate attention.
+- **Positive Trends:** Dunning Profit improved +17% QoQ (€9.24 to €10.79) and +11% YoY. Payment Approval Rate and AR Pre Dunning remain stable with slight improvements across WL markets (ER, MR, KN).
+- **Risk Shifts:** Payment Checkout Approval Rate declined -1.4% YoY (97.01% to 95.64%) with HF-INTL NL (↓21%) and RTE TT (↓31%) as key drivers. PM Others dimension showing consistent degradation across clusters.
+- **Emerging Concerns:** Total Duplicate Block Rate increased +12% QoQ and +20% YoY, with RTE markets (TK, TZ, TT, TO) showing extreme volatility (+100-900% YoY). Recovery W0 dropped -5.7% WoW across all clusters - monitor for sustained decline.
 
 ---
 
