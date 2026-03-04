@@ -4,9 +4,8 @@ Manage Jira tickets: $ARGUMENTS
 
 Parse `$ARGUMENTS` to determine the mode:
 
-- **SHOW mode** — Arguments contain "show" followed by a ticket ID (e.g., `show GA-142`), or JUST a ticket ID with no other text
-- **REWRITE mode** — Arguments contain "rewrite" followed by a ticket ID (e.g., `rewrite GA-142`)
-- **UPDATE mode** — A ticket ID followed by an action (e.g., `GA-142 add comment ...`, `GA-142 move to In Progress`)
+- **SHOW mode** — JUST a ticket ID with no action, or "show" + ticket ID (e.g., `GA-142`, `show GA-142`)
+- **UPDATE mode** — A ticket ID with an action (e.g., `GA-142 add comment ...`, `GA-142 rewrite`, `rewrite GA-142`)
 - **CREATE mode** — No ticket ID detected
 
 ---
@@ -28,8 +27,8 @@ Only request the fields needed for each mode. The Jira API returns ~66KB without
 | Mode | `fields` array |
 |------|---------------|
 | **SHOW** | `["summary","status","issuetype","assignee","reporter","priority","created","updated","parent","description","issuelinks","comment","customfield_10007"]` |
-| **UPDATE** | `["summary","status","assignee"]` |
-| **REWRITE** | `["summary","status","issuetype","description","issuelinks","parent","comment"]` |
+| **UPDATE** (default) | `["summary","status","assignee"]` |
+| **UPDATE** (rewrite) | `["summary","status","issuetype","description","issuelinks","parent","comment"]` |
 | **CREATE** (context fetch) | `["summary","status","description"]` |
 
 ---
@@ -191,7 +190,7 @@ Share the created ticket key and URL with the user.
 Extract the ticket ID from `$ARGUMENTS`. Call `getJiraIssue` with:
 - `cloudId`: `c563471e-8682-4abc-8fa9-5465b05abad5`
 - `issueIdOrKey`: the extracted ticket ID
-- `fields`: `["summary","status","assignee"]`
+- `fields`: `["summary","status","assignee"]` (default) — or `["summary","status","issuetype","description","issuelinks","parent","comment"]` if the action is "rewrite"/"reformat"
 
 Show a brief summary of the current ticket (title, status, assignee).
 
@@ -200,6 +199,7 @@ From the remaining text in `$ARGUMENTS` (after the ticket ID), determine what to
 
 | Pattern | Action | Tool |
 |---------|--------|------|
+| "rewrite" or "reformat" | Reformat description to template (see Rewrite sub-flow below) | `editJiraIssue` |
 | "add comment ..." or "comment ..." | Add a comment | `addCommentToJiraIssue` |
 | "add dependency on X" or "link to X" or "depends on X" | Add issue link | `editJiraIssue` |
 | "assign to [name]" | Change assignee | Look up via `lookupJiraAccountId`, then `editJiraIssue` |
@@ -213,40 +213,21 @@ Call the appropriate MCP tool(s). Always use `cloudId`: `c563471e-8682-4abc-8fa9
 ### Step 4 — Confirm
 Show what was changed (field, old value → new value where applicable).
 
----
+### Rewrite Sub-flow (triggered by "rewrite" or "reformat" action)
 
-## REWRITE Mode
+1. **Extract context** from the fetched ticket:
+   - Current description (however minimal or unstructured)
+   - Issue type, linked issues, parent epic (fetch linked tickets for additional context)
+   - Comments (scan for useful context)
 
-### Step 1 — Fetch Current Ticket
-Extract the ticket ID (the one after "rewrite"). Call `getJiraIssue` with:
-- `cloudId`: `c563471e-8682-4abc-8fa9-5465b05abad5`
-- `issueIdOrKey`: the extracted ticket ID
-- `fields`: `["summary","status","issuetype","description","issuelinks","parent","comment"]`
+2. **Reformat description** using the ticket template:
+   - Preserve all existing information — do not discard anything meaningful
+   - Restructure into the proper sections (User Story, Why, Acceptance Criteria, etc.)
+   - Flag missing context with `[TODO: ...]`
+   - Keep the same issue type and summary unless clearly wrong
 
-### Step 2 — Extract Context
-From the current ticket, extract:
-- Summary (title)
-- Current description content (however minimal or unstructured)
-- Issue type
-- Linked issues / parent epic (if any — fetch these too for additional context)
-- Comments (scan for useful context)
+3. **Show draft** — Present before/after to the user.
+   Ask: "Ready to apply this rewrite? Or would you like to adjust anything?"
+   **Wait for user response before proceeding.**
 
-### Step 3 — Reformat Description
-Rewrite the description using the ticket template above:
-- Preserve all existing information — do not discard anything meaningful
-- Restructure into the proper sections (User Story, Why, Acceptance Criteria, etc.)
-- If sections are missing context, make reasonable inferences but flag them with `[TODO: ...]`
-- Keep the same issue type and summary unless they're clearly wrong
-
-### Step 4 — Show Draft
-Present the reformatted ticket side-by-side (or before/after) to the user.
-
-Ask: "Ready to apply this rewrite? Or would you like to adjust anything?"
-
-**Wait for user response before proceeding.**
-
-### Step 5 — Apply
-Call `editJiraIssue` with:
-- `cloudId`: `c563471e-8682-4abc-8fa9-5465b05abad5`
-- `issueIdOrKey`: the ticket ID
-- `description`: the reformatted description (ADF format)
+4. **Apply** — Call `editJiraIssue` with the reformatted description (ADF format).
