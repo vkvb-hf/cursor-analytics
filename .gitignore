@@ -31,3 +31,13 @@ Thumbs.db
 # Project-specific
 *.log
 /tmp/
+
+# Claude Code
+.mcp.json
+.claude/*
+!.claude/commands/
+
+# Google Drive auth (scripts/gdrive)
+scripts/gdrive/credentials.json
+scripts/gdrive/token.json
+scripts/gdrive/state.json
