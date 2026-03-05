@@ -148,7 +148,7 @@ Then:
 Using the template above, draft a complete ticket:
 - Write a concise **summary** (ticket title) — action-oriented, under 80 chars
 - Fill in every section of the template using gathered context
-- For analysis tickets, use role "Analyst"
+- For analysis tickets, use role "Stakeholder" or "PM" (the person requesting the analysis, not the analyst)
 - For pipeline/ETL tickets, use role "Data Consumer" or the specific stakeholder
 - Make acceptance criteria specific to the deliverable (e.g., "Analysis completed for DE market", "Table refreshes daily")
 
