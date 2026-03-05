@@ -26,12 +26,13 @@ Do NOT hardcode. Infer the component from the ticket content:
 
 | Content signals | Component |
 |----------------|-----------|
-| payments, billing, invoicing, charges, refunds, PSP, checkout | `Payments` |
-| conversions, attribution, funnel, signup, activation, onboarding | `Conversions` |
-| ads, advertising, campaigns, impressions, clicks, ad spend, tracking | `Ad Tech` |
-| email, push, notifications, messaging, SMS, comms | `Communications` |
+| payrails, payment, retry, steering, fraud, AR, PSP, Adyen, Braintree, transaction, fee, order level | `Payments` |
+| iterable, hightouch, mailgun, email, HT, reactivation, CDP, activation, deliverability | `Communications` |
+| FIRM, DDA, experian, awareness, spend, attribution | `AdTech` |
+| pricing, benefits, discounts, factor pass, cohort, recommender, KPI | `CVO` |
+| funnel, conversion, checkout, experiment, statsig, tracking, quiz, onboarding, Factor, HF | `Conversions` |
 
-If the component cannot be confidently inferred, ask the user during the draft review step (Step 4).
+If no component matches confidently, ask the user during the draft review step (Step 4).
 
 ## Field Selection (CRITICAL — always pass `fields` to reduce response size)
 
