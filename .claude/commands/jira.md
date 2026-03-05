@@ -16,9 +16,21 @@ Parse `$ARGUMENTS` to determine the mode:
 |-------|-------|
 | Cloud ID | `c563471e-8682-4abc-8fa9-5465b05abad5` |
 | Project Key | `GA` |
-| Assignee Account ID | `712020:9db776dc-f5a9-4f11-b30b-554855eab7a2` |
 | Sprint | None (goes to backlog) |
-| Components | `Payments` |
+
+### Assignee
+Do NOT hardcode. Fetch the current user via `getJiraCurrentUser` (cloudId: `c563471e-8682-4abc-8fa9-5465b05abad5`) at the start of CREATE mode to get their `accountId` and display name. Use this as the default assignee.
+
+### Components
+Do NOT hardcode. Infer the component from the ticket content:
+
+| Content signals | Component |
+|----------------|-----------|
+| payments, billing, invoicing, charges, refunds, PSP | `Payments` |
+| pipeline, ETL, data feed, table, ingestion, sync | `Data Engineering` |
+| dashboard, report, metrics, KPI, analytics | `Analytics` |
+
+If the component cannot be confidently inferred, ask the user during the draft review step (Step 4).
 
 ## Field Selection (CRITICAL — always pass `fields` to reduce response size)
 
@@ -159,14 +171,15 @@ Present the full ticket to the user:
 **Summary:** <title>
 **Type:** <Story/Task/Bug/Epic>
 **Project:** GA
-**Assignee:** Visal Kumar
+**Assignee:** <current user display name>
+**Component:** <inferred component, or "None — please specify">
 
 ---
 
 <full description using the template>
 ```
 
-Ask: "Ready to create this ticket? Or would you like to edit anything?"
+If the component could not be inferred, ask along with: "Ready to create this ticket? Or would you like to edit anything?"
 
 **Wait for user response before proceeding.**
 
@@ -177,7 +190,7 @@ Call `createJiraIssue` with:
 - `issueTypeName`: the inferred type from Step 1
 - `summary`: the title
 - `description`: the formatted description (use ADF format as required by the API)
-- `additionalFields`: `{"assignee": {"accountId": "712020:9db776dc-f5a9-4f11-b30b-554855eab7a2"}, "components": [{"name": "Payments"}]}`
+- `additionalFields`: `{"assignee": {"accountId": "<accountId from getJiraCurrentUser>"}, "components": [{"name": "<inferred or user-specified component>"}]}`
 
 ### Step 6 — Return Result
 Share the created ticket key and URL with the user.
