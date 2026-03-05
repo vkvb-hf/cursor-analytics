@@ -16,7 +16,7 @@ Or for backward compatibility:
 import os
 import sys
 from pathlib import Path
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
 class DatabricksConfig(NamedTuple):
     """Configuration container for Databricks connection"""
@@ -25,6 +25,10 @@ class DatabricksConfig(NamedTuple):
     TOKEN: str
     DATABRICKS_HOST: str
     CLUSTER_ID: str
+    # Failover configuration
+    CLUSTER_HTTP_PATH: Optional[str]  # HTTP path for interactive cluster
+    WAREHOUSE_HTTP_PATH: Optional[str]  # HTTP path for SQL warehouse (fallback)
+    ENABLE_FAILOVER: bool  # Whether to enable cluster->warehouse failover
 
 
 def _load_dotenv():
@@ -55,9 +59,14 @@ def get_config() -> DatabricksConfig:
     Required environment variables:
         - DATABRICKS_TOKEN: Personal access token
         - DATABRICKS_SERVER_HOSTNAME: Workspace hostname (e.g., your-workspace.cloud.databricks.com)
-        - DATABRICKS_HTTP_PATH: SQL warehouse HTTP path
+        - DATABRICKS_HTTP_PATH: SQL warehouse HTTP path (primary)
         - DATABRICKS_HOST: Full workspace URL (e.g., https://your-workspace.cloud.databricks.com)
         - CLUSTER_ID: Cluster ID for notebook jobs
+    
+    Optional failover configuration:
+        - DATABRICKS_CLUSTER_HTTP_PATH: HTTP path for interactive cluster (preferred)
+        - DATABRICKS_WAREHOUSE_HTTP_PATH: HTTP path for SQL warehouse (fallback)
+        - DATABRICKS_ENABLE_FAILOVER: Set to "true" to enable cluster->warehouse failover
     
     Returns:
         DatabricksConfig namedtuple with all connection settings
@@ -95,12 +104,20 @@ def get_config() -> DatabricksConfig:
         print("   Create a .env file or set environment variables.", file=sys.stderr)
         print("   See docs/SETUP.md for configuration instructions.", file=sys.stderr)
     
+    # Failover configuration
+    cluster_http_path = os.getenv('DATABRICKS_CLUSTER_HTTP_PATH')
+    warehouse_http_path = os.getenv('DATABRICKS_WAREHOUSE_HTTP_PATH')
+    enable_failover = os.getenv('DATABRICKS_ENABLE_FAILOVER', '').lower() == 'true'
+    
     return DatabricksConfig(
         SERVER_HOSTNAME=server_hostname or '',
         HTTP_PATH=http_path or '',
         TOKEN=token or '',
         DATABRICKS_HOST=databricks_host or '',
         CLUSTER_ID=cluster_id or '',
+        CLUSTER_HTTP_PATH=cluster_http_path,
+        WAREHOUSE_HTTP_PATH=warehouse_http_path,
+        ENABLE_FAILOVER=enable_failover,
     )
 
 

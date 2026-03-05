@@ -919,6 +919,132 @@ def create_workspace_folder(
         }
 
 
+@mcp.tool()
+def get_connection_info() -> dict[str, Any]:
+    """
+    Get information about the current Databricks connection.
+    
+    Shows whether you're connected to the interactive cluster or SQL warehouse,
+    and the current failover status.
+
+    Returns:
+        JSON with: connection_type, http_path, using_fallback, failover_enabled, cluster_state
+    """
+    try:
+        pool = get_pool_instance()
+        info = pool.get_connection_info()
+        info["success"] = True
+        return info
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def switch_to_cluster() -> dict[str, Any]:
+    """
+    Manually switch to the interactive cluster.
+    
+    If the cluster is not running, this will start it and wait for it to be ready.
+    Use this when you want to ensure you're using the cluster for heavy workloads.
+
+    Returns:
+        JSON with: success, connection_type, message
+    """
+    try:
+        pool = get_pool_instance()
+        
+        # Check current state
+        info = pool.get_connection_info()
+        if info.get("connection_type") == "cluster" and not info.get("using_fallback"):
+            return {
+                "success": True,
+                "connection_type": "cluster",
+                "message": "Already connected to cluster"
+            }
+        
+        # Try to connect to cluster
+        if pool._try_connect_to_cluster():
+            return {
+                "success": True,
+                "connection_type": "cluster",
+                "message": "Switched to interactive cluster"
+            }
+        else:
+            # Cluster might be starting
+            cluster_state = pool._get_cluster_state()
+            if cluster_state in ["PENDING", "RESTARTING"]:
+                return {
+                    "success": False,
+                    "connection_type": info.get("connection_type"),
+                    "cluster_state": cluster_state,
+                    "message": f"Cluster is {cluster_state}. Try again in a few minutes."
+                }
+            elif cluster_state == "TERMINATED":
+                return {
+                    "success": False,
+                    "connection_type": info.get("connection_type"),
+                    "cluster_state": cluster_state,
+                    "message": "Cluster start requested. Try again in 2-3 minutes."
+                }
+            else:
+                return {
+                    "success": False,
+                    "connection_type": info.get("connection_type"),
+                    "cluster_state": cluster_state,
+                    "message": f"Could not switch to cluster (state: {cluster_state})"
+                }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def switch_to_warehouse() -> dict[str, Any]:
+    """
+    Manually switch to the SQL Warehouse.
+    
+    Use this when the cluster is unavailable or you want to use the always-on warehouse.
+
+    Returns:
+        JSON with: success, connection_type, message
+    """
+    try:
+        pool = get_pool_instance()
+        
+        # Check current state
+        info = pool.get_connection_info()
+        if info.get("connection_type") == "warehouse":
+            return {
+                "success": True,
+                "connection_type": "warehouse",
+                "message": "Already connected to SQL Warehouse"
+            }
+        
+        # Try to connect to warehouse
+        if pool._try_connect_to_warehouse():
+            return {
+                "success": True,
+                "connection_type": "warehouse",
+                "message": "Switched to SQL Warehouse"
+            }
+        else:
+            return {
+                "success": False,
+                "connection_type": info.get("connection_type"),
+                "message": "Could not switch to SQL Warehouse"
+            }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
 # =============================================================================
 # MAIN ENTRY POINT
 # =============================================================================
