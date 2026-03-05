@@ -26,9 +26,10 @@ Do NOT hardcode. Infer the component from the ticket content:
 
 | Content signals | Component |
 |----------------|-----------|
-| payments, billing, invoicing, charges, refunds, PSP | `Payments` |
-| pipeline, ETL, data feed, table, ingestion, sync | `Data Engineering` |
-| dashboard, report, metrics, KPI, analytics | `Analytics` |
+| payments, billing, invoicing, charges, refunds, PSP, checkout | `Payments` |
+| conversions, attribution, funnel, signup, activation, onboarding | `Conversions` |
+| ads, advertising, campaigns, impressions, clicks, ad spend, tracking | `Ad Tech` |
+| email, push, notifications, messaging, SMS, comms | `Communications` |
 
 If the component cannot be confidently inferred, ask the user during the draft review step (Step 4).
 
