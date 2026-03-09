@@ -19,7 +19,7 @@ Parse `$ARGUMENTS` to determine the mode:
 | Sprint | None (goes to backlog) |
 
 ### Assignee
-Do NOT hardcode. Fetch the current user via `getJiraCurrentUser` (cloudId: `c563471e-8682-4abc-8fa9-5465b05abad5`) at the start of CREATE mode to get their `accountId` and display name. Use this as the default assignee.
+Do NOT auto-assign. During the draft review step (Step 4), ask the user if they want the ticket assigned to them. Default is unassigned. If yes, fetch the current user via `atlassianUserInfo` (cloudId: `c563471e-8682-4abc-8fa9-5465b05abad5`) to get their `accountId`.
 
 ### Components
 Do NOT hardcode. Infer the component from the ticket content:
@@ -173,7 +173,7 @@ Present the full ticket to the user:
 **Summary:** <title>
 **Type:** <Story/Task/Bug/Epic>
 **Project:** GA
-**Assignee:** <current user display name>
+**Assignee:** <current user display name, or "Unassigned">
 **Component:** <inferred component, or "None — please specify">
 
 ---
@@ -181,21 +181,52 @@ Present the full ticket to the user:
 <full description using the template>
 ```
 
-If the component could not be inferred, ask along with: "Ready to create this ticket? Or would you like to edit anything?"
+Then ask:
+> Ready to create this ticket? Or would you like to edit anything?
+> 
+> **Assign to you?** (yes/no) — default: no (unassigned)
+
+If the component could not be inferred, also ask the user to specify it.
 
 **Wait for user response before proceeding.**
 
 ### Step 5 — Create Ticket
+Based on user's response to "Assign to you?":
+- If **yes** → fetch user info via `atlassianUserInfo` to get `accountId`
+- If **no** or not specified → ticket will be unassigned
+
 Call `createJiraIssue` with:
 - `cloudId`: `c563471e-8682-4abc-8fa9-5465b05abad5`
 - `projectKey`: `GA`
 - `issueTypeName`: the inferred type from Step 1
 - `summary`: the title
 - `description`: the formatted description (use ADF format as required by the API)
-- `additionalFields`: `{"assignee": {"accountId": "<accountId from getJiraCurrentUser>"}, "components": [{"name": "<inferred or user-specified component>"}]}`
+- `additionalFields`: 
+  - If assigning: `{"assignee": {"accountId": "<accountId from atlassianUserInfo>"}, "components": [{"name": "<inferred or user-specified component>"}]}`
+  - If not assigning: `{"components": [{"name": "<inferred or user-specified component>"}]}`
 
-### Step 6 — Return Result
-Share the created ticket key and URL with the user.
+### Step 6 — Verify Creation
+**CRITICAL:** After `createJiraIssue` returns, immediately fetch the created ticket to verify fields were set correctly:
+
+Call `getJiraIssue` with:
+- `cloudId`: `c563471e-8682-4abc-8fa9-5465b05abad5`
+- `issueIdOrKey`: the newly created ticket key
+- `fields`: `["summary","assignee","components"]`
+
+Check:
+1. **Component** — If empty but should have been set → call `editJiraIssue` to add it
+2. **Assignee** — If null but user said "yes" → call `editJiraIssue` to assign
+
+Fix any missing fields before returning to user.
+
+### Step 7 — Return Result
+Share the created ticket key and URL with the user. Confirm the final state:
+
+```
+Created: [<TICKET-KEY>](https://hellofresh.atlassian.net/browse/<TICKET-KEY>)
+- Assignee: <name or "Unassigned">
+- Component: <component name>
+```
 
 ---
 
