@@ -3,56 +3,33 @@ version: 1
 defaults:
   historical_lookback_days: 720
   refresh_lookback_days: 30
-  min_volume: 1
   alert_channels:
     - "#growth-pa-payments-alerts"
 
 monitors:
-  - name: verifications_overall
-    description: "Overall verification health"
+  - name: tokenisation_monitor
+    description: "TSR monitoring with auto-thresholds per workflow"
     severity: critical
     metrics:
-      - verification_count
-      - tokenisation_success_rate
+      - tsr_checkout_tokenisation
+      - tsr_reactivation
+      - tsr_change
+      - tsr_unpause
     dimensions:
+      - [country, payment_method, new_payment_method]
+    hierarchy:
       - []
       - [country]
+      - [country, payment_method]
+      - [country, payment_method, new_payment_method]
     rules:
-      data_presence:
+      auto_threshold:
         enabled: true
-        min_records: 1
-        severity: critical
-      period_over_period:
-        enabled: true
-        period_days: 7
-        max_change_pct: 0.03
-        severity: warning
-      day_over_year:
-        enabled: true
-        max_change_pct: 0.10
-        severity: info
-
-  - name: checkout_funnel_overall
-    description: "Overall checkout funnel health"
-    severity: critical
-    metrics:
-      - payment_page_visit
-      - payment_page_visit_to_success
-      - select_to_success
-    dimensions:
-      - []
-      - [country]
-    rules:
-      data_presence:
-        enabled: true
-        min_records: 1
-        severity: critical
-      period_over_period:
-        enabled: true
-        period_days: 7
-        max_change_pct: 0.2
-        severity: warning
-      day_over_year:
-        enabled: true
-        max_change_pct: 0.4
-        severity: info
+        type: auto_threshold
+        comparison: same_weekday
+        calibration_days: 365
+        target_flag_rate: 0.05
+        min_denominator: 30
+        severity_map:
+          critical: 3.0
+          warning: 1.0

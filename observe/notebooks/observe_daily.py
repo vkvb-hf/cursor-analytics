@@ -1,11 +1,13 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Observe Daily Monitoring
-# MAGIC 
+# MAGIC
 # MAGIC Single notebook that handles everything:
 # MAGIC 1. Setup (config sync, table creation)
 # MAGIC 2. Smart backfill (720 days if config changed, 30 days otherwise)
-# MAGIC 3. Rule evaluation and alerting
+# MAGIC 3. Metric computation with hierarchy roll-ups
+# MAGIC 4. Auto-threshold calibration and evaluation
+# MAGIC 5. Alert deduplication via hierarchy suppression
 
 # COMMAND ----------
 
@@ -17,9 +19,11 @@ import yaml
 import hashlib
 import json
 from dataclasses import dataclass, field
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from datetime import datetime, timedelta
+from functools import reduce
 from pyspark.sql import functions as F, DataFrame
+from pyspark.sql.window import Window
 from pyspark.sql.types import *
 
 # COMMAND ----------
@@ -44,31 +48,33 @@ class Metric:
     name: str
     source: str
     type: str
-    description: str = ""
-    expression: str = None
+    filter: str = None
     numerator: str = None
     denominator: str = None
+    description: str = ""
     is_p0: bool = False
-    team_ownership: str = ""
+    is_ratio: bool = False
     increase_is_good: bool = True
+    team_ownership: str = ""
 
 @dataclass
-class RuleConfig:
+class AutoThresholdRule:
     enabled: bool = True
-    severity: str = "warning"
-    min_records: int = 1
-    period_days: int = 7
-    max_change_pct: float = 0.3
+    comparison: str = "same_weekday"
+    calibration_days: int = 365
+    target_flag_rate: float = 0.05
+    min_denominator: int = 30
+    severity_map: Dict[str, float] = field(default_factory=lambda: {"critical": 3.0, "warning": 1.0})
 
 @dataclass
 class Monitor:
     name: str
     metrics: List[str]
     dimensions: List[List[str]]
-    rules: Dict[str, RuleConfig]
+    hierarchy: List[List[str]]
+    rule: AutoThresholdRule
     description: str = ""
     severity: str = "warning"
-    min_volume: int = 15
 
 @dataclass
 class Config:
@@ -86,20 +92,15 @@ class Config:
 
 import os
 
-# Create DBFS directories
 os.makedirs("/dbfs/observe/config", exist_ok=True)
 os.makedirs("/dbfs/observe/state", exist_ok=True)
 print("DBFS directories ready")
 
 # COMMAND ----------
 
-# Sync config to DBFS
-# Try multiple methods: Repos path, Workspace files API, or skip if already on DBFS
 notebook_path = dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()
-
 config_synced = False
 
-# Method 1: If running from Repos, read directly
 if notebook_path.startswith("/Repos"):
     repo_path = notebook_path.rsplit("/", 2)[0]
     config_path = f"{repo_path}/config"
@@ -115,34 +116,26 @@ if notebook_path.startswith("/Repos"):
     except Exception as e:
         print(f"  Failed: {e}")
 
-# Method 2: If running from Workspace, use Workspace REST API
 if not config_synced and "/Users/" in notebook_path:
     import requests
     import base64
-    
-    # Get the workspace base path from notebook_path
-    workspace_base = notebook_path.rsplit("/", 2)[0]  # /Users/user@example.com/observe
+    workspace_base = notebook_path.rsplit("/", 2)[0]
     config_ws_path = f"{workspace_base}/config"
     print(f"Syncing config from Workspace API: {config_ws_path}")
-    
     try:
-        # Get workspace host and token from notebook context
         ctx = dbutils.notebook.entry_point.getDbutils().notebook().getContext()
         host = ctx.apiUrl().get()
         token = ctx.apiToken().get()
         headers = {"Authorization": f"Bearer {token}"}
-        
         for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
             ws_file_path = f"{config_ws_path}/{config_file}"
-            export_url = f"{host}/api/2.0/workspace/export"
-            params = {"path": ws_file_path, "format": "SOURCE"}
-            
-            response = requests.get(export_url, headers=headers, params=params)
+            response = requests.get(
+                f"{host}/api/2.0/workspace/export",
+                headers=headers,
+                params={"path": ws_file_path, "format": "SOURCE"}
+            )
             response.raise_for_status()
-            
-            content_b64 = response.json().get('content', '')
-            content = base64.b64decode(content_b64).decode('utf-8')
-            
+            content = base64.b64decode(response.json().get('content', '')).decode('utf-8')
             with open(f"/dbfs/observe/config/{config_file}", "w") as f:
                 f.write(content)
             print(f"  Synced: {config_file}")
@@ -150,7 +143,6 @@ if not config_synced and "/Users/" in notebook_path:
     except Exception as e:
         print(f"  Failed: {e}")
 
-# Method 3: Check if configs already exist on DBFS
 if not config_synced:
     print("Checking for existing configs on DBFS...")
     try:
@@ -160,50 +152,59 @@ if not config_synced:
         print("  Using existing DBFS configs")
         config_synced = True
     except:
-        raise Exception("No config files found! Please sync configs to /dbfs/observe/config/ first.")
+        raise Exception("No config files found! Sync configs to /dbfs/observe/config/ first.")
 
 # COMMAND ----------
 
-# Ensure tables exist
 spark.sql("""
 CREATE TABLE IF NOT EXISTS payments_hf.observe_metrics_daily (
-    -- Keys
-    date DATE COMMENT 'Date of the metric',
-    monitor_name STRING COMMENT 'Name of the monitor',
-    metric_name STRING COMMENT 'Name of the metric',
-    dimension_key STRING COMMENT 'Comma-separated dimension column names',
-    dimension_value STRING COMMENT 'Comma-separated dimension values',
-    
-    -- Daily values
-    metric_value DOUBLE COMMENT 'Computed metric value',
-    metric_numerator DOUBLE COMMENT 'Numerator for ratio metrics',
-    metric_denominator DOUBLE COMMENT 'Denominator for ratio metrics',
-    
-    -- Rolling 7-day
-    rolling_7d_avg DOUBLE COMMENT 'Rolling 7-day average',
-    rolling_7d_prev_avg DOUBLE COMMENT 'Previous 7-day average (8-14 days ago)',
-    rolling_7d_change_pct DOUBLE COMMENT 'Percent change between rolling periods',
-    
-    -- Year-over-year
-    yoy_metric_value DOUBLE COMMENT 'Same day last year metric value',
-    yoy_change_pct DOUBLE COMMENT 'Year-over-year percent change',
-    
-    -- Volume filtering
-    historical_avg_denominator DOUBLE COMMENT 'Historical average denominator for volume filtering',
-    
-    -- Metadata
-    source_name STRING COMMENT 'Name of the source',
-    metric_type STRING COMMENT 'Type of metric (count, ratio)',
-    computed_at TIMESTAMP COMMENT 'When this metric was computed'
+    date DATE,
+    monitor_name STRING,
+    metric_name STRING,
+    dimension_key STRING,
+    dimension_value STRING,
+    metric_value DOUBLE,
+    metric_numerator DOUBLE,
+    metric_denominator DOUBLE,
+    rolling_7d_avg DOUBLE,
+    rolling_7d_prev_avg DOUBLE,
+    rolling_7d_change_pct DOUBLE,
+    yoy_metric_value DOUBLE,
+    yoy_change_pct DOUBLE,
+    historical_avg_denominator DOUBLE,
+    same_weekday_prev DOUBLE,
+    same_weekday_residual DOUBLE,
+    calibrated_k DOUBLE,
+    volume_tier STRING,
+    source_name STRING,
+    metric_type STRING,
+    computed_at TIMESTAMP
 ) USING DELTA PARTITIONED BY (date)
 """)
 
 spark.sql("""
 CREATE TABLE IF NOT EXISTS payments_hf.observe_alerts_daily (
-    date DATE, monitor_name STRING, metric_name STRING, dimension_key STRING,
-    dimension_value STRING, rule_name STRING, severity STRING, alert_type STRING,
-    current_value DOUBLE, expected_value DOUBLE, lower_bound DOUBLE, upper_bound DOUBLE,
-    deviation_pct DOUBLE, message STRING, created_at TIMESTAMP
+    date DATE,
+    monitor_name STRING,
+    metric_name STRING,
+    dimension_key STRING,
+    dimension_value STRING,
+    rule_name STRING,
+    severity STRING,
+    alert_type STRING,
+    current_value DOUBLE,
+    expected_value DOUBLE,
+    lower_bound DOUBLE,
+    upper_bound DOUBLE,
+    deviation_pct DOUBLE,
+    message STRING,
+    suppressed BOOLEAN,
+    suppressed_by STRING,
+    hierarchy_level INT,
+    calibrated_k DOUBLE,
+    residual_std DOUBLE,
+    denominator_count DOUBLE,
+    created_at TIMESTAMP
 ) USING DELTA PARTITIONED BY (date)
 """)
 print("Tables ready")
@@ -215,36 +216,37 @@ print("Tables ready")
 
 # COMMAND ----------
 
+def _filter_fields(data: dict, cls) -> dict:
+    return {k: v for k, v in data.items() if k in cls.__dataclass_fields__}
+
 def load_config() -> Config:
-    """Load all YAML configs from DBFS"""
     config_path = "/dbfs/observe/config"
-    
+
     with open(f"{config_path}/sources.yml") as f:
         sources_data = yaml.safe_load(f)
     with open(f"{config_path}/metrics.yml") as f:
         metrics_data = yaml.safe_load(f)
     with open(f"{config_path}/monitors.yml") as f:
         monitors_data = yaml.safe_load(f)
-    
-    sources = {s['name']: Source(**s) for s in sources_data.get('sources', [])}
-    metrics = {m['name']: Metric(**m) for m in metrics_data.get('metrics', [])}
+
+    sources = {s['name']: Source(**_filter_fields(s, Source)) for s in sources_data.get('sources', [])}
+    metrics = {m['name']: Metric(**_filter_fields(m, Metric)) for m in metrics_data.get('metrics', [])}
     defaults = monitors_data.get('defaults', {})
-    
+
     monitors = []
     for m in monitors_data.get('monitors', []):
-        rules = {}
-        for rule_name, rule_cfg in m.get('rules', {}).items():
-            rules[rule_name] = RuleConfig(**rule_cfg) if isinstance(rule_cfg, dict) else RuleConfig()
+        rule_cfg = m.get('rules', {}).get('auto_threshold', {})
+        rule = AutoThresholdRule(**_filter_fields(rule_cfg, AutoThresholdRule)) if rule_cfg else AutoThresholdRule()
         monitors.append(Monitor(
             name=m['name'],
             metrics=m.get('metrics', []),
             dimensions=m.get('dimensions', [[]]),
-            rules=rules,
+            hierarchy=m.get('hierarchy', []),
+            rule=rule,
             description=m.get('description', ''),
             severity=m.get('severity', 'warning'),
-            min_volume=m.get('min_volume', defaults.get('min_volume', 15))
         ))
-    
+
     return Config(sources=sources, metrics=metrics, monitors=monitors, defaults=defaults)
 
 config = load_config()
@@ -253,18 +255,17 @@ print(f"Loaded {len(config.sources)} sources, {len(config.metrics)} metrics, {le
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 3: Compute Monitor Hash (Data-Affecting Parts Only)
+# MAGIC ## Step 3: Smart Backfill (Hash-Based)
 
 # COMMAND ----------
 
 def compute_monitor_hash(monitor: Monitor, config: Config) -> str:
-    """Hash only data-affecting parts: metrics, dimensions, source configs"""
     hash_input = {
         "monitor_name": monitor.name,
         "metrics": [],
-        "dimensions": monitor.dimensions
+        "dimensions": monitor.dimensions,
+        "hierarchy": monitor.hierarchy,
     }
-    
     for metric_name in monitor.metrics:
         metric = config.metrics.get(metric_name)
         if metric:
@@ -273,41 +274,27 @@ def compute_monitor_hash(monitor: Monitor, config: Config) -> str:
                 "name": metric.name,
                 "source": metric.source,
                 "type": metric.type,
-                "expression": metric.expression,
+                "filter": metric.filter,
                 "numerator": metric.numerator,
                 "denominator": metric.denominator,
                 "source_table": f"{source.database}.{source.table}" if source else None,
                 "source_filters": source.filters if source else []
             })
-    
-    hash_str = json.dumps(hash_input, sort_keys=True)
-    return hashlib.md5(hash_str.encode()).hexdigest()
-
+    return hashlib.md5(json.dumps(hash_input, sort_keys=True).encode()).hexdigest()
 
 def load_stored_hashes() -> Dict[str, str]:
-    """Load previously stored hashes"""
-    hash_file = "/dbfs/observe/state/monitor_hashes.json"
     try:
-        with open(hash_file) as f:
+        with open("/dbfs/observe/state/monitor_hashes.json") as f:
             return json.load(f)
     except:
         return {}
 
-
 def save_hashes(hashes: Dict[str, str]):
-    """Save current hashes"""
-    hash_file = "/dbfs/observe/state/monitor_hashes.json"
-    with open(hash_file, "w") as f:
+    with open("/dbfs/observe/state/monitor_hashes.json", "w") as f:
         json.dump(hashes, f)
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC ## Step 4: Determine Lookback Per Monitor
-
-# COMMAND ----------
-
-# Get target date
 target_date_str = dbutils.widgets.get("target_date")
 if target_date_str:
     target_date = datetime.strptime(target_date_str, "%Y-%m-%d")
@@ -318,7 +305,6 @@ print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
 
 # COMMAND ----------
 
-# Determine lookback for each monitor
 stored_hashes = load_stored_hashes()
 new_hashes = {}
 monitor_lookbacks = {}
@@ -326,127 +312,209 @@ monitor_lookbacks = {}
 historical_days = config.defaults.get('historical_lookback_days', 720)
 refresh_days = config.defaults.get('refresh_lookback_days', 30)
 
-print(f"\nConfig: historical={historical_days} days, refresh={refresh_days} days")
+print(f"Config: historical={historical_days}d, refresh={refresh_days}d")
 print("-" * 50)
 
 for monitor in config.monitors:
     current_hash = compute_monitor_hash(monitor, config)
     stored_hash = stored_hashes.get(monitor.name)
     new_hashes[monitor.name] = current_hash
-    
+
     if stored_hash != current_hash:
         monitor_lookbacks[monitor.name] = historical_days
         reason = "NEW" if not stored_hash else "CHANGED"
-        print(f"{monitor.name}: {reason} → {historical_days} days backfill")
+        print(f"{monitor.name}: {reason} -> {historical_days}d backfill")
     else:
         monitor_lookbacks[monitor.name] = refresh_days
-        print(f"{monitor.name}: unchanged → {refresh_days} days refresh")
+        print(f"{monitor.name}: unchanged -> {refresh_days}d refresh")
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 5: Compute Metrics
+# MAGIC ## Step 4: Compute Metrics
 
 # COMMAND ----------
 
-def compute_metric(
+def compute_metric_granular(
     config: Config,
     metric: Metric,
     dimensions: List[str],
     target_date: datetime,
     lookback_days: int
 ) -> DataFrame:
-    """Compute a single metric for given dimensions over lookback period"""
+    """Compute a single ratio metric at the most granular dimension level."""
     source = config.sources[metric.source]
     start_date = target_date - timedelta(days=lookback_days)
-    
+
     df = spark.table(f"{source.database}.{source.table}")
-    
-    # Apply date filter
+
+    # Date filter
     date_col = F.col(source.date_column)
     if "string" in str(df.schema[source.date_column].dataType).lower():
         date_col = F.to_date(date_col)
     df = df.filter((date_col >= start_date) & (date_col <= target_date))
-    
-    # Apply source filters
+
+    # Source-level filters
     for flt in source.filters:
         df = df.filter(flt)
-    
-    # Group by date + dimensions
-    group_cols = [F.to_date(F.col(source.date_column)).alias("date")]
+
+    # Metric-level filter (workflow)
+    if metric.filter:
+        df = df.filter(eval(metric.filter))
+
+    # Cast boolean dimensions to string
     for dim in dimensions:
-        group_cols.append(F.col(dim))
-    
+        if dim in [f.name for f in df.schema.fields]:
+            if str(df.schema[dim].dataType) == "BooleanType":
+                df = df.withColumn(dim, F.col(dim).cast("string"))
+
+    # Group by date + dimensions
+    group_cols = [F.to_date(F.col(source.date_column)).alias("date")] + [F.col(dim) for dim in dimensions]
     grouped = df.groupBy(group_cols)
-    
-    # Compute metric
-    if metric.type == "count":
-        result = grouped.agg(eval(metric.expression).alias("metric_value"))
-    else:  # ratio
-        result = grouped.agg(
-            eval(metric.numerator).alias("numerator"),
-            eval(metric.denominator).alias("denominator")
-        )
-        result = result.withColumn(
-            "metric_value",
-            F.when(F.col("denominator") > 0, F.col("numerator") / F.col("denominator")).otherwise(None)
-        )
-    
-    # Add metadata
+
+    result = grouped.agg(
+        eval(metric.numerator).alias("numerator"),
+        eval(metric.denominator).alias("denominator")
+    )
+    result = result.withColumn(
+        "metric_value",
+        F.when(F.col("denominator") > 0, F.col("numerator") / F.col("denominator")).otherwise(None)
+    )
+
+    # Metadata
     result = result.withColumn("metric_name", F.lit(metric.name))
     result = result.withColumn("metric_type", F.lit(metric.type))
     result = result.withColumn("source_name", F.lit(metric.source))
-    
+
     dim_key = ",".join(dimensions) if dimensions else "global"
     result = result.withColumn("dimension_key", F.lit(dim_key))
-    
+
     if dimensions:
-        dim_value_expr = F.concat_ws(",", *[F.col(d) for d in dimensions])
+        dim_value_expr = F.concat_ws(",", *[F.coalesce(F.col(d).cast("string"), F.lit("_null_")) for d in dimensions])
     else:
         dim_value_expr = F.lit("global")
     result = result.withColumn("dimension_value", dim_value_expr)
-    
+
     return result
 
 # COMMAND ----------
 
+def compute_hierarchy_rollups(
+    granular_df: DataFrame,
+    hierarchy: List[List[str]],
+    granular_dims: List[str],
+    monitor_name: str
+) -> DataFrame:
+    """
+    Roll up granular metrics to each hierarchy level.
+    Ratio metrics: SUM(numerator) / SUM(denominator).
+    """
+    # Parse individual dimension values from comma-separated dimension_value
+    with_parsed = granular_df
+    for i, dim in enumerate(granular_dims):
+        with_parsed = with_parsed.withColumn(
+            f"_dim_{dim}",
+            F.split(F.col("dimension_value"), ",").getItem(i)
+        )
+
+    all_levels = []
+
+    for level_dims in hierarchy:
+        level_key = ",".join(level_dims) if level_dims else "global"
+
+        if level_dims == granular_dims:
+            level_df = with_parsed
+            all_levels.append(level_df)
+            continue
+
+        group_cols = ["date", "metric_name", "metric_type", "source_name"]
+        group_cols += [f"_dim_{d}" for d in level_dims]
+
+        rolled = with_parsed.groupBy(group_cols).agg(
+            F.sum("numerator").alias("numerator"),
+            F.sum("denominator").alias("denominator"),
+        )
+        rolled = rolled.withColumn(
+            "metric_value",
+            F.when(F.col("denominator") > 0, F.col("numerator") / F.col("denominator")).otherwise(None)
+        )
+
+        rolled = rolled.withColumn("dimension_key", F.lit(level_key))
+        if level_dims:
+            rolled = rolled.withColumn(
+                "dimension_value",
+                F.concat_ws(",", *[F.col(f"_dim_{d}") for d in level_dims])
+            )
+        else:
+            rolled = rolled.withColumn("dimension_value", F.lit("global"))
+
+        # Add missing parsed dim columns for union compatibility
+        for dim in granular_dims:
+            col_name = f"_dim_{dim}"
+            if col_name not in rolled.columns:
+                rolled = rolled.withColumn(col_name, F.lit(None).cast("string"))
+
+        all_levels.append(rolled)
+
+    # Standardize columns and union
+    standard_cols = [
+        "date", "metric_name", "metric_type", "source_name",
+        "dimension_key", "dimension_value",
+        "metric_value", "numerator", "denominator",
+    ]
+
+    standardized = []
+    for df in all_levels:
+        for col in standard_cols:
+            if col not in df.columns:
+                df = df.withColumn(col, F.lit(None))
+        standardized.append(df.select(standard_cols))
+
+    combined = reduce(DataFrame.unionByName, standardized)
+    combined = combined.withColumn("monitor_name", F.lit(monitor_name))
+    return combined
+
+# COMMAND ----------
+
 def compute_all_metrics(config: Config, target_date: datetime, monitor_lookbacks: Dict[str, int]) -> DataFrame:
-    """Compute all metrics for all monitors with appropriate lookback"""
     all_results = []
-    
+
     for monitor in config.monitors:
         lookback = monitor_lookbacks[monitor.name]
-        print(f"\nComputing {monitor.name} ({lookback} days)...")
-        
+        granular_dims = monitor.dimensions[0] if monitor.dimensions else []
+        print(f"\nComputing {monitor.name} ({lookback}d lookback)...")
+
         for metric_name in monitor.metrics:
             metric = config.metrics.get(metric_name)
             if not metric:
+                print(f"  ! Metric {metric_name} not found")
                 continue
-            for dims in monitor.dimensions:
-                try:
-                    result = compute_metric(config, metric, dims, target_date, lookback)
-                    result = result.withColumn("monitor_name", F.lit(monitor.name))
-                    all_results.append(result)
-                    print(f"  ✓ {metric_name} [{','.join(dims) or 'global'}]")
-                except Exception as e:
-                    print(f"  ✗ {metric_name} [{','.join(dims) or 'global'}]: {e}")
-    
+            try:
+                granular_df = compute_metric_granular(config, metric, granular_dims, target_date, lookback)
+                rolled_up = compute_hierarchy_rollups(granular_df, monitor.hierarchy, granular_dims, monitor.name)
+                all_results.append(rolled_up)
+                levels_str = " | ".join([",".join(h) or "global" for h in monitor.hierarchy])
+                print(f"  + {metric_name} [{levels_str}]")
+            except Exception as e:
+                print(f"  ! {metric_name}: {e}")
+
     if not all_results:
         return None
-    
-    # Standardize columns
-    standard_cols = ["date", "monitor_name", "source_name", "metric_name", "metric_type",
-                     "dimension_key", "dimension_value", "metric_value"]
-    
+
+    base_cols = [
+        "date", "monitor_name", "source_name", "metric_name", "metric_type",
+        "dimension_key", "dimension_value", "metric_value", "numerator", "denominator"
+    ]
+
     standardized = []
     for df in all_results:
-        if "numerator" not in df.columns:
-            df = df.withColumn("numerator", F.lit(None).cast("double"))
-        if "denominator" not in df.columns:
-            df = df.withColumn("denominator", F.lit(None).cast("double"))
-        standardized.append(df.select(standard_cols + ["numerator", "denominator"]))
-    
-    from functools import reduce
+        for col in base_cols:
+            if col not in df.columns:
+                df = df.withColumn(col, F.lit(None))
+        for col in ["metric_value", "numerator", "denominator"]:
+            df = df.withColumn(col, F.col(col).cast("double"))
+        standardized.append(df.select(base_cols))
+
     combined = reduce(DataFrame.unionByName, standardized)
     return combined.withColumn("computed_at", F.current_timestamp())
 
@@ -456,7 +524,7 @@ print("Computing metrics...")
 metrics_df = compute_all_metrics(config, target_date, monitor_lookbacks)
 
 if metrics_df:
-    metrics_df.cache()  # Cache for reuse in rule evaluation
+    metrics_df.cache()
     metrics_count = metrics_df.count()
     print(f"\nTotal: {metrics_count} metric records")
 else:
@@ -466,250 +534,372 @@ else:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 6: Evaluate Rules (Single Query)
+# MAGIC ## Step 5: Calibrate Auto-Thresholds
 
 # COMMAND ----------
 
-def compute_rule_aggregations(metrics_df: DataFrame, target_date: datetime, period_days: int = 7) -> DataFrame:
+def calibrate_k_values(
+    metrics_df: DataFrame,
+    target_date: datetime,
+    calibration_days: int,
+    target_flag_rate: float,
+    min_denominator: int
+) -> DataFrame:
     """
-    Compute all aggregations needed for rules in ONE query.
-    Returns DataFrame with: current_avg, previous_avg, target_day_value, yoy_value per metric/dimension combo.
+    Calibrate k-values from historical same-weekday residuals.
+
+    For each metric x dimension combo:
+    1. Pair each day with same weekday 7 days prior
+    2. Compute residuals and their std
+    3. Find k such that |residual| > k * std for ~target_flag_rate of days
     """
-    target_date_lit = F.lit(target_date.strftime("%Y-%m-%d")).cast("date")
-    
-    # Date boundaries
-    current_start = (target_date - timedelta(days=period_days - 1)).strftime("%Y-%m-%d")
-    previous_start = (target_date - timedelta(days=2 * period_days - 1)).strftime("%Y-%m-%d")
-    previous_end = (target_date - timedelta(days=period_days)).strftime("%Y-%m-%d")
-    yoy_date = (target_date - timedelta(days=365)).strftime("%Y-%m-%d")
-    target_date_str = target_date.strftime("%Y-%m-%d")
-    
-    # Single aggregation query
-    agg_df = metrics_df.groupBy(
+    cal_start = (target_date - timedelta(days=calibration_days)).strftime("%Y-%m-%d")
+    cal_end = target_date.strftime("%Y-%m-%d")
+
+    cal_df = metrics_df.filter(
+        (F.col("date") >= cal_start) & (F.col("date") <= cal_end)
+    )
+
+    curr = cal_df.alias("curr")
+    prev = cal_df.alias("prev")
+
+    pairs = curr.join(
+        prev,
+        on=[
+            curr["metric_name"] == prev["metric_name"],
+            curr["monitor_name"] == prev["monitor_name"],
+            curr["dimension_key"] == prev["dimension_key"],
+            curr["dimension_value"] == prev["dimension_value"],
+            curr["date"] == F.date_add(prev["date"], 7)
+        ],
+        how="inner"
+    ).select(
+        curr["monitor_name"],
+        curr["metric_name"],
+        curr["dimension_key"],
+        curr["dimension_value"],
+        curr["date"].alias("curr_date"),
+        curr["metric_value"].alias("curr_value"),
+        prev["metric_value"].alias("prev_value"),
+        curr["denominator"].alias("curr_denom"),
+        (curr["metric_value"] - prev["metric_value"]).alias("residual")
+    )
+
+    pairs = pairs.filter(
+        (F.col("curr_denom").isNotNull()) &
+        (F.col("curr_denom") >= min_denominator) &
+        (F.col("curr_value").isNotNull()) &
+        (F.col("prev_value").isNotNull())
+    )
+
+    quantile_target = 1.0 - target_flag_rate
+
+    combo_stats = pairs.groupBy(
         "monitor_name", "metric_name", "dimension_key", "dimension_value"
     ).agg(
-        # Period over period: current period avg (last 7 days)
-        F.avg(F.when(
-            (F.col("date") >= current_start) & (F.col("date") <= target_date_str),
-            F.col("metric_value")
-        )).alias("current_avg"),
-        
-        # Period over period: current period count
-        F.sum(F.when(
-            (F.col("date") >= current_start) & (F.col("date") <= target_date_str),
-            F.lit(1)
-        ).otherwise(0)).alias("current_count"),
-        
-        # Period over period: previous period avg (7 days before that)
-        F.avg(F.when(
-            (F.col("date") >= previous_start) & (F.col("date") <= previous_end),
-            F.col("metric_value")
-        )).alias("previous_avg"),
-        
-        # Period over period: previous period count
-        F.sum(F.when(
-            (F.col("date") >= previous_start) & (F.col("date") <= previous_end),
-            F.lit(1)
-        ).otherwise(0)).alias("previous_count"),
-        
-        # Day over year: target day value
-        F.first(F.when(
-            F.col("date") == target_date_str,
-            F.col("metric_value")
-        )).alias("target_day_value"),
-        
-        # Day over year: same day last year value
-        F.first(F.when(
-            F.col("date") == yoy_date,
-            F.col("metric_value")
-        )).alias("yoy_value")
+        F.stddev("residual").alias("residual_std"),
+        F.count("*").alias("n_pairs"),
+        F.avg("curr_denom").alias("avg_denominator"),
+        F.percentile_approx(F.abs(F.col("residual")), quantile_target).alias("abs_residual_pctile")
     )
-    
-    # Compute deviations
-    agg_df = agg_df.withColumn(
-        "pop_change_pct",
+
+    # k = percentile(|residual|) / std. Fall back to k=3.0 if insufficient data.
+    combo_stats = combo_stats.withColumn(
+        "calibrated_k",
         F.when(
-            (F.col("previous_avg").isNotNull()) & (F.col("previous_avg") != 0),
-            (F.col("current_avg") - F.col("previous_avg")) / F.col("previous_avg")
-        )
-    ).withColumn(
-        "yoy_change_pct",
-        F.when(
-            (F.col("yoy_value").isNotNull()) & (F.col("yoy_value") != 0),
-            (F.col("target_day_value") - F.col("yoy_value")) / F.col("yoy_value")
-        )
+            (F.col("residual_std") > 0) & (F.col("n_pairs") >= 20),
+            F.col("abs_residual_pctile") / F.col("residual_std")
+        ).otherwise(F.lit(3.0))
     )
-    
-    return agg_df
+
+    combo_stats = combo_stats.withColumn(
+        "volume_tier",
+        F.when(F.col("avg_denominator") >= 500, "high")
+         .when(F.col("avg_denominator") >= 100, "medium")
+         .otherwise("low")
+    )
+
+    return combo_stats
 
 # COMMAND ----------
 
-def build_monitor_thresholds(config: Config) -> DataFrame:
-    """Build a DataFrame of monitor thresholds from config"""
-    rows = []
-    for monitor in config.monitors:
-        row = {
-            "monitor_name": monitor.name,
-            "min_volume": monitor.min_volume,
-            "pop_enabled": False,
-            "pop_max_change_pct": 0.3,
-            "pop_severity": "warning",
-            "yoy_enabled": False,
-            "yoy_max_change_pct": 0.5,
-            "yoy_severity": "info"
-        }
-        
-        if "period_over_period" in monitor.rules:
-            rule = monitor.rules["period_over_period"]
-            row["pop_enabled"] = rule.enabled
-            row["pop_max_change_pct"] = rule.max_change_pct
-            row["pop_severity"] = rule.severity
-        
-        if "day_over_year" in monitor.rules:
-            rule = monitor.rules["day_over_year"]
-            row["yoy_enabled"] = rule.enabled
-            row["yoy_max_change_pct"] = rule.max_change_pct
-            row["yoy_severity"] = rule.severity
-        
-        rows.append(row)
-    
-    return spark.createDataFrame(rows)
+print("Calibrating auto-thresholds...")
+k_values_per_monitor = {}
 
-# COMMAND ----------
+for monitor in config.monitors:
+    if not monitor.rule.enabled:
+        continue
 
-def evaluate_rules_single_query(metrics_df: DataFrame, config: Config, target_date: datetime) -> DataFrame:
-    """
-    Evaluate all rules in a single pass:
-    1. Compute all aggregations in one query
-    2. Join with thresholds
-    3. Filter where deviation > threshold
-    """
-    # Step 1: Compute aggregations
-    print("Computing aggregations...")
-    agg_df = compute_rule_aggregations(metrics_df, target_date)
-    
-    # Step 2: Build thresholds DataFrame
-    thresholds_df = build_monitor_thresholds(config)
-    
-    # Step 3: Join aggregations with thresholds
-    joined_df = agg_df.join(thresholds_df, on="monitor_name", how="inner")
-    
-    # Step 4: Generate period_over_period alerts
-    pop_alerts = joined_df.filter(
-        (F.col("pop_enabled") == True) &
-        (F.col("current_count") >= F.col("min_volume")) &
-        (F.col("previous_count") >= F.col("min_volume")) &
-        (F.col("pop_change_pct").isNotNull()) &
-        (F.abs(F.col("pop_change_pct")) > F.col("pop_max_change_pct"))
-    ).select(
-        F.col("monitor_name"),
-        F.col("metric_name"),
-        F.col("dimension_key"),
-        F.col("dimension_value"),
-        F.lit("period_over_period").alias("rule_name"),
-        F.col("pop_severity").alias("severity"),
-        F.lit("anomaly").alias("alert_type"),
-        F.col("current_avg").alias("current_value"),
-        F.col("previous_avg").alias("expected_value"),
-        (F.col("pop_change_pct") * 100).alias("deviation_pct"),
-        F.concat(
-            F.col("metric_name"),
-            F.when(F.col("pop_change_pct") > 0, F.lit(" increased by ")).otherwise(F.lit(" decreased by ")),
-            F.format_string("%.1f", F.abs(F.col("pop_change_pct") * 100)),
-            F.lit("% (current: "),
-            F.format_string("%.4f", F.col("current_avg")),
-            F.lit(", previous: "),
-            F.format_string("%.4f", F.col("previous_avg")),
-            F.lit(")")
-        ).alias("message")
+    monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+
+    k_df = calibrate_k_values(
+        monitor_metrics,
+        target_date,
+        calibration_days=monitor.rule.calibration_days,
+        target_flag_rate=monitor.rule.target_flag_rate,
+        min_denominator=monitor.rule.min_denominator
     )
-    
-    # Step 5: Generate day_over_year alerts
-    yoy_alerts = joined_df.filter(
-        (F.col("yoy_enabled") == True) &
-        (F.col("target_day_value").isNotNull()) &
-        (F.col("yoy_value").isNotNull()) &
-        (F.col("yoy_change_pct").isNotNull()) &
-        (F.abs(F.col("yoy_change_pct")) > F.col("yoy_max_change_pct"))
-    ).select(
-        F.col("monitor_name"),
-        F.col("metric_name"),
-        F.col("dimension_key"),
-        F.col("dimension_value"),
-        F.lit("day_over_year").alias("rule_name"),
-        F.col("yoy_severity").alias("severity"),
-        F.lit("anomaly").alias("alert_type"),
-        F.col("target_day_value").alias("current_value"),
-        F.col("yoy_value").alias("expected_value"),
-        (F.col("yoy_change_pct") * 100).alias("deviation_pct"),
-        F.concat(
-            F.col("metric_name"),
-            F.when(F.col("yoy_change_pct") > 0, F.lit(" increased by ")).otherwise(F.lit(" decreased by ")),
-            F.format_string("%.1f", F.abs(F.col("yoy_change_pct") * 100)),
-            F.lit("% YoY (current: "),
-            F.format_string("%.4f", F.col("target_day_value")),
-            F.lit(", last year: "),
-            F.format_string("%.4f", F.col("yoy_value")),
-            F.lit(")")
-        ).alias("message")
-    )
-    
-    # Step 6: Union all alerts
-    all_alerts = pop_alerts.unionByName(yoy_alerts)
-    
-    # Add metadata columns
-    all_alerts = all_alerts.withColumn("date", F.lit(target_date.strftime("%Y-%m-%d")).cast("date"))
-    all_alerts = all_alerts.withColumn("lower_bound", F.lit(None).cast("double"))
-    all_alerts = all_alerts.withColumn("upper_bound", F.lit(None).cast("double"))
-    all_alerts = all_alerts.withColumn("created_at", F.current_timestamp())
-    
-    return all_alerts
+    k_df.cache()
 
-# COMMAND ----------
+    k_count = k_df.count()
+    print(f"\n  {monitor.name}: {k_count} combos calibrated")
+    if k_count > 0:
+        k_df.select(
+            F.round(F.avg("calibrated_k"), 2).alias("avg_k"),
+            F.round(F.min("calibrated_k"), 2).alias("min_k"),
+            F.round(F.max("calibrated_k"), 2).alias("max_k"),
+            F.round(F.avg("n_pairs"), 0).alias("avg_pairs"),
+        ).show()
 
-print("Evaluating rules...")
-alerts_df = evaluate_rules_single_query(metrics_df, config, target_date)
-alerts_count = alerts_df.count()
-
-if alerts_count > 0:
-    print(f"Generated {alerts_count} alerts")
-    display(alerts_df)
-else:
-    print("No alerts generated")
+    k_values_per_monitor[monitor.name] = k_df
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 7: Write Results
+# MAGIC ## Step 6: Evaluate Thresholds and Deduplicate
 
 # COMMAND ----------
 
-# Get date range to delete (based on max lookback used)
+def evaluate_auto_threshold(
+    metrics_df: DataFrame,
+    k_values_df: DataFrame,
+    monitor: Monitor,
+    target_date: datetime
+) -> DataFrame:
+    """Compare today's value to same-weekday-last-week against calibrated k * std."""
+    target_str = target_date.strftime("%Y-%m-%d")
+    prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
+
+    monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+
+    today = monitor_metrics.filter(F.col("date") == target_str)
+    last_week = monitor_metrics.filter(F.col("date") == prev_week_str).select(
+        "metric_name", "dimension_key", "dimension_value",
+        F.col("metric_value").alias("prev_week_value"),
+    )
+
+    compared = today.join(
+        last_week,
+        on=["metric_name", "dimension_key", "dimension_value"],
+        how="inner"
+    )
+
+    compared = compared.join(
+        k_values_df.select(
+            "monitor_name", "metric_name", "dimension_key", "dimension_value",
+            "calibrated_k", "residual_std", "avg_denominator", "volume_tier"
+        ),
+        on=["monitor_name", "metric_name", "dimension_key", "dimension_value"],
+        how="inner"
+    )
+
+    compared = compared.withColumn(
+        "residual", F.col("metric_value") - F.col("prev_week_value")
+    ).withColumn(
+        "abs_residual", F.abs(F.col("residual"))
+    ).withColumn(
+        "threshold", F.col("calibrated_k") * F.col("residual_std")
+    )
+
+    # Filter: volume >= min_denom AND exceeds threshold
+    alerts = compared.filter(
+        (F.col("denominator") >= monitor.rule.min_denominator) &
+        (F.col("residual_std") > 0) &
+        (F.col("abs_residual") > F.col("threshold"))
+    )
+
+    # Severity
+    critical_k = monitor.rule.severity_map.get("critical", 3.0)
+    alerts = alerts.withColumn(
+        "severity",
+        F.when(
+            F.col("abs_residual") > F.lit(critical_k) * F.col("residual_std"), "critical"
+        ).otherwise("warning")
+    )
+
+    alerts = alerts.withColumn(
+        "deviation_pct",
+        F.when(F.col("prev_week_value") != 0,
+               (F.col("residual") / F.col("prev_week_value")) * 100
+        ).otherwise(None)
+    ).withColumn(
+        "lower_bound", F.col("prev_week_value") - F.col("threshold")
+    ).withColumn(
+        "upper_bound", F.col("prev_week_value") + F.col("threshold")
+    )
+
+    # Hierarchy level mapping
+    hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
+    hierarchy_expr = F.lit(None).cast("int")
+    for dim_key, level in hierarchy_map.items():
+        hierarchy_expr = F.when(F.col("dimension_key") == dim_key, F.lit(level)).otherwise(hierarchy_expr)
+
+    alerts = alerts.withColumn(
+        "message",
+        F.concat(
+            F.col("metric_name"),
+            F.when(F.col("residual") < 0, F.lit(" dropped ")).otherwise(F.lit(" increased ")),
+            F.format_string("%.2f", F.abs(F.col("deviation_pct"))),
+            F.lit("% vs same weekday last week ("),
+            F.format_string("%.4f", F.col("metric_value")),
+            F.lit(" vs "),
+            F.format_string("%.4f", F.col("prev_week_value")),
+            F.lit(", k="),
+            F.format_string("%.2f", F.col("calibrated_k")),
+            F.lit(")")
+        )
+    )
+
+    return alerts.select(
+        F.lit(target_str).cast("date").alias("date"),
+        "monitor_name", "metric_name", "dimension_key", "dimension_value",
+        F.lit("auto_threshold").alias("rule_name"),
+        "severity",
+        F.lit("anomaly").alias("alert_type"),
+        F.col("metric_value").alias("current_value"),
+        F.col("prev_week_value").alias("expected_value"),
+        "lower_bound", "upper_bound", "deviation_pct", "message",
+        F.lit(False).alias("suppressed"),
+        F.lit(None).cast("string").alias("suppressed_by"),
+        hierarchy_expr.alias("hierarchy_level"),
+        "calibrated_k", "residual_std",
+        F.col("denominator").alias("denominator_count"),
+        F.current_timestamp().alias("created_at")
+    )
+
+# COMMAND ----------
+
+def deduplicate_alerts(alerts_df: DataFrame, hierarchy: List[List[str]]) -> DataFrame:
+    """
+    Suppress child alerts when a parent level also fires for the same metric.
+
+    Walks from coarsest to finest. If global fires, suppress country-level etc.
+    If only NL fires at country level, suppress NL's children but not DE's.
+    """
+    if not hierarchy or alerts_df.rdd.isEmpty():
+        return alerts_df
+
+    level_keys = [",".join(dims) if dims else "global" for dims in hierarchy]
+    result = alerts_df
+
+    for child_idx in range(1, len(hierarchy)):
+        parent_key = level_keys[child_idx - 1]
+        child_key = level_keys[child_idx]
+        parent_dims = hierarchy[child_idx - 1]
+
+        # Parent alerts that fired and are not themselves suppressed
+        parent_fired = result.filter(
+            (F.col("dimension_key") == parent_key) &
+            (F.col("suppressed") == False)
+        ).select(
+            F.col("metric_name").alias("_p_metric"),
+            F.col("dimension_value").alias("_p_dim_value"),
+            F.lit(True).alias("_parent_fired")
+        ).distinct()
+
+        if parent_fired.rdd.isEmpty():
+            continue
+
+        # Split child and non-child alerts
+        child_alerts = result.filter(F.col("dimension_key") == child_key)
+        other_alerts = result.filter(F.col("dimension_key") != child_key)
+
+        # Build the parent-matching portion of the child's dimension_value
+        if not parent_dims:
+            # Parent is global: all children match
+            child_alerts = child_alerts.withColumn("_match_value", F.lit("global"))
+        else:
+            n = len(parent_dims)
+            split_col = F.split(F.col("dimension_value"), ",")
+            child_alerts = child_alerts.withColumn(
+                "_match_value",
+                F.concat_ws(",", *[split_col.getItem(i) for i in range(n)])
+            )
+
+        # Join
+        child_alerts = child_alerts.join(
+            parent_fired,
+            on=[
+                child_alerts["metric_name"] == parent_fired["_p_metric"],
+                child_alerts["_match_value"] == parent_fired["_p_dim_value"]
+            ],
+            how="left"
+        )
+
+        child_alerts = child_alerts.withColumn(
+            "suppressed",
+            F.when(F.col("_parent_fired") == True, True).otherwise(F.col("suppressed"))
+        ).withColumn(
+            "suppressed_by",
+            F.when(
+                F.col("_parent_fired") == True,
+                F.concat(F.lit(parent_key), F.lit("="), F.col("_match_value"))
+            ).otherwise(F.col("suppressed_by"))
+        ).drop("_match_value", "_p_metric", "_p_dim_value", "_parent_fired")
+
+        result = other_alerts.unionByName(child_alerts)
+
+    return result
+
+# COMMAND ----------
+
+print("Evaluating thresholds...")
+all_alerts = []
+
+for monitor in config.monitors:
+    if not monitor.rule.enabled:
+        continue
+
+    k_df = k_values_per_monitor.get(monitor.name)
+    if k_df is None:
+        continue
+
+    print(f"\n  {monitor.name}:")
+    raw_alerts = evaluate_auto_threshold(metrics_df, k_df, monitor, target_date)
+    raw_count = raw_alerts.count()
+    print(f"    Raw alerts: {raw_count}")
+
+    if raw_count > 0 and monitor.hierarchy:
+        deduped = deduplicate_alerts(raw_alerts, monitor.hierarchy)
+        active = deduped.filter(F.col("suppressed") == False).count()
+        suppressed = raw_count - active
+        print(f"    Active: {active}, Suppressed: {suppressed}")
+        all_alerts.append(deduped)
+    elif raw_count > 0:
+        all_alerts.append(raw_alerts)
+
+if all_alerts:
+    alerts_df = reduce(DataFrame.unionByName, all_alerts)
+    alerts_count = alerts_df.count()
+    active_count = alerts_df.filter(F.col("suppressed") == False).count()
+    print(f"\nTotal: {alerts_count} alerts ({active_count} active, {alerts_count - active_count} suppressed)")
+else:
+    alerts_df = None
+    alerts_count = 0
+    print("\nNo alerts generated")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 7: Enrich Metrics and Write
+
+# COMMAND ----------
+
 max_lookback = max(monitor_lookbacks.values())
 start_date = (target_date - timedelta(days=max_lookback)).strftime("%Y-%m-%d")
 end_date = target_date.strftime("%Y-%m-%d")
 
-# Delete existing data for the date range
 spark.sql(f"DELETE FROM payments_hf.observe_metrics_daily WHERE date BETWEEN '{start_date}' AND '{end_date}'")
 print(f"Cleared metrics for {start_date} to {end_date}")
 
 # COMMAND ----------
 
-# Enrich ALL days with rolling/YoY values using window functions
-from pyspark.sql.window import Window
+# Rolling 7d averages
+partition_cols = ["monitor_name", "metric_name", "dimension_key", "dimension_value"]
+rolling_window = Window.partitionBy(partition_cols).orderBy("date").rowsBetween(-6, 0)
+prev_window = Window.partitionBy(partition_cols).orderBy("date").rowsBetween(-13, -7)
 
-# Define window for rolling calculations (7 days ending on current row)
-rolling_window = Window.partitionBy(
-    "monitor_name", "metric_name", "dimension_key", "dimension_value"
-).orderBy("date").rowsBetween(-6, 0)
-
-# Define window for previous period (days -13 to -7)
-prev_window = Window.partitionBy(
-    "monitor_name", "metric_name", "dimension_key", "dimension_value"
-).orderBy("date").rowsBetween(-13, -7)
-
-# Add rolling 7-day averages
-enriched_metrics = metrics_df.withColumn(
+enriched = metrics_df.withColumn(
     "rolling_7d_avg", F.avg("metric_value").over(rolling_window)
 ).withColumn(
     "rolling_7d_prev_avg", F.avg("metric_value").over(prev_window)
@@ -721,32 +911,19 @@ enriched_metrics = metrics_df.withColumn(
     )
 )
 
-# For YoY, we need to self-join with data from 365 days ago
-metrics_with_date = enriched_metrics.withColumn("date_str", F.col("date").cast("string"))
-
-yoy_metrics = metrics_df.select(
-    "monitor_name", "metric_name", "dimension_key", "dimension_value",
+# YoY via self-join
+yoy_source = metrics_df.select(
+    *partition_cols,
     F.date_add(F.col("date"), 365).alias("yoy_join_date"),
     F.col("metric_value").alias("yoy_metric_value")
 )
-
-enriched_metrics = metrics_with_date.join(
-    yoy_metrics,
-    on=[
-        metrics_with_date["monitor_name"] == yoy_metrics["monitor_name"],
-        metrics_with_date["metric_name"] == yoy_metrics["metric_name"],
-        metrics_with_date["dimension_key"] == yoy_metrics["dimension_key"],
-        metrics_with_date["dimension_value"] == yoy_metrics["dimension_value"],
-        metrics_with_date["date"] == yoy_metrics["yoy_join_date"]
-    ],
+enriched = enriched.join(
+    yoy_source,
+    on=[enriched[c] == yoy_source[c] for c in partition_cols] + [enriched["date"] == yoy_source["yoy_join_date"]],
     how="left"
-).select(
-    metrics_with_date["*"],
-    yoy_metrics["yoy_metric_value"]
-).drop("date_str")
+).select(enriched["*"], yoy_source["yoy_metric_value"])
 
-# Compute YoY change percent
-enriched_metrics = enriched_metrics.withColumn(
+enriched = enriched.withColumn(
     "yoy_change_pct",
     F.when(
         (F.col("yoy_metric_value").isNotNull()) & (F.col("yoy_metric_value") != 0),
@@ -754,21 +931,51 @@ enriched_metrics = enriched_metrics.withColumn(
     )
 )
 
-# Compute historical average denominator for volume filtering
-hist_avg_denom = metrics_df.groupBy(
-    "monitor_name", "metric_name", "dimension_key", "dimension_value"
-).agg(
+# Same-weekday previous via self-join
+sw_source = metrics_df.select(
+    *partition_cols,
+    F.date_add(F.col("date"), 7).alias("sw_join_date"),
+    F.col("metric_value").alias("same_weekday_prev")
+)
+enriched = enriched.join(
+    sw_source,
+    on=[enriched[c] == sw_source[c] for c in partition_cols] + [enriched["date"] == sw_source["sw_join_date"]],
+    how="left"
+).select(enriched["*"], sw_source["same_weekday_prev"])
+
+enriched = enriched.withColumn(
+    "same_weekday_residual",
+    F.when(F.col("same_weekday_prev").isNotNull(), F.col("metric_value") - F.col("same_weekday_prev"))
+)
+
+# Join calibrated k-values
+all_k = None
+for monitor_name, k_df in k_values_per_monitor.items():
+    subset = k_df.select(
+        "monitor_name", "metric_name", "dimension_key", "dimension_value",
+        F.col("calibrated_k").alias("_cal_k"),
+        "volume_tier"
+    )
+    all_k = subset if all_k is None else all_k.unionByName(subset)
+
+if all_k is not None:
+    enriched = enriched.join(
+        all_k,
+        on=["monitor_name", "metric_name", "dimension_key", "dimension_value"],
+        how="left"
+    ).withColumnRenamed("_cal_k", "calibrated_k")
+else:
+    enriched = enriched.withColumn("calibrated_k", F.lit(None).cast("double"))
+    enriched = enriched.withColumn("volume_tier", F.lit(None).cast("string"))
+
+# Historical avg denominator
+hist_avg = metrics_df.groupBy(partition_cols).agg(
     F.avg("denominator").alias("historical_avg_denominator")
 )
+enriched = enriched.join(hist_avg, on=partition_cols, how="left")
 
-enriched_metrics = enriched_metrics.join(
-    hist_avg_denom,
-    on=["monitor_name", "metric_name", "dimension_key", "dimension_value"],
-    how="left"
-)
-
-# Select final columns matching schema
-enriched_metrics = enriched_metrics.select(
+# Final select
+enriched = enriched.select(
     "date", "monitor_name", "metric_name", "dimension_key", "dimension_value",
     "metric_value",
     F.col("numerator").alias("metric_numerator"),
@@ -776,31 +983,34 @@ enriched_metrics = enriched_metrics.select(
     "rolling_7d_avg", "rolling_7d_prev_avg", "rolling_7d_change_pct",
     "yoy_metric_value", "yoy_change_pct",
     "historical_avg_denominator",
+    "same_weekday_prev", "same_weekday_residual",
+    "calibrated_k", "volume_tier",
     "source_name", "metric_type",
     F.current_timestamp().alias("computed_at")
 )
 
-# Write all enriched metrics
-enriched_metrics.write.format("delta").mode("append").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
-enriched_count = enriched_metrics.count()
-print(f"Written {enriched_count} enriched metrics for {start_date} to {end_date}")
+enriched.write.format("delta").mode("append").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
+enriched_count = enriched.count()
+print(f"Written {enriched_count} enriched metrics")
 
 # COMMAND ----------
 
-# Write alerts (only for target date)
-if alerts_count > 0:
+if alerts_df is not None and alerts_count > 0:
     spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{end_date}'")
     alerts_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_alerts_daily")
-    print(f"Written {alerts_count} alerts")
+    active = alerts_df.filter(F.col("suppressed") == False).count()
+    print(f"Written {alerts_count} alerts ({active} active)")
+else:
+    print("No alerts to write")
 
 # COMMAND ----------
 
-# Save hashes for next run
 save_hashes(new_hashes)
 print("Saved monitor hashes")
 
-# Unpersist cached DataFrame
 metrics_df.unpersist()
+for k_df in k_values_per_monitor.values():
+    k_df.unpersist()
 
 # COMMAND ----------
 
@@ -812,11 +1022,11 @@ metrics_df.unpersist()
 print(f"\n{'='*50}")
 print(f"OBSERVE DAILY COMPLETE - {end_date}")
 print(f"{'='*50}")
-print(f"Metrics computed: {metrics_count}")
-print(f"Alerts generated: {alerts_count}")
-print(f"\nMonitor lookbacks used:")
+print(f"Metrics: {metrics_count}")
+print(f"Alerts: {alerts_count}")
+if alerts_df is not None:
+    active = alerts_df.filter(F.col("suppressed") == False).count()
+    print(f"  Active: {active}")
+    print(f"  Suppressed: {alerts_count - active}")
 for name, days in monitor_lookbacks.items():
-    print(f"  - {name}: {days} days")
-print(f"\nTables updated:")
-print(f"  - payments_hf.observe_metrics_daily")
-print(f"  - payments_hf.observe_alerts_daily")
+    print(f"  {name}: {days}d lookback")

@@ -3,15 +3,16 @@ version: 1
 sources:
   - name: verifications
     database: payments_hf
-    table: verifications
-    description: "Payment verification records"
-    date_column: created_at
+    table: f_pvs_replica
+    description: "Payment verification records (final state via transition table)"
+    date_column: date
     columns:
       - name: country
-      - name: status
+      - name: verification_result
       - name: provider
       - name: payment_method
       - name: workflow
+      - name: new_payment_method
     filters: []
 
   - name: checkout_funnel

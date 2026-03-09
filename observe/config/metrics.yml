@@ -1,50 +1,50 @@
 version: 1
 
 metrics:
-  - name: verification_count
-    source: verifications
-    type: count
-    expression: "F.count('*')"
-    description: "Total verification attempts"
-    increase_is_good: true
-    is_p0: false
-    team_ownership: "Payment Offering Squad"
-
-  - name: tokenisation_success_rate
+  - name: tsr_checkout_tokenisation
     source: verifications
     type: ratio
-    numerator: "F.sum(F.when(F.col('status') == 'Success', 1).otherwise(0))"
-    denominator: "F.count('*')"
-    description: "Tokenisation success rate"
+    filter: "F.col('workflow') == 'checkout-tokenisation'"
+    numerator: "F.sum(F.when(F.col('verification_result') == 'verified', 1).otherwise(0))"
+    denominator: "F.sum(F.when(F.col('verification_result').isin('verified', 'failed'), 1).otherwise(0))"
+    description: "Tokenisation success rate for checkout tokenisation workflow"
     increase_is_good: true
     is_p0: true
+    is_ratio: true
     team_ownership: "Payment Offering Squad"
 
-  - name: payment_page_visit
-    source: checkout_funnel
-    type: count
-    expression: "F.sum(F.when(F.col('is_pay_visit') == 1, F.col('customer_count')).otherwise(0))"
-    description: "Total payment page visits"
-    increase_is_good: true
-    is_p0: false
-    team_ownership: "Payment Offering Squad"
-
-  - name: payment_page_visit_to_success
-    source: checkout_funnel
+  - name: tsr_reactivation
+    source: verifications
     type: ratio
-    numerator: "F.sum(F.when((F.col('is_pay_visit') == 1) & (F.col('is_success') == 1), F.col('customer_count')).otherwise(0))"
-    denominator: "F.sum(F.when(F.col('is_pay_visit') == 1, F.col('customer_count')).otherwise(0))"
-    description: "Conversion rate from payment page visit to success"
+    filter: "F.col('workflow') == 'reactivation'"
+    numerator: "F.sum(F.when(F.col('verification_result') == 'verified', 1).otherwise(0))"
+    denominator: "F.sum(F.when(F.col('verification_result').isin('verified', 'failed'), 1).otherwise(0))"
+    description: "Tokenisation success rate for reactivation workflow"
     increase_is_good: true
     is_p0: true
+    is_ratio: true
     team_ownership: "Payment Offering Squad"
 
-  - name: select_to_success
-    source: checkout_funnel
+  - name: tsr_change
+    source: verifications
     type: ratio
-    numerator: "F.sum(F.when((F.col('is_select') == 1) & (F.col('is_success') == 1), F.col('customer_count')).otherwise(0))"
-    denominator: "F.sum(F.when(F.col('is_select') == 1, F.col('customer_count')).otherwise(0))"
-    description: "Conversion rate from payment selection to success"
+    filter: "F.col('workflow') == 'change'"
+    numerator: "F.sum(F.when(F.col('verification_result') == 'verified', 1).otherwise(0))"
+    denominator: "F.sum(F.when(F.col('verification_result').isin('verified', 'failed'), 1).otherwise(0))"
+    description: "Tokenisation success rate for change workflow"
     increase_is_good: true
     is_p0: true
+    is_ratio: true
+    team_ownership: "Payment Offering Squad"
+
+  - name: tsr_unpause
+    source: verifications
+    type: ratio
+    filter: "F.col('workflow') == 'unpause'"
+    numerator: "F.sum(F.when(F.col('verification_result') == 'verified', 1).otherwise(0))"
+    denominator: "F.sum(F.when(F.col('verification_result').isin('verified', 'failed'), 1).otherwise(0))"
+    description: "Tokenisation success rate for unpause workflow"
+    increase_is_good: true
+    is_p0: true
+    is_ratio: true
     team_ownership: "Payment Offering Squad"
