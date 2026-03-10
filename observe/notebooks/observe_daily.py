@@ -12,6 +12,7 @@
 # COMMAND ----------
 
 dbutils.widgets.text("target_date", "", "Target Date (YYYY-MM-DD)")
+dbutils.widgets.text("slack_bot_token", "", "Slack Bot Token (optional, uses secrets if empty)")
 
 # COMMAND ----------
 
@@ -560,29 +561,46 @@ def calibrate_k_values(
         (F.col("date") >= cal_start) & (F.col("date") <= cal_end)
     )
 
-    curr = cal_df.alias("curr")
-    prev = cal_df.alias("prev")
+    # Create separate DataFrames with prefixed column names to avoid ambiguity
+    curr = cal_df.select(
+        F.col("date").alias("curr_date"),
+        F.col("monitor_name").alias("curr_monitor"),
+        F.col("metric_name").alias("curr_metric"),
+        F.col("dimension_key").alias("curr_dim_key"),
+        F.col("dimension_value").alias("curr_dim_value"),
+        F.col("metric_value").alias("curr_value"),
+        F.col("denominator").alias("curr_denom")
+    )
+
+    prev = cal_df.select(
+        F.col("date").alias("prev_date"),
+        F.col("monitor_name").alias("prev_monitor"),
+        F.col("metric_name").alias("prev_metric"),
+        F.col("dimension_key").alias("prev_dim_key"),
+        F.col("dimension_value").alias("prev_dim_value"),
+        F.col("metric_value").alias("prev_value")
+    )
 
     pairs = curr.join(
         prev,
         on=[
-            curr["metric_name"] == prev["metric_name"],
-            curr["monitor_name"] == prev["monitor_name"],
-            curr["dimension_key"] == prev["dimension_key"],
-            curr["dimension_value"] == prev["dimension_value"],
-            curr["date"] == F.date_add(prev["date"], 7)
+            curr["curr_metric"] == prev["prev_metric"],
+            curr["curr_monitor"] == prev["prev_monitor"],
+            curr["curr_dim_key"] == prev["prev_dim_key"],
+            curr["curr_dim_value"] == prev["prev_dim_value"],
+            curr["curr_date"] == F.date_add(prev["prev_date"], 7)
         ],
         how="inner"
     ).select(
-        curr["monitor_name"],
-        curr["metric_name"],
-        curr["dimension_key"],
-        curr["dimension_value"],
-        curr["date"].alias("curr_date"),
-        curr["metric_value"].alias("curr_value"),
-        prev["metric_value"].alias("prev_value"),
-        curr["denominator"].alias("curr_denom"),
-        (curr["metric_value"] - prev["metric_value"]).alias("residual")
+        F.col("curr_monitor").alias("monitor_name"),
+        F.col("curr_metric").alias("metric_name"),
+        F.col("curr_dim_key").alias("dimension_key"),
+        F.col("curr_dim_value").alias("dimension_value"),
+        "curr_date",
+        "curr_value",
+        "prev_value",
+        "curr_denom",
+        (F.col("curr_value") - F.col("prev_value")).alias("residual")
     )
 
     pairs = pairs.filter(
@@ -989,7 +1007,7 @@ enriched = enriched.select(
     F.current_timestamp().alias("computed_at")
 )
 
-enriched.write.format("delta").mode("append").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
+enriched.write.format("delta").mode("append").option("mergeSchema", "true").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
 enriched_count = enriched.count()
 print(f"Written {enriched_count} enriched metrics")
 
@@ -997,7 +1015,7 @@ print(f"Written {enriched_count} enriched metrics")
 
 if alerts_df is not None and alerts_count > 0:
     spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{end_date}'")
-    alerts_df.write.format("delta").mode("append").saveAsTable("payments_hf.observe_alerts_daily")
+    alerts_df.write.format("delta").mode("append").option("mergeSchema", "true").saveAsTable("payments_hf.observe_alerts_daily")
     active = alerts_df.filter(F.col("suppressed") == False).count()
     print(f"Written {alerts_count} alerts ({active} active)")
 else:
@@ -1011,6 +1029,192 @@ print("Saved monitor hashes")
 metrics_df.unpersist()
 for k_df in k_values_per_monitor.values():
     k_df.unpersist()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 8: Send Slack Summary
+
+# COMMAND ----------
+
+def send_slack_alert(
+    channel: str,
+    message: str,
+    bot_token: str,
+    title: str = "Data Quality Alert",
+    severity: str = "warning",
+    details: Optional[Dict[str, str]] = None
+) -> dict:
+    """Send an alert to Slack using the pa_slack_app bot."""
+    import requests
+    
+    colors = {
+        "info": "#36a64f",
+        "warning": "#ff9800",
+        "error": "#dc3545"
+    }
+    
+    blocks = [
+        {
+            "type": "header",
+            "text": {"type": "plain_text", "text": title, "emoji": True}
+        },
+        {
+            "type": "section",
+            "text": {"type": "mrkdwn", "text": message}
+        }
+    ]
+    
+    if details:
+        fields = [
+            {"type": "mrkdwn", "text": f"*{k}:*\n{v}"}
+            for k, v in details.items()
+        ]
+        blocks.append({"type": "section", "fields": fields})
+    
+    blocks.append({
+        "type": "context",
+        "elements": [
+            {"type": "mrkdwn", "text": f"Sent at {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC"}
+        ]
+    })
+    
+    payload = {
+        "channel": channel,
+        "attachments": [{
+            "color": colors.get(severity, colors["warning"]),
+            "blocks": blocks
+        }]
+    }
+    
+    response = requests.post(
+        "https://slack.com/api/chat.postMessage",
+        json=payload,
+        headers={
+            "Authorization": f"Bearer {bot_token}",
+            "Content-Type": "application/json"
+        }
+    )
+    
+    result = response.json()
+    if not result.get("ok"):
+        raise Exception(f"Slack API error: {result.get('error')}")
+    
+    return result
+
+# COMMAND ----------
+
+def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
+    """Build Slack message from active (non-suppressed) alerts."""
+    date_str = target_date.strftime("%Y-%m-%d")
+    
+    if alerts_df is None or alerts_df.rdd.isEmpty():
+        return f"*No alerts for {date_str}* ✅"
+    
+    active_alerts = alerts_df.filter(F.col("suppressed") == False)
+    active_count = active_alerts.count()
+    suppressed_count = alerts_df.filter(F.col("suppressed") == True).count()
+    
+    if active_count == 0:
+        return f"*No active alerts for {date_str}* ✅\n_{suppressed_count} alerts suppressed by hierarchy_"
+    
+    critical_count = active_alerts.filter(F.col("severity") == "critical").count()
+    warning_count = active_alerts.filter(F.col("severity") == "warning").count()
+    monitors = active_alerts.select("monitor_name").distinct().count()
+    
+    top_alerts = active_alerts.orderBy(F.abs(F.col("deviation_pct")).desc()).limit(10).collect()
+    
+    total_volume = active_alerts.agg(F.sum("denominator_count")).collect()[0][0] or 0
+    
+    # Split alerts into downward and upward trends
+    downward_alerts = [row for row in top_alerts if row["deviation_pct"] < 0]
+    upward_alerts = [row for row in top_alerts if row["deviation_pct"] >= 0]
+    
+    # Sort each by absolute deviation (most severe first)
+    downward_alerts.sort(key=lambda x: x["deviation_pct"])  # Most negative first
+    upward_alerts.sort(key=lambda x: -x["deviation_pct"])   # Most positive first
+    
+    def format_alert_line(row):
+        direction = "📈" if row["deviation_pct"] > 0 else "📉"
+        severity_icon = " 🔴" if row["severity"] == "critical" else ""
+        current = row["current_value"]
+        expected = row["expected_value"]
+        deviation = row["deviation_pct"]
+        dim_value = row["dimension_value"]
+        metric = row["metric_name"]
+        volume = row["denominator_count"] or 0
+        volume_str = f"{int(volume):,}" if volume >= 1000 else str(int(volume))
+        return f"{direction} *{metric}* | {dim_value} | {deviation:+.1f}% ({current:.2f} vs {expected:.2f}) | n={volume_str}{severity_icon}"
+    
+    total_volume_str = f"{int(total_volume):,}" if total_volume >= 1000 else str(int(total_volume))
+    
+    message = f"""*Overview:*
+• Active Alerts: {active_count}
+• Critical: {critical_count} | Warning: {warning_count}
+• Suppressed: {suppressed_count}
+• Monitors: {monitors}
+• Total Volume Impacted: {total_volume_str}
+"""
+    
+    if downward_alerts:
+        downward_lines = "\n".join(format_alert_line(row) for row in downward_alerts[:5])
+        message += f"\n*📉 Downward Trends ({len(downward_alerts)}):*\n{downward_lines}"
+    
+    if upward_alerts:
+        upward_lines = "\n".join(format_alert_line(row) for row in upward_alerts[:5])
+        message += f"\n\n*📈 Upward Trends ({len(upward_alerts)}):*\n{upward_lines}"
+    
+    return message
+
+# COMMAND ----------
+
+if alerts_df is not None and alerts_count > 0:
+    active_count = alerts_df.filter(F.col("suppressed") == False).count()
+    
+    if active_count > 0:
+        slack_message = build_slack_summary(alerts_df, target_date)
+        
+        alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
+        
+        # Get bot token from Databricks secrets (recommended) or use widget
+        bot_token = None
+        try:
+            bot_token = dbutils.secrets.get(scope="slack", key="pa-bot-token")
+        except Exception:
+            widget_token = dbutils.widgets.get("slack_bot_token")
+            if widget_token:
+                bot_token = widget_token
+        
+        if not bot_token:
+            print("Slack bot token not configured - skipping notification")
+            print("Set via: dbutils.secrets(scope='slack', key='pa-bot-token') or widget 'slack_bot_token'")
+        else:
+            critical_count = alerts_df.filter(
+                (F.col("suppressed") == False) & (F.col("severity") == "critical")
+            ).count()
+            severity = "error" if critical_count > 0 else "warning"
+            
+            for channel in alert_channels:
+                try:
+                    result = send_slack_alert(
+                        channel=channel,
+                        title=f"🔔 Observe Daily Alerts - {end_date}",
+                        message=slack_message,
+                        bot_token=bot_token,
+                        severity=severity,
+                        details={
+                            "Source": "payments_hf.observe_alerts_daily",
+                            "Active Alerts": str(active_count),
+                            "Run Date": end_date
+                        }
+                    )
+                    print(f"Slack alert sent to {channel} (ts: {result.get('ts')})")
+                except Exception as e:
+                    print(f"Failed to send Slack alert to {channel}: {e}")
+    else:
+        print("No active alerts - skipping Slack notification")
+else:
+    print("No alerts generated - skipping Slack notification")
 
 # COMMAND ----------
 
