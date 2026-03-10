@@ -48,3 +48,27 @@ metrics:
     is_p0: true
     is_ratio: true
     team_ownership: "Payment Offering Squad"
+
+  - name: payment_approval_rate
+    source: orders
+    type: ratio
+    filter: "F.col('product_type') == 'mealbox'"
+    numerator: "F.sum(F.when(F.col('latest_status') != 'canceled', 1).otherwise(0))"
+    denominator: "F.count('*')"
+    description: "Payment Approval Rate - orders not canceled / total orders (mealbox only)"
+    increase_is_good: true
+    is_p0: true
+    is_ratio: true
+    team_ownership: "Payment Platform Squad"
+
+  - name: fraud_approval_rate
+    source: checkout_funnel_backend
+    type: ratio
+    filter: "F.col('event_attempted_fraud_check') == 1"
+    numerator: "F.sum(F.when(F.col('event_fs_blocked') == 0, 1).otherwise(0))"
+    denominator: "F.count('*')"
+    description: "Fraud Approval Rate - customers passing fraud check / customers attempting fraud check"
+    increase_is_good: true
+    is_p0: true
+    is_ratio: true
+    team_ownership: "Risk & Fraud Management Squad"

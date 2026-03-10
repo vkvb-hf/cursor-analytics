@@ -33,3 +33,52 @@ monitors:
         severity_map:
           critical: 3.0
           warning: 1.0
+
+  - name: payment_approval_monitor
+    description: "Payment Approval Rate monitoring with auto-thresholds"
+    severity: critical
+    metrics:
+      - payment_approval_rate
+    dimensions:
+      - [country, first_provider, first_token, type_order]
+    hierarchy:
+      - []
+      - [country]
+      - [country, first_provider]
+      - [country, first_provider, first_token]
+      - [country, first_provider, first_token, type_order]
+    rules:
+      auto_threshold:
+        enabled: true
+        type: auto_threshold
+        comparison: same_weekday
+        calibration_days: 365
+        target_flag_rate: 0.05
+        min_denominator: 30
+        severity_map:
+          critical: 3.0
+          warning: 1.0
+
+  - name: fraud_approval_monitor
+    description: "Fraud Approval Rate monitoring with auto-thresholds"
+    severity: critical
+    metrics:
+      - fraud_approval_rate
+    dimensions:
+      - [country, category, payment_method]
+    hierarchy:
+      - []
+      - [country]
+      - [country, category]
+      - [country, category, payment_method]
+    rules:
+      auto_threshold:
+        enabled: true
+        type: auto_threshold
+        comparison: same_weekday
+        calibration_days: 365
+        target_flag_rate: 0.05
+        min_denominator: 30
+        severity_map:
+          critical: 3.0
+          warning: 1.0

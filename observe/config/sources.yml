@@ -29,3 +29,31 @@ sources:
       - name: is_select
     filters:
       - "is_different_checkout = FALSE"
+
+  - name: orders
+    database: payments_hf
+    table: f_orders
+    description: "Order-level payment data for PAR calculation"
+    date_column: delivery_date
+    columns:
+      - name: country
+      - name: first_provider
+      - name: first_token
+      - name: type_order
+      - name: latest_status
+      - name: product_type
+    filters: []
+
+  - name: checkout_funnel_backend
+    database: payments_hf
+    table: checkout_funnel_backend
+    description: "Checkout funnel backend for FAR calculation"
+    date_column: event_date
+    columns:
+      - name: country
+      - name: payment_method
+      - name: category
+        expression: "fraudservice_last_payload.category"
+      - name: event_attempted_fraud_check
+      - name: event_fs_blocked
+    filters: []
