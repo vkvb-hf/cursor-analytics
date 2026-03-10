@@ -13,6 +13,28 @@
 
 dbutils.widgets.text("target_date", "", "Target Date (YYYY-MM-DD)")
 dbutils.widgets.text("slack_bot_token", "", "Slack Bot Token (optional, uses secrets if empty)")
+dbutils.widgets.text("output_database", "payments_hf", "Output Database")
+dbutils.widgets.text("metrics_table", "observe_metrics_daily", "Metrics Table Name")
+dbutils.widgets.text("alerts_table", "observe_alerts_daily", "Alerts Table Name")
+dbutils.widgets.text("config_path", "/dbfs/observe/config", "Config Path (DBFS)")
+dbutils.widgets.text("state_path", "/dbfs/observe/state", "State Path (DBFS)")
+
+# COMMAND ----------
+
+# Get widget values
+OUTPUT_DATABASE = dbutils.widgets.get("output_database")
+METRICS_TABLE = dbutils.widgets.get("metrics_table")
+ALERTS_TABLE = dbutils.widgets.get("alerts_table")
+CONFIG_PATH = dbutils.widgets.get("config_path")
+STATE_PATH = dbutils.widgets.get("state_path")
+
+# Fully qualified table names
+METRICS_TABLE_FQN = f"{OUTPUT_DATABASE}.{METRICS_TABLE}"
+ALERTS_TABLE_FQN = f"{OUTPUT_DATABASE}.{ALERTS_TABLE}"
+
+print(f"Output tables: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}")
+print(f"Config path: {CONFIG_PATH}")
+print(f"State path: {STATE_PATH}")
 
 # COMMAND ----------
 
@@ -93,8 +115,8 @@ class Config:
 
 import os
 
-os.makedirs("/dbfs/observe/config", exist_ok=True)
-os.makedirs("/dbfs/observe/state", exist_ok=True)
+os.makedirs(CONFIG_PATH.replace("/dbfs", "/dbfs"), exist_ok=True)
+os.makedirs(STATE_PATH.replace("/dbfs", "/dbfs"), exist_ok=True)
 print("DBFS directories ready")
 
 # COMMAND ----------
@@ -110,7 +132,7 @@ if notebook_path.startswith("/Repos"):
         for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
             with open(f"{config_path}/{config_file}") as f:
                 content = f.read()
-            with open(f"/dbfs/observe/config/{config_file}", "w") as f:
+            with open(f"{CONFIG_PATH}/{config_file}", "w") as f:
                 f.write(content)
             print(f"  Synced: {config_file}")
         config_synced = True
@@ -137,7 +159,7 @@ if not config_synced and "/Users/" in notebook_path:
             )
             response.raise_for_status()
             content = base64.b64decode(response.json().get('content', '')).decode('utf-8')
-            with open(f"/dbfs/observe/config/{config_file}", "w") as f:
+            with open(f"{CONFIG_PATH}/{config_file}", "w") as f:
                 f.write(content)
             print(f"  Synced: {config_file}")
         config_synced = True
@@ -148,17 +170,17 @@ if not config_synced:
     print("Checking for existing configs on DBFS...")
     try:
         for config_file in ["sources.yml", "metrics.yml", "monitors.yml"]:
-            with open(f"/dbfs/observe/config/{config_file}") as f:
+            with open(f"{CONFIG_PATH}/{config_file}") as f:
                 _ = f.read()
         print("  Using existing DBFS configs")
         config_synced = True
     except:
-        raise Exception("No config files found! Sync configs to /dbfs/observe/config/ first.")
+        raise Exception(f"No config files found! Sync configs to {CONFIG_PATH}/ first.")
 
 # COMMAND ----------
 
-spark.sql("""
-CREATE TABLE IF NOT EXISTS payments_hf.observe_metrics_daily (
+spark.sql(f"""
+CREATE TABLE IF NOT EXISTS {METRICS_TABLE_FQN} (
     date DATE,
     monitor_name STRING,
     metric_name STRING,
@@ -183,8 +205,8 @@ CREATE TABLE IF NOT EXISTS payments_hf.observe_metrics_daily (
 ) USING DELTA PARTITIONED BY (date)
 """)
 
-spark.sql("""
-CREATE TABLE IF NOT EXISTS payments_hf.observe_alerts_daily (
+spark.sql(f"""
+CREATE TABLE IF NOT EXISTS {ALERTS_TABLE_FQN} (
     date DATE,
     monitor_name STRING,
     metric_name STRING,
@@ -208,7 +230,7 @@ CREATE TABLE IF NOT EXISTS payments_hf.observe_alerts_daily (
     created_at TIMESTAMP
 ) USING DELTA PARTITIONED BY (date)
 """)
-print("Tables ready")
+print(f"Tables ready: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}")
 
 # COMMAND ----------
 
@@ -221,13 +243,11 @@ def _filter_fields(data: dict, cls) -> dict:
     return {k: v for k, v in data.items() if k in cls.__dataclass_fields__}
 
 def load_config() -> Config:
-    config_path = "/dbfs/observe/config"
-
-    with open(f"{config_path}/sources.yml") as f:
+    with open(f"{CONFIG_PATH}/sources.yml") as f:
         sources_data = yaml.safe_load(f)
-    with open(f"{config_path}/metrics.yml") as f:
+    with open(f"{CONFIG_PATH}/metrics.yml") as f:
         metrics_data = yaml.safe_load(f)
-    with open(f"{config_path}/monitors.yml") as f:
+    with open(f"{CONFIG_PATH}/monitors.yml") as f:
         monitors_data = yaml.safe_load(f)
 
     sources = {s['name']: Source(**_filter_fields(s, Source)) for s in sources_data.get('sources', [])}
@@ -285,13 +305,13 @@ def compute_monitor_hash(monitor: Monitor, config: Config) -> str:
 
 def load_stored_hashes() -> Dict[str, str]:
     try:
-        with open("/dbfs/observe/state/monitor_hashes.json") as f:
+        with open(f"{STATE_PATH}/monitor_hashes.json") as f:
             return json.load(f)
     except:
         return {}
 
 def save_hashes(hashes: Dict[str, str]):
-    with open("/dbfs/observe/state/monitor_hashes.json", "w") as f:
+    with open(f"{STATE_PATH}/monitor_hashes.json", "w") as f:
         json.dump(hashes, f)
 
 # COMMAND ----------
@@ -907,7 +927,7 @@ max_lookback = max(monitor_lookbacks.values())
 start_date = (target_date - timedelta(days=max_lookback)).strftime("%Y-%m-%d")
 end_date = target_date.strftime("%Y-%m-%d")
 
-spark.sql(f"DELETE FROM payments_hf.observe_metrics_daily WHERE date BETWEEN '{start_date}' AND '{end_date}'")
+spark.sql(f"DELETE FROM {METRICS_TABLE_FQN} WHERE date BETWEEN '{start_date}' AND '{end_date}'")
 print(f"Cleared metrics for {start_date} to {end_date}")
 
 # COMMAND ----------
@@ -1007,15 +1027,15 @@ enriched = enriched.select(
     F.current_timestamp().alias("computed_at")
 )
 
-enriched.write.format("delta").mode("append").option("mergeSchema", "true").partitionBy("date").saveAsTable("payments_hf.observe_metrics_daily")
+enriched.write.format("delta").mode("append").option("mergeSchema", "true").partitionBy("date").saveAsTable(METRICS_TABLE_FQN)
 enriched_count = enriched.count()
 print(f"Written {enriched_count} enriched metrics")
 
 # COMMAND ----------
 
 if alerts_df is not None and alerts_count > 0:
-    spark.sql(f"DELETE FROM payments_hf.observe_alerts_daily WHERE date = '{end_date}'")
-    alerts_df.write.format("delta").mode("append").option("mergeSchema", "true").saveAsTable("payments_hf.observe_alerts_daily")
+    spark.sql(f"DELETE FROM {ALERTS_TABLE_FQN} WHERE date = '{end_date}'")
+    alerts_df.write.format("delta").mode("append").option("mergeSchema", "true").saveAsTable(ALERTS_TABLE_FQN)
     active = alerts_df.filter(F.col("suppressed") == False).count()
     print(f"Written {alerts_count} alerts ({active} active)")
 else:
@@ -1240,7 +1260,7 @@ if alerts_df is not None and alerts_count > 0:
                         bot_token=bot_token,
                         severity=severity,
                         details={
-                            "Source": "payments_hf.observe_alerts_daily",
+                            "Source": ALERTS_TABLE_FQN,
                             "Active Alerts": str(active_count),
                             "Run Date": end_date
                         }
