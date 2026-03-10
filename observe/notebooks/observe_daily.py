@@ -1124,31 +1124,31 @@ def send_slack_alert(
 
 # COMMAND ----------
 
-def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
-    """Build Slack message from active (non-suppressed) alerts."""
+def build_slack_summary(alerts_rows: list, target_date: datetime) -> str:
+    """Build Slack message from collected alert rows."""
     date_str = target_date.strftime("%Y-%m-%d")
     prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
     
-    if alerts_df is None or alerts_df.rdd.isEmpty():
+    if not alerts_rows:
         return f"*No alerts for {date_str}* ✅"
     
-    active_alerts = alerts_df.filter(F.col("suppressed") == False)
-    active_count = active_alerts.count()
-    suppressed_count = alerts_df.filter(F.col("suppressed") == True).count()
+    # Filter in Python (already collected)
+    active_alerts = [r for r in alerts_rows if not r["suppressed"]]
+    suppressed_count = len(alerts_rows) - len(active_alerts)
     
-    if active_count == 0:
+    if not active_alerts:
         return f"*No active alerts for {date_str}* ✅\n_{suppressed_count} alerts suppressed by hierarchy_"
     
-    critical_count = active_alerts.filter(F.col("severity") == "critical").count()
-    warning_count = active_alerts.filter(F.col("severity") == "warning").count()
+    # Count by severity
+    critical_alerts = [r for r in active_alerts if r["severity"] == "critical"]
+    warning_alerts = [r for r in active_alerts if r["severity"] == "warning"]
     
-    all_alerts = active_alerts.orderBy(F.abs(F.col("deviation_pct")).desc()).collect()
-    
-    total_volume = active_alerts.agg(F.sum("denominator_count")).collect()[0][0] or 0
+    # Calculate total volume
+    total_volume = sum(r["denominator_count"] or 0 for r in active_alerts)
     
     # Split alerts into downward and upward trends (filter out nulls)
-    downward_alerts = [row for row in all_alerts if row["deviation_pct"] is not None and row["deviation_pct"] < 0]
-    upward_alerts = [row for row in all_alerts if row["deviation_pct"] is not None and row["deviation_pct"] >= 0]
+    downward_alerts = [r for r in active_alerts if r["deviation_pct"] is not None and r["deviation_pct"] < 0]
+    upward_alerts = [r for r in active_alerts if r["deviation_pct"] is not None and r["deviation_pct"] >= 0]
     
     # Sort each by absolute deviation (most severe first)
     downward_alerts.sort(key=lambda x: x["deviation_pct"])  # Most negative first
@@ -1156,9 +1156,7 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     
     def humanize_metric_name(name: str) -> str:
         """Convert metric_name to human readable format."""
-        # Shorten common prefixes and convert to title case
         name = name.replace("_", " ").replace("tsr", "TSR").title().replace("Tsr", "TSR")
-        # Shorten long names
         name = name.replace("Checkout Tokenisation", "Checkout").replace("Tokenisation", "Token")
         return name
     
@@ -1173,7 +1171,6 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
         formatted_parts = []
         for i, val in enumerate(values):
             key = keys[i] if i < len(keys) else ""
-            # Humanize boolean values for new_payment_method
             if key == "new_payment_method":
                 val = "new_pm" if val.lower() == "true" else "existing_pm"
             formatted_parts.append(val)
@@ -1182,8 +1179,8 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     
     def format_alert_line(row):
         severity_icon = " 🔴" if row["severity"] == "critical" else ""
-        current = row["current_value"] * 100  # Convert to percentage
-        expected = row["expected_value"] * 100  # Convert to percentage
+        current = row["current_value"] * 100
+        expected = row["expected_value"] * 100
         deviation = row["deviation_pct"]
         dim_value = humanize_dimension_value(row["dimension_key"], row["dimension_value"])
         volume = row["denominator_count"] or 0
@@ -1200,7 +1197,7 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
         
         lines = []
         for metric, rows in grouped.items():
-            if lines:  # Add blank line between metrics
+            if lines:
                 lines.append("")
             lines.append(f"*{metric}:*")
             for row in rows:
@@ -1210,7 +1207,7 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     total_volume_str = f"{int(total_volume):,}" if total_volume >= 1000 else str(int(total_volume))
     
     message = f"""*Overview:*
-• Active: {active_count} ({critical_count} critical, {warning_count} warning) | Suppressed: {suppressed_count}
+• Active: {len(active_alerts)} ({len(critical_alerts)} critical, {len(warning_alerts)} warning) | Suppressed: {suppressed_count}
 • Volume Impacted: {total_volume_str} txns
 """
     
@@ -1243,12 +1240,19 @@ def get_slack_bot_token() -> Optional[str]:
 
 def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config: Config):
     """Send Slack notifications for alerts. Can be called independently."""
-    if alerts_df is None or alerts_df.rdd.isEmpty():
+    if alerts_df is None:
         print("No alerts to notify")
         return
     
-    active_alerts = alerts_df.filter(F.col("suppressed") == False)
-    active_count = active_alerts.count()
+    # Single collect - all processing done in Python
+    all_alerts = alerts_df.collect()
+    
+    if not all_alerts:
+        print("No alerts to notify")
+        return
+    
+    active_alerts = [r for r in all_alerts if not r["suppressed"]]
+    active_count = len(active_alerts)
     
     if active_count == 0:
         print("No active alerts - skipping Slack notification")
@@ -1260,10 +1264,11 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
         print("Set via: dbutils.secrets(scope='slack', key='pa-bot-token') or widget 'slack_bot_token'")
         return
     
-    slack_message = build_slack_summary(alerts_df, target_date)
+    # Build message from collected rows
+    slack_message = build_slack_summary(all_alerts, target_date)
     alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
     
-    critical_count = active_alerts.filter(F.col("severity") == "critical").count()
+    critical_count = len([r for r in active_alerts if r["severity"] == "critical"])
     severity = "error" if critical_count > 0 else "warning"
     
     date_str = target_date.strftime("%Y-%m-%d")
