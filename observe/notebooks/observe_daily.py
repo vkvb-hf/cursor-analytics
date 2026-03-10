@@ -1126,9 +1126,9 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     
     total_volume = active_alerts.agg(F.sum("denominator_count")).collect()[0][0] or 0
     
-    # Split alerts into downward and upward trends
-    downward_alerts = [row for row in all_alerts if row["deviation_pct"] < 0]
-    upward_alerts = [row for row in all_alerts if row["deviation_pct"] >= 0]
+    # Split alerts into downward and upward trends (filter out nulls)
+    downward_alerts = [row for row in all_alerts if row["deviation_pct"] is not None and row["deviation_pct"] < 0]
+    upward_alerts = [row for row in all_alerts if row["deviation_pct"] is not None and row["deviation_pct"] >= 0]
     
     # Sort each by absolute deviation (most severe first)
     downward_alerts.sort(key=lambda x: x["deviation_pct"])  # Most negative first
