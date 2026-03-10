@@ -1224,54 +1224,79 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
 
 # COMMAND ----------
 
-if alerts_df is not None and alerts_count > 0:
-    active_count = alerts_df.filter(F.col("suppressed") == False).count()
+# MAGIC %md
+# MAGIC ## Step 8: Send Slack Notifications
+
+# COMMAND ----------
+
+def get_alerts_for_date(alert_date: str) -> DataFrame:
+    """Load alerts from table for a specific date. Useful for re-sending notifications."""
+    return spark.table(ALERTS_TABLE_FQN).filter(F.col("date") == alert_date)
+
+def get_slack_bot_token() -> Optional[str]:
+    """Get Slack bot token from secrets or widget."""
+    try:
+        return dbutils.secrets.get(scope="slack", key="pa-bot-token")
+    except Exception:
+        widget_token = dbutils.widgets.get("slack_bot_token")
+        return widget_token if widget_token else None
+
+def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config: Config):
+    """Send Slack notifications for alerts. Can be called independently."""
+    if alerts_df is None or alerts_df.rdd.isEmpty():
+        print("No alerts to notify")
+        return
     
-    if active_count > 0:
-        slack_message = build_slack_summary(alerts_df, target_date)
-        
-        alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
-        
-        # Get bot token from Databricks secrets (recommended) or use widget
-        bot_token = None
-        try:
-            bot_token = dbutils.secrets.get(scope="slack", key="pa-bot-token")
-        except Exception:
-            widget_token = dbutils.widgets.get("slack_bot_token")
-            if widget_token:
-                bot_token = widget_token
-        
-        if not bot_token:
-            print("Slack bot token not configured - skipping notification")
-            print("Set via: dbutils.secrets(scope='slack', key='pa-bot-token') or widget 'slack_bot_token'")
-        else:
-            critical_count = alerts_df.filter(
-                (F.col("suppressed") == False) & (F.col("severity") == "critical")
-            ).count()
-            severity = "error" if critical_count > 0 else "warning"
-            
-            for channel in alert_channels:
-                try:
-                    prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
-                    result = send_slack_alert(
-                        channel=channel,
-                        title=f"🔔 Observe Daily Alerts - {end_date} (vs {prev_week_str})",
-                        message=slack_message,
-                        bot_token=bot_token,
-                        severity=severity,
-                        details={
-                            "Source": ALERTS_TABLE_FQN,
-                            "Active Alerts": str(active_count),
-                            "Run Date": end_date
-                        }
-                    )
-                    print(f"Slack alert sent to {channel} (ts: {result.get('ts')})")
-                except Exception as e:
-                    print(f"Failed to send Slack alert to {channel}: {e}")
-    else:
+    active_alerts = alerts_df.filter(F.col("suppressed") == False)
+    active_count = active_alerts.count()
+    
+    if active_count == 0:
         print("No active alerts - skipping Slack notification")
-else:
-    print("No alerts generated - skipping Slack notification")
+        return
+    
+    bot_token = get_slack_bot_token()
+    if not bot_token:
+        print("Slack bot token not configured - skipping notification")
+        print("Set via: dbutils.secrets(scope='slack', key='pa-bot-token') or widget 'slack_bot_token'")
+        return
+    
+    slack_message = build_slack_summary(alerts_df, target_date)
+    alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
+    
+    critical_count = active_alerts.filter(F.col("severity") == "critical").count()
+    severity = "error" if critical_count > 0 else "warning"
+    
+    date_str = target_date.strftime("%Y-%m-%d")
+    prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
+    
+    for channel in alert_channels:
+        try:
+            result = send_slack_alert(
+                channel=channel,
+                title=f"🔔 Observe Daily Alerts - {date_str} (vs {prev_week_str})",
+                message=slack_message,
+                bot_token=bot_token,
+                severity=severity,
+                details={
+                    "Source": ALERTS_TABLE_FQN,
+                    "Active Alerts": str(active_count),
+                    "Run Date": date_str
+                }
+            )
+            print(f"Slack alert sent to {channel} (ts: {result.get('ts')})")
+        except Exception as e:
+            print(f"Failed to send Slack alert to {channel}: {e}")
+
+# COMMAND ----------
+
+# Send notifications - use alerts_df if available, otherwise load from table
+try:
+    _alerts_to_notify = alerts_df
+except NameError:
+    print("alerts_df not defined - loading from table...")
+    _alerts_to_notify = get_alerts_for_date(end_date)
+
+send_slack_notifications(_alerts_to_notify, target_date, config)
 
 # COMMAND ----------
 
@@ -1283,11 +1308,23 @@ else:
 print(f"\n{'='*50}")
 print(f"OBSERVE DAILY COMPLETE - {end_date}")
 print(f"{'='*50}")
-print(f"Metrics: {metrics_count}")
-print(f"Alerts: {alerts_count}")
-if alerts_df is not None:
-    active = alerts_df.filter(F.col("suppressed") == False).count()
-    print(f"  Active: {active}")
-    print(f"  Suppressed: {alerts_count - active}")
-for name, days in monitor_lookbacks.items():
-    print(f"  {name}: {days}d lookback")
+
+try:
+    print(f"Metrics: {metrics_count}")
+except NameError:
+    print("Metrics: (not computed in this run)")
+
+try:
+    print(f"Alerts: {alerts_count}")
+    if alerts_df is not None:
+        active = alerts_df.filter(F.col("suppressed") == False).count()
+        print(f"  Active: {active}")
+        print(f"  Suppressed: {alerts_count - active}")
+except NameError:
+    print("Alerts: (not computed in this run)")
+
+try:
+    for name, days in monitor_lookbacks.items():
+        print(f"  {name}: {days}d lookback")
+except NameError:
+    pass
