@@ -1107,6 +1107,7 @@ def send_slack_alert(
 def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     """Build Slack message from active (non-suppressed) alerts."""
     date_str = target_date.strftime("%Y-%m-%d")
+    prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
     
     if alerts_df is None or alerts_df.rdd.isEmpty():
         return f"*No alerts for {date_str}* ✅"
@@ -1120,49 +1121,84 @@ def build_slack_summary(alerts_df: DataFrame, target_date: datetime) -> str:
     
     critical_count = active_alerts.filter(F.col("severity") == "critical").count()
     warning_count = active_alerts.filter(F.col("severity") == "warning").count()
-    monitors = active_alerts.select("monitor_name").distinct().count()
     
-    top_alerts = active_alerts.orderBy(F.abs(F.col("deviation_pct")).desc()).limit(10).collect()
+    all_alerts = active_alerts.orderBy(F.abs(F.col("deviation_pct")).desc()).collect()
     
     total_volume = active_alerts.agg(F.sum("denominator_count")).collect()[0][0] or 0
     
     # Split alerts into downward and upward trends
-    downward_alerts = [row for row in top_alerts if row["deviation_pct"] < 0]
-    upward_alerts = [row for row in top_alerts if row["deviation_pct"] >= 0]
+    downward_alerts = [row for row in all_alerts if row["deviation_pct"] < 0]
+    upward_alerts = [row for row in all_alerts if row["deviation_pct"] >= 0]
     
     # Sort each by absolute deviation (most severe first)
     downward_alerts.sort(key=lambda x: x["deviation_pct"])  # Most negative first
     upward_alerts.sort(key=lambda x: -x["deviation_pct"])   # Most positive first
     
+    def humanize_metric_name(name: str) -> str:
+        """Convert metric_name to human readable format."""
+        # Shorten common prefixes and convert to title case
+        name = name.replace("_", " ").replace("tsr", "TSR").title().replace("Tsr", "TSR")
+        # Shorten long names
+        name = name.replace("Checkout Tokenisation", "Checkout").replace("Tokenisation", "Token")
+        return name
+    
+    def humanize_dimension_value(dim_key: str, dim_value: str) -> str:
+        """Convert dimension values to human readable format with / separator."""
+        if not dim_value or dim_value == "global":
+            return "(all)"
+        
+        keys = dim_key.split(",") if dim_key else []
+        values = dim_value.split(",") if dim_value else []
+        
+        formatted_parts = []
+        for i, val in enumerate(values):
+            key = keys[i] if i < len(keys) else ""
+            # Humanize boolean values for new_payment_method
+            if key == "new_payment_method":
+                val = "new_pm" if val.lower() == "true" else "existing_pm"
+            formatted_parts.append(val)
+        
+        return "/".join(formatted_parts)
+    
     def format_alert_line(row):
-        direction = "📈" if row["deviation_pct"] > 0 else "📉"
         severity_icon = " 🔴" if row["severity"] == "critical" else ""
-        current = row["current_value"]
-        expected = row["expected_value"]
+        current = row["current_value"] * 100  # Convert to percentage
+        expected = row["expected_value"] * 100  # Convert to percentage
         deviation = row["deviation_pct"]
-        dim_value = row["dimension_value"]
-        metric = row["metric_name"]
+        dim_value = humanize_dimension_value(row["dimension_key"], row["dimension_value"])
         volume = row["denominator_count"] or 0
         volume_str = f"{int(volume):,}" if volume >= 1000 else str(int(volume))
-        return f"{direction} *{metric}* | {dim_value} | {deviation:+.1f}% ({current:.2f} vs {expected:.2f}) | n={volume_str}{severity_icon}"
+        return f"• {dim_value} | {deviation:+.1f}% ({current:.1f}% vs {expected:.1f}%) | n={volume_str}{severity_icon}"
+    
+    def format_metric_group(alerts_list):
+        """Group alerts by metric and format."""
+        from collections import defaultdict
+        grouped = defaultdict(list)
+        for row in alerts_list:
+            metric = humanize_metric_name(row["metric_name"])
+            grouped[metric].append(row)
+        
+        lines = []
+        for metric, rows in grouped.items():
+            if lines:  # Add blank line between metrics
+                lines.append("")
+            lines.append(f"*{metric}:*")
+            for row in rows:
+                lines.append(format_alert_line(row))
+        return "\n".join(lines)
     
     total_volume_str = f"{int(total_volume):,}" if total_volume >= 1000 else str(int(total_volume))
     
     message = f"""*Overview:*
-• Active Alerts: {active_count}
-• Critical: {critical_count} | Warning: {warning_count}
-• Suppressed: {suppressed_count}
-• Monitors: {monitors}
-• Total Volume Impacted: {total_volume_str}
+• Active: {active_count} ({critical_count} critical, {warning_count} warning) | Suppressed: {suppressed_count}
+• Volume Impacted: {total_volume_str} txns
 """
     
     if downward_alerts:
-        downward_lines = "\n".join(format_alert_line(row) for row in downward_alerts[:5])
-        message += f"\n*📉 Downward Trends ({len(downward_alerts)}):*\n{downward_lines}"
+        message += f"\n*📉 Drops ({len(downward_alerts)}):*\n{format_metric_group(downward_alerts)}"
     
     if upward_alerts:
-        upward_lines = "\n".join(format_alert_line(row) for row in upward_alerts[:5])
-        message += f"\n\n*📈 Upward Trends ({len(upward_alerts)}):*\n{upward_lines}"
+        message += f"\n\n*📈 Increases ({len(upward_alerts)}):*\n{format_metric_group(upward_alerts)}"
     
     return message
 
@@ -1196,9 +1232,10 @@ if alerts_df is not None and alerts_count > 0:
             
             for channel in alert_channels:
                 try:
+                    prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
                     result = send_slack_alert(
                         channel=channel,
-                        title=f"🔔 Observe Daily Alerts - {end_date}",
+                        title=f"🔔 Observe Daily Alerts - {end_date} (vs {prev_week_str})",
                         message=slack_message,
                         bot_token=bot_token,
                         severity=severity,
