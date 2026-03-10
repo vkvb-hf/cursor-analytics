@@ -369,6 +369,19 @@ def compute_metric_granular(
 
     df = spark.table(f"{source.database}.{source.table}")
 
+    # Build column expression lookup from source config
+    # Allows columns to have custom expressions (e.g., nested structs, CASE WHEN)
+    column_expressions = {}
+    for col_config in source.columns:
+        col_name = col_config.get("name")
+        col_expr = col_config.get("expression")
+        if col_name and col_expr:
+            column_expressions[col_name] = col_expr
+
+    # Apply column expressions - create aliased columns for any with expressions
+    for col_name, expr in column_expressions.items():
+        df = df.withColumn(col_name, F.expr(expr))
+
     # Date filter
     date_col = F.col(source.date_column)
     if "string" in str(df.schema[source.date_column].dataType).lower():
