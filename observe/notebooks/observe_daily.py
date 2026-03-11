@@ -16,6 +16,7 @@ dbutils.widgets.text("slack_bot_token", "", "Slack Bot Token (optional, uses sec
 dbutils.widgets.text("output_database", "payments_hf", "Output Database")
 dbutils.widgets.text("metrics_table", "observe_metrics_daily", "Metrics Table Name")
 dbutils.widgets.text("alerts_table", "observe_alerts_daily", "Alerts Table Name")
+dbutils.widgets.text("threads_table", "observe_slack_threads", "Slack Threads Table Name")
 dbutils.widgets.text("config_path", "/dbfs/observe/config", "Config Path (DBFS)")
 dbutils.widgets.text("state_path", "/dbfs/observe/state", "State Path (DBFS)")
 
@@ -25,6 +26,7 @@ dbutils.widgets.text("state_path", "/dbfs/observe/state", "State Path (DBFS)")
 OUTPUT_DATABASE = dbutils.widgets.get("output_database")
 METRICS_TABLE = dbutils.widgets.get("metrics_table")
 ALERTS_TABLE = dbutils.widgets.get("alerts_table")
+THREADS_TABLE = dbutils.widgets.get("threads_table")
 CONFIG_PATH = dbutils.widgets.get("config_path")
 STATE_PATH = dbutils.widgets.get("state_path")
 
@@ -38,8 +40,9 @@ else:
 # Fully qualified table names
 METRICS_TABLE_FQN = f"{OUTPUT_DATABASE}.{METRICS_TABLE}"
 ALERTS_TABLE_FQN = f"{OUTPUT_DATABASE}.{ALERTS_TABLE}"
+THREADS_TABLE_FQN = f"{OUTPUT_DATABASE}.{THREADS_TABLE}"
 
-print(f"Output tables: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}")
+print(f"Output tables: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}, {THREADS_TABLE_FQN}")
 print(f"Config path: {CONFIG_PATH}")
 print(f"State path: {STATE_PATH}")
 print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
@@ -240,7 +243,6 @@ CREATE TABLE IF NOT EXISTS {ALERTS_TABLE_FQN} (
 ) USING DELTA PARTITIONED BY (date)
 """)
 
-THREADS_TABLE_FQN = f"{OUTPUT_DATABASE}.observe_slack_threads"
 spark.sql(f"""
 CREATE TABLE IF NOT EXISTS {THREADS_TABLE_FQN} (
     date DATE,
