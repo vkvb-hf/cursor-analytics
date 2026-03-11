@@ -1219,16 +1219,22 @@ def build_slack_summary(alerts_rows: list, target_date: datetime) -> str:
     
     total_volume_str = f"{int(total_volume):,}" if total_volume >= 1000 else str(int(total_volume))
     
+    # Only show downward trends (declines)
+    if not downward_alerts:
+        return f"*No declining alerts for {date_str}* ✅\n_{len(active_alerts)} increases, {suppressed_count} suppressed_"
+    
+    # Recalculate counts for downward only
+    downward_critical = len([r for r in downward_alerts if r["severity"] == "critical"])
+    downward_warning = len([r for r in downward_alerts if r["severity"] == "warning"])
+    downward_volume = sum(r["denominator_count"] or 0 for r in downward_alerts)
+    downward_volume_str = f"{int(downward_volume):,}" if downward_volume >= 1000 else str(int(downward_volume))
+    
     message = f"""*Overview:*
-• Active: {len(active_alerts)} ({len(critical_alerts)} critical, {len(warning_alerts)} warning) | Suppressed: {suppressed_count}
-• Volume Impacted: {total_volume_str} txns
+• Declines: {len(downward_alerts)} ({downward_critical} critical, {downward_warning} warning) | Increases: {len(upward_alerts)} | Suppressed: {suppressed_count}
+• Volume Impacted: {downward_volume_str} txns
 """
     
-    if downward_alerts:
-        message += f"\n*📉 Drops ({len(downward_alerts)}):*\n{format_metric_group(downward_alerts)}"
-    
-    if upward_alerts:
-        message += f"\n\n*📈 Increases ({len(upward_alerts)}):*\n{format_metric_group(upward_alerts)}"
+    message += f"\n*📉 Declines ({len(downward_alerts)}):*\n{format_metric_group(downward_alerts)}"
     
     return message
 
