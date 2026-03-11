@@ -28,6 +28,13 @@ ALERTS_TABLE = dbutils.widgets.get("alerts_table")
 CONFIG_PATH = dbutils.widgets.get("config_path")
 STATE_PATH = dbutils.widgets.get("state_path")
 
+# Target date from widget or default to yesterday
+_target_date_str = dbutils.widgets.get("target_date")
+if _target_date_str:
+    target_date = datetime.strptime(_target_date_str, "%Y-%m-%d")
+else:
+    target_date = datetime.now() - timedelta(days=1)
+
 # Fully qualified table names
 METRICS_TABLE_FQN = f"{OUTPUT_DATABASE}.{METRICS_TABLE}"
 ALERTS_TABLE_FQN = f"{OUTPUT_DATABASE}.{ALERTS_TABLE}"
@@ -35,6 +42,7 @@ ALERTS_TABLE_FQN = f"{OUTPUT_DATABASE}.{ALERTS_TABLE}"
 print(f"Output tables: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}")
 print(f"Config path: {CONFIG_PATH}")
 print(f"State path: {STATE_PATH}")
+print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
 
 # COMMAND ----------
 
@@ -313,16 +321,6 @@ def load_stored_hashes() -> Dict[str, str]:
 def save_hashes(hashes: Dict[str, str]):
     with open(f"{STATE_PATH}/monitor_hashes.json", "w") as f:
         json.dump(hashes, f)
-
-# COMMAND ----------
-
-target_date_str = dbutils.widgets.get("target_date")
-if target_date_str:
-    target_date = datetime.strptime(target_date_str, "%Y-%m-%d")
-else:
-    target_date = datetime.now() - timedelta(days=1)
-
-print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
 
 # COMMAND ----------
 
