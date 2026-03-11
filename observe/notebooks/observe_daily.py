@@ -1627,6 +1627,19 @@ send_slack_notifications(_alerts_to_notify, target_date, config)
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ### Run Diagnosis Independently (Optional)
+# MAGIC 
+# MAGIC Use this cell to re-send diagnosis replies to an existing thread.
+# MAGIC Useful when diagnosis logic is updated or if initial diagnosis failed.
+
+# COMMAND ----------
+
+# Uncomment to run diagnosis independently for a specific date/channel:
+# send_diagnosis_to_thread(target_date, "#temp-test-alerts", config)
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Summary
 
 # COMMAND ----------
