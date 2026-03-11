@@ -1318,7 +1318,8 @@ try:
     _alerts_to_notify = alerts_df
 except NameError:
     print("alerts_df not defined - loading from table...")
-    _alerts_to_notify = get_alerts_for_date(end_date)
+    _target_date_str = target_date.strftime("%Y-%m-%d")
+    _alerts_to_notify = get_alerts_for_date(_target_date_str)
 
 send_slack_notifications(_alerts_to_notify, target_date, config)
 
