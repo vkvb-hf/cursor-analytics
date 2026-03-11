@@ -14,6 +14,9 @@ sources:
       - name: workflow
       - name: new_payment_method
     filters: []
+    diagnosis:
+      error_column: decline_response
+      failure_filter: "verification_result = 'failed'"
 
   - name: checkout_funnel
     database: payments_hf
@@ -43,6 +46,9 @@ sources:
       - name: latest_status
       - name: product_type
     filters: []
+    diagnosis:
+      error_column: first_note
+      failure_filter: "latest_status = 'canceled'"
 
   - name: checkout_funnel_backend
     database: payments_hf

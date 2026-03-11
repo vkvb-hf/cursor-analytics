@@ -73,6 +73,7 @@ class Source:
     description: str = ""
     columns: List[Dict] = field(default_factory=list)
     filters: List[str] = field(default_factory=list)
+    diagnosis: Dict[str, str] = field(default_factory=dict)
 
 @dataclass
 class Metric:
@@ -238,7 +239,18 @@ CREATE TABLE IF NOT EXISTS {ALERTS_TABLE_FQN} (
     created_at TIMESTAMP
 ) USING DELTA PARTITIONED BY (date)
 """)
-print(f"Tables ready: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}")
+
+THREADS_TABLE_FQN = f"{OUTPUT_DATABASE}.observe_slack_threads"
+spark.sql(f"""
+CREATE TABLE IF NOT EXISTS {THREADS_TABLE_FQN} (
+    date DATE,
+    channel STRING,
+    thread_ts STRING,
+    message_type STRING,
+    created_at TIMESTAMP
+) USING DELTA
+""")
+print(f"Tables ready: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}, {THREADS_TABLE_FQN}")
 
 # COMMAND ----------
 
@@ -1064,7 +1076,192 @@ for k_df in k_values_per_monitor.values():
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 8: Send Slack Summary
+# MAGIC ## Step 8: Diagnosis Functions
+
+# COMMAND ----------
+
+def get_error_breakdown(
+    source: Source,
+    dimension_filters: Dict[str, str],
+    target_date: str,
+    prev_date: str,
+    config: Config,
+    top_n: int = 5
+) -> List[Dict]:
+    """
+    Query error breakdown for a source, comparing target_date vs prev_date.
+    Returns list of dicts with: error, current_cnt, prev_cnt, delta
+    """
+    diagnosis_cfg = source.diagnosis
+    if not diagnosis_cfg:
+        return []
+    
+    error_column = diagnosis_cfg.get("error_column")
+    failure_filter = diagnosis_cfg.get("failure_filter")
+    
+    if not error_column or not failure_filter:
+        return []
+    
+    table_fqn = f"{source.database}.{source.table}"
+    date_col = source.date_column
+    
+    # Build dimension filter clause
+    dim_clauses = []
+    for dim_key, dim_value in dimension_filters.items():
+        if dim_value and dim_value != "global":
+            dim_clauses.append(f"{dim_key} = '{dim_value}'")
+    dim_filter = " AND ".join(dim_clauses) if dim_clauses else "1=1"
+    
+    query = f"""
+    WITH current AS (
+        SELECT {error_column} as error, COUNT(*) as current_cnt
+        FROM {table_fqn}
+        WHERE {date_col} = '{target_date}'
+          AND {failure_filter}
+          AND {dim_filter}
+        GROUP BY {error_column}
+    ),
+    prev AS (
+        SELECT {error_column} as error, COUNT(*) as prev_cnt
+        FROM {table_fqn}
+        WHERE {date_col} = '{prev_date}'
+          AND {failure_filter}
+          AND {dim_filter}
+        GROUP BY {error_column}
+    )
+    SELECT 
+        COALESCE(c.error, p.error) as error,
+        COALESCE(c.current_cnt, 0) as current_cnt,
+        COALESCE(p.prev_cnt, 0) as prev_cnt,
+        COALESCE(c.current_cnt, 0) - COALESCE(p.prev_cnt, 0) as delta
+    FROM current c
+    FULL OUTER JOIN prev p ON c.error = p.error
+    WHERE COALESCE(c.current_cnt, 0) - COALESCE(p.prev_cnt, 0) > 0
+    ORDER BY delta DESC
+    LIMIT {top_n}
+    """
+    
+    try:
+        result = spark.sql(query).collect()
+        return [row.asDict() for row in result]
+    except Exception as e:
+        print(f"Error querying diagnosis for {source.name}: {e}")
+        return []
+
+def shorten_error(error: str, max_len: int = 30) -> str:
+    """Shorten error message for display."""
+    if not error:
+        return "Unknown"
+    
+    # Remove common prefixes
+    prefixes = [
+        "Failed Verification: ",
+        "CHARGE_STATE_FAILURE: ",
+        "Refused: ",
+        "Refused(",
+        "Failed Verification: Refused(",
+    ]
+    for prefix in prefixes:
+        if error.startswith(prefix):
+            error = error[len(prefix):]
+            break
+    
+    # Remove trailing parenthesis if we removed "Refused("
+    if error.endswith(")"):
+        error = error[:-1]
+    
+    # Truncate if still too long
+    if len(error) > max_len:
+        error = error[:max_len-3] + "..."
+    
+    return error
+
+def build_diagnosis_for_alert(
+    alert_row: Dict,
+    target_date: datetime,
+    config: Config
+) -> Optional[str]:
+    """Build diagnosis message for a single declining alert."""
+    metric_name = alert_row["metric_name"]
+    dimension_key = alert_row["dimension_key"]
+    dimension_value = alert_row["dimension_value"]
+    deviation_pct = alert_row["deviation_pct"]
+    
+    # Get metric and source
+    metric = config.metrics.get(metric_name)
+    if not metric:
+        return None
+    
+    source = config.sources.get(metric.source)
+    if not source or not source.diagnosis:
+        return None
+    
+    # Parse dimensions
+    dim_keys = dimension_key.split(",") if dimension_key else []
+    dim_values = dimension_value.split(",") if dimension_value else []
+    dimension_filters = dict(zip(dim_keys, dim_values))
+    
+    # Get dates
+    target_date_str = target_date.strftime("%Y-%m-%d")
+    prev_date = target_date - timedelta(days=7)
+    prev_date_str = prev_date.strftime("%Y-%m-%d")
+    
+    # Query error breakdown
+    errors = get_error_breakdown(source, dimension_filters, target_date_str, prev_date_str, config)
+    
+    if not errors:
+        return None
+    
+    # Format dimension for display
+    dim_display = dimension_value.replace(",", "/") if dimension_value else "global"
+    
+    # Build message
+    lines = [f"🔍 *Diagnosis: {dim_display} ({deviation_pct:+.1f}%)*", "", "Top error increases vs last week:"]
+    
+    total_current = 0
+    total_prev = 0
+    
+    for err in errors:
+        error_short = shorten_error(err["error"])
+        current = err["current_cnt"]
+        prev = err["prev_cnt"]
+        delta = err["delta"]
+        total_current += current
+        total_prev += prev
+        lines.append(f"• {error_short}: {prev} → {current} (+{delta})")
+    
+    # Add total
+    if total_prev > 0:
+        total_pct = ((total_current - total_prev) / total_prev) * 100
+        lines.append(f"\n_Total failures: {total_prev} → {total_current} (+{total_pct:.0f}%)_")
+    else:
+        lines.append(f"\n_Total failures: {total_prev} → {total_current}_")
+    
+    return "\n".join(lines)
+
+# COMMAND ----------
+
+def save_thread_ts(date_str: str, channel: str, thread_ts: str, message_type: str = "summary"):
+    """Save thread_ts to table for later replies."""
+    from datetime import datetime as dt
+    spark.sql(f"""
+        INSERT INTO {THREADS_TABLE_FQN} (date, channel, thread_ts, message_type, created_at)
+        VALUES ('{date_str}', '{channel}', '{thread_ts}', '{message_type}', current_timestamp())
+    """)
+
+def get_thread_ts(date_str: str, channel: str) -> Optional[str]:
+    """Get thread_ts for a date/channel to post replies."""
+    result = spark.sql(f"""
+        SELECT thread_ts FROM {THREADS_TABLE_FQN}
+        WHERE date = '{date_str}' AND channel = '{channel}' AND message_type = 'summary'
+        ORDER BY created_at DESC LIMIT 1
+    """).collect()
+    return result[0]["thread_ts"] if result else None
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 9: Send Slack Summary
 
 # COMMAND ----------
 
@@ -1156,10 +1353,6 @@ def post_to_slack(channel: str, message: str, bot_token: str, thread_ts: str = N
         raise Exception(f"Slack API error: {result.get('error')}")
     
     return result
-
-def build_diagnosis(alerts_rows: list, target_date: datetime) -> str:
-    """Build diagnosis message for thread reply. Placeholder for now."""
-    return "*🔍 Diagnosis:* TBD"
 
 # COMMAND ----------
 
@@ -1319,6 +1512,9 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
     date_str = target_date.strftime("%Y-%m-%d")
     prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
     
+    # Get declining alerts for diagnosis
+    declining_alerts = [r for r in active_alerts if r["deviation_pct"] is not None and r["deviation_pct"] < 0]
+    
     for channel in alert_channels:
         try:
             result = send_slack_alert(
@@ -1336,18 +1532,83 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
             parent_ts = result.get("ts")
             print(f"Slack alert sent to {channel} (ts: {parent_ts})")
             
-            # Post diagnosis as a thread reply
+            # Save thread_ts for later replies
             if parent_ts:
-                diagnosis_message = build_diagnosis(all_alerts, target_date)
-                post_to_slack(
-                    channel=channel,
-                    message=diagnosis_message,
-                    bot_token=bot_token,
-                    thread_ts=parent_ts
-                )
-                print(f"  └─ Diagnosis reply posted to thread")
+                try:
+                    save_thread_ts(date_str, channel, parent_ts, "summary")
+                    print(f"  └─ Thread ts saved to table")
+                except Exception as save_e:
+                    print(f"  └─ Failed to save thread ts: {save_e}")
+                
+                # Post diagnosis for each declining alert
+                diagnosis_count = 0
+                for alert_row in declining_alerts:
+                    try:
+                        diagnosis_msg = build_diagnosis_for_alert(alert_row.asDict(), target_date, config)
+                        if diagnosis_msg:
+                            post_to_slack(
+                                channel=channel,
+                                message=diagnosis_msg,
+                                bot_token=bot_token,
+                                thread_ts=parent_ts
+                            )
+                            diagnosis_count += 1
+                    except Exception as diag_e:
+                        print(f"  └─ Failed to post diagnosis for {alert_row['dimension_value']}: {diag_e}")
+                
+                if diagnosis_count > 0:
+                    print(f"  └─ Posted {diagnosis_count} diagnosis replies to thread")
         except Exception as e:
             print(f"Failed to send Slack alert to {channel}: {e}")
+
+def send_diagnosis_to_thread(target_date: datetime, channel: str, config: Config):
+    """
+    Send diagnosis replies to an existing thread. 
+    Use this to re-run diagnosis independently after alerts have been sent.
+    """
+    date_str = target_date.strftime("%Y-%m-%d")
+    
+    # Get thread_ts from table
+    thread_ts = get_thread_ts(date_str, channel)
+    if not thread_ts:
+        print(f"No thread found for {date_str} in {channel}")
+        return
+    
+    # Get bot token
+    bot_token = get_slack_bot_token()
+    if not bot_token:
+        print("Slack bot token not configured")
+        return
+    
+    # Load alerts for the date
+    alerts_df = get_alerts_for_date(date_str)
+    all_alerts = alerts_df.collect()
+    
+    # Filter to declining, active alerts
+    declining_alerts = [
+        r for r in all_alerts 
+        if not r["suppressed"] and r["deviation_pct"] is not None and r["deviation_pct"] < 0
+    ]
+    
+    print(f"Found {len(declining_alerts)} declining alerts for {date_str}")
+    
+    diagnosis_count = 0
+    for alert_row in declining_alerts:
+        try:
+            diagnosis_msg = build_diagnosis_for_alert(alert_row.asDict(), target_date, config)
+            if diagnosis_msg:
+                post_to_slack(
+                    channel=channel,
+                    message=diagnosis_msg,
+                    bot_token=bot_token,
+                    thread_ts=thread_ts
+                )
+                diagnosis_count += 1
+                print(f"  ✓ {alert_row['dimension_value']}")
+        except Exception as e:
+            print(f"  ✗ {alert_row['dimension_value']}: {e}")
+    
+    print(f"Posted {diagnosis_count} diagnosis replies to thread {thread_ts}")
 
 # COMMAND ----------
 
