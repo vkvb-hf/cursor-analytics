@@ -1150,33 +1150,17 @@ def get_error_breakdown(
         print(f"Error querying diagnosis for {source.name}: {e}")
         return []
 
-def shorten_error(error: str, max_len: int = 30) -> str:
-    """Shorten error message for display."""
+def shorten_error(error: str) -> str:
+    """Clean up error message for display."""
     if not error:
         return "Unknown"
-    
-    # Remove common prefixes
-    prefixes = [
-        "Failed Verification: ",
-        "CHARGE_STATE_FAILURE: ",
-        "Refused: ",
-        "Refused(",
-        "Failed Verification: Refused(",
-    ]
-    for prefix in prefixes:
-        if error.startswith(prefix):
-            error = error[len(prefix):]
-            break
-    
-    # Remove trailing parenthesis if we removed "Refused("
-    if error.endswith(")"):
-        error = error[:-1]
-    
-    # Truncate if still too long
-    if len(error) > max_len:
-        error = error[:max_len-3] + "..."
-    
     return error
+
+def humanize_metric_name(name: str) -> str:
+    """Convert metric_name to human readable format."""
+    name = name.replace("_", " ").replace("tsr", "TSR").title().replace("Tsr", "TSR")
+    name = name.replace("Checkout Tokenisation", "Checkout").replace("Tokenisation", "Token")
+    return name
 
 def build_diagnosis_for_alert(
     alert_row: Dict,
@@ -1217,8 +1201,11 @@ def build_diagnosis_for_alert(
     # Format dimension for display
     dim_display = dimension_value.replace(",", "/") if dimension_value else "global"
     
+    # Format metric name for display
+    metric_display = humanize_metric_name(metric_name)
+    
     # Build message
-    lines = [f"🔍 *Diagnosis: {dim_display} ({deviation_pct:+.1f}%)*", "", "Top error increases vs last week:"]
+    lines = [f"🔍 *Diagnosis: {metric_display} - {dim_display} ({deviation_pct:+.1f}%)*", "", "Top error increases vs last week:"]
     
     total_current = 0
     total_prev = 0
@@ -1388,12 +1375,6 @@ def build_slack_summary(alerts_rows: list, target_date: datetime) -> str:
     downward_alerts.sort(key=lambda x: x["deviation_pct"])  # Most negative first
     upward_alerts.sort(key=lambda x: -x["deviation_pct"])   # Most positive first
     
-    def humanize_metric_name(name: str) -> str:
-        """Convert metric_name to human readable format."""
-        name = name.replace("_", " ").replace("tsr", "TSR").title().replace("Tsr", "TSR")
-        name = name.replace("Checkout Tokenisation", "Checkout").replace("Tokenisation", "Token")
-        return name
-    
     def humanize_dimension_value(dim_key: str, dim_value: str) -> str:
         """Convert dimension values to human readable format with / separator."""
         if not dim_value or dim_value == "global":
@@ -1517,6 +1498,18 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
     # Get declining alerts for diagnosis
     declining_alerts = [r for r in active_alerts if r["deviation_pct"] is not None and r["deviation_pct"] < 0]
     
+    # Sort declining alerts to match summary order (grouped by metric, then by deviation)
+    from collections import defaultdict
+    grouped_declining = defaultdict(list)
+    for r in declining_alerts:
+        grouped_declining[r["metric_name"]].append(r)
+    
+    sorted_declining = []
+    for metric_name in sorted(grouped_declining.keys()):
+        metric_alerts = sorted(grouped_declining[metric_name], key=lambda x: x["deviation_pct"])
+        sorted_declining.extend(metric_alerts)
+    declining_alerts = sorted_declining
+    
     for channel in alert_channels:
         try:
             result = send_slack_alert(
@@ -1591,6 +1584,18 @@ def send_diagnosis_to_thread(target_date: datetime, channel: str, config: Config
         r for r in all_alerts 
         if not r["suppressed"] and r["deviation_pct"] is not None and r["deviation_pct"] < 0
     ]
+    
+    # Sort declining alerts to match summary order (grouped by metric, then by deviation)
+    from collections import defaultdict
+    grouped_declining = defaultdict(list)
+    for r in declining_alerts:
+        grouped_declining[r["metric_name"]].append(r)
+    
+    sorted_declining = []
+    for metric_name in sorted(grouped_declining.keys()):
+        metric_alerts = sorted(grouped_declining[metric_name], key=lambda x: x["deviation_pct"])
+        sorted_declining.extend(metric_alerts)
+    declining_alerts = sorted_declining
     
     print(f"Found {len(declining_alerts)} declining alerts for {date_str}")
     
