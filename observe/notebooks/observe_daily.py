@@ -1133,6 +1133,34 @@ def send_slack_alert(
     
     return result
 
+def post_to_slack(channel: str, message: str, bot_token: str, thread_ts: str = None) -> dict:
+    """Post a simple message to Slack, optionally as a thread reply."""
+    payload = {
+        "channel": channel,
+        "text": message,
+    }
+    if thread_ts:
+        payload["thread_ts"] = thread_ts
+    
+    response = requests.post(
+        "https://slack.com/api/chat.postMessage",
+        json=payload,
+        headers={
+            "Authorization": f"Bearer {bot_token}",
+            "Content-Type": "application/json"
+        }
+    )
+    
+    result = response.json()
+    if not result.get("ok"):
+        raise Exception(f"Slack API error: {result.get('error')}")
+    
+    return result
+
+def build_diagnosis(alerts_rows: list, target_date: datetime) -> str:
+    """Build diagnosis message for thread reply. Placeholder for now."""
+    return "*🔍 Diagnosis:* TBD"
+
 # COMMAND ----------
 
 def build_slack_summary(alerts_rows: list, target_date: datetime) -> str:
@@ -1305,7 +1333,19 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
                     "Run Date": date_str
                 }
             )
-            print(f"Slack alert sent to {channel} (ts: {result.get('ts')})")
+            parent_ts = result.get("ts")
+            print(f"Slack alert sent to {channel} (ts: {parent_ts})")
+            
+            # Post diagnosis as a thread reply
+            if parent_ts:
+                diagnosis_message = build_diagnosis(all_alerts, target_date)
+                post_to_slack(
+                    channel=channel,
+                    message=diagnosis_message,
+                    bot_token=bot_token,
+                    thread_ts=parent_ts
+                )
+                print(f"  └─ Diagnosis reply posted to thread")
         except Exception as e:
             print(f"Failed to send Slack alert to {channel}: {e}")
 
