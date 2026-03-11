@@ -47,7 +47,7 @@ sources:
       - name: product_type
     filters: []
     diagnosis:
-      error_column: first_note
+      error_column: latest_note
       failure_filter: "latest_status = 'canceled'"
 
   - name: checkout_funnel_backend

@@ -99,6 +99,7 @@ class AutoThresholdRule:
     calibration_days: int = 365
     target_flag_rate: float = 0.05
     min_denominator: int = 30
+    min_effective_volume: int = 10
     severity_map: Dict[str, float] = field(default_factory=lambda: {"critical": 3.0, "warning": 1.0})
 
 @dataclass
@@ -786,10 +787,16 @@ def evaluate_auto_threshold(
                (F.col("residual") / F.col("prev_week_value")) * 100
         ).otherwise(None)
     ).withColumn(
+        "effective_volume",
+        F.round(F.col("denominator") * F.abs(F.col("residual")))
+    ).withColumn(
         "lower_bound", F.col("prev_week_value") - F.col("threshold")
     ).withColumn(
         "upper_bound", F.col("prev_week_value") + F.col("threshold")
     )
+    
+    # Filter out low-impact alerts
+    alerts = alerts.filter(F.col("effective_volume") >= monitor.rule.min_effective_volume)
 
     # Hierarchy level mapping
     hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
