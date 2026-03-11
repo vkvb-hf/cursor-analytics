@@ -4,7 +4,7 @@ defaults:
   historical_lookback_days: 720
   refresh_lookback_days: 30
   alert_channels:
-    - "#growth-pa-payments-alerts"
+    - "#temp-test-alerts"
 
 monitors:
   - name: tokenisation_monitor
