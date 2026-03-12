@@ -1114,11 +1114,11 @@ def get_error_breakdown(
     table_fqn = f"{source.database}.{source.table}"
     date_col = source.date_column
     
-    # Build dimension filter clause (handle _null_ values for SQL NULL matching)
+    # Build dimension filter clause (handle _null_ values and type casting for SQL NULL matching)
     dim_clauses = []
     for dim_key, dim_value in dimension_filters.items():
         if dim_value and dim_value != "global":
-            dim_clauses.append(f"COALESCE({dim_key}, '_null_') = '{dim_value}'")
+            dim_clauses.append(f"COALESCE(CAST({dim_key} AS STRING), '_null_') = '{dim_value}'")
     dim_filter = " AND ".join(dim_clauses) if dim_clauses else "1=1"
     
     query = f"""
