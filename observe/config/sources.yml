@@ -47,7 +47,7 @@ sources:
       - name: product_type
     filters: []
     diagnosis:
-      error_column: latest_note
+      error_column: "CASE WHEN bob_status = 'clarify_payment_error' THEN REGEXP_EXTRACT(first_note, '^([^|]+)', 1) ELSE latest_note END"
       failure_filter: "latest_status = 'canceled'"
 
   - name: checkout_funnel_backend
