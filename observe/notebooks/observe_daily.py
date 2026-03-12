@@ -30,6 +30,21 @@ THREADS_TABLE = dbutils.widgets.get("threads_table")
 CONFIG_PATH = dbutils.widgets.get("config_path")
 STATE_PATH = dbutils.widgets.get("state_path")
 
+# COMMAND ----------
+
+import yaml
+import hashlib
+import json
+from dataclasses import dataclass, field
+from typing import List, Dict, Any, Optional
+from datetime import datetime, timedelta
+from functools import reduce
+from pyspark.sql import functions as F, DataFrame
+from pyspark.sql.window import Window
+from pyspark.sql.types import *
+
+# COMMAND ----------
+
 # Target date from widget or default to yesterday
 _target_date_str = dbutils.widgets.get("target_date")
 if _target_date_str:
@@ -46,19 +61,6 @@ print(f"Output tables: {METRICS_TABLE_FQN}, {ALERTS_TABLE_FQN}, {THREADS_TABLE_F
 print(f"Config path: {CONFIG_PATH}")
 print(f"State path: {STATE_PATH}")
 print(f"Target date: {target_date.strftime('%Y-%m-%d')}")
-
-# COMMAND ----------
-
-import yaml
-import hashlib
-import json
-from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional
-from datetime import datetime, timedelta
-from functools import reduce
-from pyspark.sql import functions as F, DataFrame
-from pyspark.sql.window import Window
-from pyspark.sql.types import *
 
 # COMMAND ----------
 
