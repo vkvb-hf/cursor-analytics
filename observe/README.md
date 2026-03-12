@@ -26,14 +26,127 @@ Observe monitors daily metrics across different dimensions and alerts when value
 
 ## Quick Start
 
-### 1. Connect Repo to Databricks
-- Databricks → Repos → Add Repo
-- Connect your repository
+### Prerequisites
 
-### 2. Run Daily Monitoring
-Run `observe/notebooks/observe_daily` - it handles everything automatically.
+- Databricks workspace with access to your data tables
+- (Optional) Slack bot token for notifications
 
-### Widget Parameters
+### Step 1: Clone/Fork the Repository
+
+```bash
+git clone https://github.com/your-org/cursor-analytics.git
+cd cursor-analytics/observe
+```
+
+### Step 2: Create Your Config Files
+
+Create three YAML files in `observe/config/`:
+
+**sources.yml** - Define your data source:
+```yaml
+version: 1
+
+sources:
+  - name: my_events
+    database: my_database
+    table: events_table
+    date_column: event_date
+    columns:
+      - name: region
+      - name: category
+      - name: status
+    filters: []
+```
+
+**metrics.yml** - Define what to measure:
+```yaml
+version: 1
+
+metrics:
+  - name: success_rate
+    source: my_events
+    type: ratio
+    numerator: "status = 'success'"
+    denominator: "1=1"
+    description: "Overall success rate"
+```
+
+**monitors.yml** - Configure alerting:
+```yaml
+version: 1
+
+defaults:
+  historical_lookback_days: 720
+  refresh_lookback_days: 30
+  alert_channels:
+    - "#my-alerts-channel"
+
+monitors:
+  - name: my_monitor
+    description: "Monitor success rate by region"
+    severity: critical
+    metrics:
+      - success_rate
+    dimensions:
+      - [region, category]
+    hierarchy:
+      - []
+      - [region]
+      - [region, category]
+    rules:
+      auto_threshold:
+        enabled: true
+        comparison: same_weekday
+        calibration_days: 365
+        target_flag_rate: 0.03
+        min_denominator: 30
+        min_effective_volume: 10
+        severity_map:
+          critical: 3.0
+          warning: 1.0
+```
+
+### Step 3: Connect to Databricks
+
+1. Go to Databricks → Repos → Add Repo
+2. Connect your repository URL
+3. Navigate to `observe/notebooks/observe_daily`
+
+### Step 4: Configure Widget Parameters
+
+Before running, set the widget parameters:
+- `output_database`: Your database name (e.g., `my_database`)
+- `target_date`: Leave empty for yesterday, or set specific date
+
+### Step 5: Run the Notebook
+
+Click "Run All" - the notebook will:
+1. Create output tables if they don't exist
+2. Backfill 720 days of metrics (first run only)
+3. Generate alerts for anomalies
+4. Send Slack notifications (if configured)
+
+### Step 6: (Optional) Set Up Slack Notifications
+
+1. Create a Slack app with `chat:write` permission
+2. Store the bot token in Databricks secrets:
+   ```python
+   dbutils.secrets.createScope("slack")
+   dbutils.secrets.put("slack", "bot-token", "<your-bot-token>")
+   ```
+3. Or pass via widget: `slack_bot_token`
+
+### Step 7: Schedule Daily Runs
+
+Create a Databricks Job:
+- **Task**: Notebook task
+- **Path**: `/Repos/<user>/<repo>/observe/notebooks/observe_daily`
+- **Schedule**: Daily at your preferred time
+- **Cluster**: Any cluster with access to your data
+
+---
+
+## Widget Parameters
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
@@ -289,3 +402,39 @@ send_slack_notifications(alerts_df, target_date, config)
 ```python
 send_diagnosis_to_thread(target_date, "#alerts-channel", config)
 ```
+
+## Troubleshooting
+
+### "No alerts generated"
+- Check `min_denominator` - your dimension may have too few records
+- Check `min_effective_volume` - the impact may be below threshold
+- Verify data exists for the target date in your source table
+
+### "Config not syncing"
+- The notebook syncs config from Workspace to DBFS at startup
+- If config changes aren't reflected, manually delete `/dbfs/observe/config/` and re-run
+
+### "Backfill taking too long"
+- First run backfills 720 days - this is expected to take time
+- Reduce `historical_lookback_days` in monitors.yml for faster initial setup
+- Consider running on a larger cluster
+
+### "Diagnosis shows wrong errors"
+- Check `error_column` in sources.yml points to the correct column
+- Use SQL expressions for complex logic: `"CASE WHEN ... THEN col1 ELSE col2 END"`
+- Verify `failure_filter` correctly identifies failed records
+
+### "DATATYPE_MISMATCH error in diagnosis"
+- Dimension columns are cast to STRING automatically
+- If you see type errors, check your source table schema
+
+### "Slack notifications not sending"
+- Verify bot token is set (secret or widget)
+- Check bot has `chat:write` permission
+- Verify channel name includes `#` prefix
+- Check Databricks can reach `slack.com` (network/firewall)
+
+### "Too many alerts"
+- Increase `target_flag_rate` (e.g., 0.05 for 5%)
+- Increase `min_effective_volume` to filter low-impact alerts
+- Add more levels to `hierarchy` for better suppression
