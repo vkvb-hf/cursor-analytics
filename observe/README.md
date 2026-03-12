@@ -1,6 +1,6 @@
 # Observe - Config-Based Monitoring System
 
-A config-driven monitoring system for tracking payment metrics and detecting anomalies using auto-calibrated thresholds.
+A config-driven monitoring system for tracking metrics and detecting anomalies using auto-calibrated thresholds.
 
 ## Overview
 
@@ -8,7 +8,7 @@ Observe monitors daily metrics across different dimensions and alerts when value
 - Compares current day vs same weekday last week
 - Calibrates alert thresholds from 365 days of historical data
 - Targets a configurable flag rate (default 3%) to avoid alert fatigue
-- Suppresses redundant alerts via hierarchy (e.g., if country-level alerts, don't also alert on country+provider)
+- Suppresses redundant alerts via hierarchy (e.g., if country-level alerts, don't also alert on country+region)
 
 ## How It Works
 
@@ -28,7 +28,7 @@ Observe monitors daily metrics across different dimensions and alerts when value
 
 ### 1. Connect Repo to Databricks
 - Databricks → Repos → Add Repo
-- Connect: `https://github.com/vkvb-hf/cursor-analytics.git`
+- Connect your repository
 
 ### 2. Run Daily Monitoring
 Run `observe/notebooks/observe_daily` - it handles everything automatically.
@@ -52,86 +52,75 @@ First run will backfill 720 days of history. Subsequent runs refresh 30 days.
 
 ### sources.yml - Data Sources
 
+Define the tables and columns to monitor:
+
 ```yaml
 sources:
-  - name: verifications
-    database: payments_hf
-    table: f_pvs_replica
-    date_column: date
+  - name: transactions
+    database: my_database
+    table: transactions_table
+    date_column: transaction_date
     columns:
-      - name: country
-      - name: provider
-      - name: payment_method
-      - name: new_payment_method
+      - name: region
+      - name: channel
+      - name: status
     filters: []
     diagnosis:
-      error_column: decline_response
-      failure_filter: "verification_result = 'failed'"
-
-  - name: orders
-    database: payments_hf
-    table: f_orders
-    date_column: delivery_date
-    columns:
-      - name: country
-      - name: first_provider
-      - name: first_token
-      - name: type_order
-    filters: []
-    diagnosis:
-      error_column: "CASE WHEN bob_status = 'clarify_payment_error' THEN REGEXP_EXTRACT(first_note, '^([^|]+)', 1) ELSE latest_note END"
-      failure_filter: "latest_status = 'canceled'"
+      error_column: error_reason
+      failure_filter: "status = 'failed'"
 ```
 
 **Diagnosis block**: Configures error breakdown for alerts
-- `error_column`: Column (or expression) containing error reasons
+- `error_column`: Column (or SQL expression) containing error reasons
 - `failure_filter`: SQL filter for failed records
 
 ### metrics.yml - Metric Definitions
 
+Define what to measure:
+
 ```yaml
 metrics:
-  - name: tsr_checkout_tokenisation
-    source: verifications
+  - name: success_rate
+    source: transactions
     type: ratio
-    numerator: "verification_result = 'success'"
+    numerator: "status = 'success'"
     denominator: "1=1"
-    filter: "workflow = 'checkout_tokenisation'"
-    description: "Token Success Rate for checkout"
+    filter: "channel = 'web'"
+    description: "Success rate for web transactions"
     increase_is_good: true
 
-  - name: payment_approval_rate
-    source: orders
+  - name: conversion_rate
+    source: events
     type: ratio
-    numerator: "latest_status != 'canceled'"
-    denominator: "1=1"
-    filter: "product_type = 'mealbox'"
-    description: "Payment Approval Rate"
+    numerator: "event_type = 'purchase'"
+    denominator: "event_type = 'visit'"
+    description: "Visit to purchase conversion"
 ```
 
 ### monitors.yml - Monitor Configurations
+
+Configure monitoring rules:
 
 ```yaml
 defaults:
   historical_lookback_days: 720
   refresh_lookback_days: 30
   alert_channels:
-    - "#temp-test-alerts"
+    - "#alerts-channel"
 
 monitors:
-  - name: tokenisation_monitor
-    description: "TSR monitoring with auto-thresholds"
+  - name: transaction_monitor
+    description: "Transaction success monitoring"
     severity: critical
     metrics:
-      - tsr_checkout_tokenisation
-      - tsr_reactivation
+      - success_rate
+      - conversion_rate
     dimensions:
-      - [country, payment_method, new_payment_method]
+      - [region, channel]
     hierarchy:
-      - []                                        # Global
-      - [country]                                 # By country
-      - [country, payment_method]                 # By country + PM
-      - [country, payment_method, new_payment_method]  # Most granular
+      - []                    # Global
+      - [region]              # By region
+      - [region, channel]     # Most granular
     rules:
       auto_threshold:
         enabled: true
@@ -167,12 +156,12 @@ The system automatically calibrates alert thresholds:
 Prevents alert spam by suppressing granular alerts when parent dimensions already alert:
 
 ```
-Hierarchy: [] → [country] → [country, provider] → [country, provider, token]
+Hierarchy: [] → [region] → [region, channel]
 
-If "DE" alerts at country level:
-  ✓ DE (active)
-  ✗ DE/Adyen (suppressed by DE)
-  ✗ DE/Adyen/CreditCard (suppressed by DE)
+If "US" alerts at region level:
+  ✓ US (active)
+  ✗ US/web (suppressed by US)
+  ✗ US/mobile (suppressed by US)
 ```
 
 ## Diagnosis Feature
@@ -180,31 +169,31 @@ If "DE" alerts at country level:
 For declining alerts, the system queries error breakdowns and posts them as Slack thread replies:
 
 ```
-🔍 Diagnosis: TSR Reactivation - IE/Adyen_CreditCard/existing_pm (-36.4%)
+🔍 Diagnosis: Success Rate - US/web (-15.2%)
 
 Top error increases vs last week:
-• Refused(CVC Declined): 4 → 24 (+20)
-• Refused(FRAUD): 3 → 16 (+13)
-• Refused(Refused): 2 → 7 (+5)
+• Timeout Error: 4 → 24 (+20)
+• Invalid Input: 3 → 16 (+13)
+• Server Error: 2 → 7 (+5)
 
 Total failures: 11 → 68 (+518%)
 ```
 
 ## Output Tables
 
-### payments_hf.observe_metrics_daily
+### observe_metrics_daily
 | Column | Description |
 |--------|-------------|
 | date | Metric date |
 | monitor_name | Monitor that computed this |
 | metric_name | Name of the metric |
-| dimension_key | e.g., "country,payment_method" |
-| dimension_value | e.g., "DE,Adyen_CreditCard" |
+| dimension_key | e.g., "region,channel" |
+| dimension_value | e.g., "US,web" |
 | metric_value | Computed ratio (0-1) |
 | numerator_count | Count matching numerator |
 | denominator_count | Total count |
 
-### payments_hf.observe_alerts_daily
+### observe_alerts_daily
 | Column | Description |
 |--------|-------------|
 | date | Alert date |
@@ -223,7 +212,7 @@ Total failures: 11 → 68 (+518%)
 | suppressed_by | Parent dimension that suppressed |
 | denominator_count | Sample size |
 
-### payments_hf.observe_slack_threads
+### observe_slack_threads
 | Column | Description |
 |--------|-------------|
 | date | Alert date |
@@ -254,7 +243,7 @@ The notebook tracks a hash of each monitor's **data-affecting** config:
 1. Edit `config/sources.yml` - add source if needed
 2. Edit `config/metrics.yml` - add metric definition
 3. Edit `config/monitors.yml` - add metric to a monitor
-4. Push to GitHub
+4. Push to repository
 5. Pull in Databricks Repos
 6. Run `observe_daily` - it auto-detects the change and backfills
 
@@ -279,14 +268,14 @@ Alerts are sent to channels configured in `monitors.yml`:
 2. **Thread replies**: Diagnosis for each declining alert showing error breakdown
 
 Requires Slack bot token via:
-- Databricks secret: `dbutils.secrets.get(scope="slack", key="pa-bot-token")`
+- Databricks secret: `dbutils.secrets.get(scope="slack", key="bot-token")`
 - Or widget parameter: `slack_bot_token`
 
 ## Scheduling
 
 Create a Databricks Job:
-- **Notebook**: `/Repos/<user>/cursor-analytics/observe/notebooks/observe_daily`
-- **Schedule**: Daily at 6:00 AM UTC
+- **Notebook**: `/Repos/<user>/<repo>/observe/notebooks/observe_daily`
+- **Schedule**: Daily at desired time
 - **Cluster**: Any shared cluster
 
 ## Running Independently
@@ -298,5 +287,5 @@ send_slack_notifications(alerts_df, target_date, config)
 
 ### Re-send diagnosis to existing thread
 ```python
-send_diagnosis_to_thread(target_date, "#temp-test-alerts", config)
+send_diagnosis_to_thread(target_date, "#alerts-channel", config)
 ```
