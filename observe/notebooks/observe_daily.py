@@ -13,6 +13,7 @@
 
 dbutils.widgets.text("target_date", "", "Target Date (YYYY-MM-DD)")
 dbutils.widgets.text("slack_bot_token", "", "Slack Bot Token (optional, uses secrets if empty)")
+dbutils.widgets.text("slack_channel", "", "Slack Channel (optional, uses config default if empty)")
 dbutils.widgets.text("output_database", "payments_hf", "Output Database")
 dbutils.widgets.text("metrics_table", "observe_metrics_daily", "Metrics Table Name")
 dbutils.widgets.text("alerts_table", "observe_alerts_daily", "Alerts Table Name")
@@ -1496,7 +1497,13 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
     
     # Build message from collected rows
     slack_message = build_slack_summary(all_alerts, target_date)
-    alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
+    
+    # Use widget channel if specified, otherwise fall back to config default
+    widget_channel = dbutils.widgets.get("slack_channel")
+    if widget_channel:
+        alert_channels = [widget_channel]
+    else:
+        alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
     
     critical_count = len([r for r in active_alerts if r["severity"] == "critical"])
     severity = "error" if critical_count > 0 else "warning"
