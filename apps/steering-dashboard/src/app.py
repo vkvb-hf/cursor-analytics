@@ -25,8 +25,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.title("📊 Steering Report")
-
 
 def init_session_state():
     """Initialize session state variables."""
@@ -36,6 +34,8 @@ def init_session_state():
         st.session_state.diagnosis_running = False
     if "diagnosis_progress" not in st.session_state:
         st.session_state.diagnosis_progress = []
+    if "active_tab" not in st.session_state:
+        st.session_state.active_tab = "report"
 
 
 def render_sidebar():
@@ -78,10 +78,11 @@ def render_sidebar():
 
         st.divider()
 
-        if st.button("🗑️ Clear Diagnosis", use_container_width=True):
-            st.session_state.diagnosis_report = None
-            st.session_state.diagnosis_progress = []
-            st.rerun()
+        if st.session_state.diagnosis_report:
+            if st.button("🗑️ Clear Diagnosis", use_container_width=True):
+                st.session_state.diagnosis_report = None
+                st.session_state.diagnosis_progress = []
+                st.rerun()
 
         return selected_week
 
@@ -127,39 +128,49 @@ def run_diagnosis(metric_query: str, week: str, progress_placeholder) -> dict:
         agent.close()
 
 
-def render_diagnosis_panel(selected_week: str):
-    """Render the diagnosis input and results panel."""
-    st.subheader("🔍 Diagnosis")
+def render_report_tab(selected_week: str):
+    """Render the steering report view."""
+    st.header(f"📊 Steering Report - Week {selected_week}")
+    
+    content = load_report(selected_week)
+    render_report(content)
+
+
+def render_diagnosis_tab(selected_week: str):
+    """Render the diagnosis view."""
+    st.header("🔍 Metric Diagnosis")
+    
+    st.markdown(f"**Selected Week:** {selected_week}")
+    st.markdown("---")
 
     diagnosis_query = st.text_area(
         "What do you want to diagnose?",
         placeholder="e.g., Acceptance LL0 dropped 2.32% in HF-INTL\n\nor\n\nWhy did Recovery W0 increase 17.61% overall?",
-        height=120,
+        height=100,
         help="Describe the metric change you want to investigate"
     )
 
-    col1, col2 = st.columns([1, 1])
+    col1, col2, col3 = st.columns([2, 2, 3])
     with col1:
         diagnose_clicked = st.button(
-            "🚀 Diagnose",
+            "🚀 Run Diagnosis",
             type="primary",
             use_container_width=True,
             disabled=st.session_state.diagnosis_running
         )
     with col2:
-        if st.button("📋 Example", use_container_width=True):
+        if st.button("📋 Show Example", use_container_width=True):
             st.info("Try: 'Acceptance LL0 (Initial Charge) dropped from 90.28% to 88.18% in HF-INTL'")
 
     if diagnose_clicked and diagnosis_query.strip():
         st.session_state.diagnosis_running = True
         st.session_state.diagnosis_report = None
 
-        st.divider()
-        st.markdown(f"**Diagnosing for {selected_week}:**")
-        st.markdown(f"> {diagnosis_query}")
+        st.markdown("---")
+        st.markdown(f"**Diagnosing:** {diagnosis_query}")
 
         progress_placeholder = st.empty()
-        progress_placeholder.info("Starting diagnosis... This may take 2-5 minutes.")
+        progress_placeholder.info("🔄 Starting diagnosis... This may take 2-5 minutes.")
 
         result = run_diagnosis(diagnosis_query, selected_week, progress_placeholder)
 
@@ -184,19 +195,21 @@ def render_diagnosis_panel(selected_week: str):
             progress_placeholder.error(f"❌ Diagnosis failed: {result.get('error', 'Unknown error')}")
 
     if st.session_state.diagnosis_report:
-        st.divider()
-        st.subheader("📄 Diagnosis Report")
+        st.markdown("---")
+        
+        col_title, col_download = st.columns([3, 1])
+        with col_title:
+            st.subheader("📄 Diagnosis Report")
+        with col_download:
+            st.download_button(
+                label="📥 Download",
+                data=st.session_state.diagnosis_report,
+                file_name=f"diagnosis_{selected_week}.md",
+                mime="text/markdown",
+                use_container_width=True
+            )
 
-        with st.container(height=600):
-            st.markdown(st.session_state.diagnosis_report)
-
-        st.download_button(
-            label="📥 Download Report",
-            data=st.session_state.diagnosis_report,
-            file_name=f"diagnosis_{selected_week}.md",
-            mime="text/markdown",
-            use_container_width=True
-        )
+        st.markdown(st.session_state.diagnosis_report)
 
 
 def main():
@@ -207,16 +220,15 @@ def main():
     if not selected_week:
         st.stop()
 
-    col_report, col_diagnosis = st.columns([3, 2])
+    st.title("📊 Steering Dashboard")
 
-    with col_report:
-        st.subheader(f"Week {selected_week}")
-        content = load_report(selected_week)
-        with st.container(height=800):
-            render_report(content)
+    tab_report, tab_diagnosis = st.tabs(["📈 Weekly Report", "🔍 Diagnosis"])
 
-    with col_diagnosis:
-        render_diagnosis_panel(selected_week)
+    with tab_report:
+        render_report_tab(selected_week)
+
+    with tab_diagnosis:
+        render_diagnosis_tab(selected_week)
 
 
 if __name__ == "__main__":

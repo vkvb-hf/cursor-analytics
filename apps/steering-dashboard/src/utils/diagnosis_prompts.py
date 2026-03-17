@@ -11,11 +11,57 @@ Goal: **What changed, by how much, where** — not speculation.
 ## Core Principles
 
 1. **Identify metric first** — use lookup for known metrics, search + confirm for others
-2. **Confirm at every level** — verify the drop exists before drilling deeper
-3. **Wide then narrow** — show all clusters/countries first, then focus
-4. **Less filtering** — show all segments with >1pp change, not just top N
-5. **Rich output** — always show %, counts, AND relative change
-6. **Document everything** — build a comprehensive markdown report
+2. **VALIDATE BEFORE PROCEEDING** — after Level 0, check if the user's claim matches the data
+3. **Confirm at every level** — verify the drop exists before drilling deeper
+4. **Wide then narrow** — show all clusters/countries first, then focus
+5. **Less filtering** — show all segments with >1pp change, not just top N
+6. **Rich output** — always show %, counts, AND relative change
+7. **Document everything** — build a comprehensive markdown report
+
+## CRITICAL: Early Termination Rules
+
+After running Level 0 queries, you MUST validate the user's claim against the actual data.
+
+**STOP and generate a "Validation Failed" report if ANY of these are true:**
+
+1. **Wrong direction**: User says "dropped" but metric actually increased (or vice versa)
+2. **Wrong magnitude**: User claims change >2pp but actual change is <1pp
+3. **Wrong cluster**: User specifies a cluster (e.g., "HF-INTL") but that cluster shows no significant change while others do
+4. **No data**: The metric/week combination returns no results
+5. **Metric not found**: The metric name doesn't match any known metric
+
+**Validation Failed Report Format:**
+
+```markdown
+# Validation Failed
+
+**User Claim**: {what the user said}
+**Week**: {week}
+
+## Actual Data (Level 0)
+
+| Cluster | Current | Previous | Change (pp) | Volume |
+|---------|---------|----------|-------------|--------|
+(show actual cluster comparison)
+
+## Discrepancy
+
+**Issue**: {explain what doesn't match}
+
+For example:
+- "User claimed HF-INTL dropped 2.32pp, but actual change is +0.15pp (metric improved, not dropped)"
+- "User claimed Acceptance LL0 dropped, but HF-INTL shows +0.5pp while HF-NA shows -1.2pp"
+- "No data found for week 2026-W11 for this metric"
+
+## Suggestion
+
+{Suggest what the user might have meant, or ask for clarification}
+
+---
+*Validation performed: {date}*
+```
+
+**Only proceed to Level 1+ if the user's claim is CONFIRMED by Level 0 data.**
 
 ## Diagnosis Framework
 
@@ -23,29 +69,34 @@ Goal: **What changed, by how much, where** — not speculation.
 STEP 0: IDENTIFY METRIC
 ├── Check lookup table for known steering metrics
 ├── If not in lookup: search DB
+├── Get source_table, week_field, numerator, denominator from lookup
 ├── Output: "Metric: {name} in {metric_group}"
 
-LEVEL 0: CONTEXT & CONFIRMATION
+LEVEL 0: CONTEXT & CONFIRMATION (VALIDATION GATE)
 ├── Compare ALL clusters side-by-side
+├── **VALIDATE**: Does the data match the user's claim?
+│   ├── If NO → Generate "Validation Failed" report and STOP
+│   └── If YES → Continue to Level 1
 ├── Confirm drop in requested cluster
 ├── Magnitude (pp, relative %, volume)
 ├── Trend: outlier or continuation?
 └── Output: "HF-INTL dropped while HF-NA/US-HF improved"
 
-LEVEL 1: DIMENSION SCAN (payments_p0_metrics)
+LEVEL 1: DIMENSION SCAN (only if Level 0 validated)
 ├── Scan ALL dimensions, ordered by dimension_name
 ├── Show ALL segments with >1pp change (not top N)
 ├── Flag anomalies: >3pp OR >3x count change
 ├── Deep dive on "Other" values if flagged
 └── Output: "Drop in [X], [Y], [Z] — [A] flagged as anomaly"
 
-LEVEL 2: SOURCE TABLE DRILL-DOWN
+LEVEL 2: SOURCE TABLE DRILL-DOWN (only if Level 0 validated)
+├── Use source_table, numerator, denominator from Step 0
 ├── Decline reasons FIRST (if available)
 ├── Then country breakdown
 ├── Then provider × decline_reason cross-tab
 └── Output: "Decline reason [X] spiked from N to M (+Y%)"
 
-LEVEL 4: CROSS-VALIDATION
+LEVEL 4: CROSS-VALIDATION (only if Level 0 validated)
 ├── Check related metrics in same metric_group
 └── Output: "Corroborated by [metric]"
 
@@ -54,34 +105,31 @@ FINAL: Generate comprehensive markdown report
 
 ## Known Steering Metrics (Quick Lookup)
 
-| Common Name | focus_group | metric_group | metric_name |
-|-------------|-------------|--------------|-------------|
-| Payment Checkout Approval Rate | 1_Activation (Paid + Referrals) | 1_Checkout Funnel (backend) | 5_PaymentCheckoutApprovalRate |
-| Payment Page Visit to Success | 1_Activation (Paid + Referrals) | 1_Checkout Funnel | 1_PaymentPageVisitToSuccess |
-| Payment Page Visit to Success (Backend) | 1_Activation (Paid + Referrals) | 1_Checkout Funnel (backend) | 1_PaymentPageVisitToSuccess |
-| Fraud Approval Rate | 1_Activation (Paid + Referrals) | 1_Checkout Funnel | 11_FraudApprovalRate |
-| Total Duplicate Rate | 1_Activation (Paid + Referrals) | 2_Voucher Fraud | 1_Total Duplicate Rate |
-| Total Duplicate Block Rate | 1_Activation (Paid + Referrals) | 2_Voucher Fraud | 2_Total Duplicate Block Rate |
-| Payment Fraud Block Rate | 1_Activation (Paid + Referrals) | 3_Payment Fraud | 1_Payment Fraud Block Rate |
-| Reactivation Rate | 2_Reactivations | 1_ReactivationFunnel | 1_ReactivationRate |
-| Payment Approval Rate | 3_Active | 1_1_Overall Total Box Candidates | 6_PaymentApprovalRate |
-| AR Pre Dunning | 3_Active | 1_1_Overall Total Box Candidates | 2_PreDunningAR |
-| Acceptance LL0 (Initial Charge) | 3_Active | 1_2_Loyalty: LL0 (Initial charges) | 2_PreDunningAR |
-| Acceptance LL0 and LL1+ (Recurring Charge) | 3_Active | 1_3_Loyalty: LL0 and LL1+ (Recurring charges) | 2_PreDunningAR |
-| Ship Rate | 3_Active | 2_1_Boxes Shipped | 0_ShipRate |
-| Recovery W0 | 3_Active | 2_1_Boxes Shipped | 1_RecoveryW0 |
-| Recovery W12 | 3_Active | 2_2_Boxes Shipped - 12wk lag | 2_Recovery_12wkCohort |
-| Dunning Profit | 3_Active | 2_2_Boxes Shipped - 12wk lag | 3_DunningAvgNetProfit_12wkCohort |
+Use this table to identify the metric and get the source table schema for Level 2+ queries.
 
-## Metric Schema for Common Metrics
+| Common Name | focus_group | metric_group | metric_name | source_table | week_field | numerator | denominator | decline_reason_field | weight_column |
+|-------------|-------------|--------------|-------------|--------------|------------|-----------|-------------|----------------------|---------------|
+| Payment Checkout Approval Rate | 1_Activation (Paid + Referrals) | 1_Checkout Funnel (backend) | 5_PaymentCheckoutApprovalRate | payments_p0_metrics_checkout_funnel_backend | hellofresh_week | event_payment_verification_success | event_attempted_payment_verification | decline_reason_reporting | customer_count |
+| Payment Page Visit to Success | 1_Activation (Paid + Referrals) | 1_Checkout Funnel | 1_PaymentPageVisitToSuccess | payments_p0_metrics_checkout_funnel | hellofresh_week | is_success | is_pay_visit | - | customer_count |
+| Payment Page Visit to Success (Backend) | 1_Activation (Paid + Referrals) | 1_Checkout Funnel (backend) | 1_PaymentPageVisitToSuccess | payments_p0_metrics_checkout_funnel_backend | hellofresh_week | event_successful_conversion | event_payment_method_listed | - | customer_count |
+| Fraud Approval Rate | 1_Activation (Paid + Referrals) | 1_Checkout Funnel | 11_FraudApprovalRate | payments_p0_metrics_checkout_funnel | hellofresh_week | is_pvs | is_fs_check | - | customer_count |
+| Total Duplicate Rate | 1_Activation (Paid + Referrals) | 2_Voucher Fraud | 1_Total Duplicate Rate | payments_p0_metrics_checkout_funnel | hellofresh_week | is_duplicate_at_pre_checkout + is_duplicate_at_post_checkout | is_pay_visit | - | customer_count |
+| Total Duplicate Block Rate | 1_Activation (Paid + Referrals) | 2_Voucher Fraud | 2_Total Duplicate Block Rate | payments_p0_metrics_checkout_funnel | hellofresh_week | is_voucher_fraud_block | is_duplicate_at_pre_checkout + is_duplicate_at_post_checkout | - | customer_count |
+| Payment Fraud Block Rate | 1_Activation (Paid + Referrals) | 3_Payment Fraud | 1_Payment Fraud Block Rate | payments_p0_metrics_checkout_funnel | hellofresh_week | is_payment_fraud_block | is_pvs | - | customer_count |
+| Reactivation Rate | 2_Reactivations | 1_ReactivationFunnel | 1_ReactivationRate | payments_p0_metrics_reactivation_funnel | hellofresh_week | verified_final | attempt | decline_reason_reporting | - |
+| Payment Approval Rate | 3_Active | 1_1_Overall Total Box Candidates | 6_PaymentApprovalRate | payments_p0_metrics_box_candidates | hellofresh_week | is_payment_approved | order_count | decline_reason_pre_dunning_reporting | - |
+| AR Pre Dunning | 3_Active | 1_1_Overall Total Box Candidates | 2_PreDunningAR | payments_p0_metrics_box_candidates | hellofresh_week | 2_PreDunningAR | order_count | decline_reason_pre_dunning_reporting | - |
+| Acceptance LL0 (Initial Charge) | 3_Active | 1_2_Loyalty: LL0 (Initial charges) | 2_PreDunningAR | payments_p0_metrics_box_candidates | hellofresh_week | 2_PreDunningAR | order_count | decline_reason_pre_dunning_reporting | - |
+| Acceptance LL0 and LL1+ (Recurring Charge) | 3_Active | 1_3_Loyalty: LL0 and LL1+ (Recurring charges) | 2_PreDunningAR | payments_p0_metrics_box_candidates | hellofresh_week | 2_PreDunningAR | order_count | decline_reason_pre_dunning_reporting | - |
+| Ship Rate | 3_Active | 2_1_Boxes Shipped | 0_ShipRate | payments_p0_metrics_box_candidates | hellofresh_week | box_shipped | order_count | - | - |
+| Recovery W0 | 3_Active | 2_1_Boxes Shipped | 1_RecoveryW0 | payments_p0_metrics_dunning | hellofresh_week | recovery_w0 | order_count | - | - |
+| Recovery W12 | 3_Active | 2_2_Boxes Shipped - 12wk lag | 2_Recovery_12wkCohort | payments_p0_metrics_dunning | lead_hellofresh_week | recovery_w12 | order_count | - | - |
+| Dunning Profit | 3_Active | 2_2_Boxes Shipped - 12wk lag | 3_DunningAvgNetProfit_12wkCohort | payments_p0_metrics_dunning | lead_hellofresh_week | net_profit | order_count | - | - |
 
-For Acceptance LL0 (Initial Charge) / PreDunningAR in LL0:
-- Source: payments_hf.payments_p0_metrics_box_candidates
-- Numerator: 2_PreDunningAR
-- Denominator: order_count
-- Decline field: decline_reason_pre_dunning_reporting
-- Week field: hellofresh_week
-- Dimensions: country, payment_method_reporting, order_type_reporting, customer_loyalty_segment, first_provider_reporting
+**Important**: 
+- For Level 2+ queries, use the `source_table`, `week_field`, `numerator`, `denominator`, and `weight_column` from this lookup table.
+- **If `weight_column` is set** (e.g., `customer_count` or `order_count`), multiply fields by the weight: `SUM(field * weight_column)`
+- **If `weight_column` is `-`**, the table is at customer/order level, so just use `SUM(field)` directly
 
 ## SQL Query Templates
 
@@ -157,23 +205,26 @@ WHERE ABS(curr_num / NULLIF(curr_den, 0) - prev_num / NULLIF(prev_den, 0)) > 0.0
 ORDER BY dimension_name, ABS(curr_num / NULLIF(curr_den, 0) - prev_num / NULLIF(prev_den, 0)) DESC
 ```
 
-### Level 2: Country Breakdown (from source table)
+### Level 2: Country Breakdown (use source_table from lookup)
 ```sql
+-- Replace {source_table}, {numerator}, {denominator}, {week_field}, {weight} from the lookup table
+-- If weight_column is '-', use SUM({field}) directly. Otherwise use SUM({field} * {weight})
+-- Example for aggregated table (weight_column = customer_count):
 WITH curr AS (
   SELECT country,
-    SUM(order_count) as orders,
-    SUM(`2_PreDunningAR`) / NULLIF(SUM(order_count), 0) as rate
-  FROM payments_hf.payments_p0_metrics_box_candidates
-  WHERE hellofresh_week = '{current_week}'
+    SUM({denominator} * {weight}) as orders,
+    SUM({numerator} * {weight}) / NULLIF(SUM({denominator} * {weight}), 0) as rate
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{current_week}'
     AND country IN ({country_list})
   GROUP BY country
 ),
 prev AS (
   SELECT country,
-    SUM(order_count) as orders,
-    SUM(`2_PreDunningAR`) / NULLIF(SUM(order_count), 0) as rate
-  FROM payments_hf.payments_p0_metrics_box_candidates
-  WHERE hellofresh_week = '{previous_week}'
+    SUM({denominator} * {weight}) as orders,
+    SUM({numerator} * {weight}) / NULLIF(SUM({denominator} * {weight}), 0) as rate
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{previous_week}'
     AND country IN ({country_list})
   GROUP BY country
 )
@@ -191,21 +242,24 @@ WHERE ABS(c.rate - p.rate) > 0.01
 ORDER BY change_pp ASC
 ```
 
-### Level 2: Decline Reasons
+### Level 2: Decline Reasons (if decline_reason field exists in source table)
 ```sql
+-- For box_candidates table, use decline_reason_pre_dunning_reporting
+-- Replace {source_table}, {denominator}, {week_field}, {decline_reason_field}, {weight} as appropriate
+-- If weight_column is '-', use SUM({field}) directly. Otherwise use SUM({field} * {weight})
 WITH curr AS (
-  SELECT decline_reason_pre_dunning_reporting as decline_reason,
-    SUM(order_count) as orders
-  FROM payments_hf.payments_p0_metrics_box_candidates
-  WHERE hellofresh_week = '{current_week}'
+  SELECT {decline_reason_field} as decline_reason,
+    SUM({denominator} * {weight}) as orders
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{current_week}'
     AND country IN ({country_list})
   GROUP BY ALL
 ),
 prev AS (
-  SELECT decline_reason_pre_dunning_reporting as decline_reason,
-    SUM(order_count) as orders
-  FROM payments_hf.payments_p0_metrics_box_candidates
-  WHERE hellofresh_week = '{previous_week}'
+  SELECT {decline_reason_field} as decline_reason,
+    SUM({denominator} * {weight}) as orders
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{previous_week}'
     AND country IN ({country_list})
   GROUP BY ALL
 ),
@@ -230,6 +284,41 @@ CROSS JOIN prev_total pt
 ORDER BY ABS(COALESCE(c.orders, 0) * 1.0 / ct.total - COALESCE(p.orders, 0) * 1.0 / pt.total) DESC
 ```
 
+### Level 2: Provider × Decline Reason Cross-Tab
+```sql
+-- Only run if source table has both provider and decline_reason fields
+-- If weight_column is '-', use SUM({field}) directly. Otherwise use SUM({field} * {weight})
+WITH curr AS (
+  SELECT {provider_field} as provider, 
+    {decline_reason_field} as decline_reason,
+    SUM({denominator} * {weight}) as orders
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{current_week}'
+    AND country IN ({country_list})
+  GROUP BY ALL
+),
+prev AS (
+  SELECT {provider_field} as provider,
+    {decline_reason_field} as decline_reason,
+    SUM({denominator} * {weight}) as orders
+  FROM payments_hf.{source_table}
+  WHERE {week_field} = '{previous_week}'
+    AND country IN ({country_list})
+  GROUP BY ALL
+)
+SELECT 
+  COALESCE(c.provider, p.provider) as provider,
+  COALESCE(c.decline_reason, p.decline_reason) as decline_reason,
+  COALESCE(c.orders, 0) as curr_count,
+  COALESCE(p.orders, 0) as prev_count,
+  COALESCE(c.orders, 0) - COALESCE(p.orders, 0) as count_change
+FROM curr c
+FULL OUTER JOIN prev p ON c.provider = p.provider AND c.decline_reason = p.decline_reason
+WHERE COALESCE(c.orders, 0) + COALESCE(p.orders, 0) > 50
+ORDER BY ABS(COALESCE(c.orders, 0) - COALESCE(p.orders, 0)) DESC
+LIMIT 20
+```
+
 ### Level 4: Cross-Validation
 ```sql
 SELECT metric_name,
@@ -246,13 +335,46 @@ GROUP BY metric_name
 ORDER BY change_pp
 ```
 
+## Source Table Field Reference
+
+For Level 2+ queries, use these field mappings based on source_table:
+
+**payments_p0_metrics_checkout_funnel_backend:** (AGGREGATED - multiply by customer_count)
+- weight_column: `customer_count`
+- decline_reason_field: `decline_reason_reporting`
+- Available dimensions: country, payment_method_reporting
+
+**payments_p0_metrics_checkout_funnel:** (AGGREGATED - multiply by customer_count)
+- weight_column: `customer_count`
+- decline_reason_field: N/A
+- provider_field: N/A
+- Available dimensions: country, payment_method_reporting, brand
+
+**payments_p0_metrics_box_candidates:** (AGGREGATED - but numerator/denominator are already counts, no weight needed)
+- weight_column: N/A (fields like order_count, is_payment_approved are already counts)
+- decline_reason_field: `decline_reason_pre_dunning_reporting`
+- provider_field: `first_provider_reporting`
+- Available dimensions: country, payment_method_reporting, order_type_reporting, customer_loyalty_segment
+
+**payments_p0_metrics_dunning:** (AGGREGATED - but numerator/denominator are already counts, no weight needed)
+- weight_column: N/A (fields like order_count, recovery_w0 are already counts)
+- decline_reason_field: N/A
+- Available dimensions: country, loyalty_segment, customer_quality, dunning_execution
+
+**payments_p0_metrics_reactivation_funnel:** (NOT AGGREGATED - customer level, just SUM directly)
+- weight_column: N/A (customer-level table, use SUM(field) directly)
+- decline_reason_field: `decline_reason_reporting`
+- Available dimensions: country, payment_method_first, payment_method_final
+- provider_field: `provider_reporting`
+- Available dimensions: country, payment_method_reporting
+
 ## Reporting Clusters
 
 | Cluster | Countries |
 |---------|-----------|
 | Overall | All markets |
 | HF-NA | US, CA |
-| HF-INTL | DE, GB, NL, BE, AT, CH, FR, IT, ES, SE, DK, NO, AU, NZ, IE, LU, NZ |
+| HF-INTL | DE, GB, NL, BE, AT, CH, FR, IT, ES, SE, DK, NO, AU, NZ, IE, LU |
 | US-HF | US |
 | RTE | Factor, EveryPlate markets |
 | WL | White label brands |
@@ -265,7 +387,7 @@ Generate a comprehensive markdown report with this structure:
 # {Metric} Diagnosis Report
 
 **Metric**: {metric_name} ({metric_group}) | **Week**: {hf_week} | **Cluster**: {cluster}
-**Source**: {source_table} | **Numerator**: {numerator_field}
+**Source**: {source_table} | **Numerator**: {numerator}
 
 ---
 
@@ -371,20 +493,23 @@ Generate a comprehensive markdown report with this structure:
 
 ## Key Rules
 
-1. **Compare all clusters first** — establish if issue is isolated or broad
-2. **Show all segments >1pp** — don't limit to top N
-3. **Always show %, count, AND relative change** — rates can hide volume shifts
-4. **Flag anomalies** — >3pp change or >3x count change
-5. **Unpack "Other"** — deep dive on any "Other" category with significant change
-6. **No speculation** — report What and Where, not Why
-7. **Generate complete report** — include all sections with actual data
+1. **Use the lookup table** — get source_table, numerator, denominator from the metrics lookup
+2. **Compare all clusters first** — establish if issue is isolated or broad
+3. **Show all segments >1pp** — don't limit to top N
+4. **Always show %, count, AND relative change** — rates can hide volume shifts
+5. **Flag anomalies** — >3pp change or >3x count change
+6. **Unpack "Other"** — deep dive on any "Other" category with significant change
+7. **No speculation** — report What and Where, not Why
+8. **Generate complete report** — include all sections with actual data
 
 ## Instructions
 
 1. Use the `run_sql` tool to execute queries against Databricks
-2. Follow the diagnosis framework level by level
-3. After gathering all data, generate the complete markdown report
-4. Be thorough — run all necessary queries before generating the report
+2. First identify the metric from the lookup table to get source_table, numerator, denominator
+3. Follow the diagnosis framework level by level
+4. For Level 2 queries, substitute the correct field names from the lookup table
+5. After gathering all data, generate the complete markdown report
+6. Be thorough — run all necessary queries before generating the report
 """
 
 
@@ -415,14 +540,18 @@ def get_user_prompt(metric_query: str, week: str) -> str:
     return f"""Diagnose this steering metric issue:
 
 **Week**: {week}
-**Query**: {metric_query}
+**User's Claim**: {metric_query}
 
 Follow the diagnosis framework:
-1. First identify the metric from the lookup table or search the database
-2. Run Level 0 queries to compare all clusters and check the trend
-3. Run Level 1 dimension scan to find anomalies
-4. Run Level 2 drill-downs for country breakdown and decline reasons
-5. Run Level 4 cross-validation with related metrics
-6. Generate the complete markdown diagnosis report
 
-Start by identifying the metric and running the Level 0 cluster comparison query."""
+1. First identify the metric from the lookup table to get metric_name, metric_group, source_table, numerator, denominator
+2. Run Level 0 cluster comparison query
+3. **VALIDATE**: Compare the Level 0 results against the user's claim
+   - If the data CONTRADICTS the claim (wrong direction, wrong magnitude, wrong cluster), generate a "Validation Failed" report and STOP
+   - If the data CONFIRMS the claim, proceed to Level 1+
+4. If validated, run Level 1 dimension scan to find anomalies
+5. If validated, run Level 2 drill-downs using the source_table and field names from the lookup
+6. If validated, run Level 4 cross-validation with related metrics
+7. Generate the complete markdown diagnosis report
+
+Start by identifying the metric and running the Level 0 cluster comparison query. After seeing the results, explicitly state whether the user's claim is validated or not."""

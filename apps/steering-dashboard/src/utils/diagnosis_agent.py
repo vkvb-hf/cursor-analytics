@@ -55,16 +55,37 @@ class DiagnosisAgent:
 
     def _execute_sql(self, sql: str, description: str = "") -> str:
         """Execute SQL query and return results as markdown table."""
+        import sys
+        from pathlib import Path
+        
+        # Log to file for debugging
+        log_file = Path.home() / "diagnosis_queries.log"
+        
         try:
+            with open(log_file, "a") as f:
+                f.write(f"\n{'='*60}\n")
+                f.write(f"QUERY [{description}]:\n")
+                f.write(f"{'='*60}\n")
+                f.write(sql + "\n")
+                f.write(f"{'='*60}\n")
+            
             reader = self._get_db_reader()
             df = reader.execute_query(sql)
 
             if df.empty:
+                with open(log_file, "a") as f:
+                    f.write(f"RESULT: No results returned\n\n")
                 return "Query returned no results."
 
-            return df.to_markdown(index=False)
+            result = df.to_markdown(index=False)
+            with open(log_file, "a") as f:
+                f.write(f"RESULT: {len(df)} rows returned\n")
+                f.write(result[:500] + "...\n\n" if len(result) > 500 else result + "\n\n")
+            return result
 
         except Exception as e:
+            with open(log_file, "a") as f:
+                f.write(f"SQL ERROR: {str(e)}\n\n")
             return f"SQL Error: {str(e)}"
 
     def _call_bedrock(
