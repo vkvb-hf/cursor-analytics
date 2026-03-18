@@ -1,12 +1,13 @@
 """
 Report loader for steering dashboard.
-Loads markdown report files from local git repository.
+Loads markdown report files and JSON data from local git repository.
 """
 
+import json
 import os
 import re
 from pathlib import Path
-from typing import List
+from typing import Dict, List, Optional
 
 import streamlit as st
 
@@ -62,3 +63,29 @@ def load_report(week: str) -> str:
         return f"**Report not found:** `{filepath}`\n\nMake sure to run `git pull` in the cursor-analytics repository."
 
     return filepath.read_text()
+
+
+@st.cache_data(ttl=60)
+def load_metrics_data(week: str) -> Optional[Dict]:
+    """
+    Load structured JSON data for a specific week.
+    
+    Args:
+        week: Week string like '2026-W10'
+        
+    Returns:
+        Dict with metrics data or None if not found
+    """
+    dir_path = get_reports_dir()
+    year, week_num = week.split("-W")
+    filename = f"{year}_W{week_num}_steering_data.json"
+    filepath = dir_path / filename
+
+    if not filepath.exists():
+        return None
+
+    try:
+        return json.loads(filepath.read_text())
+    except json.JSONDecodeError as e:
+        st.error(f"Error parsing JSON data: {e}")
+        return None
