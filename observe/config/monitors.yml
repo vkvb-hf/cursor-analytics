@@ -4,7 +4,7 @@ defaults:
   historical_lookback_days: 720
   refresh_lookback_days: 30
   alert_channels:
-    - "#temp-test-alerts"
+    - "#growth-pa-payments-alerts"
 
 monitors:
   - name: tokenisation_monitor
@@ -16,15 +16,14 @@ monitors:
       - tsr_change
       - tsr_unpause
     dimensions:
-      - [country, payment_method, new_payment_method]
+      - [country, payment_method]
     hierarchy:
       - []
       - [country]
       - [country, payment_method]
-      - [country, payment_method, new_payment_method]
     rules:
       auto_threshold:
-        enabled: true
+        enabled: false
         type: auto_threshold
         comparison: same_weekday
         calibration_days: 365
@@ -34,6 +33,19 @@ monitors:
         severity_map:
           critical: 3.0
           warning: 1.0
+      zero_when_expected:
+        enabled: true
+        lookback_weeks: 4
+        min_expected_weeks: 3
+        min_denominator: 30
+      large_deviation:
+        enabled: true
+        direction: decrease
+        threshold_pct: 50
+        lookback_weeks: 4
+        min_denominator: 30
+      follow_up:
+        enabled: true
 
   - name: payment_approval_monitor
     description: "Payment Approval Rate monitoring with auto-thresholds"
@@ -50,7 +62,7 @@ monitors:
       - [country, first_provider, first_token, type_order]
     rules:
       auto_threshold:
-        enabled: true
+        enabled: false
         type: auto_threshold
         comparison: same_weekday
         calibration_days: 365
@@ -60,6 +72,19 @@ monitors:
         severity_map:
           critical: 3.0
           warning: 1.0
+      zero_when_expected:
+        enabled: true
+        lookback_weeks: 4
+        min_expected_weeks: 3
+        min_denominator: 30
+      large_deviation:
+        enabled: true
+        direction: decrease
+        threshold_pct: 50
+        lookback_weeks: 4
+        min_denominator: 30
+      follow_up:
+        enabled: true
 
   - name: fraud_approval_monitor
     description: "Fraud Approval Rate monitoring with auto-thresholds"
@@ -75,7 +100,7 @@ monitors:
       - [country, category, payment_method]
     rules:
       auto_threshold:
-        enabled: true
+        enabled: false
         type: auto_threshold
         comparison: same_weekday
         calibration_days: 365
@@ -85,3 +110,16 @@ monitors:
         severity_map:
           critical: 3.0
           warning: 1.0
+      zero_when_expected:
+        enabled: true
+        lookback_weeks: 4
+        min_expected_weeks: 3
+        min_denominator: 30
+      large_deviation:
+        enabled: true
+        direction: decrease
+        threshold_pct: 50
+        lookback_weeks: 4
+        min_denominator: 30
+      follow_up:
+        enabled: true

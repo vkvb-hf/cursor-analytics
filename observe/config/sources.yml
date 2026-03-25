@@ -59,7 +59,7 @@ sources:
       - name: country
       - name: payment_method
       - name: category
-        expression: "fraudservice_last_payload.category"
+        expression: "CASE WHEN fraudservice_last_payload.category = 'Referral' THEN 'referral' ELSE 'paid' END"
       - name: event_attempted_fraud_check
       - name: event_fs_blocked
     filters: []

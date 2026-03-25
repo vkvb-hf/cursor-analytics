@@ -106,12 +106,34 @@ class AutoThresholdRule:
     severity_map: Dict[str, float] = field(default_factory=lambda: {"critical": 3.0, "warning": 1.0})
 
 @dataclass
+class ZeroWhenExpectedRule:
+    enabled: bool = True
+    lookback_weeks: int = 4
+    min_expected_weeks: int = 3
+    min_denominator: int = 30
+
+@dataclass
+class LargeDeviationRule:
+    enabled: bool = True
+    direction: str = "decrease"
+    threshold_pct: float = 50.0
+    lookback_weeks: int = 4
+    min_denominator: int = 30
+
+@dataclass
+class FollowUpRule:
+    enabled: bool = True
+
+@dataclass
 class Monitor:
     name: str
     metrics: List[str]
     dimensions: List[List[str]]
     hierarchy: List[List[str]]
     rule: AutoThresholdRule
+    zero_rule: ZeroWhenExpectedRule = None
+    deviation_rule: LargeDeviationRule = None
+    followup_rule: FollowUpRule = None
     description: str = ""
     severity: str = "warning"
 
@@ -282,14 +304,29 @@ def load_config() -> Config:
 
     monitors = []
     for m in monitors_data.get('monitors', []):
-        rule_cfg = m.get('rules', {}).get('auto_threshold', {})
+        rules = m.get('rules', {})
+        
+        rule_cfg = rules.get('auto_threshold', {})
         rule = AutoThresholdRule(**_filter_fields(rule_cfg, AutoThresholdRule)) if rule_cfg else AutoThresholdRule()
+        
+        zero_cfg = rules.get('zero_when_expected', {})
+        zero_rule = ZeroWhenExpectedRule(**_filter_fields(zero_cfg, ZeroWhenExpectedRule)) if zero_cfg else ZeroWhenExpectedRule()
+        
+        dev_cfg = rules.get('large_deviation', {})
+        deviation_rule = LargeDeviationRule(**_filter_fields(dev_cfg, LargeDeviationRule)) if dev_cfg else LargeDeviationRule()
+        
+        followup_cfg = rules.get('follow_up', {})
+        followup_rule = FollowUpRule(**_filter_fields(followup_cfg, FollowUpRule)) if followup_cfg else FollowUpRule()
+        
         monitors.append(Monitor(
             name=m['name'],
             metrics=m.get('metrics', []),
             dimensions=m.get('dimensions', [[]]),
             hierarchy=m.get('hierarchy', []),
             rule=rule,
+            zero_rule=zero_rule,
+            deviation_rule=deviation_rule,
+            followup_rule=followup_rule,
             description=m.get('description', ''),
             severity=m.get('severity', 'warning'),
         ))
@@ -349,6 +386,18 @@ monitor_lookbacks = {}
 historical_days = config.defaults.get('historical_lookback_days', 720)
 refresh_days = config.defaults.get('refresh_lookback_days', 30)
 
+def get_monitor_data_days(monitor_name: str) -> int:
+    """Check how many distinct days of data exist for a monitor in the metrics table."""
+    try:
+        result = spark.sql(f"""
+            SELECT COUNT(DISTINCT date) as distinct_days
+            FROM {METRICS_TABLE_FQN}
+            WHERE monitor_name = '{monitor_name}'
+        """).collect()
+        return result[0]['distinct_days'] if result and result[0]['distinct_days'] else 0
+    except:
+        return 0
+
 print(f"Config: historical={historical_days}d, refresh={refresh_days}d")
 print("-" * 50)
 
@@ -362,8 +411,14 @@ for monitor in config.monitors:
         reason = "NEW" if not stored_hash else "CHANGED"
         print(f"{monitor.name}: {reason} -> {historical_days}d backfill")
     else:
-        monitor_lookbacks[monitor.name] = refresh_days
-        print(f"{monitor.name}: unchanged -> {refresh_days}d refresh")
+        existing_days = get_monitor_data_days(monitor.name)
+        calibration_days = monitor.rule.calibration_days
+        if existing_days < calibration_days:
+            monitor_lookbacks[monitor.name] = historical_days
+            print(f"{monitor.name}: insufficient data ({existing_days}d < {calibration_days}d) -> {historical_days}d backfill")
+        else:
+            monitor_lookbacks[monitor.name] = refresh_days
+            print(f"{monitor.name}: unchanged ({existing_days}d data) -> {refresh_days}d refresh")
 
 # COMMAND ----------
 
@@ -842,6 +897,289 @@ def evaluate_auto_threshold(
 
 # COMMAND ----------
 
+def evaluate_zero_when_expected(
+    metrics_df: DataFrame,
+    monitor: Monitor,
+    target_date: datetime
+) -> DataFrame:
+    """Alert when today has zero data but same weekday had data for last N weeks."""
+    target_str = target_date.strftime("%Y-%m-%d")
+    rule = monitor.zero_rule
+    
+    monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+    today = monitor_metrics.filter(F.col("date") == target_str)
+    
+    prev_dates = [(target_date - timedelta(days=7*i)).strftime("%Y-%m-%d") 
+                  for i in range(1, rule.lookback_weeks + 1)]
+    
+    historical = monitor_metrics.filter(
+        (F.col("date").isin(prev_dates)) &
+        (F.col("denominator") >= rule.min_denominator)
+    ).groupBy("metric_name", "dimension_key", "dimension_value").agg(
+        F.count("*").alias("weeks_with_data"),
+        F.avg("metric_value").alias("avg_value"),
+        F.avg("denominator").alias("avg_denominator")
+    )
+    
+    compared = today.join(
+        historical,
+        on=["metric_name", "dimension_key", "dimension_value"],
+        how="inner"
+    )
+    
+    alerts = compared.filter(
+        (F.col("denominator") == 0) &
+        (F.col("weeks_with_data") >= rule.min_expected_weeks)
+    )
+    
+    hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
+    hierarchy_expr = F.lit(None).cast("int")
+    for dim_key, level in hierarchy_map.items():
+        hierarchy_expr = F.when(F.col("dimension_key") == dim_key, F.lit(level)).otherwise(hierarchy_expr)
+    
+    return alerts.select(
+        F.lit(target_str).cast("date").alias("date"),
+        "monitor_name", "metric_name", "dimension_key", "dimension_value",
+        F.lit("zero_when_expected").alias("rule_name"),
+        F.lit("critical").alias("severity"),
+        F.lit("missing_data").alias("alert_type"),
+        F.lit(0.0).alias("current_value"),
+        F.col("avg_value").alias("expected_value"),
+        F.lit(None).cast("double").alias("lower_bound"),
+        F.lit(None).cast("double").alias("upper_bound"),
+        F.lit(-100.0).alias("deviation_pct"),
+        F.concat(
+            F.col("metric_name"),
+            F.lit(" has ZERO data but expected ~"),
+            F.format_string("%.0f", F.col("avg_denominator")),
+            F.lit(" records (had data "),
+            F.col("weeks_with_data").cast("string"),
+            F.lit("/"),
+            F.lit(str(rule.lookback_weeks)),
+            F.lit(" weeks)")
+        ).alias("message"),
+        F.lit(False).alias("suppressed"),
+        F.lit(None).cast("string").alias("suppressed_by"),
+        hierarchy_expr.alias("hierarchy_level"),
+        F.lit(None).cast("double").alias("calibrated_k"),
+        F.lit(None).cast("double").alias("residual_std"),
+        F.lit(0.0).alias("denominator_count"),
+        F.current_timestamp().alias("created_at")
+    )
+
+# COMMAND ----------
+
+def evaluate_large_deviation(
+    metrics_df: DataFrame,
+    monitor: Monitor,
+    target_date: datetime
+) -> DataFrame:
+    """Alert when metric drops more than threshold_pct vs 4-week same-weekday average."""
+    target_str = target_date.strftime("%Y-%m-%d")
+    rule = monitor.deviation_rule
+    
+    monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+    today = monitor_metrics.filter(F.col("date") == target_str)
+    
+    prev_dates = [(target_date - timedelta(days=7*i)).strftime("%Y-%m-%d") 
+                  for i in range(1, rule.lookback_weeks + 1)]
+    
+    historical_avg = monitor_metrics.filter(
+        (F.col("date").isin(prev_dates)) &
+        (F.col("denominator") >= rule.min_denominator)
+    ).groupBy("metric_name", "dimension_key", "dimension_value").agg(
+        F.avg("metric_value").alias("avg_value"),
+        F.avg("denominator").alias("avg_denominator"),
+        F.count("*").alias("weeks_with_data")
+    )
+    
+    compared = today.join(
+        historical_avg,
+        on=["metric_name", "dimension_key", "dimension_value"],
+        how="inner"
+    ).withColumn(
+        "change_pct",
+        F.when(F.col("avg_value") != 0,
+            ((F.col("metric_value") - F.col("avg_value")) / F.col("avg_value")) * 100
+        ).otherwise(None)
+    )
+    
+    alerts = compared.filter(
+        (F.col("denominator") >= rule.min_denominator) &
+        (F.col("weeks_with_data") >= 2) &
+        (F.col("change_pct") < -rule.threshold_pct)
+    )
+    
+    hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
+    hierarchy_expr = F.lit(None).cast("int")
+    for dim_key, level in hierarchy_map.items():
+        hierarchy_expr = F.when(F.col("dimension_key") == dim_key, F.lit(level)).otherwise(hierarchy_expr)
+    
+    return alerts.select(
+        F.lit(target_str).cast("date").alias("date"),
+        "monitor_name", "metric_name", "dimension_key", "dimension_value",
+        F.lit("large_deviation").alias("rule_name"),
+        F.lit("critical").alias("severity"),
+        F.lit("large_drop").alias("alert_type"),
+        F.col("metric_value").alias("current_value"),
+        F.col("avg_value").alias("expected_value"),
+        F.lit(None).cast("double").alias("lower_bound"),
+        F.lit(None).cast("double").alias("upper_bound"),
+        F.col("change_pct").alias("deviation_pct"),
+        F.concat(
+            F.col("metric_name"),
+            F.lit(" dropped "),
+            F.format_string("%.1f", F.abs(F.col("change_pct"))),
+            F.lit("% vs 4-week avg ("),
+            F.format_string("%.4f", F.col("metric_value")),
+            F.lit(" vs "),
+            F.format_string("%.4f", F.col("avg_value")),
+            F.lit(")")
+        ).alias("message"),
+        F.lit(False).alias("suppressed"),
+        F.lit(None).cast("string").alias("suppressed_by"),
+        hierarchy_expr.alias("hierarchy_level"),
+        F.lit(None).cast("double").alias("calibrated_k"),
+        F.lit(None).cast("double").alias("residual_std"),
+        F.col("denominator").alias("denominator_count"),
+        F.current_timestamp().alias("created_at")
+    )
+
+# COMMAND ----------
+
+def evaluate_follow_up(
+    metrics_df: DataFrame,
+    monitor: Monitor,
+    target_date: datetime
+) -> DataFrame:
+    """Check yesterday's alerts and report if recovered or still degraded."""
+    target_str = target_date.strftime("%Y-%m-%d")
+    yesterday_str = (target_date - timedelta(days=1)).strftime("%Y-%m-%d")
+    
+    try:
+        yesterday_alerts = spark.table(ALERTS_TABLE_FQN).filter(
+            (F.col("date") == yesterday_str) &
+            (F.col("monitor_name") == monitor.name) &
+            (F.col("suppressed") == False) &
+            (F.col("rule_name") != "follow_up") &
+            (F.col("current_value") < F.col("expected_value"))  # Only follow up on decreases
+        ).select(
+            "metric_name", "dimension_key", "dimension_value",
+            F.col("current_value").alias("yesterday_value"),
+            F.col("expected_value").alias("yesterday_expected"),
+            F.col("rule_name").alias("original_rule")
+        )
+        
+        if yesterday_alerts.rdd.isEmpty():
+            return spark.createDataFrame([], schema=StructType([
+                StructField("date", DateType()),
+                StructField("monitor_name", StringType()),
+                StructField("metric_name", StringType()),
+                StructField("dimension_key", StringType()),
+                StructField("dimension_value", StringType()),
+                StructField("rule_name", StringType()),
+                StructField("severity", StringType()),
+                StructField("alert_type", StringType()),
+                StructField("current_value", DoubleType()),
+                StructField("expected_value", DoubleType()),
+                StructField("lower_bound", DoubleType()),
+                StructField("upper_bound", DoubleType()),
+                StructField("deviation_pct", DoubleType()),
+                StructField("message", StringType()),
+                StructField("suppressed", BooleanType()),
+                StructField("suppressed_by", StringType()),
+                StructField("hierarchy_level", IntegerType()),
+                StructField("calibrated_k", DoubleType()),
+                StructField("residual_std", DoubleType()),
+                StructField("denominator_count", DoubleType()),
+                StructField("created_at", TimestampType())
+            ]))
+    except:
+        return spark.createDataFrame([], schema=StructType([
+            StructField("date", DateType()),
+            StructField("monitor_name", StringType()),
+            StructField("metric_name", StringType()),
+            StructField("dimension_key", StringType()),
+            StructField("dimension_value", StringType()),
+            StructField("rule_name", StringType()),
+            StructField("severity", StringType()),
+            StructField("alert_type", StringType()),
+            StructField("current_value", DoubleType()),
+            StructField("expected_value", DoubleType()),
+            StructField("lower_bound", DoubleType()),
+            StructField("upper_bound", DoubleType()),
+            StructField("deviation_pct", DoubleType()),
+            StructField("message", StringType()),
+            StructField("suppressed", BooleanType()),
+            StructField("suppressed_by", StringType()),
+            StructField("hierarchy_level", IntegerType()),
+            StructField("calibrated_k", DoubleType()),
+            StructField("residual_std", DoubleType()),
+            StructField("denominator_count", DoubleType()),
+            StructField("created_at", TimestampType())
+        ]))
+    
+    monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
+    today = monitor_metrics.filter(F.col("date") == target_str)
+    
+    compared = today.join(
+        yesterday_alerts,
+        on=["metric_name", "dimension_key", "dimension_value"],
+        how="inner"
+    ).withColumn(
+        "recovery_pct",
+        F.when(
+            (F.col("yesterday_expected") != 0) & (F.col("yesterday_value") != F.col("yesterday_expected")),
+            ((F.col("metric_value") - F.col("yesterday_value")) / 
+             (F.col("yesterday_expected") - F.col("yesterday_value"))) * 100
+        ).otherwise(None)
+    ).withColumn(
+        "status",
+        F.when(F.col("recovery_pct") >= 80, "recovered")
+         .when(F.col("recovery_pct") >= 20, "improving")
+         .otherwise("still_degraded")
+    )
+    
+    hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
+    hierarchy_expr = F.lit(None).cast("int")
+    for dim_key, level in hierarchy_map.items():
+        hierarchy_expr = F.when(F.col("dimension_key") == dim_key, F.lit(level)).otherwise(hierarchy_expr)
+    
+    return compared.select(
+        F.lit(target_str).cast("date").alias("date"),
+        "monitor_name", "metric_name", "dimension_key", "dimension_value",
+        F.lit("follow_up").alias("rule_name"),
+        F.lit("info").alias("severity"),
+        F.col("status").alias("alert_type"),
+        F.col("metric_value").alias("current_value"),
+        F.col("yesterday_expected").alias("expected_value"),
+        F.lit(None).cast("double").alias("lower_bound"),
+        F.lit(None).cast("double").alias("upper_bound"),
+        F.col("recovery_pct").alias("deviation_pct"),
+        F.concat(
+            F.lit("FOLLOW-UP: "),
+            F.col("metric_name"),
+            F.lit(" "),
+            F.upper(F.col("status")),
+            F.lit(" ("),
+            F.format_string("%.4f", F.col("metric_value")),
+            F.lit(" today vs "),
+            F.format_string("%.4f", F.col("yesterday_value")),
+            F.lit(" yesterday, expected "),
+            F.format_string("%.4f", F.col("yesterday_expected")),
+            F.lit(")")
+        ).alias("message"),
+        F.lit(False).alias("suppressed"),
+        F.lit(None).cast("string").alias("suppressed_by"),
+        hierarchy_expr.alias("hierarchy_level"),
+        F.lit(None).cast("double").alias("calibrated_k"),
+        F.lit(None).cast("double").alias("residual_std"),
+        F.col("denominator").alias("denominator_count"),
+        F.current_timestamp().alias("created_at")
+    )
+
+# COMMAND ----------
+
 def deduplicate_alerts(alerts_df: DataFrame, hierarchy: List[List[str]]) -> DataFrame:
     """
     Suppress child alerts when a parent level also fires for the same metric.
@@ -918,34 +1256,69 @@ def deduplicate_alerts(alerts_df: DataFrame, hierarchy: List[List[str]]) -> Data
 
 print("Evaluating thresholds...")
 all_alerts = []
+all_followups = []
 
 for monitor in config.monitors:
-    if not monitor.rule.enabled:
-        continue
-
-    k_df = k_values_per_monitor.get(monitor.name)
-    if k_df is None:
-        continue
-
     print(f"\n  {monitor.name}:")
-    raw_alerts = evaluate_auto_threshold(metrics_df, k_df, monitor, target_date)
-    raw_count = raw_alerts.count()
-    print(f"    Raw alerts: {raw_count}")
+    monitor_alerts = []
+    
+    # 1. Auto-threshold (existing)
+    if monitor.rule.enabled:
+        k_df = k_values_per_monitor.get(monitor.name)
+        if k_df is not None:
+            auto_alerts = evaluate_auto_threshold(metrics_df, k_df, monitor, target_date)
+            auto_count = auto_alerts.count()
+            print(f"    auto_threshold: {auto_count} alerts")
+            if auto_count > 0:
+                monitor_alerts.append(auto_alerts)
+    
+    # 2. Zero when expected (NEW)
+    if monitor.zero_rule and monitor.zero_rule.enabled:
+        zero_alerts = evaluate_zero_when_expected(metrics_df, monitor, target_date)
+        zero_count = zero_alerts.count()
+        print(f"    zero_when_expected: {zero_count} alerts")
+        if zero_count > 0:
+            monitor_alerts.append(zero_alerts)
+    
+    # 3. Large deviation (NEW)
+    if monitor.deviation_rule and monitor.deviation_rule.enabled:
+        dev_alerts = evaluate_large_deviation(metrics_df, monitor, target_date)
+        dev_count = dev_alerts.count()
+        print(f"    large_deviation: {dev_count} alerts")
+        if dev_count > 0:
+            monitor_alerts.append(dev_alerts)
+    
+    # 4. Follow-up (NEW) - separate from main alerts
+    if monitor.followup_rule and monitor.followup_rule.enabled:
+        followup_alerts = evaluate_follow_up(metrics_df, monitor, target_date)
+        followup_count = followup_alerts.count()
+        print(f"    follow_up: {followup_count} notifications")
+        if followup_count > 0:
+            all_followups.append(followup_alerts)
+    
+    # Combine and deduplicate for this monitor
+    if monitor_alerts:
+        combined = reduce(DataFrame.unionByName, monitor_alerts)
+        if monitor.hierarchy:
+            deduped = deduplicate_alerts(combined, monitor.hierarchy)
+            active = deduped.filter(F.col("suppressed") == False).count()
+            suppressed = combined.count() - active
+            print(f"    Total: {combined.count()} -> {active} active, {suppressed} suppressed")
+            all_alerts.append(deduped)
+        else:
+            all_alerts.append(combined)
 
-    if raw_count > 0 and monitor.hierarchy:
-        deduped = deduplicate_alerts(raw_alerts, monitor.hierarchy)
-        active = deduped.filter(F.col("suppressed") == False).count()
-        suppressed = raw_count - active
-        print(f"    Active: {active}, Suppressed: {suppressed}")
-        all_alerts.append(deduped)
-    elif raw_count > 0:
-        all_alerts.append(raw_alerts)
+# Add follow-ups to all_alerts (they don't need deduplication)
+if all_followups:
+    followups_combined = reduce(DataFrame.unionByName, all_followups)
+    all_alerts.append(followups_combined)
 
 if all_alerts:
     alerts_df = reduce(DataFrame.unionByName, all_alerts)
     alerts_count = alerts_df.count()
     active_count = alerts_df.filter(F.col("suppressed") == False).count()
-    print(f"\nTotal: {alerts_count} alerts ({active_count} active, {alerts_count - active_count} suppressed)")
+    followup_count = alerts_df.filter(F.col("rule_name") == "follow_up").count()
+    print(f"\nTotal: {alerts_count} alerts ({active_count} active, {alerts_count - active_count} suppressed, {followup_count} follow-ups)")
 else:
     alerts_df = None
     alerts_count = 0
