@@ -1,0 +1,12 @@
+{
+  "name": "livy-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for submitting and managing Livy jobs for ddi-pays-pipelines",
+  "main": "livy_mcp_server.py",
+  "scripts": {
+    "start": "python livy_mcp_server.py"
+  },
+  "keywords": ["mcp", "livy", "spark", "etl", "ddi-pays-pipelines"],
+  "author": "Visal Kumar",
+  "license": "MIT"
+}

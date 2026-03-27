@@ -1,0 +1,16 @@
+[project]
+name = "livy-mcp"
+version = "1.0.0"
+description = "MCP server for submitting and managing Livy jobs for ddi-pays-pipelines"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
