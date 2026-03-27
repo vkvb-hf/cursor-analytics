@@ -190,9 +190,9 @@ def render_report_tab(week: str):
     for fg_name, fg_metrics in groups.items():
         st.markdown(f"## {fg_name}")
         for metric in fg_metrics:
-            render_metric(metric, week)
+            render_metric(metric, week, periods)
 
-def render_metric(metric: Dict, week: str):
+def render_metric(metric: Dict, week: str, periods: Dict):
     name = metric.get("name", "Unknown")
     mtype = metric.get("metric_type", "ratio")
     threshold = metric.get("threshold", 2.5)
@@ -201,6 +201,42 @@ def render_metric(metric: Dict, week: str):
     insights = metric.get("week_comparison", {}).get("deep_insights", {})
     quarter = metric.get("long_term", {}).get("quarter", {})
     yoy = metric.get("long_term", {}).get("yoy", {})
+    
+    # Extract period info
+    latest_week = periods.get("latest_week", "")
+    prev_week = periods.get("prev_week", "")
+    prev_year_week = periods.get("prev_year_week", "")
+    quarter_range = periods.get("quarter_range", "")
+    
+    # Format week header: "2026 W10 vs W11" or "2025 W52 vs 2026 W01" if year changes
+    def format_week_comparison(w1: str, w2: str) -> str:
+        """w1 is latest_week, w2 is prev_week. Show prev vs current."""
+        if not w1 or not w2:
+            return "WEEK"
+        y1, wk1 = w1.split("-") if "-" in w1 else ("", w1)
+        y2, wk2 = w2.split("-") if "-" in w2 else ("", w2)
+        # Show prev vs current (w2 vs w1)
+        if y1 == y2:
+            return f"{y2} {wk2} vs {wk1}"
+        return f"{y2} {wk2} vs {y1} {wk1}"
+    
+    # Format quarter header - use as-is from data, it's pre-formatted
+    def format_quarter_range(qr: str) -> str:
+        if not qr:
+            return "QUARTER"
+        return qr
+    
+    # Format YoY: just show year
+    def format_yoy(prev_yr_wk: str) -> str:
+        if not prev_yr_wk:
+            return "YOY"
+        yr = prev_yr_wk.split("-")[0] if "-" in prev_yr_wk else prev_yr_wk
+        return f"YOY (vs {yr})"
+    
+    week_header = f"📊 {format_week_comparison(latest_week, prev_week)}"
+    insights_header = "🔎 INSIGHTS"
+    quarter_header = "📈 Last 13 Weeks"
+    yoy_header = f"📅 {format_yoy(prev_year_week)}"
     
     st.markdown(f"### {name}")
     
@@ -211,7 +247,7 @@ def render_metric(metric: Dict, week: str):
     with c1:
         st.markdown('<div class="comp-week">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown('<div class="comp-header comp-header-week">📊 WEEK COMPARISON</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="comp-header comp-header-week">{week_header}</div>', unsafe_allow_html=True)
             for cl in clusters:
                 render_cluster(cl, name, mtype, threshold, week)
         st.markdown('</div>', unsafe_allow_html=True)
@@ -220,7 +256,7 @@ def render_metric(metric: Dict, week: str):
     with c2:
         st.markdown('<div class="comp-insights">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown('<div class="comp-header comp-header-insights">🔎 DEEP INSIGHTS</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="comp-header comp-header-insights">{insights_header}</div>', unsafe_allow_html=True)
             render_insights(insights)
         st.markdown('</div>', unsafe_allow_html=True)
     
@@ -228,7 +264,7 @@ def render_metric(metric: Dict, week: str):
     with c3:
         st.markdown('<div class="comp-quarter">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown('<div class="comp-header comp-header-quarter">📈 QUARTER</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="comp-header comp-header-quarter">{quarter_header}</div>', unsafe_allow_html=True)
             if quarter:
                 render_period(quarter)
             else:
@@ -239,7 +275,7 @@ def render_metric(metric: Dict, week: str):
     with c4:
         st.markdown('<div class="comp-yoy">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown('<div class="comp-header comp-header-yoy">📅 YOY</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="comp-header comp-header-yoy">{yoy_header}</div>', unsafe_allow_html=True)
             if yoy:
                 render_period(yoy)
             else:

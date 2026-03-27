@@ -79,7 +79,8 @@ LEVEL 0: CONTEXT & CONFIRMATION (VALIDATION GATE)
 │   └── If YES → Continue to Level 1
 ├── Confirm drop in requested cluster
 ├── Magnitude (pp, relative %, volume)
-├── Trend: outlier or continuation?
+├── Weekly trend: outlier or continuation? (last 8 weeks)
+├── Daily trend: which days drove the change? (last 21 days)
 └── Output: "HF-INTL dropped while HF-NA/US-HF improved"
 
 LEVEL 1: DIMENSION SCAN (only if Level 0 validated)
@@ -152,7 +153,7 @@ GROUP BY reporting_cluster
 ORDER BY change_pp ASC
 ```
 
-### Level 0: Check trend (is this an outlier?)
+### Level 0: Check weekly trend (is this an outlier?)
 ```sql
 SELECT date_value,
   ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as rate_pct,
@@ -166,6 +167,21 @@ WHERE metric_name = '{metric_name}'
 GROUP BY date_value
 ORDER BY date_value DESC
 LIMIT 8
+```
+
+### Level 0: Check daily trend (granular view)
+```sql
+-- Use source_table from lookup, with date_column for daily granularity
+-- If weight_column is set, multiply by weight. Otherwise use SUM directly.
+SELECT date_column as date,
+  ROUND(SUM({numerator} * {weight}) / NULLIF(SUM({denominator} * {weight}), 0) * 100, 2) as rate_pct,
+  SUM({denominator} * {weight}) as volume
+FROM payments_hf.{source_table}
+WHERE {week_field} IN ('{current_week}', '{previous_week}')
+  AND country IN ({country_list})
+GROUP BY date_column
+ORDER BY date_column DESC
+LIMIT 21
 ```
 
 ### Level 1: Dimension Scan
@@ -341,28 +357,33 @@ For Level 2+ queries, use these field mappings based on source_table:
 
 **payments_p0_metrics_checkout_funnel_backend:** (AGGREGATED - multiply by customer_count)
 - weight_column: `customer_count`
+- date_column: `date_column`
 - decline_reason_field: `decline_reason_reporting`
 - Available dimensions: country, payment_method_reporting
 
 **payments_p0_metrics_checkout_funnel:** (AGGREGATED - multiply by customer_count)
 - weight_column: `customer_count`
+- date_column: `date_column`
 - decline_reason_field: N/A
 - provider_field: N/A
 - Available dimensions: country, payment_method_reporting, brand
 
 **payments_p0_metrics_box_candidates:** (AGGREGATED - but numerator/denominator are already counts, no weight needed)
 - weight_column: N/A (fields like order_count, is_payment_approved are already counts)
+- date_column: `date_column`
 - decline_reason_field: `decline_reason_pre_dunning_reporting`
 - provider_field: `first_provider_reporting`
 - Available dimensions: country, payment_method_reporting, order_type_reporting, customer_loyalty_segment
 
 **payments_p0_metrics_dunning:** (AGGREGATED - but numerator/denominator are already counts, no weight needed)
 - weight_column: N/A (fields like order_count, recovery_w0 are already counts)
+- date_column: `date_column`
 - decline_reason_field: N/A
 - Available dimensions: country, loyalty_segment, customer_quality, dunning_execution
 
 **payments_p0_metrics_reactivation_funnel:** (NOT AGGREGATED - customer level, just SUM directly)
 - weight_column: N/A (customer-level table, use SUM(field) directly)
+- date_column: `date_column`
 - decline_reason_field: `decline_reason_reporting`
 - Available dimensions: country, payment_method_first, payment_method_final
 - provider_field: `provider_reporting`
@@ -409,13 +430,21 @@ Generate a comprehensive markdown report with this structure:
 
 **Finding**: [Summary of cluster comparison]
 
-### Trend ({cluster})
+### Weekly Trend ({cluster})
 
 | Week | Rate | Volume | Trend |
 |------|------|--------|-------|
 (last 8 weeks)
 
 **Finding**: [Is this an outlier or continuation?]
+
+### Daily Trend ({cluster})
+
+| Date | Rate | Volume | Trend |
+|------|------|--------|-------|
+(last 21 days from source table)
+
+**Finding**: [Which specific days drove the change? Was it gradual or sudden?]
 
 ---
 
