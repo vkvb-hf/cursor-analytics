@@ -1049,12 +1049,41 @@ def evaluate_large_deviation(
 
 def evaluate_follow_up(
     metrics_df: DataFrame,
+    today_alerts_df: Optional[DataFrame],
     monitor: Monitor,
     target_date: datetime
 ) -> DataFrame:
-    """Check yesterday's alerts and report if recovered or still degraded."""
+    """Check yesterday's alerts and report if recovered or still degraded.
+    
+    Recovery logic: If today has an alert for the same (metric, dimension), 
+    it's still_degraded. Otherwise, it's recovered.
+    """
     target_str = target_date.strftime("%Y-%m-%d")
     yesterday_str = (target_date - timedelta(days=1)).strftime("%Y-%m-%d")
+    
+    empty_schema = StructType([
+        StructField("date", DateType()),
+        StructField("monitor_name", StringType()),
+        StructField("metric_name", StringType()),
+        StructField("dimension_key", StringType()),
+        StructField("dimension_value", StringType()),
+        StructField("rule_name", StringType()),
+        StructField("severity", StringType()),
+        StructField("alert_type", StringType()),
+        StructField("current_value", DoubleType()),
+        StructField("expected_value", DoubleType()),
+        StructField("lower_bound", DoubleType()),
+        StructField("upper_bound", DoubleType()),
+        StructField("deviation_pct", DoubleType()),
+        StructField("message", StringType()),
+        StructField("suppressed", BooleanType()),
+        StructField("suppressed_by", StringType()),
+        StructField("hierarchy_level", IntegerType()),
+        StructField("calibrated_k", DoubleType()),
+        StructField("residual_std", DoubleType()),
+        StructField("denominator_count", DoubleType()),
+        StructField("created_at", TimestampType())
+    ])
     
     try:
         yesterday_alerts = spark.table(ALERTS_TABLE_FQN).filter(
@@ -1062,7 +1091,7 @@ def evaluate_follow_up(
             (F.col("monitor_name") == monitor.name) &
             (F.col("suppressed") == False) &
             (F.col("rule_name") != "follow_up") &
-            (F.col("current_value") < F.col("expected_value"))  # Only follow up on decreases
+            (F.col("current_value") < F.col("expected_value"))
         ).select(
             "metric_name", "dimension_key", "dimension_value",
             F.col("current_value").alias("yesterday_value"),
@@ -1071,73 +1100,79 @@ def evaluate_follow_up(
         )
         
         if yesterday_alerts.rdd.isEmpty():
-            return spark.createDataFrame([], schema=StructType([
-                StructField("date", DateType()),
-                StructField("monitor_name", StringType()),
-                StructField("metric_name", StringType()),
-                StructField("dimension_key", StringType()),
-                StructField("dimension_value", StringType()),
-                StructField("rule_name", StringType()),
-                StructField("severity", StringType()),
-                StructField("alert_type", StringType()),
-                StructField("current_value", DoubleType()),
-                StructField("expected_value", DoubleType()),
-                StructField("lower_bound", DoubleType()),
-                StructField("upper_bound", DoubleType()),
-                StructField("deviation_pct", DoubleType()),
-                StructField("message", StringType()),
-                StructField("suppressed", BooleanType()),
-                StructField("suppressed_by", StringType()),
-                StructField("hierarchy_level", IntegerType()),
-                StructField("calibrated_k", DoubleType()),
-                StructField("residual_std", DoubleType()),
-                StructField("denominator_count", DoubleType()),
-                StructField("created_at", TimestampType())
-            ]))
+            return spark.createDataFrame([], schema=empty_schema)
     except:
-        return spark.createDataFrame([], schema=StructType([
-            StructField("date", DateType()),
-            StructField("monitor_name", StringType()),
-            StructField("metric_name", StringType()),
-            StructField("dimension_key", StringType()),
-            StructField("dimension_value", StringType()),
-            StructField("rule_name", StringType()),
-            StructField("severity", StringType()),
-            StructField("alert_type", StringType()),
-            StructField("current_value", DoubleType()),
-            StructField("expected_value", DoubleType()),
-            StructField("lower_bound", DoubleType()),
-            StructField("upper_bound", DoubleType()),
-            StructField("deviation_pct", DoubleType()),
-            StructField("message", StringType()),
-            StructField("suppressed", BooleanType()),
-            StructField("suppressed_by", StringType()),
-            StructField("hierarchy_level", IntegerType()),
-            StructField("calibrated_k", DoubleType()),
-            StructField("residual_std", DoubleType()),
-            StructField("denominator_count", DoubleType()),
-            StructField("created_at", TimestampType())
-        ]))
+        return spark.createDataFrame([], schema=empty_schema)
     
+    # Get today's metrics
     monitor_metrics = metrics_df.filter(F.col("monitor_name") == monitor.name)
-    today = monitor_metrics.filter(F.col("date") == target_str)
+    today_metrics = monitor_metrics.filter(F.col("date") == target_str)
     
-    compared = today.join(
-        yesterday_alerts,
+    # Calculate today's 4-week same-weekday average for comparison
+    rule = monitor.deviation_rule
+    if rule and rule.enabled:
+        lookback_weeks = rule.lookback_weeks
+        threshold_pct = rule.threshold_pct
+    else:
+        lookback_weeks = 4
+        threshold_pct = 50.0
+    
+    prev_dates = [(target_date - timedelta(days=7*i)).strftime("%Y-%m-%d") 
+                  for i in range(1, lookback_weeks + 1)]
+    
+    historical_avg = monitor_metrics.filter(
+        F.col("date").isin(prev_dates)
+    ).groupBy("metric_name", "dimension_key", "dimension_value").agg(
+        F.avg("metric_value").alias("today_4wk_avg")
+    )
+    
+    # Join yesterday's alerts with today's metrics and historical average
+    compared = yesterday_alerts.join(
+        today_metrics.select(
+            "metric_name", "dimension_key", "dimension_value",
+            F.col("metric_value").alias("today_value"),
+            "denominator", "monitor_name"
+        ),
         on=["metric_name", "dimension_key", "dimension_value"],
         how="inner"
-    ).withColumn(
-        "recovery_pct",
+    ).join(
+        historical_avg,
+        on=["metric_name", "dimension_key", "dimension_value"],
+        how="left"
+    )
+    
+    # Calculate today's deviation from 4-week average
+    compared = compared.withColumn(
+        "today_deviation_pct",
         F.when(
-            (F.col("yesterday_expected") != 0) & (F.col("yesterday_value") != F.col("yesterday_expected")),
-            ((F.col("metric_value") - F.col("yesterday_value")) / 
-             (F.col("yesterday_expected") - F.col("yesterday_value"))) * 100
+            F.col("today_4wk_avg").isNotNull() & (F.col("today_4wk_avg") != 0),
+            ((F.col("today_value") - F.col("today_4wk_avg")) / F.col("today_4wk_avg")) * 100
         ).otherwise(None)
-    ).withColumn(
+    )
+    
+    # Check if today has an alert for the same dimension (excluding follow-ups)
+    if today_alerts_df is not None:
+        today_alert_dims = today_alerts_df.filter(
+            (F.col("monitor_name") == monitor.name) &
+            (F.col("rule_name") != "follow_up") &
+            (F.col("suppressed") == False)
+        ).select(
+            "metric_name", "dimension_key", "dimension_value",
+            F.lit(True).alias("has_today_alert")
+        ).distinct()
+        
+        compared = compared.join(
+            today_alert_dims,
+            on=["metric_name", "dimension_key", "dimension_value"],
+            how="left"
+        ).fillna({"has_today_alert": False})
+    else:
+        compared = compared.withColumn("has_today_alert", F.lit(False))
+    
+    # Status based on whether alert exists today
+    compared = compared.withColumn(
         "status",
-        F.when(F.col("recovery_pct") >= 80, "recovered")
-         .when(F.col("recovery_pct") >= 20, "improving")
-         .otherwise("still_degraded")
+        F.when(F.col("has_today_alert") == True, "still_degraded").otherwise("recovered")
     )
     
     hierarchy_map = {(",".join(d) if d else "global"): i for i, d in enumerate(monitor.hierarchy)}
@@ -1145,29 +1180,32 @@ def evaluate_follow_up(
     for dim_key, level in hierarchy_map.items():
         hierarchy_expr = F.when(F.col("dimension_key") == dim_key, F.lit(level)).otherwise(hierarchy_expr)
     
+    # Build message with percentages
+    # Format: "Metric Name STATUS (X.X% today vs Y.Y% yesterday | 4-wk avg: Z.Z% | deviation: +/-W.W%)"
     return compared.select(
         F.lit(target_str).cast("date").alias("date"),
         "monitor_name", "metric_name", "dimension_key", "dimension_value",
         F.lit("follow_up").alias("rule_name"),
         F.lit("info").alias("severity"),
         F.col("status").alias("alert_type"),
-        F.col("metric_value").alias("current_value"),
-        F.col("yesterday_expected").alias("expected_value"),
+        F.col("today_value").alias("current_value"),
+        F.col("today_4wk_avg").alias("expected_value"),
         F.lit(None).cast("double").alias("lower_bound"),
         F.lit(None).cast("double").alias("upper_bound"),
-        F.col("recovery_pct").alias("deviation_pct"),
+        F.col("today_deviation_pct").alias("deviation_pct"),
         F.concat(
-            F.lit("FOLLOW-UP: "),
-            F.col("metric_name"),
+            F.initcap(F.regexp_replace(F.col("metric_name"), "_", " ")),
             F.lit(" "),
             F.upper(F.col("status")),
             F.lit(" ("),
-            F.format_string("%.4f", F.col("metric_value")),
-            F.lit(" today vs "),
-            F.format_string("%.4f", F.col("yesterday_value")),
-            F.lit(" yesterday, expected "),
-            F.format_string("%.4f", F.col("yesterday_expected")),
-            F.lit(")")
+            F.format_string("%.1f", F.col("today_value") * 100),
+            F.lit("% today vs "),
+            F.format_string("%.1f", F.col("yesterday_value") * 100),
+            F.lit("% yesterday | 4-wk avg: "),
+            F.coalesce(F.format_string("%.1f", F.col("today_4wk_avg") * 100), F.lit("N/A")),
+            F.lit("% | deviation: "),
+            F.coalesce(F.format_string("%+.1f", F.col("today_deviation_pct")), F.lit("N/A")),
+            F.lit("%)")
         ).alias("message"),
         F.lit(False).alias("suppressed"),
         F.lit(None).cast("string").alias("suppressed_by"),
@@ -1256,7 +1294,6 @@ def deduplicate_alerts(alerts_df: DataFrame, hierarchy: List[List[str]]) -> Data
 
 print("Evaluating thresholds...")
 all_alerts = []
-all_followups = []
 
 for monitor in config.monitors:
     print(f"\n  {monitor.name}:")
@@ -1288,14 +1325,6 @@ for monitor in config.monitors:
         if dev_count > 0:
             monitor_alerts.append(dev_alerts)
     
-    # 4. Follow-up (NEW) - separate from main alerts
-    if monitor.followup_rule and monitor.followup_rule.enabled:
-        followup_alerts = evaluate_follow_up(metrics_df, monitor, target_date)
-        followup_count = followup_alerts.count()
-        print(f"    follow_up: {followup_count} notifications")
-        if followup_count > 0:
-            all_followups.append(followup_alerts)
-    
     # Combine and deduplicate for this monitor
     if monitor_alerts:
         combined = reduce(DataFrame.unionByName, monitor_alerts)
@@ -1308,19 +1337,31 @@ for monitor in config.monitors:
         else:
             all_alerts.append(combined)
 
-# Add follow-ups to all_alerts (they don't need deduplication)
-if all_followups:
-    followups_combined = reduce(DataFrame.unionByName, all_followups)
-    all_alerts.append(followups_combined)
-
+# Combine all alerts first (needed for follow-up evaluation)
 if all_alerts:
     alerts_df = reduce(DataFrame.unionByName, all_alerts)
+else:
+    alerts_df = None
+
+# Now evaluate follow-ups with access to today's alerts
+print("\nEvaluating follow-ups...")
+for monitor in config.monitors:
+    if monitor.followup_rule and monitor.followup_rule.enabled:
+        followup_alerts = evaluate_follow_up(metrics_df, alerts_df, monitor, target_date)
+        followup_count = followup_alerts.count()
+        if followup_count > 0:
+            print(f"  {monitor.name}: {followup_count} follow-ups")
+            if alerts_df is not None:
+                alerts_df = alerts_df.unionByName(followup_alerts)
+            else:
+                alerts_df = followup_alerts
+
+if alerts_df is not None:
     alerts_count = alerts_df.count()
     active_count = alerts_df.filter(F.col("suppressed") == False).count()
     followup_count = alerts_df.filter(F.col("rule_name") == "follow_up").count()
     print(f"\nTotal: {alerts_count} alerts ({active_count} active, {alerts_count - active_count} suppressed, {followup_count} follow-ups)")
 else:
-    alerts_df = None
     alerts_count = 0
     print("\nNo alerts generated")
 
