@@ -1806,7 +1806,7 @@ def build_slack_summary(alerts_rows: list, target_date: datetime) -> str:
     
     # Only show downward trends (declines)
     if not downward_alerts:
-        return f"*No declining alerts for {date_str}* ✅\n_{len(active_alerts)} increases, {suppressed_count} suppressed_"
+        return None  # No declining alerts - caller should skip notification
     
     # Recalculate counts for downward only
     downward_critical = len([r for r in downward_alerts if r["severity"] == "critical"])
@@ -1842,6 +1842,54 @@ def get_slack_bot_token() -> Optional[str]:
         widget_token = dbutils.widgets.get("slack_bot_token")
         return widget_token if widget_token else None
 
+def send_followup_notifications(followup_alerts: list, target_date: datetime, config: Config, bot_token: str):
+    """Post follow-up alerts as replies to the original alert's thread from yesterday."""
+    yesterday_str = (target_date - timedelta(days=1)).strftime("%Y-%m-%d")
+    
+    active_followups = [r for r in followup_alerts if not r["suppressed"]]
+    if not active_followups:
+        print("No active follow-up alerts")
+        return
+    
+    widget_channel = dbutils.widgets.get("slack_channel")
+    if widget_channel:
+        channels = [widget_channel]
+    else:
+        channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
+    
+    status_emoji = {
+        "recovered": "white_check_mark",
+        "improving": "arrow_up",
+        "still_degraded": "warning"
+    }
+    
+    for channel in channels:
+        thread_ts = get_thread_ts(yesterday_str, channel)
+        if not thread_ts:
+            print(f"No thread found for {yesterday_str} in {channel} - skipping follow-ups")
+            continue
+        
+        posted_count = 0
+        for alert in active_followups:
+            try:
+                status = alert["alert_type"]
+                emoji = status_emoji.get(status, "bell")
+                dim_value = alert["dimension_value"]
+                if dim_value and dim_value != "global":
+                    dim_value = dim_value.replace(",", "/")
+                else:
+                    dim_value = "(all)"
+                
+                msg = f":{emoji}: *FOLLOW-UP* [{dim_value}]: {alert['message']}"
+                
+                post_to_slack(channel, msg, bot_token, thread_ts=thread_ts)
+                posted_count += 1
+            except Exception as e:
+                print(f"  └─ Failed to post follow-up for {alert['dimension_value']}: {e}")
+        
+        if posted_count > 0:
+            print(f"Posted {posted_count} follow-ups to {channel} thread ({yesterday_str})")
+
 def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config: Config):
     """Send Slack notifications for alerts. Can be called independently."""
     if alerts_df is None:
@@ -1855,12 +1903,9 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
         print("No alerts to notify")
         return
     
-    active_alerts = [r for r in all_alerts if not r["suppressed"]]
-    active_count = len(active_alerts)
-    
-    if active_count == 0:
-        print("No active alerts - skipping Slack notification")
-        return
+    # Separate follow-ups from regular alerts
+    regular_alerts = [r for r in all_alerts if r["rule_name"] != "follow_up"]
+    followup_alerts = [r for r in all_alerts if r["rule_name"] == "follow_up"]
     
     bot_token = get_slack_bot_token()
     if not bot_token:
@@ -1868,8 +1913,23 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
         print("Set via: dbutils.secrets(scope='slack', key='pa-bot-token') or widget 'slack_bot_token'")
         return
     
-    # Build message from collected rows
-    slack_message = build_slack_summary(all_alerts, target_date)
+    # Handle follow-ups first (reply to yesterday's thread)
+    if followup_alerts:
+        send_followup_notifications(followup_alerts, target_date, config, bot_token)
+    
+    # Check if there are any active regular alerts
+    active_regular = [r for r in regular_alerts if not r["suppressed"]]
+    if not active_regular:
+        print("No active regular alerts - skipping main notification")
+        return
+    
+    # Build message from regular alerts only
+    slack_message = build_slack_summary(regular_alerts, target_date)
+    
+    # If no declining alerts, skip notification
+    if slack_message is None:
+        print("No declining alerts - skipping main notification")
+        return
     
     # Use widget channel if specified, otherwise fall back to config default
     widget_channel = dbutils.widgets.get("slack_channel")
@@ -1878,14 +1938,14 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
     else:
         alert_channels = config.defaults.get("alert_channels", ["#growth-pa-payments-alerts"])
     
-    critical_count = len([r for r in active_alerts if r["severity"] == "critical"])
+    critical_count = len([r for r in active_regular if r["severity"] == "critical"])
     severity = "error" if critical_count > 0 else "warning"
     
     date_str = target_date.strftime("%Y-%m-%d")
     prev_week_str = (target_date - timedelta(days=7)).strftime("%Y-%m-%d")
     
-    # Get declining alerts for diagnosis
-    declining_alerts = [r for r in active_alerts if r["deviation_pct"] is not None and r["deviation_pct"] < 0]
+    # Get declining alerts for diagnosis (from regular alerts only)
+    declining_alerts = [r for r in active_regular if r["deviation_pct"] is not None and r["deviation_pct"] < 0]
     
     # Sort declining alerts to match summary order (grouped by metric, then by deviation)
     from collections import defaultdict
@@ -1909,14 +1969,14 @@ def send_slack_notifications(alerts_df: DataFrame, target_date: datetime, config
                 severity=severity,
                 details={
                     "Source": ALERTS_TABLE_FQN,
-                    "Active Alerts": str(active_count),
+                    "Active Alerts": str(len(active_regular)),
                     "Run Date": date_str
                 }
             )
             parent_ts = result.get("ts")
             print(f"Slack alert sent to {channel} (ts: {parent_ts})")
             
-            # Save thread_ts for later replies
+            # Save thread_ts for later replies (including tomorrow's follow-ups)
             if parent_ts:
                 try:
                     save_thread_ts(date_str, channel, parent_ts, "summary")
