@@ -13,30 +13,28 @@ Backend: 29.06% → 28.33% (-0.73pp, -2.5% change)
 
 ## Executive Summary
 
-**Overall:** PCR declined in W14, with GA showing a minor drop of -0.15pp (30.03% → 29.88%) while Backend experienced a more significant decline of -0.73pp (29.06% → 28.33%) on ~35K payment visits.
+**Overall:** PCR declined in W14, with GA showing -0.15pp (29.88%) and Backend showing -0.73pp (28.33%), on reduced volume of ~35K payment visits (-8.1% WoW).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | GA entry rate | -0.26pp | ⚠️ |
-| Click Submit Form | Form submission | +0.09pp | ✅ |
-| FE Validation Passed | Client validation | +0.21pp | ✅ |
-| Enter Fraud Service | Fraud check entry | +0.21pp | ✅ |
-| Approved by Fraud Service | Fraud approval | -0.11pp | ✅ |
-| Call to PVS | PVS routing | -0.52pp | ⚠️ |
-| PVS Attempt (Backend) | PVS attempt rate | -9.71pp | ⚠️ |
-| PVS Success | Payment verification | -0.05pp | ✅ |
-| Successful Checkout | Final conversion | +0.25pp | ✅ |
+| Select Payment Method | Threshold ±0.07pp | -0.26pp | ⚠️ |
+| Click Submit Form | Threshold ±0.07pp | +0.09pp | ⚠️ |
+| FE Validation Passed | Threshold ±0.07pp | +0.21pp | ✅ |
+| Enter Fraud Service | Threshold ±0.07pp | +0.21pp | ✅ |
+| Approved by Fraud Service | Threshold ±0.07pp | -0.11pp | ⚠️ |
+| Call to PVS | Threshold ±0.07pp | -0.52pp | ⚠️ |
+| Successful Checkout | Threshold ±0.07pp | +0.25pp | ✅ |
 
 **Key Findings:**
-- **Critical Backend Issue:** PVS Attempt rate dropped significantly by -9.71pp (98.79% → 89.07%), indicating a major gap between fraud approval and payment verification attempts
-- **Braintree_CreditCard degradation:** Success rate declined -2.58pp (90.20% → 87.62%), the largest drop among high-volume payment methods
-- **Braintree_Paypal decline:** Conversion dropped -1.73pp (92.11% → 90.38%) with increased "Funding Instrument Declined" errors
-- **CVC-related failures increased:** "Failed Verification: Refused(CVC Declined)" errors jumped from 10 to 21 (+11), suggesting potential card validation issues
-- **Volume decline:** Overall payment visits dropped -8.1% (38,531 → 35,420), reducing the absolute impact of rate changes
+- **Call to PVS drop (-0.52pp):** The largest GA funnel degradation occurred between Fraud Approval and PVS call, with Backend showing a severe -9.71pp drop in PVS Attempt rate (98.79% → 89.07%), indicating a potential system issue routing approved transactions to payment verification.
+- **Braintree_CreditCard underperformance:** Success rate dropped -2.58pp (90.20% → 87.62%), the worst decline among major payment methods.
+- **Braintree_Paypal decline:** Success rate fell -1.73pp (92.11% → 90.38%), with PayPal-related FE errors (PAYPAL_POPUP_CLOSED) increasing slightly (+0.63pp share).
+- **CVC-related PVS failures increased:** "Refused(CVC Declined)" errors rose from 10 to 21 cases (+5.58pp share), suggesting potential card validation issues.
+- **Volume decline across all steps:** Payment visits dropped -8.1% WoW, though conversion rates within most steps remained stable or improved slightly.
 
-**Action:** **Investigate** — The -9.71pp drop in Backend PVS Attempt rate requires immediate investigation to identify why approved fraud checks are not proceeding to payment verification. Additionally, review Braintree_CreditCard processor performance and the spike in CVC decline errors.
+**Action:** **Investigate** - The significant gap between Backend Fraud Approval and PVS Attempt (-9.71pp) requires immediate technical investigation to identify why approved transactions are not reaching payment verification. Additionally, review Braintree_CreditCard processor performance and the increase in CVC decline errors.
 
 ---
 
@@ -94,14 +92,28 @@ Backend: 29.06% → 28.33% (-0.73pp, -2.5% change)
 
 *Included because FE Validation Passed Δ Conv (+0.21pp) meets threshold (+0.07pp)*
 
-| Error Type | 2026-W13 | 2026-W14 | Δ |
-| ---------- | ----------- | --------------- | - |
-| APPLEPAY_DISMISSED | 1,409 | 1,217 | -192 |
-| terms_not_accepted | 808 | 751 | -57 |
-| PAYPAL_POPUP_CLOSED | 283 | 263 | -20 |
-| CC_TOKENISE_ERR | 40 | 30 | -10 |
-| PAYPAL_TOKENISE_ERR | 32 | 27 | -5 |
-| VENMO_TOKENISE_ERR | 0 | 1 | +1 |
+### Recovery Rate
+
+| Metric | 2026-W13 | 2026-W14 | Δ |
+|--------|-------------|-----------------|---|
+| Customers with FE Error | 2,068 | 1,837 | -231 |
+| Error → Passed | 1,209 | 1,079 | -130 |
+| **Recovery Rate** | **58.46%** | **58.74%** | **+0.27pp** |
+
+*Recovery Rate = Customers who had error but still passed / Customers with FE Error*
+
+### Error Type Distribution
+
+| Error Type | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ % |
+| ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
+| APPLEPAY_DISMISSED | 1,409 | 68.1% | 1,217 | 66.2% | -1.88pp |
+| terms_not_accepted | 808 | 39.1% | 751 | 40.9% | +1.81pp |
+| PAYPAL_POPUP_CLOSED | 283 | 13.7% | 263 | 14.3% | +0.63pp |
+| CC_TOKENISE_ERR | 40 | 1.9% | 30 | 1.6% | -0.30pp |
+| PAYPAL_TOKENISE_ERR | 32 | 1.5% | 27 | 1.5% | -0.08pp |
+| VENMO_TOKENISE_ERR | 0 | 0.0% | 1 | 0.1% | +0.05pp |
+
+*% of Errors = Error Type Count / Customers with FE Error (can exceed 100% as customers may have multiple error types)*
 
 ---
 
@@ -109,14 +121,28 @@ Backend: 29.06% → 28.33% (-0.73pp, -2.5% change)
 
 *Included because Enter FS Δ (+0.21pp) meets threshold (+0.07pp)*
 
-**Gap (Checkout Attempt → Enter Fraud Service):**
+### Gap (Checkout Attempt → Enter Fraud Service)
 
-| Week | Checkout Attempt | Enter FS | Gap | Gap % |
-| ---- | ---------------- | -------- | --- | ----- |
-| 2026-W13 | 14,782 | 14,732 | 50 | 0.34% |
-| 2026-W14 | 13,713 | 13,666 | 47 | 0.34% |
-| **Δ** | -1,069 | -1,066 | -3 | +0.00pp |
+| Metric | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
+|--------|-------------|---------------|-----------------|-------------------|---------|-----|
+| Checkout Attempt | 14,782 | - | 13,713 | - | -1,069 | -7.2% |
+| Enter Fraud Service | 14,732 | - | 13,666 | - | -1,066 | -7.2% |
+| **Gap (Skipped)** | **50** | **0.34%** | **47** | **0.34%** | **-3** | **+0.00pp** |
 
+*Gap % = Gap / Checkout Attempt*
+
+### Gap by Payment Method
+
+| Payment Method | 2026-W13 Gap | 2026-W13 % | 2026-W14 Gap | 2026-W14 % | Δ Count | Δ % |
+|----------------|-----------------|---------------|---------------------|-------------------|---------|-----|
+| Braintree_CreditCard | 16 | 32.7% | 19 | 41.3% | +3 | +8.65pp |
+| Braintree_ApplePay | 8 | 16.3% | 9 | 19.6% | +1 | +3.24pp |
+| Adyen_CreditCard | 8 | 16.3% | 7 | 15.2% | -1 | -1.11pp |
+| Braintree_Paypal | 10 | 20.4% | 6 | 13.0% | -4 | -7.36pp |
+| ProcessOut_CreditCard | 7 | 14.3% | 5 | 10.9% | -2 | -3.42pp |
+| **Total** | **49** | **100%** | **46** | **100%** | **-3** | - |
+
+*% of Gap = Payment Method Gap / Total Gap*
 
 ---
 
@@ -124,23 +150,24 @@ Backend: 29.06% → 28.33% (-0.73pp, -2.5% change)
 
 *Included because PVS Success Δ Conv (+0.25pp) meets threshold (+0.07pp)*
 
-| Decline Reason | 2026-W13 | 2026-W14 | Δ |
-| -------------- | ----------- | --------------- | - |
-| Failed Verification: Insufficient Funds | 62 | 42 | -20 |
-| Blocked Verification: Payment method is blocked due to business reasons | 38 | 40 | +2 |
-| Failed Verification: Refused(CVC Declined) | 10 | 21 | +11 |
-| Failed Verification: Card Issuer Declined CVV | 25 | 21 | -4 |
-| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 29 | 20 | -9 |
-| Failed Verification: Refused(FRAUD) | 20 | 16 | -4 |
-| Failed Verification: Cannot Authorize at this time (Policy) | 14 | 16 | +2 |
-| Failed Verification: Declined - Call Issuer | 12 | 15 | +3 |
-| Failed Verification: Processor Declined | 12 | 14 | +2 |
-| Failed Verification: Refused(Refused) | 14 | 9 | -5 |
+| Decline Reason | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
+| -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
+| Failed Verification: Insufficient Funds | 62 | 26.3% | 42 | 19.6% | -20 | -6.65pp |
+| Blocked Verification: Payment method is blocked due to business reasons | 38 | 16.1% | 40 | 18.7% | +2 | +2.59pp |
+| Failed Verification: Refused(CVC Declined) | 10 | 4.2% | 21 | 9.8% | +11 | +5.58pp |
+| Failed Verification: Card Issuer Declined CVV | 25 | 10.6% | 21 | 9.8% | -4 | -0.78pp |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 29 | 12.3% | 20 | 9.3% | -9 | -2.94pp |
+| Failed Verification: Refused(FRAUD) | 20 | 8.5% | 16 | 7.5% | -4 | -1.00pp |
+| Failed Verification: Cannot Authorize at this time (Policy) | 14 | 5.9% | 16 | 7.5% | +2 | +1.54pp |
+| Failed Verification: Declined - Call Issuer | 12 | 5.1% | 15 | 7.0% | +3 | +1.92pp |
+| Failed Verification: Processor Declined | 12 | 5.1% | 14 | 6.5% | +2 | +1.46pp |
+| Failed Verification: Refused(Refused) | 14 | 5.9% | 9 | 4.2% | -5 | -1.73pp |
+| **Total PVS Failures** | **236** | **100%** | **214** | **100%** | **-22** | - |
 
 ---
 ## Conclusion
 
-The PCR decline in W14 is primarily driven by a significant Backend issue where the PVS Attempt rate dropped by 9.71pp, indicating a substantial number of transactions are failing to reach payment verification after fraud approval. While the GA funnel shows relatively stable performance with only minor drops at entry (-0.26pp) and PVS routing (-0.52pp), the Backend data reveals a systemic issue that warrants immediate technical investigation. The combination of this routing gap and payment method-specific declines (particularly Braintree_CreditCard at -2.58pp) suggests both infrastructure and processor-level issues need to be addressed.
+The W14 PCR decline is primarily driven by a significant Backend funnel gap between Fraud Service approval and PVS attempt, where conversion dropped -9.71pp, suggesting a technical routing issue that prevented approved transactions from proceeding to payment verification. While GA-level step conversions show relatively minor fluctuations, the Backend data reveals the core problem requiring engineering investigation. Secondary concerns include degraded performance on Braintree_CreditCard (-2.58pp) and increased CVC-related payment verification failures.
 
 ---
 
@@ -235,6 +262,45 @@ WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_dat
   AND f.country IN (SELECT country FROM countries)
 GROUP BY 1, 2
 ORDER BY hellofresh_week, checkout_attempt DESC
+
+```
+
+</details>
+
+<details>
+<summary>FE Recovery Rate</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'WL' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
+  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
+  WHERE iso_year_week <= (SELECT affected_week FROM params)
+  QUALIFY iso_year_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+)
+SELECT
+  d.iso_year_week AS hellofresh_week,
+  SUM(is_click) AS click_submit,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 THEN 1 ELSE 0 END) AS customers_with_fe_error,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 1 THEN 1 ELSE 0 END) AS error_then_passed,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 0 THEN 1 ELSE 0 END) AS error_not_passed
+FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
+JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
+CROSS JOIN weeks w
+WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
+  AND f.country IN (SELECT country FROM countries)
+GROUP BY 1
+ORDER BY hellofresh_week
 
 ```
 

@@ -13,7 +13,7 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 
 ## Executive Summary
 
-**Overall:** PCR declined modestly in 2026-W14, with GA showing -0.37pp (26.77% → 26.40%) and Backend showing -0.09pp (28.36% → 28.28%) on ~44K payment visits.
+**Overall:** PCR declined by -0.37pp (26.77% → 26.40%) in GA tracking, while Backend showed a minimal decline of -0.09pp (28.36% → 28.28%), indicating the drop is primarily driven by upper-funnel behavior captured in GA.
 
 **Funnel Analysis:**
 
@@ -22,21 +22,19 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 | Select Payment Method | GA entry rate | -0.42pp | ⚠️ |
 | Click Submit Form | Click-through | +0.02pp | ✅ |
 | FE Validation Passed | Validation rate | -0.41pp | ⚠️ |
-| Enter Fraud Service | Handoff rate | +0.11pp | ✅ |
-| Approved by Fraud Service | Approval rate | -0.00pp | ✅ |
-| Call to PVS | PVS call rate | -0.23pp | ⚠️ |
+| Enter Fraud Service | Routing | +0.11pp | ✅ |
+| Approved by Fraud Service | Fraud approval | -0.00pp | ✅ |
+| Call to PVS | PVS routing | -0.23pp | ⚠️ |
 | Successful Checkout | Final conversion | +0.26pp | ✅ |
-| Backend: Checkout Attempt | Entry rate | -0.99pp | ⚠️ |
-| Backend: Fraud Approval | Approval rate | +2.75pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel weakness:** Select Payment Method conversion dropped -0.42pp (37.60% → 37.18%), contributing most to the GA PCR decline
-- **FE Validation errors improved:** Despite -0.41pp conversion drop, "terms_not_accepted" errors decreased significantly (-230), suggesting the issue may be volume-related rather than error-driven
-- **Payment method performance improved:** ProcessOut_CreditCard success rate increased +3.21pp (79.29% → 82.50%) and Braintree_ApplePay improved +2.28pp (75.72% → 78.00%)
-- **Backend fraud approval strengthened:** +2.75pp improvement (89.15% → 91.91%) indicates healthier traffic quality or improved fraud model performance
-- **PVS errors declined:** Most decline reasons showed decreases, including "Blocked Verification" (-36) and "Insufficient Funds" (-8), though "Fraud Suspected" increased (+9)
+- **Select Payment Method drop (-0.42pp):** Entry rate to payment selection declined from 37.60% to 37.18%, contributing to overall volume reduction
+- **FE Validation degradation (-0.41pp, -1.31pp recovery rate):** Recovery rate dropped from 75.67% to 74.36%; "terms_not_accepted" errors decreased (-4.50pp share) while "APPLEPAY_DISMISSED" remained stable (50.8%)
+- **ProcessOut_CreditCard improved significantly (+3.21pp):** Success rate increased from 79.29% to 82.50%, partially offsetting other declines
+- **Backend Checkout Attempt drop (-0.99pp):** Checkout attempt rate declined from 36.46% to 35.46%, indicating pre-checkout abandonment
+- **Fraud Service approval improved in Backend (+2.75pp):** Approval rate increased from 89.15% to 91.91%, a positive signal
 
-**Action:** **Monitor** — The decline is minor (-0.37pp GA) and partially offset by improvements in payment method success rates and fraud approval. No escalation needed unless the top-of-funnel drop persists in W15.
+**Action:** **Monitor** - The decline is modest (-0.37pp) with compensating improvements in payment method success rates and fraud approval. Continue tracking FE validation recovery rate and Select Payment Method entry rate for sustained degradation.
 
 ---
 
@@ -91,17 +89,31 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 
 *Included because FE Validation Passed Δ Conv (-0.41pp) meets threshold (+0.18pp)*
 
-| Error Type | 2026-W13 | 2026-W14 | Δ |
-| ---------- | ----------- | --------------- | - |
-| terms_not_accepted | 2,064 | 1,834 | -230 |
-| APPLEPAY_DISMISSED | 1,840 | 1,805 | -35 |
-| PAYPAL_POPUP_CLOSED | 273 | 254 | -19 |
-| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 235 | 223 | -12 |
-| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 102 | 113 | +11 |
-| CC_TOKENISE_ERR | 102 | 108 | +6 |
-| PAYPAL_TOKENISE_ERR | 24 | 23 | -1 |
-| CC_NO_PREPAID_ERR | 2 | 2 | 0 |
-| EXPRESS_CHECKOUT_APPLEPAY_TOKENISE_ERR | 0 | 1 | +1 |
+### Recovery Rate
+
+| Metric | 2026-W13 | 2026-W14 | Δ |
+|--------|-------------|-----------------|---|
+| Customers with FE Error | 3,678 | 3,553 | -125 |
+| Error → Passed | 2,783 | 2,642 | -141 |
+| **Recovery Rate** | **75.67%** | **74.36%** | **-1.31pp** |
+
+*Recovery Rate = Customers who had error but still passed / Customers with FE Error*
+
+### Error Type Distribution
+
+| Error Type | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ % |
+| ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
+| terms_not_accepted | 2,064 | 56.1% | 1,834 | 51.6% | -4.50pp |
+| APPLEPAY_DISMISSED | 1,840 | 50.0% | 1,805 | 50.8% | +0.77pp |
+| PAYPAL_POPUP_CLOSED | 273 | 7.4% | 254 | 7.1% | -0.27pp |
+| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 235 | 6.4% | 223 | 6.3% | -0.11pp |
+| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 102 | 2.8% | 113 | 3.2% | +0.41pp |
+| CC_TOKENISE_ERR | 102 | 2.8% | 108 | 3.0% | +0.27pp |
+| PAYPAL_TOKENISE_ERR | 24 | 0.7% | 23 | 0.6% | -0.01pp |
+| CC_NO_PREPAID_ERR | 2 | 0.1% | 2 | 0.1% | +0.00pp |
+| EXPRESS_CHECKOUT_APPLEPAY_TOKENISE_ERR | 0 | 0.0% | 1 | 0.0% | +0.03pp |
+
+*% of Errors = Error Type Count / Customers with FE Error (can exceed 100% as customers may have multiple error types)*
 
 ---
 
@@ -109,23 +121,24 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 
 *Included because PVS Success Δ Conv (+0.26pp) meets threshold (+0.18pp)*
 
-| Decline Reason | 2026-W13 | 2026-W14 | Δ |
-| -------------- | ----------- | --------------- | - |
-| Blocked Verification: Payment method is blocked due to business reasons | 570 | 534 | -36 |
-| Failed Verification: Insufficient Funds | 166 | 158 | -8 |
-| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 64 | 52 | -12 |
-| Failed Verification: Declined - Call Issuer | 36 | 42 | +6 |
-| Failed Verification: Card Issuer Declined CVV | 37 | 34 | -3 |
-| Failed Verification: Issuer or Cardholder has put a restriction on the card | 36 | 33 | -3 |
-| Failed Verification: Cannot Authorize at this time (Policy) | 28 | 29 | +1 |
-| Failed Verification: Processor Declined - Fraud Suspected | 18 | 27 | +9 |
-| Failed Verification: Card Not Activated | 38 | 25 | -13 |
-| Failed Verification: Processor Declined | 20 | 24 | +4 |
+| Decline Reason | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
+| -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
+| Blocked Verification: Payment method is blocked due to business reasons | 570 | 56.3% | 534 | 55.7% | -36 | -0.53pp |
+| Failed Verification: Insufficient Funds | 166 | 16.4% | 158 | 16.5% | -8 | +0.11pp |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 64 | 6.3% | 52 | 5.4% | -12 | -0.89pp |
+| Failed Verification: Declined - Call Issuer | 36 | 3.6% | 42 | 4.4% | +6 | +0.83pp |
+| Failed Verification: Card Issuer Declined CVV | 37 | 3.7% | 34 | 3.5% | -3 | -0.10pp |
+| Failed Verification: Issuer or Cardholder has put a restriction on the card | 36 | 3.6% | 33 | 3.4% | -3 | -0.11pp |
+| Failed Verification: Cannot Authorize at this time (Policy) | 28 | 2.8% | 29 | 3.0% | +1 | +0.26pp |
+| Failed Verification: Processor Declined - Fraud Suspected | 18 | 1.8% | 27 | 2.8% | +9 | +1.04pp |
+| Failed Verification: Card Not Activated | 38 | 3.8% | 25 | 2.6% | -13 | -1.14pp |
+| Failed Verification: Processor Declined | 20 | 2.0% | 24 | 2.5% | +4 | +0.53pp |
+| **Total PVS Failures** | **1,013** | **100%** | **958** | **100%** | **-55** | - |
 
 ---
 ## Conclusion
 
-The PCR decline in 2026-W14 was driven primarily by reduced top-of-funnel engagement (Select Payment Method -0.42pp) and FE validation pass rate (-0.41pp), while downstream metrics showed stability or improvement. Payment processor performance was notably stronger, with ProcessOut_CreditCard and ApplePay both showing meaningful gains. Given the modest overall impact and positive signals in conversion quality metrics, continued monitoring is recommended with attention to whether the top-of-funnel softness persists.
+The PCR decline in W14 is driven primarily by upper-funnel drop-off at payment method selection (-0.42pp) and FE validation (-0.41pp), with a notable decrease in validation recovery rate (-1.31pp). However, downstream performance remains healthy with ProcessOut_CreditCard (+3.21pp) and ApplePay (+2.28pp) showing improved success rates, and the final checkout step converting better (+0.26pp). No immediate escalation is required, but the FE validation recovery rate trend should be monitored in the coming weeks.
 
 ---
 
@@ -220,6 +233,45 @@ WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_dat
   AND f.country IN (SELECT country FROM countries)
 GROUP BY 1, 2
 ORDER BY hellofresh_week, checkout_attempt DESC
+
+```
+
+</details>
+
+<details>
+<summary>FE Recovery Rate</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
+  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
+  WHERE iso_year_week <= (SELECT affected_week FROM params)
+  QUALIFY iso_year_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+)
+SELECT
+  d.iso_year_week AS hellofresh_week,
+  SUM(is_click) AS click_submit,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 THEN 1 ELSE 0 END) AS customers_with_fe_error,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 1 THEN 1 ELSE 0 END) AS error_then_passed,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 0 THEN 1 ELSE 0 END) AS error_not_passed
+FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
+JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
+CROSS JOIN weeks w
+WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
+  AND f.country IN (SELECT country FROM countries)
+GROUP BY 1
+ORDER BY hellofresh_week
 
 ```
 

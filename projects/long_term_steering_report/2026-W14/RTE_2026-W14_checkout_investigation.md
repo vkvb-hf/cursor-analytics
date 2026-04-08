@@ -13,30 +13,30 @@ Backend: 33.67% → 35.22% (+1.55pp, 4.6% change)
 
 ## Executive Summary
 
-**Overall:** PCR improved in W14, with GA increasing +1.56pp (37.81% → 39.36%) and Backend increasing +1.55pp (33.67% → 35.22%), despite a -10.4% drop in payment visit volume (~63K visits).
+**Overall:** PCR improved in 2026-W14, with GA increasing +1.56pp (37.81% → 39.36%) and Backend increasing +1.55pp (33.67% → 35.22%), despite a -10.4% decrease in payment visit volume (~63K visits).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate improved | +1.76pp | ✅ |
-| Click Submit Form | Rate improved | +0.90pp | ✅ |
-| FE Validation Passed | Rate declined | -0.46pp | ⚠️ |
-| Enter Fraud Service | Rate slightly declined | -0.21pp | ✅ |
-| Approved by Fraud Service | Rate stable | -0.12pp | ✅ |
-| Call to PVS | Rate stable | -0.09pp | ✅ |
-| Successful Checkout (GA) | Rate improved | +0.32pp | ✅ |
-| PVS Attempt (Backend) | Rate declined | -1.25pp | ⚠️ |
-| PVS Success (Backend) | Rate stable | +0.01pp | ✅ |
+| Select Payment Method | GA entry rate | +1.76pp | ✅ |
+| Click Submit Form | Form submission | +0.90pp | ✅ |
+| FE Validation Passed | Frontend validation | -0.46pp | ⚠️ |
+| Enter Fraud Service | Fraud check entry | -0.21pp | ✅ |
+| Approved by Fraud Service | Fraud approval | -0.12pp | ✅ |
+| Call to PVS | PVS routing | -0.09pp | ✅ |
+| Successful Checkout (GA) | Final conversion | +0.32pp | ✅ |
+| PVS Attempt (Backend) | PVS attempt rate | -1.25pp | ⚠️ |
+| PVS Success (Backend) | PVS success rate | +0.01pp | ✅ |
 
 **Key Findings:**
-- Top-of-funnel conversion drove the improvement: Select Payment Method (+1.76pp) and Click Submit Form (+0.90pp) were the primary contributors to PCR gains
-- Backend PVS Attempt rate dropped -1.25pp (99.46% → 98.21%), indicating potential issues between fraud approval and payment verification initiation
-- Braintree_ApplePay success rate declined -1.71pp (87.23% → 85.51%) with significant volume (~10.5K attempts)
-- Adyen_IDeal experienced the largest rate drop at -3.21pp (93.45% → 90.24%), though on lower volume (676 attempts)
-- ProcessOut_CreditCard, the highest volume method (~17K attempts), remained stable with slight improvement (+0.30pp)
+- Top-of-funnel improvement drove PCR gains: Select Payment Method conversion increased +1.76pp and Click Submit Form improved +0.90pp
+- Backend PVS Attempt rate dropped -1.25pp (99.46% → 98.21%), indicating potential routing issues between fraud approval and payment verification
+- Adyen_IDeal showed the largest payment method decline at -3.21pp (93.45% → 90.24%), though on relatively low volume (676 attempts)
+- Braintree_ApplePay declined -1.71pp (87.23% → 85.51%) on significant volume (~10.5K attempts), warranting attention
+- ProcessOut_CreditCard, the highest-volume method (~17K attempts), remained stable with slight improvement (+0.30pp)
 
-**Action:** Monitor - The overall PCR improvement is positive. Recommend monitoring the PVS Attempt drop in Backend and the Braintree_ApplePay/Adyen_IDeal declines to ensure they don't worsen in W15.
+**Action:** Monitor — Overall PCR improvement is positive. Investigate the Backend PVS Attempt drop (-1.25pp) and Braintree_ApplePay decline (-1.71pp) if trends persist in W15.
 
 ---
 
@@ -91,7 +91,7 @@ Backend: 33.67% → 35.22% (+1.55pp, 4.6% change)
 
 ## Conclusion
 
-The PCR improvement of +1.55-1.56pp in W14 was driven primarily by stronger top-of-funnel engagement, with more users selecting payment methods and clicking submit. While the overall trend is positive, attention should be paid to the Backend PVS Attempt rate decline (-1.25pp) and the Braintree_ApplePay performance degradation (-1.71pp), which could offset gains if not addressed. Continued monitoring is recommended for W15 to confirm sustained improvement.
+The PCR improvement of +1.55-1.56pp in W14 is primarily driven by stronger top-of-funnel engagement, with more users selecting payment methods and completing form submissions. While overall performance is positive, the Backend PVS Attempt rate decline (-1.25pp) and underperformance of Braintree_ApplePay (-1.71pp) should be monitored in the coming week to ensure these do not develop into larger issues.
 
 ---
 

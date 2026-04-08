@@ -13,28 +13,28 @@ Backend: 30.39% → 29.86% (-0.53pp, -1.7% change)
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) declined by 0.68pp (from 28.63% to 27.95%) in GA tracking and 0.53pp (from 30.39% to 29.86%) in Backend tracking for HF-NA in 2026-W14, with stable payment visit volume (~59K).
+**Overall:** PCR declined by -0.68pp (GA) and -0.53pp (Backend) in 2026-W14, driven primarily by upper-funnel drop-offs in payment method selection and frontend validation, while downstream conversion steps remained stable or slightly improved.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate ≥ baseline | -0.34pp | ⚠️ |
-| Click Submit Form | Rate ≥ baseline | -0.41pp | ⚠️ |
-| FE Validation Passed | Rate ≥ baseline | -0.67pp | ⚠️ |
-| Enter Fraud Service | Rate ≥ baseline | -0.15pp | ⚠️ |
-| Approved by Fraud Service | Rate ≥ baseline | -0.33pp | ⚠️ |
-| Call to PVS | Rate ≥ baseline | -0.18pp | ⚠️ |
-| Successful Checkout | Rate ≥ baseline | +0.28pp | ✅ |
+| Select Payment Method | >-0.50pp? | -0.34pp | ✅ |
+| Click Submit Form | >-0.50pp? | -0.41pp | ✅ |
+| FE Validation Passed | >-0.50pp? | -0.67pp | ⚠️ |
+| Enter Fraud Service | >-0.50pp? | -0.15pp | ✅ |
+| Approved by Fraud Service | >-0.50pp? | -0.33pp | ✅ |
+| Call to PVS | >-0.50pp? | -0.18pp | ✅ |
+| Successful Checkout | >-0.50pp? | +0.28pp | ✅ |
 
 **Key Findings:**
-- **FE Validation is the largest drop point:** The FE Validation Passed step showed the steepest decline (-0.67pp), driven primarily by a +68 increase in APPLEPAY_DISMISSED errors (2,505 → 2,573)
-- **Upper funnel leakage:** Both Select Payment Method (-0.34pp) and Click Submit Form (-0.41pp) show degradation, indicating issues before payment processing begins
-- **Backend Checkout Attempt dropped significantly:** Backend data shows Checkout Attempt conversion fell by -1.14pp (37.79% → 36.66%), representing 993 fewer attempts
-- **Payment method performance is mixed:** ProcessOut_CreditCard (+1.69pp) and Braintree_ApplePay (+1.61pp) improved, while Adyen_CreditCard (-0.94pp) and Braintree_CreditCard (-1.27pp) declined
-- **Fraud approval improved in Backend:** Approved by Fraud Service conversion increased +1.55pp in Backend (89.66% → 91.21%), partially offsetting upper funnel losses
+- **FE Validation Passed** shows the largest conversion drop at -0.67pp, exceeding the threshold and warranting investigation
+- **FE Recovery Rate** declined from 72.25% to 70.06% (-2.19pp), meaning fewer customers who encountered errors successfully completed validation
+- **APPLEPAY_DISMISSED** errors increased in share (+2.33pp), now representing 56.9% of all FE errors
+- **Backend Checkout Attempt** dropped significantly (-1.14pp conversion, -993 attempts), indicating upper-funnel friction
+- **ProcessOut_CreditCard** and **Braintree_ApplePay** success rates actually improved (+1.69pp and +1.61pp respectively), suggesting the issue is not with payment processors
 
-**Action:** **Investigate** — The cumulative upper-funnel degradation across multiple steps warrants investigation into potential UX issues, page load performance, or A/B test impacts affecting payment method selection and form submission behavior. Prioritize review of ApplePay dismissal patterns.
+**Action:** **Investigate** — Focus on the FE Validation decline and increased APPLEPAY_DISMISSED errors. Review any recent frontend changes affecting Apple Pay user flows and terms acceptance screens.
 
 ---
 
@@ -92,22 +92,36 @@ Backend: 30.39% → 29.86% (-0.53pp, -1.7% change)
 
 *Included because FE Validation Passed Δ Conv (-0.67pp) meets threshold (+0.34pp)*
 
-| Error Type | 2026-W13 | 2026-W14 | Δ |
-| ---------- | ----------- | --------------- | - |
-| APPLEPAY_DISMISSED | 2,505 | 2,573 | +68 |
-| terms_not_accepted | 2,064 | 1,834 | -230 |
-| PAYPAL_POPUP_CLOSED | 455 | 421 | -34 |
-| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 293 | 280 | -13 |
-| CC_TOKENISE_ERR | 158 | 149 | -9 |
-| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 123 | 120 | -3 |
-| PAYPAL_TOKENISE_ERR | 39 | 33 | -6 |
-| CC_NO_PREPAID_ERR | 2 | 2 | 0 |
-| EXPRESS_CHECKOUT_APPLEPAY_TOKENISE_ERR | 0 | 1 | +1 |
+### Recovery Rate
+
+| Metric | 2026-W13 | 2026-W14 | Δ |
+|--------|-------------|-----------------|---|
+| Customers with FE Error | 4,587 | 4,519 | -68 |
+| Error → Passed | 3,314 | 3,166 | -148 |
+| **Recovery Rate** | **72.25%** | **70.06%** | **-2.19pp** |
+
+*Recovery Rate = Customers who had error but still passed / Customers with FE Error*
+
+### Error Type Distribution
+
+| Error Type | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ % |
+| ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
+| APPLEPAY_DISMISSED | 2,505 | 54.6% | 2,573 | 56.9% | +2.33pp |
+| terms_not_accepted | 2,064 | 45.0% | 1,834 | 40.6% | -4.41pp |
+| PAYPAL_POPUP_CLOSED | 455 | 9.9% | 421 | 9.3% | -0.60pp |
+| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 293 | 6.4% | 280 | 6.2% | -0.19pp |
+| CC_TOKENISE_ERR | 158 | 3.4% | 149 | 3.3% | -0.15pp |
+| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 123 | 2.7% | 120 | 2.7% | -0.03pp |
+| PAYPAL_TOKENISE_ERR | 39 | 0.9% | 33 | 0.7% | -0.12pp |
+| CC_NO_PREPAID_ERR | 2 | 0.0% | 2 | 0.0% | +0.00pp |
+| EXPRESS_CHECKOUT_APPLEPAY_TOKENISE_ERR | 0 | 0.0% | 1 | 0.0% | +0.02pp |
+
+*% of Errors = Error Type Count / Customers with FE Error (can exceed 100% as customers may have multiple error types)*
 
 ---
 ## Conclusion
 
-The PCR decline in 2026-W14 is driven by cumulative degradation across multiple upper-funnel steps rather than a single point of failure, with FE Validation Passed (-0.67pp) being the most impacted step. While payment processing success rates improved slightly (+0.28pp at final checkout), fewer users are reaching that stage due to increased drop-off at selection, form submission, and validation steps. The increase in APPLEPAY_DISMISSED errors and the significant Backend Checkout Attempt decline (-1.14pp) suggest user experience friction that should be investigated, particularly around ApplePay flows and the payment selection interface.
+The PCR decline in 2026-W14 is primarily attributable to frontend validation issues, with the FE Validation Passed step showing a -0.67pp conversion drop and recovery rates declining by -2.19pp. The increase in APPLEPAY_DISMISSED errors suggests potential UX friction in the Apple Pay flow. Downstream steps from fraud service onward performed normally, indicating the root cause lies in the early checkout experience rather than payment processing infrastructure.
 
 ---
 
@@ -202,6 +216,45 @@ WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_dat
   AND f.country IN (SELECT country FROM countries)
 GROUP BY 1, 2
 ORDER BY hellofresh_week, checkout_attempt DESC
+
+```
+
+</details>
+
+<details>
+<summary>FE Recovery Rate</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'HF-NA' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
+  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
+  WHERE iso_year_week <= (SELECT affected_week FROM params)
+  QUALIFY iso_year_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+)
+SELECT
+  d.iso_year_week AS hellofresh_week,
+  SUM(is_click) AS click_submit,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 THEN 1 ELSE 0 END) AS customers_with_fe_error,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 1 THEN 1 ELSE 0 END) AS error_then_passed,
+  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 0 THEN 1 ELSE 0 END) AS error_not_passed
+FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
+JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
+CROSS JOIN weeks w
+WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
+  AND f.country IN (SELECT country FROM countries)
+GROUP BY 1
+ORDER BY hellofresh_week
 
 ```
 
