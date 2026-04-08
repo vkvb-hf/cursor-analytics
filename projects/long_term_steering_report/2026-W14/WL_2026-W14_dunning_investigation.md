@@ -12,26 +12,26 @@
 
 ## Executive Summary
 
-**Overall:** WL cluster Ship Rate declined from 29.38% to 28.34% (-1.04pp, -3.54% relative change) in 2026-W14, driven primarily by Simpson's Paradox from a 59.6% volume collapse in high-performing market AO.
+**Overall:** WL cluster Ship Rate declined from 29.38% to 28.34% (-1.04pp, -3.54% relative change) in 2026-W14, despite most individual countries showing improvement—indicating a classic Simpson's Paradox driven by mix shift.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ Conv | Result |
-| ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ✅ Minor decline |
-| Discount % | 16.34% → 15.45% | -0.89pp | ✅ Favorable (lower discounts) |
-| PC2 | 47.52% → 47.03% | -0.49pp | ✅ Stable |
-| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ No seasonal impact |
-| Mix Shift | AO volume -59.6% | High-SR market | ⚠️ Simpson's Paradox confirmed |
+| Step | Check | Δ Value | Result |
+| ---- | ----- | ------- | ------ |
+| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ Slight decline |
+| Discount % | 16.34% → 15.45% | -0.89pp | ✅ Lower discounts (positive for SR) |
+| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ Marginal decline |
+| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ No cycle impact |
+| Mix Shift (AO) | 1,228 → 496 | -59.6% volume | ⚠️ Simpson's Paradox confirmed |
 
 **Key Findings:**
-- **Simpson's Paradox identified:** AO (67.26% → 72.58% SR) lost 59.6% of volume (1,228 → 496 orders), removing ~732 high-converting orders from the cluster mix
-- **All individual countries improved or held steady:** GN +2.69pp, AO +7.91pp, CG +12.81pp, CK +9.59pp; only KN declined (-6.44pp)
-- **KN showed anomalous PC2 drop:** PC2 collapsed from 87.12% to 47.34% (-45.66pp), warranting separate investigation
-- **Underlying fundamentals healthy:** Pre-Dunning AR, Discount %, and PC2 all showed stable or improving trends at cluster level
-- **Volume redistribution toward lower-SR markets:** KN (low-SR tier at 15.10%) grew +17.4% while AO (high-SR tier) contracted sharply
+- **Simpson's Paradox confirmed:** AO (highest SR at 67-73%) lost 59.6% of volume, shifting mix toward lower-SR countries and dragging down the cluster average despite 6 of 7 countries improving
+- **MR anomaly:** Ship Rate dropped from 0.07% to 0.00% (-100% relative), with PC2 showing NaN values—suggests data quality issue or complete shipping halt requiring investigation
+- **KN shows concerning trend:** Only country with genuine SR decline (-1.04pp to 15.10%) while volume increased +17.4%, amplifying negative impact
+- **Strong performers masked:** ER (+2.93pp), CK (+4.18pp), CG (+2.81pp), and AO (+5.32pp) all improved but couldn't offset mix effects
+- **Pre-Dunning AR softened slightly** (-0.47pp at cluster level), with AO showing largest decline (-3.12pp)
 
-**Action:** **Monitor** - The cluster-level decline is a compositional artifact (Simpson's Paradox) rather than true performance degradation. Investigate AO's volume collapse separately to understand if this is temporary or structural. Flag KN's PC2 anomaly for review.
+**Action:** **Investigate** — Priority focus on (1) AO volume drop root cause (operational issue vs. intentional change), (2) MR data quality/PC2 NaN values, and (3) KN performance decline despite volume growth
 
 ---
 
@@ -46,34 +46,16 @@
 
 ---
 
-## GN
+## ER (Rank: #1 by contribution, #3 by change)
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 635 | 36.06% | - | 93.50% | - | 23.17% | - | 50.2% | - |
-| 2026-W14 | Mid-Cycle | 632 | 37.03% | +2.69pp | 92.33% | -1.25pp | 22.96% | -0.91pp | 50.58% | +0.76pp |
+| 2026-W13 | Mid-Cycle | 2,563 | 23.64% | - | 89.92% | - | 18.54% | - | 41.5% | - |
+| 2026-W14 | Mid-Cycle | 2,559 | 26.57% | +12.39pp | 89.23% | -0.77pp | 19.47% | +5.02pp | 43.85% | +5.66pp |
 
 ---
 
-## AO
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,228 | 67.26% | - | 87.96% | - | 16.55% | - | 37.55% | - |
-| 2026-W14 | Mid-Cycle | 496 | 72.58% | +7.91pp | 85.22% | -3.12pp | 13.65% | -17.52pp | 43.32% | +15.37pp |
-
----
-
-## CG
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 798 | 21.93% | - | 96.76% | - | 20.81% | - | 51.84% | - |
-| 2026-W14 | Mid-Cycle | 780 | 24.74% | +12.81pp | 96.91% | +0.16pp | 17.64% | -15.23pp | 51.87% | +0.06pp |
-
----
-
-## CK
+## CK (Rank: #2 by contribution, #4 by change)
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
@@ -82,12 +64,48 @@
 
 ---
 
-## KN
+## AO (Rank: #3 by contribution, #5 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 1,228 | 67.26% | - | 87.96% | - | 16.55% | - | 37.55% | - |
+| 2026-W14 | Mid-Cycle | 496 | 72.58% | +7.91pp | 85.22% | -3.12pp | 13.65% | -17.52pp | 43.32% | +15.37pp |
+
+---
+
+## CG (Rank: #4 by contribution, #2 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 798 | 21.93% | - | 96.76% | - | 20.81% | - | 51.84% | - |
+| 2026-W14 | Mid-Cycle | 780 | 24.74% | +12.81pp | 96.91% | +0.16pp | 17.64% | -15.23pp | 51.87% | +0.06pp |
+
+---
+
+## KN (Rank: #5 by contribution, #6 by change)
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 570 | 16.14% | - | 87.61% | - | 11.62% | - | 87.12% | - |
 | 2026-W14 | Mid-Cycle | 669 | 15.10% | -6.44pp | 88.22% | +0.70pp | 11.34% | -2.41pp | 47.34% | -45.66pp |
+
+---
+
+## GN (Rank: #6 by contribution, #7 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 635 | 36.06% | - | 93.50% | - | 23.17% | - | 50.2% | - |
+| 2026-W14 | Mid-Cycle | 632 | 37.03% | +2.69pp | 92.33% | -1.25pp | 22.96% | -0.91pp | 50.58% | +0.76pp |
+
+---
+
+## MR (Rank: #7 by contribution, #1 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 1,467 | 0.07% | - | 79.88% | - | 9.47% | - | 42.03% | - |
+| 2026-W14 | Mid-Cycle | 1,422 | 0.00% | -100.00pp | 80.33% | +0.56pp | 8.14% | -14.04pp | nan% | nanpp |
 
 
 ## Mix Shift Analysis (Simpson's Paradox Check)
@@ -125,7 +143,7 @@
 
 ## Conclusion
 
-The WL cluster Ship Rate decline of -1.04pp is a statistical artifact caused by Simpson's Paradox: high-performing market AO experienced a 59.6% volume drop while all major countries individually improved their Ship Rates. No operational intervention is required for the cluster metric, but the root cause of AO's volume contraction and KN's dramatic PC2 decline (-45.66pp) should be investigated independently to ensure these do not represent emerging issues.
+The WL cluster's Ship Rate decline is a statistical artifact caused by Simpson's Paradox rather than genuine performance deterioration. The 59.6% volume collapse in high-performing AO market shifted the customer mix toward lower-SR countries, masking improvements across most markets. Immediate investigation should focus on understanding AO's volume drop and resolving MR's data anomalies before concluding any systemic issues exist.
 
 ---
 
@@ -199,14 +217,42 @@ combined AS (
     ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
     ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
   FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
+),
+with_deltas AS (
+  SELECT 
+    c.*,
+    prev.ship_rate as prev_ship_rate,
+    prev.pre_dunning_ar as prev_pre_dunning_ar,
+    prev.discount_pct as prev_discount_pct,
+    prev.pc2 as prev_pc2,
+    prev.volume as prev_volume,
+    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
+    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
+  FROM combined c
+  CROSS JOIN weeks w
+  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+),
+ranked AS (
+  SELECT 
+    group_key,
+    SUM(contribution) as total_contribution,
+    MAX(abs_delta_sr) as max_abs_delta,
+    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
+  FROM with_deltas
+  WHERE week = (SELECT affected_week FROM weeks)
+  GROUP BY group_key
 )
 SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
-  c.ship_rate, prev.ship_rate as prev_ship_rate, c.pre_dunning_ar, prev.pre_dunning_ar as prev_pre_dunning_ar,
-  c.discount_pct, prev.discount_pct as prev_discount_pct, c.pc2, prev.pc2 as prev_pc2
-FROM combined c CROSS JOIN weeks w
-LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
+  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
+  COALESCE(r.rank_contribution, 999) as rank_contribution,
+  COALESCE(r.rank_change, 999) as rank_change
+FROM with_deltas c
+CROSS JOIN weeks w
 JOIN payday_labeled pp ON c.week = pp.hellofresh_week
-ORDER BY c.week
+LEFT JOIN ranked r ON c.group_key = r.group_key
+ORDER BY COALESCE(r.rank_contribution, 999), c.week
 
 ```
 
@@ -280,14 +326,42 @@ combined AS (
     ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
     ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
   FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
+),
+with_deltas AS (
+  SELECT 
+    c.*,
+    prev.ship_rate as prev_ship_rate,
+    prev.pre_dunning_ar as prev_pre_dunning_ar,
+    prev.discount_pct as prev_discount_pct,
+    prev.pc2 as prev_pc2,
+    prev.volume as prev_volume,
+    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
+    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
+  FROM combined c
+  CROSS JOIN weeks w
+  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+),
+ranked AS (
+  SELECT 
+    group_key,
+    SUM(contribution) as total_contribution,
+    MAX(abs_delta_sr) as max_abs_delta,
+    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
+  FROM with_deltas
+  WHERE week = (SELECT affected_week FROM weeks)
+  GROUP BY group_key
 )
 SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
-  c.ship_rate, prev.ship_rate as prev_ship_rate, c.pre_dunning_ar, prev.pre_dunning_ar as prev_pre_dunning_ar,
-  c.discount_pct, prev.discount_pct as prev_discount_pct, c.pc2, prev.pc2 as prev_pc2
-FROM combined c CROSS JOIN weeks w
-LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
+  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
+  COALESCE(r.rank_contribution, 999) as rank_contribution,
+  COALESCE(r.rank_change, 999) as rank_change
+FROM with_deltas c
+CROSS JOIN weeks w
 JOIN payday_labeled pp ON c.week = pp.hellofresh_week
-ORDER BY c.week
+LEFT JOIN ranked r ON c.group_key = r.group_key
+ORDER BY COALESCE(r.rank_contribution, 999), c.week
 
 ```
 
