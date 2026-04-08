@@ -2,9 +2,7 @@
 
 **Metric:** Payment Conversion Rate (PCR)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:**  
-GA: 34.88% → 36.04% (+1.16pp, 3.3% change)  
-Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)  
+**Observation:** 34.88% → 36.04% (+1.16pp)  
 **Volume:** ~62K payment visits
 
 ---
@@ -13,33 +11,28 @@ Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) improved week-over-week, with GA increasing by +1.16pp (34.88% → 36.04%) and Backend increasing by +1.25pp (38.66% → 39.90%), despite a significant -23.9% drop in payment visit volume.
+**Overall:** Payment Conversion Rate (PCR) improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by broad gains across the checkout funnel despite a 23.9% reduction in payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | GA step conversion | +0.42pp | ✅ |
-| Click Submit Form | GA step conversion | +0.59pp | ✅ |
-| FE Validation Passed | GA step conversion | +0.68pp | ✅ |
-| Enter Fraud Service | GA step conversion | +0.40pp | ✅ |
-| Approved by Fraud Service | GA step conversion | -0.24pp | ⚠️ |
-| Call to PVS | GA step conversion | -0.01pp | ✅ |
-| Successful Checkout | GA step conversion | +0.85pp | ✅ |
-| Checkout Attempt | Backend step conversion | +1.54pp | ✅ |
-| Enter Fraud Service | Backend step conversion | -0.35pp | ⚠️ |
-| Approved by Fraud Service | Backend step conversion | -0.43pp | ⚠️ |
-| PVS Attempt | Backend step conversion | +0.73pp | ✅ |
-| PVS Success | Backend step conversion | +0.79pp | ✅ |
+| Select Payment Method | ≥0.58pp threshold | +0.42pp | ✅ |
+| Click Submit Form | ≥0.58pp threshold | +0.59pp | ⚠️ |
+| FE Validation Passed | ≥0.58pp threshold | +0.68pp | ⚠️ |
+| Enter Fraud Service | ≥0.58pp threshold | +0.40pp | ✅ |
+| Approved by Fraud Service | ≥0.58pp threshold | -0.23pp | ✅ |
+| Call to PVS | ≥0.58pp threshold | -0.01pp | ✅ |
+| Successful Checkout (PVS→Success) | ≥0.58pp threshold | +0.85pp | ⚠️ |
 
 **Key Findings:**
-- **Braintree ApplePay showed strongest improvement** among payment methods with +1.70pp gain (83.73% → 85.43%), contributing positively to overall PCR
-- **FE Validation recovery rate improved by +1.47pp** (56.10% → 57.57%), indicating customers are more successfully recovering from frontend errors
-- **PVS failures decreased significantly** from 1,522 to 1,010 (-512 failures), with "Insufficient Funds" declines dropping by -4.31pp share
-- **Fraud Service approval rates slightly declined** in both GA (-0.24pp) and Backend (-0.43pp) waterfalls, warranting monitoring
-- **APPLEPAY_DISMISSED remains the dominant FE error** at 76.8% of all errors, though this is expected user behavior
+- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of failures (-4.31pp share), contributing to fewer payment verification failures overall (1,522 → 1,010 failures)
+- **FE Validation recovery rate improved (+1.47pp):** Recovery rate increased from 56.10% to 57.57%, with APPLEPAY_DISMISSED remaining the dominant error type (76.8% of errors)
+- **France drove the largest contribution:** FR showed +3.10pp PCR improvement with Select Payment Method (+2.98pp GA, +3.77pp backend) as the key driver
+- **Denmark showed strong improvement (+5.89pp):** Select Payment Method conversion jumped +4.17pp (GA) / +4.84pp (backend), with actual successful checkout volume increasing (+12 checkouts despite -166 payment visits)
+- **Braintree ApplePay improved notably (+1.70pp):** Success rate increased from 83.73% to 85.43%, the largest positive shift among high-volume payment methods
 
-**Action:** Monitor — The PCR improvement is healthy across most funnel steps. Continue observing fraud service approval trends and maintain current configurations.
+**Action:** **Monitor** – This is a positive week-over-week improvement with no concerning degradations. Continue monitoring France and Denmark performance to determine if gains are sustainable or anomalous.
 
 ---
 
@@ -49,14 +42,14 @@ Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)
 
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 82,373 | 62,648 | -19,725 | -23.9% | - | - | - |
-| Select Payment Method | 45,198 | 34,641 | -10,557 | -23.4% | 54.87% | 55.29% | +0.42pp |
-| Click Submit Form | 36,437 | 28,131 | -8,306 | -22.8% | 80.62% | 81.21% | +0.59pp |
-| FE Validation Passed | 33,860 | 26,333 | -7,527 | -22.2% | 92.93% | 93.61% | +0.68pp |
-| Enter Fraud Service | 32,610 | 25,466 | -7,144 | -21.9% | 96.31% | 96.71% | +0.40pp |
-| Approved by Fraud Service | 30,635 | 23,863 | -6,772 | -22.1% | 93.94% | 93.71% | -0.24pp |
+| Payment Visits | 82,373 | 62,654 | -19,719 | -23.9% | - | - | - |
+| Select Payment Method | 45,198 | 34,643 | -10,555 | -23.4% | 54.87% | 55.29% | +0.42pp |
+| Click Submit Form | 36,437 | 28,132 | -8,305 | -22.8% | 80.62% | 81.21% | +0.59pp |
+| FE Validation Passed | 33,860 | 26,334 | -7,526 | -22.2% | 92.93% | 93.61% | +0.68pp |
+| Enter Fraud Service | 32,610 | 25,466 | -7,144 | -21.9% | 96.31% | 96.70% | +0.40pp |
+| Approved by Fraud Service | 30,635 | 23,864 | -6,771 | -22.1% | 93.94% | 93.71% | -0.23pp |
 | Call to PVS | 30,583 | 23,821 | -6,762 | -22.1% | 99.83% | 99.82% | -0.01pp |
-| **Successful Checkout** | 28,731 | 22,580 | -6,151 | -21.4% | 93.94% | 94.79% | +0.85pp |
+| **Successful Checkout** | 28,731 | 22,581 | -6,150 | -21.4% | 93.94% | 94.79% | +0.85pp |
 | **PCR Rate** | | | | | 34.88% | 36.04% | **+1.16pp** |
 
 ---
@@ -95,7 +88,7 @@ Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)
 
 ## FE Validation Errors
 
-*Included because FE Validation Passed Δ Conv (+0.68pp) meets threshold (+0.58pp)*
+**Include reason:** FE Validation Passed Δ Conv (+0.68pp) meets threshold (+0.58pp)
 
 ### Recovery Rate
 
@@ -126,7 +119,7 @@ Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)
 
 ## Payment Verification Errors
 
-*Included because PVS Success Δ Conv (+0.85pp) meets threshold (+0.58pp)*
+**Include reason:** PVS Success Δ Conv (+0.85pp) meets threshold (+0.58pp)
 
 | Decline Reason | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
 | -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
@@ -143,16 +136,165 @@ Backend: 38.66% → 39.90% (+1.25pp, 3.2% change)
 | **Total PVS Failures** | **1,522** | **100%** | **1,010** | **100%** | **-512** | - |
 
 ---
+## Country-Level Analysis
+
+**Country Selection:** Top 2 by contribution + Top 2 by absolute change (4 countries in HF-INTL)
+
+| Country | Volume | PCR 2026-W13 | PCR 2026-W14 | Δ PCR | Contribution Rank | Change Rank |
+|---------|--------|-----------------|-----------------|-------|-------------------|-------------|
+| FR | 16,752 | 29.08% | 32.18% | +3.10pp | 1 | 3 |
+| AU | 6,338 | 34.87% | 36.48% | +1.61pp | 2 | 6 |
+| DK | 1,407 | 42.72% | 48.61% | +5.89pp | 4 | 2 |
+| LU | 59 | 49.41% | 57.63% | +8.22pp | 12 | 1 |
+
+---
+
+### France (FR)
+
+#### Waterfall GA
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Visits | 21,892 | 16,752 | -5,140 | -23.48pp | - | - | - |
+| Select Payment Method | 10,249 | 8,342 | -1,907 | -18.61pp | 46.82% | 49.80% | +2.98pp |
+| Click Submit Form | 8,054 | 6,662 | -1,392 | -17.28pp | 78.58% | 79.86% | +1.28pp |
+| FE Validation Passed | 7,496 | 6,272 | -1,224 | -16.33pp | 93.07% | 94.15% | +1.07pp |
+| Enter Fraud Service | 7,205 | 6,071 | -1,134 | -15.74pp | 96.12% | 96.80% | +0.68pp |
+| Approved by Fraud Service | 6,576 | 5,532 | -1,044 | -15.88pp | 91.27% | 91.12% | -0.15pp |
+| Call to PVS | 6,582 | 5,544 | -1,038 | -15.77pp | 100.09% | 100.22% | +0.13pp |
+| **Successful Checkout** | 6,367 | 5,391 | -976 | -15.33pp | 96.73% | 97.24% | +0.51pp |
+| **PCR Rate** | | | | | 29.08% | 32.18% | **+3.10pp** |
+
+**Key Driver:** Select Payment Method (+2.98pp)
+
+#### Waterfall Backend
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Method Listed | 29,173 | 22,499 | -6,674 | -22.88pp | - | - | - |
+| Checkout Attempt | 10,942 | 9,288 | -1,654 | -15.12pp | 37.51% | 41.28% | +3.77pp |
+| Enter Fraud Service | 10,913 | 9,274 | -1,639 | -15.02pp | 99.73% | 99.85% | +0.11pp |
+| Approved by Fraud Service | 9,699 | 8,163 | -1,536 | -15.84pp | 88.88% | 88.02% | -0.86pp |
+| PVS Attempt | 9,691 | 8,159 | -1,532 | -15.81pp | 99.92% | 99.95% | +0.03pp |
+| PVS Success | 9,459 | 8,029 | -1,430 | -15.12pp | 97.61% | 98.41% | +0.80pp |
+| **Successful Checkout** | 9,497 | 8,058 | -1,439 | -15.15pp | 100.40% | 100.36% | -0.04pp |
+
+**Key Driver:** Checkout Attempt (+3.77pp)
+
+---
+
+### Australia (AU)
+
+#### Waterfall GA
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Visits | 8,615 | 6,338 | -2,277 | -26.43pp | - | - | - |
+| Select Payment Method | 4,489 | 3,376 | -1,113 | -24.79pp | 52.11% | 53.27% | +1.16pp |
+| Click Submit Form | 3,772 | 2,841 | -931 | -24.68pp | 84.03% | 84.15% | +0.13pp |
+| FE Validation Passed | 3,402 | 2,603 | -799 | -23.49pp | 90.19% | 91.62% | +1.43pp |
+| Enter Fraud Service | 3,300 | 2,534 | -766 | -23.21pp | 97.00% | 97.35% | +0.35pp |
+| Approved by Fraud Service | 3,099 | 2,388 | -711 | -22.94pp | 93.91% | 94.24% | +0.33pp |
+| Call to PVS | 3,094 | 2,377 | -717 | -23.17pp | 99.84% | 99.54% | -0.30pp |
+| **Successful Checkout** | 3,004 | 2,312 | -692 | -23.04pp | 97.09% | 97.27% | +0.17pp |
+| **PCR Rate** | | | | | 34.87% | 36.48% | **+1.61pp** |
+
+**Key Driver:** FE Validation Passed (+1.43pp)
+
+#### Waterfall Backend
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Method Listed | 9,530 | 7,185 | -2,345 | -24.61pp | - | - | - |
+| Checkout Attempt | 3,886 | 3,029 | -857 | -22.05pp | 40.78% | 42.16% | +1.38pp |
+| Enter Fraud Service | 3,864 | 3,015 | -849 | -21.97pp | 99.43% | 99.54% | +0.10pp |
+| Approved by Fraud Service | 3,573 | 2,794 | -779 | -21.80pp | 92.47% | 92.67% | +0.20pp |
+| PVS Attempt | 3,140 | 2,464 | -676 | -21.53pp | 87.88% | 88.19% | +0.31pp |
+| PVS Success | 3,062 | 2,401 | -661 | -21.59pp | 97.52% | 97.44% | -0.07pp |
+| **Successful Checkout** | 3,498 | 2,725 | -773 | -22.10pp | 114.24% | 113.49% | -0.74pp |
+
+**Key Driver:** Checkout Attempt (+1.38pp)
+
+---
+
+### Luxembourg (LU)
+
+#### Waterfall GA
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Visits | 85 | 59 | -26 | -30.59pp | - | - | - |
+| Select Payment Method | 53 | 40 | -13 | -24.53pp | 62.35% | 67.80% | +5.44pp |
+| Click Submit Form | 51 | 37 | -14 | -27.45pp | 96.23% | 92.50% | -3.73pp |
+| FE Validation Passed | 48 | 35 | -13 | -27.08pp | 94.12% | 94.59% | +0.48pp |
+| Enter Fraud Service | 45 | 35 | -10 | -22.22pp | 93.75% | 100.00% | +6.25pp |
+| Approved by Fraud Service | 45 | 35 | -10 | -22.22pp | 100.00% | 100.00% | +0.00pp |
+| Call to PVS | 44 | 35 | -9 | -20.45pp | 97.78% | 100.00% | +2.22pp |
+| **Successful Checkout** | 42 | 34 | -8 | -19.05pp | 95.45% | 97.14% | +1.69pp |
+| **PCR Rate** | | | | | 49.41% | 57.63% | **+8.22pp** |
+
+**Key Driver:** Enter Fraud Service (+6.25pp)
+
+#### Waterfall Backend
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Method Listed | 282 | 256 | -26 | -9.22pp | - | - | - |
+| Checkout Attempt | 86 | 75 | -11 | -12.79pp | 30.50% | 29.30% | -1.20pp |
+| Enter Fraud Service | 65 | 62 | -3 | -4.62pp | 75.58% | 82.67% | +7.09pp |
+| Approved by Fraud Service | 65 | 62 | -3 | -4.62pp | 100.00% | 100.00% | +0.00pp |
+| PVS Attempt | 64 | 61 | -3 | -4.69pp | 98.46% | 98.39% | -0.07pp |
+| PVS Success | 62 | 60 | -2 | -3.23pp | 96.88% | 98.36% | +1.49pp |
+| **Successful Checkout** | 81 | 73 | -8 | -9.88pp | 130.65% | 121.67% | -8.98pp |
+
+**Key Driver:** Successful Checkout (-8.98pp)
+
+---
+
+### Denmark (DK)
+
+#### Waterfall GA
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Visits | 1,573 | 1,407 | -166 | -10.55pp | - | - | - |
+| Select Payment Method | 1,002 | 955 | -47 | -4.69pp | 63.70% | 67.87% | +4.17pp |
+| Click Submit Form | 848 | 820 | -28 | -3.30pp | 84.63% | 85.86% | +1.23pp |
+| FE Validation Passed | 791 | 778 | -13 | -1.64pp | 93.28% | 94.88% | +1.60pp |
+| Enter Fraud Service | 768 | 759 | -9 | -1.17pp | 97.09% | 97.56% | +0.47pp |
+| Approved by Fraud Service | 698 | 695 | -3 | -0.43pp | 90.89% | 91.57% | +0.68pp |
+| Call to PVS | 694 | 695 | +1 | +0.14pp | 99.43% | 100.00% | +0.57pp |
+| **Successful Checkout** | 672 | 684 | +12 | +1.79pp | 96.83% | 98.42% | +1.59pp |
+| **PCR Rate** | | | | | 42.72% | 48.61% | **+5.89pp** |
+
+**Key Driver:** Select Payment Method (+4.17pp)
+
+#### Waterfall Backend
+
+| Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
+| ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
+| Payment Method Listed | 2,170 | 1,976 | -194 | -8.94pp | - | - | - |
+| Checkout Attempt | 1,115 | 1,111 | -4 | -0.36pp | 51.38% | 56.22% | +4.84pp |
+| Enter Fraud Service | 1,106 | 1,107 | +1 | +0.09pp | 99.19% | 99.64% | +0.45pp |
+| Approved by Fraud Service | 991 | 984 | -7 | -0.71pp | 89.60% | 88.89% | -0.71pp |
+| PVS Attempt | 961 | 966 | +5 | +0.52pp | 96.97% | 98.17% | +1.20pp |
+| PVS Success | 944 | 957 | +13 | +1.38pp | 98.23% | 99.07% | +0.84pp |
+| **Successful Checkout** | 972 | 976 | +4 | +0.41pp | 102.97% | 101.99% | -0.98pp |
+
+**Key Driver:** Checkout Attempt (+4.84pp)
+
+---
+
 ## Conclusion
 
-The PCR improvement in W14 reflects genuine funnel health gains across multiple steps, particularly in checkout initiation (+1.54pp backend), PVS success (+0.79pp), and FE validation recovery (+1.47pp). The volume decrease (-23.9% payment visits) did not negatively impact conversion quality, suggesting higher-intent traffic or improved user experience. The slight decline in fraud service approval rates (-0.24pp to -0.43pp) should be monitored but does not currently require intervention.
+The +1.16pp PCR improvement in HF-INTL for 2026-W14 reflects healthy gains across multiple funnel stages, with the most significant contributions from improved PVS success rates (+0.85pp) and FE validation pass rates (+0.68pp). France and Denmark were the primary geographic drivers, both showing substantial improvements in early-funnel conversion (Select Payment Method). The reduction in "Insufficient Funds" payment failures and improved FE error recovery suggest better user experience and potentially improved customer payment readiness during this period.
 
 ---
 
 ## SQL Queries
 
 <details>
-<summary>Waterfall GA</summary>
+<summary>Waterfall GA (cluster/country)</summary>
 
 ```sql
 
@@ -195,7 +337,7 @@ ORDER BY hellofresh_week
 </details>
 
 <details>
-<summary>Backend Combined</summary>
+<summary>Backend Combined (cluster/country)</summary>
 
 ```sql
 
@@ -246,7 +388,95 @@ ORDER BY hellofresh_week, checkout_attempt DESC
 </details>
 
 <details>
-<summary>FE Recovery Rate</summary>
+<summary>Country PCR Summary</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'HF-INTL' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
+  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
+  WHERE iso_year_week <= (SELECT affected_week FROM params)
+  QUALIFY iso_year_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+),
+base_data AS (
+  SELECT
+    d.iso_year_week AS hellofresh_week,
+    f.country,
+    SUM(is_pay_visit) AS payment_visits,
+    SUM(is_success) AS successful_checkout
+  FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
+  JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
+  CROSS JOIN weeks w
+  WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
+    AND f.country IN (SELECT country FROM countries)
+  GROUP BY 1, 2
+),
+with_pcr AS (
+  SELECT
+    hellofresh_week,
+    country,
+    payment_visits,
+    successful_checkout,
+    ROUND(successful_checkout * 100.0 / NULLIF(payment_visits, 0), 2) AS pcr
+  FROM base_data
+),
+with_delta AS (
+  SELECT
+    curr.country,
+    curr.payment_visits AS curr_volume,
+    prev.payment_visits AS prev_volume,
+    curr.pcr AS curr_pcr,
+    prev.pcr AS prev_pcr,
+    ROUND(curr.pcr - prev.pcr, 2) AS delta_pcr_pp,
+    ABS(curr.pcr - prev.pcr) AS abs_delta_pcr,
+    curr.payment_visits * ABS(curr.pcr - prev.pcr) AS contribution
+  FROM with_pcr curr
+  CROSS JOIN weeks w
+  JOIN with_pcr prev ON curr.country = prev.country 
+    AND curr.hellofresh_week = w.affected_week 
+    AND prev.hellofresh_week = w.prev_week
+),
+ranked AS (
+  SELECT
+    country,
+    prev_volume,
+    curr_volume,
+    prev_pcr,
+    curr_pcr,
+    delta_pcr_pp,
+    contribution,
+    ROW_NUMBER() OVER (ORDER BY contribution DESC) AS rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY abs_delta_pcr DESC) AS rank_change
+  FROM with_delta
+)
+SELECT
+  country,
+  prev_volume,
+  curr_volume,
+  prev_pcr,
+  curr_pcr,
+  delta_pcr_pp,
+  rank_contribution,
+  rank_change
+FROM ranked
+ORDER BY rank_contribution
+
+```
+
+</details>
+
+<details>
+<summary>FE Validation Recovery Rate</summary>
 
 ```sql
 
@@ -279,43 +509,6 @@ WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
   AND f.country IN (SELECT country FROM countries)
 GROUP BY 1
 ORDER BY hellofresh_week
-
-```
-
-</details>
-
-<details>
-<summary>FE Validation Errors</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'HF-INTL' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  iso_year_week AS hellofresh_week,
-  label_error,
-  SUM(errors) AS errors
-FROM payments_hf.dash_ga_error
-CROSS JOIN weeks w
-WHERE iso_year_week IN (w.affected_week, w.prev_week)
-  AND country IN (SELECT country FROM countries)
-  AND event_action = 'PaymentFormFEValidationError'
-GROUP BY 1, 2
-ORDER BY hellofresh_week, errors DESC
 
 ```
 
