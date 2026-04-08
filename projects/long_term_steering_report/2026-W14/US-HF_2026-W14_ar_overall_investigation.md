@@ -1,110 +1,118 @@
 # AR Overall Investigation: US-HF 2026-W14
 
 **Metric:** Pre-Dunning Acceptance Rate (Overall)  
-**Period:** 2026-W08 → 2026-W14  
-**Observation:** 91.98% → 91.93% (-0.05pp)  
+**Period:** 2026-W13 → 2026-W14  
+**Observation:** 91.98% → 91.93% (-0.05%)  
 **Volume:** 415,885 orders  
-**Validation:** PASS
-
----
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** The US-HF Pre-Dunning Acceptance Rate showed a minimal decline of -0.05pp (91.98% → 91.93%) in 2026-W14, representing stable performance within normal operating range across 415,885 orders.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate for US-HF declined marginally from 91.98% to 91.93% (-0.05%) in 2026-W14, representing a statistically insignificant change across 415,885 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Change | US-HF rate change | -0.05pp | ✅ |
-| L0: Cluster Comparison | US-HF vs other clusters | Best performer (smallest decline) | ✅ |
-| L0: 8-Week Trend | Trend stability | Range: 91.48% - 92.44% | ✅ |
-| Validation | Pass/Fail threshold | PASS | ✅ |
+| L0: 8-Week Trend | Rate within normal range (91.48%-92.09%) | -0.05% | ✅ |
+| L1: Country Breakdown | US only, -0.06% change | Below ±2.5% threshold | ✅ |
+| L1: Payment Method | Others -0.29%, PayPal -0.11%, Credit Card -0.06% | All below threshold | ✅ |
+| L1: Payment Provider | Unknown +8.23% flagged | Low volume (249 orders) | ⚠️ |
+| L3: Related Metrics | PostDunningAR -0.10%, FirstRunAR +0.24% | Mixed signals | ✅ |
 
 **Key Findings:**
-- US-HF performed as the **best cluster** with the smallest decline (-0.05pp), tied with HF-NA (-0.05pp), compared to overall portfolio decline of -0.37pp
-- **INTL-startup shows concerning decline** of -2.85pp (88.37% from 91.23%) with 10,141 orders volume - warrants separate investigation
-- 8-week trend shows **stable oscillation** between 91.48% and 92.44%, with W14's rate (91.93%) within normal range
-- Week 2026-W15 shows **recovery to 92.44%** (+0.51pp), indicating the W14 dip was transient
-- Volume declined from 453,781 (W08) to 415,885 (W14), representing approximately 8% reduction in order volume over the period
+- The -0.05% week-over-week decline is within normal weekly fluctuation range observed over the past 8 weeks (91.48% to 92.09%)
+- Volume continues a gradual downward trend: 470,140 (W07) → 415,885 (W14), representing an 11.5% volume decrease over 8 weeks
+- PaymentProvider "Unknown" shows a +8.23% improvement but represents only 249 orders (0.06% of total volume), making it statistically insignificant
+- All major payment methods (Credit Card: 305,088 orders, Apple Pay: 57,395 orders, PayPal: 51,200 orders) show minimal changes within ±0.29%
+- FirstRunAR improved (+0.24%) while PostDunningAR declined (-0.10%), suggesting recovery mechanisms are slightly less effective this week
 
-**Action:** ✅ **Monitor** - Change is <2pp, no anomaly flags present for US-HF, and validation status is PASS. The metric remains stable within historical norms.
-
----
+**Action:** Monitor — No investigation required. The change is not statistically significant and falls within normal operational variance. Continue standard weekly monitoring.
 
 ---
-
-## L0: Cluster Comparison
-
-| Cluster | Curr % | Prev % | Change pp | Volume | Flag |
-|---------|--------|--------|-----------|--------|------|
-| INTL-startup | 88.37% | 91.23% | -2.85pp | 10,141 | ⚠️ |
-| INTL-growing | 94.23% | 95.08% | -0.86pp | 370,655 |  |
-| HF-INTL | 93.64% | 94.16% | -0.53pp | 784,387 |  |
-| WL | 89.33% | 89.72% | -0.39pp | 165,018 |  |
-| Overall | 92.6% | 92.97% | -0.37pp | 1,888,446 |  |
-| HF-TOTAL | 93.06% | 93.43% | -0.36pp | 1,291,575 |  |
-| RTE | 92.46% | 92.79% | -0.33pp | 431,853 |  |
-| INTL-mature | 93.23% | 93.4% | -0.17pp | 403,591 |  |
-| **US-HF** | 91.93% | 91.98% | -0.05pp | 415,885 |  |
-| HF-NA | 92.18% | 92.23% | -0.05pp | 507,188 |  |
 
 ---
 
 ## L0: 8-Week Trend (US-HF)
 
-| Week | Rate % | Volume | Δ pp (vs prior week) |
-|------|--------|--------|----------------------|
-| 2026-W15 | 92.44% | 364,598 | +0.51pp |
-| 2026-W14 | 91.93% | 415,885 | -0.05pp ← REPORTED CHANGE |
-| 2026-W13 | 91.98% | 424,103 | +0.05pp |
-| 2026-W12 | 91.93% | 433,761 | -0.16pp |
-| 2026-W11 | 92.09% | 444,619 | +0.13pp |
-| 2026-W10 | 91.96% | 457,610 | +0.31pp |
-| 2026-W09 | 91.65% | 455,121 | +0.17pp |
-| 2026-W08 | 91.48% | 453,781 | nanpp |
+| Week | Rate % | Volume | Δ % (vs prior week) |
+|------|--------|--------|---------------------|
+| 2026-W14 | 91.93% | 415,885 | -0.05% ← REPORTED CHANGE |
+| 2026-W13 | 91.98% | 424,103 | +0.05% |
+| 2026-W12 | 91.93% | 433,761 | -0.17% |
+| 2026-W11 | 92.09% | 444,619 | +0.14% |
+| 2026-W10 | 91.96% | 457,610 | +0.34% |
+| 2026-W09 | 91.65% | 455,121 | +0.19% |
+| 2026-W08 | 91.48% | 453,781 | -0.20% |
+| 2026-W07 | 91.66% | 470,140 | +nan% |
 
 ---
 
-## Summary
+## L1: Country Breakdown
 
-The US-HF Pre-Dunning Acceptance Rate decline of -0.05pp in 2026-W14 is negligible and represents normal week-over-week fluctuation within an established stable range. No investigation or escalation is required for US-HF; however, the INTL-startup cluster's -2.85pp decline should be flagged for separate review. Continued monitoring is recommended with the next scheduled weekly assessment.
+| Country | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|---------|--------|--------|----------|----------|----------|------|
+| US | 92.79% | 92.85% | -0.06% | 497,052 | 505,599 |  |
+
+**Countries exceeding ±2.5% threshold:** None
 
 ---
 
-## Recommendation
+## L1: Dimension Scan
 
-- [ ] Monitor: if change <2pp and no anomaly flags
-- [ ] Investigate: if anomaly flags present
-- [ ] Escalate P1: if >3pp drop AND >10K orders
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Others | 98.37% | 98.65% | -0.29% | 2,202 | 2,230 |  |
+| Paypal | 95.34% | 95.44% | -0.11% | 51,200 | 52,426 |  |
+| Credit Card | 92.7% | 92.76% | -0.06% | 305,088 | 311,435 |  |
+| Apple Pay | 84.57% | 84.44% | +0.15% | 57,395 | 58,012 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Braintree | 92.44% | 92.49% | -0.05% | 372,325 | 382,647 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 1,924 | 2,065 |  |
+| Adyen | 95.05% | 94.99% | +0.07% | 364 | 399 |  |
+| ProcessOut | 86.9% | 86.57% | +0.38% | 41,023 | 38,861 |  |
+| Unknown | 86.75% | 80.15% | +8.23% | 249 | 131 | ⚠️ |
+
+---
+
+
+
+## L3: Related Metrics (Overall Total Box Candidates)
+
+| Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|--------|--------|--------|----------|----------|----------|------|
+| 1_FirstRunAR | 90.67% | 90.46% | +0.24% | 415,885 | 424,103 |  |
+| 2_PreDunningAR | 91.93% | 91.98% | -0.05% | 415,885 | 424,103 |  |
+| 3_PostDunningAR | 92.92% | 93.02% | -0.10% | 415,885 | 424,103 |  |
+| 6_PaymentApprovalRate | 93.63% | 93.59% | +0.05% | 415,885 | 424,103 |  |
+
+---
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| US | High (>92%) | 505,599 | 497,052 | -1.7% | Stable |
+
+---
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+No countries exceeded threshold for deep-dive.
 
 ---
 
 ## SQL Queries
-
-<details>
-<summary>L0: Cluster Comparison</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'US-HF' as cluster,
-    '2_PreDunningAR' as ar_metric, '1_1_Overall Total Box Candidates' as metric_group
-)
-SELECT reporting_cluster,
-  ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as curr_rate_pct,
-  ROUND(SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0) * 100, 2) as prev_rate_pct,
-  ROUND((SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) - 
-         SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0)) * 100, 2) as change_pp,
-  SUM(current_metric_value_denominator) as volume
-FROM payments_hf.payments_p0_metrics
-WHERE metric_name = (SELECT ar_metric FROM params) AND metric_group = (SELECT metric_group FROM params)
-  AND dimension_name = '_Overall' AND date_granularity = 'WEEK' AND date_value = (SELECT affected_week FROM params)
-GROUP BY reporting_cluster ORDER BY change_pp ASC
-
-```
-
-</details>
 
 <details>
 <summary>L0: 8-Week Trend</summary>
@@ -115,17 +123,171 @@ WITH params AS (
   SELECT '2026-W14' as affected_week, 'US-HF' as cluster,
     '2_PreDunningAR' as ar_metric, '1_1_Overall Total Box Candidates' as metric_group
 ),
+completed_weeks AS (
+  SELECT iso_year_week as week
+  FROM dimensions.date_dimension
+  WHERE date_string_backwards <= date_sub(CURRENT_DATE, 1)
+  GROUP BY iso_year_week
+  HAVING COUNT(*) = 7
+),
 weekly_rates AS (
-  SELECT date_value as week,
-    ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as rate_pct,
-    SUM(current_metric_value_denominator) as volume
-  FROM payments_hf.payments_p0_metrics
-  WHERE metric_name = (SELECT ar_metric FROM params) AND metric_group = (SELECT metric_group FROM params)
-    AND dimension_name = '_Overall' AND date_granularity = 'WEEK' AND reporting_cluster = (SELECT cluster FROM params)
-  GROUP BY date_value ORDER BY date_value DESC LIMIT 8
+  SELECT p.date_value as week,
+    ROUND(SUM(p.current_metric_value_numerator) / NULLIF(SUM(p.current_metric_value_denominator), 0) * 100, 2) as rate_pct,
+    SUM(p.current_metric_value_denominator) as volume
+  FROM payments_hf.payments_p0_metrics p
+  JOIN completed_weeks cw ON p.date_value = cw.week
+  WHERE p.metric_name = (SELECT ar_metric FROM params) 
+    AND p.metric_group = (SELECT metric_group FROM params)
+    AND p.dimension_name = '_Overall' 
+    AND p.date_granularity = 'WEEK' 
+    AND p.reporting_cluster = (SELECT cluster FROM params)
+  GROUP BY p.date_value 
+  ORDER BY p.date_value DESC 
+  LIMIT 8
 )
-SELECT week, rate_pct, volume, ROUND(rate_pct - LAG(rate_pct) OVER (ORDER BY week ASC), 2) as change_pp_vs_prior_week
-FROM weekly_rates ORDER BY week DESC
+SELECT week, rate_pct, volume, 
+  ROUND((rate_pct - LAG(rate_pct) OVER (ORDER BY week ASC)) / NULLIF(LAG(rate_pct) OVER (ORDER BY week ASC), 0) * 100, 2) as change_pct_vs_prior_week
+FROM weekly_rates 
+ORDER BY week DESC
+
+```
+
+</details>
+
+<details>
+<summary>L1a: Country Breakdown</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(hellofresh_week) OVER (ORDER BY hellofresh_week) as prev_week
+  FROM (SELECT DISTINCT hellofresh_week FROM dimensions.date_dimension WHERE hellofresh_week >= '2021-W01')
+  WHERE hellofresh_week <= (SELECT affected_week FROM params)
+  QUALIFY hellofresh_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+),
+curr AS (
+  SELECT country,
+    SUM(order_count) as orders,
+    SUM(`2_PreDunningAR`) / NULLIF(SUM(order_count), 0) as rate
+  FROM payments_hf.payments_p0_metrics_box_candidates
+  CROSS JOIN weeks w
+  WHERE hellofresh_week = w.affected_week
+    AND country IN (SELECT country FROM countries)
+    
+  GROUP BY country
+),
+prev AS (
+  SELECT country,
+    SUM(order_count) as orders,
+    SUM(`2_PreDunningAR`) / NULLIF(SUM(order_count), 0) as rate
+  FROM payments_hf.payments_p0_metrics_box_candidates
+  CROSS JOIN weeks w
+  WHERE hellofresh_week = w.prev_week
+    AND country IN (SELECT country FROM countries)
+    
+  GROUP BY country
+),
+combined AS (
+  SELECT 
+    c.country,
+    ROUND(c.rate * 100, 2) as curr_rate_pct,
+    ROUND(p.rate * 100, 2) as prev_rate_pct,
+    ROUND((c.rate - p.rate) / NULLIF(p.rate, 0) * 100, 2) as change_pct,
+    c.orders as curr_volume,
+    p.orders as prev_volume,
+    ABS(c.orders * (c.rate - p.rate)) as contribution
+  FROM curr c
+  JOIN prev p ON c.country = p.country
+),
+ranked AS (
+  SELECT *,
+    ROW_NUMBER() OVER (ORDER BY contribution DESC) as rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY ABS(change_pct) DESC) as rank_change
+  FROM combined
+),
+top_countries AS (
+  SELECT * FROM ranked
+  WHERE rank_contribution <= 4 OR rank_change <= 4
+  ORDER BY rank_contribution
+  LIMIT 8
+)
+SELECT country, curr_rate_pct, prev_rate_pct, change_pct, curr_volume, prev_volume,
+  CASE WHEN ABS(change_pct) > 2.5 THEN '⚠️' ELSE '' END as flag,
+  rank_contribution, rank_change
+FROM top_countries
+ORDER BY change_pct ASC
+
+```
+
+</details>
+
+<details>
+<summary>L1b: Dimension Scan</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster,
+    '2_PreDunningAR' as ar_metric, '1_1_Overall Total Box Candidates' as metric_group
+)
+SELECT dimension_name, dimension_value,
+  ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as curr_rate_pct,
+  ROUND(SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0) * 100, 2) as prev_rate_pct,
+  ROUND((SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) - 
+         SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0)) / 
+         NULLIF(SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0), 0) * 100, 2) as change_pct,
+  SUM(current_metric_value_denominator) as curr_volume,
+  SUM(prev_metric_value_denominator) as prev_volume
+FROM payments_hf.payments_p0_metrics
+WHERE metric_name = (SELECT ar_metric FROM params) 
+  AND metric_group = (SELECT metric_group FROM params)
+  AND date_granularity = 'WEEK' 
+  AND date_value = (SELECT affected_week FROM params)
+  AND reporting_cluster = (SELECT cluster FROM params)
+  AND dimension_name IN ('PaymentMethod', 'PaymentProvider')
+GROUP BY dimension_name, dimension_value
+ORDER BY dimension_name, change_pct ASC
+
+```
+
+</details>
+
+<details>
+<summary>L3: Related Metrics</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster,
+    '1_1_Overall Total Box Candidates' as metric_group
+)
+SELECT metric_name,
+  ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as curr_rate_pct,
+  ROUND(SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0) * 100, 2) as prev_rate_pct,
+  ROUND((SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) - 
+         SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0)) /
+         NULLIF(SUM(prev_metric_value_numerator) / NULLIF(SUM(prev_metric_value_denominator), 0), 0) * 100, 2) as change_pct,
+  SUM(current_metric_value_denominator) as curr_volume,
+  SUM(prev_metric_value_denominator) as prev_volume
+FROM payments_hf.payments_p0_metrics
+WHERE metric_group = (SELECT metric_group FROM params)
+  AND dimension_name = '_Overall' 
+  AND date_granularity = 'WEEK' 
+  AND date_value = (SELECT affected_week FROM params)
+  AND reporting_cluster = (SELECT cluster FROM params)
+  AND metric_name IN ('1_FirstRunAR', '2_PreDunningAR', '3_PostDunningAR', '6_PaymentApprovalRate')
+GROUP BY metric_name
+ORDER BY metric_name
 
 ```
 

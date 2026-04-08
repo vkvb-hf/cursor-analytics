@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) for HF-INTL improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by broad improvements across most funnel steps despite a 23.9% decrease in payment visit volume.
+**Overall:** Payment Conversion Rate (PCR) for HF-INTL improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by improvements across multiple funnel steps despite a 23.9% reduction in payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥0pp | +0.42pp | ✅ |
-| Click Submit Form | ≥0pp | +0.59pp | ✅ |
-| FE Validation Passed | ≥0pp | +0.68pp | ✅ |
-| Enter Fraud Service | ≥0pp | +0.40pp | ✅ |
-| Approved by Fraud Service | ≥0pp | -0.23pp | ⚠️ |
-| Call to PVS | ≥0pp | -0.01pp | ⚠️ |
-| Successful Checkout | ≥0pp | +0.85pp | ✅ |
+| Select Payment Method | ≥0.58pp threshold | +0.42pp | ⚠️ |
+| Click Submit Form | ≥0.58pp threshold | +0.59pp | ✅ |
+| FE Validation Passed | ≥0.58pp threshold | +0.68pp | ✅ |
+| Enter Fraud Service | ≥0.58pp threshold | +0.40pp | ⚠️ |
+| Approved by Fraud Service | ≥0.58pp threshold | -0.23pp | ⚠️ |
+| Call to PVS | ≥0.58pp threshold | -0.01pp | ⚠️ |
+| Successful Checkout (PVS→Success) | ≥0.58pp threshold | +0.85pp | ✅ |
 
 **Key Findings:**
-- **France drove the largest contribution** to PCR improvement (+3.10pp), with Select Payment Method conversion increasing by +2.98pp in GA waterfall
-- **FE Validation recovery rate improved** from 56.10% to 57.57% (+1.47pp), with APPLEPAY_DISMISSED remaining the dominant error type (76.8% of errors)
-- **PVS Success rate improved significantly** (+0.85pp in GA), with "Failed Verification: Insufficient Funds" declining from 17.3% to 13.0% of PVS failures (-4.31pp share)
-- **Braintree_ApplePay showed notable improvement** (+1.70pp success rate), while ProcessOut_ApplePay declined (-1.20pp)
-- **Fraud Service approval rate slightly declined** (-0.23pp in GA, -0.43pp in Backend), representing the only meaningful negative trend in the funnel
+- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of PVS failures (-4.31pp share), indicating better customer payment readiness
+- **FE Validation recovery rate improved (+1.47pp):** Customers recovering from frontend errors increased from 56.10% to 57.57%, with PAYPAL_POPUP_CLOSED errors decreasing as a share (-2.79pp)
+- **France (FR) drove the largest contribution:** PCR improved +3.10pp with Select Payment Method step improving +2.98pp, suggesting better payment method presentation or customer intent
+- **Denmark (DK) showed strong improvement (+5.89pp):** Select Payment Method improved +4.17pp and checkout success rate increased despite being a smaller volume market
+- **Braintree ApplePay conversion improved +1.70pp:** From 83.73% to 85.43%, the second largest payment method by volume showed meaningful improvement
 
-**Action:** Monitor - The overall improvement is positive and broad-based. Continue monitoring Fraud Service approval rates and ProcessOut_ApplePay performance for potential degradation trends.
+**Action:** **Monitor** – The PCR improvement is positive and broad-based across funnel steps and geographies. Continue monitoring to confirm the trend sustains, particularly the PVS success improvements and FR market performance.
 
 ---
 
@@ -287,7 +287,7 @@
 
 ## Conclusion
 
-The +1.16pp PCR improvement in 2026-W14 reflects healthy performance across the payment funnel, with gains in early-funnel engagement (Select Payment Method +0.42pp) and late-funnel success (PVS Success +0.85pp) offsetting minor declines in Fraud Service approval. France contributed most significantly to the improvement with a +3.10pp PCR increase driven by better checkout initiation rates. No immediate action is required, though the slight Fraud Service approval decline (-0.23pp) should be monitored for persistence in upcoming weeks.
+The +1.16pp PCR improvement in HF-INTL during 2026-W14 represents a healthy positive trend driven primarily by better PVS success rates (+0.85pp) and frontend validation pass rates (+0.68pp). France contributed most significantly to the improvement with a +3.10pp PCR gain, while reduced "Insufficient Funds" payment failures suggest improved customer payment instrument quality. No immediate action is required, but continued monitoring is recommended to validate these gains persist in subsequent weeks.
 
 ---
 

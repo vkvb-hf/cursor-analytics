@@ -1,34 +1,35 @@
-# AR Overall Investigation: HF-NA 2026-W14
+# AR Initial (LL0) Investigation: HF-NA 2026-W14
 
-**Metric:** Pre-Dunning Acceptance Rate (Overall)  
+**Metric:** Pre-Dunning Acceptance Rate (Initial Charges)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 92.23% → 92.17% (-0.07%)  
-**Volume:** 507,188 orders  
+**Observation:** 89.1% → 89.66% (+0.63%)  
+**Volume:** 17,242 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for HF-NA declined marginally from 92.23% to 92.17% (-0.07%) in 2026-W14, representing a statistically non-significant change across 507,188 orders.
+**Overall:** The Pre-Dunning Acceptance Rate for HF-NA initial charges improved from 89.1% to 89.66% (+0.63%) in 2026-W14, representing a recovery from the prior week's decline; however, this change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.24% | ✅ |
-| 2_PreDunningAR | Target Metric | -0.06% | ✅ |
-| 3_PostDunningAR | Downstream | -0.13% | ✅ |
-| 6_PaymentApprovalRate | Final | +0.04% | ✅ |
+| L0: 8-Week Trend | Rate within normal range (89.37%-90.82%) | +0.63% | ✅ |
+| L1: Country Breakdown | US shows +4.43% change, exceeds ±2.5% threshold | +4.43% (US) | ⚠️ |
+| L1: Payment Provider | Adyen -4.74%, Unknown +3.40% exceed threshold | -4.74% (Adyen) | ⚠️ |
+| L2: US Deep-Dive | ProcessOut +6.32%, applepay +5.21% flagged | +6.32% (ProcessOut) | ⚠️ |
+| L3: Related Metrics | All AR metrics improved consistently (+0.54% to +0.77%) | +0.63% | ✅ |
 
 **Key Findings:**
-- **Stable performance across countries:** Neither US (-0.06%) nor CA (-0.10%) exceeded the ±2.5% threshold, indicating no country-specific issues driving the decline
-- **Payment provider anomaly detected:** "Unknown" provider showed a +6.91% change but represents minimal volume (758 orders), flagged as ⚠️ but not impactful
-- **Consistent 8-week trend:** The rate has remained stable between 91.35% and 92.28% over the past 8 weeks, with the current week within normal variance
-- **Volume decline observed:** Total order volume decreased by ~2% (517,599 → 507,188), consistent across both US (-1.7%) and CA (-2.4%)
-- **First Run AR improvement:** The upstream metric 1_FirstRunAR improved by +0.24%, suggesting initial payment attempts are performing better despite slight Pre-Dunning decline
+- **US drove the improvement:** US acceptance rate increased significantly from 66.77% to 69.72% (+4.43%), with volume rising from 23,515 to 24,598 orders
+- **ProcessOut performance surge in US:** ProcessOut improved from 72.97% to 77.59% (+6.32%) while handling increased volume (8,584 → 11,351 orders), indicating successful routing optimization
+- **Decline reasons improved:** "Insufficient Funds" declines dropped by 1.70pp (21.42% → 19.72%) and "Refused" declines decreased by 1.14pp (8.53% → 7.39%)
+- **Adyen volume shift:** Adyen showed a -4.74% rate change but volume dropped significantly (668 → 218), suggesting traffic was redistributed to other providers
+- **Apple Pay improvement in US:** Apple Pay acceptance increased from 66.49% to 69.95% (+5.21%) on substantial volume (7,696 → 8,283 orders)
 
-**Action:** **Monitor** — The -0.07% change is within normal weekly fluctuation, no dimensions exceeded alert thresholds at meaningful volume, and the 8-week trend shows stable performance. No immediate investigation required.
+**Action:** **Monitor** – The improvement is positive but not statistically significant. Continue monitoring ProcessOut performance and the volume shift away from Adyen to ensure the routing changes remain beneficial.
 
 ---
 
@@ -38,14 +39,14 @@
 
 | Week | Rate % | Volume | Δ % (vs prior week) |
 |------|--------|--------|---------------------|
-| 2026-W14 | 92.17% | 507,188 | -0.07% ← REPORTED CHANGE |
-| 2026-W13 | 92.23% | 517,599 | +0.10% |
-| 2026-W12 | 92.14% | 526,516 | -0.15% |
-| 2026-W11 | 92.28% | 539,763 | +0.29% |
-| 2026-W10 | 92.01% | 554,777 | +0.46% |
-| 2026-W09 | 91.59% | 553,112 | +0.26% |
-| 2026-W08 | 91.35% | 548,921 | -0.23% |
-| 2026-W07 | 91.56% | 570,585 | +nan% |
+| 2026-W14 | 89.66% | 17,242 | +0.63% ← REPORTED CHANGE |
+| 2026-W13 | 89.1% | 16,215 | -0.60% |
+| 2026-W12 | 89.64% | 21,080 | -1.30% |
+| 2026-W11 | 90.82% | 21,784 | +1.09% |
+| 2026-W10 | 89.84% | 25,446 | +0.25% |
+| 2026-W09 | 89.62% | 25,208 | -0.19% |
+| 2026-W08 | 89.79% | 25,674 | +0.47% |
+| 2026-W07 | 89.37% | 28,927 | +nan% |
 
 ---
 
@@ -53,10 +54,10 @@
 
 | Country | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |---------|--------|--------|----------|----------|----------|------|
-| CA | 93.52% | 93.61% | -0.10% | 105,528 | 108,071 |  |
-| US | 92.79% | 92.85% | -0.06% | 497,052 | 505,599 |  |
+| CA | 80.88% | 80.74% | +0.18% | 7,779 | 7,706 |  |
+| US | 69.72% | 66.77% | +4.43% | 24,598 | 23,515 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** None
+**Countries exceeding ±2.5% threshold:** US
 
 ---
 
@@ -66,33 +67,70 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Paypal | 95.41% | 95.5% | -0.09% | 61,971 | 63,431 |  |
-| Credit Card | 92.73% | 92.79% | -0.06% | 372,464 | 380,055 |  |
-| Apple Pay | 85.8% | 85.72% | +0.10% | 68,380 | 69,160 |  |
-| Others | 98.51% | 98.36% | +0.15% | 4,373 | 4,953 |  |
+| Paypal | 90.25% | 90.77% | -0.58% | 1,333 | 1,268 |  |
+| Credit Card | 89.43% | 89.0% | +0.49% | 9,781 | 9,096 |  |
+| Others | 98.85% | 98.0% | +0.86% | 866 | 1,101 |  |
+| Apple Pay | 88.43% | 86.78% | +1.90% | 5,262 | 4,750 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Adyen | 93.29% | 93.46% | -0.18% | 25,367 | 26,148 |  |
-| Braintree | 92.53% | 92.58% | -0.05% | 394,115 | 404,848 |  |
-| ProcessOut | 89.84% | 89.81% | +0.03% | 83,447 | 82,249 |  |
-| No Payment | 100.0% | 99.97% | +0.03% | 3,501 | 3,844 |  |
-| Unknown | 91.82% | 85.88% | +6.91% | 758 | 510 | ⚠️ |
+| Adyen | 93.12% | 97.75% | -4.74% | 218 | 668 | ⚠️ |
+| No Payment | 100.0% | 99.5% | +0.50% | 163 | 201 |  |
+| Braintree | 88.7% | 88.18% | +0.59% | 6,980 | 7,739 |  |
+| ProcessOut | 89.54% | 88.7% | +0.94% | 9,260 | 7,256 |  |
+| Unknown | 98.39% | 95.16% | +3.40% | 621 | 351 | ⚠️ |
+
+---
+
+## L2: US Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| None | 95.37% | 0.0% | +nan% | 216 | 0 |  |
+| None | 0.0% | 93.2% | -100.00% | 0 | 103 | ⚠️ |
+| venmo | 0.0% | 100.0% | -100.00% | 0 | 3 | ⚠️ |
+| cashcredit | 100.0% | 100.0% | +0.00% | 198 | 196 |  |
+| paypal | 70.41% | 69.37% | +1.50% | 1,967 | 1,985 |  |
+| credit_card | 68.66% | 65.85% | +4.26% | 13,934 | 13,532 |  |
+| applepay | 69.95% | 66.49% | +5.21% | 8,283 | 7,696 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Braintree | 61.86% | 62.49% | -1.01% | 12,833 | 14,632 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 198 | 198 |  |
+| Unknown | 95.37% | 93.07% | +2.47% | 216 | 101 |  |
+| ProcessOut | 77.59% | 72.97% | +6.32% | 11,351 | 8,584 | ⚠️ |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| 1. SUCCESSFULL | 17,150 | 15,700 | 69.72% | 66.77% | +2.96 |
+| Insufficient Funds | 4,851 | 5,036 | 19.72% | 21.42% | -1.70 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 1,818 | 2,007 | 7.39% | 8.53% | -1.14 |
+| Other reasons | 770 | 771 | 3.13% | 3.28% | -0.15 |
+| Unknown | 4 | 0 | 0.02% | 0.00% | +0.02 |
+| PROVIDER_ERROR: failure executing charge with provider | 5 | 1 | 0.02% | 0.00% | +0.02 |
+
+**Root Cause:** None + ProcessOut + Insufficient
 
 ---
 
 
-
-## L3: Related Metrics (Overall Total Box Candidates)
+## L3: Related Metrics (Loyalty: LL0 (Initial charges))
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 90.95% | 90.73% | +0.24% | 507,188 | 517,599 |  |
-| 2_PreDunningAR | 92.17% | 92.23% | -0.06% | 507,188 | 517,599 |  |
-| 3_PostDunningAR | 93.26% | 93.38% | -0.13% | 507,188 | 517,599 |  |
-| 6_PaymentApprovalRate | 94.0% | 93.96% | +0.04% | 507,188 | 517,599 |  |
+| 1_FirstRunAR | 88.42% | 87.75% | +0.77% | 17,242 | 16,215 |  |
+| 2_PreDunningAR | 89.66% | 89.1% | +0.63% | 17,242 | 16,215 |  |
+| 3_PostDunningAR | 89.83% | 89.26% | +0.63% | 17,242 | 16,215 |  |
+| 6_PaymentApprovalRate | 90.08% | 89.59% | +0.54% | 17,242 | 16,215 |  |
 
 ---
 
@@ -100,8 +138,8 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 505,599 | 497,052 | -1.7% | Stable |
-| CA | High (>92%) | 108,071 | 105,528 | -2.4% | Stable |
+| US | Low (>85%) | 23,515 | 24,598 | +4.6% | Stable |
+| CA | Low (>85%) | 7,706 | 7,779 | +0.9% | Stable |
 
 ---
 
@@ -109,7 +147,9 @@
 
 **Root Cause Derivation:**
 
-No countries exceeded threshold for deep-dive.
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| US | ↑ +4.43% | None -100.0% | ProcessOut +6.3% | Insufficient Funds -1.70pp | None + ProcessOut + Insufficient |
 
 ---
 
@@ -122,7 +162,7 @@ No countries exceeded threshold for deep-dive.
 
 WITH params AS (
   SELECT '2026-W14' as affected_week, 'HF-NA' as cluster,
-    '2_PreDunningAR' as ar_metric, '1_1_Overall Total Box Candidates' as metric_group
+    '2_PreDunningAR' as ar_metric, '1_2_Loyalty: LL0 (Initial charges)' as metric_group
 ),
 completed_weeks AS (
   SELECT iso_year_week as week
@@ -184,7 +224,7 @@ curr AS (
   CROSS JOIN weeks w
   WHERE hellofresh_week = w.affected_week
     AND country IN (SELECT country FROM countries)
-    
+    AND customer_loyalty_segment = 'a. 0'
   GROUP BY country
 ),
 prev AS (
@@ -195,7 +235,7 @@ prev AS (
   CROSS JOIN weeks w
   WHERE hellofresh_week = w.prev_week
     AND country IN (SELECT country FROM countries)
-    
+    AND customer_loyalty_segment = 'a. 0'
   GROUP BY country
 ),
 combined AS (
@@ -239,7 +279,7 @@ ORDER BY change_pct ASC
 
 WITH params AS (
   SELECT '2026-W14' as affected_week, 'HF-NA' as cluster,
-    '2_PreDunningAR' as ar_metric, '1_1_Overall Total Box Candidates' as metric_group
+    '2_PreDunningAR' as ar_metric, '1_2_Loyalty: LL0 (Initial charges)' as metric_group
 )
 SELECT dimension_name, dimension_value,
   ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as curr_rate_pct,
@@ -270,7 +310,7 @@ ORDER BY dimension_name, change_pct ASC
 
 WITH params AS (
   SELECT '2026-W14' as affected_week, 'HF-NA' as cluster,
-    '1_1_Overall Total Box Candidates' as metric_group
+    '1_2_Loyalty: LL0 (Initial charges)' as metric_group
 )
 SELECT metric_name,
   ROUND(SUM(current_metric_value_numerator) / NULLIF(SUM(current_metric_value_denominator), 0) * 100, 2) as curr_rate_pct,

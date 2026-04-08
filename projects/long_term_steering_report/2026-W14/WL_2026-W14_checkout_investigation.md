@@ -9,9 +9,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Conversion Rate declined from 30.03% to 29.88% (-0.15pp) week-over-week, with payment visits decreasing by 8.1% (~3,110 fewer visits).
+**Overall:** Payment Conversion Rate (PCR) declined slightly from 30.03% to 29.88% (-0.15pp) on ~35K payment visits, representing a minor week-over-week decrease.
 
 **Funnel Analysis:**
 
@@ -26,13 +24,13 @@
 | Successful Checkout | ≥-0.07pp | +0.25pp | ✅ |
 
 **Key Findings:**
-- **Call to PVS shows significant drop (-0.53pp):** Backend data confirms a severe PVS Attempt decline (-9.71pp from 98.79% to 89.07%), indicating a critical issue between fraud approval and payment verification service calls.
-- **Country KN is the primary driver:** KN experienced a -3.75pp PCR decline with Select Payment Method dropping -3.26pp, contributing most to the overall degradation.
-- **Braintree_CreditCard shows notable decline:** Success rate dropped -2.58pp (90.20% → 87.62%), the largest negative change among major payment methods.
-- **Braintree_Paypal also underperforming:** Success rate declined -1.73pp (92.11% → 90.38%), with increased "CVC Declined" errors (+5.58pp share) in PVS failures.
-- **Positive offset from GN and ER:** Both countries improved PCR (+4.30pp and +2.04pp respectively), partially offsetting KN's decline through better Select Payment Method conversion.
+- **Call to PVS shows significant drop (-0.53pp):** Backend data confirms a severe PVS Attempt conversion decline (-9.71pp from 98.79% to 89.07%), indicating a potential system issue between fraud approval and payment verification initiation
+- **Country KN is the primary negative driver:** PCR dropped -3.75pp (27.15% → 23.40%) with Select Payment Method conversion falling -3.26pp and Fraud Service approval declining -1.79pp
+- **Braintree_CreditCard underperforming:** Success rate dropped -2.58pp (90.20% → 87.62%), the largest decline among major payment methods
+- **Countries ER and GN showed improvement:** ER improved +2.04pp and GN improved +4.30pp, both driven by better Select Payment Method conversion (+1.60pp and +4.07pp respectively)
+- **CVV/CVC decline errors increased:** "Failed Verification: Refused(CVC Declined)" rose from 4.2% to 9.8% of PVS failures (+5.58pp share increase)
 
-**Action:** **Investigate** - Priority investigation needed for (1) the Call to PVS / PVS Attempt gap showing -9.71pp backend drop, and (2) KN market's Select Payment Method degradation (-3.26pp). Check for technical issues with PVS connectivity and any payment method availability changes in KN.
+**Action:** **Investigate** - The significant gap between Fraud Approval and PVS Attempt in backend data (-9.71pp) requires immediate investigation. Additionally, focus on KN market performance and Braintree_CreditCard processing issues.
 
 ---
 
@@ -279,7 +277,7 @@
 
 ## Conclusion
 
-The -0.15pp PCR decline is primarily driven by two issues: a significant backend gap between fraud approval and PVS attempt (-9.71pp), and poor performance in the KN market where Select Payment Method conversion dropped -3.26pp. While improvements in GN (+4.30pp) and ER (+2.04pp) provided partial offset, the PVS connectivity issue requires immediate technical investigation as it represents a systemic problem affecting checkout completion across all markets.
+The PCR decline of -0.15pp is primarily driven by issues in the KN market (-3.75pp) and a concerning drop in the Call to PVS step (-0.53pp in GA, -9.71pp in backend). While other markets (ER, GN) showed positive trends that partially offset the decline, the backend data reveals a significant gap between fraud approval and PVS initiation that warrants immediate technical investigation. Priority should be given to diagnosing the PVS routing issue and addressing the Braintree_CreditCard success rate degradation.
 
 ---
 
