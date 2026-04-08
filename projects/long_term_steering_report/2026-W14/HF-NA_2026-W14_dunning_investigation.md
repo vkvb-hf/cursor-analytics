@@ -2,31 +2,35 @@
 
 **Metric:** Ship Rate (Good Customers)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 46.70% → 49.18% (+5.31pp)  
-**Volume:** 17,743 orders
+**Observation:** 46.70% → 49.18% (+5.31pp, +2.48pppp)  
+**Volume:** 17,743 orders  
+**Significance:** Significant
 
 ---
 
 ## Executive Summary
 
-**Overall:** Ship Rate for Good Customers improved significantly from 46.70% to 49.18% (+5.31pp) in HF-NA during 2026-W14, with stable order volume of 17,743 orders.
+## Executive Summary
+
+**Overall:** Ship Rate for HF-NA improved significantly from 46.70% to 49.18% (+2.48pp, +5.31% relative) in 2026-W14, driven primarily by US performance with stable volume of ~17,743 orders.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ Conv | Result |
+| Step | Check | Δ | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 92.92% (stable) | -0.06pp | ✅ |
-| Discount % | 15.46% (decreased) | -7.20pp | ✅ |
-| PC2 | 52.5% (increased) | +2.36pp | ✅ |
+| Pre-Dunning AR | 92.98% → 92.92% | -0.06pp | ✅ Stable |
+| Discount % | 16.66% → 15.46% | -1.20pp | ✅ Lower discounts (positive signal) |
+| PC2 | 51.29% → 52.50% | +1.21pp | ✅ Improved profitability |
+| Ship Rate | 46.70% → 49.18% | +2.48pp | ✅ Significant improvement |
 
 **Key Findings:**
-- Ship Rate increased by +5.31pp week-over-week despite Pre-Dunning AR remaining essentially flat (-0.06pp), indicating the improvement came from downstream funnel changes
-- Discount % decreased significantly by -7.20pp (from 16.66% to 15.46%), which per the decision framework has a negative relationship with Ship Rate—meaning lower discounts correlate with higher Ship Rate, consistent with the observed improvement
-- PC2 increased by +2.36pp (from 51.29% to 52.5%), which has a positive relationship with Ship Rate, contributing to the improvement
-- Both weeks remained in Mid-Cycle payday phase, eliminating payday timing as a confounding factor
-- Order volume stayed stable (17,752 → 17,743), confirming the rate change reflects genuine performance improvement rather than volume shifts
+- **US drove the improvement:** US Ship Rate increased +2.71pp (45.08% → 47.79%) with 78% of cluster volume, ranking #1 in both contribution and change
+- **Discount reduction correlates with SR gain:** US discount % dropped significantly (-1.73pp, from 16.31% to 14.58%), aligning with the expected negative relationship between discounts and ship rate
+- **No Simpson's Paradox detected:** Both countries showed genuine SR improvement with minimal volume shifts (US: 0.0%, CA: -0.2%)
+- **CA maintained strong performance:** Despite smaller gains (+1.68pp), CA sustained high-tier SR at 54.06% with a slight increase in discount % (+0.94pp)
+- **Payday phase stable:** Both weeks remained in Mid-Cycle phase, eliminating payday timing as a confounding factor
 
-**Action:** Monitor — The Ship Rate improvement is driven by favorable movements in both Discount % and PC2, with all metrics moving in the expected direction per the decision framework. No investigation required; continue tracking to confirm trend sustainability.
+**Action:** **Monitor** - The improvement is significant and driven by genuine performance gains (lower discounts, improved PC2) rather than mix shifts. Continue tracking to confirm sustainability through the next payday cycle.
 
 ---
 
@@ -41,7 +45,36 @@
 
 ---
 
+## US (Rank: #1 by contribution, #1 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 13,817 | 45.08% | - | 92.85% | - | 16.31% | - | 51.11% | - |
+| 2026-W14 | Mid-Cycle | 13,814 | 47.79% | +6.01pp | 92.79% | -0.06pp | 14.58% | -10.61pp | 52.82% | +3.35pp |
+
+---
+
+## CA (Rank: #2 by contribution, #2 by change)
+
+| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
+| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
+| 2026-W13 | Mid-Cycle | 3,935 | 52.38% | - | 93.63% | - | 18.06% | - | 51.95% | - |
+| 2026-W14 | Mid-Cycle | 3,929 | 54.06% | +3.21pp | 93.54% | -0.10pp | 19.0% | +5.20pp | 51.37% | -1.12pp |
+
+
+## Mix Shift Analysis (Simpson's Paradox Check)
+
+| Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
+| ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
+| US  | Medium | 13,817 | 13,814 | +0.0% | 45.08% | 47.79% | +2.71pp |
+| CA  | High | 3,935 | 3,929 | -0.2% | 52.38% | 54.06% | +1.68pp |
+
+*High-SR markets (>50%) with volume drop >30% indicate Simpson's Paradox*
+
+---
 ## Decision Framework
+
+**How Ship Rate relates to other metrics:**
 
 | Metric | Relationship | If metric ↑ | If metric ↓ |
 | ------ | ------------ | ----------- | ----------- |
@@ -49,11 +82,299 @@
 | Discount % | Negative | Ship Rate ↓ | Ship Rate ↑ |
 | PC2 | Positive | Ship Rate ↑ | Ship Rate ↓ |
 
+**Payday Cycle (for HF-INTL):**
+- Phase transition: Mid-Cycle → Mid-Cycle
+- Pre-Payday → Payday: Expected SR ↓
+- Payday → Post-Payday: Expected SR ↑
+- Post-Payday → Mid-Cycle: Expected SR →
+
 ---
 
 ## Conclusion
 
-The +5.31pp improvement in Ship Rate during 2026-W14 appears to be a genuine performance gain driven by a meaningful reduction in Discount % (-7.20pp) and an increase in PC2 (+2.36pp), both of which align with the expected relationships defined in the decision framework. With stable volume and consistent payday phase timing, this positive trend warrants continued monitoring to assess whether the improvement is sustained in subsequent weeks.
+The HF-NA Ship Rate improvement of +2.48pp in 2026-W14 represents a genuine operational gain, primarily driven by US market performance where reduced discount rates (-1.73pp) aligned with the expected inverse relationship to ship rate. Pre-Dunning AR remained stable and PC2 improved, indicating healthier order economics without sacrificing profitability. No intervention is required; continued monitoring is recommended to verify the trend persists through upcoming payday transitions.
+
+---
+
+## SQL Queries
+
+<details>
+<summary>Cluster Query</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'HF-NA' as cluster, 'cluster' as level
+),
+date_lkup AS (
+  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
+  FROM dimensions.date_dimension GROUP BY hellofresh_week
+),
+weeks AS (
+  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
+  FROM date_lkup curr JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
+  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
+),
+payday_phases AS (
+  SELECT hellofresh_week,
+    CASE WHEN SUM(CASE WHEN day_of_month BETWEEN 8 AND 15 THEN 1 ELSE 0 END) >= 4 THEN 1 ELSE 0 END as is_payday
+  FROM dimensions.date_dimension GROUP BY hellofresh_week
+),
+payday_with_context AS (
+  SELECT hellofresh_week, is_payday,
+    LEAD(is_payday) OVER (ORDER BY hellofresh_week) as next_is_payday,
+    LAG(is_payday) OVER (ORDER BY hellofresh_week) as prev_is_payday
+  FROM payday_phases
+),
+payday_labeled AS (
+  SELECT hellofresh_week,
+    CASE WHEN is_payday = 1 THEN 'Payday' WHEN next_is_payday = 1 THEN 'Pre-Payday'
+         WHEN prev_is_payday = 1 THEN 'Post-Payday' ELSE 'Mid-Cycle' END as payday_phase
+  FROM payday_with_context
+),
+countries AS (
+  SELECT business_unit as country FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+),
+base_data AS (
+  SELECT hellofresh_delivery_week as week,
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
+    SUM(order_nr) as eligible,
+    SUM(CAST(discount_amount_incl_vat_eur AS DOUBLE)) as discount_sum,
+    SUM(CAST(grand_total_eur AS DOUBLE) + CAST(discount_amount_incl_vat_eur AS DOUBLE)) as total_sum,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN profit_margin_week_eur ELSE 0 END) as profit_margin_shipped,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN gross_revenue_week_eur ELSE 0 END) as gross_revenue_shipped
+  FROM payments_hf.dunning_dashboard CROSS JOIN weeks w
+  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
+    AND country IN (SELECT country FROM countries) AND product_type = 'mealbox'
+    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
+  GROUP BY hellofresh_delivery_week, 
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
+),
+pre_dunning_ar AS (
+  SELECT hellofresh_week as week,
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
+    ROUND(SUM(`2_PreDunningAR`) * 100.0 / NULLIF(SUM(order_count), 0), 2) as pre_dunning_ar
+  FROM payments_hf.payments_p0_metrics_box_candidates CROSS JOIN weeks w
+  WHERE hellofresh_week IN (w.prev_week, w.affected_week) AND country IN (SELECT country FROM countries)
+  GROUP BY hellofresh_week, CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
+),
+combined AS (
+  SELECT b.week, b.group_key, b.eligible as volume,
+    ROUND(b.shipped * 100.0 / NULLIF(b.eligible, 0), 2) as ship_rate, p.pre_dunning_ar,
+    ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
+    ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
+  FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
+),
+with_deltas AS (
+  SELECT 
+    c.*,
+    prev.ship_rate as prev_ship_rate,
+    prev.pre_dunning_ar as prev_pre_dunning_ar,
+    prev.discount_pct as prev_discount_pct,
+    prev.pc2 as prev_pc2,
+    prev.volume as prev_volume,
+    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
+    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
+  FROM combined c
+  CROSS JOIN weeks w
+  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+),
+ranked AS (
+  SELECT 
+    group_key,
+    SUM(contribution) as total_contribution,
+    MAX(abs_delta_sr) as max_abs_delta,
+    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
+  FROM with_deltas
+  WHERE week = (SELECT affected_week FROM weeks)
+  GROUP BY group_key
+)
+SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
+  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
+  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
+  COALESCE(r.rank_contribution, 999) as rank_contribution,
+  COALESCE(r.rank_change, 999) as rank_change
+FROM with_deltas c
+CROSS JOIN weeks w
+JOIN payday_labeled pp ON c.week = pp.hellofresh_week
+LEFT JOIN ranked r ON c.group_key = r.group_key
+ORDER BY COALESCE(r.rank_contribution, 999), c.week
+
+```
+
+</details>
+
+<details>
+<summary>Country Query</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'HF-NA' as cluster, 'country' as level
+),
+date_lkup AS (
+  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
+  FROM dimensions.date_dimension GROUP BY hellofresh_week
+),
+weeks AS (
+  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
+  FROM date_lkup curr JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
+  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
+),
+payday_phases AS (
+  SELECT hellofresh_week,
+    CASE WHEN SUM(CASE WHEN day_of_month BETWEEN 8 AND 15 THEN 1 ELSE 0 END) >= 4 THEN 1 ELSE 0 END as is_payday
+  FROM dimensions.date_dimension GROUP BY hellofresh_week
+),
+payday_with_context AS (
+  SELECT hellofresh_week, is_payday,
+    LEAD(is_payday) OVER (ORDER BY hellofresh_week) as next_is_payday,
+    LAG(is_payday) OVER (ORDER BY hellofresh_week) as prev_is_payday
+  FROM payday_phases
+),
+payday_labeled AS (
+  SELECT hellofresh_week,
+    CASE WHEN is_payday = 1 THEN 'Payday' WHEN next_is_payday = 1 THEN 'Pre-Payday'
+         WHEN prev_is_payday = 1 THEN 'Post-Payday' ELSE 'Mid-Cycle' END as payday_phase
+  FROM payday_with_context
+),
+countries AS (
+  SELECT business_unit as country FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+),
+base_data AS (
+  SELECT hellofresh_delivery_week as week,
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
+    SUM(order_nr) as eligible,
+    SUM(CAST(discount_amount_incl_vat_eur AS DOUBLE)) as discount_sum,
+    SUM(CAST(grand_total_eur AS DOUBLE) + CAST(discount_amount_incl_vat_eur AS DOUBLE)) as total_sum,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN profit_margin_week_eur ELSE 0 END) as profit_margin_shipped,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN gross_revenue_week_eur ELSE 0 END) as gross_revenue_shipped
+  FROM payments_hf.dunning_dashboard CROSS JOIN weeks w
+  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
+    AND country IN (SELECT country FROM countries) AND product_type = 'mealbox'
+    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
+  GROUP BY hellofresh_delivery_week, 
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
+),
+pre_dunning_ar AS (
+  SELECT hellofresh_week as week,
+    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
+    ROUND(SUM(`2_PreDunningAR`) * 100.0 / NULLIF(SUM(order_count), 0), 2) as pre_dunning_ar
+  FROM payments_hf.payments_p0_metrics_box_candidates CROSS JOIN weeks w
+  WHERE hellofresh_week IN (w.prev_week, w.affected_week) AND country IN (SELECT country FROM countries)
+  GROUP BY hellofresh_week, CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
+),
+combined AS (
+  SELECT b.week, b.group_key, b.eligible as volume,
+    ROUND(b.shipped * 100.0 / NULLIF(b.eligible, 0), 2) as ship_rate, p.pre_dunning_ar,
+    ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
+    ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
+  FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
+),
+with_deltas AS (
+  SELECT 
+    c.*,
+    prev.ship_rate as prev_ship_rate,
+    prev.pre_dunning_ar as prev_pre_dunning_ar,
+    prev.discount_pct as prev_discount_pct,
+    prev.pc2 as prev_pc2,
+    prev.volume as prev_volume,
+    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
+    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
+  FROM combined c
+  CROSS JOIN weeks w
+  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
+),
+ranked AS (
+  SELECT 
+    group_key,
+    SUM(contribution) as total_contribution,
+    MAX(abs_delta_sr) as max_abs_delta,
+    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
+    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
+  FROM with_deltas
+  WHERE week = (SELECT affected_week FROM weeks)
+  GROUP BY group_key
+)
+SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
+  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
+  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
+  COALESCE(r.rank_contribution, 999) as rank_contribution,
+  COALESCE(r.rank_change, 999) as rank_change
+FROM with_deltas c
+CROSS JOIN weeks w
+JOIN payday_labeled pp ON c.week = pp.hellofresh_week
+LEFT JOIN ranked r ON c.group_key = r.group_key
+ORDER BY COALESCE(r.rank_contribution, 999), c.week
+
+```
+
+</details>
+
+<details>
+<summary>Mix Shift Query</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'HF-NA' as cluster
+),
+date_lkup AS (
+  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
+  FROM dimensions.date_dimension
+  GROUP BY hellofresh_week
+),
+weeks AS (
+  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
+  FROM date_lkup curr
+  JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
+  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+),
+base_data AS (
+  SELECT 
+    hellofresh_delivery_week as week,
+    country,
+    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
+    SUM(order_nr) as eligible
+  FROM payments_hf.dunning_dashboard
+  CROSS JOIN weeks w
+  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
+    AND country IN (SELECT country FROM countries)
+    AND product_type = 'mealbox'
+    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
+  GROUP BY hellofresh_delivery_week, country
+)
+SELECT 
+  country,
+  MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) as prev_volume,
+  MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) as prev_sr,
+  MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN eligible END) as curr_volume,
+  MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) as curr_sr,
+  ROUND((MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN eligible END) - 
+         MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END)) * 100.0 / 
+         NULLIF(MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END), 0), 1) as volume_change_pct,
+  CASE 
+    WHEN MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) > 50 THEN 'High'
+    WHEN MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) > 30 THEN 'Medium'
+    ELSE 'Low'
+  END as sr_tier
+FROM base_data
+GROUP BY country
+ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) DESC
+
+```
+
+</details>
 
 ---
 

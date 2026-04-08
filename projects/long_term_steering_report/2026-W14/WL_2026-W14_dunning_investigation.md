@@ -12,26 +12,26 @@
 
 ## Executive Summary
 
-**Overall:** WL cluster Ship Rate declined from 29.38% to 28.34% (-1.04pp, -3.54% relative change) in 2026-W14, despite most individual countries showing improvement—indicating a classic Simpson's Paradox driven by mix shift.
+**Overall:** Ship Rate for WL cluster declined from 29.38% to 28.34% (-1.04pp, -3.54% relative change) in 2026-W14, flagged as significant with 8,055 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Value | Result |
 | ---- | ----- | ------- | ------ |
-| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ Slight decline |
-| Discount % | 16.34% → 15.45% | -0.89pp | ✅ Lower discounts (positive for SR) |
-| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ Marginal decline |
-| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ No cycle impact |
-| Mix Shift (AO) | 1,228 → 496 | -59.6% volume | ⚠️ Simpson's Paradox confirmed |
+| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ |
+| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ✅ |
+| Discount % | 16.34% → 15.45% | -0.89pp | ✅ |
+| PC2 | 47.52% → 47.03% | -0.49pp | ✅ |
+| Mix Shift (Simpson's) | AO volume drop 59.6% | High-SR market shrink | ⚠️ |
 
 **Key Findings:**
-- **Simpson's Paradox confirmed:** AO (highest SR at 67-73%) lost 59.6% of volume, shifting mix toward lower-SR countries and dragging down the cluster average despite 6 of 7 countries improving
-- **MR anomaly:** Ship Rate dropped from 0.07% to 0.00% (-100% relative), with PC2 showing NaN values—suggests data quality issue or complete shipping halt requiring investigation
-- **KN shows concerning trend:** Only country with genuine SR decline (-1.04pp to 15.10%) while volume increased +17.4%, amplifying negative impact
-- **Strong performers masked:** ER (+2.93pp), CK (+4.18pp), CG (+2.81pp), and AO (+5.32pp) all improved but couldn't offset mix effects
-- **Pre-Dunning AR softened slightly** (-0.47pp at cluster level), with AO showing largest decline (-3.12pp)
+- **Simpson's Paradox confirmed:** AO (highest SR market at 72.58%) lost 59.6% of volume (1,228 → 496 orders), removing high-converting orders from the mix and dragging down the aggregate rate
+- **All individual countries improved or held steady:** ER +2.93pp, CK +4.18pp, AO +5.32pp, CG +2.81pp, GN +0.97pp — only KN showed slight decline (-1.04pp) and MR remained near zero
+- **MR anomaly:** Ship Rate dropped from 0.07% to 0.00% with PC2 showing NaN values, indicating potential data quality issues or operational changes in this market
+- **KN volume increased 17.4%** while SR declined 1.04pp, partially offsetting positive mix effects with lower-converting volume
+- **Discount rates decreased across most markets** (WL -5.45pp overall), which per the decision framework should support higher Ship Rate — yet aggregate declined due to mix shift
 
-**Action:** **Investigate** — Priority focus on (1) AO volume drop root cause (operational issue vs. intentional change), (2) MR data quality/PC2 NaN values, and (3) KN performance decline despite volume growth
+**Action:** Monitor — The aggregate decline is driven by Simpson's Paradox (AO volume collapse), not deteriorating country performance. Investigate the root cause of AO's 60% volume drop and MR's data anomalies before escalating.
 
 ---
 
@@ -143,7 +143,7 @@
 
 ## Conclusion
 
-The WL cluster's Ship Rate decline is a statistical artifact caused by Simpson's Paradox rather than genuine performance deterioration. The 59.6% volume collapse in high-performing AO market shifted the customer mix toward lower-SR countries, masking improvements across most markets. Immediate investigation should focus on understanding AO's volume drop and resolving MR's data anomalies before concluding any systemic issues exist.
+The 1.04pp decline in WL Ship Rate is a **compositional artifact**, not a performance issue. The high-converting AO market experienced a 59.6% volume reduction, while lower-converting markets (ER, KN) maintained or increased volume, shifting the mix toward lower Ship Rate segments. Underlying country-level performance actually improved across 5 of 7 markets, indicating healthy dunning execution. Priority should be understanding why AO eligible orders dropped so dramatically and resolving the MR data quality issue (NaN PC2).
 
 ---
 
