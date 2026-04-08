@@ -4,39 +4,39 @@
 **Period:** 2026-W13 → 2026-W14  
 **Observation:**  
 GA: 26.77% → 26.40% (-0.37pp, -1.4% change)  
-Backend: 30.09% → 30.17% (+0.09pp, 0.3% change)  
+Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)  
 **Volume:** ~44K payment visits
 
 ---
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by 0.37pp (-1.4%) in GA tracking from 26.77% to 26.40%, while backend tracking showed a slight improvement of +0.09pp (+0.3%) from 30.09% to 30.17%.
+**Overall:** Payment Conversion Rate declined by 0.37pp (-1.4%) in GA and 0.09pp (-0.3%) in Backend, with GA showing a more significant drop across multiple funnel steps.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | GA | -0.42pp | ⚠️ |
-| Click Submit Form | GA | +0.02pp | ✅ |
-| FE Validation Passed | GA | -0.41pp | ⚠️ |
-| Enter Fraud Service | GA | +0.11pp | ✅ |
-| Approved by Fraud Service | GA | -0.00pp | ✅ |
-| Call to PVS | GA | -0.23pp | ⚠️ |
-| Successful Checkout | GA | +0.26pp | ✅ |
-| Checkout Attempt | Backend | -0.99pp | ⚠️ |
-| Enter Fraud Service | Backend | -0.77pp | ⚠️ |
-| Approved by Fraud Service | Backend | +2.75pp | ✅ |
-| PVS Success | Backend | +0.29pp | ✅ |
+| Select Payment Method | -0.42pp | GA | ⚠️ |
+| Click Submit Form | +0.02pp | GA | ✅ |
+| FE Validation Passed | -0.41pp | GA | ⚠️ |
+| Enter Fraud Service | +0.11pp | GA | ✅ |
+| Approved by Fraud Service | -0.00pp | GA | ✅ |
+| Call to PVS | -0.23pp | GA | ⚠️ |
+| Successful Checkout | +0.26pp | GA | ✅ |
+| Checkout Attempt | -0.99pp | Backend | ⚠️ |
+| Enter Fraud Service | -0.77pp | Backend | ⚠️ |
+| Approved by Fraud Service | +2.75pp | Backend | ✅ |
+| PVS Success | +0.29pp | Backend | ✅ |
 
 **Key Findings:**
-- Major improvement in fraud service approval rate (+2.75pp in backend) suggests fraud rules were relaxed or optimized
-- Payment method selection dropped significantly (-0.42pp GA, -0.99pp backend), indicating potential UI/UX issues in the initial payment flow
-- FE validation issues increased with -0.41pp conversion drop, primarily driven by "terms_not_accepted" errors (2,064 → 1,834 raw count but lower conversion)
-- ProcessOut_CreditCard showed strong recovery (+3.23pp to 82.72%) and Braintree_ApplePay improved (+1.80pp to 87.61%), offsetting declines in other methods
-- Volume decreased across all funnel steps (~2% decline) but successful checkouts maintained better retention rates
+- ProcessOut_CreditCard and Braintree_ApplePay showed strong improvements (+3.21pp and +2.28pp respectively), indicating payment processor performance gains
+- Backend fraud service approval rate improved significantly (+2.75pp), suggesting better fraud detection accuracy or policy adjustments
+- GA funnel shows concerning drops in early stages: Select Payment Method (-0.42pp) and FE Validation Passed (-0.41pp), indicating potential user experience issues
+- Frontend validation errors remained consistent with terms_not_accepted being the top error, while APPLEPAY_DISMISSED errors decreased slightly
+- Overall payment volume decreased by ~300-400 visits across both GA and Backend tracking
 
-**Action:** Monitor - The backend metrics show stability with fraud improvements, but investigate the payment method selection drop and FE validation issues if the trend continues next week.
+**Action:** Investigate
 
 ---
 
@@ -68,8 +68,8 @@ Backend: 30.09% → 30.17% (+0.09pp, 0.3% change)
 | Approved by Fraud Service | 15,733 | 15,322 | -411 | -2.6% | 89.15% | 91.91% | +2.75pp |
 | PVS Attempt | 15,361 | 14,911 | -450 | -2.9% | 97.64% | 97.32% | -0.32pp |
 | PVS Success | 14,219 | 13,845 | -374 | -2.6% | 92.57% | 92.85% | +0.29pp |
-| **Successful Checkout** | 14,691 | 14,421 | -270 | -1.8% | 103.32% | 104.16% | +0.84pp |
-| **PCR Rate** | | | | | 30.09% | 30.17% | **+0.09pp** |
+| **Successful Checkout** | 13,849 | 13,514 | -335 | -2.4% | 97.40% | 97.61% | +0.21pp |
+| **PCR Rate** | | | | | 28.36% | 28.28% | **-0.09pp** |
 
 ---
 
@@ -77,12 +77,12 @@ Backend: 30.09% → 30.17% (+0.09pp, 0.3% change)
 
 | Payment Method | 2026-W13 Attempt | 2026-W13 Success | 2026-W13 Rate | 2026-W14 Attempt | 2026-W14 Success | 2026-W14 Rate | Δ Rate |
 | -------------- | ------------------- | ------------------- | ---------------- | ----------------------- | ----------------------- | -------------------- | ------ |
-| ProcessOut_CreditCard | 10,229 | 8,131 | 79.49% | 9,309 | 7,700 | 82.72% | +3.23pp |
-| Braintree_ApplePay | 5,750 | 4,934 | 85.81% | 5,745 | 5,033 | 87.61% | +1.80pp |
-| Braintree_Paypal | 1,298 | 1,133 | 87.29% | 1,384 | 1,196 | 86.42% | -0.87pp |
-| Adyen_CreditCard | 108 | 107 | 99.07% | 212 | 212 | 100.00% | +0.93pp |
-| Braintree_CreditCard | 281 | 257 | 91.46% | 178 | 160 | 89.89% | -1.57pp |
-|  | 136 | 129 | 94.85% | 120 | 119 | 99.17% | +4.31pp |
+| ProcessOut_CreditCard | 10,229 | 8,111 | 79.29% | 9,309 | 7,680 | 82.50% | +3.21pp |
+| Braintree_ApplePay | 5,750 | 4,354 | 75.72% | 5,745 | 4,481 | 78.00% | +2.28pp |
+| Braintree_Paypal | 1,298 | 1,131 | 87.13% | 1,384 | 1,193 | 86.20% | -0.93pp |
+| Adyen_CreditCard | 108 | 0 | 0.00% | 212 | 0 | 0.00% | +0.00pp |
+| Braintree_CreditCard | 281 | 253 | 90.04% | 178 | 158 | 88.76% | -1.27pp |
+|  | 136 | 0 | 0.00% | 120 | 1 | 0.83% | +0.83pp |
 | Braintree_Venmo | 0 | 0 | 0.00% | 1 | 1 | 100.00% | +100.00pp |
 
 ---
@@ -125,7 +125,7 @@ Backend: 30.09% → 30.17% (+0.09pp, 0.3% change)
 ---
 ## Conclusion
 
-The week showed mixed signals with GA tracking indicating a PCR decline while backend metrics remained stable. The significant improvement in fraud service approval rates (+2.75pp) suggests system optimizations are working, but early funnel issues around payment method selection need attention. Overall, the backend stability and strong performance of major payment methods (ProcessOut_CreditCard, Braintree_ApplePay) indicate the core payment infrastructure is healthy despite the GA-tracked decline.
+The PCR decline appears to be primarily driven by early-stage funnel issues in the GA tracking, particularly around payment method selection and frontend validation, while backend performance actually improved in key areas like fraud approval rates. The strong performance gains in major payment methods (ProcessOut_CreditCard and Braintree_ApplePay) suggest technical improvements are working, but user experience friction in the early checkout stages needs investigation to address the overall conversion decline.
 
 ---
 
@@ -213,7 +213,7 @@ SELECT
   SUM(CASE WHEN event_attempted_fraud_check = 1 AND event_fs_blocked = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
   SUM(event_payment_verification_attempt) AS pvs_attempt,
   SUM(event_payment_verification_success) AS pvs_success,
-  SUM(event_checkout_success) AS checkout_success
+  SUM(CASE WHEN event_payment_method_listed = 1 AND event_checkout_success = 1 THEN 1 ELSE 0 END) AS checkout_success
 FROM spark_catalog.payments_hf.checkout_funnel_backend f
 JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
 WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
