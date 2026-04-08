@@ -10,28 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL remained essentially flat in W14, moving from 90.12% to 90.13% (+0.01%), a statistically insignificant change on 31,165 orders.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL remained essentially flat in 2026-W14, increasing marginally from 90.12% to 90.13% (+0.01%), a statistically insignificant change on 31,165 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate stable within normal range (88.06%-91.70%) | +0.01% | ✅ |
-| L1: Country Breakdown | 6 countries exceed ±2.5% threshold | LU -8.41%, DK -7.22%, AT -7.04%, DE -4.41%, AU -4.14%, CH +11.33% | ⚠️ |
-| L1: Payment Method | Others segment increased significantly | +4.05% | ⚠️ |
-| L1: Payment Provider | All providers within acceptable range | -0.69% to +2.29% | ✅ |
-| L2: Decline Reasons | Insufficient Funds increased across flagged countries | LU +7.61pp, AT +5.67pp, DK +5.55pp, DE +2.51pp | ⚠️ |
-| L3: Related Metrics | All funnel metrics stable | -0.17% to +0.04% | ✅ |
-| Mix Shift | Significant volume drops in DE, DK, NO, AT | DE -22.1%, DK -31.0%, NO -46.4%, AT -25.6% | ⚠️ |
+| L0: 8-Week Trend | Rate stable at ~90%, but volume declining from 52,771 (W07) to 31,165 (W14) | +0.01% | ✅ |
+| L1: Country Impact | 6 countries exceeded ±2.5% threshold (LU -8.41%, DK -7.22%, AT -7.04%, DE -4.41%, AU -4.14%, CH +11.33%) | Mixed | ⚠️ |
+| L1: Dimension Scan | Payment methods and providers stable; "Others" payment method +4.05% | <±2% | ✅ |
+| L2: Root Cause | Multiple countries show "Insufficient Funds" as primary decline driver (+5-7pp) | Consistent pattern | ⚠️ |
+| L3: Related Metrics | All funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) stable within ±0.2% | <±1% | ✅ |
 
 **Key Findings:**
-- Despite individual country declines (LU -8.41%, DK -7.22%, AT -7.04%, DE -4.41%), the overall rate remained stable due to offsetting improvements in CH (+11.33%) and GB (+2.37%)
-- "Insufficient Funds" decline reason increased across all flagged countries, with LU seeing the largest jump (+7.61pp from 8.89% to 16.49%)
-- Significant volume contraction observed: total orders dropped from 34,718 to 31,165 (-10.2%), with notable declines in NO (-46.4%), DK (-31.0%), and AT (-25.6%)
-- Adyen showed sharp performance drops in smaller markets: AT (-55.00%), DK (-10.64%), and LU via Braintree (-10.30%)
-- The "None" payment method category shows -100% changes across multiple countries, suggesting data quality or categorization issues
+- **Volume decline is significant:** Total order volume dropped 41% over 8 weeks (52,771 → 31,165), with DE (-22.1%), DK (-31.0%), NO (-46.4%), and AT (-25.6%) showing major volume drops
+- **Insufficient Funds is the dominant decline reason:** LU (+7.61pp), AT (+5.67pp), DK (+5.55pp), and DE (+2.51pp) all show increased "Insufficient Funds" declines
+- **Country-level rate declines offset each other:** While LU, DK, AT, DE, and AU declined, CH improved +11.33% and GB improved +2.37%, resulting in a flat overall rate
+- **Adyen and Braintree showing localized issues:** Adyen dropped significantly in AT (-55.0%) and DK (-10.6%); Braintree declined in LU (-10.3%)
+- **Credit card performance deteriorating:** DE credit cards dropped -18.4%, AT credit cards dropped -15.9%
 
-**Action:** Monitor — The overall metric is stable and statistically insignificant. However, continue tracking the "Insufficient Funds" trend across European markets and the volume declines in DE, DK, NO, and AT. If these patterns persist for 2+ weeks, escalate for deeper investigation into macroeconomic factors or provider-specific issues with Adyen and Braintree in affected markets.
+**Action:** **Monitor** – The overall metric is stable and statistically insignificant. However, recommend tracking the "Insufficient Funds" trend across EU markets (LU, DK, AT, DE) and the continued volume decline pattern. If volume erosion continues or "Insufficient Funds" rates persist above 10%, escalate for customer payment method health assessment.
 
 ---
 

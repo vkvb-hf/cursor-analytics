@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for HF-NA declined marginally from 92.23% to 92.17% (-0.07%) in 2026-W14, representing a statistically non-significant change across 507,188 orders.
+**Overall:** Pre-Dunning Acceptance Rate for HF-NA declined marginally from 92.23% to 92.17% (-0.07%) in 2026-W14, a change that is **not statistically significant** and falls within normal weekly fluctuation patterns.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +0.24% | ✅ |
-| 2_PreDunningAR | Target Metric | -0.06% | ✅ |
-| 3_PostDunningAR | Downstream | -0.13% | ✅ |
-| 6_PaymentApprovalRate | Final | +0.04% | ✅ |
+| 2_PreDunningAR | Reported Metric | -0.06% | ✅ |
+| 3_PostDunningAR | Post-Recovery | -0.13% | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.04% | ✅ |
 
 **Key Findings:**
-- **Stable performance across countries:** Neither US (-0.06%) nor CA (-0.10%) exceeded the ±2.5% threshold, indicating no country-specific issues driving the decline
-- **Payment provider anomaly detected:** "Unknown" provider showed a +6.91% change but represents minimal volume (758 orders), flagged as ⚠️ but not impactful
-- **Consistent 8-week trend:** The rate has remained stable between 91.35% and 92.28% over the past 8 weeks, with the current week within normal variance
-- **Volume decline observed:** Total order volume decreased by ~2% (517,599 → 507,188), consistent across both US (-1.7%) and CA (-2.4%)
-- **First Run AR improvement:** The upstream metric 1_FirstRunAR improved by +0.24%, suggesting initial payment attempts are performing better despite slight Pre-Dunning decline
+- **No significant country impact:** Both US (-0.06%) and CA (-0.10%) showed minimal declines, neither exceeding the ±2.5% threshold for concern
+- **Payment provider anomaly:** "Unknown" provider showed a +6.91% change, but with very low volume (758 orders) making it statistically irrelevant to overall performance
+- **Stable 8-week trend:** The rate has remained consistently between 91.35% and 92.28% over the past 8 weeks, indicating normal operational variance
+- **Volume decline observed:** Total order volume decreased by ~2% (517,599 → 507,188), consistent across both countries
+- **No mix shift impact:** Both US and CA remain in the High AR tier (>92%) with stable volume proportions
 
-**Action:** **Monitor** — The -0.07% change is within normal weekly fluctuation, no dimensions exceeded alert thresholds at meaningful volume, and the 8-week trend shows stable performance. No immediate investigation required.
+**Action:** **Monitor** - No investigation required. The -0.07% change is within normal weekly variance and no dimensions show concerning patterns at scale.
 
 ---
 

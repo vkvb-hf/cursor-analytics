@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Overall) for RTE declined slightly from 92.79% to 92.46% (-0.36%) in 2026-W14, with volume of 431,853 orders. This change is **not statistically significant**.
+**Overall:** Pre-Dunning Acceptance Rate declined modestly from 92.79% to 92.46% (-0.36%) in W14, representing a statistically non-significant change across 431,853 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.52% | ⚠️ |
-| 2_PreDunningAR | Pre-Dunning | -0.35% | ⚠️ |
-| 3_PostDunningAR | Post-Dunning | -0.31% | ⚠️ |
-| 6_PaymentApprovalRate | Final Approval | -0.20% | ⚠️ |
+| 1_FirstRunAR | Upstream impact | -0.52% | ⚠️ |
+| 2_PreDunningAR | Primary metric | -0.35% | ⚠️ |
+| 3_PostDunningAR | Downstream recovery | -0.31% | ⚠️ |
+| 6_PaymentApprovalRate | Final approval | -0.20% | ⚠️ |
 
 **Key Findings:**
-- **Gradual 3-week decline:** The rate has decreased for three consecutive weeks (W12: 93.09% → W13: 92.79% → W14: 92.46%), though still above the W07-W10 baseline (~91.3%)
-- **No country breached threshold:** All countries showed changes within ±2.5%; TK had the largest decline (-1.63%) but with low volume (1,779 orders)
-- **Credit Card slight underperformance:** Credit Card payment method declined -0.42% (92.08% from 92.47%), representing 73% of total volume (316,124 orders)
-- **Unknown PaymentProvider anomaly:** Flagged with +332.23% change, but negligible volume (83 orders) - likely data quality noise
-- **Volume decline across all countries:** Overall order volume dropped from 442,530 to 431,853 (-2.4%), with TK experiencing the sharpest volume drop (-17.4%)
+- **Consistent decline across funnel:** All related AR metrics showed parallel declines (-0.20% to -0.52%), indicating the issue originates at FirstRunAR (-0.52%) rather than being isolated to pre-dunning
+- **No country exceeded threshold:** All 7 countries remained within ±2.5% tolerance; TK showed the largest decline at -1.63% but with minimal volume (1,779 orders)
+- **Payment provider anomalies flagged:** "Unknown" provider showed +332.23% change and "No Payment" showed +2.66%, but both have negligible volume (83 and 534 orders respectively)
+- **Credit Card segment leads decline:** Credit Card payments declined -0.42% representing 316,124 orders (73% of volume), making it the primary contributor to the overall drop
+- **Three-week declining trend:** Rate has dropped consecutively from 93.20% (W11) to 92.46% (W14), a cumulative decline of -0.74pp over 4 weeks
 
-**Action:** **Monitor** — The decline is not significant and within normal fluctuation range. Continue tracking the 3-week downward trend; escalate if W15 continues below 92.5% or any country breaches the ±2.5% threshold.
+**Action:** **Monitor** — The decline is not statistically significant and no individual dimension breached investigation thresholds. Continue monitoring the three-week downward trend; if W15 continues declining, escalate for deeper FirstRunAR investigation.
 
 ---
 

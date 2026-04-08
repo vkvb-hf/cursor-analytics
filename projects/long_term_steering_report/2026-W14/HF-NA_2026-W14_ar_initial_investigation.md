@@ -10,26 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for HF-NA initial charges improved from 89.1% to 89.66% (+0.63%) in 2026-W14, representing a recovery from the prior week's decline; however, this change is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for HF-NA initial charges improved from 89.1% to 89.66% (+0.63%) in 2026-W14, representing a recovery from the prior week's decline but remaining within normal fluctuation range and not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (89.37%-90.82%) | +0.63% | ✅ |
-| L1: Country Breakdown | US shows +4.43% change, exceeds ±2.5% threshold | +4.43% (US) | ⚠️ |
-| L1: Payment Provider | Adyen -4.74%, Unknown +3.40% exceed threshold | -4.74% (Adyen) | ⚠️ |
-| L2: US Deep-Dive | ProcessOut +6.32%, applepay +5.21% flagged | +6.32% (ProcessOut) | ⚠️ |
-| L3: Related Metrics | All AR metrics improved consistently (+0.54% to +0.77%) | +0.63% | ✅ |
+| L0: 8-Week Trend | Rate within historical range (89.37%-90.82%) | +0.63% | ✅ |
+| L1: Country Breakdown | US exceeded ±2.5% threshold | +4.43% (US) | ⚠️ |
+| L1: Payment Method | All methods within threshold | Max +1.90% | ✅ |
+| L1: Payment Provider | Adyen exceeded threshold | -4.74% (Adyen) | ⚠️ |
+| L2: US Deep-Dive | ProcessOut exceeded threshold | +6.32% | ⚠️ |
+| L3: Related Metrics | All AR metrics improved consistently | +0.54% to +0.77% | ✅ |
 
 **Key Findings:**
-- **US drove the improvement:** US acceptance rate increased significantly from 66.77% to 69.72% (+4.43%), with volume rising from 23,515 to 24,598 orders
-- **ProcessOut performance surge in US:** ProcessOut improved from 72.97% to 77.59% (+6.32%) while handling increased volume (8,584 → 11,351 orders), indicating successful routing optimization
-- **Decline reasons improved:** "Insufficient Funds" declines dropped by 1.70pp (21.42% → 19.72%) and "Refused" declines decreased by 1.14pp (8.53% → 7.39%)
-- **Adyen volume shift:** Adyen showed a -4.74% rate change but volume dropped significantly (668 → 218), suggesting traffic was redistributed to other providers
-- **Apple Pay improvement in US:** Apple Pay acceptance increased from 66.49% to 69.95% (+5.21%) on substantial volume (7,696 → 8,283 orders)
+- US drove the overall improvement with a +4.43% rate increase, primarily through ProcessOut (+6.32%) and Apple Pay (+5.21% in US)
+- Decline reasons improved: "Insufficient Funds" decreased by 1.70pp (21.42% → 19.72%) and "Refused" declined by 1.14pp (8.53% → 7.39%)
+- Adyen showed a significant rate drop of -4.74%, but volume decreased substantially (668 → 218 orders), limiting overall impact
+- Volume decreased 32% week-over-week from ~25K to 17K orders, consistent with the declining volume trend observed since W07 (28,927)
+- Mix shift analysis shows both US and CA volume tiers remained stable with no material impact on rate changes
 
-**Action:** **Monitor** – The improvement is positive but not statistically significant. Continue monitoring ProcessOut performance and the volume shift away from Adyen to ensure the routing changes remain beneficial.
+**Action:** Monitor — The improvement is positive but not significant, and the rate has returned to the 8-week average range. Continue tracking Adyen performance and ProcessOut's sustained improvement.
 
 ---
 

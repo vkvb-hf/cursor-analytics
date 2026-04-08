@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) declined by -0.68pp (28.63% → 27.96%) in Week 14, driven primarily by front-end validation failures and reduced fraud service approval rates.
+**Overall:** Payment Conversion Rate declined by -0.68pp (28.63% → 27.96%) in 2026-W14 with stable volume (~59K payment visits), indicating a conversion efficiency issue rather than a traffic problem.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥-0.50pp | -0.34pp | ✅ |
-| Click Submit Form | ≥-0.50pp | -0.40pp | ✅ |
-| FE Validation Passed | ≥-0.50pp | -0.68pp | ⚠️ |
-| Enter Fraud Service | ≥-0.50pp | -0.15pp | ✅ |
-| Approved by Fraud Service | ≥-0.50pp | -0.33pp | ✅ |
-| Call to PVS | ≥-0.50pp | -0.19pp | ✅ |
-| Successful Checkout | ≥-0.50pp | +0.29pp | ✅ |
+| Select Payment Method | ≥-0.34pp | -0.34pp | ⚠️ |
+| Click Submit Form | ≥-0.34pp | -0.40pp | ⚠️ |
+| FE Validation Passed | ≥-0.34pp | -0.68pp | ⚠️ |
+| Enter Fraud Service | ≥-0.34pp | -0.15pp | ✅ |
+| Approved by Fraud Service | ≥-0.34pp | -0.33pp | ✅ |
+| Call to PVS | ≥-0.34pp | -0.19pp | ✅ |
+| Successful Checkout | ≥-0.34pp | +0.29pp | ✅ |
 
 **Key Findings:**
-- **FE Validation is the primary driver:** The -0.68pp drop in FE Validation Passed conversion is the largest single-step decline and matches the overall PCR drop
-- **Recovery Rate declined:** Customers recovering from FE errors dropped from 72.25% to 70.06% (-2.19pp), indicating users who encounter errors are less likely to complete checkout
-- **APPLEPAY_DISMISSED errors increased:** This error type rose from 54.6% to 56.9% (+2.33pp) of all FE errors, while terms_not_accepted decreased (-4.41pp)
-- **Canada significantly underperformed:** CA showed -1.77pp PCR decline vs US at -0.36pp, with FE Validation Passed dropping -1.30pp in CA specifically
-- **Backend fraud approval improved in US:** Despite GA showing declines, US backend fraud approval increased +2.75pp, suggesting some process improvements are working
+- **FE Validation is the primary bottleneck:** The largest single-step drop of -0.68pp occurred at FE Validation Passed, with recovery rate declining from 72.25% to 70.06% (-2.19pp)
+- **Canada drives majority of decline:** CA experienced a -1.77pp PCR drop (34.16% → 32.39%) with FE Validation as the key driver (-1.30pp), despite a +3.2% increase in traffic
+- **APPLEPAY_DISMISSED errors increased:** This error type grew from 54.6% to 56.9% (+2.33pp) of all FE errors, while terms_not_accepted decreased (-4.41pp)
+- **Payment method performance improved:** ProcessOut_CreditCard (+1.69pp) and Braintree_ApplePay (+1.61pp) success rates increased, but volume shift to Adyen_CreditCard (with only 2.90% success rate) created drag
+- **Backend fraud approval improved:** Approved by Fraud Service in backend showed +1.55pp improvement overall, and +2.75pp in US specifically
 
-**Action:** **Investigate** - Focus on the root cause of increased APPLEPAY_DISMISSED errors and the Canada-specific FE validation decline. Review recent Apple Pay integration changes and CA-specific frontend deployments.
+**Action:** **Investigate** - Focus investigation on (1) the root cause of increased APPLEPAY_DISMISSED errors, particularly in Canada, and (2) the declining FE validation recovery rate. Coordinate with frontend team to review any recent changes to Apple Pay integration or validation logic.
 
 ---
 
@@ -198,7 +198,7 @@
 
 ## Conclusion
 
-The -0.68pp PCR decline in Week 14 is primarily attributable to front-end validation failures, with the FE Validation Passed step showing the exact same magnitude of decline. Canada is disproportionately affected (-1.77pp vs -0.36pp in US), and the increasing share of APPLEPAY_DISMISSED errors combined with a declining recovery rate suggests users are abandoning the Apple Pay flow more frequently. Immediate investigation into Apple Pay dismissal patterns, particularly in Canada, is recommended to prevent further degradation.
+The -0.68pp PCR decline in 2026-W14 is primarily driven by frontend validation failures, with FE Validation Passed showing the largest conversion drop in the funnel. Canada accounts for the majority of the impact with a -1.77pp decline concentrated at the FE validation step, while increased APPLEPAY_DISMISSED errors (+2.33pp share) and declining recovery rates (-2.19pp) suggest potential issues with the Apple Pay checkout flow that warrant immediate investigation.
 
 ---
 

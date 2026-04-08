@@ -10,27 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined from 89.72% to 89.33% (-0.43%) in WL 2026-W14, a statistically non-significant change affecting 165,018 orders.
+**Overall:** Pre-Dunning Acceptance Rate declined from 89.72% to 89.33% (-0.43%) in WL for 2026-W14, a change that is not statistically significant, with volume decreasing from 169,667 to 165,018 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Rate within normal range (88.14%-89.79%) | -0.43% | ✅ |
-| L1: Country Breakdown | AO exceeds ±2.5% threshold | -3.12% | ⚠️ |
-| L1: Payment Method | No methods exceed threshold | -1.18% max | ✅ |
-| L1: Payment Provider | Unknown flagged (low volume: 35 orders) | -4.76% | ✅ |
-| L2: AO Deep-Dive | Apple Pay via ProcessOut declined | -5.69% | ⚠️ |
-| L3: Related Metrics | All AR metrics declined similarly | -0.28% to -0.44% | ✅ |
+| L1: Country Breakdown | AO exceeds ±2.5% threshold (-3.12%) | -3.12% | ⚠️ |
+| L1: Payment Method | No dimension exceeds threshold | -1.18% max | ✅ |
+| L1: Payment Provider | Unknown flagged but minimal volume (35 orders) | -4.76% | ✅ |
+| L2: AO Deep-Dive | Apple Pay (-5.69%) and ProcessOut (-5.69%) flagged | -5.69% | ⚠️ |
+| L3: Related Metrics | All AR metrics declined similarly (-0.28% to -0.44%) | -0.44% | ✅ |
+| Mix Shift | GN high-AR country volume dropped 11.6% | -11.6% vol | ✅ |
 
 **Key Findings:**
-- **AO is the sole driver:** Angola declined -3.12% (85.22% from 87.96%), the only country exceeding the ±2.5% threshold
-- **Root cause identified:** In AO, Apple Pay via ProcessOut declined -5.69% (75.35% from 79.90%), with "Insufficient Funds" declines increasing by +2.36pp (from 10.12% to 12.48%)
-- **Volume decline in high-performing markets:** GN (high AR tier at 92.33%) saw -11.6% volume reduction, though this had minimal mix shift impact
-- **Consistent decline across funnel:** All related AR metrics (FirstRun, PreDunning, PostDunning, PaymentApproval) declined by similar margins (-0.28% to -0.44%), suggesting a systemic rather than stage-specific issue
-- **No significant mix shift:** All countries show "Stable" impact despite volume fluctuations
+- **AO is the primary driver** of the overall decline, with acceptance rate dropping 3.12% (from 87.96% to 85.22%) on 15,776 orders
+- **Insufficient Funds increased significantly in AO**, rising +2.36pp (from 10.12% to 12.48% of transactions), indicating potential customer payment capacity issues
+- **Apple Pay via ProcessOut in AO** showed the steepest decline at -5.69%, suggesting a provider-specific issue in that country
+- **GN volume dropped 11.6%** (from 16,207 to 14,333 orders) which was a high-AR country (93.5%), contributing to mix shift impact
+- **All related AR metrics declined proportionally** (FirstRunAR +0.16%, PreDunning -0.44%, PostDunning -0.44%), suggesting the issue originates at the pre-dunning stage
 
-**Action:** **Monitor** — The overall change is not statistically significant and falls within the 8-week trend range. However, continue monitoring AO's ProcessOut + Apple Pay performance for "Insufficient Funds" declines over the next 1-2 weeks.
+**Action:** **Monitor** – The overall change is not significant and falls within the 8-week trend range. However, recommend tracking AO's ProcessOut/Apple Pay performance and Insufficient Funds rates over the next 1-2 weeks to determine if this is a temporary fluctuation or emerging trend.
 
 ---
 

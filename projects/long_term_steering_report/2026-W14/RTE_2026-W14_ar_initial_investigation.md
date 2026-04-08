@@ -10,26 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) declined from 91.4% to 90.89% (-0.56%) in W14, continuing a downward trend from the 93.59% peak in W09, though the change is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) declined from 91.4% to 90.89% (-0.56%) in W14, continuing a downward trend from 93.59% in W09, though the change is flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Sustained decline from W09 (93.59%) to W14 (90.89%) | -2.70pp over 5 weeks | ⚠️ |
-| L1: Country Variance | 4 countries exceed ±2.5% threshold (TO, TT, TV, TK) | TO -4.77%, TK +9.33% | ⚠️ |
-| L1: Dimension Scan | PaymentMethod & PaymentProvider within normal range | Max -0.80% (Credit Card) | ✅ |
-| L2: Root Cause | TO decline driven by Adyen (-6.94%) + Insufficient Funds (+2.85pp) | Primary driver identified | ⚠️ |
-| L3: Related Metrics | All AR metrics declining in parallel | -0.39% to -0.69% | ⚠️ |
-| Mix Shift | TK volume dropped 33.3%; other countries stable | Minor impact | ✅ |
+| L1: Country Variance | 4 countries exceed ±2.5% threshold | TO -4.77%, TK +9.33% | ⚠️ |
+| L1: Dimension Scan | No payment method or provider exceeds threshold | Max change -0.80% (Credit Card) | ✅ |
+| L2: Root Cause - TO | Adyen -6.94%, Insufficient Funds +2.85pp | Primary driver of decline | ⚠️ |
+| L3: Related Metrics | All AR metrics declining in parallel | FirstRunAR -0.69%, PostDunningAR -0.44% | ⚠️ |
+| Mix Shift | TK volume dropped 33.3% (348→232) | Low-AR country shrinking | ✅ |
 
 **Key Findings:**
-- **TO is the primary concern:** The only country showing significant decline (-4.77%), driven by Adyen payment provider (-6.94%) and increased "Insufficient Funds" declines (+2.85pp), with credit card acceptance dropping from 69.68% to 64.99%
-- **Three countries showed improvement:** TT (+2.62%), TV (+4.98%), and TK (+9.33%) all improved, partially offsetting TO's decline; TK's improvement correlates with reduced Insufficient Funds declines (-5.17pp)
-- **Volume is declining across the board:** Total volume dropped from 36,413 to 31,900 orders (-12.4%), with TK experiencing the largest proportional drop (-33.3%)
-- **Consistent decline across AR funnel:** All related metrics (FirstRunAR, PreDunningAR, PostDunningAR, PaymentApprovalRate) declined in parallel, suggesting a systemic rather than isolated issue
+- TO (Tonga) is the primary negative contributor with AR dropping 4.77% (71.79%→68.36%), driven by Adyen credit card declines and a +2.85pp increase in "Insufficient Funds" decline reasons
+- Three countries showed significant improvement: TK (+9.33%), TV (+4.98%), and TT (+2.62%), all showing reduced "Insufficient Funds" declines
+- Volume declined 12.4% week-over-week (36,413→31,900 orders), consistent with the 8-week downward volume trend from 52,390 in W07
+- The decline pattern appears across all related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate), suggesting a systemic issue rather than isolated to pre-dunning
+- Credit card payments show the largest absolute volume (20,181 orders) with a -0.80% rate change, though below the significance threshold
 
-**Action:** **Monitor** - The change is not statistically significant and the overall decline is modest (-0.56%). However, continue monitoring TO's Adyen + credit card performance and the broader 5-week downward trend. If TO's decline persists next week or the overall rate drops below 90%, escalate for deeper investigation into Insufficient Funds root causes.
+**Action:** Monitor — The change is not statistically significant, and improving countries (TK, TV, TT) partially offset TO's decline. Continue tracking the sustained downward trend and monitor TO's Adyen + Insufficient Funds pattern for persistence in W15.
 
 ---
 

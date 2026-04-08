@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) declined by -0.37pp (from 26.77% to 26.41%) on ~44K payment visits in US-HF during 2026-W14.
+**Overall:** Payment Conversion Rate (PCR) for US-HF declined by -0.37pp week-over-week (26.77% → 26.41%) on approximately 44K payment visits.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Top of funnel engagement | -0.42pp | ⚠️ |
-| Click Submit Form | Form submission intent | +0.02pp | ✅ |
-| FE Validation Passed | Frontend validation | -0.41pp | ⚠️ |
-| Enter Fraud Service | Fraud check entry | +0.12pp | ✅ |
+| Select Payment Method | Entry rate | -0.42pp | ⚠️ |
+| Click Submit Form | Form engagement | +0.02pp | ✅ |
+| FE Validation Passed | Validation | -0.41pp | ⚠️ |
+| Enter Fraud Service | Fraud routing | +0.12pp | ✅ |
 | Approved by Fraud Service | Fraud approval | -0.00pp | ✅ |
-| Call to PVS | Payment verification call | -0.24pp | ⚠️ |
+| Call to PVS | PVS routing | -0.24pp | ⚠️ |
 | Successful Checkout | Final conversion | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Primary driver:** Select Payment Method conversion dropped -0.42pp (37.60% → 37.18%), indicating fewer visitors are engaging with payment options at the top of funnel
-- **FE Validation degradation:** Validation pass rate declined -0.41pp with recovery rate dropping from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" errors decreased (-4.50pp share) while "APPLEPAY_DISMISSED" remained stable at ~50%
-- **Backend shows steeper entry decline:** Checkout Attempt rate dropped -0.99pp and Enter Fraud Service fell -0.77pp in backend data, suggesting potential tracking discrepancies or session-level issues
-- **Payment method performance improved:** ProcessOut_CreditCard success rate increased +3.21pp and Braintree_ApplePay improved +2.28pp, partially offsetting funnel losses
-- **PVS failures decreased:** Total PVS failures dropped from 1,013 to 958 (-55), with "Fraud Suspected" declines increasing slightly (+1.04pp share)
+- **Select Payment Method is the primary driver** of the PCR decline, with conversion dropping -0.42pp (37.60% → 37.18%), indicating fewer visitors are initiating the payment process
+- **FE Validation recovery rate decreased by -1.31pp** (75.67% → 74.36%), with "terms_not_accepted" remaining the dominant error type at 51.6% of errors
+- **Backend data shows a significant -0.99pp drop in Checkout Attempt rate** (36.46% → 35.46%), corroborating the top-of-funnel issue
+- **ProcessOut_CreditCard and Braintree_ApplePay both improved** their success rates (+3.21pp and +2.28pp respectively), partially offsetting upstream losses
+- **Fraud Service approval improved significantly in backend data** (+2.75pp), and PVS failures decreased by 55 cases week-over-week
 
-**Action:** Investigate — Focus on top-of-funnel drop-off at Select Payment Method step and FE validation recovery rate decline. Review any recent UI/UX changes or A/B tests affecting payment method selection.
+**Action:** **Investigate** - The consistent decline at the Select Payment Method step across both GA and Backend waterfalls suggests a user experience or technical issue at the payment method selection stage. Recommend reviewing any recent UI/UX changes, page load performance, and A/B test exposure during W14.
 
 ---
 
@@ -180,7 +180,7 @@
 
 ## Conclusion
 
-The -0.37pp PCR decline in US-HF for 2026-W14 is primarily driven by reduced engagement at the Select Payment Method step (-0.42pp) and FE validation issues (-0.41pp), despite improved downstream conversion rates at PVS (+0.26pp) and strong payment method performance improvements. The combination of lower funnel entry with declining FE validation recovery rates (75.67% → 74.36%) warrants investigation into potential frontend changes or user experience issues affecting initial payment engagement. Immediate focus should be on identifying root causes for the top-of-funnel drop-off while monitoring whether the payment method success rate improvements continue to offset upstream losses.
+The -0.37pp PCR decline in US-HF for 2026-W14 is primarily driven by reduced conversion at the payment method selection stage (-0.42pp) and decreased FE validation recovery rates (-1.31pp). While downstream metrics including payment method success rates and PVS performance showed improvement, these gains were insufficient to offset the top-of-funnel losses. Investigation should focus on identifying any changes to the payment selection experience or technical issues that may be preventing users from initiating checkout.
 
 ---
 

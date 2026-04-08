@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) improved from 37.81% to 39.36% (+1.55pp) week-over-week, driven primarily by stronger top-of-funnel performance in payment method selection, despite a 10.4% decrease in payment visit volume.
+**Overall:** Payment Conversion Rate (PCR) improved by +1.55pp (37.81% → 39.36%) week-over-week despite a -10.4% reduction in payment visit volume (~63K visits in W14).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate improved | +1.75pp | ✅ |
-| Click Submit Form | Rate improved | +0.90pp | ✅ |
-| FE Validation Passed | Slight decline | -0.46pp | ⚠️ |
-| Enter Fraud Service | Slight decline | -0.21pp | ✅ |
-| Approved by Fraud Service | Stable | -0.09pp | ✅ |
-| Call to PVS | Stable | -0.11pp | ✅ |
-| Successful Checkout | Rate improved | +0.33pp | ✅ |
+| Select Payment Method | Rate ≥ baseline | +1.75pp | ✅ |
+| Click Submit Form | Rate ≥ baseline | +0.90pp | ✅ |
+| FE Validation Passed | Rate ≥ baseline | -0.46pp | ⚠️ |
+| Enter Fraud Service | Rate ≥ baseline | -0.21pp | ⚠️ |
+| Approved by Fraud Service | Rate ≥ baseline | -0.09pp | ⚠️ |
+| Call to PVS | Rate ≥ baseline | -0.11pp | ⚠️ |
+| Successful Checkout | Rate ≥ baseline | +0.33pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel gains drove PCR improvement:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), the largest single-step improvement in the GA waterfall
-- **FJ (largest market) performed strongly:** With 64% of volume, FJ improved PCR by +2.51pp, driven by +2.32pp gain in Select Payment Method and +1.41pp in Click Submit Form
-- **TO experienced fraud service degradation:** Approved by Fraud Service dropped -4.88pp (94.46% → 89.58%), causing TO's PCR to decline -5.78pp despite representing only ~1.4% of volume
-- **TK showed significant fraud service recovery:** Approved by Fraud Service jumped +5.88pp (89.95% → 95.83%), contributing to TK's +6.09pp PCR improvement
-- **Braintree_ApplePay underperformed:** Success rate declined -1.71pp (87.23% → 85.51%), the largest drop among high-volume payment methods
+- **Top-of-funnel improvement drove PCR gains:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), contributing the largest positive delta in the GA waterfall
+- **FJ (largest market) drove overall improvement:** With 40,637 visits, FJ improved +2.51pp in PCR, with Select Payment Method (+2.32pp) as the key driver
+- **Backend PVS Attempt step degraded:** PVS Attempt conversion dropped -1.25pp (99.46% → 98.21%) in the backend waterfall, indicating potential payment verification service issues
+- **TO experienced significant decline:** PCR dropped -5.78pp (44.86% → 39.08%) driven by Fraud Service approval rate falling -4.88pp (94.46% → 89.58%)
+- **Braintree_ApplePay underperformed:** Success rate declined -1.71pp (87.23% → 85.51%) with significant volume (~10.5K attempts)
 
-**Action:** **Monitor** - The overall PCR improvement is healthy and driven by sustainable top-of-funnel gains. However, investigate the fraud service performance divergence between TO (declining) and TK (improving) to understand if configuration changes or fraud rule adjustments are causing inconsistent regional behavior.
+**Action:** Monitor — Overall PCR improvement is positive, but investigate the Fraud Service approval decline in TO and the PVS Attempt degradation in backend. Review Braintree_ApplePay performance for potential payment method-specific issues.
 
 ---
 
@@ -201,7 +201,7 @@
 
 ## Conclusion
 
-The +1.55pp PCR improvement in 2026-W14 represents a positive trend driven primarily by enhanced user engagement at the payment method selection stage, particularly in the high-volume FJ market. While the fraud service showed concerning degradation in TO (-4.88pp approval rate), this was offset by improvements elsewhere and represents a small portion of overall volume. Continued monitoring of fraud service performance across regions is recommended to ensure the TO decline does not spread to other markets.
+The +1.55pp PCR improvement in W14 was primarily driven by enhanced top-of-funnel engagement, particularly in the Select Payment Method step across the RTE cluster, with FJ contributing the majority of gains. However, localized issues warrant attention: TO's Fraud Service approval rate declined significantly (-4.88pp), and the backend PVS Attempt step showed degradation (-1.25pp) that should be monitored to prevent future conversion losses.
 
 ---
 

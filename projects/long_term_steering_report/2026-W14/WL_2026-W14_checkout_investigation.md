@@ -9,7 +9,9 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) declined slightly from 30.03% to 29.88% (-0.15pp) on ~35K payment visits, representing a minor week-over-week decrease.
+## Executive Summary
+
+**Overall:** Payment Conversion Rate (PCR) declined slightly from 30.03% to 29.88% (-0.15pp) in WL 2026-W14, with payment visits decreasing by 8.1% (~3,100 fewer visits).
 
 **Funnel Analysis:**
 
@@ -24,13 +26,13 @@
 | Successful Checkout | ≥-0.07pp | +0.25pp | ✅ |
 
 **Key Findings:**
-- **Call to PVS shows significant drop (-0.53pp):** Backend data confirms a severe PVS Attempt conversion decline (-9.71pp from 98.79% to 89.07%), indicating a potential system issue between fraud approval and payment verification initiation
-- **Country KN is the primary negative driver:** PCR dropped -3.75pp (27.15% → 23.40%) with Select Payment Method conversion falling -3.26pp and Fraud Service approval declining -1.79pp
-- **Braintree_CreditCard underperforming:** Success rate dropped -2.58pp (90.20% → 87.62%), the largest decline among major payment methods
-- **Countries ER and GN showed improvement:** ER improved +2.04pp and GN improved +4.30pp, both driven by better Select Payment Method conversion (+1.60pp and +4.07pp respectively)
-- **CVV/CVC decline errors increased:** "Failed Verification: Refused(CVC Declined)" rose from 4.2% to 9.8% of PVS failures (+5.58pp share increase)
+- **Call to PVS step shows significant drop (-0.53pp):** Backend data confirms PVS Attempt dropped from 98.79% to 89.07% (-9.71pp), indicating a potential issue between fraud approval and payment verification initiation
+- **Country KN is the primary driver of decline:** KN experienced a -3.75pp PCR drop, with Select Payment Method conversion falling -3.26pp and Fraud Service approval dropping -1.79pp
+- **Braintree_CreditCard and Braintree_Paypal show notable degradation:** Success rates declined -2.58pp and -1.73pp respectively, while ProcessOut_ApplePay improved significantly (+8.72pp)
+- **PVS decline reason shift observed:** "Refused (CVC Declined)" errors increased from 4.2% to 9.8% (+5.58pp share), while "Insufficient Funds" decreased from 26.3% to 19.6%
+- **Countries ER (+2.04pp) and GN (+4.30pp) showed improvements**, partially offsetting KN's decline, driven by better Select Payment Method conversion
 
-**Action:** **Investigate** - The significant gap between Fraud Approval and PVS Attempt in backend data (-9.71pp) requires immediate investigation. Additionally, focus on KN market performance and Braintree_CreditCard processing issues.
+**Action:** **Investigate** - The significant drop in Call to PVS / PVS Attempt conversion warrants immediate investigation into the backend flow between fraud approval and PVS initiation. Additionally, investigate KN's fraud service approval decline and the increase in CVC-related declines.
 
 ---
 
@@ -277,7 +279,7 @@
 
 ## Conclusion
 
-The PCR decline of -0.15pp is primarily driven by issues in the KN market (-3.75pp) and a concerning drop in the Call to PVS step (-0.53pp in GA, -9.71pp in backend). While other markets (ER, GN) showed positive trends that partially offset the decline, the backend data reveals a significant gap between fraud approval and PVS initiation that warrants immediate technical investigation. Priority should be given to diagnosing the PVS routing issue and addressing the Braintree_CreditCard success rate degradation.
+The -0.15pp PCR decline in WL 2026-W14 is primarily driven by two issues: (1) a significant backend gap between Fraud Service approval and PVS Attempt (-9.71pp), and (2) country-specific degradation in KN affecting early funnel engagement and fraud approval rates. While the overall impact appears modest due to offsetting improvements in ER and GN, the PVS routing issue and increased CVC decline errors require technical investigation to prevent further deterioration. Recommend prioritizing the PVS Attempt drop investigation and monitoring Braintree payment method performance.
 
 ---
 

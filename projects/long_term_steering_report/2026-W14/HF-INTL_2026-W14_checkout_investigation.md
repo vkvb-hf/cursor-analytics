@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) for HF-INTL improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by improvements across multiple funnel steps despite a 23.9% reduction in payment visit volume.
+**Overall:** Payment Conversion Rate (PCR) for HF-INTL improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by gains across multiple funnel steps despite a 23.9% reduction in payment visit volume.
 
 **Funnel Analysis:**
 
@@ -23,16 +23,16 @@
 | Enter Fraud Service | ≥0.58pp threshold | +0.40pp | ⚠️ |
 | Approved by Fraud Service | ≥0.58pp threshold | -0.23pp | ⚠️ |
 | Call to PVS | ≥0.58pp threshold | -0.01pp | ⚠️ |
-| Successful Checkout (PVS→Success) | ≥0.58pp threshold | +0.85pp | ✅ |
+| Successful Checkout (PVS Success) | ≥0.58pp threshold | +0.85pp | ✅ |
 
 **Key Findings:**
-- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of PVS failures (-4.31pp share), indicating better customer payment readiness
-- **FE Validation recovery rate improved (+1.47pp):** Customers recovering from frontend errors increased from 56.10% to 57.57%, with PAYPAL_POPUP_CLOSED errors decreasing as a share (-2.79pp)
-- **France (FR) drove the largest contribution:** PCR improved +3.10pp with Select Payment Method step improving +2.98pp, suggesting better payment method presentation or customer intent
-- **Denmark (DK) showed strong improvement (+5.89pp):** Select Payment Method improved +4.17pp and checkout success rate increased despite being a smaller volume market
-- **Braintree ApplePay conversion improved +1.70pp:** From 83.73% to 85.43%, the second largest payment method by volume showed meaningful improvement
+- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of failures (-4.31pp share), and total PVS failures dropped from 1,522 to 1,010 (-512 failures)
+- **FE Validation recovery rate improved (+1.47pp):** Recovery rate increased from 56.10% to 57.57%, with PAYPAL_POPUP_CLOSED errors decreasing as a share (-2.79pp)
+- **France drove the largest contribution to PCR improvement:** FR showed +3.10pp PCR gain, primarily from Select Payment Method (+2.98pp in GA funnel) and Checkout Attempt (+3.77pp in backend)
+- **Braintree ApplePay showed strong improvement:** Conversion rate increased from 83.73% to 85.43% (+1.70pp), the largest gain among high-volume payment methods
+- **Denmark showed exceptional PCR growth (+5.89pp):** Despite smaller volume, DK improved from 42.72% to 48.61% PCR, driven by Select Payment Method (+4.17pp)
 
-**Action:** **Monitor** – The PCR improvement is positive and broad-based across funnel steps and geographies. Continue monitoring to confirm the trend sustains, particularly the PVS success improvements and FR market performance.
+**Action:** Monitor — The PCR improvement is broad-based and positive. Continue monitoring FE validation errors (APPLEPAY_DISMISSED remains at 76.8% of errors) and track whether the reduced "Insufficient Funds" decline rate sustains in coming weeks.
 
 ---
 
@@ -287,7 +287,7 @@
 
 ## Conclusion
 
-The +1.16pp PCR improvement in HF-INTL during 2026-W14 represents a healthy positive trend driven primarily by better PVS success rates (+0.85pp) and frontend validation pass rates (+0.68pp). France contributed most significantly to the improvement with a +3.10pp PCR gain, while reduced "Insufficient Funds" payment failures suggest improved customer payment instrument quality. No immediate action is required, but continued monitoring is recommended to validate these gains persist in subsequent weeks.
+The +1.16pp PCR improvement in HF-INTL for 2026-W14 reflects healthy gains across the checkout funnel, particularly in PVS success rates and FE validation pass rates. France and Denmark were the primary geographic contributors, both showing improved engagement at the payment method selection stage. No immediate escalation is required; the team should continue monitoring to confirm these improvements are sustained rather than anomalous.
 
 ---
 
