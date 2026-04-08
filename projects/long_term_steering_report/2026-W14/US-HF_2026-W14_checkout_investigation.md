@@ -2,14 +2,16 @@
 
 **Metric:** Payment Conversion Rate (PCR)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 26.77% → 26.40% (-0.37pp)  
+**Observation:**  
+GA: 26.77% → 26.40% (-0.37pp, -1.4% change)  
+Backend: 30.09% → 30.17% (+0.09pp, 0.3% change)  
 **Volume:** ~44K payment visits
 
 ---
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by 0.37pp from 26.77% to 26.40% in 2026-W14, representing a moderate deterioration in payment performance.
+**Overall:** Payment Conversion Rate declined by 0.37pp (-1.4%) in GA tracking from 26.77% to 26.40%, while backend tracking showed a slight improvement of +0.09pp (+0.3%) from 30.09% to 30.17%.
 
 **Funnel Analysis:**
 
@@ -25,15 +27,16 @@
 | Checkout Attempt | Backend | -0.99pp | ⚠️ |
 | Enter Fraud Service | Backend | -0.77pp | ⚠️ |
 | Approved by Fraud Service | Backend | +2.75pp | ✅ |
+| PVS Success | Backend | +0.29pp | ✅ |
 
 **Key Findings:**
-- Early funnel shows weakness with Select Payment Method conversion declining 0.42pp (37.60% → 37.18%) in GA flow
-- Backend checkout attempts dropped significantly by 0.99pp (36.46% → 35.46%), indicating user engagement issues
-- Fraud service approval rates improved substantially by 2.75pp (89.15% → 91.91%) in backend flow, suggesting better fraud detection accuracy
-- ProcessOut_CreditCard and Braintree_ApplePay both showed strong improvements (+3.23pp and +1.80pp respectively), while Braintree_Paypal declined slightly (-0.87pp)
-- Overall payment volumes decreased across both GA (-319 visits, -0.7%) and backend (-853 attempts, -4.8%) flows
+- Major improvement in fraud service approval rate (+2.75pp in backend) suggests fraud rules were relaxed or optimized
+- Payment method selection dropped significantly (-0.42pp GA, -0.99pp backend), indicating potential UI/UX issues in the initial payment flow
+- FE validation issues increased with -0.41pp conversion drop, primarily driven by "terms_not_accepted" errors (2,064 → 1,834 raw count but lower conversion)
+- ProcessOut_CreditCard showed strong recovery (+3.23pp to 82.72%) and Braintree_ApplePay improved (+1.80pp to 87.61%), offsetting declines in other methods
+- Volume decreased across all funnel steps (~2% decline) but successful checkouts maintained better retention rates
 
-**Action:** Investigate - Focus on early funnel optimization, particularly payment method selection and initial checkout attempt conversion issues.
+**Action:** Monitor - The backend metrics show stability with fraud improvements, but investigate the payment method selection drop and FE validation issues if the trend continues next week.
 
 ---
 
@@ -66,6 +69,7 @@
 | PVS Attempt | 15,361 | 14,911 | -450 | -2.9% | 97.64% | 97.32% | -0.32pp |
 | PVS Success | 14,219 | 13,845 | -374 | -2.6% | 92.57% | 92.85% | +0.29pp |
 | **Successful Checkout** | 14,691 | 14,421 | -270 | -1.8% | 103.32% | 104.16% | +0.84pp |
+| **PCR Rate** | | | | | 30.09% | 30.17% | **+0.09pp** |
 
 ---
 
@@ -83,9 +87,45 @@
 
 ---
 
+## FE Validation Errors
+
+*Included because FE Validation Passed Δ Conv (-0.41pp) meets threshold (+0.18pp)*
+
+| Error Type | 2026-W13 | 2026-W14 | Δ |
+| ---------- | ----------- | --------------- | - |
+| terms_not_accepted | 2,064 | 1,834 | -230 |
+| APPLEPAY_DISMISSED | 1,840 | 1,805 | -35 |
+| PAYPAL_POPUP_CLOSED | 273 | 254 | -19 |
+| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 235 | 223 | -12 |
+| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 102 | 113 | +11 |
+| CC_TOKENISE_ERR | 102 | 108 | +6 |
+| PAYPAL_TOKENISE_ERR | 24 | 23 | -1 |
+| CC_NO_PREPAID_ERR | 2 | 2 | 0 |
+| EXPRESS_CHECKOUT_APPLEPAY_TOKENISE_ERR | 0 | 1 | +1 |
+
+---
+
+## Payment Verification Errors
+
+*Included because PVS Success Δ Conv (+0.26pp) meets threshold (+0.18pp)*
+
+| Decline Reason | 2026-W13 | 2026-W14 | Δ |
+| -------------- | ----------- | --------------- | - |
+| Blocked Verification: Payment method is blocked due to business reasons | 570 | 534 | -36 |
+| Failed Verification: Insufficient Funds | 166 | 158 | -8 |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 64 | 52 | -12 |
+| Failed Verification: Declined - Call Issuer | 36 | 42 | +6 |
+| Failed Verification: Card Issuer Declined CVV | 37 | 34 | -3 |
+| Failed Verification: Issuer or Cardholder has put a restriction on the card | 36 | 33 | -3 |
+| Failed Verification: Cannot Authorize at this time (Policy) | 28 | 29 | +1 |
+| Failed Verification: Processor Declined - Fraud Suspected | 18 | 27 | +9 |
+| Failed Verification: Card Not Activated | 38 | 25 | -13 |
+| Failed Verification: Processor Declined | 20 | 24 | +4 |
+
+---
 ## Conclusion
 
-The 0.37pp decline in PCR appears to be driven primarily by reduced user engagement in the early stages of the payment funnel, with Select Payment Method and Checkout Attempt conversions showing notable deterioration. While fraud service improvements and strong performance from major payment methods (ProcessOut_CreditCard, Braintree_ApplePay) provide positive signals, the overall trend requires investigation into user experience factors affecting initial payment engagement.
+The week showed mixed signals with GA tracking indicating a PCR decline while backend metrics remained stable. The significant improvement in fraud service approval rates (+2.75pp) suggests system optimizations are working, but early funnel issues around payment method selection need attention. Overall, the backend stability and strong performance of major payment methods (ProcessOut_CreditCard, Braintree_ApplePay) indicate the core payment infrastructure is healthy despite the GA-tracked decline.
 
 ---
 
@@ -185,6 +225,92 @@ ORDER BY hellofresh_week, checkout_attempt DESC
 
 </details>
 
+<details>
+<summary>FE Validation Errors</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster
+),
+weeks AS (
+  SELECT 
+    (SELECT affected_week FROM params) as affected_week,
+    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
+  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
+  WHERE iso_year_week <= (SELECT affected_week FROM params)
+  QUALIFY iso_year_week = (SELECT affected_week FROM params)
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+)
+SELECT
+  iso_year_week AS hellofresh_week,
+  label_error,
+  SUM(errors) AS errors
+FROM payments_hf.dash_ga_error
+CROSS JOIN weeks w
+WHERE iso_year_week IN (w.affected_week, w.prev_week)
+  AND country IN (SELECT country FROM countries)
+  AND event_action = 'PaymentFormFEValidationError'
+GROUP BY 1, 2
+ORDER BY hellofresh_week, errors DESC
+
+```
+
+</details>
+
+<details>
+<summary>PVS Decline Reasons</summary>
+
+```sql
+
+WITH params AS (
+  SELECT '2026-W14' as affected_week, 'US-HF' as cluster
+),
+week_dates AS (
+  SELECT 
+    MIN(date_string_backwards) as start_date,
+    MAX(date_string_backwards) as end_date,
+    iso_year_week
+  FROM dimensions.date_dimension
+  WHERE iso_year_week IN (
+    (SELECT affected_week FROM params),
+    (SELECT MAX(iso_year_week) FROM dimensions.date_dimension 
+     WHERE iso_year_week < (SELECT affected_week FROM params))
+  )
+  GROUP BY iso_year_week
+),
+date_range AS (
+  SELECT MIN(start_date) as min_date, MAX(end_date) as max_date
+  FROM week_dates
+),
+countries AS (
+  SELECT business_unit as country
+  FROM payments_hf.business_units
+  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
+)
+SELECT
+  wd.iso_year_week AS hellofresh_week,
+  pvs_last_payload.decline_response AS decline_reason,
+  COUNT(*) AS customers
+FROM spark_catalog.payments_hf.checkout_funnel_backend f
+JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
+WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
+  AND f.country IN (SELECT country FROM countries)
+  AND event_payment_verification_attempt = 1
+  AND event_payment_verification_success = 0
+  AND pvs_last_payload.decline_response IS NOT NULL
+GROUP BY 1, 2
+ORDER BY hellofresh_week, customers DESC
+
+```
+
+</details>
+
+
 ---
 
-*Report: 2026-04-07*
+*Report: 2026-04-08*
