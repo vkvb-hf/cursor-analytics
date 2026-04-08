@@ -2,35 +2,41 @@
 
 **Metric:** Payment Conversion Rate (PCR)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 37.81% → 39.36% (+1.56pp)  
+**Observation:**  
+GA: 37.81% → 39.36% (+1.56pp, 4.1% change)  
+Backend: 33.67% → 35.22% (+1.55pp, 4.6% change)  
 **Volume:** ~63K payment visits
 
 ---
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +1.56pp from 37.81% to 39.36% during 2026-W14, despite a 10.4% decrease in payment visit volume.
+## Executive Summary
+
+**Overall:** PCR improved in W14, with GA increasing +1.56pp (37.81% → 39.36%) and Backend increasing +1.55pp (33.67% → 35.22%), despite a -10.4% drop in payment visit volume (~63K visits).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | 48.18% → 49.94% | +1.76pp | ✅ |
-| Click Submit Form | 89.19% → 90.09% | +0.90pp | ✅ |
-| FE Validation Passed | 97.61% → 97.15% | -0.46pp | ⚠️ |
-| Enter Fraud Service | 97.99% → 97.78% | -0.21pp | ⚠️ |
-| Approved by Fraud Service | 96.11% → 95.98% | -0.13pp | ⚠️ |
-| Call to PVS | 99.89% → 99.80% | -0.09pp | ⚠️ |
-| Successful Checkout | 95.83% → 96.15% | +0.32pp | ✅ |
+| Select Payment Method | Rate improved | +1.76pp | ✅ |
+| Click Submit Form | Rate improved | +0.90pp | ✅ |
+| FE Validation Passed | Rate declined | -0.46pp | ⚠️ |
+| Enter Fraud Service | Rate slightly declined | -0.21pp | ✅ |
+| Approved by Fraud Service | Rate stable | -0.12pp | ✅ |
+| Call to PVS | Rate stable | -0.09pp | ✅ |
+| Successful Checkout (GA) | Rate improved | +0.32pp | ✅ |
+| PVS Attempt (Backend) | Rate declined | -1.25pp | ⚠️ |
+| PVS Success (Backend) | Rate stable | +0.01pp | ✅ |
 
 **Key Findings:**
-- Early funnel performance drove the PCR improvement, with Select Payment Method (+1.76pp) and Click Submit Form (+0.90pp) showing strong gains
-- Mid-funnel steps experienced slight degradation, particularly FE Validation (-0.46pp) and fraud service approval rates (-0.13pp)
-- Final checkout success rate improved (+0.32pp), offsetting mid-funnel losses and contributing to overall PCR gains
-- Payment volume decreased significantly (-10.4% to ~63K visits) but conversion quality improved across the funnel
-- Backend data shows similar patterns with checkout attempt rate improving (+1.97pp) and PVS success rate remaining stable (+0.01pp)
+- Top-of-funnel conversion drove the improvement: Select Payment Method (+1.76pp) and Click Submit Form (+0.90pp) were the primary contributors to PCR gains
+- Backend PVS Attempt rate dropped -1.25pp (99.46% → 98.21%), indicating potential issues between fraud approval and payment verification initiation
+- Braintree_ApplePay success rate declined -1.71pp (87.23% → 85.51%) with significant volume (~10.5K attempts)
+- Adyen_IDeal experienced the largest rate drop at -3.21pp (93.45% → 90.24%), though on lower volume (676 attempts)
+- ProcessOut_CreditCard, the highest volume method (~17K attempts), remained stable with slight improvement (+0.30pp)
 
-**Action:** Monitor
+**Action:** Monitor - The overall PCR improvement is positive. Recommend monitoring the PVS Attempt drop in Backend and the Braintree_ApplePay/Adyen_IDeal declines to ensure they don't worsen in W15.
 
 ---
 
@@ -62,7 +68,8 @@
 | Approved by Fraud Service | 43,132 | 40,642 | -2,490 | -5.8% | 95.14% | 95.03% | -0.10pp |
 | PVS Attempt | 42,897 | 39,914 | -2,983 | -7.0% | 99.46% | 98.21% | -1.25pp |
 | PVS Success | 41,563 | 38,675 | -2,888 | -6.9% | 96.89% | 96.90% | +0.01pp |
-| **Successful Checkout** | 42,106 | 39,663 | -2,443 | -5.8% | 101.31% | 102.55% | +1.25pp |
+| **Successful Checkout** | 41,426 | 38,814 | -2,612 | -6.3% | 99.67% | 100.36% | +0.69pp |
+| **PCR Rate** | | | | | 33.67% | 35.22% | **+1.55pp** |
 
 ---
 
@@ -70,21 +77,21 @@
 
 | Payment Method | 2026-W13 Attempt | 2026-W13 Success | 2026-W13 Rate | 2026-W14 Attempt | 2026-W14 Success | 2026-W14 Rate | Δ Rate |
 | -------------- | ------------------- | ------------------- | ---------------- | ----------------------- | ----------------------- | -------------------- | ------ |
-| ProcessOut_CreditCard | 17,491 | 16,287 | 93.12% | 17,123 | 15,983 | 93.34% | +0.23pp |
-| Braintree_ApplePay | 11,367 | 10,474 | 92.14% | 10,528 | 9,741 | 92.52% | +0.38pp |
-| Adyen_CreditCard | 9,936 | 9,165 | 92.24% | 9,248 | 8,450 | 91.37% | -0.87pp |
-| Braintree_Paypal | 5,297 | 4,964 | 93.71% | 4,880 | 4,523 | 92.68% | -1.03pp |
+| ProcessOut_CreditCard | 17,491 | 16,234 | 92.81% | 17,123 | 15,943 | 93.11% | +0.30pp |
+| Braintree_ApplePay | 11,367 | 9,915 | 87.23% | 10,528 | 9,003 | 85.51% | -1.71pp |
+| Adyen_CreditCard | 9,936 | 9,111 | 91.70% | 9,248 | 8,384 | 90.66% | -1.04pp |
+| Braintree_Paypal | 5,297 | 4,954 | 93.52% | 4,880 | 4,520 | 92.62% | -0.90pp |
 | Adyen_IDeal | 809 | 756 | 93.45% | 676 | 610 | 90.24% | -3.21pp |
 | Adyen_Klarna | 378 | 347 | 91.80% | 297 | 273 | 91.92% | +0.12pp |
-| Braintree_CreditCard | 125 | 105 | 84.00% | 91 | 76 | 83.52% | -0.48pp |
+| Braintree_CreditCard | 125 | 105 | 84.00% | 91 | 75 | 82.42% | -1.58pp |
 | Braintree_Venmo | 4 | 4 | 100.00% | 6 | 6 | 100.00% | +0.00pp |
-|  | 4 | 4 | 100.00% | 1 | 1 | 100.00% | +0.00pp |
+|  | 4 | 0 | 0.00% | 1 | 0 | 0.00% | +0.00pp |
 
 ---
 
 ## Conclusion
 
-The PCR improvement of +1.56pp represents a positive trend driven primarily by enhanced early-funnel performance, with users more likely to select payment methods and submit forms. While mid-funnel conversion rates showed minor degradation, particularly in validation and fraud processing, the strong early-funnel gains and improved final checkout success resulted in net positive performance despite reduced traffic volume.
+The PCR improvement of +1.55-1.56pp in W14 was driven primarily by stronger top-of-funnel engagement, with more users selecting payment methods and clicking submit. While the overall trend is positive, attention should be paid to the Backend PVS Attempt rate decline (-1.25pp) and the Braintree_ApplePay performance degradation (-1.71pp), which could offset gains if not addressed. Continued monitoring is recommended for W15 to confirm sustained improvement.
 
 ---
 
@@ -172,7 +179,7 @@ SELECT
   SUM(CASE WHEN event_attempted_fraud_check = 1 AND event_fs_blocked = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
   SUM(event_payment_verification_attempt) AS pvs_attempt,
   SUM(event_payment_verification_success) AS pvs_success,
-  SUM(event_checkout_success) AS checkout_success
+  SUM(CASE WHEN event_payment_method_listed = 1 AND event_checkout_success = 1 THEN 1 ELSE 0 END) AS checkout_success
 FROM spark_catalog.payments_hf.checkout_funnel_backend f
 JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
 WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
@@ -184,6 +191,7 @@ ORDER BY hellofresh_week, checkout_attempt DESC
 
 </details>
 
+
 ---
 
-*Report: 2026-04-07*
+*Report: 2026-04-08*

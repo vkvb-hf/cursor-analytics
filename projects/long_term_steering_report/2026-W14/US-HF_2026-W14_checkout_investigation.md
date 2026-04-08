@@ -11,32 +11,32 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by 0.37pp (-1.4%) in GA and 0.09pp (-0.3%) in Backend, with GA showing a more significant drop across multiple funnel steps.
+## Executive Summary
+
+**Overall:** PCR declined modestly in 2026-W14, with GA showing -0.37pp (26.77% → 26.40%) and Backend showing -0.09pp (28.36% → 28.28%) on ~44K payment visits.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | -0.42pp | GA | ⚠️ |
-| Click Submit Form | +0.02pp | GA | ✅ |
-| FE Validation Passed | -0.41pp | GA | ⚠️ |
-| Enter Fraud Service | +0.11pp | GA | ✅ |
-| Approved by Fraud Service | -0.00pp | GA | ✅ |
-| Call to PVS | -0.23pp | GA | ⚠️ |
-| Successful Checkout | +0.26pp | GA | ✅ |
-| Checkout Attempt | -0.99pp | Backend | ⚠️ |
-| Enter Fraud Service | -0.77pp | Backend | ⚠️ |
-| Approved by Fraud Service | +2.75pp | Backend | ✅ |
-| PVS Success | +0.29pp | Backend | ✅ |
+| Select Payment Method | GA entry rate | -0.42pp | ⚠️ |
+| Click Submit Form | Click-through | +0.02pp | ✅ |
+| FE Validation Passed | Validation rate | -0.41pp | ⚠️ |
+| Enter Fraud Service | Handoff rate | +0.11pp | ✅ |
+| Approved by Fraud Service | Approval rate | -0.00pp | ✅ |
+| Call to PVS | PVS call rate | -0.23pp | ⚠️ |
+| Successful Checkout | Final conversion | +0.26pp | ✅ |
+| Backend: Checkout Attempt | Entry rate | -0.99pp | ⚠️ |
+| Backend: Fraud Approval | Approval rate | +2.75pp | ✅ |
 
 **Key Findings:**
-- ProcessOut_CreditCard and Braintree_ApplePay showed strong improvements (+3.21pp and +2.28pp respectively), indicating payment processor performance gains
-- Backend fraud service approval rate improved significantly (+2.75pp), suggesting better fraud detection accuracy or policy adjustments
-- GA funnel shows concerning drops in early stages: Select Payment Method (-0.42pp) and FE Validation Passed (-0.41pp), indicating potential user experience issues
-- Frontend validation errors remained consistent with terms_not_accepted being the top error, while APPLEPAY_DISMISSED errors decreased slightly
-- Overall payment volume decreased by ~300-400 visits across both GA and Backend tracking
+- **Top-of-funnel weakness:** Select Payment Method conversion dropped -0.42pp (37.60% → 37.18%), contributing most to the GA PCR decline
+- **FE Validation errors improved:** Despite -0.41pp conversion drop, "terms_not_accepted" errors decreased significantly (-230), suggesting the issue may be volume-related rather than error-driven
+- **Payment method performance improved:** ProcessOut_CreditCard success rate increased +3.21pp (79.29% → 82.50%) and Braintree_ApplePay improved +2.28pp (75.72% → 78.00%)
+- **Backend fraud approval strengthened:** +2.75pp improvement (89.15% → 91.91%) indicates healthier traffic quality or improved fraud model performance
+- **PVS errors declined:** Most decline reasons showed decreases, including "Blocked Verification" (-36) and "Insufficient Funds" (-8), though "Fraud Suspected" increased (+9)
 
-**Action:** Investigate
+**Action:** **Monitor** — The decline is minor (-0.37pp GA) and partially offset by improvements in payment method success rates and fraud approval. No escalation needed unless the top-of-funnel drop persists in W15.
 
 ---
 
@@ -125,7 +125,7 @@ Backend: 28.36% → 28.28% (-0.09pp, -0.3% change)
 ---
 ## Conclusion
 
-The PCR decline appears to be primarily driven by early-stage funnel issues in the GA tracking, particularly around payment method selection and frontend validation, while backend performance actually improved in key areas like fraud approval rates. The strong performance gains in major payment methods (ProcessOut_CreditCard and Braintree_ApplePay) suggest technical improvements are working, but user experience friction in the early checkout stages needs investigation to address the overall conversion decline.
+The PCR decline in 2026-W14 was driven primarily by reduced top-of-funnel engagement (Select Payment Method -0.42pp) and FE validation pass rate (-0.41pp), while downstream metrics showed stability or improvement. Payment processor performance was notably stronger, with ProcessOut_CreditCard and ApplePay both showing meaningful gains. Given the modest overall impact and positive signals in conversion quality metrics, continued monitoring is recommended with attention to whether the top-of-funnel softness persists.
 
 ---
 
