@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by broad gains across the checkout funnel despite a 23.9% reduction in payment visit volume.
+**Overall:** Payment Conversion Rate (PCR) for HF-INTL improved from 34.88% to 36.04% (+1.16pp) in 2026-W14, driven by broad improvements across most funnel steps despite a 23.9% decrease in payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥0.58pp threshold | +0.42pp | ✅ |
-| Click Submit Form | ≥0.58pp threshold | +0.59pp | ⚠️ |
-| FE Validation Passed | ≥0.58pp threshold | +0.68pp | ⚠️ |
-| Enter Fraud Service | ≥0.58pp threshold | +0.40pp | ✅ |
-| Approved by Fraud Service | ≥0.58pp threshold | -0.23pp | ✅ |
-| Call to PVS | ≥0.58pp threshold | -0.01pp | ✅ |
-| Successful Checkout (PVS→Success) | ≥0.58pp threshold | +0.85pp | ⚠️ |
+| Select Payment Method | ≥0pp | +0.42pp | ✅ |
+| Click Submit Form | ≥0pp | +0.59pp | ✅ |
+| FE Validation Passed | ≥0pp | +0.68pp | ✅ |
+| Enter Fraud Service | ≥0pp | +0.40pp | ✅ |
+| Approved by Fraud Service | ≥0pp | -0.23pp | ⚠️ |
+| Call to PVS | ≥0pp | -0.01pp | ⚠️ |
+| Successful Checkout | ≥0pp | +0.85pp | ✅ |
 
 **Key Findings:**
-- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of failures (-4.31pp share), contributing to fewer payment verification failures overall (1,522 → 1,010 failures)
-- **FE Validation recovery rate improved (+1.47pp):** Recovery rate increased from 56.10% to 57.57%, with APPLEPAY_DISMISSED remaining the dominant error type (76.8% of errors)
-- **France drove the largest contribution:** FR showed +3.10pp PCR improvement with Select Payment Method (+2.98pp GA, +3.77pp backend) as the key driver
-- **Denmark showed strong improvement (+5.89pp):** Select Payment Method conversion jumped +4.17pp (GA) / +4.84pp (backend), with actual successful checkout volume increasing (+12 checkouts despite -166 payment visits)
-- **Braintree ApplePay improved notably (+1.70pp):** Success rate increased from 83.73% to 85.43%, the largest positive shift among high-volume payment methods
+- **France drove the largest contribution** to PCR improvement (+3.10pp), with Select Payment Method conversion increasing by +2.98pp in GA waterfall
+- **FE Validation recovery rate improved** from 56.10% to 57.57% (+1.47pp), with APPLEPAY_DISMISSED remaining the dominant error type (76.8% of errors)
+- **PVS Success rate improved significantly** (+0.85pp in GA), with "Failed Verification: Insufficient Funds" declining from 17.3% to 13.0% of PVS failures (-4.31pp share)
+- **Braintree_ApplePay showed notable improvement** (+1.70pp success rate), while ProcessOut_ApplePay declined (-1.20pp)
+- **Fraud Service approval rate slightly declined** (-0.23pp in GA, -0.43pp in Backend), representing the only meaningful negative trend in the funnel
 
-**Action:** **Monitor** – This is a positive week-over-week improvement with no concerning degradations. Continue monitoring France and Denmark performance to determine if gains are sustainable or anomalous.
+**Action:** Monitor - The overall improvement is positive and broad-based. Continue monitoring Fraud Service approval rates and ProcessOut_ApplePay performance for potential degradation trends.
 
 ---
 
@@ -149,7 +149,7 @@
 
 ---
 
-### France (FR)
+### FR
 
 #### Waterfall GA
 
@@ -183,7 +183,7 @@
 
 ---
 
-### Australia (AU)
+### AU
 
 #### Waterfall GA
 
@@ -217,7 +217,7 @@
 
 ---
 
-### Luxembourg (LU)
+### LU
 
 #### Waterfall GA
 
@@ -251,7 +251,7 @@
 
 ---
 
-### Denmark (DK)
+### DK
 
 #### Waterfall GA
 
@@ -287,7 +287,7 @@
 
 ## Conclusion
 
-The +1.16pp PCR improvement in HF-INTL for 2026-W14 reflects healthy gains across multiple funnel stages, with the most significant contributions from improved PVS success rates (+0.85pp) and FE validation pass rates (+0.68pp). France and Denmark were the primary geographic drivers, both showing substantial improvements in early-funnel conversion (Select Payment Method). The reduction in "Insufficient Funds" payment failures and improved FE error recovery suggest better user experience and potentially improved customer payment readiness during this period.
+The +1.16pp PCR improvement in 2026-W14 reflects healthy performance across the payment funnel, with gains in early-funnel engagement (Select Payment Method +0.42pp) and late-funnel success (PVS Success +0.85pp) offsetting minor declines in Fraud Service approval. France contributed most significantly to the improvement with a +3.10pp PCR increase driven by better checkout initiation rates. No immediate action is required, though the slight Fraud Service approval decline (-0.23pp) should be monitored for persistence in upcoming weeks.
 
 ---
 
