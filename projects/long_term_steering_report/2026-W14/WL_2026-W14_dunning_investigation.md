@@ -1,431 +1,59 @@
-# Dunning Ship Rate Investigation: WL 2026-W14
+# Dunning Investigation: WL 2026-W14
 
-**Metric:** Ship Rate (Good Customers)  
+**Metric:** Dunning Ship Rate  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 29.39% → 28.35% (-3.54pp, -1.04pppp)  
-**Volume:** 8,053 orders  
-**Significance:** Significant
-
----
+**Observation:** 29.39% → 28.35% (-1.04pp)  
+**Volume:** 8,053 eligible orders  
+**Payday Phase:** Mid-Cycle
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** WL cluster Ship Rate declined from 29.39% to 28.35% (-1.04pp, -3.54% relative change) in 2026-W14, despite most individual countries showing improved ship rates—indicating a Simpson's Paradox driven by mix shift.
+**Overall:** Dunning Ship Rate declined by 1.04pp (29.39% → 28.35%) week-over-week during Mid-Cycle payday phase, with volume decreasing from 8,700 to 8,053 eligible orders.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ | Result |
+| Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ Slight decline |
-| Discount % | 16.35% → 15.46% | -0.89pp | ✅ Lower discounts (positive for SR) |
-| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ Slight decline |
-| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ Neutral |
-| Mix Shift (AO) | 1,228 → 496 volume | -59.6% | ⚠️ High-SR market volume collapse |
+| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ |
+| Discount % | 16.35% → 15.46% | -0.89pp | ⚠️ |
+| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ |
+| Ship Rate | 29.39% → 28.35% | -1.04pp | ⚠️ |
 
 **Key Findings:**
-- **Simpson's Paradox confirmed:** AO (highest SR at 67-73%) lost 59.6% of volume (1,228 → 496 orders), shifting mix toward lower-SR markets
-- **6 of 7 countries improved SR:** ER (+2.93pp), CK (+4.15pp), AO (+5.32pp), CG (+2.85pp), GN (+0.97pp) all increased, only KN declined (-1.04pp)
-- **MR anomaly:** Ship Rate dropped to 0.00% (from 0.07%) with PC2 showing "nan%" - potential data quality issue
-- **KN volume increased 17.4%** while being a low-SR market (15.10%), amplifying negative mix effect
-- **Pre-Dunning AR declined across most markets**, with AO showing the largest drop (-3.12pp)
+- **Simpson's Paradox Detected:** AO (highest SR tier at 72.58%) saw volume collapse by 59.6% (1,228 → 496 orders), while most individual countries actually improved their ship rates
+- **Mix Shift Impact:** Low-performing KN increased volume share by 17.4% while maintaining a low 15.10% ship rate, diluting overall performance
+- **Discount Reduction:** Discount percentage dropped 0.89pp (16.35% → 15.46%), potentially contributing to lower conversion
+- **Country-Level Improvements Masked:** ER (+2.93pp), CK (+4.15pp), AO (+5.32pp), CG (+2.85pp), and GN (+0.97pp) all improved individually despite cluster-level decline
 
-**Action:** **Investigate** - The AO volume collapse (-59.6%) is the primary driver. Determine if this is a data issue, operational constraint, or intentional change. Also investigate MR's 0% ship rate and missing PC2 data.
-
----
+**Action:** Investigate — The decline is driven by mix shift (AO volume collapse) rather than true performance degradation. Investigate why AO volume dropped 59.6% and assess if this is expected or requires intervention.
 
 ---
 
-## WL (Cluster)
+---
 
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 8,700 | 29.39% | - | 91.18% | - | 16.35% | - | 47.52% | - |
-| 2026-W14 | Mid-Cycle | 8,053 | 28.35% | -3.54pp | 90.71% | -0.52pp | 15.46% | -5.44pp | 47.03% | -1.03pp |
+## L0: Cluster-Level Metrics
+
+| Week | Payday Phase | Volume | Ship Rate | Pre-Dunning AR | Discount % | PC2 |
+|------|--------------|--------|-----------|----------------|------------|-----|
+| 2026-W13 | Mid-Cycle | 8,700 | 29.39% | 91.18% | 16.35% | 47.52% |
+| 2026-W14 | Mid-Cycle | 8,053 | 28.35% | 90.71% | 15.46% | 47.03% |
 
 ---
 
-## ER (Rank: #1 by contribution, #3 by change)
+## Mix Shift Analysis (Simpson's Paradox Detection)
 
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 2,563 | 23.64% | - | 89.92% | - | 18.54% | - | 41.5% | - |
-| 2026-W14 | Mid-Cycle | 2,559 | 26.57% | +12.39pp | 89.23% | -0.77pp | 19.47% | +5.02pp | 43.85% | +5.66pp |
-
----
-
-## CK (Rank: #2 by contribution, #4 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,440 | 43.61% | - | 94.15% | - | 26.78% | - | 47.97% | - |
-| 2026-W14 | Mid-Cycle | 1,497 | 47.76% | +9.52pp | 93.82% | -0.35pp | 25.26% | -5.68pp | 47.84% | -0.27pp |
+| Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
+|---------|-------------|---------|-------------|---------|------------|---------|
+| ER | 2,563 | 23.64% | 2,559 | 26.57% | -0.2% | Low |
+| MR | 1,466 | 0.07% | 1,421 | 0.00% | -3.1% | Low |
+| CK | 1,440 | 43.61% | 1,497 | 47.76% | 4.0% | Medium |
+| AO | 1,228 | 67.26% | 496 | 72.58% | -59.6% | High |
+| CG | 798 | 21.93% | 779 | 24.78% | -2.4% | Low |
+| GN | 635 | 36.06% | 632 | 37.03% | -0.5% | Medium |
+| KN | 570 | 16.14% | 669 | 15.10% | 17.4% | Low |
 
 ---
 
-## AO (Rank: #3 by contribution, #5 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,228 | 67.26% | - | 87.96% | - | 16.55% | - | 37.55% | - |
-| 2026-W14 | Mid-Cycle | 496 | 72.58% | +7.91pp | 85.22% | -3.12pp | 13.65% | -17.52pp | 43.32% | +15.37pp |
-
----
-
-## CG (Rank: #4 by contribution, #2 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 798 | 21.93% | - | 96.76% | - | 20.81% | - | 51.84% | - |
-| 2026-W14 | Mid-Cycle | 779 | 24.78% | +13.00pp | 96.91% | +0.16pp | 17.64% | -15.23pp | 51.87% | +0.06pp |
-
----
-
-## KN (Rank: #5 by contribution, #6 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 570 | 16.14% | - | 87.61% | - | 11.62% | - | 87.12% | - |
-| 2026-W14 | Mid-Cycle | 669 | 15.10% | -6.44pp | 88.21% | +0.68pp | 11.34% | -2.41pp | 47.34% | -45.66pp |
-
----
-
-## GN (Rank: #6 by contribution, #7 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 635 | 36.06% | - | 93.50% | - | 23.17% | - | 50.2% | - |
-| 2026-W14 | Mid-Cycle | 632 | 37.03% | +2.69pp | 92.33% | -1.25pp | 22.96% | -0.91pp | 50.58% | +0.76pp |
-
----
-
-## MR (Rank: #7 by contribution, #1 by change)
-
-| Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
-| ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,466 | 0.07% | - | 79.88% | - | 9.48% | - | 42.03% | - |
-| 2026-W14 | Mid-Cycle | 1,421 | 0.00% | -100.00pp | 80.32% | +0.55pp | 8.15% | -14.03pp | nan% | nanpp |
-
-
-## Mix Shift Analysis (Simpson's Paradox Check)
-
-| Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
-| ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
-| ER  | Low | 2,563 | 2,559 | -0.2% | 23.64% | 26.57% | +2.93pp |
-| MR  | Low | 1,466 | 1,421 | -3.1% | 0.07% | 0.00% | +0.00pp |
-| CK  | Medium | 1,440 | 1,497 | +4.0% | 43.61% | 47.76% | +4.15pp |
-| AO ⚠️ | High | 1,228 | 496 | -59.6% | 67.26% | 72.58% | +5.32pp |
-| CG  | Low | 798 | 779 | -2.4% | 21.93% | 24.78% | +2.85pp |
-| GN  | Medium | 635 | 632 | -0.5% | 36.06% | 37.03% | +0.97pp |
-| KN  | Low | 570 | 669 | +17.4% | 16.14% | 15.10% | -1.04pp |
-
-*High-SR markets (>50%) with volume drop >30% indicate Simpson's Paradox*
-
----
-## Decision Framework
-
-**How Ship Rate relates to other metrics:**
-
-| Metric | Relationship | If metric ↑ | If metric ↓ |
-| ------ | ------------ | ----------- | ----------- |
-| Pre-Dunning AR | Positive | Ship Rate ↑ | Ship Rate ↓ |
-| Discount % | Negative | Ship Rate ↓ | Ship Rate ↑ |
-| PC2 | Positive | Ship Rate ↑ | Ship Rate ↓ |
-
-**Payday Cycle (for HF-INTL):**
-- Phase transition: Mid-Cycle → Mid-Cycle
-- Pre-Payday → Payday: Expected SR ↓
-- Payday → Post-Payday: Expected SR ↑
-- Post-Payday → Mid-Cycle: Expected SR →
-
----
-
-## Conclusion
-
-The WL cluster's apparent Ship Rate decline is a classic Simpson's Paradox case—individual country performance improved while aggregate metrics declined due to composition changes. The 59.6% volume drop in AO (the highest-performing market at 72.58% SR) shifted the customer mix toward lower-converting markets like ER, KN, and MR. Immediate investigation should focus on understanding the AO volume reduction and validating the MR data anomaly before drawing operational conclusions.
-
----
-
-## SQL Queries
-
-<details>
-<summary>Cluster Query</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster, 'cluster' as level
-),
-date_lkup AS (
-  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
-  FROM dimensions.date_dimension GROUP BY hellofresh_week
-),
-weeks AS (
-  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
-  FROM date_lkup curr JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
-  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
-),
-payday_phases AS (
-  SELECT hellofresh_week,
-    CASE WHEN SUM(CASE WHEN day_of_month BETWEEN 8 AND 15 THEN 1 ELSE 0 END) >= 4 THEN 1 ELSE 0 END as is_payday
-  FROM dimensions.date_dimension GROUP BY hellofresh_week
-),
-payday_with_context AS (
-  SELECT hellofresh_week, is_payday,
-    LEAD(is_payday) OVER (ORDER BY hellofresh_week) as next_is_payday,
-    LAG(is_payday) OVER (ORDER BY hellofresh_week) as prev_is_payday
-  FROM payday_phases
-),
-payday_labeled AS (
-  SELECT hellofresh_week,
-    CASE WHEN is_payday = 1 THEN 'Payday' WHEN next_is_payday = 1 THEN 'Pre-Payday'
-         WHEN prev_is_payday = 1 THEN 'Post-Payday' ELSE 'Mid-Cycle' END as payday_phase
-  FROM payday_with_context
-),
-countries AS (
-  SELECT business_unit as country FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-base_data AS (
-  SELECT hellofresh_delivery_week as week,
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
-    SUM(order_nr) as eligible,
-    SUM(CAST(discount_amount_incl_vat_eur AS DOUBLE)) as discount_sum,
-    SUM(CAST(grand_total_eur AS DOUBLE) + CAST(discount_amount_incl_vat_eur AS DOUBLE)) as total_sum,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN profit_margin_week_eur ELSE 0 END) as profit_margin_shipped,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN gross_revenue_week_eur ELSE 0 END) as gross_revenue_shipped
-  FROM payments_hf.dunning_dashboard CROSS JOIN weeks w
-  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
-    AND country IN (SELECT country FROM countries) AND product_type = 'mealbox'
-    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
-  GROUP BY hellofresh_delivery_week, 
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
-),
-pre_dunning_ar AS (
-  SELECT hellofresh_week as week,
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
-    ROUND(SUM(`2_PreDunningAR`) * 100.0 / NULLIF(SUM(order_count), 0), 2) as pre_dunning_ar
-  FROM payments_hf.payments_p0_metrics_box_candidates CROSS JOIN weeks w
-  WHERE hellofresh_week IN (w.prev_week, w.affected_week) AND country IN (SELECT country FROM countries)
-  GROUP BY hellofresh_week, CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
-),
-combined AS (
-  SELECT b.week, b.group_key, b.eligible as volume,
-    ROUND(b.shipped * 100.0 / NULLIF(b.eligible, 0), 2) as ship_rate, p.pre_dunning_ar,
-    ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
-    ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
-  FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
-),
-with_deltas AS (
-  SELECT 
-    c.*,
-    prev.ship_rate as prev_ship_rate,
-    prev.pre_dunning_ar as prev_pre_dunning_ar,
-    prev.discount_pct as prev_discount_pct,
-    prev.pc2 as prev_pc2,
-    prev.volume as prev_volume,
-    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
-    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
-  FROM combined c
-  CROSS JOIN weeks w
-  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
-),
-ranked AS (
-  SELECT 
-    group_key,
-    SUM(contribution) as total_contribution,
-    MAX(abs_delta_sr) as max_abs_delta,
-    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
-    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
-  FROM with_deltas
-  WHERE week = (SELECT affected_week FROM weeks)
-  GROUP BY group_key
-)
-SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
-  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
-  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
-  COALESCE(r.rank_contribution, 999) as rank_contribution,
-  COALESCE(r.rank_change, 999) as rank_change
-FROM with_deltas c
-CROSS JOIN weeks w
-JOIN payday_labeled pp ON c.week = pp.hellofresh_week
-LEFT JOIN ranked r ON c.group_key = r.group_key
-ORDER BY COALESCE(r.rank_contribution, 999), c.week
-
-```
-
-</details>
-
-<details>
-<summary>Country Query</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster, 'country' as level
-),
-date_lkup AS (
-  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
-  FROM dimensions.date_dimension GROUP BY hellofresh_week
-),
-weeks AS (
-  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
-  FROM date_lkup curr JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
-  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
-),
-payday_phases AS (
-  SELECT hellofresh_week,
-    CASE WHEN SUM(CASE WHEN day_of_month BETWEEN 8 AND 15 THEN 1 ELSE 0 END) >= 4 THEN 1 ELSE 0 END as is_payday
-  FROM dimensions.date_dimension GROUP BY hellofresh_week
-),
-payday_with_context AS (
-  SELECT hellofresh_week, is_payday,
-    LEAD(is_payday) OVER (ORDER BY hellofresh_week) as next_is_payday,
-    LAG(is_payday) OVER (ORDER BY hellofresh_week) as prev_is_payday
-  FROM payday_phases
-),
-payday_labeled AS (
-  SELECT hellofresh_week,
-    CASE WHEN is_payday = 1 THEN 'Payday' WHEN next_is_payday = 1 THEN 'Pre-Payday'
-         WHEN prev_is_payday = 1 THEN 'Post-Payday' ELSE 'Mid-Cycle' END as payday_phase
-  FROM payday_with_context
-),
-countries AS (
-  SELECT business_unit as country FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-base_data AS (
-  SELECT hellofresh_delivery_week as week,
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
-    SUM(order_nr) as eligible,
-    SUM(CAST(discount_amount_incl_vat_eur AS DOUBLE)) as discount_sum,
-    SUM(CAST(grand_total_eur AS DOUBLE) + CAST(discount_amount_incl_vat_eur AS DOUBLE)) as total_sum,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN profit_margin_week_eur ELSE 0 END) as profit_margin_shipped,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN gross_revenue_week_eur ELSE 0 END) as gross_revenue_shipped
-  FROM payments_hf.dunning_dashboard CROSS JOIN weeks w
-  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
-    AND country IN (SELECT country FROM countries) AND product_type = 'mealbox'
-    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
-  GROUP BY hellofresh_delivery_week, 
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
-),
-pre_dunning_ar AS (
-  SELECT hellofresh_week as week,
-    CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END as group_key,
-    ROUND(SUM(`2_PreDunningAR`) * 100.0 / NULLIF(SUM(order_count), 0), 2) as pre_dunning_ar
-  FROM payments_hf.payments_p0_metrics_box_candidates CROSS JOIN weeks w
-  WHERE hellofresh_week IN (w.prev_week, w.affected_week) AND country IN (SELECT country FROM countries)
-  GROUP BY hellofresh_week, CASE WHEN (SELECT level FROM params) = 'cluster' THEN (SELECT cluster FROM params) ELSE country END
-),
-combined AS (
-  SELECT b.week, b.group_key, b.eligible as volume,
-    ROUND(b.shipped * 100.0 / NULLIF(b.eligible, 0), 2) as ship_rate, p.pre_dunning_ar,
-    ROUND(b.discount_sum * 100.0 / NULLIF(b.total_sum, 0), 2) as discount_pct,
-    ROUND(b.profit_margin_shipped * 100.0 / NULLIF(b.gross_revenue_shipped, 0), 2) as pc2
-  FROM base_data b LEFT JOIN pre_dunning_ar p ON b.week = p.week AND b.group_key = p.group_key
-),
-with_deltas AS (
-  SELECT 
-    c.*,
-    prev.ship_rate as prev_ship_rate,
-    prev.pre_dunning_ar as prev_pre_dunning_ar,
-    prev.discount_pct as prev_discount_pct,
-    prev.pc2 as prev_pc2,
-    prev.volume as prev_volume,
-    ABS(c.volume * (c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / 100) as contribution,
-    ABS((c.ship_rate - COALESCE(prev.ship_rate, c.ship_rate)) / NULLIF(prev.ship_rate, 0) * 100) as abs_delta_sr
-  FROM combined c
-  CROSS JOIN weeks w
-  LEFT JOIN combined prev ON c.week = w.affected_week AND prev.week = w.prev_week AND c.group_key = prev.group_key
-),
-ranked AS (
-  SELECT 
-    group_key,
-    SUM(contribution) as total_contribution,
-    MAX(abs_delta_sr) as max_abs_delta,
-    ROW_NUMBER() OVER (ORDER BY SUM(contribution) DESC) as rank_contribution,
-    ROW_NUMBER() OVER (ORDER BY MAX(abs_delta_sr) DESC) as rank_change
-  FROM with_deltas
-  WHERE week = (SELECT affected_week FROM weeks)
-  GROUP BY group_key
-)
-SELECT c.group_key, c.week, pp.payday_phase, CAST(c.volume AS INT) as volume,
-  c.ship_rate, c.prev_ship_rate, c.pre_dunning_ar, c.prev_pre_dunning_ar,
-  c.discount_pct, c.prev_discount_pct, c.pc2, c.prev_pc2,
-  COALESCE(r.rank_contribution, 999) as rank_contribution,
-  COALESCE(r.rank_change, 999) as rank_change
-FROM with_deltas c
-CROSS JOIN weeks w
-JOIN payday_labeled pp ON c.week = pp.hellofresh_week
-LEFT JOIN ranked r ON c.group_key = r.group_key
-ORDER BY COALESCE(r.rank_contribution, 999), c.week
-
-```
-
-</details>
-
-<details>
-<summary>Mix Shift Query</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-date_lkup AS (
-  SELECT hellofresh_week, ROW_NUMBER() OVER (ORDER BY hellofresh_week ASC) AS row_num
-  FROM dimensions.date_dimension
-  GROUP BY hellofresh_week
-),
-weeks AS (
-  SELECT curr.hellofresh_week as affected_week, prev.hellofresh_week as prev_week
-  FROM date_lkup curr
-  JOIN date_lkup prev ON curr.row_num = prev.row_num + 1
-  WHERE curr.hellofresh_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-base_data AS (
-  SELECT 
-    hellofresh_delivery_week as week,
-    country,
-    SUM(CASE WHEN dunning_execution = 'shipped' THEN order_nr ELSE 0 END) as shipped,
-    SUM(order_nr) as eligible
-  FROM payments_hf.dunning_dashboard
-  CROSS JOIN weeks w
-  WHERE hellofresh_delivery_week IN (w.prev_week, w.affected_week)
-    AND country IN (SELECT country FROM countries)
-    AND product_type = 'mealbox'
-    AND NOT (RIGHT(COALESCE(last_10_order_statuses, ''), 2) = 'ff')
-  GROUP BY hellofresh_delivery_week, country
-)
-SELECT 
-  country,
-  MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) as prev_volume,
-  MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) as prev_sr,
-  MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN eligible END) as curr_volume,
-  MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) as curr_sr,
-  ROUND((MAX(CASE WHEN week = (SELECT affected_week FROM weeks) THEN eligible END) - 
-         MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END)) * 100.0 / 
-         NULLIF(MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END), 0), 1) as volume_change_pct,
-  CASE 
-    WHEN MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) > 50 THEN 'High'
-    WHEN MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN ROUND(shipped * 100.0 / NULLIF(eligible, 0), 2) END) > 30 THEN 'Medium'
-    ELSE 'Low'
-  END as sr_tier
-FROM base_data
-GROUP BY country
-ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) DESC
-
-```
-
-</details>
 
 ---
 

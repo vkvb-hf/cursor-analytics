@@ -1,44 +1,45 @@
 # PCR Investigation: WL 2026-W14
 
-**Metric:** Payment Conversion Rate (PCR)  
+**Metric:** Payment Conversion Rate  
 **Period:** 2026-W13 → 2026-W14  
 **Observation:** 30.03% → 29.88% (-0.15pp)  
-**Volume:** ~35K payment visits
-
----
-
-## Executive Summary
+**Volume:** 35,421 payment visits  
+**Threshold:** +0.07pp (0.5 × |Overall PCR Δ|)
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.15pp (30.03% → 29.88%) on ~35K payment visits, driven primarily by a significant drop in the Call to PVS step and underperformance in country KN.
+## Executive Summary
+
+**Overall:** Payment Conversion Rate declined slightly from 30.03% to 29.88% (-0.15pp) on 35,421 payment visits, with the primary drop occurring at the Select Payment Method step (-0.26pp) and Call to PVS step (-0.53pp).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Threshold ±0.07pp | -0.26pp | ⚠️ |
-| Click Submit Form | Threshold ±0.07pp | +0.09pp | ⚠️ |
-| FE Validation Passed | Threshold ±0.07pp | +0.21pp | ⚠️ |
-| Enter Fraud Service | Threshold ±0.07pp | +0.20pp | ⚠️ |
-| Approved by Fraud Service | Threshold ±0.07pp | -0.11pp | ⚠️ |
-| Call to PVS | Threshold ±0.07pp | -0.53pp | ⚠️ |
-| Successful Checkout | Threshold ±0.07pp | +0.25pp | ⚠️ |
+| Select Payment Method | ⚠️ | -0.26pp | Below threshold |
+| Click Submit Form | ✅ | +0.09pp | Improved |
+| FE Validation Passed | ✅ | +0.21pp | Improved |
+| Enter Fraud Service | ✅ | +0.20pp | Improved |
+| Approved by Fraud Service | ⚠️ | -0.11pp | Below threshold |
+| Call to PVS | ⚠️ | -0.53pp | Significant drop |
+| Successful Checkout | ✅ | +0.25pp | Improved |
 
 **Key Findings:**
-- **Critical PVS Gap in Backend:** The PVS Attempt step shows a severe -9.71pp drop in conversion (98.79% → 89.07%), indicating a significant issue between Fraud Service approval and PVS calls that requires immediate investigation
-- **Country KN driving decline:** KN experienced a -3.75pp PCR drop with Select Payment Method conversion falling -3.26pp and Approved by Fraud Service declining -1.79pp, making it the largest negative contributor
-- **Braintree_CreditCard underperforming:** Success rate dropped -2.58pp (90.20% → 87.62%), the steepest decline among major payment methods
-- **Braintree_Paypal degradation:** Conversion rate fell -1.73pp (92.11% → 90.38%) despite relatively stable volumes
-- **Positive signals in ER and GN:** Both countries showed PCR improvements (+2.04pp and +4.30pp respectively), driven by better Select Payment Method conversion
+- **KN is the primary driver of decline:** KN experienced a -3.75pp drop in PCR (27.15% → 23.40%), with Select Payment Method conversion falling -3.26pp and significant drops in Fraud Service approval (-1.79pp)
+- **Backend PVS Attempt shows major anomaly:** Backend data shows PVS Attempt conversion dropped -9.71pp (98.79% → 89.07%), indicating potential system issues between Fraud approval and PVS calls
+- **ER and GN offset some decline:** Both countries showed PCR improvements (+2.04pp and +4.30pp respectively), driven by improved Select Payment Method engagement (+1.60pp and +4.07pp)
+- **Braintree_CreditCard success rate declined significantly:** Payment method success rate dropped -2.58pp (90.20% → 87.62%), while Braintree_Paypal also fell -1.73pp
+- **PVS failure reasons shifted:** "Insufficient Funds" declined (-6.65pp share) while "CVC Declined" increased (+5.58pp share), suggesting potential card validation issues
 
-**Action:** **Investigate** — The -9.71pp backend PVS Attempt conversion drop and KN country-specific issues require immediate technical investigation to identify root cause of payment verification service failures.
-
----
+**Action:** **Investigate** - The significant Backend PVS Attempt drop (-9.71pp) warrants immediate investigation into system logs between Fraud Service approval and PVS calls. Additionally, prioritize root cause analysis for KN market's sharp decline in Select Payment Method conversion.
 
 ---
 
-## Waterfall GA
+---
+
+## L0: Cluster-Level Waterfall
+
+### Waterfall GA (Google Analytics)
 
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
@@ -52,9 +53,7 @@
 | **Successful Checkout** | 11,571 | 10,584 | -987 | -8.5% | 96.39% | 96.64% | +0.25pp |
 | **PCR Rate** | | | | | 30.03% | 29.88% | **-0.15pp** |
 
----
-
-## Waterfall Backend
+### Waterfall Backend
 
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
@@ -67,9 +66,7 @@
 | **Successful Checkout** | 13,390 | 12,368 | -1,022 | -7.6% | 101.39% | 112.08% | +10.69pp |
 | **PCR Rate** | | | | | 29.06% | 28.33% | **-0.73pp** |
 
----
-
-## Payment Method Breakdown
+### Payment Method Breakdown
 
 | Payment Method | 2026-W13 Attempt | 2026-W13 Success | 2026-W13 Rate | 2026-W14 Attempt | 2026-W14 Success | 2026-W14 Rate | Δ Rate |
 | -------------- | ------------------- | ------------------- | ---------------- | ----------------------- | ----------------------- | -------------------- | ------ |
@@ -86,83 +83,6 @@
 
 ---
 
-## FE Validation Errors
-
-**Include reason:** FE Validation Passed Δ Conv (+0.21pp) meets threshold (+0.07pp)
-
-### Recovery Rate
-
-| Metric | 2026-W13 | 2026-W14 | Δ |
-|--------|-------------|-----------------|---|
-| Customers with FE Error | 2,068 | 1,837 | -231 |
-| Error → Passed | 1,209 | 1,079 | -130 |
-| **Recovery Rate** | **58.46%** | **58.74%** | **+0.27pp** |
-
-*Recovery Rate = Customers who had error but still passed / Customers with FE Error*
-
-### Error Type Distribution
-
-| Error Type | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ % |
-| ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
-| APPLEPAY_DISMISSED | 1,409 | 68.1% | 1,217 | 66.2% | -1.88pp |
-| terms_not_accepted | 808 | 39.1% | 751 | 40.9% | +1.81pp |
-| PAYPAL_POPUP_CLOSED | 283 | 13.7% | 263 | 14.3% | +0.63pp |
-| CC_TOKENISE_ERR | 40 | 1.9% | 30 | 1.6% | -0.30pp |
-| PAYPAL_TOKENISE_ERR | 32 | 1.5% | 27 | 1.5% | -0.08pp |
-| VENMO_TOKENISE_ERR | 0 | 0.0% | 1 | 0.1% | +0.05pp |
-
-*% of Errors = Error Type Count / Customers with FE Error (can exceed 100% as customers may have multiple error types)*
-
----
-
-## Fraud Analysis
-
-**Include reason:** Enter FS Δ (+0.20pp) meets threshold (+0.07pp)
-
-### Gap (Checkout Attempt → Enter Fraud Service)
-
-| Metric | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
-|--------|-------------|---------------|-----------------|-------------------|---------|-----|
-| Checkout Attempt | 14,782 | - | 13,713 | - | -1,069 | -7.2% |
-| Enter Fraud Service | 14,732 | - | 13,666 | - | -1,066 | -7.2% |
-| **Gap (Skipped)** | **50** | **0.34%** | **47** | **0.34%** | **-3** | **+0.00pp** |
-
-*Gap % = Gap / Checkout Attempt*
-
-### Gap by Payment Method
-
-| Payment Method | 2026-W13 Gap | 2026-W13 % | 2026-W14 Gap | 2026-W14 % | Δ Count | Δ % |
-|----------------|-----------------|---------------|---------------------|-------------------|---------|-----|
-| Braintree_CreditCard | 16 | 32.7% | 19 | 41.3% | +3 | +8.65pp |
-| Braintree_ApplePay | 8 | 16.3% | 9 | 19.6% | +1 | +3.24pp |
-| Adyen_CreditCard | 8 | 16.3% | 7 | 15.2% | -1 | -1.11pp |
-| Braintree_Paypal | 10 | 20.4% | 6 | 13.0% | -4 | -7.36pp |
-| ProcessOut_CreditCard | 7 | 14.3% | 5 | 10.9% | -2 | -3.42pp |
-| **Total** | **49** | **100%** | **46** | **100%** | **-3** | - |
-
-*% of Gap = Payment Method Gap / Total Gap*
-
----
-
-## Payment Verification Errors
-
-**Include reason:** PVS Success Δ Conv (+0.25pp) meets threshold (+0.07pp)
-
-| Decline Reason | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
-| -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
-| Failed Verification: Insufficient Funds | 62 | 26.3% | 42 | 19.6% | -20 | -6.65pp |
-| Blocked Verification: Payment method is blocked due to business reasons | 38 | 16.1% | 40 | 18.7% | +2 | +2.59pp |
-| Failed Verification: Refused(CVC Declined) | 10 | 4.2% | 21 | 9.8% | +11 | +5.58pp |
-| Failed Verification: Card Issuer Declined CVV | 25 | 10.6% | 21 | 9.8% | -4 | -0.78pp |
-| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 29 | 12.3% | 20 | 9.3% | -9 | -2.94pp |
-| Failed Verification: Refused(FRAUD) | 20 | 8.5% | 16 | 7.5% | -4 | -1.00pp |
-| Failed Verification: Cannot Authorize at this time (Policy) | 14 | 5.9% | 16 | 7.5% | +2 | +1.54pp |
-| Failed Verification: Declined - Call Issuer | 12 | 5.1% | 15 | 7.0% | +3 | +1.92pp |
-| Failed Verification: Processor Declined | 12 | 5.1% | 14 | 6.5% | +2 | +1.46pp |
-| Failed Verification: Refused(Refused) | 14 | 5.9% | 9 | 4.2% | -5 | -1.73pp |
-| **Total PVS Failures** | **236** | **100%** | **214** | **100%** | **-22** | - |
-
----
 ## Country-Level Analysis
 
 **Country Selection:** Top 2 by contribution + Top 2 by absolute change (3 countries in WL)
@@ -277,282 +197,82 @@
 
 ---
 
-## Conclusion
 
-The -0.15pp PCR decline is primarily attributable to a backend issue where transactions approved by Fraud Service are failing to reach PVS (-9.71pp conversion drop), combined with country-specific degradation in KN (-3.75pp). While frontend funnel steps show minor fluctuations within acceptable ranges, the backend PVS gap and Braintree payment method performance issues warrant technical investigation to prevent further deterioration. Priority should be given to diagnosing the PVS connectivity/routing issue and understanding the KN market-specific factors affecting payment method selection.
+
+## FE Validation Errors
+
+**Include reason:** FE Validation Passed Δ Conv (+0.21pp) meets threshold (+0.07pp)
+
+### Recovery Rate
+
+| Metric | 2026-W13 | 2026-W14 | Δ |
+|--------|-------------|-----------------|---|
+| Customers with FE Error | 2,068 | 1,837 | -231 |
+| Error → Passed | 1,209 | 1,079 | -130 |
+| **Recovery Rate** | **58.46%** | **58.74%** | **+0.27pp** |
+
+### Error Type Distribution
+
+| Error Type | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ % |
+| ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
+| APPLEPAY_DISMISSED | 1,409 | 68.1% | 1,217 | 66.2% | -1.88pp |
+| terms_not_accepted | 808 | 39.1% | 751 | 40.9% | +1.81pp |
+| PAYPAL_POPUP_CLOSED | 283 | 13.7% | 263 | 14.3% | +0.63pp |
+| CC_TOKENISE_ERR | 40 | 1.9% | 30 | 1.6% | -0.30pp |
+| PAYPAL_TOKENISE_ERR | 32 | 1.5% | 27 | 1.5% | -0.08pp |
+| VENMO_TOKENISE_ERR | 0 | 0.0% | 1 | 0.1% | +0.05pp |
+
 
 ---
 
-## SQL Queries
+## Fraud Analysis
 
-<details>
-<summary>Waterfall GA (cluster/country)</summary>
+**Include reason:** Enter FS Δ (+0.20pp) meets threshold (+0.07pp)
 
-```sql
+### Gap (Checkout Attempt → Enter Fraud Service)
 
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  d.iso_year_week AS hellofresh_week,
-  SUM(is_pay_visit) AS payment_visits,
-  SUM(is_select) AS select_payment_method,
-  SUM(is_click) AS click_submit_form,
-  SUM(CASE WHEN is_fs_check = 1 THEN 1 WHEN is_click = 1 AND is_fe_validation_error = 0 THEN 1 ELSE is_fe_validation_passed END) AS fe_validation_passed,
-  SUM(is_fs_check) AS enter_fraud_service,
-  SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 0 AND is_payment_fraud_block = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
-  SUM(is_pvs) AS call_to_pvs,
-  SUM(is_success) AS successful_checkout
-FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
-JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
-CROSS JOIN weeks w
-WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
-  AND f.country IN (SELECT country FROM countries)
-GROUP BY 1
-ORDER BY hellofresh_week
+| Metric | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
+|--------|-------------|---------------|-----------------|-------------------|---------|-----|
+| Checkout Attempt | 14,782 | - | 13,713 | - | -1,069 | -7.2% |
+| Enter Fraud Service | 14,732 | - | 13,666 | - | -1,066 | -7.2% |
+| **Gap (Skipped)** | **50** | **0.34%** | **47** | **0.34%** | **-3** | **+0.00pp** |
 
-```
+*Gap % = Gap / Checkout Attempt*
 
-</details>
+### Gap by Payment Method
 
-<details>
-<summary>Backend Combined (cluster/country)</summary>
+| Payment Method | 2026-W13 Gap | 2026-W13 % | 2026-W14 Gap | 2026-W14 % | Δ Count | Δ % |
+|----------------|-----------------|---------------|---------------------|-------------------|---------|-----|
+| Braintree_CreditCard | 16 | 32.7% | 19 | 41.3% | +3 | +8.65pp |
+| Braintree_ApplePay | 8 | 16.3% | 9 | 19.6% | +1 | +3.24pp |
+| Adyen_CreditCard | 8 | 16.3% | 7 | 15.2% | -1 | -1.11pp |
+| Braintree_Paypal | 10 | 20.4% | 6 | 13.0% | -4 | -7.36pp |
+| ProcessOut_CreditCard | 7 | 14.3% | 5 | 10.9% | -2 | -3.42pp |
+| **Total** | **49** | **100%** | **46** | **100%** | **-3** | - |
 
-```sql
+*% of Gap = Payment Method Gap / Total Gap*
 
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-week_dates AS (
-  SELECT 
-    MIN(date_string_backwards) as start_date,
-    MAX(date_string_backwards) as end_date,
-    iso_year_week
-  FROM dimensions.date_dimension
-  WHERE iso_year_week IN (
-    (SELECT affected_week FROM params),
-    (SELECT MAX(iso_year_week) FROM dimensions.date_dimension 
-     WHERE iso_year_week < (SELECT affected_week FROM params))
-  )
-  GROUP BY iso_year_week
-),
-date_range AS (
-  SELECT MIN(start_date) as min_date, MAX(end_date) as max_date
-  FROM week_dates
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  wd.iso_year_week AS hellofresh_week,
-  f.payment_method,
-  SUM(event_payment_method_listed) AS payment_method_listed,
-  SUM(event_checkout_attempt) AS checkout_attempt,
-  SUM(event_attempted_fraud_check) AS enter_fraud_service,
-  SUM(CASE WHEN event_attempted_fraud_check = 1 AND event_fs_blocked = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
-  SUM(event_payment_verification_attempt) AS pvs_attempt,
-  SUM(event_payment_verification_success) AS pvs_success,
-  SUM(CASE WHEN event_payment_method_listed = 1 AND event_checkout_success = 1 THEN 1 ELSE 0 END) AS checkout_success
-FROM spark_catalog.payments_hf.checkout_funnel_backend f
-JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
-WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
-  AND f.country IN (SELECT country FROM countries)
-GROUP BY 1, 2
-ORDER BY hellofresh_week, checkout_attempt DESC
+---
 
-```
+## Payment Verification Errors
 
-</details>
+**Include reason:** PVS Success Δ Conv (+0.25pp) meets threshold (+0.07pp)
 
-<details>
-<summary>Country PCR Summary</summary>
+| Decline Reason | 2026-W13 | 2026-W13 % | 2026-W14 | 2026-W14 % | Δ Count | Δ % |
+| -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
+| Failed Verification: Insufficient Funds | 62 | 26.3% | 42 | 19.6% | -20 | -6.65pp |
+| Blocked Verification: Payment method is blocked due to business reasons | 38 | 16.1% | 40 | 18.7% | +2 | +2.59pp |
+| Failed Verification: Refused(CVC Declined) | 10 | 4.2% | 21 | 9.8% | +11 | +5.58pp |
+| Failed Verification: Card Issuer Declined CVV | 25 | 10.6% | 21 | 9.8% | -4 | -0.78pp |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 29 | 12.3% | 20 | 9.3% | -9 | -2.94pp |
+| Failed Verification: Refused(FRAUD) | 20 | 8.5% | 16 | 7.5% | -4 | -1.00pp |
+| Failed Verification: Cannot Authorize at this time (Policy) | 14 | 5.9% | 16 | 7.5% | +2 | +1.54pp |
+| Failed Verification: Declined - Call Issuer | 12 | 5.1% | 15 | 7.0% | +3 | +1.92pp |
+| Failed Verification: Processor Declined | 12 | 5.1% | 14 | 6.5% | +2 | +1.46pp |
+| Failed Verification: Refused(Refused) | 14 | 5.9% | 9 | 4.2% | -5 | -1.73pp |
+| **Total PVS Failures** | **236** | **100%** | **214** | **100%** | **-22** | - |
 
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-base_data AS (
-  SELECT
-    d.iso_year_week AS hellofresh_week,
-    f.country,
-    SUM(is_pay_visit) AS payment_visits,
-    SUM(is_success) AS successful_checkout
-  FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
-  JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
-  CROSS JOIN weeks w
-  WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
-    AND f.country IN (SELECT country FROM countries)
-  GROUP BY 1, 2
-),
-with_pcr AS (
-  SELECT
-    hellofresh_week,
-    country,
-    payment_visits,
-    successful_checkout,
-    ROUND(successful_checkout * 100.0 / NULLIF(payment_visits, 0), 2) AS pcr
-  FROM base_data
-),
-with_delta AS (
-  SELECT
-    curr.country,
-    curr.payment_visits AS curr_volume,
-    prev.payment_visits AS prev_volume,
-    curr.pcr AS curr_pcr,
-    prev.pcr AS prev_pcr,
-    ROUND(curr.pcr - prev.pcr, 2) AS delta_pcr_pp,
-    ABS(curr.pcr - prev.pcr) AS abs_delta_pcr,
-    curr.payment_visits * ABS(curr.pcr - prev.pcr) AS contribution
-  FROM with_pcr curr
-  CROSS JOIN weeks w
-  JOIN with_pcr prev ON curr.country = prev.country 
-    AND curr.hellofresh_week = w.affected_week 
-    AND prev.hellofresh_week = w.prev_week
-),
-ranked AS (
-  SELECT
-    country,
-    prev_volume,
-    curr_volume,
-    prev_pcr,
-    curr_pcr,
-    delta_pcr_pp,
-    contribution,
-    ROW_NUMBER() OVER (ORDER BY contribution DESC) AS rank_contribution,
-    ROW_NUMBER() OVER (ORDER BY abs_delta_pcr DESC) AS rank_change
-  FROM with_delta
-)
-SELECT
-  country,
-  prev_volume,
-  curr_volume,
-  prev_pcr,
-  curr_pcr,
-  delta_pcr_pp,
-  rank_contribution,
-  rank_change
-FROM ranked
-ORDER BY rank_contribution
-
-```
-
-</details>
-
-<details>
-<summary>FE Validation Recovery Rate</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  d.iso_year_week AS hellofresh_week,
-  SUM(is_click) AS click_submit,
-  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 THEN 1 ELSE 0 END) AS customers_with_fe_error,
-  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 1 THEN 1 ELSE 0 END) AS error_then_passed,
-  SUM(CASE WHEN is_click = 1 AND is_fe_validation_error = 1 AND is_fe_validation_passed = 0 THEN 1 ELSE 0 END) AS error_not_passed
-FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
-JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
-CROSS JOIN weeks w
-WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
-  AND f.country IN (SELECT country FROM countries)
-GROUP BY 1
-ORDER BY hellofresh_week
-
-```
-
-</details>
-
-<details>
-<summary>PVS Decline Reasons</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'WL' as cluster
-),
-week_dates AS (
-  SELECT 
-    MIN(date_string_backwards) as start_date,
-    MAX(date_string_backwards) as end_date,
-    iso_year_week
-  FROM dimensions.date_dimension
-  WHERE iso_year_week IN (
-    (SELECT affected_week FROM params),
-    (SELECT MAX(iso_year_week) FROM dimensions.date_dimension 
-     WHERE iso_year_week < (SELECT affected_week FROM params))
-  )
-  GROUP BY iso_year_week
-),
-date_range AS (
-  SELECT MIN(start_date) as min_date, MAX(end_date) as max_date
-  FROM week_dates
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  wd.iso_year_week AS hellofresh_week,
-  pvs_last_payload.decline_response AS decline_reason,
-  COUNT(*) AS customers
-FROM spark_catalog.payments_hf.checkout_funnel_backend f
-JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
-WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
-  AND f.country IN (SELECT country FROM countries)
-  AND event_payment_verification_attempt = 1
-  AND event_payment_verification_success = 0
-  AND pvs_last_payload.decline_response IS NOT NULL
-GROUP BY 1, 2
-ORDER BY hellofresh_week, customers DESC
-
-```
-
-</details>
+---
 
 
 ---

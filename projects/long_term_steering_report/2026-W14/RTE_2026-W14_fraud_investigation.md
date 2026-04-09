@@ -10,26 +10,24 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for RTE cluster improved slightly from 94.14% to 94.72% (+0.61%) in 2026-W14, a change that is not statistically significant and falls within normal weekly fluctuation observed in the 8-week trend (range: 93.82% - 94.95%).
+**Overall:** The Fraud Approval Rate improved from 94.14% to 94.72% (+0.61pp) week-over-week, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within normal range (93.82%-94.95%) | +0.61% | ✅ |
-| L1: Country Scan | 2 countries exceed ±2.5% threshold (TO, TK) | TO: -4.22%, TK: +5.01% | ⚠️ |
-| L1: Channel Scan | Both categories within threshold | Paid: +1.00%, Referral: -1.15% | ✅ |
-| L2: TO Deep-Dive | Paid channel duplicate spike | Dup Rate: +122.15% | ⚠️ |
-| L2: TK Deep-Dive | Duplicate rate improvement | Dup Rate: -37.46% | ✅ |
+| L0: 8-Week Trend | FAR within historical range (93.82%-94.95%) | +0.61pp | ✅ |
+| L1: Country Breakdown | TO: -4.22pp FAR, +70.52% Dup Rate; TK: +5.01pp FAR | 2 countries flagged | ⚠️ |
+| L1: Channel Category | Paid +1.00pp; Referral -1.15pp | Within threshold | ✅ |
 
 **Key Findings:**
-- **TO experienced a -4.22% FAR decline** driven by a significant spike in duplicate detection (+70.52%) and blocking (+71.26%) in the Paid channel, with only 579 customers affected (1.4% of total volume)
-- **TK showed a +5.01% FAR improvement** due to decreased duplicate activity (Dup Rate -37.46%, Dup Block -30.58%), though this represents only 336 customers (0.8% of total volume)
-- **FJ dominates cluster volume** at 29,804 customers (69.9% of total) with stable FAR improvement of +1.11%
-- **Referral channel shows elevated duplicate rates** (22.61%) compared to Paid (12.52%), consistent with expected voucher abuse patterns
-- **Payment Fraud Block rates remain negligible** across all countries (≤0.29%), indicating no payment fraud concerns
+- **FJ drives overall improvement:** FJ (largest market at 29,804 volume) saw FAR increase +1.11pp to 95.51%, offsetting declines elsewhere
+- **TO shows concerning pattern:** FAR dropped -4.22pp (92.50% → 88.60%) while Duplicate Rate surged +70.52% (6.99% → 11.92%), though volume is low (579 customers)
+- **TK volatility:** FAR jumped +5.01pp with Duplicate Rate falling -37.46%, but very low volume (336 customers) limits significance
+- **Paid channel outperforms:** Paid channel FAR improved +1.00pp to 97.60% while Referral declined -1.15pp to 81.40%
+- **Overall volume declining:** Total volume dropped from 43,962 to 42,650 (-3.0% WoW), continuing a downward trend from W10 peak of 50,499
 
-**Action:** **Monitor** - The overall FAR change is not significant and the flagged countries (TO, TK) represent <2.5% of total volume combined. Continue standard monitoring; no investigation required unless patterns persist in W15.
+**Action:** Monitor — The overall change is not statistically significant. Continue tracking TO for potential emerging duplicate abuse pattern; low volume makes immediate escalation unnecessary.
 
 ---
 
@@ -52,15 +50,22 @@
 
 ## L1: Country Breakdown
 
-| Country | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|---------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| TO | 92.5→88.6 | 88.60% | -4.22% | 11.92% | +70.52% | 10.88% | +71.26% | 0.00% | - | 579 | ⚠️ |
-| TT | 91.3→89.3 | 89.32% | -2.14% | 10.56% | +23.82% | 8.73% | +35.38% | 0.00% | - | 871 |  |
-| CF | 94.1→93.5 | 93.52% | -0.66% | 13.48% | +0.04% | 5.38% | +21.34% | 0.00% | - | 6,632 |  |
-| YE | 94.0→93.5 | 93.50% | -0.54% | 18.29% | -1.41% | 6.09% | +26.28% | 0.00% | - | 3,418 |  |
-| FJ | 94.5→95.5 | 95.51% | +1.11% | 14.45% | -2.85% | 3.69% | +2.93% | 0.29% | -21.21% | 29,804 |  |
-| TV | 90.9→93.1 | 93.08% | +2.38% | 8.21% | +5.30% | 6.15% | -5.23% | 0.00% | -100.00% | 390 |  |
-| TK | 88.4→92.9 | 92.86% | +5.01% | 7.44% | -37.46% | 6.25% | -30.58% | 0.00% | - | 336 | ⚠️ |
+| Country | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
+|---------|------|-------|-----|------------|-----|--------|------|
+| FJ | 2026-W13 | 94.47% | - | 14.88% | - | 30,231 |  |
+| FJ | 2026-W14 | 95.51% | +1.11% | 14.45% | -2.85% | 29,804 |  |
+| CF | 2026-W13 | 94.14% | - | 13.47% | - | 6,672 |  |
+| CF | 2026-W14 | 93.52% | -0.66% | 13.48% | +0.04% | 6,632 |  |
+| TO | 2026-W13 | 92.50% | - | 6.99% | - | 787 |  |
+| TO | 2026-W14 | 88.60% | -4.22% | 11.92% | +70.52% | 579 | ⚠️ |
+| YE | 2026-W13 | 94.01% | - | 18.55% | - | 3,839 |  |
+| YE | 2026-W14 | 93.50% | -0.54% | 18.29% | -1.41% | 3,418 |  |
+| TT | 2026-W13 | 91.28% | - | 8.53% | - | 1,055 |  |
+| TT | 2026-W14 | 89.32% | -2.14% | 10.56% | +23.82% | 871 |  |
+| TK | 2026-W13 | 88.42% | - | 11.90% | - | 311 |  |
+| TK | 2026-W14 | 92.86% | +5.01% | 7.44% | -37.46% | 336 | ⚠️ |
+| TV | 2026-W13 | 90.91% | - | 7.79% | - | 462 |  |
+| TV | 2026-W14 | 93.08% | +2.38% | 8.21% | +5.30% | 390 |  |
 
 **Countries exceeding ±2.5% threshold:** TO, TK
 
@@ -68,317 +73,12 @@
 
 ## L1: Channel Category Scan
 
-**Note:** Fraud rates vary significantly by channel - Paid channels typically have higher duplicate rates due to voucher abuse.
-
-| Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 96.6→97.6 | 97.60% | +1.00% | 12.52% | -4.75% | 1.60% | +3.56% | 0.21% | -20.74% | 35,066 |  |
-| Referral | 82.3→81.4 | 81.40% | -1.15% | 22.61% | +8.01% | 17.67% | +10.48% | 0.16% | -19.34% | 7,584 |  |
-
----
-
-## L2: TO Deep-Dive
-
-### Channel Category
-
-**Note:** Channel mix shifts can significantly impact country-level FAR.
-
-| Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 95.1→91.2 | 91.20% | -4.09% | 9.49% | +122.15% | 8.10% | +113.35% | 0.00% | - | 432 | ⚠️ |
-| Referral | 81.9→81.0 | 80.95% | -1.20% | 19.05% | +5.44% | 19.05% | +13.55% | 0.00% | - | 147 |  |
-
-### Payment Method (Payment Fraud Block Rate)
-
-| Payment Method | Curr vs Prev | PF Block % | Δ % | Volume | Flag |
-|----------------|--------------|------------|-----|--------|------|
-| Others | 0.00→0.00 | 0.00% | - | 505 |  |
-
-**Root Cause:** Dup Rate ↑ + Dup Block ↑
-
----
-
-## L2: TK Deep-Dive
-
-### Channel Category
-
-**Note:** Channel mix shifts can significantly impact country-level FAR.
-
-| Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 90.2→93.5 | 93.48% | +3.63% | 6.88% | -32.54% | 5.43% | -21.68% | 0.00% | - | 276 | ⚠️ |
-| Referral | 81.8→90.0 | 90.00% | +10.00% | 10.00% | -45.00% | 10.00% | -40.00% | 0.00% | - | 60 | ⚠️ |
-
-### Payment Method (Payment Fraud Block Rate)
-
-| Payment Method | Curr vs Prev | PF Block % | Δ % | Volume | Flag |
-|----------------|--------------|------------|-----|--------|------|
-| Others | 0.00→0.00 | 0.00% | - | 324 |  |
-
-**Root Cause:** Dup Rate ↓ + Dup Block ↓
-
----
-
-
-## Decision Framework
-
-**Root Cause Derivation:**
-
-| Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
-|---------|------------|----------------|----------|-----------|----------|------------|
-| TO | ↓ -4.22% | Paid -4.1% | +70.5% | +71.3% | +0.0% | Dup Rate ↑ + Dup Block ↑ |
-| TK | ↑ +5.01% | Paid +3.6% | -37.5% | -30.6% | +0.0% | Dup Rate ↓ + Dup Block ↓ |
-
----
-
-## SQL Queries
-
-<details>
-<summary>L0: 8-Week Trend</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-completed_weeks AS (
-  SELECT hellofresh_week as week
-  FROM dimensions.date_dimension
-  WHERE date_string_backwards <= date_sub(CURRENT_DATE, 1)
-  GROUP BY hellofresh_week
-  HAVING COUNT(*) = 7
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-weekly_metrics AS (
-  SELECT 
-    p.hellofresh_week as week,
-    SUM(CASE WHEN is_fs_check = 1 AND NOT is_fraud_service_block THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS fraud_approval_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_duplicate_at_pre_checkout = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS duplicate_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS duplicate_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_payment_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS payment_fraud_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END) AS volume
-  FROM payments_hf.payments_p0_metrics_checkout_funnel p
-  JOIN completed_weeks cw ON p.hellofresh_week = cw.week
-  WHERE p.country IN (SELECT country FROM countries)
-    AND p.is_different_checkout = FALSE
-  GROUP BY p.hellofresh_week
-  ORDER BY p.hellofresh_week DESC
-  LIMIT 8
-)
-SELECT 
-  week,
-  ROUND(fraud_approval_rate, 2) as far_pct,
-  ROUND(duplicate_rate, 2) as dup_rate_pct,
-  ROUND(duplicate_block_rate, 2) as dup_block_pct,
-  ROUND(payment_fraud_block_rate, 2) as pf_block_pct,
-  volume,
-  ROUND((fraud_approval_rate - LAG(fraud_approval_rate) OVER (ORDER BY week ASC)) / 
-        NULLIF(LAG(fraud_approval_rate) OVER (ORDER BY week ASC), 0) * 100, 2) as change_pct
-FROM weekly_metrics
-ORDER BY week DESC
-
-```
-
-</details>
-
-<details>
-<summary>L1a: Country Breakdown</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(hellofresh_week) OVER (ORDER BY hellofresh_week) as prev_week
-  FROM (SELECT DISTINCT hellofresh_week FROM dimensions.date_dimension WHERE hellofresh_week >= '2021-W01')
-  WHERE hellofresh_week <= (SELECT affected_week FROM params)
-  QUALIFY hellofresh_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-curr AS (
-  SELECT 
-    country,
-    SUM(CASE WHEN is_fs_check = 1 AND NOT is_fraud_service_block THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS far,
-    SUM(CASE WHEN is_fs_check = 1 AND is_duplicate_at_pre_checkout = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_payment_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS pf_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END) AS volume
-  FROM payments_hf.payments_p0_metrics_checkout_funnel
-  CROSS JOIN weeks w
-  WHERE hellofresh_week = w.affected_week
-    AND country IN (SELECT country FROM countries)
-    AND is_different_checkout = FALSE
-  GROUP BY country
-),
-prev AS (
-  SELECT 
-    country,
-    SUM(CASE WHEN is_fs_check = 1 AND NOT is_fraud_service_block THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS far,
-    SUM(CASE WHEN is_fs_check = 1 AND is_duplicate_at_pre_checkout = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_payment_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS pf_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END) AS volume
-  FROM payments_hf.payments_p0_metrics_checkout_funnel
-  CROSS JOIN weeks w
-  WHERE hellofresh_week = w.prev_week
-    AND country IN (SELECT country FROM countries)
-    AND is_different_checkout = FALSE
-  GROUP BY country
-),
-combined AS (
-  SELECT 
-    c.country,
-    ROUND(p.far, 1) as prev_far,
-    ROUND(c.far, 1) as curr_far,
-    ROUND(c.far, 2) as far_pct,
-    ROUND((c.far - p.far) / NULLIF(p.far, 0) * 100, 2) as far_delta,
-    ROUND(c.dup_rate, 2) as dup_rate_pct,
-    ROUND((c.dup_rate - p.dup_rate) / NULLIF(p.dup_rate, 0) * 100, 2) as dup_rate_delta,
-    ROUND(c.dup_block_rate, 2) as dup_block_pct,
-    ROUND((c.dup_block_rate - p.dup_block_rate) / NULLIF(p.dup_block_rate, 0) * 100, 2) as dup_block_delta,
-    ROUND(c.pf_block_rate, 2) as pf_block_pct,
-    ROUND((c.pf_block_rate - p.pf_block_rate) / NULLIF(p.pf_block_rate, 0) * 100, 2) as pf_block_delta,
-    c.volume,
-    ABS(c.volume * (c.far - p.far) / 100) as contribution
-  FROM curr c
-  JOIN prev p ON c.country = p.country
-),
-ranked AS (
-  SELECT *,
-    ROW_NUMBER() OVER (ORDER BY contribution DESC) as rank_contribution,
-    ROW_NUMBER() OVER (ORDER BY ABS(far_delta) DESC) as rank_change
-  FROM combined
-),
-top_countries AS (
-  SELECT * FROM ranked
-  WHERE rank_contribution <= 4 OR rank_change <= 4
-  ORDER BY rank_contribution
-  LIMIT 8
-)
-SELECT 
-  country, 
-  prev_far,
-  curr_far,
-  far_pct,
-  far_delta,
-  dup_rate_pct,
-  dup_rate_delta,
-  dup_block_pct,
-  dup_block_delta,
-  pf_block_pct,
-  pf_block_delta,
-  volume,
-  CASE WHEN ABS(far_delta) > 2.5 THEN '⚠️' ELSE '' END as flag
-FROM top_countries
-ORDER BY far_delta ASC
-
-```
-
-</details>
-
-<details>
-<summary>L1b: Channel Category Scan</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(hellofresh_week) OVER (ORDER BY hellofresh_week) as prev_week
-  FROM (SELECT DISTINCT hellofresh_week FROM dimensions.date_dimension WHERE hellofresh_week >= '2021-W01')
-  WHERE hellofresh_week <= (SELECT affected_week FROM params)
-  QUALIFY hellofresh_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-curr AS (
-  SELECT 
-    category,
-    SUM(CASE WHEN is_fs_check = 1 AND NOT is_fraud_service_block THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS far,
-    SUM(CASE WHEN is_fs_check = 1 AND is_duplicate_at_pre_checkout = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_payment_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS pf_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END) AS volume
-  FROM payments_hf.payments_p0_metrics_checkout_funnel
-  CROSS JOIN weeks w
-  WHERE hellofresh_week = w.affected_week
-    AND country IN (SELECT country FROM countries)
-    AND is_different_checkout = FALSE
-  GROUP BY category
-),
-prev AS (
-  SELECT 
-    category,
-    SUM(CASE WHEN is_fs_check = 1 AND NOT is_fraud_service_block THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS far,
-    SUM(CASE WHEN is_fs_check = 1 AND is_duplicate_at_pre_checkout = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS dup_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 AND is_payment_fraud_block = 1 THEN customer_count ELSE 0 END) * 100.0 /
-      NULLIF(SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END), 0) AS pf_block_rate,
-    SUM(CASE WHEN is_fs_check = 1 THEN customer_count ELSE 0 END) AS volume
-  FROM payments_hf.payments_p0_metrics_checkout_funnel
-  CROSS JOIN weeks w
-  WHERE hellofresh_week = w.prev_week
-    AND country IN (SELECT country FROM countries)
-    AND is_different_checkout = FALSE
-  GROUP BY category
-)
-SELECT 
-  c.category,
-  ROUND(p.far, 1) as prev_far,
-  ROUND(c.far, 1) as curr_far,
-  ROUND(c.far, 2) as far_pct,
-  ROUND((c.far - p.far) / NULLIF(p.far, 0) * 100, 2) as far_delta,
-  ROUND(c.dup_rate, 2) as dup_rate_pct,
-  ROUND((c.dup_rate - p.dup_rate) / NULLIF(p.dup_rate, 0) * 100, 2) as dup_rate_delta,
-  ROUND(c.dup_block_rate, 2) as dup_block_pct,
-  ROUND((c.dup_block_rate - p.dup_block_rate) / NULLIF(p.dup_block_rate, 0) * 100, 2) as dup_block_delta,
-  ROUND(c.pf_block_rate, 2) as pf_block_pct,
-  ROUND((c.pf_block_rate - p.pf_block_rate) / NULLIF(p.pf_block_rate, 0) * 100, 2) as pf_block_delta,
-  c.volume,
-  CASE WHEN ABS((c.far - p.far) / NULLIF(p.far, 0) * 100) > 2.5 THEN '⚠️' ELSE '' END as flag
-FROM curr c
-JOIN prev p ON c.category = p.category
-ORDER BY c.category
-
-```
-
-</details>
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|--------|------|
+| Paid | 2026-W13 | 96.63% | - | 13.14% | - | 36,315 |  |
+| Paid | 2026-W14 | 97.60% | +1.00% | 12.52% | -4.75% | 35,066 |  |
+| Referral | 2026-W13 | 82.35% | - | 20.94% | - | 7,647 |  |
+| Referral | 2026-W14 | 81.40% | -1.15% | 22.61% | +8.01% | 7,584 |  |
 
 ---
 

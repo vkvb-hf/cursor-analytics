@@ -1,44 +1,45 @@
 # PCR Investigation: RTE 2026-W14
 
-**Metric:** Payment Conversion Rate (PCR)  
+**Metric:** Payment Conversion Rate  
 **Period:** 2026-W13 → 2026-W14  
 **Observation:** 37.81% → 39.36% (+1.55pp)  
-**Volume:** ~63K payment visits
-
----
-
-## Executive Summary
+**Volume:** 63,361 payment visits  
+**Threshold:** +0.78pp (0.5 × |Overall PCR Δ|)
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) improved from 37.81% to 39.36% (+1.55pp) week-over-week, driven primarily by increased engagement at the top of the funnel despite an overall volume decline of 10.4%.
+## Executive Summary
+
+**Overall:** Payment Conversion Rate improved from 37.81% to 39.36% (+1.55pp) in 2026-W14, exceeding the threshold of +0.78pp, while payment visit volume decreased by 10.4% (from 70,721 to 63,361 visits).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate improved | +1.75pp | ✅ |
-| Click Submit Form | Rate improved | +0.90pp | ✅ |
-| FE Validation Passed | Minor decline | -0.46pp | ⚠️ |
-| Enter Fraud Service | Minor decline | -0.21pp | ✅ |
-| Approved by Fraud Service | Stable | -0.09pp | ✅ |
-| Call to PVS | Stable | -0.11pp | ✅ |
-| Successful Checkout | Rate improved | +0.33pp | ✅ |
+| Select Payment Method | ≥ threshold? | +1.75pp | ✅ |
+| Click Submit Form | ≥ threshold? | +0.90pp | ✅ |
+| FE Validation Passed | ≥ threshold? | -0.46pp | ⚠️ |
+| Enter Fraud Service | ≥ threshold? | -0.21pp | ⚠️ |
+| Approved by Fraud Service | ≥ threshold? | -0.09pp | ⚠️ |
+| Call to PVS | ≥ threshold? | -0.11pp | ⚠️ |
+| Successful Checkout | ≥ threshold? | +0.33pp | ⚠️ |
 
 **Key Findings:**
-- **Top-of-funnel improvement:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), the largest positive driver of PCR improvement
-- **Country divergence:** FJ (largest market, 64% of volume) improved +2.51pp, while TO declined -5.78pp due to fraud service approval dropping -4.88pp
-- **TK outperformance:** Smallest market showed strongest improvement (+6.09pp) driven by Fraud Service approval jumping +5.88pp
-- **Payment method mix:** Braintree_ApplePay declined -1.71pp and Adyen_IDeal dropped -3.21pp, partially offsetting gains
-- **Backend PVS Attempt:** Showed concerning -1.25pp decline in conversion (99.46% → 98.21%), though PVS Success rate remained stable
+- **Top-of-funnel improvement drove PCR gains:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), representing the largest positive contributor to overall improvement
+- **Country-level divergence in Fraud Service performance:** TK saw Fraud Service approval improve +5.88pp while TO experienced a decline of -4.88pp at the same step
+- **Backend PVS Attempt shows concerning drop:** Backend waterfall reveals PVS Attempt conversion declined -1.25pp (99.46% → 98.21%), partially offsetting gains
+- **FJ dominates volume and contribution:** FJ accounts for 64% of payment visits and showed +2.51pp PCR improvement, primarily driven by Select Payment Method (+2.32pp)
+- **Braintree_ApplePay declined:** Payment method success rate dropped -1.71pp (87.23% → 85.51%) despite being the second-highest volume method
 
-**Action:** **Monitor** - The PCR improvement is positive and driven by healthy top-of-funnel engagement. Recommend monitoring TO's fraud service approval decline and investigating the PVS Attempt drop in the backend funnel for potential technical issues.
-
----
+**Action:** Monitor — The overall PCR improvement is positive and driven by healthy top-of-funnel gains. However, investigate the divergent Fraud Service performance between TK (+5.88pp) and TO (-4.88pp) to understand if policy changes or regional factors are causing inconsistent outcomes.
 
 ---
 
-## Waterfall GA
+---
+
+## L0: Cluster-Level Waterfall
+
+### Waterfall GA (Google Analytics)
 
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
@@ -52,9 +53,7 @@
 | **Successful Checkout** | 26,739 | 24,939 | -1,800 | -6.7% | 95.83% | 96.16% | +0.33pp |
 | **PCR Rate** | | | | | 37.81% | 39.36% | **+1.55pp** |
 
----
-
-## Waterfall Backend
+### Waterfall Backend
 
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
@@ -67,9 +66,7 @@
 | **Successful Checkout** | 41,426 | 38,814 | -2,612 | -6.3% | 99.67% | 100.36% | +0.69pp |
 | **PCR Rate** | | | | | 33.67% | 35.22% | **+1.55pp** |
 
----
-
-## Payment Method Breakdown
+### Payment Method Breakdown
 
 | Payment Method | 2026-W13 Attempt | 2026-W13 Success | 2026-W13 Rate | 2026-W14 Attempt | 2026-W14 Success | 2026-W14 Rate | Δ Rate |
 | -------------- | ------------------- | ------------------- | ---------------- | ----------------------- | ----------------------- | -------------------- | ------ |
@@ -199,195 +196,8 @@
 
 ---
 
-## Conclusion
 
-The +1.55pp PCR improvement in 2026-W14 represents a healthy conversion gain primarily driven by better user engagement at the payment method selection stage, particularly in the dominant FJ market. While overall payment visit volume declined by 10.4%, the quality of sessions improved with higher conversion rates at most funnel steps. The fraud service performance in TO warrants attention, but the overall trend is positive and no immediate escalation is required.
 
----
-
-## SQL Queries
-
-<details>
-<summary>Waterfall GA (cluster/country)</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  d.iso_year_week AS hellofresh_week,
-  SUM(is_pay_visit) AS payment_visits,
-  SUM(is_select) AS select_payment_method,
-  SUM(is_click) AS click_submit_form,
-  SUM(CASE WHEN is_fs_check = 1 THEN 1 WHEN is_click = 1 AND is_fe_validation_error = 0 THEN 1 ELSE is_fe_validation_passed END) AS fe_validation_passed,
-  SUM(is_fs_check) AS enter_fraud_service,
-  SUM(CASE WHEN is_fs_check = 1 AND is_voucher_fraud_block = 0 AND is_payment_fraud_block = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
-  SUM(is_pvs) AS call_to_pvs,
-  SUM(is_success) AS successful_checkout
-FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
-JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
-CROSS JOIN weeks w
-WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
-  AND f.country IN (SELECT country FROM countries)
-GROUP BY 1
-ORDER BY hellofresh_week
-
-```
-
-</details>
-
-<details>
-<summary>Backend Combined (cluster/country)</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-week_dates AS (
-  SELECT 
-    MIN(date_string_backwards) as start_date,
-    MAX(date_string_backwards) as end_date,
-    iso_year_week
-  FROM dimensions.date_dimension
-  WHERE iso_year_week IN (
-    (SELECT affected_week FROM params),
-    (SELECT MAX(iso_year_week) FROM dimensions.date_dimension 
-     WHERE iso_year_week < (SELECT affected_week FROM params))
-  )
-  GROUP BY iso_year_week
-),
-date_range AS (
-  SELECT MIN(start_date) as min_date, MAX(end_date) as max_date
-  FROM week_dates
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-)
-SELECT
-  wd.iso_year_week AS hellofresh_week,
-  f.payment_method,
-  SUM(event_payment_method_listed) AS payment_method_listed,
-  SUM(event_checkout_attempt) AS checkout_attempt,
-  SUM(event_attempted_fraud_check) AS enter_fraud_service,
-  SUM(CASE WHEN event_attempted_fraud_check = 1 AND event_fs_blocked = 0 THEN 1 ELSE 0 END) AS approved_by_fraud_service,
-  SUM(event_payment_verification_attempt) AS pvs_attempt,
-  SUM(event_payment_verification_success) AS pvs_success,
-  SUM(CASE WHEN event_payment_method_listed = 1 AND event_checkout_success = 1 THEN 1 ELSE 0 END) AS checkout_success
-FROM spark_catalog.payments_hf.checkout_funnel_backend f
-JOIN week_dates wd ON f.event_date BETWEEN wd.start_date AND wd.end_date
-WHERE f.event_date BETWEEN (SELECT min_date FROM date_range) AND (SELECT max_date FROM date_range)
-  AND f.country IN (SELECT country FROM countries)
-GROUP BY 1, 2
-ORDER BY hellofresh_week, checkout_attempt DESC
-
-```
-
-</details>
-
-<details>
-<summary>Country PCR Summary</summary>
-
-```sql
-
-WITH params AS (
-  SELECT '2026-W14' as affected_week, 'RTE' as cluster
-),
-weeks AS (
-  SELECT 
-    (SELECT affected_week FROM params) as affected_week,
-    LAG(iso_year_week) OVER (ORDER BY iso_year_week) as prev_week
-  FROM (SELECT DISTINCT iso_year_week FROM dimensions.date_dimension)
-  WHERE iso_year_week <= (SELECT affected_week FROM params)
-  QUALIFY iso_year_week = (SELECT affected_week FROM params)
-),
-countries AS (
-  SELECT business_unit as country
-  FROM payments_hf.business_units
-  WHERE ARRAY_CONTAINS(reporting_cluster_array, (SELECT cluster FROM params))
-),
-base_data AS (
-  SELECT
-    d.iso_year_week AS hellofresh_week,
-    f.country,
-    SUM(is_pay_visit) AS payment_visits,
-    SUM(is_success) AS successful_checkout
-  FROM spark_catalog.payments_hf.fact_payment_conversion_rate f
-  JOIN dimensions.date_dimension d ON f.date_string_backwards = d.date_string_backwards
-  CROSS JOIN weeks w
-  WHERE d.iso_year_week IN (w.affected_week, w.prev_week)
-    AND f.country IN (SELECT country FROM countries)
-  GROUP BY 1, 2
-),
-with_pcr AS (
-  SELECT
-    hellofresh_week,
-    country,
-    payment_visits,
-    successful_checkout,
-    ROUND(successful_checkout * 100.0 / NULLIF(payment_visits, 0), 2) AS pcr
-  FROM base_data
-),
-with_delta AS (
-  SELECT
-    curr.country,
-    curr.payment_visits AS curr_volume,
-    prev.payment_visits AS prev_volume,
-    curr.pcr AS curr_pcr,
-    prev.pcr AS prev_pcr,
-    ROUND(curr.pcr - prev.pcr, 2) AS delta_pcr_pp,
-    ABS(curr.pcr - prev.pcr) AS abs_delta_pcr,
-    curr.payment_visits * ABS(curr.pcr - prev.pcr) AS contribution
-  FROM with_pcr curr
-  CROSS JOIN weeks w
-  JOIN with_pcr prev ON curr.country = prev.country 
-    AND curr.hellofresh_week = w.affected_week 
-    AND prev.hellofresh_week = w.prev_week
-),
-ranked AS (
-  SELECT
-    country,
-    prev_volume,
-    curr_volume,
-    prev_pcr,
-    curr_pcr,
-    delta_pcr_pp,
-    contribution,
-    ROW_NUMBER() OVER (ORDER BY contribution DESC) AS rank_contribution,
-    ROW_NUMBER() OVER (ORDER BY abs_delta_pcr DESC) AS rank_change
-  FROM with_delta
-)
-SELECT
-  country,
-  prev_volume,
-  curr_volume,
-  prev_pcr,
-  curr_pcr,
-  delta_pcr_pp,
-  rank_contribution,
-  rank_change
-FROM ranked
-ORDER BY rank_contribution
-
-```
-
-</details>
 
 
 ---
