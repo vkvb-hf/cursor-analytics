@@ -10,33 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.37pp (26.77% → 26.41%) in US-HF cluster during 2026-W14, exceeding the significance threshold of ±0.18pp.
+**Overall:** Payment Conversion Rate declined by -0.37pp (from 26.77% to 26.41%) on 44,056 payment visits in US-HF during 2026-W14.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | GA Funnel | -0.42pp | ⚠️ |
-| Click Submit Form | GA Funnel | +0.02pp | ✅ |
-| FE Validation Passed | GA Funnel | -0.41pp | ⚠️ |
-| Enter Fraud Service | GA Funnel | +0.12pp | ✅ |
-| Approved by Fraud Service | GA Funnel | -0.00pp | ✅ |
-| Call to PVS | GA Funnel | -0.24pp | ⚠️ |
-| Successful Checkout | GA Funnel | +0.26pp | ✅ |
-| Checkout Attempt | Backend | -0.99pp | ⚠️ |
-| Enter Fraud Service | Backend | -0.77pp | ⚠️ |
-| Approved by Fraud Service | Backend | +2.75pp | ✅ |
-| PVS Attempt | Backend | -0.32pp | ⚠️ |
-| PVS Success | Backend | +0.29pp | ✅ |
+| Select Payment Method | Rate vs prior week | -0.42pp | ⚠️ |
+| Click Submit Form | Rate vs prior week | +0.02pp | ✅ |
+| FE Validation Passed | Rate vs prior week | -0.41pp | ⚠️ |
+| Enter Fraud Service | Rate vs prior week | +0.12pp | ✅ |
+| Approved by Fraud Service | Rate vs prior week | -0.00pp | ✅ |
+| Call to PVS | Rate vs prior week | -0.24pp | ⚠️ |
+| Successful Checkout | Rate vs prior week | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel drop:** Select Payment Method conversion declined -0.42pp (37.60% → 37.18%), indicating reduced user intent to proceed with payment
-- **FE Validation degradation:** FE Validation Passed dropped -0.41pp with recovery rate declining from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" errors decreased (-4.50pp share) while "APPLEPAY_DISMISSED" remained stable at ~50%
-- **Backend Checkout Attempt decline:** Significant -0.99pp drop (36.46% → 35.46%) in users initiating checkout attempts from payment method listing
-- **Fraud Service improvement:** Backend Approved by Fraud Service improved +2.75pp (89.15% → 91.91%), partially offsetting funnel losses
-- **ProcessOut CreditCard performance:** Success rate improved +3.21pp (79.29% → 82.50%), though attempt volume decreased by 920 (-9.0%)
+- **Select Payment Method is the primary driver** of the PCR decline, with conversion dropping -0.42pp (37.60% → 37.18%), indicating users are abandoning before selecting a payment option
+- **FE Validation recovery rate declined** from 75.67% to 74.36% (-1.31pp), with "terms_not_accepted" remaining the top error at 51.6% of occurrences
+- **Backend shows improved Fraud Service approval** (+2.75pp from 89.15% to 91.91%), partially offsetting upstream losses
+- **ProcessOut_CreditCard and Braintree_ApplePay** both improved significantly (+3.21pp and +2.28pp respectively), while Adyen_CreditCard continues to show 0% success rate across 212 attempts
+- **PVS failures decreased** by 55 total failures week-over-week, with "Blocked Verification: Payment method is blocked due to business reasons" remaining the top decline reason at 55.7%
 
-**Action:** **Investigate** - The -0.42pp drop at Select Payment Method and -0.41pp at FE Validation require investigation into user experience issues at the payment selection stage and frontend validation flows.
+**Action:** Investigate — Focus on the Select Payment Method drop-off and the persistent Adyen_CreditCard 0% success rate. Monitor FE validation recovery rate and terms_not_accepted error patterns.
 
 ---
 
