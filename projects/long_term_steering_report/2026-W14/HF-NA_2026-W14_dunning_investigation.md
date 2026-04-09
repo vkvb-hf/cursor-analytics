@@ -20,13 +20,13 @@
 | Ship Rate | 46.70% → 49.18% | +2.48pp | ✅ |
 
 **Key Findings:**
-- Ship Rate improved +2.48pp despite a reduction in discount rate (-1.20pp), suggesting improved conversion efficiency
-- Both US (+2.70pp to 47.79%) and CA (+1.68pp to 54.06%) showed Ship Rate improvements, confirming genuine performance gains rather than mix shift
-- Volume remained stable across both countries (US: 0.0% change, CA: -0.2% change), ruling out Simpson's Paradox as a factor
-- PC2 conversion increased +1.21pp to 52.50%, contributing to the overall Ship Rate improvement
-- Pre-Dunning AR remained essentially flat (-0.07pp), indicating stable upstream funnel health
+- Ship Rate improved +2.48pp despite a reduction in discount percentage (-1.20pp), suggesting improved conversion efficiency
+- PC2 (payment conversion) increased by +1.21pp to 52.50%, contributing to the overall ship rate improvement
+- Both US (+2.70pp to 47.79%) and CA (+1.68pp to 54.06%) showed ship rate improvements with no significant mix shift (volume distribution unchanged)
+- Pre-Dunning AR remained stable at ~93%, indicating consistent order quality entering the dunning funnel
+- No Simpson's Paradox detected—improvements are genuine across both country segments
 
-**Action:** Monitor — Continue tracking to confirm this positive trend sustains through the remainder of the Mid-Cycle phase.
+**Action:** Monitor — The improvement is healthy and broad-based across segments with no concerning signals. Continue tracking to confirm the trend sustains into W15.
 
 ---
 

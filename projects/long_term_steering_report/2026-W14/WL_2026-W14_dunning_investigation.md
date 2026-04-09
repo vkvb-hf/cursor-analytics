@@ -8,7 +8,9 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 1.04pp (29.39% → 28.35%) week-over-week during Mid-Cycle payday phase, with volume decreasing from 8,700 to 8,053 eligible orders.
+## Executive Summary
+
+**Overall:** Dunning Ship Rate declined from 29.39% to 28.35% (-1.04pp) week-over-week during Mid-Cycle payday phase, with eligible volume decreasing from 8,700 to 8,053 orders.
 
 **Funnel Analysis:**
 
@@ -20,12 +22,13 @@
 | Ship Rate | 29.39% → 28.35% | -1.04pp | ⚠️ |
 
 **Key Findings:**
-- **Simpson's Paradox Detected:** AO (highest SR tier at 72.58%) saw volume collapse by 59.6% (1,228 → 496 orders), while most individual countries actually improved their ship rates
-- **Mix Shift Impact:** Low-performing KN increased volume share by 17.4% while maintaining a low 15.10% ship rate, diluting overall performance
-- **Discount Reduction:** Discount percentage dropped 0.89pp (16.35% → 15.46%), potentially contributing to lower conversion
-- **Country-Level Improvements Masked:** ER (+2.93pp), CK (+4.15pp), AO (+5.32pp), CG (+2.85pp), and GN (+0.97pp) all improved individually despite cluster-level decline
+- **Simpson's Paradox Detected:** AO (highest performing country at 72.58% SR) experienced a -59.6% volume drop (1,228 → 496 orders), significantly reducing the mix of high-converting traffic
+- **Individual country performance improved:** ER (+2.93pp), CK (+4.15pp), AO (+5.32pp), CG (+2.85pp), and GN (+0.97pp) all showed ship rate improvements despite the cluster-level decline
+- **Low-tier country KN expanded:** Volume increased 17.4% (570 → 669) while ship rate declined slightly (16.14% → 15.10%), adding more low-converting orders to the mix
+- **MR remains effectively non-converting:** Ship rate dropped from 0.07% to 0.00% with 1,421 orders contributing zero conversions
+- **All funnel metrics showed slight declines:** Pre-Dunning AR, Discount %, and PC2 each dropped by approximately 0.5-0.9pp
 
-**Action:** Investigate — The decline is driven by mix shift (AO volume collapse) rather than true performance degradation. Investigate why AO volume dropped 59.6% and assess if this is expected or requires intervention.
+**Action:** **Investigate** – The cluster-level decline is primarily driven by mix shift (Simpson's Paradox) rather than true performance degradation. Prioritize understanding why AO volume dropped 59.6% and evaluate whether MR orders should remain in the dunning flow.
 
 ---
 

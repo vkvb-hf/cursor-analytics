@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** The Dunning Ship Rate improved from 45.09% to 47.79% (+2.70pp) week-over-week during Mid-Cycle payday phase, with stable volume of ~13,810 eligible orders.
+**Overall:** Dunning Ship Rate improved from 45.09% to 47.79% (+2.70pp) week-over-week, with volume holding steady at ~13,810 eligible orders during Mid-Cycle payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | Ship Rate | 45.09% → 47.79% | +2.70pp | ✅ |
 
 **Key Findings:**
-- Ship Rate increased by +2.70pp despite a reduction in discount offerings (-1.73pp), suggesting improved organic conversion efficiency
-- PC2 (payment conversion) improved by +1.71pp, contributing to the higher ship rate
-- Pre-Dunning Approval Rate remained stable at ~92.8%, indicating no upstream changes affecting eligible population
-- Volume held flat (13,816 → 13,810), ruling out mix shift as a contributing factor
-- No Simpson's Paradox detected — US is the sole country with 100% of volume and direct rate improvement
+- Ship Rate increased +2.70pp despite a reduction in discount offers (-1.73pp), indicating improved conversion efficiency
+- PC2 (payment completion) improved by +1.71pp, suggesting better customer payment behavior
+- Pre-Dunning Approval Rate remained stable (-0.06pp), confirming no upstream eligibility changes
+- Volume remained flat (13,816 → 13,810, ~0% change) with no mix shift detected in the US market
+- No Simpson's Paradox detected—US is the sole country and shows genuine improvement
 
-**Action:** Monitor — The improvement appears organic with better payment conversion at lower discount levels. Continue tracking to confirm trend sustainability.
+**Action:** Monitor — The improvement appears organic with better payment conversion despite lower discounting. Continue tracking to confirm trend sustainability.
 
 ---
 

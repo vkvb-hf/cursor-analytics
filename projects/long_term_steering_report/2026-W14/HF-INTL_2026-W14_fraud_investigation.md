@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined marginally from 91.79% to 91.70% (-0.10pp) in 2026-W14, a change that is not statistically significant, while volume decreased substantially from 46,689 to 37,558 customers (-19.6%).
+**Overall:** The Fraud Approval Rate (FAR) for HF-INTL declined marginally from 91.79% to 91.70% (-0.09 pp) in 2026-W14, a statistically non-significant change accompanied by a notable 19.6% decrease in volume (46,689 → 37,558 customers).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: HF-INTL Trend | FAR within normal 8-week range (91.58%-92.37%) | -0.10pp | ✅ |
-| L0: Duplicate Rate | Dup Rate stable (30.52% → 30.22%) | -0.30pp | ✅ |
-| L0: Dup Block Rate | Slight increase (6.61% → 7.42%) | +0.81pp | ✅ |
-| L0: PF Block Rate | Stable (0.27% → 0.25%) | -0.02pp | ✅ |
-| L1: Country Scan | 2 countries exceed ±2.5% threshold (NZ, LU) | Variable | ⚠️ |
-| L1: Channel Scan | Both channels stable, within threshold | <1pp | ✅ |
+| L0: Overall FAR | 91.79% → 91.70% | -0.09 pp | ✅ |
+| L0: Duplicate Rate | 30.52% → 30.22% | -0.30 pp | ✅ |
+| L0: Duplicate Block Rate | 6.61% → 7.42% | +0.81 pp | ⚠️ |
+| L0: PF Block Rate | 0.27% → 0.25% | -0.02 pp | ✅ |
+| L1: Country Variance | NZ +4.56 pp, LU +4.71 pp | Exceeds ±2.5% | ⚠️ |
+| L1: Channel Variance | Paid +0.77 pp, Referral +0.18 pp | Within threshold | ✅ |
 
 **Key Findings:**
-- NZ showed a significant FAR improvement of +4.56pp (85.61% → 89.51%) with an accompanying decrease in duplicate rate of -7.76pp, though volume is low (734 customers)
-- LU exhibited the largest FAR increase at +4.71pp (93.02% → 97.40%), but with very low volume (77 customers) and a notable duplicate rate jump from 0% to 9.09%
-- FR experienced the largest negative movement among high-volume countries at -0.93pp (88.80% → 87.97%) with 9,239 customers
-- AT saw a -2.24pp FAR decline paired with a substantial +21.46% relative increase in duplicate rate (19.02% → 23.10%)
-- Overall volume declined significantly by ~19.6% week-over-week across HF-INTL
+- **Volume decline:** Total volume dropped significantly from 46,689 to 37,558 (-19.6%), continuing a 4-week downward trend from the W09 peak of 54,963
+- **Duplicate Block Rate increased:** Rose from 6.61% to 7.42% (+0.81 pp), the highest level in the 8-week period, potentially contributing to the slight FAR decline
+- **NZ showed notable improvement:** FAR increased +4.56 pp (85.61% → 89.51%) with duplicate rate dropping -7.76 pp (38.99% → 35.97%)
+- **FR continues underperformance:** FAR declined -0.93 pp to 87.97%, remaining the lowest-performing major market
+- **AT duplicate rate spike:** Duplicate rate increased +21.46% (19.02% → 23.10%) though FAR impact was moderate (-2.24 pp)
 
-**Action:** Monitor — The overall FAR change is not significant and falls within normal operating range. Continue monitoring FR and AT for potential sustained declines in subsequent weeks.
+**Action:** Monitor — The overall FAR change is non-significant and within normal fluctuation. Continue monitoring the Duplicate Block Rate trend and FR market performance over the next 1-2 weeks.
 
 ---
 

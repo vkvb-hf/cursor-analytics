@@ -8,7 +8,9 @@
 
 ## Executive Summary
 
-**Overall:** The Dunning Ship Rate improved significantly from 68.50% to 70.90% (+2.40pp) week-over-week, with volume increasing modestly from 35,556 to 36,703 eligible orders (+3.2%).
+## Executive Summary
+
+**Overall:** Dunning Ship Rate improved from 68.50% to 70.90% (+2.40pp) week-over-week, with volume increasing by 3.2% (35,556 → 36,703 eligible orders).
 
 **Funnel Analysis:**
 
@@ -20,13 +22,13 @@
 | Ship Rate | 68.50% → 70.90% | +2.40pp | ✅ |
 
 **Key Findings:**
-- **Belgium volume surge:** BE saw the largest volume increase (+35.2%, from 2,382 to 3,221 orders) while maintaining the highest ship rate at 90.50% (+2.63pp), contributing positively to the overall mix
-- **Germany strong performance:** DE showed substantial volume growth (+18.5%) combined with a significant ship rate improvement to 74.75% (+5.66pp)
-- **France driving gains:** FR volume increased 13.3% with ship rate jumping from 65.55% to 70.12% (+4.57pp)
-- **Nordic contraction:** NO and SE volumes dropped significantly (-32.1% and -37.1% respectively), though these high-performing markets (79-72% SR) had minimal negative impact due to reduced share
-- **PC2 improvement:** The PC2 metric increased by +2.81pp (43.11% → 45.92%), correlating with the overall ship rate improvement
+- **Belgium (+35.2% volume)** showed the strongest volume growth while maintaining the highest Ship Rate at 90.50% (+2.63pp), contributing positively to overall performance
+- **Germany (+18.5% volume)** and **France (+13.3% volume)** both expanded significantly with strong Ship Rate improvements of +5.66pp and +4.57pp respectively
+- **PC2 improved substantially** from 43.11% to 45.92% (+2.81pp), indicating better payment conversion at the second collection attempt
+- **Norway volume declined sharply (-32.1%)** with a modest Ship Rate decrease from 81.99% to 79.22% (-2.77pp)
+- **Mix shift favors high-performers:** Higher-performing countries (BE, DE, FR) gained volume share while some lower-volume markets contracted
 
-**Action:** Monitor — The improvement appears to be driven by genuine performance gains across major markets (FR, DE, BE) combined with favorable mix shift toward higher-converting segments. No immediate investigation required.
+**Action:** Monitor — The improvement is broad-based across most countries with genuine rate increases (not purely mix-driven). Continue tracking to confirm trend sustainability.
 
 ---
 

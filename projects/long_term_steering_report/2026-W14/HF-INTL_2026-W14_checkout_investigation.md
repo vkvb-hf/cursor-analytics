@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +1.16pp (34.88% → 36.04%) in 2026-W14, exceeding the monitoring threshold of +0.58pp, driven by gains across multiple funnel stages.
+**Overall:** Payment Conversion Rate improved by +1.16pp (34.88% → 36.04%) in 2026-W14, despite a significant -23.9% decrease in payment visit volume (82,373 → 62,654).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ +0.58pp | +0.42pp | ✅ |
-| Click Submit Form | ≥ +0.58pp | +0.59pp | ⚠️ |
-| FE Validation Passed | ≥ +0.58pp | +0.68pp | ⚠️ |
-| Enter Fraud Service | ≥ +0.58pp | +0.40pp | ✅ |
-| Approved by Fraud Service | ≥ +0.58pp | -0.23pp | ✅ |
-| Call to PVS | ≥ +0.58pp | -0.01pp | ✅ |
-| Successful Checkout | ≥ +0.58pp | +0.85pp | ⚠️ |
+| Select Payment Method | ≥ +0.58pp threshold | +0.42pp | ✅ |
+| Click Submit Form | ≥ +0.58pp threshold | +0.59pp | ⚠️ |
+| FE Validation Passed | ≥ +0.58pp threshold | +0.68pp | ⚠️ |
+| Enter Fraud Service | ≥ +0.58pp threshold | +0.40pp | ✅ |
+| Approved by Fraud Service | ≥ +0.58pp threshold | -0.23pp | ✅ |
+| Call to PVS | ≥ +0.58pp threshold | -0.01pp | ✅ |
+| Successful Checkout | ≥ +0.58pp threshold | +0.85pp | ⚠️ |
 
 **Key Findings:**
-- **FR drove the largest contribution** with PCR improving +3.10pp, primarily from Select Payment Method (+2.98pp GA) and Checkout Attempt (+3.77pp Backend)
-- **FE Validation recovery rate improved** from 56.10% to 57.57% (+1.47pp), with APPLEPAY_DISMISSED remaining the dominant error type (76.8% of errors)
-- **PVS Success improved significantly** (+0.85pp), with "Failed Verification: Insufficient Funds" declining from 17.3% to 13.0% of failures (-4.31pp share)
-- **Braintree_ApplePay showed notable improvement** with success rate increasing +1.70pp (83.73% → 85.43%)
-- **DK showed strong improvement** (+5.89pp PCR) despite lower volume, with Select Payment Method conversion up +4.17pp
+- **FR drove the largest contribution** with PCR improving +3.10pp, primarily from Select Payment Method (+2.98pp GA, +3.77pp Backend Checkout Attempt)
+- **DK showed strongest relative improvement** at +5.89pp PCR gain, with Select Payment Method (+4.17pp) as the key driver
+- **FE Validation recovery rate improved** from 56.10% to 57.57% (+1.47pp), with APPLEPAY_DISMISSED remaining the dominant error type (76.8%)
+- **PVS Success improved +0.85pp** with total PVS failures decreasing by 512 cases (-33.6%), notably "Failed Verification: Insufficient Funds" dropped from 263 to 131 cases (-4.31pp share)
+- **Braintree_ApplePay showed notable improvement** at +1.70pp success rate (83.73% → 85.43%)
 
-**Action:** Monitor — The PCR improvement is positive and widespread across funnel stages and key markets. No immediate escalation required, but continue monitoring FE validation errors and PVS decline reasons for sustained improvement.
+**Action:** Monitor — The PCR improvement is positive and driven by broad funnel improvements across multiple countries. No escalation required, but continue tracking FE validation errors and PVS decline reasons.
 
 ---
 

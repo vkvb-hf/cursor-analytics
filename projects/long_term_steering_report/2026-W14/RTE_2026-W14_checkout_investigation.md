@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved from 37.81% to 39.36% (+1.55pp) in 2026-W14, exceeding the threshold of +0.78pp, while payment visit volume decreased by 10.4% (from 70,721 to 63,361 visits).
+**Overall:** Payment Conversion Rate improved significantly from 37.81% to 39.36% (+1.55pp) in 2026-W14, driven primarily by improvements in the early funnel stages, particularly Select Payment Method (+1.75pp) and Click Submit Form (+0.90pp).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ threshold? | +1.75pp | ✅ |
-| Click Submit Form | ≥ threshold? | +0.90pp | ✅ |
-| FE Validation Passed | ≥ threshold? | -0.46pp | ⚠️ |
-| Enter Fraud Service | ≥ threshold? | -0.21pp | ⚠️ |
-| Approved by Fraud Service | ≥ threshold? | -0.09pp | ⚠️ |
-| Call to PVS | ≥ threshold? | -0.11pp | ⚠️ |
-| Successful Checkout | ≥ threshold? | +0.33pp | ⚠️ |
+| Select Payment Method | Above threshold | +1.75pp | ✅ |
+| Click Submit Form | Above threshold | +0.90pp | ✅ |
+| FE Validation Passed | Below threshold | -0.46pp | ⚠️ |
+| Enter Fraud Service | Below threshold | -0.21pp | ⚠️ |
+| Approved by Fraud Service | Below threshold | -0.09pp | ⚠️ |
+| Call to PVS | Below threshold | -0.11pp | ⚠️ |
+| Successful Checkout | Below threshold | +0.33pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel improvement drove PCR gains:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), representing the largest positive contributor to overall improvement
-- **Country-level divergence in Fraud Service performance:** TK saw Fraud Service approval improve +5.88pp while TO experienced a decline of -4.88pp at the same step
-- **Backend PVS Attempt shows concerning drop:** Backend waterfall reveals PVS Attempt conversion declined -1.25pp (99.46% → 98.21%), partially offsetting gains
-- **FJ dominates volume and contribution:** FJ accounts for 64% of payment visits and showed +2.51pp PCR improvement, primarily driven by Select Payment Method (+2.32pp)
-- **Braintree_ApplePay declined:** Payment method success rate dropped -1.71pp (87.23% → 85.51%) despite being the second-highest volume method
+- **FJ (largest market)** drove the overall improvement with +2.51pp PCR increase, primarily from Select Payment Method (+2.32pp) and improved form submission (+1.41pp)
+- **TK showed strongest growth** (+6.09pp PCR) with significant improvement in Fraud Service approval (+5.88pp GA, +3.85pp Backend)
+- **TO experienced decline** (-5.78pp PCR) due to deteriorating Fraud Service approval rates (-4.88pp GA, -4.24pp Backend), partially offsetting overall gains
+- **Backend PVS Attempt step** showed notable decline (-1.25pp), suggesting potential technical issues between Fraud approval and PVS handoff
+- **Braintree_ApplePay** conversion declined -1.71pp, the largest drop among high-volume payment methods
 
-**Action:** Monitor — The overall PCR improvement is positive and driven by healthy top-of-funnel gains. However, investigate the divergent Fraud Service performance between TK (+5.88pp) and TO (-4.88pp) to understand if policy changes or regional factors are causing inconsistent outcomes.
+**Action:** Monitor — The overall positive trend is healthy, but investigate the Fraud Service approval decline in TO and the PVS Attempt drop in Backend waterfall to prevent potential future degradation.
 
 ---
 
