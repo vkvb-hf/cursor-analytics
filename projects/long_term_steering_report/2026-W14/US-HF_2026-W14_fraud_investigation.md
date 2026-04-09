@@ -10,26 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved significantly from 88.61% to 91.54% (+3.30pp) in 2026-W14, returning to levels consistent with weeks 2026-W09 and 2026-W10.
+**Overall:** The Fraud Approval Rate (FAR) improved significantly from 88.61% to 91.54% (+3.30pp) in W14, returning to levels consistent with W09-W10 after a two-week dip.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within historical range (89-92%) | +3.30pp | ✅ |
-| L1: Country | US exceeds ±2.5% threshold | +3.30pp | ⚠️ |
+| L0: US-HF Trend | FAR within historical range (91.54% vs 8-week avg ~90.9%) | +3.30pp | ✅ |
+| L1: Country | US sole contributor (+3.30pp) | +3.30pp | ⚠️ |
 | L1: Channel - Paid | Stable performance | +0.31pp | ✅ |
 | L1: Channel - Referral | Significant increase | +16.00pp | ⚠️ |
-| PF Block Rate | Dropped from elevated W13 level | -2.68pp | ✅ |
+| Duplicate Rate | Slight increase | +0.92pp | ✅ |
+| PF Block Rate | Sharp decrease from W13 | -2.68pp | ⚠️ |
 
 **Key Findings:**
-- The FAR increase is primarily driven by the **Referral channel**, which saw a +16.00pp improvement (59.79% → 69.35%) while volume decreased by 633 customers
-- **PF Block Rate dropped significantly** from 3.60% to 0.92% (-2.68pp), suggesting a policy or system change that reduced pre-fraud blocks
-- The **Paid channel remains stable** at ~96% FAR with minimal change (+0.31pp), indicating the shift is isolated to Referral
-- **Duplicate Rate increased slightly** (+0.92pp to 26.05%), with Referral channel showing the highest duplicate rate at 32.60% (+14.92%)
-- Overall volume declined by 966 customers (17,575 → 16,609), a -5.5% reduction week-over-week
+- The FAR increase is primarily driven by the **Referral channel**, which jumped from 59.79% to 69.35% (+16.00pp) despite lower volume (3,648 → 3,015 customers)
+- **PF Block Rate dropped significantly** from 3.60% to 0.92% (-2.68pp), which directly contributes to higher approval rates
+- The **Paid channel remains stable** at 96.46% (+0.31pp), representing 82% of total volume
+- **Overall volume declined** by 5.5% (17,575 → 16,609 customers), consistent with a downward trend from W10's peak of 20,601
+- **Duplicate Rate increased slightly** to 26.05% (+0.92pp), with Referral channel showing higher duplicate activity at 32.60% (+14.92pp)
 
-**Action:** **Investigate** — The significant Referral channel improvement (+16.00pp) combined with the sharp PF Block Rate drop (-2.68pp) suggests a recent policy or model change. Verify if any fraud prevention rules were modified in W14 that would explain both the reduced blocking and improved approval rates.
+**Action:** **Investigate** — The sharp drop in PF Block Rate and the unusual +16.00pp swing in the Referral channel warrant investigation to confirm these changes are expected (e.g., policy/model update) rather than indicative of control degradation.
 
 ---
 

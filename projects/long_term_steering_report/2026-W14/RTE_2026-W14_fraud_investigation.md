@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The Fraud Approval Rate improved from 94.14% to 94.72% (+0.61pp) week-over-week, a change that is not statistically significant, with the metric remaining within normal 8-week operating range (93.82% - 94.95%).
+**Overall:** The Fraud Approval Rate improved from 94.14% to 94.72% (+0.58 pp), remaining within normal 8-week fluctuation range and flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within historical range | +0.61pp | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | TO: -4.22pp, TK: +5.01pp | ⚠️ |
-| L1: Channel Category | Both channels within threshold | Paid: +1.00pp, Referral: -1.15pp | ✅ |
+| L0: 8-Week Trend | FAR within historical range (93.82%-94.95%) | +0.61% | ✅ |
+| L1: Country Breakdown | 2 countries exceed ±2.5% threshold (TO, TK) | TO: -4.22%, TK: +5.01% | ⚠️ |
+| L1: Channel Category | Both channels within threshold | Paid: +1.00%, Referral: -1.15% | ✅ |
+| Duplicate Rate | Overall slight decrease | -0.19 pp (14.50%→14.31%) | ✅ |
+| Duplicate Block Rate | Slight increase | +0.40 pp (4.06%→4.46%) | ✅ |
 
 **Key Findings:**
-- **FJ dominates volume and drove improvement:** FJ represents 70% of volume (29,804 customers) and improved FAR by +1.11pp to 95.51%, offsetting declines elsewhere
-- **TO shows concerning pattern:** FAR dropped -4.22pp (92.50% → 88.60%) while Duplicate Rate spiked +70.52% (6.99% → 11.92%), though volume is low (579 customers)
-- **TK improved significantly:** FAR increased +5.01pp (88.42% → 92.86%) with Duplicate Rate declining -37.46%, but volume remains minimal (336 customers)
-- **Overall volume declining:** Total volume dropped from 43,962 to 42,650 (-3.0%), continuing a downward trend from W10 peak of 50,499
-- **Paid channel outperforms Referral:** Paid FAR at 97.60% vs Referral at 81.40%, with Referral showing increased Duplicate Rate (+8.01%)
+- FJ (largest market, 70% of volume) drove the overall FAR improvement with +1.11 pp increase (94.47%→95.51%) while duplicate rate decreased by 2.85%
+- TO showed significant decline in FAR (-4.22 pp to 88.60%) coupled with a 70.52% spike in duplicate rate (6.99%→11.92%), though volume is low (579 customers)
+- TK showed strong FAR improvement (+5.01 pp to 92.86%) with duplicate rate dropping 37.46%, but volume is minimal (336 customers)
+- Overall volume declined 3% week-over-week (43,962→42,650 customers)
+- Paid channel outperforms Referral significantly (97.60% vs 81.40% FAR) with Referral showing elevated duplicate rates (+8.01% increase to 22.61%)
 
-**Action:** Monitor — The overall change is not significant and the metric remains stable. Continue monitoring TO for sustained FAR decline and elevated duplicate activity; no immediate escalation required given low volume impact.
+**Action:** Monitor — The overall change is not significant and driven by positive movement in the largest market (FJ). Continue monitoring TO for potential duplicate rate issues, but low volume does not warrant immediate escalation.
 
 ---
 

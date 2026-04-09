@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 94.16% to 93.64% (-0.55pp) in W14, continuing a 4-week downward trend from the W11 peak of 94.9%.
+**Overall:** AR Overall declined by 0.55 percentage points (94.16% → 93.64%) in W14, continuing a 4-week downward trend from the peak of 94.9% in W11.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Trend | 4 consecutive weeks of decline (W11→W14) | -1.26pp cumulative | ⚠️ |
-| L1 Country | DK (-2.78pp), AT (-2.51pp) exceed threshold | -2.78pp max | ⚠️ |
-| L1 PaymentMethod | Apple Pay lowest at 87.52% | -0.85pp | ✅ |
-| L1 PaymentProvider | ProcessOut lowest at 91.13% | -0.83pp | ✅ |
+| L0: Overall Trend | 4 consecutive weeks of decline | -0.55 pp | ⚠️ |
+| L1: Country Breakdown | 3 countries exceed ±2.5% threshold | DK -2.78 pp, AT -2.51 pp, CH +2.98 pp | ⚠️ |
+| L1: Payment Method | Apple Pay lowest performer | -0.85 pp (87.52%) | ⚠️ |
+| L1: Payment Provider | ProcessOut underperforming | -0.83 pp (91.13%) | ⚠️ |
 
 **Key Findings:**
-- **Denmark (DK)** showed the largest country-level decline at -2.78pp (96.72% → 94.03%) with 30,036 orders, significantly exceeding the ±2.5% threshold
-- **Austria (AT)** also exceeded threshold with -2.51pp decline (95.19% → 92.8%) on 12,458 orders
-- **Sustained downward trend:** AR Overall has declined for 4 consecutive weeks, dropping 1.26pp from the W11 peak (94.9% → 93.64%)
-- **Volume decline:** Order volume decreased 6.9% WoW (842,480 → 784,389), continuing a 4-week volume contraction from W10's 916,831
-- **Switzerland (CH)** was the only country showing significant improvement at +2.98pp (91.21% → 93.93%), though on low volume (2,174 orders)
+- Denmark (DK) showed the largest decline at -2.78 pp (96.72% → 94.03%) with 30,036 orders, representing a significant regional degradation
+- Austria (AT) declined -2.51 pp (95.19% → 92.8%) with 12,458 orders, flagged as exceeding threshold
+- Apple Pay continues to be the lowest performing payment method at 87.52% (-0.85 pp), processing 105,676 orders
+- ProcessOut is the weakest payment provider at 91.13% (-0.83 pp) handling 226,595 orders (largest provider volume after Credit Card)
+- Volume decreased by ~58,000 orders (842,480 → 784,389) week-over-week, a 6.9% reduction
 
-**Action:** **Investigate** – Prioritize root cause analysis for Denmark and Austria, which together account for 42,494 orders and showed declines exceeding the 2.5pp threshold. The sustained 4-week declining trend warrants deeper examination of country-specific factors.
+**Action:** Investigate — Focus investigation on DK and AT country-specific issues, and conduct deeper analysis into Apple Pay + ProcessOut combination performance to identify potential payment processing degradation.
 
 ---
 

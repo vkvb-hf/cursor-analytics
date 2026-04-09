@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate improved from 68.50% to 70.90% (+2.40pp) week-over-week, with volume increasing by 3.2% (35,556 → 36,703 eligible orders).
+**Overall:** Dunning Ship Rate improved from 68.50% to 70.90% (+2.40pp) week-over-week, with volume increasing by 3.2% (35,556 → 36,703 eligible orders) during Mid-Cycle payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 68.50% → 70.90% | +2.40pp | ✅ |
 
 **Key Findings:**
-- **Belgium (+35.2% volume)** showed the strongest volume growth while maintaining the highest Ship Rate at 90.50% (+2.63pp), contributing positively to overall performance
-- **Germany (+18.5% volume)** and **France (+13.3% volume)** both expanded significantly with strong Ship Rate improvements of +5.66pp and +4.57pp respectively
-- **PC2 improved substantially** from 43.11% to 45.92% (+2.81pp), indicating better payment conversion at the second collection attempt
-- **Norway volume declined sharply (-32.1%)** with a modest Ship Rate decrease from 81.99% to 79.22% (-2.77pp)
-- **Mix shift favors high-performers:** Higher-performing countries (BE, DE, FR) gained volume share while some lower-volume markets contracted
+- **Belgium (BE) drove significant gains:** Volume surged +35.2% with the highest ship rate in the cluster at 90.50% (+2.63pp), contributing disproportionately to overall improvement
+- **Germany (DE) and France (FR) showed strong performance:** DE volume grew +18.5% with ship rate improving to 74.75% (+5.66pp); FR volume grew +13.3% with ship rate reaching 70.12% (+4.57pp)
+- **PC2 conversion improved substantially:** +2.81pp (43.11% → 45.92%) indicates better payment completion in the dunning funnel
+- **Mix shift toward higher-performing markets:** Volume declined in lower-performing markets (NO -32.1%, SE -37.1%) while expanding in higher-performing ones (BE, DE, FR, DK)
+- **Pre-Dunning AR slight decline:** -0.46pp drop warrants monitoring but did not prevent overall improvement
 
-**Action:** Monitor — The improvement is broad-based across most countries with genuine rate increases (not purely mix-driven). Continue tracking to confirm trend sustainability.
+**Action:** Monitor — The +2.40pp improvement is driven by genuine performance gains in key markets (DE, FR, BE) combined with favorable mix shift. Continue tracking BE and DE momentum while monitoring the Pre-Dunning AR slight decline.
 
 ---
 

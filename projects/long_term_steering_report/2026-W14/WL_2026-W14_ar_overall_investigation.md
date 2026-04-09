@@ -9,26 +9,24 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 89.72% to 89.33% (-0.39 pp) in 2026-W14, with order volume decreasing to 165,018 orders.
+**Overall:** AR Overall declined from 89.72% to 89.33% (-0.39 pp) in W14, reversing the positive trend observed in W13 and representing the largest weekly decline in the 8-week period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Overall | Week-over-week trend | -0.39 pp | ⚠️ |
-| L1: Country | AO exceeds ±2.5% threshold | -3.12 pp | ⚠️ |
-| L1: PaymentMethod | Others highest decline | -1.18 pp | ✅ |
-| L1: PaymentProvider | Unknown highest decline (low volume) | -4.76 pp | ✅ |
-| L1: PaymentProvider | Adyen notable decline | -1.34 pp | ⚠️ |
+| L0: WL Trend | Week-over-week change | -0.39 pp | ⚠️ |
+| L1: Country | AO exceeds ±2.5% threshold | -3.12% | ⚠️ |
+| L1: Payment Method | Others highest decline | -1.18% | ✅ |
+| L1: Payment Provider | Adyen notable decline | -1.34% | ⚠️ |
 
 **Key Findings:**
-- AO (Angola) experienced the largest country-level decline at -3.12 pp (from 87.96% to 85.22%), exceeding the ±2.5% threshold with 15,776 orders
-- PaymentProvider Adyen showed a -1.34 pp decline (from 90.82% to 89.60%) affecting 38,117 orders, making it the most impactful provider-level change by volume
-- Overall order volume dropped by 4,649 orders (from 169,667 to 165,018) compared to the prior week
-- The 8-week trend shows the current rate (89.33%) remains above the W07-W09 baseline (~88.2%) but has reversed the positive momentum seen in W10-W13
-- PaymentProvider "Unknown" showed a -4.76 pp decline but with minimal volume impact (only 35 orders)
+- **AO country is the primary driver:** AO experienced a -3.12% decline (85.22% from 87.96%), the only country exceeding the ±2.5% threshold, with 15,776 orders impacted
+- **Adyen payment provider underperformance:** Adyen declined -1.34% (89.60% from 90.82%) across 38,117 orders, showing the largest decline among major payment providers
+- **Volume decline alongside rate decline:** Order volume dropped from 169,667 to 165,018 (-2.7%), continuing a downward volume trend from W10's peak of 179,964
+- **Credit Card method affected:** The dominant payment method (Credit Card, 117,492 orders) declined -0.48 pp, contributing significantly to overall decline due to volume weight
 
-**Action:** Investigate — Focus investigation on AO (Angola) country performance and Adyen payment provider, as these represent the primary drivers of the decline with material order volumes.
+**Action:** **Investigate** – Focus immediate analysis on AO country performance and Adyen payment provider to identify root cause of the -3.12% and -1.34% declines respectively.
 
 ---
 

@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.37pp (26.77% → 26.41%) in 2026-W14, with 44,056 payment visits, driven primarily by a decrease in the "Select Payment Method" step.
+**Overall:** Payment Conversion Rate declined by -0.37pp (from 26.77% to 26.41%) in 2026-W14, with 44,056 payment visits representing a -0.7% volume decrease week-over-week.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate drop exceeds threshold | -0.42pp | ⚠️ |
-| Click Submit Form | Within normal range | +0.02pp | ✅ |
-| FE Validation Passed | Rate drop exceeds threshold | -0.41pp | ⚠️ |
-| Enter Fraud Service | Within normal range | +0.12pp | ✅ |
-| Approved by Fraud Service | Within normal range | -0.00pp | ✅ |
-| Call to PVS | Rate drop exceeds threshold | -0.24pp | ⚠️ |
-| Successful Checkout | Within normal range | +0.26pp | ✅ |
+| Select Payment Method | Rate dropped | -0.42pp | ⚠️ |
+| Click Submit Form | Stable | +0.02pp | ✅ |
+| FE Validation Passed | Rate dropped | -0.41pp | ⚠️ |
+| Enter Fraud Service | Slight improvement | +0.12pp | ✅ |
+| Approved by Fraud Service | Stable | -0.00pp | ✅ |
+| Call to PVS | Rate dropped | -0.24pp | ⚠️ |
+| Successful Checkout | Improved | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method** is the primary driver of PCR decline with -0.42pp conversion drop, indicating users are abandoning before selecting a payment option
-- **FE Validation Passed** dropped -0.41pp, with recovery rate declining from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" remains the top error at 51.6% of errors
-- **Backend data shows positive trend** at Fraud Service approval (+2.75pp), suggesting fraud rules may have been relaxed or optimized
-- **ProcessOut_CreditCard** and **Braintree_ApplePay** both improved significantly (+3.21pp and +2.28pp respectively), partially offsetting funnel losses
-- **Adyen_CreditCard** shows 0% success rate across both weeks (0/108 and 0/212 attempts), indicating a potential integration issue
+- **Top-of-funnel drop:** Select Payment Method conversion decreased by -0.42pp (37.60% → 37.18%), representing the largest negative driver in the GA waterfall
+- **FE Validation degradation:** FE Validation Passed dropped -0.41pp with recovery rate declining from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" errors remain the top issue at 51.6% of all errors
+- **Backend fraud approval improved:** Approved by Fraud Service rate increased significantly by +2.75pp (89.15% → 91.91%), partially offsetting upstream losses
+- **ProcessOut_CreditCard performance improved:** Success rate increased +3.21pp (79.29% → 82.50%), and Braintree_ApplePay improved +2.28pp (75.72% → 78.00%)
+- **Adyen_CreditCard remains non-functional:** 212 attempts in W14 with 0% success rate, consistent with W13 (108 attempts, 0% success)
 
-**Action:** **Investigate** - Focus on the Select Payment Method drop and the Adyen_CreditCard 0% success rate. The upper-funnel decline suggests potential UX issues or page load problems affecting payment method selection.
+**Action:** Monitor – The decline is modest (-0.37pp) with offsetting positive signals in fraud approval and payment method success rates. Investigate the FE Validation "terms_not_accepted" error pattern and confirm Adyen_CreditCard is intentionally disabled or requires remediation.
 
 ---
 

@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved slightly from 43.89% to 44.23% (+0.34pp) week-over-week during Mid-Cycle payday phase, with volume increasing by 531 orders to 21,680 eligible orders.
+**Overall:** Dunning Ship Rate improved modestly from 43.89% to 44.23% (+0.34pp) week-over-week during a stable Mid-Cycle payday phase, with volume increasing by 531 orders (+2.5%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 93.38% → 93.06% | -0.32pp | ⚠️ |
-| Discount % | 18.11% → 17.79% | -0.32pp | ⚠️ |
+| Discount % | 18.11% → 17.79% | -0.32pp | ✅ |
 | PC2 | 43.31% → 48.91% | +5.60pp | ✅ |
 | Ship Rate | 43.89% → 44.23% | +0.34pp | ✅ |
 
 **Key Findings:**
-- PC2 conversion showed strong improvement of +5.60pp (43.31% → 48.91%), driving the overall ship rate gain despite headwinds in earlier funnel steps
-- FJ (largest market at 70% of volume) improved ship rate by +0.74pp (42.78% → 43.52%) while growing volume by 3.2%
-- CF experienced volume growth of +6.8% but ship rate declined -0.70pp (31.08% → 30.38%), indicating potential performance concerns
-- Pre-Dunning AR and Discount % both declined slightly (-0.32pp each), suggesting the improvement was driven by downstream conversion rather than upstream quality
-- Low-tier markets TO and TV showed notable ship rate improvements (+6.52pp and +5.57pp respectively) despite small volumes
+- PC2 metric showed significant improvement (+5.60pp), jumping from 43.31% to 48.91%, which likely contributed to the overall ship rate gain
+- FJ (largest market at 70% of volume) improved ship rate from 42.78% to 43.52% (+0.74pp) while growing volume by 3.2%
+- CF experienced volume growth (+6.8%) but ship rate declined from 31.08% to 30.38% (-0.70pp), indicating potential mix dilution
+- YE (high-performing market at ~60% SR) saw slight volume decline (-1.0%) and ship rate erosion from 60.31% to 59.63% (-0.68pp)
+- Low-tier markets TO and TV showed notable ship rate improvements (+6.52pp and +5.57pp respectively), though on small volumes
 
-**Action:** Monitor – The +0.34pp improvement is modest but positive. Continue tracking PC2 performance and monitor CF's declining ship rate as its volume grows.
+**Action:** Monitor — The modest improvement is positive but marginal; watch CF's declining ship rate despite volume growth and YE's slight erosion in the high-performing segment.
 
 ---
 

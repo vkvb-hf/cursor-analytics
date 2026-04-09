@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined slightly from 30.03% to 29.88% (-0.15pp) on 35,421 payment visits, with the primary degradation occurring at the Select Payment Method step (-0.26pp) and Call to PVS step (-0.53pp), partially offset by improvements in mid-funnel validation steps.
+**Overall:** Payment Conversion Rate declined by -0.15pp (30.03% → 29.88%) on 35,421 payment visits in 2026-W14, driven primarily by a significant drop at the "Call to PVS" step in the GA funnel and country-specific deterioration in KN.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate check | -0.26pp | ⚠️ |
-| Click Submit Form | Rate check | +0.09pp | ✅ |
-| FE Validation Passed | Rate check | +0.21pp | ✅ |
-| Enter Fraud Service | Rate check | +0.20pp | ✅ |
-| Approved by Fraud Service | Rate check | -0.11pp | ⚠️ |
-| Call to PVS | Rate check | -0.53pp | ⚠️ |
-| Successful Checkout | Rate check | +0.25pp | ✅ |
+| Select Payment Method | Above threshold | -0.26pp | ⚠️ |
+| Click Submit Form | Within threshold | +0.09pp | ✅ |
+| FE Validation Passed | Above threshold | +0.21pp | ✅ |
+| Enter Fraud Service | Above threshold | +0.20pp | ✅ |
+| Approved by Fraud Service | Within threshold | -0.11pp | ✅ |
+| Call to PVS | Above threshold | -0.53pp | ⚠️ |
+| Successful Checkout | Above threshold | +0.25pp | ✅ |
 
 **Key Findings:**
-- **KN drove the largest negative impact:** KN experienced a -3.75pp PCR decline (27.15% → 23.40%), with Select Payment Method conversion dropping -3.26pp and backend Checkout Attempt falling -2.86pp
-- **Call to PVS showed significant degradation in GA data:** -0.53pp conversion drop at this step, while backend data shows PVS Attempt dropped -9.71pp (98.79% → 89.07%), indicating a potential technical issue between fraud approval and payment verification
-- **Braintree_CreditCard and Braintree_Paypal underperformed:** Braintree_CreditCard success rate dropped -2.58pp (90.20% → 87.62%) and Braintree_Paypal dropped -1.73pp (92.11% → 90.38%)
-- **ER and GN showed positive offsetting trends:** ER improved +2.04pp and GN improved +4.30pp, both driven by gains at Select Payment Method (+1.60pp and +4.07pp respectively)
-- **PVS failure "Refused(CVC Declined)" increased:** This decline reason grew from 4.2% to 9.8% of failures (+5.58pp share), suggesting potential card validation issues
+- **Call to PVS step shows critical degradation:** GA funnel shows -0.53pp drop in conversion (99.80% → 99.27%), while Backend shows severe -9.71pp decline at PVS Attempt step (98.79% → 89.07%), indicating a potential system issue between fraud approval and payment verification.
+- **KN country is the primary negative driver:** PCR dropped -3.75pp (27.15% → 23.40%) with Select Payment Method conversion falling -3.26pp and Approved by Fraud Service dropping -1.79pp in the GA funnel.
+- **Braintree_CreditCard and Braintree_Paypal payment methods underperforming:** Success rates declined -2.58pp and -1.73pp respectively, with Braintree_CreditCard also showing increased gap in reaching fraud service (+3 cases, +8.65pp share).
+- **ER and GN countries showed positive performance:** ER improved +2.04pp and GN improved +4.30pp, both driven by Select Payment Method gains (+1.60pp and +4.07pp respectively), partially offsetting KN's decline.
+- **PVS failure distribution shifted:** "Insufficient Funds" failures decreased (-20 cases, -6.65pp share) while "CVC Declined" failures increased (+11 cases, +5.58pp share).
 
-**Action:** **Investigate** - The significant backend discrepancy at PVS Attempt (-9.71pp) and the concentrated decline in KN warrant immediate investigation into potential technical issues between Fraud Service approval and PVS handoff, particularly for Braintree payment methods.
+**Action:** Investigate - The significant backend discrepancy at PVS Attempt (-9.71pp) combined with KN's fraud approval degradation (-2.68pp in Backend) requires immediate technical investigation to identify potential system issues or configuration changes affecting the payment verification pipeline.
 
 ---
 

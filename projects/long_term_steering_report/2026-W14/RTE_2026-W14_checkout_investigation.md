@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 37.81% to 39.36% (+1.55pp) in 2026-W14, driven primarily by improvements in the early funnel stages, particularly Select Payment Method (+1.75pp) and Click Submit Form (+0.90pp).
+**Overall:** Payment Conversion Rate improved by +1.55pp (37.81% → 39.36%) in 2026-W14, driven primarily by increased top-of-funnel engagement despite an overall volume decline of -10.4% in payment visits.
 
 **Funnel Analysis:**
 
@@ -25,13 +25,13 @@
 | Successful Checkout | Below threshold | +0.33pp | ✅ |
 
 **Key Findings:**
-- **FJ (largest market)** drove the overall improvement with +2.51pp PCR increase, primarily from Select Payment Method (+2.32pp) and improved form submission (+1.41pp)
-- **TK showed strongest growth** (+6.09pp PCR) with significant improvement in Fraud Service approval (+5.88pp GA, +3.85pp Backend)
-- **TO experienced decline** (-5.78pp PCR) due to deteriorating Fraud Service approval rates (-4.88pp GA, -4.24pp Backend), partially offsetting overall gains
-- **Backend PVS Attempt step** showed notable decline (-1.25pp), suggesting potential technical issues between Fraud approval and PVS handoff
-- **Braintree_ApplePay** conversion declined -1.71pp, the largest drop among high-volume payment methods
+- **Top-of-funnel improvement:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), the largest positive contributor to overall PCR improvement
+- **Country-level variance:** TK showed strong improvement (+6.09pp) driven by Fraud Service approval (+5.88pp), while TO declined (-5.78pp) due to Fraud Service rejection increase (-4.88pp)
+- **FJ dominates contribution:** With 40,637 payment visits (64% of volume), FJ's +2.51pp improvement was the primary driver of overall PCR gains
+- **Backend PVS Attempt degradation:** Backend data shows PVS Attempt step dropped -1.25pp (99.46% → 98.21%), warranting monitoring
+- **Braintree_ApplePay underperformance:** Success rate declined -1.71pp (87.23% → 85.51%) on significant volume (10,528 attempts)
 
-**Action:** Monitor — The overall positive trend is healthy, but investigate the Fraud Service approval decline in TO and the PVS Attempt drop in Backend waterfall to prevent potential future degradation.
+**Action:** Monitor – The overall PCR improvement is positive and driven by legitimate funnel improvements. Continue monitoring Fraud Service performance in TO and the PVS Attempt backend degradation. No immediate escalation required.
 
 ---
 

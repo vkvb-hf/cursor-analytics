@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined marginally by -0.05 percentage points (91.98% → 91.93%) on a volume of 415,885 orders, representing a minor fluctuation within normal operating range.
+**Overall:** AR Overall declined marginally by -0.05 percentage points (91.98% → 91.93%) on volume of 415,885 orders, representing a minor fluctuation within the normal operating range observed over the 8-week period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (91.48%-92.09%) | -0.05 pp | ✅ |
-| L1: Country Breakdown | US only, no countries exceeding ±2.5% threshold | -0.06 pp | ✅ |
-| L1: Payment Method | Minor declines across most methods | -0.29 pp max (Others) | ✅ |
-| L1: Payment Provider | Braintree stable, ProcessOut improved | -0.05 pp to +8.23 pp | ✅ |
+| L0: 8-Week Trend | Volatility within ±0.34pp range | -0.05pp | ✅ |
+| L1: Country Breakdown | US only, no country >±2.5% threshold | -0.06pp | ✅ |
+| L1: PaymentMethod | Others showed largest decline | -0.29pp | ✅ |
+| L1: PaymentProvider | Unknown showed unusual swing | +8.23pp | ⚠️ |
 
 **Key Findings:**
-- The -0.05 pp decline is consistent with normal week-over-week volatility observed in the 8-week trend (range: -0.20 pp to +0.34 pp)
-- PaymentMethod "Others" showed the largest decline at -0.29 pp (98.65% → 98.37%), but represents minimal volume (2,202 orders)
-- Braintree, the dominant payment provider (372,325 orders, ~90% of volume), declined only -0.05 pp (92.49% → 92.44%)
-- ProcessOut showed improvement of +0.38 pp (86.57% → 86.90%) on 41,023 orders
-- Apple Pay improved slightly by +0.15 pp (84.44% → 84.57%) despite having the lowest rate among major payment methods
+- The -0.05pp decline is within normal weekly volatility (8-week range: 91.48% to 92.09%), and reverses the +0.05pp gain from the prior week
+- No country-level anomalies detected; US is the sole country and declined by -0.06pp
+- PaymentMethod "Others" showed the largest decline (-0.29pp) but represents minimal volume (2,202 orders)
+- PaymentProvider "Unknown" showed a +8.23pp improvement, but volume is negligible (249 orders) making this statistically insignificant
+- Primary payment flows (Braintree at 372,325 orders, Credit Card at 305,088 orders) showed stable performance with only -0.05pp and -0.06pp changes respectively
 
-**Action:** Monitor – No investigation required. The change is within normal operating variance, no dimensions exceeded alert thresholds, and the 8-week trend shows stable performance.
+**Action:** **Monitor** – The decline is minimal, within historical volatility, and no significant dimensional drivers were identified. Continue standard monitoring; no immediate investigation required.
 
 ---
 
