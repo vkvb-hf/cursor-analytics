@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 89.23% to 89.84% (+0.68%) in WL 2026-W14, though this change is not statistically significant and follows a downward trend from the 91.99% peak in W11.
+**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) for WL cluster improved slightly from 89.23% to 89.84% (+0.68%) in 2026-W14, representing a partial recovery after two consecutive weeks of decline, though the change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate recovering from W13 dip but below W11 peak | +0.68% | ⚠️ |
+| L0: 8-Week Trend | Rate recovering from W13 low | +0.68% | ✅ |
 | L1: Country Variance | 3 countries exceed ±2.5% threshold (GN, AO, ER) | GN -3.50%, AO -2.99%, ER +3.53% | ⚠️ |
-| L1: Dimension Scan | "Others" payment method dropped significantly | -6.62% | ⚠️ |
-| L2: Root Causes | Insufficient Funds rising in GN (+1.79pp) and AO (+2.34pp) | Mixed | ⚠️ |
-| L3: Related Metrics | All funnel metrics moving in sync (positive) | +0.67% to +1.03% | ✅ |
-| Mix Shift | Volume declining across most countries; no material mix impact | Stable | ✅ |
+| L1: Payment Method | "Others" category declined significantly | -6.62% | ⚠️ |
+| L1: Payment Provider | Braintree improved, ProcessOut declined | Braintree +3.17%, ProcessOut -2.31% | ⚠️ |
+| L2: Root Causes | Insufficient Funds driving declines in GN/AO | +1.79pp (GN), +2.34pp (AO) | ⚠️ |
+| L3: Related Metrics | All AR metrics improved in parallel | +0.67% to +1.03% | ✅ |
 
 **Key Findings:**
-- GN declined -3.50% with Insufficient Funds increasing by +1.79pp (from 13.73% to 15.52%), primarily affecting Braintree (-3.34%) transactions
-- AO declined -2.99% driven by Apple Pay/ProcessOut combination (-9.05%) with Insufficient Funds rising +2.34pp to 31.17% of all transactions
-- ER improved +3.53% with PayPal showing strong recovery (+8.61%) and "Other reasons" declining -1.35pp
-- Overall volume continues downward trend (12,781 vs 15,670 in W07), representing an 18% decline over 8 weeks
-- First Run AR improved +1.03%, suggesting upstream payment acceptance is strengthening
+- **Volume decline continues:** Total order volume dropped from 12,904 to 12,781 (-1.0%), continuing an 8-week downward trend from 15,670 orders in W07
+- **GN underperformance:** GN saw a -3.50% rate decline (82.6% → 79.7%) with Insufficient Funds increasing by +1.79pp, coupled with a significant -14.3% volume drop
+- **AO Apple Pay/ProcessOut issue:** AO declined -2.99% driven specifically by Apple Pay (-9.05%) via ProcessOut (-9.05%), with Insufficient Funds rising +2.34pp
+- **ER positive outlier:** ER improved +3.53% (60.82% → 62.97%) with PayPal showing strong gains (+8.61%) and "Other reasons" declines dropping -1.35pp
+- **Braintree recovery:** Braintree improved +3.17% globally (89.93% → 92.79%), partially offsetting ProcessOut weakness
 
-**Action:** Monitor - The +0.68% improvement is not significant and the metric remains below the W11 peak of 91.99%. Continue monitoring GN and AO for persistent Insufficient Funds issues, particularly the ProcessOut/Apple Pay combination in AO.
+**Action:** **Monitor** - The overall metric change is not significant and represents a recovery from W13. However, continue monitoring GN and AO for sustained Insufficient Funds increases, and investigate the ProcessOut/Apple Pay combination in AO if the trend persists next week.
 
 ---
 
@@ -417,4 +417,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

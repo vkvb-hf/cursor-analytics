@@ -11,28 +11,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate (PCR) for US-HF declined by -0.37pp week-over-week (26.77% → 26.41%) on approximately 44K payment visits.
+**Overall:** Payment Conversion Rate declined by -0.37pp (26.77% → 26.41%) in 2026-W14 on ~44K payment visits, driven primarily by a drop in payment method selection at the top of the funnel.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Entry rate | -0.42pp | ⚠️ |
-| Click Submit Form | Form engagement | +0.02pp | ✅ |
-| FE Validation Passed | Validation | -0.41pp | ⚠️ |
-| Enter Fraud Service | Fraud routing | +0.12pp | ✅ |
+| Select Payment Method | Top-of-funnel engagement | -0.42pp | ⚠️ |
+| Click Submit Form | Form submission intent | +0.02pp | ✅ |
+| FE Validation Passed | Frontend validation | -0.41pp | ⚠️ |
+| Enter Fraud Service | Fraud check entry | +0.12pp | ✅ |
 | Approved by Fraud Service | Fraud approval | -0.00pp | ✅ |
-| Call to PVS | PVS routing | -0.24pp | ⚠️ |
+| Call to PVS | Payment verification call | -0.24pp | ⚠️ |
 | Successful Checkout | Final conversion | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary driver** of the PCR decline, with conversion dropping -0.42pp (37.60% → 37.18%), indicating fewer visitors are initiating the payment process
-- **FE Validation recovery rate decreased by -1.31pp** (75.67% → 74.36%), with "terms_not_accepted" remaining the dominant error type at 51.6% of errors
-- **Backend data shows a significant -0.99pp drop in Checkout Attempt rate** (36.46% → 35.46%), corroborating the top-of-funnel issue
-- **ProcessOut_CreditCard and Braintree_ApplePay both improved** their success rates (+3.21pp and +2.28pp respectively), partially offsetting upstream losses
-- **Fraud Service approval improved significantly in backend data** (+2.75pp), and PVS failures decreased by 55 cases week-over-week
+- **Select Payment Method (-0.42pp)** is the primary driver of the PCR decline, indicating fewer visitors are engaging with payment options after reaching the payment page
+- **FE Validation Recovery Rate dropped by -1.31pp** (75.67% → 74.36%), meaning more customers who encounter frontend errors are abandoning rather than recovering
+- **"terms_not_accepted" errors decreased by -4.50pp** in share, while **APPLEPAY_DISMISSED** remained stable at ~50% of FE errors
+- **ProcessOut_CreditCard success rate improved significantly (+3.21pp)** from 79.29% to 82.50%, partially offsetting funnel losses
+- **Backend data shows Fraud Service approval improved by +2.75pp** (89.15% → 91.91%), indicating reduced fraud blocks
 
-**Action:** **Investigate** - The consistent decline at the Select Payment Method step across both GA and Backend waterfalls suggests a user experience or technical issue at the payment method selection stage. Recommend reviewing any recent UI/UX changes, page load performance, and A/B test exposure during W14.
+**Action:** **Monitor** - The decline is modest (-0.37pp) and partially offset by downstream improvements. Focus monitoring on the payment method selection step and FE validation recovery rate for the next 1-2 weeks.
 
 ---
 
@@ -180,7 +180,7 @@
 
 ## Conclusion
 
-The -0.37pp PCR decline in US-HF for 2026-W14 is primarily driven by reduced conversion at the payment method selection stage (-0.42pp) and decreased FE validation recovery rates (-1.31pp). While downstream metrics including payment method success rates and PVS performance showed improvement, these gains were insufficient to offset the top-of-funnel losses. Investigation should focus on identifying any changes to the payment selection experience or technical issues that may be preventing users from initiating checkout.
+The -0.37pp PCR decline in US-HF for 2026-W14 is primarily attributed to reduced top-of-funnel engagement at the payment method selection step (-0.42pp) and a slight decrease in frontend validation pass rates (-0.41pp with lower recovery). However, the impact was partially mitigated by improvements in payment processor success rates (ProcessOut +3.21pp, ApplePay +2.28pp) and better fraud service approval rates (+2.75pp backend). This appears to be a minor fluctuation within normal operating range rather than a systemic issue requiring immediate escalation.
 
 ---
 
@@ -458,4 +458,4 @@ ORDER BY hellofresh_week, customers DESC
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

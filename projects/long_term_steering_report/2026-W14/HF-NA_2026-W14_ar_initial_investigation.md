@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-NA initial charges improved from 89.1% to 89.66% (+0.63%) in 2026-W14, representing a recovery from the prior week's decline but remaining within normal fluctuation range and not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for HF-NA initial charges improved from 89.1% to 89.66% (+0.63%) in W14, a positive but statistically not significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Rate within historical range (89.37%-90.82%) | +0.63% | ✅ |
-| L1: Country Breakdown | US exceeded ±2.5% threshold | +4.43% (US) | ⚠️ |
-| L1: Payment Method | All methods within threshold | Max +1.90% | ✅ |
-| L1: Payment Provider | Adyen exceeded threshold | -4.74% (Adyen) | ⚠️ |
-| L2: US Deep-Dive | ProcessOut exceeded threshold | +6.32% | ⚠️ |
-| L3: Related Metrics | All AR metrics improved consistently | +0.54% to +0.77% | ✅ |
+| L1: Country Breakdown | US exceeds ±2.5% threshold (+4.43%) | +4.43% US | ⚠️ |
+| L1: Payment Provider | Adyen shows -4.74% decline (low volume: 218) | -4.74% Adyen | ⚠️ |
+| L2: US Deep-Dive | ProcessOut +6.32%, Apple Pay +5.21% | Positive shift | ✅ |
+| L2: Decline Reasons | Insufficient Funds decreased -1.70pp | -1.70pp | ✅ |
+| L3: Related Metrics | All AR metrics improved consistently (+0.54% to +0.77%) | Aligned | ✅ |
 
 **Key Findings:**
-- US drove the overall improvement with a +4.43% rate increase, primarily through ProcessOut (+6.32%) and Apple Pay (+5.21% in US)
-- Decline reasons improved: "Insufficient Funds" decreased by 1.70pp (21.42% → 19.72%) and "Refused" declined by 1.14pp (8.53% → 7.39%)
-- Adyen showed a significant rate drop of -4.74%, but volume decreased substantially (668 → 218 orders), limiting overall impact
-- Volume decreased 32% week-over-week from ~25K to 17K orders, consistent with the declining volume trend observed since W07 (28,927)
-- Mix shift analysis shows both US and CA volume tiers remained stable with no material impact on rate changes
+- **US drove the improvement:** US acceptance rate increased +4.43% (66.77% → 69.72%), with ProcessOut showing +6.32% improvement and Apple Pay +5.21% improvement
+- **Decline reasons improved:** "Insufficient Funds" declined by -1.70pp (21.42% → 19.72%) and "Refused" declined by -1.14pp (8.53% → 7.39%), indicating healthier payment attempts
+- **Volume shift to ProcessOut:** ProcessOut volume increased from 8,584 to 11,351 orders (+32%) while Braintree decreased from 14,632 to 12,833 (-12%), suggesting intentional routing changes
+- **Adyen volume drop:** Adyen volume decreased significantly from 668 to 218 orders (-67%) with rate declining -4.74%, though low volume limits impact
+- **Canada stable:** CA showed minimal change (+0.18%) with consistent volume, not contributing to the overall shift
 
-**Action:** Monitor — The improvement is positive but not significant, and the rate has returned to the 8-week average range. Continue tracking Adyen performance and ProcessOut's sustained improvement.
+**Action:** **Monitor** - The improvement is positive but not statistically significant. Continue monitoring ProcessOut performance as volume shifts toward this provider. No escalation needed.
 
 ---
 
@@ -337,4 +337,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

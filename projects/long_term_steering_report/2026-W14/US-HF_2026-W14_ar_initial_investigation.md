@@ -10,27 +10,29 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for US-HF improved significantly from 87.53% to 88.84% (+1.50%) in 2026-W14, representing a recovery from the prior week's decline.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF Initial Charges improved from 87.53% to 88.84% (+1.50%) in 2026-W14, a statistically significant positive change on 11,716 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (87.53%-90.11%) | +1.31pp | ✅ |
-| L1: Country Impact | US exceeded ±2.5% threshold (+4.43%) | +2.95pp | ⚠️ |
-| L1: PaymentMethod | Apple Pay exceeded threshold (+2.60%) | +2.21pp | ⚠️ |
-| L1: PaymentProvider | ProcessOut near threshold (+2.07%) | +1.82pp | ✅ |
-| L2: US Deep-Dive | ProcessOut +6.32%, applepay +5.21% | Multiple drivers | ⚠️ |
-| L3: Related Metrics | All AR metrics improved consistently (+1.37% to +1.53%) | Aligned | ✅ |
+| L0: 8-Week Trend | Rate recovering from W13 dip but below W11 peak (90.11%) | +1.50% | ✅ |
+| L1: Country | US drove all change (+4.43% change, exceeds ±2.5% threshold) | +4.43% | ⚠️ |
+| L1: PaymentMethod | Apple Pay improved most (+2.60%), flagged | +2.60% | ⚠️ |
+| L1: PaymentProvider | ProcessOut improved (+2.07%), Braintree stable (+0.56%) | +2.07% | ✅ |
+| L2: US PaymentMethod | applepay +5.21%, credit_card +4.26% drove gains | +5.21% | ⚠️ |
+| L2: US PaymentProvider | ProcessOut +6.32% (11,351 vol), Braintree -1.01% | +6.32% | ⚠️ |
+| L2: Decline Reasons | Insufficient Funds -1.70pp, Refused -1.14pp | -1.70pp | ✅ |
+| L3: Related Metrics | All AR metrics improved consistently (+1.37% to +1.53%) | +1.45% avg | ✅ |
 
 **Key Findings:**
-- **ProcessOut volume shift driving improvement:** ProcessOut volume increased from 8,584 to 11,351 orders (+32%) with acceptance rate improving +6.32%, while Braintree volume decreased from 14,632 to 12,833 (-12%)
-- **Decline reasons improved:** "Insufficient Funds" declines dropped by 1.70pp (21.42% → 19.72%) and "Refused" declines dropped by 1.14pp (8.53% → 7.39%)
-- **Apple Pay showing strong recovery in US:** Apple Pay acceptance improved +5.21% (66.49% → 69.95%) with volume increasing from 7,696 to 8,283 orders
-- **Volume remains suppressed:** Current week volume of 11,716 orders is significantly below 8-week highs (21,838 in W07), though up 7% from prior week
-- **Credit card acceptance improved:** US credit card rate increased from 65.85% to 68.66% (+4.26%), the largest payment method by volume
+- **ProcessOut performance surge:** US ProcessOut acceptance rate jumped +6.32% (72.97% → 77.59%) with volume increasing from 8,584 to 11,351 orders, indicating improved provider routing or processing
+- **Decline reason reduction:** Insufficient Funds declined by 1.70pp (21.42% → 19.72%) and Refused declined by 1.14pp (8.53% → 7.39%), directly contributing to the AR improvement
+- **Apple Pay momentum:** applepay in US improved +5.21% (66.49% → 69.95%) on 8,283 orders, suggesting better mobile payment processing
+- **Volume shift to ProcessOut:** Braintree volume decreased (14,632 → 12,833) while ProcessOut volume increased (8,584 → 11,351), with ProcessOut showing better performance
+- **Recovery pattern:** W14 rate (88.84%) rebounds from W13 dip (87.53%) but remains below the W11 peak of 90.11%
 
-**Action:** **Monitor** - The improvement appears driven by favorable mix shift toward ProcessOut and reduced decline rates. Continue monitoring ProcessOut performance and volume allocation between providers.
+**Action:** **Monitor** - This is a positive improvement driven by reduced decline rates and strong ProcessOut performance. Continue monitoring to confirm the trend sustains and investigate whether the volume shift toward ProcessOut is intentional routing optimization.
 
 ---
 
@@ -334,4 +336,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

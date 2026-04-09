@@ -1,52 +1,51 @@
-# Fraud Investigation: HF-INTL 2026-W14
+# Fraud Investigation: WL 2026-W14
 
 **Metric:** Fraud Approval Rate  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 91.79% → 91.70% (-0.10%)  
-**Volume:** 37,558 customers reaching fraud service  
+**Observation:** 92.73% → 93.06% (+0.35%)  
+**Volume:** 13,609 customers reaching fraud service  
 **Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-INTL declined marginally from 91.79% to 91.70% (-0.10%) in 2026-W14, a statistically insignificant change within normal operating variance.
+**Overall:** The Fraud Approval Rate (FAR) for WL cluster improved marginally from 92.73% to 93.06% (+0.35%) in 2026-W14, a change that is **not statistically significant** based on the 13,609 customers reaching fraud service.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ Conv | Result |
+| Step | Check | Δ % | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Cluster Trend | FAR within 8-week range (91.58%-92.37%) | -0.10% | ✅ |
-| L1: Country Scan | 2 countries exceed ±2.5% threshold (NZ, LU) | NZ +4.56%, LU +4.71% | ⚠️ |
-| L1: Channel Scan | Both Paid and Referral within threshold | Paid +0.77%, Referral +0.18% | ✅ |
-| L2: NZ Deep-Dive | Referral channel drove improvement | Referral +24.38% | ✅ |
-| L2: LU Deep-Dive | Low volume (77 customers), high variance expected | Referral +90.38% | ✅ |
+| L0: 8-Week Trend | FAR within normal range (89.36%-94.31%) | +0.35% | ✅ |
+| L1: Country Scan | KN exceeds ±2.5% threshold | -2.90% | ⚠️ |
+| L1: Channel Scan | No channels exceed threshold | +0.28% / -1.40% | ✅ |
+| L2: KN Deep-Dive | Referral channel severe degradation | -16.06% | ⚠️ |
 
 **Key Findings:**
-- The -0.10% FAR decline is not significant and falls within the normal 8-week fluctuation range (91.58% to 92.37%)
-- NZ showed a notable FAR improvement (+4.56%) driven by decreased duplicate rate (-7.76%), lower duplicate blocks (-15.82%), and reduced payment fraud blocks (-11.39%) in the Referral channel
-- LU experienced a +4.71% FAR increase but with very low volume (77 customers), making this statistically unreliable
-- Volume dropped significantly from 46,689 to 37,558 customers (-19.6% WoW), which may amplify percentage fluctuations
-- Duplicate Block Rate increased cluster-wide from 6.61% to 7.42% (+0.81pp), partially offsetting FAR improvements in flagged countries
+- **KN Referral channel critically impacted:** FAR dropped 16.06% (84.3% → 70.8%) with duplicate rate surging +74.36% and duplicate block rate up +92.36%, indicating a likely voucher abuse campaign targeting referral signups
+- **KN duplicate metrics spiking:** Country-level duplicate rate increased +32.40% and duplicate block rate rose +42.15%, driving the -2.90% FAR decline in KN
+- **Payment fraud blocks decreased significantly in KN:** PF Block rate dropped -80.55% (0.25% → 0.05%), suggesting fraud vectors shifted from payment fraud to voucher/duplicate abuse
+- **Overall cluster stability maintained:** Despite KN issues, the WL cluster FAR remains stable at 93.06%, within the 8-week range, due to KN's relatively small volume (2,310 of 13,609 total)
+- **Volume trend declining:** Cluster volume decreased from 19,099 (W07) to 13,609 (W14), a 29% reduction over 8 weeks
 
-**Action:** Monitor — No immediate action required. The overall change is not significant, and country-level movements are either positive (NZ) or low-volume noise (LU).
-
----
+**Action:** **Investigate** — The KN Referral channel requires immediate attention due to the severe FAR decline (-16.06%) driven by duplicate abuse. Recommend reviewing duplicate detection rules and referral voucher controls specific to KN market.
 
 ---
 
-## L0: 8-Week Trend (HF-INTL)
+---
+
+## L0: 8-Week Trend (WL)
 
 | Week | FAR % | Dup Rate % | Dup Block % | PF Block % | Volume | Δ FAR % |
 |------|-------|------------|-------------|------------|--------|---------|
-| 2026-W14 | 91.70% | 30.22% | 7.42% | 0.25% | 37,558 | -0.10% ← REPORTED CHANGE |
-| 2026-W13 | 91.79% | 30.52% | 6.61% | 0.27% | 46,689 | -0.17% |
-| 2026-W12 | 91.94% | 30.60% | 6.86% | 0.20% | 44,707 | +0.25% |
-| 2026-W11 | 91.72% | 29.91% | 7.11% | 0.15% | 49,927 | -0.70% |
-| 2026-W10 | 92.36% | 29.84% | 6.44% | 0.22% | 52,844 | -0.01% |
-| 2026-W09 | 92.37% | 29.17% | 6.28% | 0.37% | 54,963 | +0.86% |
-| 2026-W08 | 91.58% | 29.98% | 7.05% | 0.26% | 54,577 | -0.44% |
-| 2026-W07 | 91.99% | 29.94% | 6.76% | 0.16% | 54,624 | - |
+| 2026-W14 | 93.06% | 15.81% | 5.25% | 0.84% | 13,609 | +0.35% ← REPORTED CHANGE |
+| 2026-W13 | 92.73% | 15.53% | 5.07% | 0.80% | 14,394 | -0.32% |
+| 2026-W12 | 93.03% | 15.96% | 4.88% | 0.43% | 15,081 | -1.35% |
+| 2026-W11 | 94.31% | 14.77% | 4.13% | 0.35% | 16,403 | +0.50% |
+| 2026-W10 | 93.84% | 15.79% | 4.48% | 0.45% | 17,316 | +0.41% |
+| 2026-W09 | 93.46% | 15.27% | 4.66% | 0.54% | 16,428 | +0.09% |
+| 2026-W08 | 93.37% | 15.19% | 4.89% | 0.49% | 16,797 | +4.50% |
+| 2026-W07 | 89.36% | 14.40% | 4.28% | 5.17% | 19,099 | - |
 
 ---
 
@@ -54,15 +53,12 @@
 
 | Country | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |---------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| CH | 92.9→90.6 | 90.60% | -2.47% | 11.11% | -3.17% | 4.27% | +160.68% | 0.00% | -100.00% | 117 |  |
-| AT | 92.9→90.8 | 90.79% | -2.24% | 23.10% | +21.46% | 7.75% | +73.96% | 0.00% | -100.00% | 619 |  |
-| FR | 88.8→88.0 | 87.97% | -0.93% | 25.90% | +0.83% | 11.26% | +17.99% | 0.17% | -15.51% | 9,239 |  |
-| GB | 92.4→92.7 | 92.73% | +0.39% | 39.58% | -1.89% | 6.53% | +3.94% | 0.37% | +54.66% | 8,861 |  |
-| AU | 91.9→92.5 | 92.46% | +0.58% | 36.22% | +2.06% | 6.45% | -2.50% | 0.40% | +1.72% | 3,009 |  |
-| NZ | 85.6→89.5 | 89.51% | +4.56% | 35.97% | -7.76% | 7.77% | -15.82% | 1.63% | -11.39% | 734 | ⚠️ |
-| LU | 93.0→97.4 | 97.40% | +4.71% | 9.09% | - | 0.00% | - | 0.00% | - | 77 | ⚠️ |
+| KN | 92.9→90.2 | 90.22% | -2.90% | 9.13% | +32.40% | 8.23% | +42.15% | 0.04% | -80.55% | 2,310 | ⚠️ |
+| CG | 92.6→93.5 | 93.52% | +0.98% | 12.63% | -2.05% | 4.38% | +8.03% | 1.54% | -3.56% | 2,145 |  |
+| AO | 86.2→88.1 | 88.13% | +2.28% | 26.84% | +1.91% | 11.18% | +2.41% | 0.00% | -100.00% | 868 |  |
+| CK | 91.7→94.0 | 94.02% | +2.49% | 24.84% | -6.67% | 5.01% | -18.16% | 0.08% | - | 2,576 |  |
 
-**Countries exceeding ±2.5% threshold:** NZ, LU
+**Countries exceeding ±2.5% threshold:** KN
 
 ---
 
@@ -72,12 +68,12 @@
 
 | Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 96.9→97.6 | 97.60% | +0.77% | 30.16% | -2.11% | 1.48% | -9.88% | 0.25% | -14.75% | 27,353 |  |
-| Referral | 75.7→75.9 | 75.88% | +0.18% | 30.39% | +2.58% | 23.32% | +4.48% | 0.24% | +19.34% | 10,205 |  |
+| Paid | 96.1→96.3 | 96.34% | +0.28% | 13.87% | +2.29% | 1.88% | +17.17% | 0.91% | +5.15% | 11,510 |  |
+| Referral | 76.1→75.0 | 75.04% | -1.40% | 26.44% | +4.12% | 23.77% | +6.32% | 0.43% | -6.22% | 2,099 |  |
 
 ---
 
-## L2: NZ Deep-Dive
+## L2: KN Deep-Dive
 
 ### Channel Category
 
@@ -85,36 +81,17 @@
 
 | Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 94.5→96.7 | 96.75% | +2.40% | 35.44% | -4.78% | 0.18% | -61.78% | 1.99% | +5.09% | 553 |  |
-| Referral | 54.2→67.4 | 67.40% | +24.38% | 37.57% | -16.98% | 30.94% | -23.08% | 0.55% | -67.04% | 181 | ⚠️ |
+| Paid | 93.6→91.4 | 91.38% | -2.40% | 7.84% | +30.32% | 6.97% | +39.00% | 0.05% | -80.95% | 2,180 |  |
+| Referral | 84.3→70.8 | 70.77% | -16.06% | 30.77% | +74.36% | 29.23% | +92.36% | 0.00% | - | 130 | ⚠️ |
 
 ### Payment Method (Payment Fraud Block Rate)
 
 | Payment Method | Curr vs Prev | PF Block % | Δ % | Volume | Flag |
 |----------------|--------------|------------|-----|--------|------|
-| Others | 1.96→1.70 | 1.70% | -13.09% | 706 | ⚠️ |
+| Paypal | 0.00→0.00 | 0.00% | - | 235 |  |
+| Others | 0.25→0.05 | 0.05% | -80.56% | 2,040 | ⚠️ |
 
-**Root Cause:** Dup Rate ↓ + Dup Block ↓ + PF Block ↓
-
----
-
-## L2: LU Deep-Dive
-
-### Channel Category
-
-**Note:** Channel mix shifts can significantly impact country-level FAR.
-
-| Category | Curr vs Prev | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|--------------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 98.7→100.0 | 100.00% | +1.32% | 10.94% | - | 0.00% | - | 0.00% | - | 64 |  |
-| Referral | 44.4→84.6 | 84.62% | +90.38% | 0.00% | - | 0.00% | - | 0.00% | - | 13 | ⚠️ |
-
-### Payment Method (Payment Fraud Block Rate)
-
-| Payment Method | Curr vs Prev | PF Block % | Δ % | Volume | Flag |
-|----------------|--------------|------------|-----|--------|------|
-
-**Root Cause:** Requires investigation
+**Root Cause:** Dup Rate ↑ + Dup Block ↑ + PF Block ↓
 
 ---
 
@@ -125,8 +102,7 @@
 
 | Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
 |---------|------------|----------------|----------|-----------|----------|------------|
-| NZ | ↑ +4.56% | Referral +24.4% | -7.8% | -15.8% | -11.4% | Dup Rate ↓ + Dup Block ↓ + PF Block ↓ |
-| LU | ↑ +4.71% | Referral +90.4% | +0.0% | +0.0% | +0.0% | Requires investigation |
+| KN | ↓ -2.90% | Referral -16.1% | +32.4% | +42.2% | -80.6% | Dup Rate ↑ + Dup Block ↑ + PF Block ↓ |
 
 ---
 
@@ -138,7 +114,7 @@
 ```sql
 
 WITH params AS (
-  SELECT '2026-W14' as affected_week, 'HF-INTL' as cluster
+  SELECT '2026-W14' as affected_week, 'WL' as cluster
 ),
 completed_weeks AS (
   SELECT hellofresh_week as week
@@ -194,7 +170,7 @@ ORDER BY week DESC
 ```sql
 
 WITH params AS (
-  SELECT '2026-W14' as affected_week, 'HF-INTL' as cluster
+  SELECT '2026-W14' as affected_week, 'WL' as cluster
 ),
 weeks AS (
   SELECT 
@@ -304,7 +280,7 @@ ORDER BY far_delta ASC
 ```sql
 
 WITH params AS (
-  SELECT '2026-W14' as affected_week, 'HF-INTL' as cluster
+  SELECT '2026-W14' as affected_week, 'WL' as cluster
 ),
 weeks AS (
   SELECT 

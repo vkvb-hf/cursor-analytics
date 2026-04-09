@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined from 94.16% to 93.64% (-0.55%) in 2026-W14, representing a statistically non-significant change across 784,389 orders.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined from 94.16% to 93.64% (-0.55%) in 2026-W14, a change flagged as not statistically significant, with volume decreasing from 842,480 to 784,389 orders (-6.9%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | First authorization attempt | -0.86% | ⚠️ |
-| 2_PreDunningAR | Pre-dunning recovery | -0.55% | ⚠️ |
-| 3_PostDunningAR | Post-dunning recovery | -0.42% | ⚠️ |
+| 1_FirstRunAR | First payment attempt success | -0.86% | ⚠️ |
+| 2_PreDunningAR | Recovery before dunning | -0.55% | ⚠️ |
+| 3_PostDunningAR | Recovery after dunning | -0.42% | ⚠️ |
 | 6_PaymentApprovalRate | Final approval | -0.13% | ✅ |
 
 **Key Findings:**
-- **Denmark (DK)** experienced the largest decline at -2.78%, driven by a 100% drop in "None" payment method volume and a +2.09pp increase in "Insufficient Funds" declines
-- **Austria (AT)** declined -2.51%, similarly impacted by loss of "None" payment method volume and +1.51pp increase in Insufficient Funds
-- **Switzerland (CH)** improved +2.98%, primarily through Apple Pay performance increasing +5.35% and Insufficient Funds declines decreasing by -1.96pp
-- **Norway (NO)** shows a major volume shift with -46.6% order reduction, though rate impact was -2.24%
-- All payment providers showed slight declines (-0.40% to -0.83%), with no single provider identified as the primary driver
+- **Denmark (DK)** experienced the largest decline at -2.78%, driven by a complete loss of "None" payment method volume (0 vs 18,900 prior week) and a +2.09pp increase in "Insufficient Funds" declines
+- **Austria (AT)** declined -2.51%, similarly impacted by "None" payment method disappearing (0 vs 3,083) and +1.51pp increase in "Insufficient Funds"
+- **Switzerland (CH)** improved +2.98%, with Apple Pay recovering +5.35% and "Insufficient Funds" declining by -1.96pp
+- **Major volume shifts** observed: Norway (NO) volume dropped -46.6% and Denmark dropped -27.8%, indicating significant mix shift impacts
+- **All payment providers** showed modest declines (-0.40% to -0.83%), with no single provider identified as a systemic issue
 
-**Action:** **Monitor** - The change is not statistically significant. Continue tracking DK and AT for sustained "Insufficient Funds" elevation over the next 1-2 weeks before escalating.
+**Action:** **Monitor** - The decline is not statistically significant and appears driven by transient factors including payment method data anomalies ("None" values) and increased insufficient funds in specific markets. Continue monitoring DK and AT for persistence of elevated insufficient funds rates.
 
 ---
 
@@ -424,4 +424,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

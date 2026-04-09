@@ -3,7 +3,7 @@
 **Metric:** Ship Rate (Good Customers)  
 **Period:** 2026-W13 → 2026-W14  
 **Observation:** 43.89% → 44.23% (+0.77pp, +0.34pppp)  
-**Volume:** 21,688 orders  
+**Volume:** 21,680 orders  
 **Significance:** Not significant
 
 ---
@@ -12,7 +12,7 @@
 
 ## Executive Summary
 
-**Overall:** Ship Rate for RTE cluster improved modestly from 43.89% to 44.23% (+0.34pp, +0.77% relative) in 2026-W14, though the change is not statistically significant.
+**Overall:** Ship Rate for RTE cluster improved marginally from 43.89% to 44.23% (+0.34pp, +0.77% relative change) in 2026-W14, though this change is not statistically significant.
 
 **Funnel Analysis:**
 
@@ -20,17 +20,17 @@
 | ---- | ----- | ------- | ------ |
 | Pre-Dunning AR | 93.38% → 93.06% | -0.32pp | ⚠️ Slight decline |
 | Discount % | 18.11% → 17.79% | -0.32pp | ✅ Lower discounts (favorable) |
-| PC2 (Margin) | 43.31% → 48.91% | +5.60pp | ✅ Strong improvement |
-| Ship Rate | 43.89% → 44.23% | +0.34pp | ✅ Slight improvement |
+| PC2 (Profitability) | 43.31% → 48.91% | +5.60pp | ✅ Strong improvement |
+| Ship Rate | 43.89% → 44.23% | +0.34pp | ✅ Marginal improvement |
 
 **Key Findings:**
-- **FJ dominates contribution** (#1 by volume at 15,154 orders, 70% of cluster) with Ship Rate improving +1.71pp to 43.51%, driving the overall cluster improvement
-- **TO showed largest relative change** (+25.92% relative, +6.52pp absolute) from 25.15% to 31.67%, though low volume (341 orders) limits impact
-- **YE (high-SR market at ~60%) declined** -1.09pp with slight volume drop (-1.0%), partially offsetting gains elsewhere
-- **TZ experienced notable decline** (-10.92% relative, -3.27pp) despite increased discounting (+10.96pp), suggesting discount effectiveness issues
-- **No Simpson's Paradox detected** - while TV and TT had volume drops >25%, they are low-SR markets (<35%), and their improved SR contributed positively to the overall trend
+- **FJ dominates contribution** (#1 by contribution): Ship Rate improved +1.73pp (42.78% → 43.52%) with volume growth of +3.2%, driving most of the cluster improvement
+- **TO showed strongest relative change** (#1 by change): Ship Rate surged +25.92pp (25.15% → 31.67%), though low volume (341 orders) limits overall impact
+- **YE (high-SR market) declined:** Ship Rate dropped -1.13pp (60.31% → 59.63%) with -1.0% volume decline; PC2 spiked +26.02pp suggesting profitability focus may be affecting ship decisions
+- **Mixed signals in smaller markets:** TV and TT showed strong SR improvements (+22.10pp and +11.10pp respectively) but both experienced significant volume drops (-26.0% and -34.5%)
+- **No Simpson's Paradox detected:** YE is the only high-SR market (>50%) but its volume drop of -1.0% is well below the 30% threshold
 
-**Action:** **Monitor** - The improvement is not statistically significant and driven primarily by FJ's modest gains. Continue tracking TZ's discount effectiveness and YE's slight softening in the high-SR tier.
+**Action:** Monitor — The change is not statistically significant and metrics are moving in generally favorable directions (lower discounts, higher profitability). Continue monitoring FJ performance as the primary volume driver.
 
 ---
 
@@ -40,8 +40,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 21,154 | 43.89% | - | 93.38% | - | 18.11% | - | 43.31% | - |
-| 2026-W14 | Mid-Cycle | 21,688 | 44.23% | +0.77pp | 93.06% | -0.34pp | 17.79% | -1.77pp | 48.91% | +12.93pp |
+| 2026-W13 | Mid-Cycle | 21,149 | 43.89% | - | 93.38% | - | 18.11% | - | 43.31% | - |
+| 2026-W14 | Mid-Cycle | 21,680 | 44.23% | +0.77pp | 93.06% | -0.34pp | 17.79% | -1.77pp | 48.91% | +12.93pp |
 
 ---
 
@@ -49,8 +49,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 14,686 | 42.78% | - | 93.97% | - | 18.1% | - | 44.46% | - |
-| 2026-W14 | Mid-Cycle | 15,154 | 43.51% | +1.71pp | 93.62% | -0.37pp | 17.71% | -2.15pp | 49.74% | +11.88pp |
+| 2026-W13 | Mid-Cycle | 14,683 | 42.78% | - | 93.97% | - | 18.1% | - | 44.46% | - |
+| 2026-W14 | Mid-Cycle | 15,148 | 43.52% | +1.73pp | 93.62% | -0.37pp | 17.71% | -2.15pp | 49.74% | +11.88pp |
 
 ---
 
@@ -58,8 +58,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 3,526 | 60.32% | - | 88.62% | - | 15.9% | - | 40.62% | - |
-| 2026-W14 | Mid-Cycle | 3,490 | 59.66% | -1.09pp | 88.15% | -0.53pp | 15.89% | -0.06pp | 51.22% | +26.10pp |
+| 2026-W13 | Mid-Cycle | 3,525 | 60.31% | - | 88.62% | - | 15.9% | - | 40.62% | - |
+| 2026-W14 | Mid-Cycle | 3,488 | 59.63% | -1.13pp | 88.15% | -0.53pp | 15.91% | +0.06pp | 51.19% | +26.02pp |
 
 ---
 
@@ -76,8 +76,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 2,060 | 31.12% | - | 93.70% | - | 20.13% | - | 39.4% | - |
-| 2026-W14 | Mid-Cycle | 2,199 | 30.38% | -2.38pp | 93.48% | -0.23pp | 19.96% | -0.84pp | 36.82% | -6.55pp |
+| 2026-W13 | Mid-Cycle | 2,059 | 31.08% | - | 93.70% | - | 20.14% | - | 39.41% | - |
+| 2026-W14 | Mid-Cycle | 2,199 | 30.38% | -2.25pp | 93.47% | -0.25pp | 19.96% | -0.89pp | 36.82% | -6.57pp |
 
 ---
 
@@ -103,8 +103,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 110 | 30.00% | - | 96.29% | - | 19.12% | - | 25.99% | - |
-| 2026-W14 | Mid-Cycle | 72 | 33.33% | +11.10pp | 97.20% | +0.95pp | 20.84% | +9.00pp | 29.02% | +11.66pp |
+| 2026-W13 | Mid-Cycle | 110 | 30.00% | - | 96.27% | - | 19.12% | - | 25.99% | - |
+| 2026-W14 | Mid-Cycle | 72 | 33.33% | +11.10pp | 97.20% | +0.97pp | 20.84% | +9.00pp | 29.02% | +11.66pp |
 
 ---
 
@@ -120,9 +120,9 @@
 
 | Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
 | ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
-| FJ  | Medium | 14,686 | 15,154 | +3.2% | 42.78% | 43.51% | +0.73pp |
-| YE  | High | 3,526 | 3,490 | -1.0% | 60.32% | 59.66% | -0.66pp |
-| CF  | Medium | 2,060 | 2,199 | +6.7% | 31.12% | 30.38% | -0.74pp |
+| FJ  | Medium | 14,683 | 15,148 | +3.2% | 42.78% | 43.52% | +0.74pp |
+| YE  | High | 3,525 | 3,488 | -1.0% | 60.31% | 59.63% | -0.68pp |
+| CF  | Medium | 2,059 | 2,199 | +6.8% | 31.08% | 30.38% | -0.70pp |
 | TO  | Low | 326 | 341 | +4.6% | 25.15% | 31.67% | +6.52pp |
 | TZ  | Low | 177 | 195 | +10.2% | 29.94% | 26.67% | -3.27pp |
 | TK  | Low | 146 | 146 | +0.0% | 24.66% | 24.66% | +0.00pp |
@@ -152,7 +152,7 @@
 
 ## Conclusion
 
-The RTE cluster's Ship Rate showed a marginal, non-significant improvement of +0.34pp in 2026-W14, primarily driven by FJ's +1.71pp gain which offset declines in YE and CF. The stable payday phase (Mid-Cycle to Mid-Cycle) removes seasonality as a factor, and the reduction in discount percentage alongside improved PC2 margins suggests healthier unit economics despite the modest top-line Ship Rate change. No immediate action is required, but monitoring TZ's declining conversion despite increased discounting warrants attention in coming weeks.
+The RTE cluster's Ship Rate showed a modest, non-significant improvement of +0.34pp in 2026-W14, primarily driven by FJ's volume growth and rate improvement. The payday phase remained stable at Mid-Cycle, eliminating cyclical effects as a factor. Supporting metrics are favorable with reduced discount rates and substantially improved profitability (PC2 +5.60pp), suggesting healthy operational performance despite the marginal Ship Rate movement. No immediate action is required beyond continued monitoring.
 
 ---
 
@@ -438,4 +438,4 @@ ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) D
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

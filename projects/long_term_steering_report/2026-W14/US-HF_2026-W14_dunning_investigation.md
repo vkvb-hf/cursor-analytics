@@ -2,8 +2,8 @@
 
 **Metric:** Ship Rate (Good Customers)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 45.08% → 47.79% (+6.01pp, +2.71pppp)  
-**Volume:** 13,814 orders  
+**Observation:** 45.09% → 47.79% (+5.99pp, +2.70pppp)  
+**Volume:** 13,810 orders  
 **Significance:** Significant
 
 ---
@@ -12,7 +12,7 @@
 
 ## Executive Summary
 
-**Overall:** Ship Rate for US-HF improved significantly in 2026-W14, increasing from 45.08% to 47.79% (+2.71pp, representing a +6.01% relative change) on stable volume of ~13,814 orders.
+**Overall:** Ship Rate for US-HF improved significantly in 2026-W14, increasing from 45.09% to 47.79% (+2.70pp, +5.99% relative change) on stable volume of ~13,810 orders.
 
 **Funnel Analysis:**
 
@@ -20,17 +20,17 @@
 | ---- | ----- | ------- | ------ |
 | Pre-Dunning AR | 92.85% → 92.79% | -0.06pp | ✅ Stable |
 | Discount % | 16.31% → 14.58% | -1.73pp (-10.61% relative) | ✅ Favorable |
-| PC2 (Margin) | 51.11% → 52.82% | +1.71pp (+3.35% relative) | ✅ Improved |
-| Ship Rate | 45.08% → 47.79% | +2.71pp (+6.01% relative) | ✅ Improved |
+| PC2 (Profit Margin) | 51.11% → 52.82% | +1.71pp (+3.35% relative) | ✅ Improved |
+| Ship Rate | 45.09% → 47.79% | +2.70pp | ✅ Improved |
 
 **Key Findings:**
-- **Discount reduction drove improvement:** Discount % decreased significantly by 1.73pp (10.61% relative decline), which has a negative relationship with Ship Rate—lower discounts correlate with higher ship rates
-- **No Simpson's Paradox detected:** US is the sole market in this cluster, with stable volume (+0.0% change) and Medium SR tier, indicating genuine performance improvement rather than mix shift
-- **Margin improved alongside Ship Rate:** PC2 increased by +1.71pp to 52.82%, suggesting shipped orders maintained healthy profitability
-- **Pre-Dunning AR remained stable:** Near-flat change (-0.06pp) indicates consistent upstream payment authorization performance
-- **Payday phase unchanged:** Both weeks were Mid-Cycle, eliminating payday timing as a factor in the improvement
+- Ship Rate improvement of +2.70pp is statistically significant and driven entirely by US (ranked #1 by both contribution and change)
+- Discount percentage decreased substantially (-1.73pp), which per the decision framework has a negative relationship with Ship Rate — yet Ship Rate improved, suggesting other factors dominated
+- PC2 (profit contribution) improved by +1.71pp, indicating shipped orders are more profitable this week
+- Pre-Dunning AR remained essentially flat (-0.06pp), ruling out upstream payment authorization as a driver
+- No Simpson's Paradox detected: US remains in the Medium SR tier with stable volume (+0.0% change) and genuine SR improvement
 
-**Action:** **Monitor** — This is a positive, significant improvement driven by favorable discount dynamics with no signs of mix shift distortion. Continue tracking to confirm the trend sustains into W15.
+**Action:** **Monitor** — This is a positive movement with aligned metrics (lower discounts, higher profitability). Continue tracking to confirm this is a sustainable trend rather than a one-week anomaly.
 
 ---
 
@@ -40,8 +40,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 13,817 | 45.08% | - | 92.85% | - | 16.31% | - | 51.11% | - |
-| 2026-W14 | Mid-Cycle | 13,814 | 47.79% | +6.01pp | 92.79% | -0.06pp | 14.58% | -10.61pp | 52.82% | +3.35pp |
+| 2026-W13 | Mid-Cycle | 13,816 | 45.09% | - | 92.85% | - | 16.31% | - | 51.11% | - |
+| 2026-W14 | Mid-Cycle | 13,810 | 47.79% | +5.99pp | 92.79% | -0.06pp | 14.58% | -10.61pp | 52.82% | +3.35pp |
 
 ---
 
@@ -49,15 +49,15 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 13,817 | 45.08% | - | 92.85% | - | 16.31% | - | 51.11% | - |
-| 2026-W14 | Mid-Cycle | 13,814 | 47.79% | +6.01pp | 92.79% | -0.06pp | 14.58% | -10.61pp | 52.82% | +3.35pp |
+| 2026-W13 | Mid-Cycle | 13,816 | 45.09% | - | 92.85% | - | 16.31% | - | 51.11% | - |
+| 2026-W14 | Mid-Cycle | 13,810 | 47.79% | +5.99pp | 92.79% | -0.06pp | 14.58% | -10.61pp | 52.82% | +3.35pp |
 
 
 ## Mix Shift Analysis (Simpson's Paradox Check)
 
 | Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
 | ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
-| US  | Medium | 13,817 | 13,814 | +0.0% | 45.08% | 47.79% | +2.71pp |
+| US  | Medium | 13,816 | 13,810 | +0.0% | 45.09% | 47.79% | +2.70pp |
 
 *High-SR markets (>50%) with volume drop >30% indicate Simpson's Paradox*
 
@@ -82,7 +82,7 @@
 
 ## Conclusion
 
-The +2.71pp Ship Rate improvement in US-HF during 2026-W14 represents genuine operational performance gains, primarily driven by a substantial reduction in discount rates (-1.73pp) while maintaining stable pre-dunning authorization and improving profit margins. With no evidence of Simpson's Paradox and consistent payday phase timing, this improvement reflects real underlying improvement in customer payment behavior. Continued monitoring is recommended to validate trend persistence.
+The +2.70pp Ship Rate improvement in US-HF during 2026-W14 represents a genuine performance gain, supported by reduced discounting (-1.73pp) and improved profit margins (+1.71pp) on shipped orders. With stable Pre-Dunning AR and no volume mix shifts detected, this appears to be an organic improvement in dunning effectiveness rather than a compositional artifact. Continued monitoring over the next 2-3 weeks is recommended to validate trend persistence.
 
 ---
 
@@ -368,4 +368,4 @@ ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) D
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

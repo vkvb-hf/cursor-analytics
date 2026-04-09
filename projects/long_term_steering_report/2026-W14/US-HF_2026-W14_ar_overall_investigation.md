@@ -10,25 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for US-HF declined marginally from 91.98% to 91.93% (-0.05%) in 2026-W14, representing a statistically non-significant change across 415,885 orders.
+**Overall:** The Pre-Dunning Acceptance Rate for US-HF declined marginally from 91.98% to 91.93% (-0.05%) in Week 14, a change that is not statistically significant and falls within normal weekly fluctuation patterns observed over the 8-week trend.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | 90.46% → 90.67% | +0.24% | ✅ |
-| 2_PreDunningAR | 91.98% → 91.93% | -0.05% | ✅ |
-| 3_PostDunningAR | 93.02% → 92.92% | -0.10% | ✅ |
-| 6_PaymentApprovalRate | 93.59% → 93.63% | +0.05% | ✅ |
+| L0: 8-Week Trend | Rate within normal range (91.48%-92.09%) | -0.05% | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | -0.06% (US) | ✅ |
+| L1: Payment Method | All methods within normal variance | -0.29% to +0.15% | ✅ |
+| L1: Payment Provider | Unknown flagged but low volume (249 orders) | +8.23% (Unknown) | ⚠️ |
+| L3: Related Metrics | Mixed performance, all within tolerance | -0.10% to +0.24% | ✅ |
 
 **Key Findings:**
-- The -0.05% decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 91.48% and 92.09%, with W14 at 91.93% being consistent with this range
-- No countries exceeded the ±2.5% threshold; US (the only country in cluster) showed a minor -0.06% change
-- PaymentProvider "Unknown" flagged with +8.23% improvement, but represents minimal volume (249 orders vs 131 prior week) with no material impact
-- All payment methods showed stable performance: Others (-0.29%), PayPal (-0.11%), Credit Card (-0.06%), Apple Pay (+0.15%)
-- Volume declined by ~2% week-over-week (415,885 vs 424,103), continuing a gradual downward trend observed since W07
+- The -0.05% week-over-week decline returns the rate to the same level as W12 (91.93%), indicating normal oscillation rather than a downward trend
+- Volume decreased by ~8,200 orders (424,103 → 415,885), consistent with a gradual volume decline observed since W07 (470,140)
+- Payment Provider "Unknown" showed a +8.23% improvement but represents only 249 orders (0.06% of total volume), making it statistically insignificant
+- "Others" payment method showed the largest decline (-0.29%) but with minimal volume impact (2,202 orders)
+- First Run AR improved (+0.24%) while Post-Dunning AR declined (-0.10%), suggesting dunning effectiveness may warrant monitoring
 
-**Action:** Monitor — No investigation required. The change is not statistically significant and falls within normal operating variance. Continue standard weekly monitoring.
+**Action:** Monitor — No immediate action required. The change is not significant and all major dimensions remain stable. Continue standard weekly monitoring.
 
 ---
 
@@ -294,4 +295,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

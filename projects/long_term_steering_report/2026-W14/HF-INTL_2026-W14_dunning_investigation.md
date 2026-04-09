@@ -2,36 +2,34 @@
 
 **Metric:** Ship Rate (Good Customers)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 68.51% → 70.91% (+3.50pp, +2.40pppp)  
-**Volume:** 36,718 orders  
+**Observation:** 68.50% → 70.90% (+3.50pp, +2.40pppp)  
+**Volume:** 36,703 orders  
 **Significance:** Significant
 
 ---
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Ship Rate for HF-INTL improved significantly in 2026-W14, increasing from 68.51% to 70.91% (+3.50pp / +2.40pp WoW), driven primarily by strong performance in FR, DE, and BE markets.
+**Overall:** Ship Rate for HF-INTL improved significantly from 68.50% to 70.90% (+3.50pp / +2.40pp week-over-week) in 2026-W14, driven by broad-based gains across most markets with no payday phase transition impact.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ Value | Result |
-| ---- | ----- | ------- | ------ |
-| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ |
-| Pre-Dunning AR | 94.78% → 94.31% | -0.50pp | ⚠️ |
-| Discount % | 13.73% → 13.32% | -2.99pp | ✅ |
-| PC2 (Margin) | 43.11% → 45.92% | +6.52pp | ✅ |
-| Volume | 35,560 → 36,718 | +3.26% | ✅ |
+| Step | Check | Δ Conv | Result |
+| ---- | ----- | ------ | ------ |
+| Pre-Dunning AR | 94.78% → 94.32% | -0.49pp | ⚠️ Slight decline (negative pressure) |
+| Discount % | 13.73% → 13.32% | -2.99pp | ✅ Lower discounts (positive for SR) |
+| PC2 | 43.11% → 45.92% | +6.52pp | ✅ Improved profitability |
+| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ No cycle effect |
+| Mix Shift | NO -32.1%, SE -37.1%, CH -41.0% | High-SR drop | ⚠️ Simpson's Paradox risk |
 
 **Key Findings:**
-- **FR drove the largest contribution** (#1 by contribution): Ship Rate surged +6.97pp (65.55% → 70.12%) with volume increasing +13.3%, accompanied by a significant PC2 improvement of +13.02pp
-- **AT showed the strongest rate improvement** (#1 by change): +11.35pp gain (71.82% → 79.97%) with a notable discount reduction of -21.25pp, suggesting improved customer quality or pricing optimization
-- **DE delivered strong dual performance** (#2 by contribution, #3 by change): +8.18pp SR improvement with +18.5% volume growth and -7.99pp discount reduction
-- **NL is a concern** despite cluster improvement: Ship Rate declined -11.02pp (80.31% → 71.46%) with discount % spiking +53.13pp, warranting investigation
-- **Simpson's Paradox flags**: NO (-32.1% volume), SE (-37.1%), and CH (-41.0%) show significant volume drops in high-SR markets, but positive cluster trend suggests genuine improvement rather than mix shift artifact
+- **AT led rate changes** with +11.29pp improvement (79.93% SR) alongside a significant -21.16pp reduction in discounts, suggesting improved customer quality or collection effectiveness
+- **FR was the largest contributor** to cluster improvement with +6.97pp gain and +13.3% volume growth (6,786 → 7,688 orders), indicating strong market momentum
+- **DE showed strong performance** with +8.19pp SR improvement, +18.5% volume growth, and -7.99pp discount reduction
+- **NL was the only major decliner** with -11.02pp SR drop despite +53.13pp discount increase, suggesting potential collection issues requiring investigation
+- **Simpson's Paradox risk exists** as three high-SR markets (NO, SE, CH) experienced >30% volume drops, though their combined volume is small relative to cluster total
 
-**Action:** **Monitor** - The improvement appears organic across multiple markets with favorable discount and margin trends. Continue monitoring NL for potential intervention and track whether NO/SE/CH volume recovers.
+**Action:** **Monitor** – The improvement appears genuine and broad-based across major markets. Continue tracking NL's performance decline and validate whether NO/SE/CH volume drops are seasonal or systemic.
 
 ---
 
@@ -41,8 +39,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 35,560 | 68.51% | - | 94.78% | - | 13.73% | - | 43.11% | - |
-| 2026-W14 | Mid-Cycle | 36,718 | 70.91% | +3.50pp | 94.31% | -0.50pp | 13.32% | -2.99pp | 45.92% | +6.52pp |
+| 2026-W13 | Mid-Cycle | 35,556 | 68.50% | - | 94.78% | - | 13.73% | - | 43.11% | - |
+| 2026-W14 | Mid-Cycle | 36,703 | 70.90% | +3.50pp | 94.32% | -0.49pp | 13.32% | -2.99pp | 45.92% | +6.52pp |
 
 ---
 
@@ -51,7 +49,7 @@
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 6,786 | 65.55% | - | 93.70% | - | 12.08% | - | 40.47% | - |
-| 2026-W14 | Mid-Cycle | 7,691 | 70.12% | +6.97pp | 92.95% | -0.80pp | 12.05% | -0.25pp | 45.74% | +13.02pp |
+| 2026-W14 | Mid-Cycle | 7,688 | 70.12% | +6.97pp | 92.95% | -0.80pp | 12.05% | -0.25pp | 45.74% | +13.02pp |
 
 ---
 
@@ -59,8 +57,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 3,809 | 69.10% | - | 97.22% | - | 17.27% | - | 40.32% | - |
-| 2026-W14 | Mid-Cycle | 4,514 | 74.75% | +8.18pp | 96.44% | -0.80pp | 15.89% | -7.99pp | 42.14% | +4.51pp |
+| 2026-W13 | Mid-Cycle | 3,808 | 69.09% | - | 97.22% | - | 17.27% | - | 40.31% | - |
+| 2026-W14 | Mid-Cycle | 4,514 | 74.75% | +8.19pp | 96.44% | -0.80pp | 15.89% | -7.99pp | 42.14% | +4.54pp |
 
 ---
 
@@ -68,8 +66,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 2,382 | 87.87% | - | 95.33% | - | 7.48% | - | 39.06% | - |
-| 2026-W14 | Mid-Cycle | 3,221 | 90.50% | +2.99pp | 94.00% | -1.40pp | 7.34% | -1.87pp | 43.12% | +10.39pp |
+| 2026-W13 | Mid-Cycle | 2,382 | 87.87% | - | 95.32% | - | 7.48% | - | 39.06% | - |
+| 2026-W14 | Mid-Cycle | 3,221 | 90.50% | +2.99pp | 94.01% | -1.37pp | 7.34% | -1.87pp | 43.12% | +10.39pp |
 
 ---
 
@@ -77,8 +75,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 5,717 | 65.28% | - | 91.25% | - | 14.07% | - | 46.32% | - |
-| 2026-W14 | Mid-Cycle | 5,857 | 66.14% | +1.32pp | 90.85% | -0.44pp | 13.43% | -4.55pp | 50.68% | +9.41pp |
+| 2026-W13 | Mid-Cycle | 5,716 | 65.27% | - | 91.25% | - | 14.07% | - | 46.32% | - |
+| 2026-W14 | Mid-Cycle | 5,850 | 66.10% | +1.27pp | 90.85% | -0.44pp | 13.42% | -4.62pp | 50.69% | +9.43pp |
 
 ---
 
@@ -87,7 +85,7 @@
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 472 | 71.82% | - | 95.19% | - | 11.72% | - | 38.44% | - |
-| 2026-W14 | Mid-Cycle | 589 | 79.97% | +11.35pp | 92.80% | -2.51pp | 9.23% | -21.25pp | 41.23% | +7.26pp |
+| 2026-W14 | Mid-Cycle | 588 | 79.93% | +11.29pp | 92.80% | -2.51pp | 9.24% | -21.16pp | 41.22% | +7.23pp |
 
 ---
 
@@ -96,7 +94,7 @@
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 574 | 80.31% | - | 99.14% | - | 10.71% | - | 38.39% | - |
-| 2026-W14 | Mid-Cycle | 466 | 71.46% | -11.02pp | 99.27% | +0.13pp | 16.4% | +53.13pp | 41.72% | +8.67pp |
+| 2026-W14 | Mid-Cycle | 466 | 71.46% | -11.02pp | 99.29% | +0.15pp | 16.4% | +53.13pp | 41.72% | +8.67pp |
 
 ---
 
@@ -113,18 +111,18 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 9,279 | 64.67% | - | 93.11% | - | 17.09% | - | 46.94% | - |
-| 2026-W14 | Mid-Cycle | 8,734 | 65.03% | +0.56pp | 93.07% | -0.04pp | 16.86% | -1.35pp | 48.61% | +3.56pp |
+| 2026-W13 | Mid-Cycle | 9,277 | 64.67% | - | 93.11% | - | 17.09% | - | 46.94% | - |
+| 2026-W14 | Mid-Cycle | 8,730 | 65.02% | +0.54pp | 93.07% | -0.04pp | 16.87% | -1.29pp | 48.61% | +3.56pp |
 
 
 ## Mix Shift Analysis (Simpson's Paradox Check)
 
 | Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
 | ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
-| GB  | High | 9,279 | 8,734 | -5.9% | 64.67% | 65.03% | +0.36pp |
-| FR  | High | 6,786 | 7,691 | +13.3% | 65.55% | 70.12% | +4.57pp |
-| AU  | High | 5,717 | 5,857 | +2.4% | 65.28% | 66.14% | +0.86pp |
-| DE  | High | 3,809 | 4,514 | +18.5% | 69.10% | 74.75% | +5.65pp |
+| GB  | High | 9,277 | 8,730 | -5.9% | 64.67% | 65.02% | +0.35pp |
+| FR  | High | 6,786 | 7,688 | +13.3% | 65.55% | 70.12% | +4.57pp |
+| AU  | High | 5,716 | 5,850 | +2.3% | 65.27% | 66.10% | +0.83pp |
+| DE  | High | 3,808 | 4,514 | +18.5% | 69.09% | 74.75% | +5.66pp |
 | BE  | High | 2,382 | 3,221 | +35.2% | 87.87% | 90.50% | +2.63pp |
 | NZ  | High | 1,402 | 1,302 | -7.1% | 58.56% | 61.29% | +2.73pp |
 | NO ⚠️ | High | 1,388 | 943 | -32.1% | 81.99% | 79.22% | -2.77pp |
@@ -132,7 +130,7 @@
 | SE ⚠️ | High | 1,284 | 808 | -37.1% | 70.95% | 71.66% | +0.71pp |
 | DK  | High | 891 | 1,229 | +37.9% | 74.52% | 76.00% | +1.48pp |
 | NL  | High | 574 | 466 | -18.8% | 80.31% | 71.46% | -8.85pp |
-| AT  | High | 472 | 589 | +24.8% | 71.82% | 79.97% | +8.15pp |
+| AT  | High | 472 | 588 | +24.6% | 71.82% | 79.93% | +8.11pp |
 | CH ⚠️ | High | 161 | 95 | -41.0% | 78.88% | 80.00% | +1.12pp |
 | LU  | High | 110 | 119 | +8.2% | 92.73% | 89.08% | -3.65pp |
 
@@ -159,7 +157,7 @@
 
 ## Conclusion
 
-The +3.50pp Ship Rate improvement in HF-INTL for 2026-W14 reflects genuine operational gains rather than composition effects, as evidenced by consistent payday phase (Mid-Cycle), reduced discounting (-2.99pp), and improved profit margins (+6.52pp PC2). The broad-based improvement across FR, DE, AT, and BE—combined with volume growth in key markets—indicates sustainable positive momentum. However, the NL deterioration (-11.02pp SR with +53.13pp discount increase) should be monitored closely as an isolated counter-trend requiring potential follow-up investigation.
+The HF-INTL cluster's Ship Rate improvement of +3.50pp is a genuine performance gain driven primarily by FR, DE, AT, and BE markets, supported by reduced discount rates (-2.99pp) and improved profitability (PC2 +6.52pp). While Pre-Dunning AR showed marginal decline and NL experienced a notable drop, the overall trend is positive with no payday cycle distortion. Recommend continued monitoring with specific attention to NL's collection performance and the volume declines in Nordic markets.
 
 ---
 
@@ -445,4 +443,4 @@ ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) D
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

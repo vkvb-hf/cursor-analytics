@@ -10,26 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL remained essentially flat in 2026-W14, increasing marginally from 90.12% to 90.13% (+0.01%), a statistically insignificant change on 31,165 orders.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL remained essentially flat in 2026-W14, moving from 90.12% to 90.13% (+0.01%), a statistically insignificant change on 31,165 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate stable at ~90%, but volume declining from 52,771 (W07) to 31,165 (W14) | +0.01% | ✅ |
-| L1: Country Impact | 6 countries exceeded ±2.5% threshold (LU -8.41%, DK -7.22%, AT -7.04%, DE -4.41%, AU -4.14%, CH +11.33%) | Mixed | ⚠️ |
-| L1: Dimension Scan | Payment methods and providers stable; "Others" payment method +4.05% | <±2% | ✅ |
-| L2: Root Cause | Multiple countries show "Insufficient Funds" as primary decline driver (+5-7pp) | Consistent pattern | ⚠️ |
-| L3: Related Metrics | All funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) stable within ±0.2% | <±1% | ✅ |
+| L0: 8-Week Trend | Rate stable at ~90%, within normal range (88-92%) | +0.01% | ✅ |
+| L1: Country Variance | 6 countries exceed ±2.5% threshold (LU, DK, AT, DE, AU, CH) | -8.41% to +11.33% | ⚠️ |
+| L1: Payment Method | "Others" +4.05%, all major methods within tolerance | -1.79% to +4.05% | ✅ |
+| L1: Payment Provider | All providers within ±2.5% threshold | -0.69% to +2.29% | ✅ |
+| L2: Root Cause Pattern | Consistent pattern: "Insufficient Funds" increase across flagged countries | +2.51pp to +7.61pp | ⚠️ |
+| L3: Related Metrics | All AR funnel metrics stable (<0.2% change) | -0.17% to +0.04% | ✅ |
 
 **Key Findings:**
-- **Volume decline is significant:** Total order volume dropped 41% over 8 weeks (52,771 → 31,165), with DE (-22.1%), DK (-31.0%), NO (-46.4%), and AT (-25.6%) showing major volume drops
-- **Insufficient Funds is the dominant decline reason:** LU (+7.61pp), AT (+5.67pp), DK (+5.55pp), and DE (+2.51pp) all show increased "Insufficient Funds" declines
-- **Country-level rate declines offset each other:** While LU, DK, AT, DE, and AU declined, CH improved +11.33% and GB improved +2.37%, resulting in a flat overall rate
-- **Adyen and Braintree showing localized issues:** Adyen dropped significantly in AT (-55.0%) and DK (-10.6%); Braintree declined in LU (-10.3%)
-- **Credit card performance deteriorating:** DE credit cards dropped -18.4%, AT credit cards dropped -15.9%
+- **Volume decline masks country-level issues:** Overall volume dropped 10.2% (34,718 → 31,165), with significant drops in DE (-22.1%), DK (-31.0%), NO (-46.4%), and AT (-25.6%)
+- **Insufficient Funds driving declines:** All four flagged declining countries (LU, DK, AT, DE) show "Insufficient Funds" as the top increasing decline reason, ranging from +2.51pp (DE) to +7.61pp (LU)
+- **Payment method "None" anomaly:** Multiple countries show -100% change for a "None" payment method category, suggesting a data classification or reporting shift rather than a true operational issue
+- **CH improvement offsets declines:** Switzerland improved significantly (+11.33%), though on low volume (229 orders), partially offsetting declines elsewhere
+- **Adyen performance concerns in smaller markets:** Adyen shows sharp declines in AT (-55.0%) and DK (-10.6%), though on relatively low volumes
 
-**Action:** **Monitor** – The overall metric is stable and statistically insignificant. However, recommend tracking the "Insufficient Funds" trend across EU markets (LU, DK, AT, DE) and the continued volume decline pattern. If volume erosion continues or "Insufficient Funds" rates persist above 10%, escalate for customer payment method health assessment.
+**Action:** **Monitor** - The overall metric is stable and not significant. However, recommend tracking the "Insufficient Funds" trend across EU markets over the next 2-3 weeks. If the pattern persists or volume continues declining in DE/DK/AT, escalate for potential customer communication or payment retry strategy review.
 
 ---
 
@@ -463,4 +464,4 @@ ORDER BY metric_name
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

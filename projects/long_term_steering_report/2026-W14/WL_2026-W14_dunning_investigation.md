@@ -2,8 +2,8 @@
 
 **Metric:** Ship Rate (Good Customers)  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 29.38% → 28.34% (-3.54pp, -1.04pppp)  
-**Volume:** 8,055 orders  
+**Observation:** 29.39% → 28.35% (-3.54pp, -1.04pppp)  
+**Volume:** 8,053 orders  
 **Significance:** Significant
 
 ---
@@ -12,26 +12,26 @@
 
 ## Executive Summary
 
-**Overall:** Ship Rate for WL cluster declined from 29.38% to 28.34% (-1.04pp, -3.54% relative change) in 2026-W14, flagged as significant with 8,055 orders.
+**Overall:** WL cluster Ship Rate declined from 29.39% to 28.35% (-1.04pp, -3.54% relative change) in 2026-W14, despite most individual countries showing improved ship rates—indicating a Simpson's Paradox driven by mix shift.
 
 **Funnel Analysis:**
 
-| Step | Check | Δ Value | Result |
-| ---- | ----- | ------- | ------ |
-| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ |
-| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ✅ |
-| Discount % | 16.34% → 15.45% | -0.89pp | ✅ |
-| PC2 | 47.52% → 47.03% | -0.49pp | ✅ |
-| Mix Shift (Simpson's) | AO volume drop 59.6% | High-SR market shrink | ⚠️ |
+| Step | Check | Δ | Result |
+| ---- | ----- | ------ | ------ |
+| Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ Slight decline |
+| Discount % | 16.35% → 15.46% | -0.89pp | ✅ Lower discounts (positive for SR) |
+| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ Slight decline |
+| Payday Phase | Mid-Cycle → Mid-Cycle | No change | ✅ Neutral |
+| Mix Shift (AO) | 1,228 → 496 volume | -59.6% | ⚠️ High-SR market volume collapse |
 
 **Key Findings:**
-- **Simpson's Paradox confirmed:** AO (highest SR market at 72.58%) lost 59.6% of volume (1,228 → 496 orders), removing high-converting orders from the mix and dragging down the aggregate rate
-- **All individual countries improved or held steady:** ER +2.93pp, CK +4.18pp, AO +5.32pp, CG +2.81pp, GN +0.97pp — only KN showed slight decline (-1.04pp) and MR remained near zero
-- **MR anomaly:** Ship Rate dropped from 0.07% to 0.00% with PC2 showing NaN values, indicating potential data quality issues or operational changes in this market
-- **KN volume increased 17.4%** while SR declined 1.04pp, partially offsetting positive mix effects with lower-converting volume
-- **Discount rates decreased across most markets** (WL -5.45pp overall), which per the decision framework should support higher Ship Rate — yet aggregate declined due to mix shift
+- **Simpson's Paradox confirmed:** AO (highest SR at 67-73%) lost 59.6% of volume (1,228 → 496 orders), shifting mix toward lower-SR markets
+- **6 of 7 countries improved SR:** ER (+2.93pp), CK (+4.15pp), AO (+5.32pp), CG (+2.85pp), GN (+0.97pp) all increased, only KN declined (-1.04pp)
+- **MR anomaly:** Ship Rate dropped to 0.00% (from 0.07%) with PC2 showing "nan%" - potential data quality issue
+- **KN volume increased 17.4%** while being a low-SR market (15.10%), amplifying negative mix effect
+- **Pre-Dunning AR declined across most markets**, with AO showing the largest drop (-3.12pp)
 
-**Action:** Monitor — The aggregate decline is driven by Simpson's Paradox (AO volume collapse), not deteriorating country performance. Investigate the root cause of AO's 60% volume drop and MR's data anomalies before escalating.
+**Action:** **Investigate** - The AO volume collapse (-59.6%) is the primary driver. Determine if this is a data issue, operational constraint, or intentional change. Also investigate MR's 0% ship rate and missing PC2 data.
 
 ---
 
@@ -41,8 +41,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 8,702 | 29.38% | - | 91.18% | - | 16.34% | - | 47.52% | - |
-| 2026-W14 | Mid-Cycle | 8,055 | 28.34% | -3.54pp | 90.71% | -0.52pp | 15.45% | -5.45pp | 47.03% | -1.03pp |
+| 2026-W13 | Mid-Cycle | 8,700 | 29.39% | - | 91.18% | - | 16.35% | - | 47.52% | - |
+| 2026-W14 | Mid-Cycle | 8,053 | 28.35% | -3.54pp | 90.71% | -0.52pp | 15.46% | -5.44pp | 47.03% | -1.03pp |
 
 ---
 
@@ -59,8 +59,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,441 | 43.58% | - | 94.15% | - | 26.77% | - | 47.97% | - |
-| 2026-W14 | Mid-Cycle | 1,497 | 47.76% | +9.59pp | 93.82% | -0.35pp | 25.26% | -5.64pp | 47.84% | -0.27pp |
+| 2026-W13 | Mid-Cycle | 1,440 | 43.61% | - | 94.15% | - | 26.78% | - | 47.97% | - |
+| 2026-W14 | Mid-Cycle | 1,497 | 47.76% | +9.52pp | 93.82% | -0.35pp | 25.26% | -5.68pp | 47.84% | -0.27pp |
 
 ---
 
@@ -78,7 +78,7 @@
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 798 | 21.93% | - | 96.76% | - | 20.81% | - | 51.84% | - |
-| 2026-W14 | Mid-Cycle | 780 | 24.74% | +12.81pp | 96.91% | +0.16pp | 17.64% | -15.23pp | 51.87% | +0.06pp |
+| 2026-W14 | Mid-Cycle | 779 | 24.78% | +13.00pp | 96.91% | +0.16pp | 17.64% | -15.23pp | 51.87% | +0.06pp |
 
 ---
 
@@ -87,7 +87,7 @@
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
 | 2026-W13 | Mid-Cycle | 570 | 16.14% | - | 87.61% | - | 11.62% | - | 87.12% | - |
-| 2026-W14 | Mid-Cycle | 669 | 15.10% | -6.44pp | 88.22% | +0.70pp | 11.34% | -2.41pp | 47.34% | -45.66pp |
+| 2026-W14 | Mid-Cycle | 669 | 15.10% | -6.44pp | 88.21% | +0.68pp | 11.34% | -2.41pp | 47.34% | -45.66pp |
 
 ---
 
@@ -104,8 +104,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 | ---- | ------------ | ------ | --------- | ---- | -------------- | ---- | ---------- | ------ | --- | ----- |
-| 2026-W13 | Mid-Cycle | 1,467 | 0.07% | - | 79.88% | - | 9.47% | - | 42.03% | - |
-| 2026-W14 | Mid-Cycle | 1,422 | 0.00% | -100.00pp | 80.33% | +0.56pp | 8.14% | -14.04pp | nan% | nanpp |
+| 2026-W13 | Mid-Cycle | 1,466 | 0.07% | - | 79.88% | - | 9.48% | - | 42.03% | - |
+| 2026-W14 | Mid-Cycle | 1,421 | 0.00% | -100.00pp | 80.32% | +0.55pp | 8.15% | -14.03pp | nan% | nanpp |
 
 
 ## Mix Shift Analysis (Simpson's Paradox Check)
@@ -113,10 +113,10 @@
 | Country | SR Tier | Prev Volume | Curr Volume | Volume Δ | Prev SR | Curr SR | SR Δ |
 | ------- | ------- | ----------- | ----------- | -------- | ------- | ------- | ---- |
 | ER  | Low | 2,563 | 2,559 | -0.2% | 23.64% | 26.57% | +2.93pp |
-| MR  | Low | 1,467 | 1,422 | -3.1% | 0.07% | 0.00% | +0.00pp |
-| CK  | Medium | 1,441 | 1,497 | +3.9% | 43.58% | 47.76% | +4.18pp |
+| MR  | Low | 1,466 | 1,421 | -3.1% | 0.07% | 0.00% | +0.00pp |
+| CK  | Medium | 1,440 | 1,497 | +4.0% | 43.61% | 47.76% | +4.15pp |
 | AO ⚠️ | High | 1,228 | 496 | -59.6% | 67.26% | 72.58% | +5.32pp |
-| CG  | Low | 798 | 780 | -2.3% | 21.93% | 24.74% | +2.81pp |
+| CG  | Low | 798 | 779 | -2.4% | 21.93% | 24.78% | +2.85pp |
 | GN  | Medium | 635 | 632 | -0.5% | 36.06% | 37.03% | +0.97pp |
 | KN  | Low | 570 | 669 | +17.4% | 16.14% | 15.10% | -1.04pp |
 
@@ -143,7 +143,7 @@
 
 ## Conclusion
 
-The 1.04pp decline in WL Ship Rate is a **compositional artifact**, not a performance issue. The high-converting AO market experienced a 59.6% volume reduction, while lower-converting markets (ER, KN) maintained or increased volume, shifting the mix toward lower Ship Rate segments. Underlying country-level performance actually improved across 5 of 7 markets, indicating healthy dunning execution. Priority should be understanding why AO eligible orders dropped so dramatically and resolving the MR data quality issue (NaN PC2).
+The WL cluster's apparent Ship Rate decline is a classic Simpson's Paradox case—individual country performance improved while aggregate metrics declined due to composition changes. The 59.6% volume drop in AO (the highest-performing market at 72.58% SR) shifted the customer mix toward lower-converting markets like ER, KN, and MR. Immediate investigation should focus on understanding the AO volume reduction and validating the MR data anomaly before drawing operational conclusions.
 
 ---
 
@@ -429,4 +429,4 @@ ORDER BY MAX(CASE WHEN week = (SELECT prev_week FROM weeks) THEN eligible END) D
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*

@@ -17,22 +17,22 @@
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥0.58pp threshold | +0.42pp | ⚠️ |
-| Click Submit Form | ≥0.58pp threshold | +0.59pp | ✅ |
-| FE Validation Passed | ≥0.58pp threshold | +0.68pp | ✅ |
-| Enter Fraud Service | ≥0.58pp threshold | +0.40pp | ⚠️ |
-| Approved by Fraud Service | ≥0.58pp threshold | -0.23pp | ⚠️ |
-| Call to PVS | ≥0.58pp threshold | -0.01pp | ⚠️ |
-| Successful Checkout (PVS Success) | ≥0.58pp threshold | +0.85pp | ✅ |
+| Select Payment Method | ≥0.5pp improvement | +0.42pp | ⚠️ |
+| Click Submit Form | ≥0.5pp improvement | +0.59pp | ✅ |
+| FE Validation Passed | ≥0.5pp improvement | +0.68pp | ✅ |
+| Enter Fraud Service | ≥0.5pp improvement | +0.40pp | ⚠️ |
+| Approved by Fraud Service | No degradation | -0.23pp | ⚠️ |
+| Call to PVS | No degradation | -0.01pp | ✅ |
+| Successful Checkout (PVS Success) | ≥0.5pp improvement | +0.85pp | ✅ |
 
 **Key Findings:**
-- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of failures (-4.31pp share), and total PVS failures dropped from 1,522 to 1,010 (-512 failures)
-- **FE Validation recovery rate improved (+1.47pp):** Recovery rate increased from 56.10% to 57.57%, with PAYPAL_POPUP_CLOSED errors decreasing as a share (-2.79pp)
-- **France drove the largest contribution to PCR improvement:** FR showed +3.10pp PCR gain, primarily from Select Payment Method (+2.98pp in GA funnel) and Checkout Attempt (+3.77pp in backend)
-- **Braintree ApplePay showed strong improvement:** Conversion rate increased from 83.73% to 85.43% (+1.70pp), the largest gain among high-volume payment methods
-- **Denmark showed exceptional PCR growth (+5.89pp):** Despite smaller volume, DK improved from 42.72% to 48.61% PCR, driven by Select Payment Method (+4.17pp)
+- **PVS Success rate improved significantly (+0.85pp):** "Failed Verification: Insufficient Funds" declined from 17.3% to 13.0% of failures (-4.31pp), and total PVS failures dropped from 1,522 to 1,010 (-512 failures)
+- **FE Validation recovery rate increased (+1.47pp):** 57.57% of customers who encountered FE errors still completed validation vs. 56.10% prior week
+- **France drove the largest contribution:** FR showed +3.10pp PCR improvement with Select Payment Method conversion up +2.98pp (GA) and Checkout Attempt up +3.77pp (Backend)
+- **Braintree ApplePay conversion improved (+1.70pp):** Rate increased from 83.73% to 85.43%, representing the largest gain among high-volume payment methods
+- **Denmark showed strong improvement (+5.89pp PCR):** All funnel steps improved, with Select Payment Method up +4.17pp and Successful Checkout up +1.59pp
 
-**Action:** Monitor — The PCR improvement is broad-based and positive. Continue monitoring FE validation errors (APPLEPAY_DISMISSED remains at 76.8% of errors) and track whether the reduced "Insufficient Funds" decline rate sustains in coming weeks.
+**Action:** Monitor — The positive trends across multiple funnel steps and countries indicate healthy performance. Continue tracking to confirm sustainability of improvements, particularly the reduced PVS failure rates and FE validation recovery gains.
 
 ---
 
@@ -287,7 +287,7 @@
 
 ## Conclusion
 
-The +1.16pp PCR improvement in HF-INTL for 2026-W14 reflects healthy gains across the checkout funnel, particularly in PVS success rates and FE validation pass rates. France and Denmark were the primary geographic contributors, both showing improved engagement at the payment method selection stage. No immediate escalation is required; the team should continue monitoring to confirm these improvements are sustained rather than anomalous.
+The +1.16pp PCR improvement in HF-INTL during 2026-W14 reflects broad-based funnel optimization, with the most significant gains occurring at the PVS Success step (+0.85pp) and FE Validation Passed step (+0.68pp). France contributed most substantially to the overall improvement, showing a +3.10pp PCR increase driven by higher checkout attempt conversion. The reduction in payment visit volume (-23.9%) did not negatively impact conversion efficiency, suggesting improved traffic quality or checkout experience optimization is taking effect.
 
 ---
 
@@ -565,4 +565,4 @@ ORDER BY hellofresh_week, customers DESC
 
 ---
 
-*Report: 2026-04-08*
+*Report: 2026-04-09*
