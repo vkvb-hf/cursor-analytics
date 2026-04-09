@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.68pp (28.63% → 27.96%) in 2026-W14 across 59,454 payment visits, breaching the investigation threshold.
+**Overall:** Payment Conversion Rate declined by -0.68pp (from 28.63% to 27.96%) in 2026-W14, driven primarily by drops in early funnel engagement and front-end validation issues.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ -0.34pp | -0.34pp | ⚠️ |
-| Click Submit Form | ≥ -0.34pp | -0.40pp | ⚠️ |
-| FE Validation Passed | ≥ -0.34pp | -0.68pp | ⚠️ |
-| Enter Fraud Service | ≥ -0.34pp | -0.15pp | ✅ |
-| Approved by Fraud Service | ≥ -0.34pp | -0.33pp | ✅ |
-| Call to PVS | ≥ -0.34pp | -0.19pp | ✅ |
-| Successful Checkout | ≥ -0.34pp | +0.29pp | ✅ |
+| Select Payment Method | vs threshold ±0.34pp | -0.34pp | ⚠️ |
+| Click Submit Form | vs threshold ±0.34pp | -0.40pp | ⚠️ |
+| FE Validation Passed | vs threshold ±0.34pp | -0.68pp | ⚠️ |
+| Enter Fraud Service | vs threshold ±0.34pp | -0.15pp | ✅ |
+| Approved by Fraud Service | vs threshold ±0.34pp | -0.32pp | ✅ |
+| Call to PVS | vs threshold ±0.34pp | -0.21pp | ✅ |
+| Successful Checkout | vs threshold ±0.34pp | +0.30pp | ✅ |
 
 **Key Findings:**
-- **FE Validation Passed is the primary drop-off point** with -0.68pp conversion decline, matching the overall PCR drop exactly
-- **Canada (CA) drove the majority of the decline** with -1.77pp PCR drop vs US at -0.36pp; CA's FE Validation step fell -1.30pp
-- **FE Error Recovery Rate decreased by -2.19pp** (72.25% → 70.06%), indicating more users are failing to recover from validation errors
-- **APPLEPAY_DISMISSED errors increased** from 54.6% to 56.9% of error share (+2.33pp), while terms_not_accepted decreased by -4.41pp
-- **Backend Fraud Service approval improved in US** (+2.75pp) but declined in CA (-1.39pp), showing regional divergence
+- **FE Validation Passed** showed the largest conversion drop at -0.68pp, with recovery rate declining from 72.25% to 70.06% (-2.19pp)
+- **Canada** experienced significant decline of -1.77pp in PCR, with FE Validation Passed dropping -1.30pp and Approved by Fraud Service dropping -1.07pp
+- **APPLEPAY_DISMISSED** errors increased share from 54.6% to 56.9% (+2.33pp), while **terms_not_accepted** errors decreased from 45.0% to 40.6%
+- Backend data shows **Checkout Attempt** conversion dropped -1.14pp (from 37.79% to 36.66%), indicating early funnel abandonment
+- Payment method performance was mixed: ProcessOut_CreditCard improved (+1.69pp) but overall volume shifted with fewer checkout attempts (-993 attempts, -4.0%)
 
-**Action:** **Investigate** — Focus on FE Validation issues, particularly in Canada. Review Apple Pay dismissal patterns and determine if recent changes impacted the validation flow or recovery UX.
+**Action:** **Investigate** – The FE Validation drop exceeds threshold and is impacting both countries, with Canada showing compounded issues across multiple funnel steps. Prioritize investigation into Apple Pay dismissal patterns and the root cause of decreased validation recovery rates.
 
 ---
 
@@ -48,9 +48,9 @@
 | Click Submit Form | 20,847 | 20,638 | -209 | -1.0% | 85.55% | 85.15% | -0.40pp |
 | FE Validation Passed | 19,788 | 19,450 | -338 | -1.7% | 94.92% | 94.24% | -0.68pp |
 | Enter Fraud Service | 19,364 | 19,005 | -359 | -1.9% | 97.86% | 97.71% | -0.15pp |
-| Approved by Fraud Service | 18,112 | 17,714 | -398 | -2.2% | 93.53% | 93.21% | -0.33pp |
-| Call to PVS | 18,097 | 17,665 | -432 | -2.4% | 99.92% | 99.72% | -0.19pp |
-| **Successful Checkout** | 16,975 | 16,621 | -354 | -2.1% | 93.80% | 94.09% | +0.29pp |
+| Approved by Fraud Service | 18,112 | 17,715 | -397 | -2.2% | 93.53% | 93.21% | -0.32pp |
+| Call to PVS | 18,097 | 17,664 | -433 | -2.4% | 99.92% | 99.71% | -0.21pp |
+| **Successful Checkout** | 16,975 | 16,621 | -354 | -2.1% | 93.80% | 94.10% | +0.30pp |
 | **PCR Rate** | | | | | 28.63% | 27.96% | **-0.68pp** |
 
 ### Waterfall Backend
@@ -105,8 +105,8 @@
 | Click Submit Form | 14,732 | 14,468 | -264 | -1.79pp | 88.30% | 88.32% | +0.02pp |
 | FE Validation Passed | 13,994 | 13,684 | -310 | -2.22pp | 94.99% | 94.58% | -0.41pp |
 | Enter Fraud Service | 13,714 | 13,426 | -288 | -2.10pp | 98.00% | 98.11% | +0.12pp |
-| Approved by Fraud Service | 12,848 | 12,578 | -270 | -2.10pp | 93.69% | 93.68% | -0.00pp |
-| Call to PVS | 12,852 | 12,552 | -300 | -2.33pp | 100.03% | 99.79% | -0.24pp |
+| Approved by Fraud Service | 12,848 | 12,577 | -271 | -2.11pp | 93.69% | 93.68% | -0.01pp |
+| Call to PVS | 12,852 | 12,551 | -301 | -2.34pp | 100.03% | 99.79% | -0.24pp |
 | **Successful Checkout** | 11,879 | 11,634 | -245 | -2.06pp | 92.43% | 92.69% | +0.26pp |
 | **PCR Rate** | | | | | 26.77% | 26.41% | **-0.37pp** |
 
@@ -139,8 +139,8 @@
 | Click Submit Form | 6,115 | 6,170 | +55 | +0.90pp | 79.59% | 78.55% | -1.04pp |
 | FE Validation Passed | 5,794 | 5,766 | -28 | -0.48pp | 94.75% | 93.45% | -1.30pp |
 | Enter Fraud Service | 5,650 | 5,579 | -71 | -1.26pp | 97.51% | 96.76% | -0.76pp |
-| Approved by Fraud Service | 5,264 | 5,136 | -128 | -2.43pp | 93.17% | 92.06% | -1.11pp |
-| Call to PVS | 5,245 | 5,113 | -132 | -2.52pp | 99.64% | 99.55% | -0.09pp |
+| Approved by Fraud Service | 5,264 | 5,138 | -126 | -2.39pp | 93.17% | 92.10% | -1.07pp |
+| Call to PVS | 5,245 | 5,113 | -132 | -2.52pp | 99.64% | 99.51% | -0.13pp |
 | **Successful Checkout** | 5,096 | 4,987 | -109 | -2.14pp | 97.16% | 97.54% | +0.38pp |
 | **PCR Rate** | | | | | 34.16% | 32.39% | **-1.78pp** |
 

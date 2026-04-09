@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined marginally by -0.05 percentage points (91.98% → 91.93%) on volume of 415,885 orders, representing a minor fluctuation within the normal operating range observed over the 8-week period.
+**Overall:** AR Overall declined slightly from 91.98% to 91.93% (-0.05 pp) in W14, representing a minor decrease within normal weekly fluctuation range across 415,885 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Volatility within ±0.34pp range | -0.05pp | ✅ |
-| L1: Country Breakdown | US only, no country >±2.5% threshold | -0.06pp | ✅ |
-| L1: PaymentMethod | Others showed largest decline | -0.29pp | ✅ |
-| L1: PaymentProvider | Unknown showed unusual swing | +8.23pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (91.48%-92.09%) | -0.05 pp | ✅ |
+| L1: Country Breakdown | US declined -0.07 pp | -0.07 pp | ✅ |
+| L1: PaymentMethod | All methods within ±0.29 pp | -0.29 pp max | ✅ |
+| L1: PaymentProvider | Unknown improved +8.23 pp (low volume) | +8.23 pp | ⚠️ |
 
 **Key Findings:**
-- The -0.05pp decline is within normal weekly volatility (8-week range: 91.48% to 92.09%), and reverses the +0.05pp gain from the prior week
-- No country-level anomalies detected; US is the sole country and declined by -0.06pp
-- PaymentMethod "Others" showed the largest decline (-0.29pp) but represents minimal volume (2,202 orders)
-- PaymentProvider "Unknown" showed a +8.23pp improvement, but volume is negligible (249 orders) making this statistically insignificant
-- Primary payment flows (Braintree at 372,325 orders, Credit Card at 305,088 orders) showed stable performance with only -0.05pp and -0.06pp changes respectively
+- The -0.05 pp decline is minimal and consistent with the 8-week trend pattern showing normal oscillation between 91.48% and 92.09%
+- No countries exceeded the ±2.5% threshold; US (sole country) declined only -0.07 pp
+- PaymentMethod "Others" showed the largest decline at -0.29 pp but represents only 2,202 orders (0.5% of volume)
+- ProcessOut provider improved +0.38 pp (41,023 orders), partially offsetting Braintree's -0.05 pp decline (372,325 orders)
+- Unknown PaymentProvider showed +8.23 pp improvement but volume is negligible (249 orders)
 
-**Action:** **Monitor** – The decline is minimal, within historical volatility, and no significant dimensional drivers were identified. Continue standard monitoring; no immediate investigation required.
+**Action:** Monitor - The decline is within normal weekly variance and no dimension exceeds concerning thresholds. Continue standard monitoring for W15.
 
 ---
 
@@ -50,7 +50,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.79% | 92.85% | -0.06% | 497,052 |  |
+| US | 92.79% | 92.85% | -0.07% | 497,052 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 

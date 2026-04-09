@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.31 pp) in W14, representing a recovery toward the 8-week average after the decline observed in W13.
+**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.31 pp) in W14, recovering partially from the prior week's decline but remaining below the W11 peak of 90.11%.
 
 **Funnel Analysis:**
 
@@ -20,13 +20,13 @@
 | L1: Credit Card | 88.26% → 89.22% | +0.96 pp | ✅ |
 
 **Key Findings:**
-- US country-level rate improved significantly by +4.43% (66.77% → 69.72%), exceeding the ±2.5% threshold and flagged for attention
-- Apple Pay payment method showed notable improvement of +2.60 pp (84.92% → 87.13%), contributing to overall gains
-- ProcessOut provider improved by +2.07 pp (87.54% → 89.36%) with significant volume (6,146 orders)
-- Volume decreased substantially from prior weeks (11,716 in W14 vs 19,259 in W10), which may amplify rate volatility
-- PayPal and Others payment methods showed slight declines (-0.53 pp and -0.31 pp respectively) but with lower volumes
+- US country performance improved significantly by +4.43% (66.77% → 69.72%), exceeding the ±2.5% monitoring threshold
+- Apple Pay showed the largest payment method improvement at +2.60 pp (84.92% → 87.13%), with 4,000 orders processed
+- ProcessOut provider improved by +2.07 pp (87.54% → 89.36%) on 6,146 orders, contributing to overall gains
+- Volume decreased 38% from W10 peak (19,259) to W14 (11,716), which may amplify rate volatility
+- PayPal and Others payment methods showed minor declines (-0.53 pp and -0.31 pp respectively) but with low volume impact
 
-**Action:** Monitor — The improvement is positive but volume remains lower than historical norms. Continue tracking US performance and Apple Pay/ProcessOut trends to confirm sustained recovery.
+**Action:** Monitor — The improvement is positive but follows a volatile 8-week trend. Continue monitoring US performance and Apple Pay/ProcessOut to confirm sustained recovery toward the W11 benchmark of 90.11%.
 
 ---
 

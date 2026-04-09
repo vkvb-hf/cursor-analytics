@@ -7,25 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined by 0.55 percentage points (94.16% → 93.64%) in W14, continuing a 4-week downward trend from the peak of 94.9% in W11.
+## Executive Summary
+
+**Overall:** AR Overall performance declined from 94.16% to 93.64% (-0.52pp) in W14, continuing a 4-week downward trend from the peak of 94.9% in W11, with volume also decreasing to 784,389 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 4 consecutive weeks of decline | -0.55 pp | ⚠️ |
-| L1: Country Breakdown | 3 countries exceed ±2.5% threshold | DK -2.78 pp, AT -2.51 pp, CH +2.98 pp | ⚠️ |
-| L1: Payment Method | Apple Pay lowest performer | -0.85 pp (87.52%) | ⚠️ |
-| L1: Payment Provider | ProcessOut underperforming | -0.83 pp (91.13%) | ⚠️ |
+| L0 Trend | 4 consecutive weeks of decline | -0.55% | ⚠️ |
+| L1 Country | DK -2.78pp, AT -2.50pp exceed threshold | -2.78pp max | ⚠️ |
+| L1 PaymentMethod | Apple Pay lowest at 87.52% | -0.85pp | ⚠️ |
+| L1 PaymentProvider | ProcessOut lowest at 91.13% | -0.83pp | ⚠️ |
 
 **Key Findings:**
-- Denmark (DK) showed the largest decline at -2.78 pp (96.72% → 94.03%) with 30,036 orders, representing a significant regional degradation
-- Austria (AT) declined -2.51 pp (95.19% → 92.8%) with 12,458 orders, flagged as exceeding threshold
-- Apple Pay continues to be the lowest performing payment method at 87.52% (-0.85 pp), processing 105,676 orders
-- ProcessOut is the weakest payment provider at 91.13% (-0.83 pp) handling 226,595 orders (largest provider volume after Credit Card)
-- Volume decreased by ~58,000 orders (842,480 → 784,389) week-over-week, a 6.9% reduction
+- Denmark (DK) experienced the largest country decline at -2.78pp (96.72% → 94.03%), exceeding the ±2.5% threshold with 30,036 orders affected
+- Austria (AT) declined -2.50pp (95.19% → 92.81%), also at threshold level
+- Apple Pay continues to underperform at 87.52% rate, representing 105,676 orders with the lowest acceptance among payment methods
+- ProcessOut shows the weakest provider performance at 91.13% (-0.83pp), handling 226,595 orders
+- Switzerland (CH) improved +2.98pp but on very low volume (2,174 orders), flagged as anomaly
 
-**Action:** Investigate — Focus investigation on DK and AT country-specific issues, and conduct deeper analysis into Apple Pay + ProcessOut combination performance to identify potential payment processing degradation.
+**Action:** **Investigate** – Focus investigation on Denmark's -2.78pp decline and ProcessOut provider performance, particularly for Apple Pay transactions which show consistently low acceptance rates.
 
 ---
 
@@ -51,14 +53,14 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | DK | 94.03% | 96.72% | -2.78% | 30,036 | ⚠️ |
-| AT | 92.8% | 95.19% | -2.51% | 12,458 | ⚠️ |
+| AT | 92.81% | 95.19% | -2.50% | 12,458 |  |
 | NO | 90.27% | 92.35% | -2.24% | 13,551 |  |
-| BE | 94.01% | 95.32% | -1.38% | 74,093 |  |
+| BE | 94.01% | 95.31% | -1.37% | 74,093 |  |
 | DE | 96.44% | 97.22% | -0.80% | 205,169 |  |
-| FR | 92.95% | 93.7% | -0.80% | 158,169 |  |
+| FR | 92.95% | 93.7% | -0.80% | 158,170 |  |
 | CH | 93.93% | 91.21% | +2.98% | 2,174 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** DK, AT, CH
+**Countries exceeding ±2.5% threshold:** DK, CH
 
 ---
 

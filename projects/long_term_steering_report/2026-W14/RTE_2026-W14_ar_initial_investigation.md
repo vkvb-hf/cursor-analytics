@@ -9,27 +9,27 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) declined from 91.4% to 90.89% (-0.51 pp) in W14, continuing a downward trend for the third consecutive week with performance now at its lowest point in the 8-week observation period.
+**Overall:** AR Initial (LL0) declined from 91.4% to 90.89% (-0.56pp) in W14, continuing a three-week downward trend with rates dropping from 92.56% in W12, accompanied by significant volume reduction to 31,900 orders (down from 36,413 in W13).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: RTE Overall | 91.4% → 90.89% | -0.51 pp | ⚠️ |
-| L1: Country - TO | 71.79% → 68.36% | -3.43 pp | ⚠️ |
-| L1: Country - FJ | 83.13% → 82.6% | -0.53 pp | ✅ |
-| L1: Country - YE | 76.16% → 75.74% | -0.42 pp | ✅ |
-| L1: PaymentMethod - Credit Card | 90.71% → 89.99% | -0.72 pp | ⚠️ |
-| L1: PaymentProvider - Adyen | 89.79% → 89.21% | -0.58 pp | ✅ |
+| L0: Overall Trend | 3-week consecutive decline (W12-W14) | -1.67pp cumulative | ⚠️ |
+| L1: Country | TO showed largest decline | -4.77pp | ⚠️ |
+| L1: Country | TK, TV, TT showed improvements | +2.62pp to +9.33pp | ✅ |
+| L1: Payment Method | Credit Card (largest volume) declined | -0.80pp | ⚠️ |
+| L1: Payment Provider | Adyen declined | -0.65pp | ⚠️ |
+| L1: Payment Provider | Unknown provider anomaly | +nan% (new/data issue) | ⚠️ |
 
 **Key Findings:**
-- **Sustained decline:** The metric has dropped from 92.56% (W12) to 90.89% (W14) over three weeks, a cumulative decline of 1.67 pp
-- **Volume contraction:** Order volume decreased significantly from 36,413 (W13) to 31,900 (W14), a 12.4% reduction in volume
-- **TO country underperformance:** TO experienced a -4.77% rate change (71.79% → 68.36%), the largest country-level decline, though volume is relatively small (629 orders)
-- **Credit Card degradation:** Credit Card payments, representing the largest volume segment (20,181 orders), declined -0.80 pp and are the primary contributor to the overall decline
-- **PaymentProvider "Unknown" anomaly:** A new provider category "Unknown" appeared with 77.55% rate and 49 orders (previously 0%)
+- **Sustained decline:** AR Initial has dropped for 3 consecutive weeks, falling 1.67pp from W12 (92.56%) to W14 (90.89%), now at the lowest point in the 8-week window
+- **Volume contraction:** Order volume decreased 39% from W07 peak (52,390) to W14 (31,900), with a 12.4% drop from W13 alone
+- **TO country underperformance:** Tonga (TO) experienced a -4.77pp decline (71.79% → 68.36%), the largest country-level drop, though with limited volume (629 orders)
+- **Credit Card payment drag:** Credit Card transactions, representing 63% of volume (20,181 orders), declined -0.80pp, contributing most to the overall metric drop
+- **Data anomaly:** PaymentProvider "Unknown" shows 49 orders at 77.55% with an undefined prior rate, suggesting a tracking or categorization issue
 
-**Action:** **Investigate** - The three-week declining trend combined with Credit Card payment method degradation across high-volume segments warrants immediate investigation into payment processing issues, particularly with Adyen (-0.58 pp) which handles significant Credit Card volume.
+**Action:** **Investigate** – The three-week declining trend combined with sustained volume reduction warrants deeper analysis into Credit Card payment flows and the root cause of the TO country decline. The "Unknown" payment provider anomaly should also be reviewed for data integrity.
 
 ---
 
@@ -56,7 +56,7 @@
 |---------|-----------|-----------|-----|-------------|------|
 | TO | 68.36% | 71.79% | -4.77% | 629 | ⚠️ |
 | FJ | 82.6% | 83.13% | -0.64% | 38,808 |  |
-| YE | 75.74% | 76.16% | -0.55% | 6,365 |  |
+| YE | 75.73% | 76.16% | -0.57% | 6,365 |  |
 | CF | 84.9% | 84.67% | +0.27% | 7,763 |  |
 | TT | 94.46% | 92.05% | +2.62% | 722 | ⚠️ |
 | TV | 91.67% | 87.32% | +4.98% | 408 | ⚠️ |

@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +1.55pp (37.81% → 39.36%) in 2026-W14, driven primarily by increased top-of-funnel engagement despite an overall volume decline of -10.4% in payment visits.
+**Overall:** Payment Conversion Rate improved significantly from 37.81% to 39.36% (+1.55pp) in 2026-W14, driven primarily by stronger top-of-funnel engagement despite an overall 10.4% decrease in payment visit volume.
 
 **Funnel Analysis:**
 
@@ -25,13 +25,13 @@
 | Successful Checkout | Below threshold | +0.33pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel improvement:** Select Payment Method conversion increased +1.75pp (48.18% → 49.93%), the largest positive contributor to overall PCR improvement
-- **Country-level variance:** TK showed strong improvement (+6.09pp) driven by Fraud Service approval (+5.88pp), while TO declined (-5.78pp) due to Fraud Service rejection increase (-4.88pp)
-- **FJ dominates contribution:** With 40,637 payment visits (64% of volume), FJ's +2.51pp improvement was the primary driver of overall PCR gains
-- **Backend PVS Attempt degradation:** Backend data shows PVS Attempt step dropped -1.25pp (99.46% → 98.21%), warranting monitoring
-- **Braintree_ApplePay underperformance:** Success rate declined -1.71pp (87.23% → 85.51%) on significant volume (10,528 attempts)
+- **Top-of-funnel gains offset mid-funnel friction:** Select Payment Method (+1.75pp) and Click Submit Form (+0.90pp) drove the overall PCR improvement, compensating for minor losses in validation and fraud steps
+- **FJ (largest market) drove most contribution:** FJ improved +2.51pp with Select Payment Method (+2.33pp) being the key driver, representing the majority of volume (40,637 payment visits)
+- **TK showed strongest improvement:** TK improved +6.09pp, driven by Approved by Fraud Service (+5.88pp GA / +3.85pp Backend), though volume is small (473 visits)
+- **TO experienced significant decline:** TO dropped -5.78pp, with Approved by Fraud Service declining -4.88pp (GA) and -4.24pp (Backend), suggesting fraud service issues specific to this country
+- **Backend shows PVS Attempt friction:** Backend waterfall reveals a -1.25pp drop at PVS Attempt step, warranting monitoring
 
-**Action:** Monitor – The overall PCR improvement is positive and driven by legitimate funnel improvements. Continue monitoring Fraud Service performance in TO and the PVS Attempt backend degradation. No immediate escalation required.
+**Action:** Monitor – The overall improvement is positive and above threshold. However, investigate the fraud service decline in TO (-4.88pp) and monitor the PVS Attempt friction (-1.25pp in Backend) to prevent future deterioration.
 
 ---
 
@@ -44,12 +44,12 @@
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
 | Payment Visits | 70,721 | 63,361 | -7,360 | -10.4% | - | - | - |
-| Select Payment Method | 34,071 | 31,636 | -2,435 | -7.1% | 48.18% | 49.93% | +1.75pp |
+| Select Payment Method | 34,071 | 31,637 | -2,434 | -7.1% | 48.18% | 49.93% | +1.75pp |
 | Click Submit Form | 30,388 | 28,501 | -1,887 | -6.2% | 89.19% | 90.09% | +0.90pp |
 | FE Validation Passed | 29,663 | 27,689 | -1,974 | -6.7% | 97.61% | 97.15% | -0.46pp |
 | Enter Fraud Service | 29,067 | 27,074 | -1,993 | -6.9% | 97.99% | 97.78% | -0.21pp |
-| Approved by Fraud Service | 27,935 | 25,995 | -1,940 | -6.9% | 96.11% | 96.01% | -0.09pp |
-| Call to PVS | 27,903 | 25,936 | -1,967 | -7.0% | 99.89% | 99.77% | -0.11pp |
+| Approved by Fraud Service | 27,937 | 25,997 | -1,940 | -6.9% | 96.11% | 96.02% | -0.09pp |
+| Call to PVS | 27,903 | 25,936 | -1,967 | -7.0% | 99.88% | 99.77% | -0.11pp |
 | **Successful Checkout** | 26,739 | 24,939 | -1,800 | -6.7% | 95.83% | 96.16% | +0.33pp |
 | **PCR Rate** | | | | | 37.81% | 39.36% | **+1.55pp** |
 
@@ -169,16 +169,16 @@
 | Funnel Step | 2026-W13 | 2026-W14 | Δ Count | Δ % | 2026-W13 Conv | 2026-W14 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
 | Payment Visits | 45,842 | 40,637 | -5,205 | -11.35pp | - | - | - |
-| Select Payment Method | 21,465 | 19,972 | -1,493 | -6.96pp | 46.82% | 49.15% | +2.32pp |
-| Click Submit Form | 19,217 | 18,161 | -1,056 | -5.50pp | 89.53% | 90.93% | +1.41pp |
+| Select Payment Method | 21,465 | 19,973 | -1,492 | -6.95pp | 46.82% | 49.15% | +2.33pp |
+| Click Submit Form | 19,217 | 18,161 | -1,056 | -5.50pp | 89.53% | 90.93% | +1.40pp |
 | FE Validation Passed | 18,659 | 17,530 | -1,129 | -6.05pp | 97.10% | 96.53% | -0.57pp |
 | Enter Fraud Service | 18,366 | 17,246 | -1,120 | -6.10pp | 98.43% | 98.38% | -0.05pp |
-| Approved by Fraud Service | 17,731 | 16,695 | -1,036 | -5.84pp | 96.54% | 96.81% | +0.26pp |
-| Call to PVS | 17,701 | 16,683 | -1,018 | -5.75pp | 99.83% | 99.93% | +0.10pp |
+| Approved by Fraud Service | 17,731 | 16,698 | -1,033 | -5.83pp | 96.54% | 96.82% | +0.28pp |
+| Call to PVS | 17,701 | 16,683 | -1,018 | -5.75pp | 99.83% | 99.91% | +0.08pp |
 | **Successful Checkout** | 17,158 | 16,232 | -926 | -5.40pp | 96.93% | 97.30% | +0.36pp |
 | **PCR Rate** | | | | | 37.43% | 39.94% | **+2.52pp** |
 
-**Key Driver:** Select Payment Method (+2.32pp)
+**Key Driver:** Select Payment Method (+2.33pp)
 
 #### Waterfall Backend
 

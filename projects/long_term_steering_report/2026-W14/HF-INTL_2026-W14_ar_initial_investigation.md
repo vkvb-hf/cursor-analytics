@@ -9,25 +9,25 @@
 
 ## Executive Summary
 
-**Overall:** The AR Initial (LL0) metric for HF-INTL remained essentially flat, increasing marginally from 90.12% to 90.13% (+0.01 pp) in 2026-W14 on a volume of 31,165 orders.
+**Overall:** AR Initial (LL0) for HF-INTL remained essentially flat week-over-week, increasing marginally from 90.12% to 90.13% (+0.01 pp) on a volume of 31,165 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: Overall Rate | 90.12% → 90.13% | +0.01 pp | ✅ |
-| L1: Country Mix | 6 countries exceeding ±2.5% threshold | Mixed | ⚠️ |
+| L1: Country Breakdown | 6 countries exceed ±2.5% threshold | Mixed | ⚠️ |
 | L1: Payment Method | Credit Card -1.79 pp, Others +4.05 pp | Mixed | ✅ |
 | L1: Payment Provider | All providers within ±2.5% | Stable | ✅ |
 
 **Key Findings:**
 - **Volume decline continues:** Order volume dropped from 34,718 to 31,165 (-10.2% WoW), continuing a downward trend from 52,771 orders in W07—a 41% reduction over 8 weeks
-- **Significant country-level volatility:** LU (-8.41 pp), DK (-7.22 pp), AT (-7.04 pp), and DE (-4.41 pp) all showed notable declines, offset by CH (+11.33 pp) and GB (+2.37 pp)
-- **Germany warrants attention:** DE declined -4.41 pp (81.58% from 85.34%) on substantial volume (8,587 orders), representing meaningful impact to overall performance
-- **Australia remains persistently low:** AU at 64.13% (-4.14 pp) is significantly underperforming other markets despite being the 3rd highest volume country
-- **8-week trend shows instability:** Rate has fluctuated between 88.06% (W09) and 91.70% (W07), indicating underlying volatility masked by the flat WoW change
+- **Significant country-level volatility masked at aggregate:** LU (-8.41 pp), DK (-7.22 pp), AT (-7.04 pp), and DE (-4.41 pp) all declined materially, offset by CH (+11.33 pp) and GB (+2.37 pp)
+- **Germany impact is notable:** DE represents 8,587 orders (27.5% of volume) and declined -4.41 pp from 85.34% to 81.58%
+- **Australia remains persistently low:** AU at 64.13% is significantly below the overall benchmark, with 6,365 orders (20.4% of volume)
+- **8-week trend shows recovery:** Current rate of 90.13% has stabilized after W09's dip to 88.06%, though still below W07's peak of 91.7%
 
-**Action:** **Investigate** — While the overall metric appears stable, the significant country-level movements (particularly DE, AU, and the European cluster of LU/DK/AT) combined with sustained volume decline warrant deeper investigation into root causes.
+**Action:** **Investigate** — While the overall metric appears stable, the country-level analysis reveals significant underlying volatility. Prioritize investigation into DE and AU performance drivers, as these two markets represent nearly 48% of total volume and are underperforming.
 
 ---
 

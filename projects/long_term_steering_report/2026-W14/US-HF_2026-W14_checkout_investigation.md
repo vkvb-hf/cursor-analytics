@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.37pp (from 26.77% to 26.41%) in 2026-W14, with 44,056 payment visits representing a -0.7% volume decrease week-over-week.
+**Overall:** Payment Conversion Rate declined by -0.37pp (from 26.77% to 26.41%) in US-HF for 2026-W14, with 44,056 payment visits processed.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate dropped | -0.42pp | ⚠️ |
-| Click Submit Form | Stable | +0.02pp | ✅ |
-| FE Validation Passed | Rate dropped | -0.41pp | ⚠️ |
-| Enter Fraud Service | Slight improvement | +0.12pp | ✅ |
-| Approved by Fraud Service | Stable | -0.00pp | ✅ |
-| Call to PVS | Rate dropped | -0.24pp | ⚠️ |
-| Successful Checkout | Improved | +0.26pp | ✅ |
+| Select Payment Method | Rate vs threshold | -0.42pp | ⚠️ |
+| Click Submit Form | Rate vs threshold | +0.02pp | ✅ |
+| FE Validation Passed | Rate vs threshold | -0.41pp | ⚠️ |
+| Enter Fraud Service | Rate vs threshold | +0.12pp | ✅ |
+| Approved by Fraud Service | Rate vs threshold | -0.01pp | ✅ |
+| Call to PVS | Rate vs threshold | -0.24pp | ⚠️ |
+| Successful Checkout | Rate vs threshold | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Top-of-funnel drop:** Select Payment Method conversion decreased by -0.42pp (37.60% → 37.18%), representing the largest negative driver in the GA waterfall
-- **FE Validation degradation:** FE Validation Passed dropped -0.41pp with recovery rate declining from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" errors remain the top issue at 51.6% of all errors
-- **Backend fraud approval improved:** Approved by Fraud Service rate increased significantly by +2.75pp (89.15% → 91.91%), partially offsetting upstream losses
-- **ProcessOut_CreditCard performance improved:** Success rate increased +3.21pp (79.29% → 82.50%), and Braintree_ApplePay improved +2.28pp (75.72% → 78.00%)
-- **Adyen_CreditCard remains non-functional:** 212 attempts in W14 with 0% success rate, consistent with W13 (108 attempts, 0% success)
+- **Select Payment Method is the primary drop-off point:** Conversion decreased by -0.42pp (from 37.60% to 37.18%), indicating fewer visitors are proceeding to select a payment option
+- **FE Validation recovery rate declined:** Recovery rate dropped from 75.67% to 74.36% (-1.31pp), with "terms_not_accepted" remaining the top error at 51.6% of customers with errors
+- **Backend shows improvement in Fraud Service approval:** Approved by Fraud Service improved significantly by +2.75pp (from 89.15% to 91.91%), partially offsetting upstream losses
+- **ProcessOut_CreditCard and Braintree_ApplePay success rates improved:** ProcessOut_CreditCard increased +3.21pp (to 82.50%) and ApplePay increased +2.28pp (to 78.00%)
+- **PVS failures decreased:** Total PVS failures dropped from 1,013 to 958 (-55 failures), with "Card Not Activated" errors down -1.14pp
 
-**Action:** Monitor – The decline is modest (-0.37pp) with offsetting positive signals in fraud approval and payment method success rates. Investigate the FE Validation "terms_not_accepted" error pattern and confirm Adyen_CreditCard is intentionally disabled or requires remediation.
+**Action:** Investigate - Focus on the Select Payment Method drop-off and FE Validation issues, particularly the "terms_not_accepted" errors which affect over 50% of customers encountering FE errors.
 
 ---
 
@@ -48,8 +48,8 @@
 | Click Submit Form | 14,732 | 14,468 | -264 | -1.8% | 88.30% | 88.32% | +0.02pp |
 | FE Validation Passed | 13,994 | 13,684 | -310 | -2.2% | 94.99% | 94.58% | -0.41pp |
 | Enter Fraud Service | 13,714 | 13,426 | -288 | -2.1% | 98.00% | 98.11% | +0.12pp |
-| Approved by Fraud Service | 12,848 | 12,578 | -270 | -2.1% | 93.69% | 93.68% | -0.00pp |
-| Call to PVS | 12,852 | 12,552 | -300 | -2.3% | 100.03% | 99.79% | -0.24pp |
+| Approved by Fraud Service | 12,848 | 12,577 | -271 | -2.1% | 93.69% | 93.68% | -0.01pp |
+| Call to PVS | 12,852 | 12,551 | -301 | -2.3% | 100.03% | 99.79% | -0.24pp |
 | **Successful Checkout** | 11,879 | 11,634 | -245 | -2.1% | 92.43% | 92.69% | +0.26pp |
 | **PCR Rate** | | | | | 26.77% | 26.41% | **-0.37pp** |
 
@@ -101,8 +101,8 @@
 | Click Submit Form | 14,732 | 14,468 | -264 | -1.79pp | 88.30% | 88.32% | +0.02pp |
 | FE Validation Passed | 13,994 | 13,684 | -310 | -2.22pp | 94.99% | 94.58% | -0.41pp |
 | Enter Fraud Service | 13,714 | 13,426 | -288 | -2.10pp | 98.00% | 98.11% | +0.12pp |
-| Approved by Fraud Service | 12,848 | 12,578 | -270 | -2.10pp | 93.69% | 93.68% | -0.00pp |
-| Call to PVS | 12,852 | 12,552 | -300 | -2.33pp | 100.03% | 99.79% | -0.24pp |
+| Approved by Fraud Service | 12,848 | 12,577 | -271 | -2.11pp | 93.69% | 93.68% | -0.01pp |
+| Call to PVS | 12,852 | 12,551 | -301 | -2.34pp | 100.03% | 99.79% | -0.24pp |
 | **Successful Checkout** | 11,879 | 11,634 | -245 | -2.06pp | 92.43% | 92.69% | +0.26pp |
 | **PCR Rate** | | | | | 26.77% | 26.41% | **-0.37pp** |
 

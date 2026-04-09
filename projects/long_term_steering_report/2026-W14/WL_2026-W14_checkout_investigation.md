@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.15pp (30.03% → 29.88%) on 35,421 payment visits in 2026-W14, driven primarily by a significant drop at the "Call to PVS" step in the GA funnel and country-specific deterioration in KN.
+**Overall:** Payment Conversion Rate declined slightly from 30.03% to 29.88% (-0.15pp) in 2026-W14, with payment visits down 8.1% (38,531 → 35,421).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | -0.26pp | ⚠️ |
-| Click Submit Form | Within threshold | +0.09pp | ✅ |
-| FE Validation Passed | Above threshold | +0.21pp | ✅ |
-| Enter Fraud Service | Above threshold | +0.20pp | ✅ |
-| Approved by Fraud Service | Within threshold | -0.11pp | ✅ |
-| Call to PVS | Above threshold | -0.53pp | ⚠️ |
-| Successful Checkout | Above threshold | +0.25pp | ✅ |
+| Select Payment Method | Rate vs threshold | -0.26pp | ⚠️ |
+| Click Submit Form | Rate vs threshold | +0.09pp | ⚠️ |
+| FE Validation Passed | Rate vs threshold | +0.21pp | ⚠️ |
+| Enter Fraud Service | Rate vs threshold | +0.20pp | ⚠️ |
+| Approved by Fraud Service | Rate vs threshold | -0.10pp | ⚠️ |
+| Call to PVS | Rate vs threshold | -0.53pp | ⚠️ |
+| Successful Checkout | Rate vs threshold | +0.25pp | ⚠️ |
 
 **Key Findings:**
-- **Call to PVS step shows critical degradation:** GA funnel shows -0.53pp drop in conversion (99.80% → 99.27%), while Backend shows severe -9.71pp decline at PVS Attempt step (98.79% → 89.07%), indicating a potential system issue between fraud approval and payment verification.
-- **KN country is the primary negative driver:** PCR dropped -3.75pp (27.15% → 23.40%) with Select Payment Method conversion falling -3.26pp and Approved by Fraud Service dropping -1.79pp in the GA funnel.
-- **Braintree_CreditCard and Braintree_Paypal payment methods underperforming:** Success rates declined -2.58pp and -1.73pp respectively, with Braintree_CreditCard also showing increased gap in reaching fraud service (+3 cases, +8.65pp share).
-- **ER and GN countries showed positive performance:** ER improved +2.04pp and GN improved +4.30pp, both driven by Select Payment Method gains (+1.60pp and +4.07pp respectively), partially offsetting KN's decline.
-- **PVS failure distribution shifted:** "Insufficient Funds" failures decreased (-20 cases, -6.65pp share) while "CVC Declined" failures increased (+11 cases, +5.58pp share).
+- **Call to PVS shows largest conversion drop (-0.53pp):** Backend data reveals a significant gap between Fraud Approval and PVS Attempt (PVS Attempt dropped -9.71pp in conversion), indicating potential routing or system issues between these steps.
+- **KN country drove the decline (-3.75pp PCR):** Select Payment Method conversion in KN dropped -3.26pp, contributing most to the overall negative trend, while ER (+2.04pp) and GN (+4.30pp) showed improvements.
+- **Braintree_CreditCard payment method degraded significantly (-2.58pp):** Success rate fell from 90.20% to 87.62%, alongside Braintree_Paypal dropping -1.73pp.
+- **FE Validation recovery rate stable (58.46% → 58.74%):** Despite meeting threshold, the improvement is marginal with APPLEPAY_DISMISSED remaining the dominant error type (66.2%).
+- **PVS failures decreased (-22 total):** Insufficient Funds errors dropped from 62 to 42 (-6.65pp share), though CVC Declined errors increased (+11 cases, +5.58pp share).
 
-**Action:** Investigate - The significant backend discrepancy at PVS Attempt (-9.71pp) combined with KN's fraud approval degradation (-2.68pp in Backend) requires immediate technical investigation to identify potential system issues or configuration changes affecting the payment verification pipeline.
+**Action:** Investigate – Focus on the Call to PVS step drop (-0.53pp) and the significant backend PVS Attempt conversion decline (-9.71pp). Additionally, investigate KN country's Select Payment Method degradation and Braintree_CreditCard performance issues.
 
 ---
 
@@ -48,7 +48,7 @@
 | Click Submit Form | 13,947 | 12,752 | -1,195 | -8.6% | 88.42% | 88.51% | +0.09pp |
 | FE Validation Passed | 13,240 | 12,132 | -1,108 | -8.4% | 94.93% | 95.14% | +0.21pp |
 | Enter Fraud Service | 12,710 | 11,671 | -1,039 | -8.2% | 96.00% | 96.20% | +0.20pp |
-| Approved by Fraud Service | 12,028 | 11,032 | -996 | -8.3% | 94.63% | 94.52% | -0.11pp |
+| Approved by Fraud Service | 12,028 | 11,033 | -995 | -8.3% | 94.63% | 94.53% | -0.10pp |
 | Call to PVS | 12,004 | 10,952 | -1,052 | -8.8% | 99.80% | 99.27% | -0.53pp |
 | **Successful Checkout** | 11,571 | 10,584 | -987 | -8.5% | 96.39% | 96.64% | +0.25pp |
 | **PCR Rate** | | | | | 30.03% | 29.88% | **-0.15pp** |
@@ -140,8 +140,8 @@
 | Click Submit Form | 1,480 | 1,243 | -237 | -16.01pp | 87.99% | 88.72% | +0.73pp |
 | FE Validation Passed | 1,182 | 1,005 | -177 | -14.97pp | 79.86% | 80.85% | +0.99pp |
 | Enter Fraud Service | 1,089 | 933 | -156 | -14.33pp | 92.13% | 92.84% | +0.70pp |
-| Approved by Fraud Service | 1,027 | 888 | -139 | -13.53pp | 94.31% | 95.18% | +0.87pp |
-| Call to PVS | 1,020 | 886 | -134 | -13.14pp | 99.32% | 99.77% | +0.46pp |
+| Approved by Fraud Service | 1,027 | 889 | -138 | -13.44pp | 94.31% | 95.28% | +0.98pp |
+| Call to PVS | 1,020 | 886 | -134 | -13.14pp | 99.32% | 99.66% | +0.34pp |
 | **Successful Checkout** | 980 | 861 | -119 | -12.14pp | 96.08% | 97.18% | +1.10pp |
 | **PCR Rate** | | | | | 32.80% | 37.10% | **+4.30pp** |
 

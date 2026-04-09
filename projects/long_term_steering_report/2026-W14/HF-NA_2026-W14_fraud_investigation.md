@@ -10,28 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved significantly from 89.13% to 90.90% (+1.98pp) in 2026-W14, representing a recovery toward the baseline levels observed in W07-W10.
+**Overall:** The Fraud Approval Rate (FAR) improved from 89.13% to 90.90% (+1.98pp week-over-week), representing a significant positive change on volume of 23,540 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | FAR within normal range | +1.98pp | ✅ |
-| L0: PF Block Rate | Decreased from prior week | 3.33% → 1.48% (-1.85pp) | ✅ |
-| L0: Dup Block Rate | Slight increase | 6.32% → 6.85% (+0.53pp) | ✅ |
-| L1: Country - US | Exceeds ±2.5% threshold | +3.30pp | ⚠️ |
-| L1: Country - CA | Within threshold | -1.20pp | ✅ |
-| L1: Channel - Paid | Within threshold | +0.49pp | ✅ |
-| L1: Channel - Referral | Exceeds threshold; Dup Rate spike | +6.81pp FAR; +17.19% Dup Rate | ⚠️ |
+| L0: Regional Trend | FAR within 8-week range (89.13%-92.52%) | +1.98pp | ✅ |
+| L1: Country | US exceeds ±2.5% threshold | +3.30pp | ⚠️ |
+| L1: Country | CA within threshold | -1.20pp | ✅ |
+| L1: Channel | Paid within threshold | +0.49pp | ✅ |
+| L1: Channel | Referral exceeds threshold | +6.81pp | ⚠️ |
 
 **Key Findings:**
-- US drove the regional FAR improvement with a +3.30pp increase (88.61% → 91.54%), accounting for the majority of the +1.98pp regional change
-- PF Block Rate dropped significantly from 3.33% to 1.48% (-1.85pp), contributing to higher approval rates
-- Referral channel shows concerning signals: FAR increased +6.81pp but Dup Rate spiked +17.19% (29.78% → 34.90%), suggesting potential abuse pattern
-- Overall volume declined by 1,050 customers (24,590 → 23,540), a -4.27% decrease week-over-week
-- Canada showed slight FAR decline (-1.20pp) but remains within normal operating range
+- **US drove the regional improvement:** US FAR increased +3.30pp (88.61% → 91.54%) on volume of 16,609 customers, accounting for the majority of the regional gain
+- **PF Block Rate dropped significantly:** Decreased from 3.33% in W13 to 1.48% in W14 (-1.85pp), returning to levels seen in W09-W10, likely contributing to higher approval rates
+- **Referral channel shows elevated volatility:** FAR jumped +6.81pp with a concurrent spike in Duplicate Rate (+17.19%, from 29.78% to 34.90%), suggesting potential fraud pattern changes
+- **Duplicate Block Rate increased:** Rose from 6.32% to 6.85% (+0.53pp), the highest in the 8-week window
+- **Overall volume declining:** Week-over-week volume dropped from 24,590 to 23,540 (-4.27%), continuing a downward trend from W09 peak of 30,559
 
-**Action:** Investigate — The Referral channel's simultaneous FAR increase and Dup Rate spike (+17.19%) warrants deeper analysis to rule out fraudulent referral abuse or policy exploitation.
+**Action:** **Investigate** – The US market and Referral channel warrant deeper analysis. The correlation between Referral's elevated Duplicate Rate (+17.19%) and FAR increase (+6.81pp) may indicate shifting fraud patterns or policy changes requiring review.
 
 ---
 

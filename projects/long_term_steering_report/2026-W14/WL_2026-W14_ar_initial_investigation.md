@@ -9,27 +9,28 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved by +0.68% (from 89.23% to 89.84%) in 2026-W14, though this partial recovery follows two consecutive weeks of decline and remains below the 8-week high of 91.99% seen in W11.
+**Overall:** AR Initial (LL0) improved from 89.23% to 89.84% (+0.61 pp) in W14, showing a partial recovery after two consecutive weeks of decline, though still below the W11 peak of 91.99%.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | +0.68pp | ✅ |
-| L1: Country - GN | Threshold ±2.5% | -3.50pp | ⚠️ |
-| L1: Country - AO | Threshold ±2.5% | -2.99pp | ⚠️ |
-| L1: Country - ER | Threshold ±2.5% | +3.53pp | ⚠️ |
-| L1: PaymentMethod - Others | Significant decline | -6.62pp | ⚠️ |
-| L1: PaymentProvider - Braintree | Notable improvement | +3.17pp | ✅ |
+| L0 Weekly Trend | Rate improved W13→W14 | +0.61 pp | ✅ |
+| L0 8-Week Context | Below 8-week high (91.99%) | -2.15 pp vs peak | ⚠️ |
+| L1 Country: GN | Declined significantly | -2.9 pp | ⚠️ |
+| L1 Country: AO | Declined significantly | -2.03 pp | ⚠️ |
+| L1 Country: ER | Improved significantly | +2.13 pp | ✅ |
+| L1 PaymentMethod: Others | Sharp decline (low volume) | -6.37 pp | ⚠️ |
+| L1 PaymentProvider: Braintree | Strong improvement | +2.86 pp | ✅ |
 
 **Key Findings:**
-- **Volume decline continues:** Order volume dropped from 15,670 (W07) to 12,781 (W14), representing an 18% reduction over 8 weeks
-- **Country-level concerns:** GN (-3.50pp) and AO (-2.99pp) both experienced significant rate declines exceeding the ±2.5% threshold
-- **Payment method "Others" volatility:** This category dropped -6.62pp (96.2% → 89.83%), though low volume (59 orders) limits impact
-- **Braintree driving improvement:** Braintree improved +3.17pp (89.93% → 92.79%) with substantial volume (6,696 orders), contributing positively to overall recovery
-- **ER improvement:** Despite low base rate (62.97%), ER improved +3.53pp with the highest volume (5,023 orders)
+- Volume has declined steadily over 8 weeks, dropping from 15,670 orders (W07) to 12,781 orders (W14), a reduction of ~18%
+- Countries GN (-2.9 pp to 79.7%) and AO (-2.03 pp to 63.89%) are underperforming and dragging overall metrics despite the aggregate improvement
+- ER showed strong recovery (+2.13 pp) and represents the largest volume segment at 5,023 orders, contributing significantly to the overall rate improvement
+- Braintree payment provider improved +2.86 pp to 92.79% with substantial volume (6,696 orders), while ProcessOut declined -2.07 pp to 87.62%
+- "Others" payment method dropped -6.37 pp, but with only 59 orders, the impact on overall rate is minimal
 
-**Action:** **Investigate** – While the overall metric improved, the sustained volume decline and underperformance in GN and AO warrant deeper investigation into regional factors affecting these markets.
+**Action:** **Monitor** – The week-over-week improvement is positive, but continue monitoring GN and AO country performance. If declines persist for another week, escalate for deeper investigation into country-specific issues.
 
 ---
 
@@ -55,9 +56,9 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | GN | 79.7% | 82.6% | -3.50% | 1,823 | ⚠️ |
-| AO | 63.95% | 65.92% | -2.99% | 1,559 | ⚠️ |
+| AO | 63.89% | 65.92% | -3.08% | 1,559 | ⚠️ |
 | CK | 79.09% | 81.08% | -2.45% | 3,386 |  |
-| ER | 62.97% | 60.82% | +3.53% | 5,023 | ⚠️ |
+| ER | 62.95% | 60.82% | +3.50% | 5,023 | ⚠️ |
 
 **Countries exceeding ±2.5% threshold:** GN, AO, ER
 

@@ -8,29 +8,30 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33 pp), representing a modest recovery within normal operating range and flagged as not statistically significant.
+## Executive Summary
+
+**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33pp), a change that is not statistically significant, with volume decreasing from 14,394 to 13,609 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | 92.73% → 93.06% | +0.33 pp | ✅ |
-| L0: Duplicate Rate | 15.53% → 15.81% | +0.28 pp | ✅ |
-| L0: Duplicate Block | 5.07% → 5.25% | +0.18 pp | ✅ |
-| L0: PF Block | 0.80% → 0.84% | +0.04 pp | ✅ |
-| L1: Country (KN) | 92.92% → 90.22% | -2.70 pp | ⚠️ |
-| L1: Country (CK) | 91.74% → 94.02% | +2.28 pp | ✅ |
-| L1: Channel (Paid) | 96.07% → 96.34% | +0.27 pp | ✅ |
-| L1: Channel (Referral) | 76.10% → 75.04% | -1.06 pp | ✅ |
+| L0: Overall FAR | 92.73% → 93.06% | +0.33pp | ✅ |
+| L0: Duplicate Rate | 15.53% → 15.81% | +0.28pp | ✅ |
+| L0: Duplicate Block | 5.07% → 5.25% | +0.18pp | ✅ |
+| L0: PF Block | 0.80% → 0.84% | +0.04pp | ✅ |
+| L1: Country - KN | 92.92% → 90.22% | -2.70pp | ⚠️ |
+| L1: Channel - Paid | 96.07% → 96.34% | +0.27pp | ✅ |
+| L1: Channel - Referral | 76.10% → 75.04% | -1.06pp | ✅ |
 
 **Key Findings:**
-- KN (Saint Kitts and Nevis) showed a notable FAR decline of -2.70 pp (92.92% → 90.22%), exceeding the ±2.5% threshold, accompanied by a significant duplicate rate increase of +32.40% (6.90% → 9.13%)
-- Volume continues a downward trend from 19,099 (W07) to 13,609 (W14), representing a -29% reduction over 8 weeks
-- CK showed strong improvement with FAR increasing +2.28 pp while duplicate rate decreased -6.67%, indicating healthier traffic quality
-- Referral channel maintains significantly lower FAR (75.04%) compared to Paid channel (96.34%), with duplicate rates continuing to rise (+4.12%)
-- Overall metrics remain stable after recovering from the W07 anomaly where PF Block spiked to 5.17%
+- KN is the only country exceeding the ±2.5% threshold, with FAR declining -2.90% (90.22%) and duplicate rate spiking +32.40% (from 6.90% to 9.13%)
+- Overall volume continues a declining trend, dropping from 14,394 to 13,609 (-5.5% WoW), part of a sustained decrease from 19,099 in W07
+- CK showed the strongest improvement at +2.49pp FAR (94.02%), accompanied by a -6.67% reduction in duplicate rate
+- Referral channel maintains significantly lower FAR (75.04%) compared to Paid channel (96.34%), with increasing duplicate rates (+4.12%)
+- PF Block rate remains stable at historically low levels (0.84%) after the anomaly in W07 (5.17%)
 
-**Action:** Monitor – Continue standard monitoring with focus on KN market. The KN duplicate rate surge (+32.40%) warrants a targeted L2 investigation into traffic sources if the trend persists into W15.
+**Action:** Monitor – The overall change is not significant and metrics are within normal ranges. However, recommend focused monitoring of KN due to the notable FAR decline and duplicate rate increase.
 
 ---
 

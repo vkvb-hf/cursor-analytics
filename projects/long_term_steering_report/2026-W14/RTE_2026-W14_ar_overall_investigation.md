@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 92.79% to 92.46% (-0.36 pp) in W14, continuing a three-week downward trend with cumulative volume of 431,853 orders.
+**Overall:** AR Overall declined from 92.79% to 92.46% (-0.36 pp) in W14, continuing a three-week downward trend that has seen the metric drop from a peak of 93.20% in W11.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 3 consecutive weeks of decline (W12-W14) | -0.36 pp | ⚠️ |
-| L1: Country Threshold | No country exceeds ±2.5% threshold | N/A | ✅ |
-| L1: Country Drivers | TK (-1.63 pp), TZ (-1.43 pp) largest declines | Low volume | ✅ |
-| L1: High-Volume Country | FJ at 93.62% (-0.37 pp) with 397,332 orders | -0.37 pp | ⚠️ |
-| L1: Payment Method | Credit Card (-0.42 pp) with 316,124 orders | -0.42 pp | ⚠️ |
-| L1: Payment Provider | Braintree (-0.36 pp) with 293,781 orders | -0.36 pp | ⚠️ |
+| L0: 8-Week Trend | Consistent decline W11→W14 | -0.74 pp over 3 weeks | ⚠️ |
+| L1: Country Impact | No country exceeds ±2.5% threshold | TK largest drop at -1.63 pp | ✅ |
+| L1: Payment Method | Credit Card (73% volume) declined | -0.42 pp | ⚠️ |
+| L1: Payment Provider | Braintree (68% volume) declined | -0.36 pp | ⚠️ |
 
 **Key Findings:**
-- Three consecutive weeks of AR decline: W12 (-0.12 pp), W13 (-0.32 pp), W14 (-0.36 pp), indicating an accelerating downward trend
-- FJ dominates volume (92% of orders at 397,332) and its -0.37 pp decline is the primary driver of overall metric movement
-- Credit Card payment method shows the largest decline (-0.42 pp) among payment methods and represents 73% of total volume (316,124 orders)
-- Braintree provider accounts for 68% of volume (293,781 orders) and declined -0.36 pp, directly correlating with overall decline
-- TK (-1.63 pp) and TZ (-1.43 pp) show significant rate drops but combined volume (4,792 orders) represents only 1.1% of total volume
+- **Sustained decline pattern:** The metric has dropped consecutively for three weeks (W12: -0.12 pp, W13: -0.32 pp, W14: -0.36 pp), with the rate of decline accelerating
+- **Credit Card performance:** The largest payment method by volume (316,124 orders / 73%) declined -0.42 pp, driving the majority of the overall drop
+- **Braintree impact:** As the dominant payment provider (293,781 orders / 68%), Braintree's -0.36 pp decline directly mirrors the overall metric decline
+- **Volume contraction:** Order volume has decreased from 458,408 (W11) to 431,853 (W14), a 5.8% reduction alongside rate deterioration
+- **No geographic outliers:** All countries remained within the ±2.5% threshold, indicating a systemic rather than localized issue
 
-**Action:** Investigate — Focus investigation on Credit Card payments processed through Braintree in FJ market, as this combination represents the highest-volume segment showing consistent decline.
+**Action:** **Investigate** – The three-week consecutive decline and accelerating rate of deterioration warrants deeper investigation into Credit Card + Braintree transaction failures. Recommend L2 drill-down into Braintree error codes and decline reasons.
 
 ---
 
@@ -54,7 +52,7 @@
 |---------|-----------|-----------|-----|-------------|------|
 | TK | 88.65% | 90.12% | -1.63% | 1,779 |  |
 | TZ | 90.11% | 91.42% | -1.43% | 3,013 |  |
-| YE | 88.15% | 88.62% | -0.53% | 45,214 |  |
+| YE | 88.15% | 88.62% | -0.54% | 45,214 |  |
 | FJ | 93.62% | 93.97% | -0.37% | 397,332 |  |
 | CF | 93.47% | 93.7% | -0.24% | 52,140 |  |
 | TT | 97.2% | 96.27% | +0.97% | 4,924 |  |
