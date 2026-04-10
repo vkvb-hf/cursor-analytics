@@ -10,27 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved from 89.13% to 90.90% (+1.77pp) in 2026-W14, recovering from the prior week's decline and returning closer to the 8-week average of ~91%.
+**Overall:** Fraud Approval Rate (FAR) recovered from 89.13% to 90.90% (+1.98pp), returning closer to the 8-week average after a dip in W13.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | FAR within normal range | +1.98% | ✅ |
-| L0: Duplicate Rate | Dup Rate increased | +0.53pp (26.05% → 26.58%) | ✅ |
-| L0: Duplicate Block | Dup Block increased | +0.53pp (6.32% → 6.85%) | ✅ |
-| L0: PF Block | PF Block decreased significantly | -1.85pp (3.33% → 1.48%) | ✅ |
-| L1: Country | No country exceeded ±2.5% threshold | US: -1.41%, CA: -0.98% | ✅ |
-| L1: Channel | Referral channel exceeded threshold | -2.93% | ⚠️ |
+| L0: Regional Trend | FAR within normal range | +1.98pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | US -1.41pp, CA -0.98pp | ✅ |
+| L1: Channel Category | Referral channel declined | -2.93pp | ⚠️ |
+| Duplicate Rate | Slight increase across region | +0.53pp | ✅ |
+| PF Block Rate | Decreased significantly | -1.85pp (3.33% → 1.48%) | ✅ |
 
 **Key Findings:**
-- PF Block rate dropped significantly from 3.33% to 1.48% (-1.85pp), which is the primary driver of the FAR improvement
-- Referral channel shows concerning decline in FAR (62.72%, -2.93%), falling below the ±2.5% threshold and warranting attention
-- Duplicate Rate continues its upward trend, reaching 26.58% (highest in the 8-week period), with Dup Block also increasing to 6.85%
-- Volume decreased by 4.3% (24,590 → 23,540 customers), continuing the declining volume trend observed since W09
-- Both US and CA showed slight FAR declines in W13 (-1.41% and -0.98% respectively), but neither exceeded alert thresholds
+- FAR rebounded +1.98pp in W14, recovering from the -1.30pp dip observed in W13, suggesting the W13 decline was temporary
+- PF Block Rate dropped significantly from 3.33% to 1.48% (-1.85pp), which directly contributed to the FAR improvement
+- Referral channel shows concerning decline of -2.93pp (64.61% → 62.72%), exceeding the ±2.5% threshold and flagged for attention
+- Duplicate Rate continues gradual upward trend (23.92% in W07 → 26.58% in W14), increasing +0.53pp week-over-week
+- Overall volume declined by 1,050 customers (24,590 → 23,540), continuing a downward trend from W09 peak of 30,559
 
-**Action:** Monitor — The FAR recovery is driven by reduced PF Block rates. Continue monitoring the Referral channel performance and the rising Duplicate Rate trend.
+**Action:** Monitor — FAR has recovered to expected levels. Continue tracking Referral channel performance; if decline persists beyond W15, escalate for deeper investigation into referral-specific fraud patterns.
 
 ---
 

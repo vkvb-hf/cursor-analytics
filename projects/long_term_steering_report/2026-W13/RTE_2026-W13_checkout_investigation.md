@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.82pp (38.63% → 37.81%) in 2026-W13, driven primarily by a significant drop at the Select Payment Method step.
+**Overall:** Payment Conversion Rate declined by -0.82pp (38.63% → 37.81%) in 2026-W13, driven primarily by a significant drop in the "Select Payment Method" step across major markets.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | |Δ| > 0.41pp | -2.07pp | ⚠️ |
-| Click Submit Form | |Δ| > 0.41pp | +1.55pp | ⚠️ |
-| FE Validation Passed | |Δ| < 0.41pp | -0.10pp | ✅ |
-| Enter Fraud Service | |Δ| < 0.41pp | -0.09pp | ✅ |
-| Approved by Fraud Service | |Δ| < 0.41pp | +0.29pp | ✅ |
-| Call to PVS | |Δ| < 0.41pp | +0.04pp | ✅ |
-| Successful Checkout | |Δ| < 0.41pp | +0.17pp | ✅ |
+| Select Payment Method | ⚠️ | -2.07pp | Exceeds threshold |
+| Click Submit Form | ✅ | +1.55pp | Improved |
+| FE Validation Passed | ✅ | -0.10pp | Within threshold |
+| Enter Fraud Service | ✅ | -0.09pp | Within threshold |
+| Approved by Fraud Service | ✅ | +0.29pp | Improved |
+| Call to PVS | ✅ | +0.04pp | Within threshold |
+| Successful Checkout | ✅ | +0.17pp | Improved |
 
 **Key Findings:**
-- **Primary driver:** Select Payment Method conversion dropped -2.07pp (50.25% → 48.18%), accounting for the majority of the PCR decline
-- **Braintree_ApplePay degradation:** Success rate fell -4.40pp (91.63% → 87.23%) with significant volume (11,367 attempts in W13)
-- **Braintree_CreditCard severe drop:** Success rate declined -8.72pp (92.72% → 84.00%), though volume dramatically decreased from 4,329 to 125 attempts
-- **Geographic impact:** FJ (largest market, 45,842 visits) saw -2.82pp drop at Select Payment Method; CF (second largest) declined -1.78pp at the same step
-- **Positive outlier:** TO showed +9.21pp PCR improvement driven by +9.15pp at Select Payment Method step
+- **Primary driver:** "Select Payment Method" conversion dropped -2.07pp (50.25% → 48.18%), accounting for the majority of the PCR decline
+- **Payment method degradation:** Braintree_ApplePay success rate fell -4.40pp (91.63% → 87.23%), and Braintree_CreditCard crashed -8.72pp (92.72% → 84.00%) with volume dropping from 4,329 to just 125 attempts
+- **Geographic impact:** FJ (largest market) saw "Select Payment Method" drop -2.82pp; CF experienced -1.78pp decline at the same step
+- **Positive outlier:** TO showed strong improvement with PCR +9.21pp, driven by "Select Payment Method" increasing +9.15pp
+- **Backend stable:** Backend PCR remained nearly flat at -0.03pp, indicating the issue is concentrated in the frontend/user selection phase
 
-**Action:** Investigate — Focus on Braintree_ApplePay success rate degradation and the root cause of Select Payment Method abandonment in FJ and CF markets.
+**Action:** **Investigate** - The significant drop in "Select Payment Method" conversion combined with Braintree payment method degradation (especially the near-complete volume loss for Braintree_CreditCard) warrants immediate investigation into potential UI/UX changes, payment method availability issues, or Braintree integration problems.
 
 ---
 

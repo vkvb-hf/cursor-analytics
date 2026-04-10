@@ -7,27 +7,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR declined from 97.17% to 97.04% (-0.13pp) in 2026-W13, representing a modest decrease across 784,389 orders, though the metric remains within the elevated range achieved over recent weeks.
+**Overall:** PAR declined by -0.13pp (97.17% → 97.04%) on volume of 784,389 orders in 2026-W13, continuing a downward trend from the recent peak of 97.25% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent pattern | -0.13pp | ✅ |
-| L1: Country Breakdown | 1 country >±2.5% threshold | NO: +2.76pp, CH: -2.31pp | ⚠️ |
-| L1: Payment Method | Minor declines across methods | Apple Pay: -0.36pp | ✅ |
-| L1: Payment Provider | Unknown provider significant drop | Unknown: -5.22pp | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern | -0.13pp | ⚠️ |
+| L1: Country Breakdown | 7 of 8 countries declined | CH -2.31pp, SE -1.29pp | ⚠️ |
+| L1: Country Threshold | NO exceeds ±2.5% threshold | +2.76pp | ⚠️ |
+| L1: Payment Method | All methods stable or slight decline | Apple Pay -0.36pp | ✅ |
+| L1: Payment Provider | Unknown provider significant drop | -5.22pp | ⚠️ |
 
 **Key Findings:**
-- **Switzerland (CH)** experienced the largest decline at -2.31pp (93.37% → 91.21%), though volume is low at 2,401 orders
-- **Norway (NO)** showed significant improvement of +2.76pp (89.86% → 92.35%) across 25,359 orders, flagged for exceeding the ±2.5% threshold
-- **PaymentProvider "Unknown"** dropped -5.22pp (89.9% → 85.21%) but represents only 2,130 orders (minimal overall impact)
-- **GB and FR** (two highest volume markets at 222,020 and 161,318 orders) both declined modestly (-0.51pp and -0.86pp respectively)
-- The overall decline follows a -0.08pp drop in the prior week, suggesting a potential softening trend after the peak of 97.25% in W12
+- CH experienced the largest PAR decline at -2.31pp (93.37% → 91.21%) on 2,401 orders
+- SE and BE both declined notably by -1.29pp and -0.88pp respectively, with BE contributing significant volume (75,558 orders)
+- PaymentProvider "Unknown" dropped -5.22pp (89.9% → 85.21%) though on limited volume (2,130 orders)
+- NO showed anomalous improvement of +2.76pp against the overall declining trend, flagged for threshold breach
+- Major markets GB (-0.51pp), DE (-0.41pp), and FR (-0.86pp) all contributed to the overall decline with combined volume exceeding 608,000 orders
 
-**Action:** **Monitor** – The -0.13pp decline is within normal fluctuation range. Continue monitoring CH performance and investigate the "Unknown" PaymentProvider data quality issue. No immediate escalation required.
+**Action:** Investigate — Focus on CH and SE country-specific issues, and identify root cause for "Unknown" payment provider degradation. Monitor NO for data quality or process changes explaining the counter-trend improvement.
 
 ---
 

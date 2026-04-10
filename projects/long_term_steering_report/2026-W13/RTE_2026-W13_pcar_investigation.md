@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved marginally by +0.01 percentage points (96.89% → 96.90%) on a volume of 39,914 orders in 2026-W13, representing a minor positive movement within normal fluctuation range.
+**Overall:** PCAR remained essentially stable at 96.9% in 2026-W13, showing a marginal improvement of +0.01pp on a volume of 39,914 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate stable within ±0.5pp range | +0.01pp | ✅ |
-| L1: Country Threshold (±2.5%) | No countries exceeding threshold | 0 flags | ✅ |
-| L1: Country Performance | TK declined -2.00pp (largest drop) | -2.00pp | ⚠️ |
-| L1: Payment Method | Credit Card slight decline | -0.05pp | ✅ |
-| L1: Payment Method | PayPal improvement | +0.38pp | ✅ |
+| 8-Week Trend | Rate stability within normal range | +0.01pp | ✅ |
+| Country Breakdown | No countries exceed ±2.5% threshold | Max decline: TK -2.00pp | ✅ |
+| Payment Method | All methods stable | Paypal +0.38pp, Credit Card -0.05pp | ✅ |
+| Volume Trend | Declining weekly volume observed | 39,914 (down from 50,858 in W09) | ⚠️ |
 
 **Key Findings:**
-- Volume has declined steadily over 8 weeks, dropping from 50,858 (W09) to 39,914 (W13), a reduction of approximately 21.5%
-- TK experienced the largest country-level decline at -2.00pp (91.96% → 90.12%), approaching the ±2.5% threshold
-- TO and TV also showed notable declines of -1.72pp and -1.56pp respectively, though on smaller volumes (3,508 and 2,191 orders)
-- PayPal showed the strongest payment method improvement at +0.38pp (97.78% → 98.15%)
-- FJ dominates volume at 409,231 orders but experienced a minor decline of -0.35pp
+- PCAR has remained stable in a narrow band between 96.88% and 97.3% over the past 8 weeks, with the reported +0.01pp change representing normal fluctuation
+- TK shows the largest country-level decline at -2.00pp (90.12% vs 91.96%), followed by TO at -1.72pp (85.35% vs 86.85%), though neither exceeds the ±2.5% threshold
+- Paypal shows the strongest payment method improvement at +0.38pp (98.15%), while Credit Card shows a minor decline of -0.05pp (97.76%)
+- Weekly order volume has decreased approximately 21% from W09 (50,858) to W13 (39,914), indicating a declining trend worth monitoring
+- TO and TK maintain the lowest PCAR rates at 85.35% and 90.12% respectively, representing ongoing underperformance
 
-**Action:** Monitor – The +0.01pp change is negligible and no countries breached the ±2.5% threshold. However, continue monitoring TK (-2.00pp) as it approaches the threshold, and investigate the sustained volume decline trend across recent weeks.
+**Action:** Monitor — The +0.01pp change is within normal variance and no dimensions exceed alert thresholds. Continue monitoring TK and TO for potential further decline, and track the decreasing order volume trend.
 
 ---
 

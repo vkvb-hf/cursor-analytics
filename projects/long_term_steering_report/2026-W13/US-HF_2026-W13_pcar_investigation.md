@@ -7,28 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PCAR improved from 92.57% to 92.85% (+0.30pp) in 2026-W13 with a total volume of 14,911 orders, showing a recovery after the prior week's decline.
+**Overall:** PCAR improved by +0.30% from 92.57% to 92.85% in 2026-W13, representing a partial recovery after the -0.38% decline observed in the prior week.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric within normal range (92.45%-94.58%) | +0.30pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.05pp | ✅ |
-| L1: Payment Method - Credit Card | Decline observed | -0.92pp | ⚠️ |
-| L1: Payment Method - Apple Pay | Improvement observed | +0.36pp | ✅ |
-| L1: Payment Method - Paypal | Stable | +0.11pp | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.45%-94.58%) | +0.30% | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | +0.05% (US) | ✅ |
+| L1: Payment Method | Credit Card shows decline | -0.92% | ⚠️ |
+| L1: Payment Method | Apple Pay improved | +0.36% | ✅ |
 
 **Key Findings:**
-- PCAR rebounded +0.30pp after a -0.38pp decline in the prior week (2026-W13), partially recovering toward the 8-week high of 94.58% seen in W10
-- Credit Card payments showed the largest decline at -0.92pp (93.51% → 92.64%), representing the highest volume segment at 8,821 orders
-- Apple Pay improved by +0.36pp (91.75% → 92.08%) with 5,227 orders, contributing positively to overall performance
-- Order volume continues a downward trend, dropping from 15,361 to 14,911 orders (-2.9% WoW)
-- No country-level anomalies detected; US showed minimal change at +0.05pp
+- PCAR rate of 92.85% remains below the 8-week high of 94.58% (2026-W10), indicating the metric has not fully recovered to peak performance
+- Credit Card payment method declined by -0.92pp (93.51% → 92.64%) despite representing the largest volume at 8,821 orders
+- Apple Pay showed improvement of +0.36pp (91.75% → 92.08%) with significant volume of 5,227 orders
+- Order volume continues to decline week-over-week (14,911 in W14 vs. 20,573 in W07), a pattern requiring monitoring
+- US as the sole country showed minimal change (+0.05pp), indicating stable country-level performance
 
-**Action:** Monitor – Continue tracking Credit Card payment method performance; the -0.92pp decline warrants observation in the next reporting period to determine if this is a one-time fluctuation or emerging trend.
+**Action:** Monitor - The overall improvement is positive, but the Credit Card payment method decline (-0.92pp) warrants continued observation. If Credit Card performance continues to decline in the next reporting period, escalate for deeper investigation.
 
 ---
 

@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Overall declined by -0.43pp (from 89.72% to 89.33%) in WL 2026-W13 with a volume of 165,018 orders, reversing the positive trend observed in prior weeks.
+**Overall:** AR Overall declined by -0.43 percentage points (89.72% → 89.33%) in WL 2026-W13 with a volume of 165,018 orders, interrupting a generally positive trend observed since W07.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline pattern? | -0.43pp | ✅ Minor fluctuation within normal range (88.14%-89.79%) |
-| L1: Country Breakdown | Any country Δ > ±2.5%? | Max: +0.88pp (CK) | ✅ No countries exceed threshold |
-| L1: PaymentMethod | Any method Δ > ±2.5%? | +12.74pp (Others) | ⚠️ "Others" shows significant swing but low volume (796) |
-| L1: PaymentProvider | Any provider Δ > ±2.5%? | -37.50pp (Unknown) | ⚠️ "Unknown" provider dropped significantly but minimal volume (15) |
+| L0: 8-Week Trend | Consistent pattern? | -0.43 pp | ⚠️ Decline after 2 weeks of gains |
+| L1: Country Impact | Any country > ±2.5%? | Max: -0.17 pp (KN) | ✅ No major outliers |
+| L1: Payment Method | Any method > ±2.5%? | +12.74 pp (Others) | ⚠️ Anomaly in low-volume segment |
+| L1: Payment Provider | Any provider > ±2.5%? | -37.50 pp (Unknown) | ⚠️ Severe drop in low-volume segment |
 
 **Key Findings:**
-- The -0.43pp decline breaks a 4-week positive trend that had lifted AR Overall from 88.14% (W08) to 89.72% (W13)
-- No country exceeded the ±2.5% threshold; all country movements were within -0.17pp to +0.88pp
-- PaymentProvider "Unknown" showed a -37.50pp drop (60.0% vs 96.0%), but with only 15 orders this is statistically insignificant
-- Credit Card payments, representing the largest volume (120,798 orders), declined slightly by -0.13pp
-- Braintree, the largest payment provider (111,236 orders), declined -0.29pp from 91.15% to 90.89%
+- PaymentProvider "Unknown" experienced a severe decline of -37.50 pp (96.0% → 60.0%), though volume is minimal at only 15 orders
+- PaymentMethod "Others" showed an unusual spike of +12.74 pp (87.48% → 98.62%) on 796 orders, suggesting data anomaly or classification change
+- Braintree, the highest-volume provider (111,236 orders), declined slightly by -0.29 pp, contributing meaningfully to the overall drop
+- All five countries remained within normal variance (±2.5% threshold), with changes ranging from -0.17 pp (KN) to +0.88 pp (CK)
+- ProcessOut continues to underperform at 79.93% acceptance rate despite a +1.24 pp improvement
 
-**Action:** Monitor – The decline is minor (-0.43pp) and no significant dimensional drivers were identified. The flagged anomalies in "Unknown" provider and "Others" payment method have negligible volume impact.
+**Action:** Monitor — The overall decline is modest (-0.43 pp) and no major country or high-volume dimension shows significant deviation. The anomalies in "Unknown" provider and "Others" payment method warrant data quality review but involve negligible volume.
 
 ---
 

@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.50%) in W14, recovering from the prior week's decline and returning closer to the 8-week average performance level.
+**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.50% / +1.31pp) in 2026-W14, recovering from the prior week's decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Rate | 87.53% → 88.84% | +1.31 pp | ✅ |
-| L1: US Country | 68.09% → 66.77% | -1.32 pp | ✅ |
-| L1: Apple Pay | 87.07% → 84.92% | -2.15 pp | ⚠️ |
-| L1: Unknown Provider | 100.0% → 96.91% | -3.09 pp | ⚠️ |
-| L1: ProcessOut | 88.77% → 87.54% | -1.23 pp | ✅ |
-| L1: Braintree | 88.19% → 87.20% | -0.99 pp | ✅ |
+| L0: Overall Rate | +1.50% WoW | +1.31pp | ✅ |
+| L1: Country (US) | -1.95% WoW | -1.32pp | ⚠️ |
+| L1: PaymentMethod | Apple Pay -2.48% | -2.15pp | ⚠️ |
+| L1: PaymentProvider | Unknown -3.09% | -3.09pp | ⚠️ |
 
 **Key Findings:**
-- Overall metric recovered +1.50% after the -1.30% decline reported in W13, suggesting the prior week's drop was temporary
-- Apple Pay showed the largest decline among payment methods at -2.48% (84.92% from 87.07%), representing 3,693 orders
-- PaymentProvider "Unknown" dropped -3.09 pp (100.0% → 96.91%), though volume is minimal at 97 orders
-- PayPal was the only payment method showing improvement at +1.76% (89.48% → 91.05%)
-- Volume decreased significantly from recent weeks (11,716 vs. 19,259 in W10), which may amplify rate fluctuations
+- US-HF AR Initial rate recovered +1.31pp to 88.84% in W14, reversing the -1.30% decline observed in W13
+- Apple Pay showed the largest payment method decline at -2.48% (-2.15pp), dropping from 87.07% to 84.92% on 3,693 orders
+- PaymentProvider "Unknown" experienced a -3.09pp drop (100.0% → 96.91%), though volume is limited at 97 orders
+- PayPal was the only payment method showing improvement at +1.76% (+1.57pp), reaching 91.05%
+- Volume decreased significantly from the 8-week high of 21,838 (W07) to 11,716 orders in the current week
 
-**Action:** Monitor — The overall metric has recovered and no dimensions exceed the ±2.5% threshold. Continue watching Apple Pay performance over the next 1-2 weeks to confirm it stabilizes.
+**Action:** Monitor - The overall metric has improved and recovered from W13's decline. Continue monitoring Apple Pay performance as it represents meaningful volume (3,693 orders) and showed notable deterioration.
 
 ---
 

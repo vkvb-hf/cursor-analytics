@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall for HF-INTL declined from 94.16% to 93.64% (-0.55pp) in W13→W14, continuing a 3-week downward trend with volume decreasing to 784,389 orders.
+**Overall:** AR Overall declined by -0.55% (from 94.16% to 93.64%) in 2026-W13, representing the second consecutive weekly decline in the HF-INTL region with 784,389 orders processed.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline pattern (W12-W14) | -0.96pp over 3 weeks | ⚠️ |
-| L1: Country Breakdown | 7 of 8 countries declined; CH worst at -2.31pp | -2.31pp to +2.76pp range | ⚠️ |
-| L1: Payment Method | Apple Pay lowest performer | -1.36pp | ⚠️ |
-| L1: Payment Provider | Unknown provider significant drop | -6.11pp | ⚠️ |
+| L0: 8-Week Trend | Consecutive declines W12-W14 | -0.55% | ⚠️ |
+| L1: Country Breakdown | CH exceeds threshold (-2.31pp) | -2.31% | ⚠️ |
+| L1: Country Breakdown | NO positive outlier (+2.76pp) | +2.76% | ⚠️ |
+| L1: PaymentMethod | Apple Pay underperforming | -1.36% | ⚠️ |
+| L1: PaymentProvider | Unknown provider significant drop | -6.11% | ⚠️ |
 
 **Key Findings:**
-- **Payment Provider "Unknown" dropped -6.11pp** (87.41% → 82.07%), though low volume (2,130 orders) limits overall impact
-- **Switzerland (CH) saw the largest country decline at -2.31pp** (93.37% → 91.21%), albeit on small volume (2,401 orders)
-- **Apple Pay underperforms** at 88.27% (-1.36pp), the lowest rate among payment methods with significant volume (113,387 orders)
-- **Norway (NO) improved +2.76pp** (89.86% → 92.35%), the only country showing positive movement and exceeding the ±2.5% threshold
-- **GB and FR represent high-impact volume** (383,338 combined orders) both declining -0.51pp and -0.86pp respectively
+- CH experienced the largest country-level decline at -2.31pp (91.21% from 93.37%), though volume is relatively low at 2,401 orders
+- PaymentProvider "Unknown" showed a significant drop of -6.11pp (82.07% from 87.41%) with 2,130 orders, indicating potential tracking or integration issues
+- Apple Pay continues to underperform other payment methods at 88.27% (-1.36pp), affecting 113,387 orders (14.5% of volume)
+- GB and FR, the two highest-volume countries (222,020 and 161,318 orders respectively), both declined by -0.51pp and -0.86pp
+- NO is the only country showing improvement at +2.76pp, flagged as an outlier worth monitoring
 
-**Action:** **Investigate** – The sustained 3-week decline, combined with the significant drop in the "Unknown" payment provider and Apple Pay underperformance, warrants investigation into payment processing issues, particularly for Braintree and ProcessOut which serve Apple Pay and Credit Card transactions.
+**Action:** Investigate - Focus on the Unknown PaymentProvider drop (-6.11pp) and Apple Pay performance degradation across high-volume markets (GB, FR). Coordinate with payment integration teams to identify root cause.
 
 ---
 

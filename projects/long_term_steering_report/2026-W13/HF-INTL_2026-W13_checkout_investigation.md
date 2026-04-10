@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +0.41pp (34.47% → 34.88%) in HF-INTL for 2026-W13, exceeding the +0.20pp threshold, driven primarily by gains in Select Payment Method (+1.00pp) despite a significant decline at Successful Checkout (-1.30pp).
+**Overall:** Payment Conversion Rate improved from 34.47% to 34.88% (+0.41pp) on 82,373 payment visits, exceeding the +0.20pp threshold for investigation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | +1.00pp | ✅ |
-| Click Submit Form | Above threshold | +0.38pp | ✅ |
-| FE Validation Passed | Within threshold | -0.10pp | ✅ |
-| Enter Fraud Service | Within threshold | +0.18pp | ✅ |
-| Approved by Fraud Service | Within threshold | -0.09pp | ✅ |
-| Call to PVS | Above threshold | +0.26pp | ✅ |
-| Successful Checkout | Below threshold | -1.30pp | ⚠️ |
+| Select Payment Method | Volume & Rate | +1.00pp | ✅ |
+| Click Submit Form | Rate | +0.38pp | ✅ |
+| FE Validation Passed | Rate | -0.10pp | ✅ |
+| Enter Fraud Service | Rate | +0.18pp | ✅ |
+| Approved by Fraud Service | Rate | -0.09pp | ✅ |
+| Call to PVS | Rate | +0.26pp | ✅ |
+| Successful Checkout | Rate | -1.30pp | ⚠️ |
 
 **Key Findings:**
-- **PVS Failures increased significantly:** Total PVS failures rose from 872 to 1,530 (+658), with "Refused: Refused" errors increasing by +132 (+7.10pp share) and "Cancelled: Cancelled" by +154 (+5.87pp share)
-- **DE showing PVS degradation:** Germany experienced a -6.63pp drop at Successful Checkout (GA) and -6.06pp at PVS Success (Backend), offsetting volume gains
-- **Adyen_IDeal and Adyen_Klarna underperforming:** IDeal conversion dropped -2.63pp (94.41% → 91.79%) and Klarna dropped -1.92pp (94.85%), both Adyen payment methods
-- **GB driving positive performance:** Great Britain contributed the largest volume increase (+1,833 visits) with PCR improving +1.47pp, led by Select Payment Method gains (+0.88pp)
-- **CH showed strong recovery:** Despite low volume (500 visits), Switzerland improved +4.60pp in PCR, with FE Validation Passed gaining +6.58pp
+- The +1.00pp improvement in Select Payment Method was the primary driver of overall PCR gains, with GB contributing +0.88pp at this step
+- Successful Checkout conversion dropped -1.30pp despite upstream improvements, driven by a 75% increase in PVS failures (872 → 1,530 total failures)
+- DE experienced a significant -6.63pp drop at Successful Checkout despite +6.57% volume growth, with PVS Success falling -6.06pp in backend data
+- "Refused: Refused" errors increased by +132 cases (+7.10pp share), and "Cancelled: Cancelled" rose by +154 cases (+5.87pp share)
+- Adyen_IDeal (-2.63pp) and Adyen_Klarna (-1.92pp) showed notable conversion declines, while Adyen_CreditCard dropped -11.25pp on reduced volume (906 → 116 attempts)
 
-**Action:** **Investigate** – The -1.30pp decline at Successful Checkout warrants investigation into PVS failures, particularly the surge in "Refused: Refused" and "Cancelled: Cancelled" errors. Priority focus on Adyen payment methods (IDeal, Klarna) and DE market PVS performance.
+**Action:** Investigate — The -1.30pp Successful Checkout degradation and 75% increase in PVS failures require immediate investigation, particularly the surge in "Refused" and "Cancelled" errors. Focus analysis on DE payment processing issues and Adyen payment method performance.
 
 ---
 

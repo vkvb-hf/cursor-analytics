@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Initial (LL0) improved from 89.1% to 89.66% (+0.63%) in 2026-W14, recovering from the prior week's decline and returning to levels consistent with the 8-week trend.
+**Overall:** AR Initial (LL0) improved by +0.63% (from 89.1% to 89.66%) in 2026-W14, recovering from the prior week's decline and returning to levels consistent with the 8-week trend.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | +0.63% | ✅ |
-| L1: Country Impact | Any country ±2.5% threshold | None exceeded | ✅ |
-| L1: Payment Method | Apple Pay decline | -1.48% | ⚠️ |
-| L1: Payment Provider | Unknown provider decline | -4.18% | ⚠️ |
+| L0: Overall Trend | Rate increased +0.63% WoW | +0.56pp | ✅ |
+| L1: Country Impact | No country exceeds ±2.5% threshold | US -1.95%, CA -0.26% | ✅ |
+| L1: Payment Method | Apple Pay declined most | -1.48% | ✅ |
+| L1: Payment Provider | Unknown provider significant drop | -4.18% | ⚠️ |
 
 **Key Findings:**
-- The +0.63% improvement reverses the -0.60% decline from W13, bringing the rate back in line with the 8-week average (~89.5%)
-- PaymentProvider "Unknown" showed the largest dimensional decline at -4.18% (from 99.3% to 95.16%), though volume is low at 351 orders
-- Apple Pay experienced a -1.48% decline (from 88.08% to 86.78%) on meaningful volume of 4,750 orders
-- Both US (-1.95%) and CA (-0.26%) showed slight declines, but neither exceeded the ±2.5% flag threshold
-- PayPal showed positive movement at +1.28% (from 89.62% to 90.77%)
+- The +0.63% improvement reverses the -0.60% decline seen in W13, bringing the rate back to 89.66% which aligns with the 8-week average (~89.5%)
+- PaymentProvider "Unknown" shows a notable decline of -4.18% (95.16% vs 99.30%), though volume is limited at 351 orders
+- US shows a -1.95% decline (66.77% vs 68.09%) with the largest volume (23,515 orders), remaining below threshold but worth monitoring
+- Apple Pay declined -1.48% (86.78% vs 88.08%) with meaningful volume of 4,750 orders
+- PayPal showed positive movement at +1.28% (90.77% vs 89.62%)
 
-**Action:** Monitor — The overall metric has recovered and no country-level flags were triggered. Continue tracking Apple Pay and the "Unknown" PaymentProvider segment for sustained declines in subsequent weeks.
+**Action:** Monitor — The overall metric has recovered and no country breaches the ±2.5% threshold. Continue to watch the "Unknown" PaymentProvider trend and US performance in coming weeks.
 
 ---
 

@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.31pp (30.34% → 30.03%) in 2026-W13, driven primarily by a significant drop in the Select Payment Method step (-0.49pp) and Fraud Service approval rate (-0.27pp).
+**Overall:** Payment Conversion Rate declined by -0.31pp (30.34% → 30.03%) in 2026-W13 with 38,531 payment visits, driven primarily by a significant drop in the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate vs Prior Week | -0.49pp | ⚠️ |
-| Click Submit Form | Rate vs Prior Week | +0.26pp | ✅ |
-| FE Validation Passed | Rate vs Prior Week | +0.24pp | ✅ |
-| Enter Fraud Service | Rate vs Prior Week | -0.22pp | ⚠️ |
-| Approved by Fraud Service | Rate vs Prior Week | -0.27pp | ⚠️ |
-| Call to PVS | Rate vs Prior Week | -0.04pp | ✅ |
-| Successful Checkout | Rate vs Prior Week | +0.18pp | ✅ |
+| Select Payment Method | ≥ +0.15pp threshold | -0.49pp | ⚠️ |
+| Click Submit Form | ≥ +0.15pp threshold | +0.26pp | ⚠️ |
+| FE Validation Passed | ≥ +0.15pp threshold | +0.24pp | ⚠️ |
+| Enter Fraud Service | ≥ +0.15pp threshold | -0.22pp | ⚠️ |
+| Approved by Fraud Service | ≥ +0.15pp threshold | -0.27pp | ⚠️ |
+| Call to PVS | ≥ +0.15pp threshold | -0.04pp | ✅ |
+| Successful Checkout | ≥ +0.15pp threshold | +0.18pp | ⚠️ |
 
 **Key Findings:**
-- **GN country experienced severe PCR decline (-4.57pp)**, with Select Payment Method conversion dropping -3.90pp and FE Validation Passed dropping -3.79pp, making it the largest negative contributor
-- **ProcessOut_CreditCard success rate declined -1.62pp** (91.85% → 90.23%), while ProcessOut_ApplePay dropped -3.29pp (88.21% → 84.91%), indicating potential issues with ProcessOut gateway
-- **Fraud Service entry gap increased +0.12pp** (0.22% → 0.34%), with Braintree_CreditCard showing the largest increase in skipped transactions (+10 count, +12.65pp share)
-- **CG country showed positive improvement (+1.68pp)** driven by Select Payment Method (+2.24pp), partially offsetting overall decline
-- **PVS failures decreased by 18 total**, with "Insufficient Funds" declines dropping from 85 to 62 (-23 count), contributing to the +0.18pp improvement in Successful Checkout conversion
+- **GN experienced a severe PCR decline of -4.57pp** (37.37% → 32.80%), with the Select Payment Method step dropping -3.90pp and FE Validation Passed falling -3.79pp, indicating significant frontend issues in this market
+- **ProcessOut_CreditCard success rate declined -1.62pp** (91.85% → 90.23%), while ProcessOut_ApplePay dropped -3.29pp (88.21% → 84.91%), suggesting potential ProcessOut integration issues
+- **CG showed positive momentum with +1.68pp PCR improvement**, driven by a +2.24pp increase in Select Payment Method conversion, partially offsetting GN losses
+- **Backend PVS Attempt gap in GN dropped significantly** from 99.75% to 90.80% (-8.95pp), indicating a backend processing issue specific to this market
+- **Fraud Service approval rate declined -0.27pp** (GA) and -0.35pp (Backend), with the gap between Checkout Attempt and Enter Fraud Service increasing from 0.22% to 0.34%
 
-**Action:** Investigate — Focus on GN country's significant conversion drop at Select Payment Method and FE Validation steps, and examine ProcessOut gateway performance degradation across both CreditCard and ApplePay methods.
+**Action:** Investigate - Priority focus on GN market's frontend validation issues (particularly at Select Payment Method and FE Validation steps), ProcessOut payment method performance degradation, and the backend PVS Attempt gap in GN
 
 ---
 

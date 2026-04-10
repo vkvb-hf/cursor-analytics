@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined marginally from 91.98% to 91.93% (-0.05 pp) in 2026-W13, representing a minor fluctuation within normal operating range across 415,885 orders.
+**Overall:** AR Overall for US-HF declined marginally by -0.05pp (91.98% → 91.93%) in 2026-W13 on a volume of 415,885 orders, remaining within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Volatility within ±0.34 pp range | -0.05 pp | ✅ |
-| L1: Country Impact | US only market, +0.05 pp | +0.05 pp | ✅ |
-| L1: PaymentMethod | Others declined -0.52 pp (2,230 vol) | -0.52 pp | ✅ |
-| L1: PaymentProvider | Unknown dropped -13.50 pp (131 vol) | -13.50 pp | ⚠️ |
-| L1: PaymentProvider | Adyen declined -1.12 pp (399 vol) | -1.12 pp | ✅ |
+| L0: 8-Week Trend | Rate within normal range (91.48%-92.09%) | -0.05pp | ✅ |
+| L1: Country Impact | US +0.05pp, no countries exceeding ±2.5% | +0.05pp | ✅ |
+| L1: PaymentMethod | Others -0.52pp, Apple Pay -0.04pp | Mixed | ✅ |
+| L1: PaymentProvider | Unknown -13.50pp (131 orders) | -13.50pp | ⚠️ |
 
 **Key Findings:**
-- PaymentProvider "Unknown" experienced a significant rate drop of -13.50 pp (from 92.66% to 80.15%), but with minimal volume impact (131 orders only)
-- PaymentProvider "Adyen" showed a -1.12 pp decline (from 96.06% to 94.99%), though volume remains low at 399 orders
-- PaymentMethod "Others" declined -0.52 pp (from 99.17% to 98.65%) on 2,230 orders
-- Primary payment flows remain stable: Braintree (+0.06 pp, 382,647 orders) and Credit Card (+0.00 pp, 311,435 orders)
-- 8-week trend shows overall metric stability, ranging between 91.48% and 92.09%
+- The -0.05pp decline is a minor fluctuation; the prior week (W13) showed a +0.05pp increase, indicating normal variance
+- PaymentProvider "Unknown" dropped significantly by -13.50pp (80.15% vs 92.66%), but volume is negligible at only 131 orders (0.03% of total)
+- PaymentProvider "Adyen" declined -1.12pp (94.99% vs 96.06%) on low volume of 399 orders
+- Primary payment flows remain stable: Braintree (+0.06pp, 382,647 orders) and Credit Card (+0.00pp, 311,435 orders)
+- Overall volume decreased by ~8,218 orders week-over-week (415,885 vs 424,103)
 
-**Action:** Monitor - The -0.05 pp decline is within normal weekly variance. The PaymentProvider "Unknown" drop warrants observation but has negligible volume impact (<0.1% of total orders).
+**Action:** Monitor — The decline is minimal and within normal operating range. The PaymentProvider "Unknown" drop, while significant in rate, affects negligible volume and does not warrant escalation.
 
 ---
 

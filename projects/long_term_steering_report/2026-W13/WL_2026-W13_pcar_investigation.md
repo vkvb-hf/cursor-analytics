@@ -7,24 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PCAR declined marginally from 97.07% to 97.03% (-0.04 pp) in W13 with 11,373 orders, representing a minor fluctuation within normal operating range.
+**Overall:** PCAR declined slightly from 97.07% to 97.03% (-0.04 pp) in 2026-W13, representing a minor week-over-week decrease on a volume of 11,373 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 8-week stability check | -0.04 pp | ✅ Within normal variance; rate improved significantly from W07 (94.85%) to current levels |
-| L1: Country | ±2.5% threshold scan | No flags | ✅ All countries within acceptable range |
-| L1: Payment Method | Dimension scan | -0.13 pp (Credit Card) | ⚠️ Credit Card slight decline; Apple Pay & PayPal improved |
+| L0: 8-Week Trend | Volatility within normal range | -0.04 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max: +0.88 pp (CK) | ✅ |
+| L1: Payment Method | Credit Card slight decline | -0.13 pp | ✅ |
+| L1: Payment Method | Apple Pay & Paypal improved | +0.58 pp / +0.68 pp | ✅ |
 
 **Key Findings:**
-- The -0.04 pp decline is minimal and follows a +0.20 pp improvement in the prior week (W13 vs W12), indicating stable performance
-- Credit Card payment method showed a slight decline of -0.13 pp (96.91% vs 97.04%), accounting for 7,642 orders (67% of volume)
-- Apple Pay improved by +0.58 pp (97.0% vs 96.44%) and PayPal improved by +0.68 pp (97.97% vs 97.31%)
-- No country exceeded the ±2.5% threshold; KN showed the lowest rate at 87.61% but only declined -0.17 pp
-- Overall 8-week trend shows strong recovery from W07 (94.85%) with rates stabilizing around 97%
+- The -0.04 pp decline is minimal and falls well within normal weekly fluctuation; the 8-week trend shows overall improvement from 94.85% (W07) to 97.03% (W14)
+- No countries exceeded the ±2.5% threshold; KN showed the largest decline at -0.17 pp while CK improved by +0.88 pp
+- Credit Card payments (67% of volume) saw a slight rate decline of -0.13 pp (96.91%), partially offset by improvements in Apple Pay (+0.58 pp) and Paypal (+0.68 pp)
+- Volume decreased from 13,604 to 11,373 orders (-16.4%), which may amplify rate volatility
+- ER represents the highest volume country (73,655) and showed improvement of +0.43 pp
 
-**Action:** Monitor — The decline is within normal variance and no significant drivers identified. Continue standard monitoring cadence.
+**Action:** Monitor — The decline is negligible (-0.04 pp), no dimensional breakdowns exceed alert thresholds, and the metric remains stable within a healthy 97%+ range. Continue standard monitoring.
 
 ---
 
@@ -63,8 +64,8 @@
 
 | Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
 |-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Others | 100.0% | nan% | +nan% | 1 |
 | PaymentMethod | Unknown | nan% | nan% | +nan% | 0 |
+| PaymentMethod | Others | 100.0% | nan% | +nan% | 1 |
 | PaymentMethod | Credit Card | 96.91% | 97.04% | -0.13% | 7,642 |
 | PaymentMethod | Apple Pay | 97.0% | 96.44% | +0.58% | 4,237 |
 | PaymentMethod | Paypal | 97.97% | 97.31% | +0.68% | 1,724 |

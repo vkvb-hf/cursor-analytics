@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined from 32.20% to 29.38% (-2.82pp) week-over-week, driven primarily by significant underperformance in key countries and unfavorable mix shifts during the Mid-Cycle payday phase.
+**Overall:** Dunning Ship Rate declined from 32.20% to 29.38% (-2.82pp) in W13, with volume increasing modestly from 8,367 to 8,699 eligible orders during a Mid-Cycle payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 32.20% → 29.38% | -2.82pp | ⚠️ |
 
 **Key Findings:**
-- **ER underperformance:** Largest volume country (2,562 orders) saw Ship Rate drop from 28.74% to 23.61% (-5.13pp) while volume increased 5.3%
-- **Unfavorable mix shift:** MR volume surged +30.4% (1,124 → 1,466 orders) but has near-zero Ship Rate (0.80% → 0.07%), diluting overall performance
-- **High-performer contraction:** CK (Medium SR tier) volume decreased -8.5% while AO (High SR tier) decreased -2.8%, reducing contribution from better-converting countries
-- **Payday phase impact:** Shift from Post-Payday to Mid-Cycle correlates with the decline, consistent with typical cash-flow constraints
-- **GN positive signal:** One bright spot with Ship Rate improving from 28.00% to 36.06% (+8.06pp)
+- ER saw a significant Ship Rate decline (-5.13pp, from 28.74% to 23.61%) while volume grew +5.3%, amplifying negative impact on overall performance
+- MR volume surged +30.4% (1,124 → 1,466 orders) while Ship Rate collapsed to near-zero (0.80% → 0.07%), indicating potential mix shift drag
+- CK, a Medium-tier performer, lost -8.5% volume share while maintaining relatively stable SR (-2.29pp), reducing positive contribution to the cluster
+- AO showed positive momentum with SR improving +3.81pp (63.45% → 67.26%) despite slight volume decline
+- Mid-Cycle payday phase timing may be contributing to lower conversion compared to Post-Payday in W12
 
-**Action:** **Investigate** — The -2.82pp decline is material and concentrated in specific countries (ER, MR). Recommend deep-dive into ER's -5.13pp drop and evaluate whether MR volume growth is sustainable given its near-zero conversion rate.
+**Action:** Investigate – Focus on root cause analysis for ER's sharp SR decline and MR's near-zero conversion despite major volume increase; assess if MR orders should be excluded or require different dunning treatment.
 
 ---
 

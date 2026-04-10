@@ -9,27 +9,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved slightly from 89.23% to 89.84% (+0.68pp) in 2026-W13, though this follows a broader declining trend from 91.99% in 2026-W11.
+**Overall:** AR Initial (LL0) improved slightly from 89.23% to 89.84% (+0.61 pp) in 2026-W14, though this follows a declining trend from the 91.99% peak observed in 2026-W11.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Overall Trend | 8-week stability | +0.68pp WoW | ✅ |
-| L1 Country - MR | Threshold ±2.5% | -6.73pp | ⚠️ |
-| L1 Country - CK | Threshold ±2.5% | +2.52pp | ⚠️ |
-| L1 Country - ER | Threshold ±2.5% | +6.87pp | ⚠️ |
-| L1 PaymentProvider - Braintree | Rate change | -3.60pp | ⚠️ |
-| L1 PaymentProvider - Unknown | Rate change | -25.00pp | ⚠️ |
+| L0 Trend | 8-week pattern | +0.61 pp WoW | ✅ |
+| L1 Country | MR, CK, ER outside ±2.5% | MR -6.73 pp, CK +2.52 pp, ER +6.87 pp | ⚠️ |
+| L1 PaymentProvider | Braintree, Unknown flagged | Braintree -3.60 pp, Unknown -25.00 pp | ⚠️ |
+| L1 PaymentMethod | Others improved | Others +3.99 pp (low volume: 79) | ✅ |
 
 **Key Findings:**
-- **MR experienced significant decline:** AR Initial dropped -6.73pp (82.38% → 76.83%) with substantial volume of 3,600 orders, requiring immediate attention
-- **Braintree payment provider degradation:** Rate declined -3.60pp (93.29% → 89.93%) affecting 6,497 orders (largest provider volume)
-- **ER showed strong recovery:** Rate improved +6.87pp (56.92% → 60.82%) on 5,197 orders, though absolute rate remains lowest at 60.82%
-- **Volume decline continues:** Total volume dropped from 15,670 (W07) to 12,781 (W14), representing an 18% reduction over 8 weeks
-- **PaymentProvider "Unknown" anomaly:** -25.00pp drop, though only 12 orders affected (low impact)
+- MR experienced the largest decline at -6.73 pp (76.83% from 82.38%) with significant volume (3,600 orders), requiring immediate attention
+- Braintree payment provider declined -3.60 pp (89.93% from 93.29%) affecting 6,497 orders—the highest volume provider
+- ER showed strong improvement of +6.87 pp (60.82% from 56.92%) with the largest volume at 5,197 orders, though absolute rate remains the lowest
+- Overall volume has declined steadily from 15,670 (W07) to 12,781 (W14), a reduction of approximately 18%
+- Unknown payment provider dropped -25.00 pp but represents minimal volume (12 orders)
 
-**Action:** **Investigate** - Priority focus on MR country decline (-6.73pp) and Braintree provider degradation (-3.60pp), as both represent significant volume segments with material rate deterioration.
+**Action:** Investigate — Focus on MR country performance decline and Braintree payment provider degradation, as both represent high-volume segments with significant rate drops.
 
 ---
 

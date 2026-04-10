@@ -7,27 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved from 93.92% to 94.12% (+0.21 pp) in 2026-W14, representing a positive recovery after the prior week's decline, with 20,221 orders processed.
+**Overall:** PCAR improved by +0.21 percentage points (93.92% → 94.12%) on a volume of 20,221 orders in 2026-W13, recovering from the prior week's decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Regional (HF-NA) | Overall Rate Change | +0.21 pp | ✅ |
-| US | Country Performance | +0.05 pp | ✅ |
-| CA | Country Performance | +0.26 pp | ✅ |
-| Credit Card | Payment Method | -0.70 pp | ⚠️ |
-| Apple Pay | Payment Method | +0.39 pp | ✅ |
-| PayPal | Payment Method | +0.01 pp | ✅ |
+| Regional Rate | HF-NA +0.21pp | +0.21pp | ✅ |
+| Country: US | 92.85% → +0.05pp | +0.05pp | ✅ |
+| Country: CA | 93.61% → +0.26pp | +0.26pp | ✅ |
+| Payment: Credit Card | 94.13% → -0.70pp | -0.70pp | ⚠️ |
+| Payment: Apple Pay | 93.42% → +0.39pp | +0.39pp | ✅ |
+| Payment: PayPal | 94.18% → +0.01pp | +0.01pp | ✅ |
 
 **Key Findings:**
-- The +0.21 pp improvement reverses the -0.29 pp decline observed in 2026-W13, bringing PCAR closer to the 8-week high of 95.23% seen in 2026-W10
-- Both countries showed improvement: Canada led with +0.26 pp while US improved modestly at +0.05 pp; no countries exceeded the ±2.5% threshold
-- Credit Card payment method declined -0.70 pp (from 94.79% to 94.13%) despite being the highest volume payment method at 12,366 orders
-- Apple Pay showed solid improvement of +0.39 pp (93.06% → 93.42%) on significant volume of 6,568 orders
-- Order volume decreased from 20,751 to 20,221 (-2.6%), continuing a downward volume trend from the 8-week high of 27,201 in 2026-W09
+- PCAR recovered +0.21pp after declining -0.29pp in the prior week (2026-W13), returning closer to the 8-week high of 95.23% seen in 2026-W10
+- CA showed stronger improvement (+0.26pp) compared to US (+0.05pp), with CA achieving 93.61% vs US at 92.85%
+- Credit Card payment method declined -0.70pp (94.79% → 94.13%) despite being the highest volume payment type (12,366 orders)
+- Apple Pay improved +0.39pp (93.06% → 93.42%) on significant volume (6,568 orders)
+- Overall order volume continues declining trend: 20,221 orders vs 20,751 prior week (-2.6%)
 
-**Action:** Monitor – The metric shows positive recovery with no country-level flags, but Credit Card payment method performance warrants observation in the next reporting period.
+**Action:** Monitor – The metric shows recovery and no countries exceed the ±2.5% threshold; however, continue monitoring Credit Card performance given the -0.70pp decline on high volume.
 
 ---
 

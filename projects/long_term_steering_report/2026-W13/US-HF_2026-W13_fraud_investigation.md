@@ -10,25 +10,24 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined by -1.41 percentage points from 89.88% (W12) to 88.61% (W13), representing a significant negative shift in fraud service performance.
+**Overall:** Fraud Approval Rate (FAR) declined by -1.41 pp from 89.88% to 88.61% in 2026-W13, representing a significant change against a volume of 17,575 customers reaching fraud service.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR Trend | FAR dropped from 89.88% to 88.61% | -1.41 pp | ⚠️ |
-| L1: Country Breakdown | US showed decline but within threshold | -1.41 pp | ✅ |
-| L1: Channel - Paid | Minor decline, stable performance | -0.78 pp | ✅ |
-| L1: Channel - Referral | Exceeded ±2.5% threshold | -4.26 pp | ⚠️ |
+| L0: 8-Week Trend | FAR within normal range | -1.41 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | US: -1.41 pp | ✅ |
+| L1: Channel Category | Referral channel exceeds threshold | -4.26 pp | ⚠️ |
 
 **Key Findings:**
-- Referral channel FAR declined significantly from 62.44% to 59.79% (-4.26 pp), exceeding the ±2.5% threshold and flagged as a concern
-- Pre-Fraud (PF) Block Rate increased notably from 2.72% (W12) to 3.60% (W13), a +0.88 pp increase that may be contributing to lower approvals
-- Duplicate Rate increased slightly from 24.70% to 25.13% (+0.43 pp), continuing an upward trend over recent weeks
-- Volume remained relatively stable at 17,575 customers (W13) vs 17,515 (W12)
-- Paid channel maintained strong FAR at 96.17% despite slight decline of -0.78 pp
+- FAR dropped -1.41 pp in 2026-W13, the second consecutive weekly decline following a -2.04 pp drop in W11
+- Referral channel shows significant FAR decline of -4.26 pp (62.44% → 59.79%), flagged as exceeding threshold
+- Paid channel remains stable with only -0.78 pp decline and maintains high FAR at 96.17%
+- PF Block Rate spiked to 3.60% in W13, up from 2.72% in W12 and significantly above the W14 level of 0.92%
+- Duplicate Rate increased slightly by +1.71 pp to 25.13%, continuing an upward trend over recent weeks
 
-**Action:** Investigate — Focus investigation on the Referral channel's -4.26 pp FAR decline and the elevated Pre-Fraud Block Rate (+0.88 pp) to identify root causes driving reduced approvals.
+**Action:** Investigate — The Referral channel's -4.26 pp FAR decline and the elevated PF Block Rate (3.60%) warrant deeper analysis to identify root cause and determine if intervention is needed.
 
 ---
 

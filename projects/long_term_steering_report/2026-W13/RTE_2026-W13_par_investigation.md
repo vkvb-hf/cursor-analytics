@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined from 94.94% to 94.76% (-0.19pp) in W13 with 431,853 orders processed, continuing a downward trend for the second consecutive week.
+**Overall:** PAR declined by -0.19 percentage points (94.94% → 94.76%) in 2026-W13, continuing a two-week downward trend from the recent peak of 95.18% in 2026-W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Decline pattern observed | -0.19pp WoW | ⚠️ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | TK worst at -2.00pp | ✅ |
-| L1: Payment Method | All methods declined except Others | Apple Pay -0.38pp | ⚠️ |
-| L1: Payment Provider | Braintree declined (largest volume) | -0.33pp on 310K orders | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern? | -0.19pp WoW, -0.44pp from W12 peak | ⚠️ |
+| L1: Country Impact | Any country Δ > ±2.5%? | None (max: TK at -2.00pp) | ✅ |
+| L1: Country Contribution | Top volume country impact? | FJ: -0.35pp (409,231 orders, 95% of volume) | ⚠️ |
+| L1: Payment Method | Significant method degradation? | Apple Pay: -0.38pp, Credit Card: -0.27pp | ⚠️ |
+| L1: Payment Provider | Provider-specific issues? | Braintree: -0.33pp (310,634 orders) | ⚠️ |
 
 **Key Findings:**
-- PAR has declined for 2 consecutive weeks, dropping from 95.18% (W12) to 94.76% (W14), a total decrease of 0.42pp
-- TK showed the largest country-level decline at -2.00pp (90.12%), though volume is low at 2,155 orders
-- Braintree, handling 72% of volume (310,634 orders), declined -0.33pp from 95.93% to 95.62%
-- Apple Pay showed the steepest payment method decline at -0.38pp (92.37%), processing 55,464 orders
-- The "Unknown" payment provider has critically low PAR at 37.14%, though volume is negligible (35 orders)
+- FJ dominates volume (95% of orders at 409,231) and its -0.35pp decline is the primary driver of the overall PAR drop
+- Braintree, handling 72% of transaction volume (310,634 orders), declined -0.33pp and warrants attention as the largest payment provider
+- TK showed the steepest country-level decline at -2.00pp, though low volume (2,155 orders) limits overall impact
+- Apple Pay underperformed other payment methods with -0.38pp decline across 55,464 orders
+- This marks the second consecutive week of decline after PAR peaked at 95.18% in W12
 
-**Action:** Monitor - The -0.19pp decline is within normal variance and no single dimension exceeds the ±2.5% threshold. Continue tracking Braintree performance given its high volume contribution and the consecutive weekly declines.
+**Action:** Monitor – No single dimension exceeds the ±2.5% threshold, but the consecutive weekly declines and broad-based degradation across FJ, Braintree, and Apple Pay suggest close monitoring through W14. If the downward trend continues, escalate for deeper investigation into Braintree processing in FJ.
 
 ---
 

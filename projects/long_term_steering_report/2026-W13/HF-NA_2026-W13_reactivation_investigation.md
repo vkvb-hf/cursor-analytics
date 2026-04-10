@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved slightly from 90.69% to 90.95% (+0.26 pp) in W14, continuing a positive 8-week upward trend from 86.03% in W07.
+**Overall:** Reactivation rate improved slightly from 90.69% to 90.95% (+0.26 pp) in W14, continuing a positive upward trend observed over the past 8 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement from W07 (86.03%) to W14 (90.95%) | +4.92 pp over 8 weeks | ✅ |
-| L1: Country Breakdown | US +0.05 pp, CA +0.26 pp; No countries exceed ±2.5% threshold | Within normal range | ✅ |
-| L1: Payment Method | Credit Card declined -0.51 pp; Others +20.00 pp (5 orders only) | Minor fluctuation | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement from 86.03% (W07) to 90.95% (W14) | +4.92 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | US: +0.05 pp, CA: +0.26 pp | ✅ |
+| L1: Dimension Scan | Minor fluctuations across payment methods | Credit Card: -0.51 pp | ✅ |
 
 **Key Findings:**
-- Reactivation rate has shown consistent improvement over the past 8 weeks, rising from 86.03% (W07) to 90.95% (W14), a gain of +4.92 pp
-- Both US (92.85%) and CA (93.61%) markets are performing strongly with no concerning deviations from prior week
-- Credit Card payment method showed a slight decline of -0.51 pp (90.74% → 90.28%), representing the largest volume segment at 15,394 orders
-- The "Others" payment method showed +20.00 pp change, but volume is negligible (5 orders) and not statistically significant
-- Volume decreased from 21,909 to 20,279 orders (-7.4%), which should be monitored for seasonal patterns
+- Reactivation rate has shown consistent improvement over 8 weeks, rising from 86.03% (W07) to 90.95% (W14), a gain of +4.92 pp
+- Both US (+0.05 pp to 92.85%) and CA (+0.26 pp to 93.61%) showed stable, positive performance with no anomalies
+- Credit Card payments showed a slight decline of -0.51 pp (90.74% → 90.28%) but remains within normal variance
+- The "Others" payment method showed +20.00 pp change but is statistically insignificant with only 5 orders
+- Volume decreased from 21,909 (W13) to 20,279 (W14), representing a normal week-over-week fluctuation
 
-**Action:** Monitor – The +0.26 pp improvement is within normal fluctuation, all country-level metrics are healthy, and the 8-week trend remains positive. Continue standard monitoring cadence.
+**Action:** Monitor — The +0.26 pp improvement is within normal variance and the 8-week trend shows healthy, sustained growth. No investigation or escalation required.
 
 ---
 

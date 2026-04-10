@@ -10,26 +10,24 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-INTL declined marginally from 91.79% to 91.70% (-0.10pp) in 2026-W13, a change that is not statistically significant.
+**Overall:** Fraud Approval Rate (FAR) declined marginally from 91.79% to 91.70% (-0.10pp) in 2026-W13, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | -0.10pp WoW | Within normal range | ✅ |
-| L0: Duplicate Rate | +0.30pp (30.52% → 30.22%) | Slight decrease | ✅ |
-| L0: Duplicate Block Rate | +0.81pp (6.61% → 7.42%) | Minor increase | ✅ |
-| L1: Country Variance | 4 countries exceed ±2.5% threshold | NL, NZ, DK, LU flagged | ⚠️ |
+| L0: Overall FAR | -0.10pp WoW | Within ±1% threshold | ✅ |
+| L1: Country Breakdown | 4 countries exceed ±2.5% | NL, NZ, DK, LU flagged | ⚠️ |
 | L1: Channel Category | Paid -0.39pp, Referral -0.88pp | Within normal range | ✅ |
 
 **Key Findings:**
-- **New Zealand (NZ)** experienced the largest FAR decline at -5.50pp (90.59% → 85.61%) with volume of 813 customers and a +7.60% increase in duplicate rate
-- **Luxembourg (LU)** showed a -5.67pp FAR decline (98.61% → 93.02%), though on very low volume (86 customers)
-- **Netherlands (NL)** declined -2.83pp in FAR (94.24% → 91.58%) accompanied by a significant +14.79% increase in duplicate rate
-- **Denmark (DK)** improved +3.31pp in FAR (85.78% → 88.62%) with a -10.17% decrease in duplicate rate
-- Overall volume decreased significantly from 46,689 to 37,558 customers (-19.6% WoW)
+- NZ experienced the largest FAR decline (-5.50pp to 85.61%) alongside a +7.60% increase in duplicate rate, indicating potential fraud pattern changes
+- LU showed a sharp FAR drop (-5.67pp to 93.02%) though on low volume (86 customers)
+- NL saw FAR decline of -2.83pp coupled with a significant duplicate rate increase (+14.79%), warranting attention
+- DK moved counter-trend with FAR improving +3.31pp while duplicate rate decreased -10.17%
+- Volume decreased 19.6% WoW (46,689 → 37,558), continuing a downward trend from W10 peak of 52,844
 
-**Action:** Monitor — The overall decline is not significant and within normal weekly fluctuation. Continue monitoring NZ and NL for sustained declines, particularly the correlation between rising duplicate rates and falling FAR in these markets.
+**Action:** Monitor – Overall change is non-significant; however, recommend tracking NZ and NL in W14 to determine if elevated duplicate rates and declining FAR persist.
 
 ---
 

@@ -7,25 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved from 95.21% to 96.0% (+0.83pp) in 2026-W13 to W14, representing a recovery from the prior week's decline of -1.52pp.
+**Overall:** PCAR improved from 95.21% to 96.0% (+0.79 pp) in 2026-W14, recovering from the prior week's decline, though volume decreased from 39,598 to 31,465 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric recovering after W13 dip | +0.83pp | ✅ |
-| L1: Country Breakdown | 7 of 8 countries declined; NO improved significantly | Mixed | ⚠️ |
-| L1: Country Threshold | NO exceeded ±2.5% threshold (+2.76pp) | +2.76pp | ⚠️ |
-| L1: Payment Method | "Others" payment method significant decline | -11.63pp | ⚠️ |
+| L0: 8-Week Trend | Metric recovering after W13 dip | +0.83% vs prior | ✅ |
+| L1: Country Breakdown | 7 of 8 countries showed decline | NO +2.76% exceeds threshold | ⚠️ |
+| L1: Payment Method | "Others" significant drop | -11.63 pp | ⚠️ |
 
 **Key Findings:**
-- Norway (NO) showed a significant improvement of +2.76pp (89.86% → 92.35%), exceeding the ±2.5% threshold and flagged for review
-- The "Others" payment method experienced a severe decline of -11.63pp (84.74% → 74.88%) on 4,081 orders, indicating a potential issue with alternative payment processing
-- Switzerland (CH) had the largest country-level decline at -2.31pp (93.37% → 91.21%) on 2,401 orders
-- Volume decreased significantly from 39,598 (W13) to 31,465 (W14), a drop of approximately 20.5%
-- Credit Card payments showed slight improvement (+0.11pp) and maintained the highest rate at 97.89%
+- PCAR recovered +0.83% in W14 after a -1.52% decline in W13, but remains below the W11-W12 performance levels (97.2% and 96.68%)
+- NO showed anomalous improvement of +2.76 pp (89.86% → 92.35%), the only country exceeding the ±2.5% threshold
+- CH experienced the largest decline among countries at -2.31 pp (93.37% → 91.21%) on 2,401 orders
+- PaymentMethod "Others" dropped significantly by -11.63 pp (84.74% → 74.88%), though volume is relatively low at 4,081 orders
+- Volume has declined consistently from 48,803 orders in W07 to 31,465 in W14, representing a 35% reduction over 8 weeks
 
-**Action:** Investigate — The "Others" payment method decline of -11.63pp requires immediate investigation to identify root cause. Additionally, monitor Switzerland's continued decline and validate the Norway improvement is sustainable.
+**Action:** Monitor - The metric has recovered from the W13 dip. Investigate the "Others" payment method decline and the sustained volume decrease trend. Track CH performance for continued degradation.
 
 ---
 

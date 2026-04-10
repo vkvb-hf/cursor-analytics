@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved by +0.68pp (from 88.6% to 89.2%) on a volume of 17,264 orders in 2026-W13, continuing a positive 6-week upward trend from the W07 baseline of 85.57%.
+**Overall:** Reactivation rate improved by +0.68pp (88.6% → 89.2%) on a volume of 17,264 orders in 2026-W13, continuing a positive upward trend observed over the past several weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement over 6 weeks (+3.63pp since W07) | +0.68pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold; TK declined -2.00pp | -2.00pp (max) | ✅ |
-| L1: Payment Method | Apple Pay underperforms at 66.87% but stable (+0.15pp) | -0.18pp to +1.30pp | ✅ |
+| L0: 8-Week Trend | Sustained improvement pattern | +4.49pp since W07 | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max decline: TK -2.00pp | ✅ |
+| L1: Dimension Scan | Payment methods stable | Max change: Others +1.30pp | ✅ |
 
 **Key Findings:**
-- Reactivation rate shows consistent improvement over 6 consecutive weeks, rising from 85.57% (W07) to 89.2% (W14), representing a +3.63pp cumulative gain
-- Volume has decreased significantly from ~24,688 orders (W07) to 17,264 orders (W14), a reduction of approximately 30%
-- TK experienced the largest country-level decline at -2.00pp (91.96% → 90.12%), though still within acceptable thresholds
-- Apple Pay maintains the lowest reactivation rate at 66.87% across payment methods, ~25pp below Credit Card (90.84%) and PayPal (92.11%)
-- FJ dominates volume at 409,231 orders with a strong 93.97% rate, though showing slight decline of -0.35pp
+- Reactivation rate has shown consistent improvement over 8 weeks, rising from 85.57% (W07) to 89.2% (W14), representing a cumulative gain of +3.63pp
+- TK experienced the largest country-level decline at -2.00pp (91.96% → 90.12%) but remains below the ±2.5% investigation threshold
+- Apple Pay continues to underperform other payment methods significantly at 66.87% vs. Credit Card at 90.84% (-23.97pp gap)
+- FJ dominates volume with 409,231 orders and maintains strong performance at 93.97% despite a minor -0.35pp decline
+- Order volume decreased from 19,685 to 17,264 (-12.3%) while rate improved, suggesting potential mix effects
 
-**Action:** Monitor — The metric shows healthy improvement within normal variance. Continue tracking volume decline and Apple Pay underperformance for potential future investigation.
+**Action:** Monitor — The +0.68pp improvement is within normal variance, no countries exceed thresholds, and the overall trend remains positive. Continue standard weekly monitoring.
 
 ---
 

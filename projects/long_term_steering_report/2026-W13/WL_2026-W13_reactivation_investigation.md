@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** The Reactivation metric experienced a minor decline of -0.05 percentage points (88.71% → 88.67%) in WL 2026-W13, representing a negligible change on a volume of 7,706 orders.
+**Overall:** Reactivation rate experienced a marginal decline of -0.05pp (88.71% → 88.67%) in W13, representing a minor fluctuation within normal operating parameters on a volume of 7,706 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable pattern with recent peak in W12-W13 | -0.05 pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | -0.17 pp to +0.88 pp range | ✅ |
-| L1: Payment Method | Apple Pay showing largest decline | -1.91 pp | ⚠️ |
+| L0: 8-Week Trend | Sustained pattern or anomaly? | -0.05pp | ✅ Minor dip following strong 2-week gains (+1.89pp, +1.91pp) |
+| L1: Country | Any country Δ > ±2.5%? | Max: +0.88pp (CK) | ✅ All countries within threshold |
+| L1: Dimension | Any dimension Δ > ±2.5%? | Max: -1.91pp (Apple Pay) | ✅ No significant dimension anomalies |
 
 **Key Findings:**
-- The -0.05 pp weekly decline is well within normal fluctuation, following a strong +1.89 pp increase in W12 that brought rates to a recent high of 89.15%
-- No countries exceeded the ±2.5% threshold; KN showed the largest country decline at -0.17 pp while CK improved by +0.88 pp
-- Apple Pay payment method showed the most notable decline at -1.91 pp (73.98% → 72.57%) on 627 orders, though this remains below the 2.5% threshold
-- The 8-week trend shows overall positive trajectory, with rates improving from 85.09% (W07) to 88.67% (W14), a net gain of +3.58 pp
-- PayPal also declined by -0.88 pp (93.19% → 92.37%) while Credit Card remained relatively stable at -0.26 pp
+- The -0.05pp decline is negligible and follows two consecutive weeks of strong improvement (W11: +1.91pp, W12: +1.89pp), indicating a natural stabilization
+- No countries exceeded the ±2.5% threshold; KN showed the largest decline at -0.17pp while CK improved by +0.88pp
+- Apple Pay showed the most notable payment method decline (-1.91pp) but remains below threshold and represents only 627 orders (8% of volume)
+- Overall reactivation rate of 88.67% remains elevated compared to earlier weeks (W07-W10 averaged ~85.5%)
+- The "Others" payment method shows +50.00pp change but is statistically insignificant with only 3 orders
 
-**Action:** Monitor – The decline is minimal and within expected variance. Continue tracking Apple Pay performance over the next 2-3 weeks to determine if the -1.91 pp decline represents the start of a trend.
+**Action:** Monitor — No investigation required. Continue standard monitoring as the decline is within normal variance and no dimensions breach alert thresholds.
 
 ---
 

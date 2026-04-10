@@ -7,25 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) declined by -0.56pp from 91.4% to 90.89% in W13, continuing a 4-week downward trend that has seen the metric fall from a peak of 93.59% in W09.
+## Executive Summary
+
+**Overall:** AR Initial (LL0) declined by -0.56pp from 91.4% to 90.89% in W13, continuing a downward trend observed over the past 6 weeks with total volume of 31,900 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall RTE Trend | 4 consecutive weeks of decline (W10-W13) | -0.56pp | ⚠️ |
-| L1: Country Breakdown | 3 countries exceed ±2.5% threshold (TK, TO, TV) | TK: -7.82pp, TO: -4.95pp, TV: -3.09pp | ⚠️ |
-| L1: Payment Method | All major methods declining | Apple Pay: -1.47pp, Credit Card: -1.39pp | ⚠️ |
-| L1: Payment Provider | Adyen worst performer among active providers | -1.50pp | ⚠️ |
+| L0: RTE Trend | 6-week declining trend (92.84% → 90.89%) | -1.95pp | ⚠️ |
+| L1: Country | 3 countries exceed ±2.5% threshold | TK -7.82pp, TO -4.95pp, TV -3.09pp | ⚠️ |
+| L1: Payment Method | All major methods declining | Apple Pay -1.47pp, Credit Card -1.39pp | ⚠️ |
+| L1: Payment Provider | Unknown provider anomaly | -100.00pp (16 orders) | ⚠️ |
 
 **Key Findings:**
-- TK experienced the largest country-level drop at -7.82pp (88.53% → 81.61%), though with relatively low volume (348 orders)
-- The decline is broad-based across payment methods, with Apple Pay (-1.47pp) and Credit Card (-1.39pp) both contributing significantly given their combined volume of 30,698 orders
-- Adyen shows the steepest provider decline at -1.50pp (91.16% → 89.79%) on 9,337 orders, while Braintree (largest volume at 21,813) declined -1.06pp
-- Volume has dropped significantly from 52,390 (W07) to 31,900 (W13), a 39% reduction over 7 weeks
-- PaymentProvider "Unknown" shows a -100pp drop but with negligible volume (16 orders)
+- TK experienced the largest country-level decline at -7.82pp (88.53% → 81.61%), though volume is relatively low at 348 orders
+- TO and TV also showed significant declines of -4.95pp and -3.09pp respectively, both flagged as exceeding threshold
+- Adyen payment provider shows the steepest decline among major providers at -1.50pp (91.16% → 89.79%) with 9,337 orders
+- Volume has decreased significantly over 8 weeks, dropping from 52,390 (W07) to 31,900 (W14), a 39% reduction
+- PayPal remains the highest performing payment method at 95.97% despite a minor -0.34pp decline
 
-**Action:** Investigate – The persistent 4-week declining trend combined with broad-based deterioration across countries, payment methods, and providers warrants deeper root cause analysis, particularly focusing on Adyen performance and the TK/TO/TV country issues.
+**Action:** Investigate — The sustained 6-week declining trend combined with significant drops in TK, TO, and TV countries and the Adyen provider performance warrants deeper investigation into root causes.
 
 ---
 

@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +0.28pp (28.35% → 28.63%) in HF-NA during 2026-W13, driven primarily by a significant uplift in the Click Submit Form step (+2.55pp), despite a 4.1% decrease in payment visit volume.
+**Overall:** Payment Conversion Rate improved by +0.28pp (28.35% → 28.63%) in HF-NA during 2026-W13, driven primarily by strong gains in the Click Submit Form step despite declining payment visit volume (-4.1%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Below threshold | -1.05pp | ⚠️ |
-| Click Submit Form | Above threshold | +2.55pp | ✅ |
-| FE Validation Passed | Above threshold | +0.93pp | ✅ |
-| Enter Fraud Service | Below threshold | +0.07pp | ✅ |
-| Approved by Fraud Service | Below threshold | -0.38pp | ⚠️ |
-| Call to PVS | Above threshold | +0.52pp | ✅ |
-| Successful Checkout | Below threshold | -0.62pp | ⚠️ |
+| Select Payment Method | Δ ≥ +0.14pp? | -1.05pp | ⚠️ |
+| Click Submit Form | Δ ≥ +0.14pp? | +2.55pp | ✅ |
+| FE Validation Passed | Δ ≥ +0.14pp? | +0.93pp | ✅ |
+| Enter Fraud Service | Δ ≥ +0.14pp? | +0.07pp | ✅ |
+| Approved by Fraud Service | Δ ≥ +0.14pp? | -0.38pp | ⚠️ |
+| Call to PVS | Δ ≥ +0.14pp? | +0.52pp | ✅ |
+| Successful Checkout | Δ ≥ +0.14pp? | -0.62pp | ⚠️ |
 
 **Key Findings:**
-- **Click Submit Form conversion surged +2.55pp** at the cluster level, with US showing an even stronger improvement of +4.21pp, indicating improved form submission behavior
-- **Adyen_CreditCard experienced a catastrophic decline** from 90.66% to 3.85% success rate (-86.82pp), with 123 transactions now skipping fraud service entry (up from 10), suggesting a critical integration failure
-- **Braintree_CreditCard volume dropped 91%** (3,268 → 281 attempts) but success rate improved significantly (+7.23pp), indicating a potential traffic routing change to ProcessOut_CreditCard (which increased from 11,105 to 14,991 attempts)
-- **FE Validation recovery rate improved +2.06pp** (70.19% → 72.25%), with CC_NO_PREPAID_ERR nearly eliminated (250 → 2 occurrences, -5.01pp share)
-- **PVS blocked verifications increased** (+56 counts, +2.83pp share), becoming the dominant decline reason at 53.5% of all PVS failures
+- **Click Submit Form** showed the largest improvement (+2.55pp), with US contributing +4.21pp at this step, offsetting the initial drop in payment method selection
+- **Adyen_CreditCard** experienced a critical failure with success rate plummeting from 90.66% to 3.85% (-86.82pp), though low volume (130 attempts) limited overall impact
+- **Fraud Service gap** increased significantly for Adyen_CreditCard (from 18.5% to 65.8% of gap share), with 123 transactions failing to enter fraud service
+- **FE Validation recovery rate** improved from 70.19% to 72.25% (+2.06pp), while CC_NO_PREPAID_ERR dropped dramatically from 250 to 2 occurrences (-5.01pp share)
+- **CA** showed declining PCR (-0.73pp) counter to overall trend, with weakness in Click Submit Form (-0.96pp) and Successful Checkout (-0.78pp)
 
-**Action:** **Investigate** — The Adyen_CreditCard integration failure requires immediate attention as it shows near-complete payment failure (3.85% success rate) and a significant increase in fraud service bypass. Additionally, confirm the traffic migration from Braintree_CreditCard to ProcessOut_CreditCard was intentional.
+**Action:** Investigate - Prioritize investigation into Adyen_CreditCard payment processor failure (3.85% success rate) and the increased fraud service gap for this payment method.
 
 ---
 

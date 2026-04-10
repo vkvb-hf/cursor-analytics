@@ -7,26 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined by -0.36% (from 92.79% to 92.46%) in 2026-W13, continuing a downward trend observed over the past three weeks, with total volume of 431,853 orders.
+**Overall:** AR Overall declined by -0.36% (from 92.79% to 92.46%) in 2026-W13, continuing a downward trend observed over the past three weeks with total volume of 431,853 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline for 3 consecutive weeks | -0.36% WoW | ⚠️ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | TK highest decline at -2.00% | ✅ |
-| L1: Dimension Scan (Payment Method) | Apple Pay shows largest decline | -0.62% | ⚠️ |
-| L1: Dimension Scan (Payment Provider) | Unknown provider significant drop (low volume) | -54.29% (35 orders) | ✅ |
-| L1: Volume Impact | FJ dominates volume (95% of orders) | -0.35% decline | ⚠️ |
+| 8-Week Trend | Consistent decline W11→W14 | -0.74pp over 3 weeks | ⚠️ |
+| Country Threshold (±2.5%) | No countries exceeded threshold | N/A | ✅ |
+| Country Performance | TK largest drop | -2.00pp | ⚠️ |
+| Payment Method | Apple Pay underperforming | -0.62pp | ⚠️ |
+| Payment Provider | Unknown provider anomaly | -54.29pp (low volume: 35) | ⚠️ |
+| Major Provider (Braintree) | Slight decline | -0.41pp | ✅ |
 
 **Key Findings:**
-- AR Overall has declined for 3 consecutive weeks (W12: -0.12%, W13: -0.32%, W14: -0.36%), indicating a persistent downward trend from the W11 peak of 93.2%
-- FJ represents 95% of total volume (409,231 orders) and its -0.35pp decline is the primary driver of the overall metric drop
-- TK experienced the largest country-level decline at -2.00pp (90.12% from 91.96%), though volume is limited to 2,155 orders
-- Apple Pay shows the weakest performance among payment methods at 90.19% (-0.62pp), handling 55,464 orders (13% of volume)
-- Braintree, the largest payment provider (310,634 orders), declined -0.41pp to 93.75%
+- Three consecutive weeks of decline: W11 (93.2%) → W12 (93.09%) → W13 (92.79%) → W14 (92.46%), representing a cumulative -0.74pp drop
+- TK experienced the largest country-level decline at -2.00pp (90.12% from 91.96%), followed by TO at -1.72pp and TV at -1.56pp
+- Apple Pay shows the weakest payment method performance at 90.19% (-0.62pp), underperforming Credit Card (92.47%) and Paypal (96.52%)
+- PaymentProvider "Unknown" dropped -54.29pp but represents negligible volume (35 orders)
+- FJ dominates volume (409,231 orders, 95% of total) with a -0.35pp decline, making it the primary driver of overall metric movement
 
-**Action:** Monitor – No individual dimension exceeds the ±2.5% threshold, but the sustained 3-week decline warrants close observation. If the trend continues into W15, escalate for deeper investigation into FJ market and Apple Pay performance.
+**Action:** Monitor - No individual country exceeded the ±2.5% threshold, but the sustained three-week downward trend warrants close observation. If decline continues in W15, escalate investigation into FJ performance and Apple Pay payment method.
 
 ---
 

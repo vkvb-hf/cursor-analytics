@@ -7,24 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** The Reactivation rate for HF-INTL improved from 90.03% to 90.92% (+0.89 pp) in 2026-W14, representing a positive reversal after two consecutive weeks of decline.
+**Overall:** Reactivation rate improved from 90.03% to 90.92% (+0.99 pp) in 2026-W14, returning to levels consistent with the 8-week average after a brief dip.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 8-week stability check | +0.99% | ✅ |
-| L1: Country Breakdown | Threshold ±2.5% | NO: +2.76%, CH: -2.31% | ⚠️ |
-| L1: Payment Method | Dimension scan | Max Δ: -0.82% (Apple Pay) | ✅ |
+| L0: HF-INTL Trend | Within normal range | +0.99 pp | ✅ |
+| L1: Country Breakdown | NO exceeds ±2.5% threshold | +2.76 pp | ⚠️ |
+| L1: Country Breakdown | CH notable decline | -2.31 pp | ✅ |
+| L1: Payment Method | All methods within range | -0.82 pp to +0.46 pp | ✅ |
 
 **Key Findings:**
-- Norway (NO) shows a significant positive swing of +2.76 pp (89.86% → 92.35%), exceeding the ±2.5% threshold and flagged for attention
-- Switzerland (CH) experienced the largest decline at -2.31 pp (93.37% → 91.21%), approaching the monitoring threshold
+- NO showed a significant improvement of +2.76 pp (89.86% → 92.35%), exceeding the ±2.5% monitoring threshold and flagged for attention
+- CH experienced the largest decline at -2.31 pp (93.37% → 91.21%) on 2,401 orders, though still below the alert threshold
 - Volume decreased substantially from 43,179 to 32,555 orders (-24.6%), which may amplify rate volatility
-- Apple Pay shows the weakest performance among payment methods at 89.81% with a -0.82 pp decline
-- The overall improvement breaks a two-week declining trend (W12: -0.20%, W13: -0.19%)
+- All payment methods remained stable with Apple Pay showing the largest decline (-0.82 pp) on relatively low volume (7,114 orders)
+- The overall rate of 90.92% is within the normal 8-week range (89.85% - 90.90%)
 
-**Action:** Monitor – The overall metric is trending positively and within normal bounds. Continue monitoring Norway's unusual +2.76 pp improvement and Switzerland's -2.31 pp decline to determine if these represent sustained shifts or one-week anomalies.
+**Action:** Monitor - The overall improvement is positive and within expected variance. Continue monitoring NO for sustained improvement and CH for potential continued decline. No immediate escalation required.
 
 ---
 

@@ -8,28 +8,27 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33 pp) in 2026-W13, a change that is not statistically significant.
+**Overall:** The Fraud Approval Rate (FAR) improved marginally from 92.73% to 93.06% (+0.33 pp), representing a statistically non-significant fluctuation within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | FAR within normal range (89.36%-94.31% over 8 weeks) | +0.35 pp | ✅ |
-| L1: Country | No country exceeds ±2.5% threshold | CG: -2.03%, AO: -2.40% | ✅ |
-| L1: Channel | Paid & Referral stable | Paid: -0.13%, Referral: +0.10% | ✅ |
-| Dup Rate | Slight increase | 15.53% → 15.81% (+0.28 pp) | ✅ |
-| PF Block | Minor increase | 0.80% → 0.84% (+0.04 pp) | ✅ |
+| L0: WL 8-Week Trend | FAR within normal range (89.36%-94.31%) | +0.33 pp | ✅ |
+| L1: Country Scan | No countries exceed ±2.5% threshold | CG -2.03 pp, AO -2.40 pp | ✅ |
+| L1: Channel Category | Paid & Referral stable | Paid -0.13 pp, Referral +0.10 pp | ✅ |
+| Duplicate Rate | Slight increase | +0.28 pp (15.53%→15.81%) | ✅ |
+| Duplicate Block Rate | Minor increase | +0.18 pp (5.07%→5.25%) | ✅ |
+| PF Block Rate | Slight uptick | +0.04 pp (0.80%→0.84%) | ✅ |
 
 **Key Findings:**
-- FAR has recovered from the W07 low of 89.36% (driven by 5.17% PF Block rate) and stabilized in the 92-94% range
-- Volume continues declining trend: 19,099 (W07) → 13,609 (W14), representing a ~29% decrease over 8 weeks
-- AO maintains the lowest FAR (86.17%) with the highest duplicate rate (26.34%), though both metrics remain stable week-over-week
-- CG showed the largest FAR decline (-2.03 pp) alongside a 12.72% increase in duplicate rate, approaching monitoring threshold
-- PF Block rate has normalized to <1% after the W07 spike (5.17%)
+- FAR increased by +0.33 pp week-over-week, recovering partially from the -0.32 pp decline in W13; the metric remains within the 8-week range of 89.36%-94.31%
+- AO shows the lowest FAR at 86.17% with the highest duplicate rate (26.34%), though the -2.40 pp decline remains below the ±2.5% threshold
+- CG experienced a -2.03 pp FAR decline coupled with a +12.72% increase in duplicate rate, approaching but not exceeding monitoring thresholds
+- Volume continues a declining trend (19,099 in W07 → 13,609 in W14), representing a ~29% reduction over 8 weeks
+- Referral channel maintains significantly lower FAR (76.10%) compared to Paid channel (96.07%), a consistent ~20 pp gap
 
-**Action:** Monitor — No immediate action required. Continue tracking CG country performance and overall volume decline trend.
+**Action:** Monitor — No thresholds exceeded; continue standard weekly surveillance with attention to AO and CG duplicate rate trends.
 
 ---
 

@@ -10,24 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved slightly from 94.14% to 94.72% (+0.58pp) in 2026-W13, a change that is not statistically significant and falls within normal weekly fluctuation range (8-week range: 93.82% - 94.95%).
+**Overall:** The Fraud Approval Rate (FAR) improved by +0.61pp from 94.14% to 94.72% in 2026-W13, a change that is not statistically significant, within normal weekly fluctuation range observed over the 8-week trend (93.82% - 94.95%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR Trend | 8-week stability check | +0.61pp | ✅ |
-| L1: Country Breakdown | ±2.5% threshold | TZ +3.52pp, TK -6.23pp | ⚠️ |
-| L1: Channel Category | Category stability | Paid +0.13pp, Referral +1.10pp | ✅ |
+| Overall FAR | +0.61pp within normal range | +0.61pp | ✅ |
+| Duplicate Rate | Slight decrease (14.50% → 14.31%) | -0.19pp | ✅ |
+| Duplicate Block Rate | Increased (4.06% → 4.46%) | +0.40pp | ✅ |
+| PF Block Rate | Decreased (0.26% → 0.20%) | -0.06pp | ✅ |
+| Country Distribution | 2 countries exceeded ±2.5% threshold | TZ, TK flagged | ⚠️ |
+| Channel Category | All channels stable | <1.5pp change | ✅ |
 
 **Key Findings:**
-- **TK (Tokelau) anomaly:** FAR dropped -6.23pp (94.30% → 88.42%) while Duplicate Rate spiked +108.86% (5.70% → 11.90%), indicating potential fraud pattern emergence in this small market (311 volume)
-- **TZ (Tanzania) improvement:** FAR increased +3.52pp (88.29% → 91.40%) with Duplicate Rate decreasing -36.36% (12.21% → 7.77%), suggesting improved fraud detection efficiency (605 volume)
-- **Volume decline observed:** Overall volume dropped from 45,581 (W12) to 43,962 (W13), continuing a downward trend from peak of 51,707 in W09
-- **Channel performance stable:** Both Paid (96.63% FAR) and Referral (82.35% FAR) channels show consistent performance with minimal week-over-week changes
-- **Duplicate Rate stable:** Overall duplicate rate remained steady at ~14.50%, with Duplicate Block Rate increasing slightly from 4.06% to 4.46%
+- TZ showed a significant FAR improvement of +3.52pp (88.29% → 91.40%) coupled with a -36.36% drop in duplicate rate, suggesting potential changes in fraud patterns or detection rules
+- TK experienced a concerning FAR decline of -6.23pp (94.30% → 88.42%) with duplicate rate more than doubling (+108.86%), though volume is low (311 customers)
+- YE showed notable duplicate rate improvement of -4.97% (19.52% → 18.55%) contributing to +0.72pp FAR gain
+- Overall volume decreased by 3.0% (43,962 → 42,650 customers) continuing a downward trend from W10 peak of 50,499
+- Referral channel maintains significantly lower FAR (82.35%) compared to Paid channel (96.63%), a ~14pp gap
 
-**Action:** **Monitor** – Overall metric is stable and change is not significant. However, recommend targeted monitoring of TK market due to significant FAR decline and duplicate rate spike, despite low volume.
+**Action:** Monitor — The overall change is not significant and within expected variance. Continue monitoring TK for sustained FAR decline given the spike in duplicate rate, though low volume limits immediate concern.
 
 ---
 

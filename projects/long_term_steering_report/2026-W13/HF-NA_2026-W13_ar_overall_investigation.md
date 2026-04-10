@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined slightly from 92.23% to 92.17% (-0.07pp) in 2026-W13, representing a minor dip within normal weekly fluctuation patterns across 507,188 orders.
+**Overall:** AR Overall rate declined slightly from 92.23% to 92.17% (-0.06 pp) on a volume of 507,188 orders, representing a minor week-over-week decrease within normal fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stability check | -0.07pp | ✅ Within normal variance |
-| L1: Country Breakdown | US & CA threshold (±2.5%) | US +0.05pp, CA +0.26pp | ✅ No flags |
-| L1: PaymentMethod | Dimension scan | Range: -0.15pp to +0.27pp | ✅ Stable |
-| L1: PaymentProvider | Dimension scan | Unknown: -5.67pp | ⚠️ Threshold exceeded |
+| L0: 8-Week Trend | Rate stable within 91.35%-92.28% range | -0.06 pp | ✅ |
+| L1: Country | No countries exceeding ±2.5% threshold | US +0.05 pp, CA +0.26 pp | ✅ |
+| L1: PaymentMethod | All methods within normal range | -0.15 pp to +0.27 pp | ✅ |
+| L1: PaymentProvider | Unknown provider significant decline | -5.67 pp | ⚠️ |
 
 **Key Findings:**
-- PaymentProvider "Unknown" showed a significant decline of -5.67pp (91.04% → 85.88%), though volume is minimal at only 510 orders (0.1% of total)
-- Both countries performed positively: US improved +0.05pp and CA improved +0.26pp, indicating the overall decline is not country-driven
-- PayPal showed the strongest improvement among payment methods at +0.27pp (95.24% → 95.50%)
-- The 8-week trend shows overall positive trajectory, with rates improving from 91.56% (W07) to 92.17% (W14), a gain of +0.61pp
-- ProcessOut payment provider improved +0.37pp despite handling significant volume (82,249 orders)
+- PaymentProvider "Unknown" showed a significant decline of -5.67 pp (91.04% → 85.88%), though on very low volume (510 orders)
+- Both countries (US and CA) showed positive movement: US +0.05 pp and CA +0.26 pp, indicating the overall decline is not country-driven
+- PayPal showed the strongest improvement among payment methods at +0.27 pp (95.24% → 95.50%)
+- ProcessOut provider improved by +0.37 pp (89.48% → 89.81%) on meaningful volume of 82,249 orders
+- The 8-week trend shows overall positive trajectory from 91.56% (W07) to 92.17% (W14)
 
-**Action:** Monitor — The -0.07pp decline is within normal weekly variance. The PaymentProvider "Unknown" degradation warrants observation but low volume (510 orders) limits business impact. No immediate escalation required.
+**Action:** Monitor - The overall decline is minimal (-0.06 pp) and within normal weekly variance. The PaymentProvider "Unknown" decline warrants observation but represents <0.1% of total volume.
 
 ---
 

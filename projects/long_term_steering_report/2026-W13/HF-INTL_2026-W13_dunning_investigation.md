@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate improved from 65.33% to 68.51% (+3.18pp) week-over-week, with volume increasing from 34,114 to 35,553 eligible orders during a Mid-Cycle payday phase.
+**Overall:** Dunning Ship Rate improved significantly from 65.33% to 68.51% (+3.18pp) week-over-week, with volume increasing by 4.2% (34,114 → 35,553 eligible orders) during the Mid-Cycle payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 65.33% → 68.51% | +3.18pp | ✅ |
 
 **Key Findings:**
-- Ship Rate improvement of +3.18pp occurred despite slight declines in Pre-Dunning AR (-0.37pp) and PC2 (-0.76pp), suggesting improved conversion efficiency in later funnel stages
-- GB and FR drove significant volume growth (+7.2% and +10.7% respectively) while also improving Ship Rates by +4.72pp and +5.03pp
-- NO experienced a substantial volume decline (-30.6%) alongside a -2.60pp Ship Rate drop, though it remains the highest-performing country at 81.99%
-- BE showed strong performance with both volume growth (+21.2%) and the highest Ship Rate in the cluster at 87.87% (+1.96pp)
-- SE demonstrated notable improvement with +7.90pp Ship Rate gain (63.05% → 70.95%) and +21.0% volume increase
+- GB and FR drove significant volume growth (+7.2% and +10.7% respectively) while also improving ship rates by +4.72pp and +5.03pp
+- SE showed strong performance with +7.90pp ship rate improvement and +21.0% volume increase
+- NO experienced substantial volume decline (-30.6%) along with a -2.60pp drop in ship rate from 84.59% to 81.99%
+- BE maintained the highest ship rate in the cluster at 87.87% (+1.96pp) with strong volume growth (+21.2%)
+- AU was the only major market with declining ship rate (-1.01pp) alongside volume contraction (-6.0%)
 
-**Action:** Monitor — The +3.18pp improvement is a positive signal with broad-based gains across major markets. Continue tracking NO's volume decline and ensure the positive trend sustains through the remainder of Mid-Cycle.
+**Action:** Monitor – The overall improvement is strong and broad-based across most markets. Continue tracking NO and AU for potential underlying issues, but no immediate escalation required.
 
 ---
 

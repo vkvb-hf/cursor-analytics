@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined by -0.27 percentage points (pp) from 91.3% to 91.05% in 2026-W13, representing a continued downward trend from the recent peak of 91.58% in W11.
+**Overall:** PAR declined by 0.27 percentage points (91.3% → 91.05%) in 2026-W13, continuing a downward trend observed over the past three weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 3 consecutive weeks of decline (W12-W14) | -0.27 pp | ⚠️ |
-| L1: Country | No country exceeds ±2.5% threshold | Max: +0.88 pp (CK) | ✅ |
-| L1: PaymentMethod | Credit Card slight decline, Others anomaly | -0.32 pp / +12.46 pp | ⚠️ |
-| L1: PaymentProvider | Unknown provider severe drop | -24.66 pp | ⚠️ |
+| L0: WL Trend | 3-week declining trend (W12-W14) | -0.27pp | ⚠️ |
+| L1: Country | No country exceeds ±2.5% threshold | Max: +0.88pp (CK) | ✅ |
+| L1: PaymentMethod | Credit Card slight decline | -0.32pp | ✅ |
+| L1: PaymentProvider | Unknown provider significant drop | -24.66pp | ⚠️ |
+| L1: PaymentProvider | Braintree minor decline | -0.33pp | ✅ |
 
 **Key Findings:**
-- **PaymentProvider "Unknown" dropped sharply by -24.66 pp** (from 97.33% to 73.33%), though volume is minimal at only 15 orders
-- **Credit Card payments declined by -0.32 pp** (90.99% from 91.29%), impacting the largest volume segment at 120,798 orders
-- **Braintree, the highest-volume provider (111,236 orders), declined by -0.33 pp** (from 92.15% to 91.85%), contributing significantly to overall PAR drop
-- **PaymentMethod "Others" shows anomalous +12.46 pp increase** (87.92% to 98.87%) on very low volume (796 orders), suggesting data quality consideration
-- **All countries performing within normal thresholds** with no individual country exceeding ±2.5% change
+- PaymentProvider "Unknown" experienced a severe decline of -24.66pp (97.33% → 73.33%), though volume is minimal at only 15 orders
+- Credit Card payments, representing the largest volume (120,798 orders), declined by 0.32pp, contributing most to the overall drop
+- Braintree, the highest-volume provider (111,236 orders), declined by 0.33pp (92.15% → 91.85%)
+- CK showed the strongest improvement at +0.88pp, while ER improved by +0.43pp
+- Overall volume decreased by ~4,649 orders (169,667 → 165,018) week-over-week
 
-**Action:** **Monitor** - The -0.27 pp decline is modest and within normal fluctuation ranges. However, investigate the Braintree and Credit Card performance as they represent the largest volume contributors. The "Unknown" PaymentProvider anomaly should be reviewed for data quality but is not material given the 15-order volume.
+**Action:** Monitor – The decline is modest and no country breaches the ±2.5% threshold. The PaymentProvider "Unknown" anomaly warrants a quick data quality check due to its extreme swing, but its negligible volume (15 orders) limits impact. Continue monitoring the 3-week downward trend.
 
 ---
 

@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined from 48.27% to 46.71% (-1.56pp) week-over-week as the cluster transitioned from Post-Payday to Mid-Cycle phase, with volume remaining relatively stable at 17,743 eligible orders.
+**Overall:** Dunning Ship Rate declined by -1.56pp (48.27% → 46.71%) during the Mid-Cycle payday phase, with relatively stable volume of 17,743 eligible orders.
 
 **Funnel Analysis:**
 
@@ -18,17 +16,17 @@
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 92.89% → 92.98% | +0.09pp | ✅ |
 | Discount % | 16.03% → 16.67% | +0.64pp | ✅ |
-| PC2 | 51.15% → 51.3% | +0.15pp | ✅ |
+| PC2 | 51.15% → 51.30% | +0.15pp | ✅ |
 | Ship Rate | 48.27% → 46.71% | -1.56pp | ⚠️ |
 
 **Key Findings:**
-- US market experienced a significant Ship Rate decline from 47.68% to 45.08% (-2.60pp) while maintaining near-identical volume (13,814 vs 13,822 orders)
-- CA market showed improvement with Ship Rate increasing from 50.30% to 52.46% (+2.16pp) despite a -2.5% volume reduction
-- The overall decline is primarily driven by US performance, which represents ~78% of total volume
-- Upstream metrics (Pre-Dunning AR, Discount %, PC2) all showed slight improvements, indicating the issue is isolated to the final conversion step
-- Payday phase shift from Post-Payday to Mid-Cycle is a likely contributing factor to reduced customer payment capacity
+- US drove the decline with Ship Rate dropping -2.60pp (47.68% → 45.08%) while maintaining 78% of total volume
+- CA showed positive performance with Ship Rate improving +2.16pp (50.30% → 52.46%), partially offsetting US decline
+- Upstream funnel metrics (Pre-Dunning AR, Discount %, PC2) all showed slight improvements, indicating the issue is isolated to final conversion
+- Mid-Cycle payday phase typically shows softer performance compared to Post-Payday, which may partially explain the decline
+- Volume remained stable (-0.6% WoW), ruling out significant mix shift as the primary driver
 
-**Action:** Investigate — The -2.60pp US Ship Rate decline warrants deeper analysis into US-specific factors (payment method mix, customer cohort behavior, messaging timing) given stable upstream metrics and the disproportionate impact on overall performance.
+**Action:** Investigate – The decline is concentrated in US despite stable upstream metrics. Recommend deeper analysis into US-specific dunning messaging effectiveness and payment method availability during Mid-Cycle.
 
 ---
 

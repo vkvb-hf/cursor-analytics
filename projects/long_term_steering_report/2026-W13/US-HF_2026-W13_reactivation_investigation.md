@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved slightly from 90.63% to 90.99% (+0.36 pp) in 2026-W14, continuing a positive upward trend that has seen the metric increase by approximately 5.75 pp over the past 8 weeks.
+**Overall:** Reactivation rate improved slightly from 90.63% to 90.99% (+0.36 pp) in 2026-W13, continuing a positive upward trend observed over the past 8 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement from W07 (85.24%) to W14 (90.99%) | +5.75 pp | ✅ |
-| L1: Country (US) | US rate stable at 92.85% vs 92.8% | +0.05 pp | ✅ |
-| L1: Payment Method - Credit Card | Slight decline in largest volume segment | -1.06 pp | ⚠️ |
-| L1: Payment Method - PayPal | Stable performance | +0.07 pp | ✅ |
-| L1: Payment Method - Apple Pay | Stable performance | +0.09 pp | ✅ |
+| L0: 8-Week Trend | Sustained improvement from 85.24% (W07) to 90.99% (W14) | +5.75 pp | ✅ |
+| L1: Country Impact | US rate stable at 92.85% (+0.05 pp) | +0.05 pp | ✅ |
+| L1: Payment Method | Credit Card slight decline, others stable | -1.06 pp (CC) | ⚠️ |
 
 **Key Findings:**
-- The +0.36 pp week-over-week improvement is part of a consistent 8-week upward trend, with reactivation rates climbing from 85.24% (W07) to 90.99% (W14)
-- No countries exceeded the ±2.5% threshold; US performance remains stable with only +0.05 pp change
-- Credit Card payments (74% of volume at 10,956 orders) showed a -1.06 pp decline, which is the only segment showing meaningful deterioration
-- Volume decreased from 15,928 to 14,736 orders (-7.5%), though this appears to be normal weekly fluctuation
-- PayPal and Apple Pay segments remain stable with marginal positive movement (+0.07 pp and +0.09 pp respectively)
+- Reactivation rate has shown consistent improvement over 8 weeks, rising from 85.24% (W07) to 90.99% (W14), a gain of +5.75 pp
+- US country-level performance remains stable with minimal change (+0.05 pp), no countries exceeded the ±2.5% threshold
+- Credit Card payment method showed a minor decline of -1.06 pp (91.37% → 90.4%) but remains the highest volume channel with 10,956 orders
+- PayPal maintains the highest reactivation rate at 93.58% with 2,509 orders
+- Volume decreased from 15,928 to 14,736 orders (-7.5%), which should be monitored
 
-**Action:** Monitor – The overall metric is healthy and trending positively. Continue monitoring Credit Card payment method performance; if the decline persists beyond -2.0 pp in subsequent weeks, escalate for deeper investigation.
+**Action:** Monitor — The metric is performing well with sustained improvement. Continue tracking Credit Card payment method performance and volume trends.
 
 ---
 

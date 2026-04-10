@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +0.59pp (26.18% → 26.77%) in 2026-W13, exceeding the +0.30pp threshold, driven primarily by a significant improvement in the Click Submit Form step (+4.21pp).
+**Overall:** Payment Conversion Rate improved from 26.18% to 26.77% (+0.59pp) in US-HF for 2026-W13, exceeding the +0.30pp threshold, despite a 4.5% decrease in payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | vs threshold | -1.27pp | ⚠️ |
-| Click Submit Form | vs threshold | +4.21pp | ✅ |
-| FE Validation Passed | vs threshold | +1.14pp | ✅ |
-| Enter Fraud Service | vs threshold | +0.19pp | ✅ |
-| Approved by Fraud Service | vs threshold | -0.32pp | ⚠️ |
-| Call to PVS | vs threshold | +0.18pp | ✅ |
-| Successful Checkout | vs threshold | -0.52pp | ⚠️ |
+| Select Payment Method | Rate vs prior week | -1.27pp | ⚠️ |
+| Click Submit Form | Rate vs prior week | +4.21pp | ✅ |
+| FE Validation Passed | Rate vs prior week | +1.14pp | ✅ |
+| Enter Fraud Service | Rate vs prior week | +0.19pp | ✅ |
+| Approved by Fraud Service | Rate vs prior week | -0.32pp | ⚠️ |
+| Call to PVS | Rate vs prior week | +0.18pp | ✅ |
+| Successful Checkout | Rate vs prior week | -0.52pp | ⚠️ |
 
 **Key Findings:**
-- **Click Submit Form conversion surged +4.21pp** (84.09% → 88.30%), the largest positive driver of the overall PCR improvement
-- **CC_NO_PREPAID_ERR dropped dramatically** from 250 occurrences (6.2%) to just 2 (0.1%), a -6.19pp reduction indicating a likely policy or validation change that improved FE validation recovery rate to 75.67% (+2.50pp)
-- **Payment method mix shift:** ProcessOut_CreditCard attempts increased significantly (6,991 → 10,229) while Braintree_CreditCard dropped sharply (3,268 → 281), suggesting a PSP routing change
-- **Adyen_CreditCard introduced** with 108 checkout attempts but 0% success rate, creating a 100% gap (108 transactions) between Checkout Attempt and Enter Fraud Service
-- **PVS "Blocked Verification" errors increased** (+56 occurrences, +2.73pp share) becoming the dominant decline reason at 55.4% of all PVS failures
+- **Click Submit Form conversion surged +4.21pp** (84.09% → 88.30%), the primary driver of overall PCR improvement
+- **CC_NO_PREPAID_ERR dropped dramatically** from 250 occurrences (6.2%) to just 2 (0.1%), indicating a policy or validation change that improved FE validation recovery rate (+2.50pp)
+- **Payment method mix shift:** ProcessOut_CreditCard attempts increased significantly (6,991 → 10,229) while Braintree_CreditCard dropped sharply (3,268 → 281), suggesting a processor migration
+- **Adyen_CreditCard introduced:** 108 new checkout attempts appeared with 100% gap rate (no transactions entering fraud service), indicating integration issues
+- **PVS failures increased slightly** (+53 total), with "Blocked Verification: Payment method is blocked" remaining the top decline reason at 55.4% of failures
 
-**Action:** **Investigate** - The new Adyen_CreditCard integration requires immediate attention due to 100% failure rate at fraud service entry. Monitor the impact of the PSP routing change from Braintree to ProcessOut on overall conversion.
+**Action:** Monitor - The overall PCR improvement is positive. Investigate the Adyen_CreditCard integration gap (108 attempts, 0 entering fraud service) and continue monitoring the ProcessOut migration success rate (-2.20pp decline vs Braintree_CreditCard's +7.23pp).
 
 ---
 

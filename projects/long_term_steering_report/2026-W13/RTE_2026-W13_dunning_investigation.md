@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate remained flat at 43.89% week-over-week (0.00pp change), with volume increasing slightly from 20,396 to 21,143 eligible orders during the transition from Post-Payday to Mid-Cycle phase.
+**Overall:** Dunning Ship Rate remained flat at 43.89% (+0.00pp) week-over-week, with volume increasing slightly from 20,396 to 21,143 eligible orders during the transition from Post-Payday to Mid-Cycle phase.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 93.65% → 93.38% | -0.27pp | ⚠️ |
+| Pre-Dunning AR | 93.65% → 93.38% | -0.27pp | ✅ |
 | Discount % | 17.95% → 18.11% | +0.16pp | ✅ |
-| PC2 | 43.41% → 43.31% | -0.10pp | ⚠️ |
+| PC2 | 43.41% → 43.31% | -0.10pp | ✅ |
 | Ship Rate | 43.89% → 43.89% | +0.00pp | ✅ |
 
 **Key Findings:**
-- Pre-Dunning AR declined slightly by 0.27pp (93.65% → 93.38%), indicating marginally lower account readiness entering the dunning process
-- YE (Yemen) saw the largest Ship Rate decline among high-volume countries, dropping 1.38pp (61.69% → 60.31%) despite being the highest-performing market
-- Low-tier markets showed strong improvements: TK surged +16.33pp (8.33% → 24.66%), TV improved +11.44pp (13.76% → 25.20%), and TZ gained +7.79pp (22.15% → 29.94%)
-- FJ (Fiji), the largest market by volume (14,680 orders), remained stable with only +0.07pp improvement (42.72% → 42.79%)
-- CF (Central African Republic) volume declined 5.7% with Ship Rate dropping 0.80pp (31.83% → 31.03%)
+- Ship Rate stability masks mixed country-level performance: YE declined -1.38pp (61.69% → 60.31%) while low-tier countries showed strong gains
+- TK showed the largest volume growth (+21.7%) and dramatic SR improvement (+16.33pp, from 8.33% to 24.66%)
+- Low-tier countries (TO, TZ, TK, TV) all improved significantly, with SR gains ranging from +5.49pp to +16.33pp
+- CF volume contracted -5.7% with a slight SR decline (-0.80pp), while FJ (largest market) grew +5.2% with marginal improvement (+0.07pp)
+- No Simpson's Paradox detected: aggregate stability reflects genuine offsetting movements across high and low performers
 
-**Action:** Monitor – The overall metric is stable with no significant degradation. Continue tracking YE performance given its high-tier status and recent decline, while observing if low-tier market improvements sustain.
+**Action:** Monitor — Rate is stable with healthy volume growth; continue tracking YE performance as the high-tier country showing decline, and validate sustainability of low-tier improvements.
 
 ---
 

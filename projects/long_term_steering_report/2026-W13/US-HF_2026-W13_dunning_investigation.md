@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined from 47.68% to 45.08% (-2.60pp) week-over-week during the Mid-Cycle payday phase, with volume remaining stable at 13,814 eligible orders.
+**Overall:** Dunning Ship Rate declined by 2.60pp (47.68% → 45.08%) in US-HF cluster during 2026-W13, coinciding with a shift from Post-Payday to Mid-Cycle phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 47.68% → 45.08% | -2.60pp | ⚠️ |
 
 **Key Findings:**
-- Ship Rate declined -2.60pp despite stable Pre-Dunning Approval Rate (92.85%) and slight PC2 improvement (+0.23pp)
-- Discount percentage increased by +1.14pp (15.17% → 16.31%), indicating more aggressive discounting was required but failed to maintain ship rates
-- Volume remained essentially flat (-0.1% change, 13,822 → 13,814 orders), ruling out volume-driven mix shift
-- Payday phase shifted from Post-Payday to Mid-Cycle, which typically correlates with reduced customer liquidity
-- No Simpson's Paradox detected—US is the only country and shows true performance decline
+- Ship Rate declined 2.60pp despite stable Pre-Dunning AR (92.85%) and slight PC2 improvement (+0.23pp)
+- Payday Phase shifted from Post-Payday to Mid-Cycle, which typically correlates with lower conversion rates
+- Discount % increased by 1.14pp (15.17% → 16.31%), suggesting more aggressive discounting failed to offset the decline
+- Volume remained essentially flat (-0.1%), ruling out volume mix as a contributing factor
+- US is the sole country in this cluster, eliminating Simpson's Paradox as an explanation
 
-**Action:** Investigate — The -2.60pp decline during Mid-Cycle warrants deeper analysis into payment failure reasons and customer payment behavior patterns, particularly given that increased discounting did not offset the decline.
+**Action:** Monitor — The decline aligns with expected Mid-Cycle payday behavior. Track W14 performance to confirm recovery as customers approach next payday cycle.
 
 ---
 

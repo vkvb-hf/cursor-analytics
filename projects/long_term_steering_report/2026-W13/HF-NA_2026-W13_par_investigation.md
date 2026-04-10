@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR improved marginally from 93.96% to 94.0% (+0.04 pp) in 2026-W13, continuing a steady upward trend observed over the past 8 weeks.
+**Overall:** PAR improved marginally by +0.04 pp (93.96% → 94.0%) on volume of 507,188 orders, continuing a positive trend observed over the past 7 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement pattern | +0.50 pp since W07 | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | US +0.05 pp, CA +0.26 pp | ✅ |
+| L0: 8-Week Trend | Consistent improvement since W07 | +0.50 pp over 8 weeks | ✅ |
+| L1: Country Breakdown | All countries within threshold | US +0.05 pp, CA +0.26 pp | ✅ |
 | L1: Payment Method | All methods improved | +0.04 pp to +0.27 pp | ✅ |
-| L1: Payment Provider | Unknown provider declined | -1.59 pp | ⚠️ |
+| L1: Payment Provider | Minor decline in Unknown provider | -1.59 pp (510 orders only) | ⚠️ |
 
 **Key Findings:**
-- PAR has shown consistent week-over-week improvement for 5 consecutive weeks, rising from 93.27% (W08) to 94.0% (W14)
-- Canada outperformed the US with a +0.26 pp improvement vs +0.05 pp, though US represents the majority of volume (505,599 orders)
-- PaymentProvider "Unknown" showed a notable decline of -1.59 pp (90.0% from 91.45%), but represents minimal volume (510 orders)
-- All payment methods improved, with "Others" showing the largest gain (+0.27 pp) and PayPal maintaining the highest rate at 96.2%
-- Volume decreased by approximately 2% week-over-week (507,188 vs 517,599), consistent with recent weekly declines
+- PAR has shown consistent week-over-week improvement since W07, rising from 93.5% to 94.0% (+0.50 pp total)
+- CA outperformed US with +0.26 pp improvement vs +0.05 pp, though US represents the majority of volume (505,599 orders)
+- PaymentProvider "Unknown" declined by -1.59 pp, but impact is negligible due to low volume (510 orders, 0.1% of total)
+- All payment methods showed improvement, with "Others" (+0.27 pp) and PayPal (+0.23 pp) leading gains
+- Order volume has been declining week-over-week (from 570,585 in W07 to 507,188 in W14), warranting separate monitoring
 
-**Action:** Monitor — The +0.04 pp improvement is within normal variance and all major segments are performing positively. Continue monitoring the "Unknown" PaymentProvider segment for any volume increases that could impact overall PAR.
+**Action:** Monitor — The +0.04 pp improvement is within normal variance and all key segments are performing positively. Continue tracking the declining volume trend separately.
 
 ---
 

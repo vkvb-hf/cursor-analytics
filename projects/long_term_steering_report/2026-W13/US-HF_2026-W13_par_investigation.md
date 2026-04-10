@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR improved marginally from 93.59% to 93.63% (+0.04 pp) in 2026-W13, continuing a positive trend observed over the past several weeks.
+**Overall:** PAR improved marginally by +0.04 pp (93.59% → 93.63%) in US-HF during 2026-W13, continuing a positive trend observed over the past several weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable improvement pattern | +0.04 pp | ✅ |
-| L1: Country Breakdown | US within threshold | +0.05 pp | ✅ |
-| L1: Payment Method | Minor fluctuations | -0.09 pp to +0.28 pp | ✅ |
-| L1: Payment Provider | Unknown provider volatility | -6.43 pp | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement pattern | +0.04 pp | ✅ |
+| L1: Country Impact | US threshold check (±2.5%) | +0.05 pp | ✅ |
+| L1: PaymentMethod | Variance within normal range | -0.09 pp to +0.28 pp | ✅ |
+| L1: PaymentProvider | Unknown provider anomaly | -6.43 pp | ⚠️ |
 
 **Key Findings:**
-- PAR has shown consistent week-over-week improvement since W09, rising from 93.16% to 93.63% (+0.47 pp over 5 weeks)
-- PayPal payment method showed the strongest improvement at +0.28 pp (95.79% → 96.06%) with 52,426 orders
-- **Unknown PaymentProvider dropped significantly by -6.43 pp** (93.82% → 87.79%), though volume is minimal at only 131 orders
-- Adyen provider declined by -0.84 pp (96.55% → 95.74%), but represents very low volume (399 orders)
-- Braintree, handling the majority of volume (382,647 orders), improved slightly by +0.09 pp (93.94% → 94.02%)
+- PAR has shown consistent week-over-week improvement from W07 (93.38%) to W13 (93.63%), a cumulative gain of +0.25 pp over 6 weeks
+- PaymentProvider "Unknown" dropped significantly by -6.43 pp (93.82% → 87.79%), though volume is minimal (131 orders)
+- PayPal showed the strongest improvement among payment methods at +0.28 pp (95.79% → 96.06%) with meaningful volume (52,426 orders)
+- Braintree, the dominant provider (382,647 orders), improved slightly by +0.09 pp, driving overall metric stability
+- Order volume continues to decline week-over-week (470,140 in W07 → 415,885 in W14), representing an 11.5% decrease
 
-**Action:** Monitor – The overall trend is positive and no major dimensions exceed the ±2.5% threshold at meaningful volumes. Continue tracking the Unknown PaymentProvider for potential data quality issues.
+**Action:** Monitor — The +0.04 pp improvement is within normal operating variance and continues a positive trend. The PaymentProvider "Unknown" decline warrants observation but impacts negligible volume (<0.05% of orders).
 
 ---
 

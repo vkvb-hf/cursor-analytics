@@ -7,28 +7,28 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The AR Initial (LL0) metric for HF-INTL remained essentially stable in 2026-W13, improving marginally from 90.12% to 90.13% (+0.01 pp) on a volume of 31,165 orders.
+**Overall:** AR Initial (LL0) for HF-INTL remained essentially flat in 2026-W13, increasing marginally by +0.01 percentage points (90.12% → 90.13%) on 31,165 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 8-week trend shows decline from 91.7% (W07) to 90.13% (W14) | -1.57 pp | ⚠️ |
-| L1: Country - CH | Switzerland rate dropped significantly | -11.69 pp | ⚠️ |
-| L1: Country - NZ | New Zealand rate declined | -5.98 pp | ⚠️ |
-| L1: Payment Method | All major methods declined (PayPal, Apple Pay, Credit Card) | -1.41 to -1.96 pp | ⚠️ |
-| L1: Payment Provider | Braintree and ProcessOut both declined | -1.57 to -1.76 pp | ⚠️ |
+| L0: Overall Rate | 90.12% → 90.13% | +0.01 pp | ✅ |
+| L1: Country - CH | 87.5% → 77.27% | -11.69 pp | ⚠️ |
+| L1: Country - NZ | 51.84% → 48.74% | -5.98 pp | ⚠️ |
+| L1: Country - FR | 87.11% → 85.35% | -2.01 pp | ✅ |
+| L1: Country - DE | 86.93% → 85.34% | -1.84 pp | ✅ |
+| L1: PaymentMethod - Paypal | 96.85% → 94.95% | -1.96 pp | ✅ |
+| L1: PaymentProvider - Braintree | 92.53% → 90.91% | -1.76 pp | ✅ |
 
 **Key Findings:**
-- Switzerland (CH) experienced the largest country-level decline at -11.69 pp (from 87.5% to 77.27%), though on relatively low volume (198 orders)
-- New Zealand (NZ) showed a significant decline of -5.98 pp (from 51.84% to 48.74%) on 1,783 orders, with an already-low baseline rate
-- The 8-week trend reveals a broader decline from 91.7% in W07 to 90.13% in W14, representing a -1.57 pp erosion over this period
-- PayPal showed the steepest payment method decline at -1.96 pp (from 96.85% to 94.95%)
-- Volume has decreased significantly from 52,771 orders (W07) to 31,165 orders (W14), a 41% reduction
+- CH experienced a significant drop of -11.69 pp (87.5% → 77.27%), though volume is relatively low at 198 orders
+- NZ continues to underperform with a -5.98 pp decline (51.84% → 48.74%) on 1,783 orders, remaining well below the overall benchmark
+- The 8-week trend shows a concerning downward pattern from 91.7% (W07) to 90.13% (W14), representing a cumulative decline of ~1.6 pp
+- All major payment methods declined, with Paypal showing the largest drop (-1.96 pp) and Apple Pay following (-1.91 pp)
+- SE was the only country showing meaningful improvement at +2.40 pp (82.03% → 84.0%)
 
-**Action:** Investigate — While the week-over-week change is minimal (+0.01 pp), the flagged countries (CH and NZ) exceeding the ±2.5% threshold and the broader 8-week downward trend warrant deeper investigation into root causes, particularly in Switzerland and New Zealand.
+**Action:** Investigate - Prioritize root cause analysis for CH and NZ given their significant declines exceeding the ±2.5% threshold; monitor the broader 8-week downward trend.
 
 ---
 
