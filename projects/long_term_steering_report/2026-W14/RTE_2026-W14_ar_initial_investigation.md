@@ -9,27 +9,26 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) declined from 91.4% to 90.89% (-0.56pp) in W14, continuing a three-week downward trend with rates dropping from 92.56% in W12, accompanied by significant volume reduction to 31,900 orders (down from 36,413 in W13).
+**Overall:** AR Initial (LL0) declined from 91.4% to 90.89% (-0.51pp) in W14, continuing a downward trend now spanning 5 consecutive weeks with total decline of 2.70pp since W09.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 3-week consecutive decline (W12-W14) | -1.67pp cumulative | ⚠️ |
-| L1: Country | TO showed largest decline | -4.77pp | ⚠️ |
-| L1: Country | TK, TV, TT showed improvements | +2.62pp to +9.33pp | ✅ |
-| L1: Payment Method | Credit Card (largest volume) declined | -0.80pp | ⚠️ |
-| L1: Payment Provider | Adyen declined | -0.65pp | ⚠️ |
-| L1: Payment Provider | Unknown provider anomaly | +nan% (new/data issue) | ⚠️ |
+| L0: RTE Trend | 5-week decline pattern | -2.70pp since W09 | ⚠️ |
+| L1: Country | TO largest drop | -4.77% | ⚠️ |
+| L1: Payment Method | Credit Card decline | -0.80% | ⚠️ |
+| L1: Payment Provider | Unknown provider anomaly | +nan% (new) | ⚠️ |
+| Volume | Significant volume drop | 31,900 vs 36,413 (-12.4%) | ⚠️ |
 
 **Key Findings:**
-- **Sustained decline:** AR Initial has dropped for 3 consecutive weeks, falling 1.67pp from W12 (92.56%) to W14 (90.89%), now at the lowest point in the 8-week window
-- **Volume contraction:** Order volume decreased 39% from W07 peak (52,390) to W14 (31,900), with a 12.4% drop from W13 alone
-- **TO country underperformance:** Tonga (TO) experienced a -4.77pp decline (71.79% → 68.36%), the largest country-level drop, though with limited volume (629 orders)
-- **Credit Card payment drag:** Credit Card transactions, representing 63% of volume (20,181 orders), declined -0.80pp, contributing most to the overall metric drop
-- **Data anomaly:** PaymentProvider "Unknown" shows 49 orders at 77.55% with an undefined prior rate, suggesting a tracking or categorization issue
+- TO experienced the largest country-level decline at -4.77% (68.36% vs 71.79%), though volume is relatively low at 629 orders
+- Credit Card payments, representing the highest volume (20,181 orders / 63% of total), declined -0.80% and are the primary driver of the overall metric decline
+- Order volume has dropped significantly from 52,390 (W07) to 31,900 (W14), a 39% reduction over 8 weeks
+- A new "Unknown" payment provider appeared with 49 orders at 77.55% rate, requiring investigation
+- TK showed strong improvement (+9.33%) but with minimal volume impact (232 orders)
 
-**Action:** **Investigate** – The three-week declining trend combined with sustained volume reduction warrants deeper analysis into Credit Card payment flows and the root cause of the TO country decline. The "Unknown" payment provider anomaly should also be reviewed for data integrity.
+**Action:** **Investigate** - The sustained 5-week declining trend combined with significant volume reduction and Credit Card performance degradation requires root cause analysis, particularly focusing on FJ (highest volume at 38,808 orders with -0.64% decline) and Credit Card payment processing.
 
 ---
 
@@ -82,4 +81,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 89.72% to 89.33% (-0.43 pp) in W14, reversing the positive trend observed in W13, with total volume of 165,018 orders.
+**Overall:** AR Overall declined from 89.72% to 89.33% (-0.39 pp) in W14 with volume decreasing from 169,667 to 165,018 orders (-2.7%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | -0.43 pp | ⚠️ |
-| L1: Country Breakdown | Countries exceeding ±2.5% threshold | AO: -3.13 pp | ⚠️ |
-| L1: Payment Method | Top degradation | Others: -1.18 pp | ✅ |
-| L1: Payment Provider | Top degradation | Adyen: -1.34 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (88.14%-89.79%) | -0.39 pp | ✅ |
+| L1: Country Breakdown | AO exceeds ±2.5% threshold | -3.13 pp | ⚠️ |
+| L1: PaymentMethod | No values exceed threshold | -1.18 pp max | ✅ |
+| L1: PaymentProvider | Unknown low volume anomaly | -4.76 pp | ✅ |
 
 **Key Findings:**
-- AO is the primary country driver with a significant -3.13 pp decline (85.21% from 87.96%) on 15,776 orders, exceeding the ±2.5% threshold
-- Adyen payment provider showed notable degradation of -1.34 pp (89.60% from 90.82%) affecting 38,117 orders
-- Volume decreased by 4,649 orders (165,018 vs 169,667) representing a -2.7% reduction week-over-week
-- The decline breaks a two-week recovery pattern (W10-W13) that had brought AR from 88.19% to 89.72%
-- ProcessOut maintains the lowest AR among major providers at 79.78% with 18,108 orders
+- AO is the primary driver of decline, dropping from 87.96% to 85.21% (-2.75 pp) with 15,776 orders - the only country exceeding the ±2.5% threshold
+- PaymentProvider Adyen shows notable decline of -1.34 pp (90.82% → 89.60%) affecting 38,117 orders
+- GN experienced the second-largest country decline at -1.25 pp (93.50% → 92.33%) with 14,333 orders
+- PaymentProvider Unknown shows -4.76 pp decline but with negligible volume (35 orders)
+- Overall volume decreased by ~4,649 orders (-2.7%) week-over-week
 
-**Action:** Investigate – Focus investigation on AO country performance and Adyen provider degradation as primary contributors to the overall decline.
+**Action:** Investigate - Focus on AO country performance and potential correlation with Adyen payment provider issues
 
 ---
 
@@ -76,4 +76,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

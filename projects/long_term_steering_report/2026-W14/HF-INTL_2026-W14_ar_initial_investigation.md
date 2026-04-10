@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Initial (LL0) for HF-INTL remained essentially flat week-over-week, increasing marginally from 90.12% to 90.13% (+0.01 pp) on a volume of 31,165 orders.
+**Overall:** AR Initial (LL0) for HF-INTL remained essentially flat at 90.13%, improving marginally by +0.01 percentage points week-over-week, while order volume decreased by 10.2% (from 34,718 to 31,165 orders).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Rate | 90.12% → 90.13% | +0.01 pp | ✅ |
+| L0: Overall Trend | 8-week stability check | +0.01 pp | ✅ |
 | L1: Country Breakdown | 6 countries exceed ±2.5% threshold | Mixed | ⚠️ |
-| L1: Payment Method | Credit Card -1.79 pp, Others +4.05 pp | Mixed | ✅ |
-| L1: Payment Provider | All providers within ±2.5% | Stable | ✅ |
+| L1: Payment Method | All within normal variance | -1.79 pp to +4.05 pp | ✅ |
+| L1: Payment Provider | All within normal variance | -0.69 pp to +2.29 pp | ✅ |
 
 **Key Findings:**
-- **Volume decline continues:** Order volume dropped from 34,718 to 31,165 (-10.2% WoW), continuing a downward trend from 52,771 orders in W07—a 41% reduction over 8 weeks
-- **Significant country-level volatility masked at aggregate:** LU (-8.41 pp), DK (-7.22 pp), AT (-7.04 pp), and DE (-4.41 pp) all declined materially, offset by CH (+11.33 pp) and GB (+2.37 pp)
-- **Germany impact is notable:** DE represents 8,587 orders (27.5% of volume) and declined -4.41 pp from 85.34% to 81.58%
-- **Australia remains persistently low:** AU at 64.13% is significantly below the overall benchmark, with 6,365 orders (20.4% of volume)
-- **8-week trend shows recovery:** Current rate of 90.13% has stabilized after W09's dip to 88.06%, though still below W07's peak of 91.7%
+- The +0.01 pp overall change masks significant offsetting country-level movements: LU (-8.41 pp), DK (-7.22 pp), AT (-7.04 pp), and DE (-4.41 pp) declined substantially, while CH improved by +11.33 pp
+- DE represents the highest-volume flagged country at 8,587 orders with a -4.41 pp decline (81.58% vs 85.34%), contributing meaningful negative pressure
+- AU continues to underperform at 64.13% (down -4.14 pp), representing 6,365 orders—the lowest acceptance rate among all countries
+- GB showed improvement of +2.37 pp (78.23% → 80.08%) with the highest volume at 14,083 orders, partially offsetting declines elsewhere
+- Payment dimensions (method and provider) show no significant anomalies, suggesting country-specific factors rather than payment infrastructure issues
 
-**Action:** **Investigate** — While the overall metric appears stable, the country-level analysis reveals significant underlying volatility. Prioritize investigation into DE and AU performance drivers, as these two markets represent nearly 48% of total volume and are underperforming.
+**Action:** **Investigate** — While overall metric is stable, the significant declines in DE, DK, AT, and LU warrant investigation into potential issuer-side changes or regional processing issues in these European markets.
 
 ---
 
@@ -81,4 +79,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

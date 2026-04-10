@@ -1,22 +1,22 @@
 # Payment Conversion Rate (Checkout) - Overall Summary
 
 **Week:** 2026-W14  
-**Generated:** 2026-04-09 20:00  
+**Generated:** 2026-04-10 13:02  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Conversion Rate (Checkout) performance was mixed globally in 2026-W14, with HF-INTL (+1.16pp) and RTE (+1.55pp) showing strong improvements while US-HF (-0.37pp), WL (-0.15pp), and HF-NA (-0.68pp) experienced declines. The most significant concern is the consistent degradation in early funnel stages (Select Payment Method and FE Validation) across declining clusters, particularly the "terms_not_accepted" errors affecting over 50% of customers with FE errors in US-HF.
+Payment Conversion Rate (Checkout) showed mixed performance globally in 2026-W14, with improvements in HF-INTL (+1.16pp) and RTE (+1.55pp) offset by declines in US-HF (-0.37pp), HF-NA (-0.68pp), and WL (-0.15pp). The most significant concern is the -0.42pp drop at Select Payment Method in US-HF and the -9.71pp Backend PVS Attempt conversion decline in WL, both requiring immediate investigation.
 
 ### Cluster Highlights
 
-- **US-HF:** PCR declined by -0.37pp to 26.41%, driven primarily by Select Payment Method drop-off (-0.42pp) and FE Validation issues with "terms_not_accepted" errors affecting 51.6% of customers encountering errors.
-- **HF-INTL:** PCR improved by +1.16pp to 36.04%, driven by France (+3.10pp) and strong gains in PVS Success (+0.85pp) as "Insufficient Funds" errors dropped significantly.
-- **WL:** PCR declined slightly by -0.15pp to 29.88%, with Call to PVS showing the largest conversion drop (-0.53pp) and KN country driving the decline (-3.75pp PCR).
-- **HF-NA:** PCR declined by -0.68pp to 27.96%, driven by FE Validation Passed dropping -0.68pp with APPLEPAY_DISMISSED errors increasing to 56.9% share, particularly impacting Canada (-1.77pp).
-- **RTE:** PCR improved by +1.55pp to 39.36%, driven by strong top-of-funnel gains in Select Payment Method (+1.75pp) led by FJ market (+2.51pp), despite TO country experiencing a significant -5.78pp decline.
+- **US-HF:** PCR declined by -0.37pp (26.77% → 26.41%) driven primarily by a -0.42pp drop at Select Payment Method indicating users are abandoning before engaging with payment options.
+- **HF-INTL:** PCR improved significantly by +1.16pp (34.88% → 36.04%) led by FR (+3.10pp) and DK (+5.89pp), with gains across early funnel stages and PVS success rates.
+- **WL:** PCR declined slightly by -0.15pp (30.03% → 29.88%) with KN experiencing a significant -3.75pp drop driven by Select Payment Method issues, compounded by a severe Backend PVS Attempt conversion decline (-9.71pp).
+- **HF-NA:** PCR declined by -0.68pp (28.63% → 27.96%) primarily driven by FE Validation issues in CA (-1.77pp country PCR), with APPLEPAY_DISMISSED errors increasing to 56.9% of all FE errors.
+- **RTE:** PCR improved by +1.55pp (37.81% → 39.36%) driven by FJ's +2.51pp increase from improved Select Payment Method conversion, though TO showed a concerning -5.78pp decline due to Fraud Service approval rate drops.
 
 ---
 

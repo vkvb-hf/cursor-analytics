@@ -1,22 +1,22 @@
 # Acceptance Rate (Initial Charges) - Overall Summary
 
 **Week:** 2026-W14  
-**Generated:** 2026-04-09 20:01  
+**Generated:** 2026-04-10 13:03  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Initial Charges) showed mixed performance globally in 2026-W14, with four of five clusters improving modestly (+0.01pp to +1.31pp) while RTE declined by -0.56pp. The most significant concern is RTE's three-week consecutive decline reaching its lowest 8-week point at 90.89%, alongside persistent underperformance in HF-INTL's Germany and Australia markets which together represent 48% of that cluster's volume.
+Acceptance Rate (Initial Charges) showed mixed performance globally in 2026-W14, with four of five clusters improving while RTE continued a 5-week decline (-0.56pp to 90.89%). The most significant concern is RTE's sustained downward trend (-2.70pp since W09) combined with a 39% volume reduction, while HF-INTL's flat overall rate masks substantial offsetting movements including DE declining -4.41pp on 8,587 orders.
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +1.31pp to 88.84%, driven by US country performance (+2.95pp) and Apple Pay recovery (+2.21pp) on 11,716 orders.
-- **HF-INTL:** Remained flat at 90.13% despite significant underlying volatility, with Germany declining -4.41pp to 81.58% and Australia persistently low at 64.13%.
-- **WL:** Improved by +0.61pp to 89.84%, supported by Braintree provider gains (+2.86pp) though offset by continued weakness in Guinea (-2.9pp) and Angola (-2.03pp).
-- **HF-NA:** Improved by +0.56pp to 89.66%, with US showing significant recovery (+2.95pp) partially offset by Adyen provider decline (-4.63pp on low volume).
-- **RTE:** Declined by -0.56pp to 90.89%, marking a third consecutive weekly decline with Credit Card transactions (-0.80pp on 63% of volume) as the primary drag.
+- **US-HF:** Improved +1.50pp to 88.84% driven by strong US recovery (+4.43pp) and Apple Pay gains (+2.60pp), though volume remains significantly below earlier weeks.
+- **HF-INTL:** Stable at 90.13% (+0.01pp) but masking significant country-level volatility with DE (-4.41pp), DK (-7.22pp), and AT (-7.04pp) declining while CH improved +11.33pp.
+- **WL:** Improved +0.68pp to 89.84% led by Braintree provider gains (+3.17pp), though persistent volume decline (-18.4% over 8 weeks) and GN/AO rate drops warrant monitoring.
+- **HF-NA:** Improved +0.63pp to 89.66% driven primarily by US recovery (+4.43pp on 24,598 orders), with Adyen showing a notable but low-volume decline (-4.74pp).
+- **RTE:** Declined -0.56pp to 90.89% marking the fifth consecutive weekly decline, with Credit Card payments (-0.80pp on 20,181 orders) as the primary drag and TO showing the largest country drop (-4.77pp).
 
 ---
 

@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined slightly from 92.23% to 92.17% (-0.07 pp) in W14, representing a minor week-over-week decrease on 507,188 orders.
+**Overall:** AR Overall declined slightly from 92.23% to 92.17% (-0.07pp) in W14, representing a minor fluctuation within normal operating range across 507,188 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend Stability | Within normal variance (91.35%-92.28% range) | -0.07 pp | ✅ |
-| Country Threshold (±2.5%) | No countries exceeding threshold | CA: -0.10 pp, US: -0.07 pp | ✅ |
-| Payment Method Impact | All methods within normal range | -0.09 pp to +0.15 pp | ✅ |
-| Payment Provider Anomaly | Unknown provider showed +6.91 pp spike | Low volume (758 orders) | ⚠️ |
+| 8-Week Trend Stability | Rate within historical range (91.35%-92.28%) | -0.07pp | ✅ |
+| Country Impact | No country exceeding ±2.5% threshold | CA: -0.10pp, US: -0.07pp | ✅ |
+| Payment Method Variance | All major methods within tolerance | -0.09pp to +0.15pp | ✅ |
+| Payment Provider Variance | One provider shows elevated change | Unknown: +6.91pp | ⚠️ |
 
 **Key Findings:**
-- The -0.07 pp decline is within normal weekly fluctuation, with the 8-week range spanning 91.35% to 92.28%
-- Both CA (-0.10 pp) and US (-0.07 pp) showed minor declines, neither exceeding the ±2.5% threshold
-- Adyen showed the largest provider decline at -0.18 pp (25,367 orders), while Braintree (largest volume at 394,115 orders) declined only -0.05 pp
-- PaymentProvider "Unknown" spiked +6.91 pp but represents minimal volume (758 orders / 0.15% of total)
-- Apple Pay showed slight improvement (+0.10 pp) while PayPal and Credit Card both declined marginally
+- The -0.07pp decline is consistent across both markets, with US (-0.07pp on 497K orders) and CA (-0.10pp on 106K orders) showing aligned performance
+- All payment methods performed within normal variance: PayPal -0.09pp, Credit Card -0.06pp, Apple Pay +0.10pp
+- Adyen showed the largest decline among major providers at -0.18pp, though on relatively low volume (25,367 orders)
+- The "Unknown" payment provider spiked +6.91pp, but represents minimal volume (758 orders) and does not materially impact overall AR
+- Week-over-week volume decreased by ~10K orders (517,599 → 507,188), continuing a declining volume trend observed since W10
 
-**Action:** Monitor — The decline is minimal and within normal operating variance. No single dimension shows concerning degradation at significant volume. Continue standard monitoring.
+**Action:** Monitor — No significant anomalies detected; the decline is minimal and within normal weekly fluctuation. Continue standard monitoring cadence.
 
 ---
 
@@ -73,4 +73,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

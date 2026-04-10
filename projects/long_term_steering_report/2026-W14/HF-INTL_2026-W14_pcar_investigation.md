@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved from 95.21% to 96.0% (+0.83pp) in 2026-W14 on volume of 31,465 orders, partially recovering from the -1.52pp decline observed in W13.
+**Overall:** PCAR improved by +0.83pp (95.21% → 96.0%) in 2026-W14 on a volume of 31,465 orders, though this follows a -1.52pp decline in the prior week and represents the lowest volume in the 8-week trend period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric within normal range | +0.83pp vs prior week | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | DK -2.78pp, CH +2.98pp | ⚠️ |
-| L1: Payment Method | All methods stable or improving | Range: +0.28pp to +0.86pp | ✅ |
-| Volume Trend | Declining volume pattern | 31,465 (lowest in 8 weeks) | ⚠️ |
+| L0: 8-Week Trend | Rate recovering from W13 dip | +0.83pp | ✅ |
+| L0: Volume Trend | Volume dropped significantly (31,465 vs 39,598) | -20.5% | ⚠️ |
+| L1: Country Performance | DK and AT exceed -2.5% threshold | -2.78pp, -2.50pp | ⚠️ |
+| L1: Country Outliers | CH improved significantly | +2.98pp | ✅ |
+| L1: Payment Methods | All tracked methods stable or improving | +0.28pp to +0.86pp | ✅ |
 
 **Key Findings:**
-- Denmark (DK) shows the largest decline at -2.78pp (96.72% → 94.03%) with significant volume of 30,036 orders, flagged for investigation
-- Switzerland (CH) improved notably by +2.98pp (91.21% → 93.93%), though on low volume of 2,174 orders
-- Volume has decreased significantly from 48,803 in W07 to 31,465 in W14, a ~35% reduction over 8 weeks
-- Apple Pay showed the strongest payment method improvement at +0.86pp (97.32% → 98.16%) on 10,202 orders
-- "Others" payment method remains a concern with the lowest rate at 75.1%, though stable vs prior week
+- DK showed the largest rate decline at -2.78pp (96.72% → 94.03%) on significant volume of 30,036 orders, warranting investigation
+- Order volume has declined 35.6% over the 8-week period (48,803 in W07 → 31,465 in W14), with W14 representing the lowest volume observed
+- AT and NO also showed notable declines of -2.50pp and -2.24pp respectively, suggesting a pattern in certain markets
+- CH was the only country with significant improvement (+2.98pp), though on low volume (2,174 orders)
+- Payment method "Others" continues to significantly underperform at 75.1% vs 97-98% for standard payment methods
 
-**Action:** **Investigate** – While the overall metric improved, the Denmark decline (-2.78pp on 30,036 orders) requires root cause analysis, and the persistent volume decline trend warrants attention.
+**Action:** Investigate — Focus on DK to identify root cause of -2.78pp decline; also review AT and NO for potential regional issues. Monitor volume decline trend.
 
 ---
 
@@ -74,4 +75,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

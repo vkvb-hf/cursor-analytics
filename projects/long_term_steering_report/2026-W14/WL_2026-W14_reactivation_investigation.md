@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate experienced a minimal decline of -0.05 percentage points (88.71% → 88.67%) on volume of 7,706 orders, representing the smallest week-over-week change in the 8-week trend period.
+**Overall:** Reactivation rate showed a minimal decline of -0.05 pp (from 88.71% to 88.67%) on volume of 7,706 orders, representing normal week-over-week fluctuation within an overall positive 8-week trend.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 8-week trajectory | +3.58pp since W07 | ✅ |
-| L1: Country | AO exceeds ±2.5% threshold | -3.13pp | ⚠️ |
-| L1: Payment Method | All within normal range | -0.70pp to +0.58pp | ✅ |
+| L0: 8-Week Trend | Sustained decline? | -0.05 pp (single week) | ✅ No pattern - rate up +3.58 pp since W07 |
+| L1: Country Breakdown | Any country > ±2.5%? | AO: -3.13 pp | ⚠️ AO flagged |
+| L1: Dimension Scan | Payment method anomaly? | Apple Pay: -0.70 pp | ✅ Within normal range |
 
 **Key Findings:**
-- The -0.05pp decline is statistically negligible and continues an overall positive 8-week trend (85.09% in W07 → 88.67% in W14, +3.58pp improvement)
-- **AO is the only flagged country** with a significant decline of -3.13pp (87.96% → 85.21%) on substantial volume of 15,776 orders
-- Apple Pay shows the lowest reactivation rate at 72.06% but remained relatively stable (-0.70pp) on low volume (698 orders)
-- Volume decreased by 248 orders (7,954 → 7,706) compared to prior week, a -3.1% reduction
-- GN and CK maintain strong performance above 92% despite minor declines
+- The -0.05 pp decline is negligible and occurs within a strong upward trend (85.09% in W07 → 88.67% in W14, +3.58 pp over 8 weeks)
+- AO is the only country exceeding the ±2.5% threshold with a -3.13 pp drop (87.96% → 85.21%) on significant volume of 15,776 orders
+- Apple Pay shows the lowest reactivation rate at 72.06% but remained relatively stable (-0.70 pp) with low volume (698 orders)
+- Credit Card (5,441 orders, 70.6% of volume) showed slight improvement at +0.13 pp
+- Volume decreased by 248 orders (7,954 → 7,706) compared to prior week
 
-**Action:** **Monitor** – The WL-level change is within normal fluctuation. However, recommend targeted investigation into AO's -3.13pp decline if it persists into W15.
+**Action:** Monitor — The overall metric change is within normal variance. Continue monitoring AO performance; if the -3.13 pp decline persists for a second consecutive week, escalate for country-specific investigation.
 
 ---
 
@@ -72,4 +70,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

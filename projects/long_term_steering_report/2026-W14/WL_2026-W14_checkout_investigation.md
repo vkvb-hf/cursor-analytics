@@ -8,30 +8,28 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Conversion Rate declined slightly from 30.03% to 29.88% (-0.15pp) in 2026-W14, with payment visits down 8.1% (38,531 → 35,421).
+**Overall:** Payment Conversion Rate declined slightly from 30.03% to 29.88% (-0.15pp) in W14, with 35,421 payment visits representing an 8.1% decrease in volume from the previous week.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate vs threshold | -0.26pp | ⚠️ |
-| Click Submit Form | Rate vs threshold | +0.09pp | ⚠️ |
-| FE Validation Passed | Rate vs threshold | +0.21pp | ⚠️ |
-| Enter Fraud Service | Rate vs threshold | +0.20pp | ⚠️ |
-| Approved by Fraud Service | Rate vs threshold | -0.10pp | ⚠️ |
-| Call to PVS | Rate vs threshold | -0.53pp | ⚠️ |
-| Successful Checkout | Rate vs threshold | +0.25pp | ⚠️ |
+| Select Payment Method | Δ ≥ ±0.07pp | -0.26pp | ⚠️ |
+| Click Submit Form | Δ ≥ ±0.07pp | +0.09pp | ⚠️ |
+| FE Validation Passed | Δ ≥ ±0.07pp | +0.21pp | ⚠️ |
+| Enter Fraud Service | Δ ≥ ±0.07pp | +0.20pp | ⚠️ |
+| Approved by Fraud Service | Δ ≥ ±0.07pp | -0.10pp | ⚠️ |
+| Call to PVS | Δ ≥ ±0.07pp | -0.53pp | ⚠️ |
+| Successful Checkout | Δ ≥ ±0.07pp | +0.25pp | ⚠️ |
 
 **Key Findings:**
-- **Call to PVS shows largest conversion drop (-0.53pp):** Backend data reveals a significant gap between Fraud Approval and PVS Attempt (PVS Attempt dropped -9.71pp in conversion), indicating potential routing or system issues between these steps.
-- **KN country drove the decline (-3.75pp PCR):** Select Payment Method conversion in KN dropped -3.26pp, contributing most to the overall negative trend, while ER (+2.04pp) and GN (+4.30pp) showed improvements.
-- **Braintree_CreditCard payment method degraded significantly (-2.58pp):** Success rate fell from 90.20% to 87.62%, alongside Braintree_Paypal dropping -1.73pp.
-- **FE Validation recovery rate stable (58.46% → 58.74%):** Despite meeting threshold, the improvement is marginal with APPLEPAY_DISMISSED remaining the dominant error type (66.2%).
-- **PVS failures decreased (-22 total):** Insufficient Funds errors dropped from 62 to 42 (-6.65pp share), though CVC Declined errors increased (+11 cases, +5.58pp share).
+- **KN drove the decline:** KN experienced a significant -3.75pp drop in PCR (27.15% → 23.40%), primarily due to a -3.26pp decrease at Select Payment Method step
+- **Call to PVS showed concerning drop:** GA waterfall shows -0.53pp conversion decline at Call to PVS, while Backend data reveals a severe -9.71pp drop at PVS Attempt (98.79% → 89.07%)
+- **Positive performance in ER and GN:** Both countries showed PCR improvements (+2.04pp and +4.30pp respectively), driven by gains at Select Payment Method (+1.60pp and +4.07pp)
+- **Braintree_CreditCard underperformed:** Success rate dropped -2.58pp (90.20% → 87.62%), the largest decline among major payment methods
+- **PVS failures improved:** Total PVS failures decreased from 236 to 214 (-22), with "Insufficient Funds" declines dropping by 20 cases
 
-**Action:** Investigate – Focus on the Call to PVS step drop (-0.53pp) and the significant backend PVS Attempt conversion decline (-9.71pp). Additionally, investigate KN country's Select Payment Method degradation and Braintree_CreditCard performance issues.
+**Action:** Investigate - Focus on KN's Select Payment Method drop and the significant Backend PVS Attempt conversion decline (-9.71pp), which indicates potential technical issues between Fraud Service approval and PVS calls.
 
 ---
 
@@ -277,4 +275,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

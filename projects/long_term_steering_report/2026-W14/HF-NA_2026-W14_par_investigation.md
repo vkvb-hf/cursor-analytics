@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PAR improved marginally from 93.96% to 94.0% (+0.04pp), continuing a 6-week upward trend since W08 (93.27%), with total volume of 507,188 orders.
+**Overall:** PAR improved marginally from 93.96% to 94.0% (+0.04 pp) on volume of 507,188 orders, continuing a steady upward trend over the past 8 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement trend | +0.04pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | CA: -0.10pp, US: -0.07pp | ✅ |
-| L1: Payment Method | All methods within normal range | Apple Pay: +0.29pp (best), PayPal: -0.01pp | ✅ |
-| L1: Payment Provider | One anomaly detected (Unknown) | Unknown: +6.86pp (low volume) | ⚠️ |
+| L0: 8-Week Trend | Stable/Improving | +0.04 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | CA: -0.10 pp, US: -0.07 pp | ✅ |
+| L1: Dimension Scan | No major dimension shifts | Range: -0.10 pp to +0.44 pp | ✅ |
+| L1: Outlier Detection | One outlier detected | Unknown Provider: +6.86 pp | ⚠️ |
 
 **Key Findings:**
-- PAR has improved consistently over 6 weeks, rising from 93.27% (W08) to 94.0% (W14), a cumulative gain of +0.73pp
-- Both CA (-0.10pp) and US (-0.07pp) showed slight declines this week, yet overall PAR still improved due to volume mix
-- Apple Pay showed the strongest improvement among major payment methods at +0.29pp (88.28% → 88.54%)
-- PaymentProvider "Unknown" spiked +6.86pp (90.0% → 96.17%), but volume is negligible at only 758 orders
-- Volume declined by ~10,400 orders (-2.0%) week-over-week (517,599 → 507,188), continuing a downward volume trend
+- PAR has improved consistently over the 8-week period, rising from 93.5% (W07) to 94.0% (W14), a cumulative gain of +0.50 pp
+- Both CA (-0.10 pp) and US (-0.07 pp) showed slight declines this week, but neither breaches the ±2.5% threshold
+- Apple Pay showed the strongest improvement among major payment methods at +0.29 pp (88.28% → 88.54%)
+- PaymentProvider "Unknown" showed a +6.86 pp spike (90.0% → 96.17%), but volume is minimal (758 orders, 0.15% of total)
+- Volume declined by ~2% week-over-week (517,599 → 507,188), continuing a gradual volume decrease trend
 
-**Action:** Monitor — No significant anomalies detected; the +0.04pp improvement is within normal fluctuation and the trend remains positive. Continue standard weekly monitoring.
+**Action:** Monitor — No significant anomalies detected; the metric continues its stable upward trajectory with all major segments performing within normal ranges.
 
 ---
 
@@ -73,4 +73,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

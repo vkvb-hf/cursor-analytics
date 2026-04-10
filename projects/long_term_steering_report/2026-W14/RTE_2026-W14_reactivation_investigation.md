@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate improved from 88.6% to 89.2% (+0.68 pp) in W14, continuing a positive 8-week upward trend from 85.57% in W07, though volume decreased from 19,685 to 17,264 orders.
+**Overall:** Reactivation rate improved from 88.6% to 89.2% (+0.68 pp) in W14, continuing a positive 5-week upward trend despite a 12.3% decrease in order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Consistent improvement since W07 | +3.63 pp over 8 weeks | ✅ |
-| Country Breakdown | No country exceeds ±2.5% threshold | Range: -1.63 pp to +1.52 pp | ✅ |
-| Payment Method | Apple Pay shows largest swing | +4.18 pp (low volume: 1,668) | ⚠️ |
+| 8-Week Trend | Sustained improvement pattern | +3.63 pp since W07 | ✅ |
+| Country Variance | No country exceeds ±2.5% threshold | Max decline: TK -1.63 pp | ✅ |
+| Dimension Scan | Payment methods all improved | Apple Pay +4.18 pp | ✅ |
+| Volume Check | Significant volume decline W14 | 17,264 vs 19,685 (-12.3%) | ⚠️ |
 
 **Key Findings:**
-- The +0.68 pp improvement in W14 is part of a sustained upward trend, with reactivation rate climbing from 85.57% (W07) to 89.2% (W14)
-- TK showed the largest country decline at -1.63 pp (88.65% from 90.12%) but remains within acceptable thresholds with modest volume (1,779 orders)
-- Apple Pay reactivation improved significantly by +4.18 pp (66.87% → 69.66%), though at low volume (1,668 orders) and still notably below other payment methods
-- Order volume has declined 30% from W07 (24,688) to W14 (17,264), which may be inflating rate improvements
-- FJ represents the highest volume country (397,332 orders) with stable performance at 93.62% (-0.37 pp)
+- Reactivation rate has steadily climbed from 85.57% (W07) to 89.2% (W14), representing a cumulative +3.63 pp improvement over 8 weeks
+- Apple Pay showed the strongest improvement at +4.18 pp (66.87% → 69.66%), though it remains the lowest-performing payment method at 69.66%
+- TK experienced the largest country-level decline at -1.63 pp (90.12% → 88.65%), but remains within acceptable thresholds
+- Order volume has declined 30% from peak W11 (23,790) to W14 (17,264), which may be inflating rate improvements due to smaller sample sizes
+- FJ represents the largest volume market (397,332 orders) with a slight decline of -0.37 pp but maintains strong performance at 93.62%
 
-**Action:** Monitor — The metric shows healthy improvement with no dimensional anomalies exceeding thresholds. Continue tracking volume decline and Apple Pay's below-average performance.
+**Action:** Monitor — The +0.68 pp improvement is part of a sustained positive trend with no dimension exceeding alert thresholds. Continue monitoring volume decline and Apple Pay performance, which remains significantly below other payment methods despite improvement.
 
 ---
 
@@ -74,4 +73,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

@@ -10,28 +10,24 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33pp), a change that is not statistically significant, with volume decreasing from 14,394 to 13,609 customers.
+**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33pp) week-over-week, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | 92.73% → 93.06% | +0.33pp | ✅ |
-| L0: Duplicate Rate | 15.53% → 15.81% | +0.28pp | ✅ |
-| L0: Duplicate Block | 5.07% → 5.25% | +0.18pp | ✅ |
-| L0: PF Block | 0.80% → 0.84% | +0.04pp | ✅ |
-| L1: Country - KN | 92.92% → 90.22% | -2.70pp | ⚠️ |
-| L1: Channel - Paid | 96.07% → 96.34% | +0.27pp | ✅ |
-| L1: Channel - Referral | 76.10% → 75.04% | -1.06pp | ✅ |
+| L0: Overall FAR | +0.35% WoW, within normal range | +0.33pp | ✅ |
+| L1: Country Breakdown | KN exceeded ±2.5% threshold | -2.90% in KN | ⚠️ |
+| L1: Channel Category | All channels within tolerance | Paid +0.28%, Referral -1.40% | ✅ |
 
 **Key Findings:**
-- KN is the only country exceeding the ±2.5% threshold, with FAR declining -2.90% (90.22%) and duplicate rate spiking +32.40% (from 6.90% to 9.13%)
-- Overall volume continues a declining trend, dropping from 14,394 to 13,609 (-5.5% WoW), part of a sustained decrease from 19,099 in W07
-- CK showed the strongest improvement at +2.49pp FAR (94.02%), accompanied by a -6.67% reduction in duplicate rate
-- Referral channel maintains significantly lower FAR (75.04%) compared to Paid channel (96.34%), with increasing duplicate rates (+4.12%)
-- PF Block rate remains stable at historically low levels (0.84%) after the anomaly in W07 (5.17%)
+- KN experienced a notable FAR decline of -2.90% (92.92% → 90.22%) alongside a significant duplicate rate increase of +32.40% (6.90% → 9.13%)
+- Overall volume decreased by 5.5% (14,394 → 13,609 customers) continuing a downward trend from W11 peak of 16,403
+- CK showed the strongest FAR improvement at +2.49% (91.74% → 94.02%) with duplicate rate declining -6.67%
+- Referral channel maintains substantially lower FAR (~75%) compared to Paid channel (~96%), with Referral duplicate rate increasing +4.12%
+- PF Block rate remains stable at 0.84%, well below the anomalous 5.17% seen in W07
 
-**Action:** Monitor – The overall change is not significant and metrics are within normal ranges. However, recommend focused monitoring of KN due to the notable FAR decline and duplicate rate increase.
+**Action:** Monitor – The overall metric change is not significant. Continue monitoring KN for potential duplicate rate issues; if the elevated duplicate rate persists next week, escalate for deeper investigation.
 
 ---
 
@@ -80,4 +76,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

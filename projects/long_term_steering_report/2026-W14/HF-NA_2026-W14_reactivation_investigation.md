@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate improved modestly from 90.69% to 90.95% (+0.29 pp) in W14, continuing a positive 8-week upward trend from 86.03% in W07.
+**Overall:** Reactivation rate improved slightly from 90.69% to 90.95% (+0.26 pp), continuing a positive 8-week upward trend from 86.03% in W07.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement over 8 weeks | +4.92 pp since W07 | ✅ |
-| L1: Country | No country exceeds ±2.5% threshold | CA: -0.10 pp, US: -0.07 pp | ✅ |
-| L1: Payment Method | Minor fluctuations within normal range | Apple Pay: -1.38 pp | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement from 86.03% (W07) to 90.95% (W14) | +4.92 pp over 8 weeks | ✅ |
+| L1: Country Performance | Both CA and US within normal range | CA: -0.10 pp, US: -0.07 pp | ✅ |
+| L1: Payment Method | Apple Pay declined; Credit Card improved | Apple Pay: -1.38 pp, Credit Card: +0.60 pp | ⚠️ |
 
 **Key Findings:**
-- Reactivation rate has shown consistent improvement over 8 weeks, rising from 86.03% (W07) to 90.95% (W14), a cumulative gain of +4.92 pp
-- Volume decreased by 7.4% week-over-week (21,909 → 20,279 orders), which may partly explain the rate improvement
-- Apple Pay shows the largest payment method decline at -1.38 pp (89.63% → 88.39%) with 2,981 orders
-- Credit Card, the highest-volume payment method (14,160 orders), improved by +0.60 pp (90.28% → 90.83%)
-- Both US and CA markets remained stable with negligible declines (-0.07 pp and -0.10 pp respectively)
+- Strong positive 8-week trend: Reactivation rate has increased +4.92 pp from 86.03% (W07) to 90.95% (W14)
+- Volume declined 7.4% week-over-week (21,909 → 20,279 orders), consistent with recent weekly fluctuations
+- Apple Pay shows the largest negative shift at -1.38 pp (89.63% → 88.39%) with 2,981 orders
+- Credit Card, representing the highest volume (14,160 orders), improved +0.60 pp (90.28% → 90.83%)
+- No country exceeded the ±2.5% threshold; both CA (93.52%) and US (92.79%) remain stable
 
-**Action:** Monitor — The +0.29 pp improvement is within normal variance, no dimensions exceed alert thresholds, and the overall trend remains positive. Continue standard weekly monitoring with attention to Apple Pay performance.
+**Action:** Monitor - The week-over-week change is minimal and within normal variation. Continue tracking Apple Pay performance to determine if the -1.38 pp decline becomes a sustained pattern.
 
 ---
 
@@ -69,4 +67,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

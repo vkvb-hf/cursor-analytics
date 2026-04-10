@@ -7,25 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined by 0.13 percentage points (97.17% → 97.04%) on a volume of 784,389 orders, representing the second consecutive week of decline after a four-week improvement trend.
+## Executive Summary
+
+**Overall:** PAR declined by -0.13pp (97.17% → 97.04%) on volume of 784,389 orders, continuing a two-week downward trend after peaking at 97.25% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline pattern? | -0.13pp (2nd consecutive drop) | ⚠️ |
-| L1: Country Breakdown | Countries exceeding ±2.5% threshold? | DK: -2.78pp, AT: -2.50pp, CH: +2.98pp | ⚠️ |
-| L1: Payment Method | Significant degradation? | Apple Pay: -0.37pp (largest drop) | ✅ |
-| L1: Payment Provider | Provider-level issues? | ProcessOut: -0.28pp (largest drop) | ✅ |
+| L0: 8-Week Trend | Sustained decline? | -0.13pp (2nd consecutive week) | ⚠️ |
+| L1: Country | Any >±2.5pp? | DK: -2.78pp, CH: +2.98pp | ⚠️ |
+| L1: Payment Method | Any >±1.0pp? | Max: Apple Pay -0.37pp | ✅ |
+| L1: Payment Provider | Any >±1.0pp? | Unknown: +2.76pp (low vol) | ✅ |
 
 **Key Findings:**
-- **Denmark (DK) is the primary driver** of the decline with a -2.78pp drop (94.03% from 96.72%) on 30,036 orders, flagged as exceeding the ±2.5% threshold
-- **Austria (AT) also shows significant degradation** at -2.50pp (92.81% from 95.19%) on 12,458 orders
-- **Volume decreased by 6.9%** week-over-week (784,389 vs 842,480), which may be contributing to rate volatility
-- **Switzerland (CH) shows anomalous improvement** of +2.98pp but on very low volume (2,174 orders), warranting verification
-- **ProcessOut shows the largest provider-level decline** at -0.28pp affecting 226,595 orders (29% of total volume)
+- DK experienced the largest decline at -2.78pp (96.72% → 94.03%) on 30,036 orders, flagged as primary driver
+- AT dropped -2.50pp (95.19% → 92.81%) and NO dropped -2.24pp (92.35% → 90.27%), indicating broader Nordic/DACH regional softness
+- Volume declined -6.9% WoW (842,480 → 784,389), marking the 4th consecutive week of volume contraction
+- CH showed anomalous improvement of +2.98pp but on minimal volume (2,174 orders)
+- Payment dimensions remain stable with no method or provider exceeding ±1.0pp threshold on meaningful volume
 
-**Action:** **Investigate** — The -2.78pp drop in Denmark exceeds the threshold and requires immediate root cause analysis. Cross-reference DK performance with ProcessOut data to determine if there is a correlation between the country decline and payment provider issues.
+**Action:** **Investigate** — Focus on DK to identify root cause of -2.78pp drop; secondary review of AT and NO for potential shared regional factors.
 
 ---
 
@@ -78,4 +80,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

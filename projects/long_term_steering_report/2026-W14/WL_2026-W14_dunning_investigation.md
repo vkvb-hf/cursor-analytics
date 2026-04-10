@@ -2,13 +2,13 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 29.39% → 28.35% (-1.04pp)  
-**Volume:** 8,053 eligible orders  
+**Observation:** 29.38% → 28.34% (-1.04pp)  
+**Volume:** 8,051 eligible orders  
 **Payday Phase:** Mid-Cycle
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 1.04pp (29.39% → 28.35%) week-over-week during a Mid-Cycle payday phase, with eligible volume decreasing from 8,700 to 8,053 orders.
+**Overall:** Dunning Ship Rate declined by 1.04pp (29.38% → 28.34%) week-over-week during Mid-Cycle payday phase, with volume decreasing by 648 orders (8,699 → 8,051).
 
 **Funnel Analysis:**
 
@@ -16,17 +16,17 @@
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 91.18% → 90.71% | -0.47pp | ⚠️ |
 | Discount % | 16.35% → 15.46% | -0.89pp | ⚠️ |
-| PC2 | 47.52% → 47.03% | -0.49pp | ⚠️ |
-| Ship Rate | 29.39% → 28.35% | -1.04pp | ⚠️ |
+| PC2 | 47.51% → 47.03% | -0.48pp | ⚠️ |
+| Ship Rate | 29.38% → 28.34% | -1.04pp | ⚠️ |
 
 **Key Findings:**
-- **Simpson's Paradox detected:** AO (highest SR tier at 72.58%) experienced a -59.6% volume drop (1,228 → 496 orders), disproportionately removing high-converting orders from the mix
-- **Individual country performance improved:** 6 of 7 countries showed SR increases (ER +2.93pp, CK +4.15pp, AO +5.32pp, CG +2.85pp, GN +0.97pp), yet cluster-level SR declined
-- **Low-tier volume expansion:** KN (15.10% SR) increased volume by 17.4%, adding more low-converting orders to the mix
-- **Discount reduction:** Discount % dropped by 0.89pp, potentially reducing conversion incentives across the funnel
-- **MR remains near-zero:** MR maintained 0.00% ship rate on 1,421 orders, representing significant untapped potential
+- **Simpson's Paradox Detected:** Despite the overall decline, 6 of 7 countries showed improved Ship Rates individually; the decline is driven by mix shift away from high-performing AO (volume dropped 59.6%, from 1,228 to 496 orders)
+- **AO volume collapse:** AO, the highest-performing country (72.58% SR), saw dramatic volume reduction, significantly impacting the weighted average
+- **Low-tier country KN grew:** KN volume increased 17.4% while maintaining a low Ship Rate (15.10%), further diluting overall performance
+- **All funnel metrics declined marginally:** Pre-Dunning AR (-0.47pp), Discount % (-0.89pp), and PC2 (-0.48pp) all showed slight deterioration
+- **CK improvement:** CK showed both volume growth (+3.8%) and SR improvement (43.61% → 47.76%), a positive signal
 
-**Action:** Monitor — The decline is primarily driven by mix shift (Simpson's Paradox) rather than true performance degradation. Investigate the root cause of AO's 59.6% volume drop to determine if this is a temporary anomaly or systemic issue requiring intervention.
+**Action:** Investigate — The Simpson's Paradox finding requires investigation into why AO volume dropped so significantly; this mix shift is masking underlying country-level improvements.
 
 ---
 
@@ -36,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Pre-Dunning AR | Discount % | PC2 |
 |------|--------------|--------|-----------|----------------|------------|-----|
-| 2026-W13 | Mid-Cycle | 8,700 | 29.39% | 91.18% | 16.35% | 47.52% |
-| 2026-W14 | Mid-Cycle | 8,053 | 28.35% | 90.71% | 15.46% | 47.03% |
+| 2026-W13 | Mid-Cycle | 8,699 | 29.38% | 91.18% | 16.35% | 47.51% |
+| 2026-W14 | Mid-Cycle | 8,051 | 28.34% | 90.71% | 15.46% | 47.03% |
 
 ---
 
@@ -45,9 +45,9 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| ER | 2,563 | 23.64% | 2,559 | 26.57% | -0.2% | Low |
+| ER | 2,562 | 23.61% | 2,559 | 26.57% | -0.1% | Low |
 | MR | 1,466 | 0.07% | 1,421 | 0.00% | -3.1% | Low |
-| CK | 1,440 | 43.61% | 1,497 | 47.76% | 4.0% | Medium |
+| CK | 1,440 | 43.61% | 1,495 | 47.76% | 3.8% | Medium |
 | AO | 1,228 | 67.26% | 496 | 72.58% | -59.6% | High |
 | CG | 798 | 21.93% | 779 | 24.78% | -2.4% | Low |
 | GN | 635 | 36.06% | 632 | 37.03% | -0.5% | Medium |
@@ -58,4 +58,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

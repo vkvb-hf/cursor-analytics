@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined by 0.27pp (91.3% → 91.05%) in W14, continuing a three-week downward trend from the W11 peak of 91.58%.
+**Overall:** PAR declined by -0.25 percentage points (91.3% → 91.05%) in W14, continuing a gradual downward trend observed over the past three weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 3-week consecutive decline (W12-W14) | -0.27pp | ⚠️ |
-| L1: Country | AO exceeded ±2.5% threshold | -3.13pp | ⚠️ |
-| L1: Payment Method | All methods declined, Apple Pay largest | -0.60pp | ✅ |
-| L1: Payment Provider | Adyen showed notable decline | -0.87pp | ⚠️ |
+| L0: WL Trend | 3-week declining trend (W12-W14) | -0.27% | ⚠️ |
+| L1: Country | AO exceeds ±2.5% threshold | -3.13% | ⚠️ |
+| L1: Payment Method | All methods show minor declines | -0.19% to -0.60% | ✅ |
+| L1: Payment Provider | Adyen shows largest decline | -0.87% | ⚠️ |
 
 **Key Findings:**
-- **AO (Angola) is the primary driver:** AO declined -3.13pp (87.96% → 85.21%) with 15,776 orders, the only country exceeding the ±2.5% threshold
-- **Adyen underperformance:** Adyen dropped -0.87pp (94.33% → 93.51%) across 38,117 orders, the largest decline among major payment providers
-- **Volume contraction:** Order volume decreased from 169,667 to 165,018 (-2.7%), continuing a downward trend from W10's peak of 179,964
-- **Broad-based decline:** All countries except KN (+0.68pp) showed negative movement, suggesting a systemic rather than isolated issue
-- **Apple Pay weakness:** Apple Pay had the largest payment method decline at -0.60pp (87.59% → 87.06%)
+- AO is the primary driver of the decline, dropping -3.13% (87.96% → 85.21%) with 15,776 orders representing ~9.6% of total volume
+- Adyen payment provider declined -0.87% (94.33% → 93.51%) across 38,117 orders, the largest drop among meaningful-volume providers
+- Volume decreased by 4,649 orders (-2.7%) week-over-week, continuing a 5-week volume decline from W10 peak
+- All payment methods showed slight declines, with Apple Pay showing the largest drop at -0.60%
+- ProcessOut maintains the lowest PAR at 81.01%, though stable vs prior week (-0.12%)
 
-**Action:** **Investigate** — Prioritize deep-dive into AO market performance and Adyen provider issues. Cross-reference AO x Adyen combination to determine if these factors are correlated or independent contributors.
+**Action:** Investigate – Focus on AO market performance and Adyen provider issues; determine if there is correlation between AO and Adyen that may indicate a localized payment processing problem.
 
 ---
 
@@ -76,4 +76,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

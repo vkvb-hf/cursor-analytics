@@ -2,31 +2,31 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W13 → 2026-W14  
-**Observation:** 46.70% → 49.18% (+2.48pp)  
-**Volume:** 17,739 eligible orders  
+**Observation:** 46.71% → 49.17% (+2.46pp)  
+**Volume:** 17,735 eligible orders  
 **Payday Phase:** Mid-Cycle
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved from 46.70% to 49.18% (+2.48pp) week-over-week during Mid-Cycle payday phase, with stable volume of 17,739 eligible orders.
+**Overall:** Dunning Ship Rate improved from 46.71% to 49.17% (+2.46pp) in W14, with both US and CA contributing positive performance gains during Mid-Cycle payday phase.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 92.98% → 92.91% | -0.07pp | ✅ |
-| Discount % | 16.66% → 15.46% | -1.20pp | ✅ |
-| PC2 | 51.29% → 52.50% | +1.21pp | ✅ |
-| Ship Rate | 46.70% → 49.18% | +2.48pp | ✅ |
+| Discount % | 16.67% → 15.47% | -1.20pp | ✅ |
+| PC2 | 51.3% → 52.5% | +1.20pp | ✅ |
+| Ship Rate | 46.71% → 49.17% | +2.46pp | ✅ |
 
 **Key Findings:**
-- Ship Rate improved +2.48pp despite a reduction in discount offering (-1.20pp), indicating improved payment conversion efficiency
-- PC2 (payment conversion) increased by +1.21pp to 52.50%, contributing to the overall Ship Rate improvement
-- Both US (+2.70pp to 47.79%) and CA (+1.68pp to 54.06%) showed Ship Rate improvements with negligible volume shifts, ruling out Simpson's Paradox
-- Pre-Dunning AR remained stable at ~93%, showing consistent upstream funnel performance
-- Volume held steady at 17,739 orders (-0.07% change), confirming genuine rate improvement rather than volume-driven effects
+- US Ship Rate improved significantly from 45.08% to 47.78% (+2.70pp), driving the majority of cluster improvement given its 78% volume share
+- CA maintained its High SR tier status with improvement from 52.46% to 54.05% (+1.59pp)
+- Discount % decreased by 1.20pp while Ship Rate still improved, indicating better conversion efficiency
+- Volume remained stable at 17,735 orders (-8 orders, -0.05%), confirming no mix shift distortion
+- PC2 increased by 1.20pp to 52.5%, contributing to overall funnel health
 
-**Action:** Monitor — The improvement is positive and appears driven by genuine conversion gains across both countries. Continue tracking to confirm sustainability through the next payday cycle.
+**Action:** Monitor — Positive trend across both markets with no Simpson's Paradox detected; continue tracking to confirm sustained improvement.
 
 ---
 
@@ -36,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Pre-Dunning AR | Discount % | PC2 |
 |------|--------------|--------|-----------|----------------|------------|-----|
-| 2026-W13 | Mid-Cycle | 17,751 | 46.70% | 92.98% | 16.66% | 51.29% |
-| 2026-W14 | Mid-Cycle | 17,739 | 49.18% | 92.91% | 15.46% | 52.5% |
+| 2026-W13 | Mid-Cycle | 17,743 | 46.71% | 92.98% | 16.67% | 51.3% |
+| 2026-W14 | Mid-Cycle | 17,735 | 49.17% | 92.91% | 15.47% | 52.5% |
 
 ---
 
@@ -45,12 +45,12 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| US | 13,816 | 45.09% | 13,810 | 47.79% | 0.0% | Medium |
-| CA | 3,935 | 52.38% | 3,929 | 54.06% | -0.2% | High |
+| US | 13,814 | 45.08% | 13,807 | 47.78% | -0.1% | Medium |
+| CA | 3,929 | 52.46% | 3,928 | 54.05% | 0.0% | High |
 
 ---
 
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

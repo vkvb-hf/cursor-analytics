@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved by +0.21 percentage points (93.92% → 94.12%) on volume of 20,221 orders in W14, representing a recovery from the prior week's decline and bringing performance back in line with the 8-week average.
+**Overall:** PCAR improved from 93.92% to 94.12% (+0.20 pp) in W14, representing a modest recovery after the prior week's decline, with volume at 20,221 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | +0.21 pp | ✅ |
-| L1: Country Impact | Any country ±2.5% threshold | None flagged | ✅ |
-| L1: Payment Method | Dimension variance check | +3.02 pp (Others) | ⚠️ |
+| Overall Rate Change | +0.20 pp improvement | +0.21% | ✅ |
+| Country Deviation (>±2.5 pp) | No countries exceeded threshold | CA: -0.10 pp, US: -0.07 pp | ✅ |
+| Payment Method Volatility | Others: +3.02 pp (low volume) | 121 orders | ⚠️ |
+| Volume Trend | Declining volume vs W13 | -530 orders (-2.6%) | ⚠️ |
+| 8-Week Trend Stability | Rate within normal range | 93.53% - 95.23% | ✅ |
 
 **Key Findings:**
-- The +0.21 pp improvement reverses the -0.29 pp decline from W13, stabilizing PCAR near the 94% benchmark
-- No countries exceeded the ±2.5% threshold; both US (-0.07 pp) and CA (-0.10 pp) showed minimal, slightly negative movement
-- "Others" payment method showed a significant +3.02 pp increase (96.27% → 99.17%), though on low volume (121 orders)
-- Apple Pay improved notably by +1.13 pp (93.42% → 94.48%) on meaningful volume (6,578 orders)
-- Credit Card declined by -0.41 pp (94.13% → 93.75%), which is notable given it represents the largest payment volume (11,753 orders)
-- Overall order volume continues to decline (20,221 vs. 20,751 prior week), down significantly from W09 peak of 27,201
+- The +0.20 pp improvement reverses the -0.29 pp decline from W13, bringing the rate close to W12 levels (94.19%)
+- Both CA (93.52%, -0.10 pp) and US (92.79%, -0.07 pp) showed slight declines, indicating the overall improvement came from mix shift rather than country-level gains
+- Apple Pay showed strong improvement (+1.13 pp to 94.48%) with meaningful volume (6,578 orders), while Credit Card declined (-0.41 pp to 93.75%)
+- Order volume continues a downward trend (20,221 vs 26,944 in W07), representing a 25% decrease over the 8-week period
+- The "Others" payment method showed +3.02 pp improvement but with only 121 orders, making it statistically insignificant
 
-**Action:** Monitor — The improvement is positive but modest. Continue monitoring Credit Card performance given its volume significance and slight decline trend.
+**Action:** Monitor - The improvement is positive but modest. Continue tracking Credit Card performance which declined despite being the highest-volume payment method (11,753 orders). No escalation required as no thresholds were breached.
 
 ---
 
@@ -69,4 +70,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

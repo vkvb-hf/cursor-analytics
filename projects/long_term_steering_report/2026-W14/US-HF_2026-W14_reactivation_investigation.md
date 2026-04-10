@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** The Reactivation metric improved from 90.63% to 90.99% (+0.40 pp) in W14, continuing a positive trend that has seen the rate increase approximately 5.75 pp since W07 (85.24%).
+**Overall:** Reactivation rate improved from 90.63% to 90.99% (+0.40% or +0.36 pp) in W14, continuing a positive upward trend that began in W07 (85.24%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained upward trend from 85.24% (W07) to 90.99% (W14) | +0.40 pp | ✅ |
-| L1: Country | US rate stable at 92.79% vs 92.85% | -0.07 pp | ✅ |
-| L1: Payment Method | Apple Pay declined; Credit Card improved | Mixed | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement from 85.24% (W07) to 90.99% (W14) | +0.40% WoW | ✅ |
+| L1: Country Breakdown | US rate stable at 92.79% vs 92.85% | -0.07% | ✅ |
+| L1: Payment Method | Credit Card improved; Apple Pay declined | Mixed | ⚠️ |
 
 **Key Findings:**
-- The +0.40 pp weekly improvement represents a recovery from W13's -0.69 pp dip, returning closer to W12's peak of 91.26%
-- Volume decreased by 7.5% (15,928 → 14,736 orders), which is the lowest volume in the 8-week window
-- Apple Pay shows the largest payment method decline at -1.55 pp (88.62% → 87.25%), though it represents only 15.8% of order volume (2,329 orders)
-- Credit Card, the dominant payment method with 67.8% of volume (9,982 orders), improved by +0.90 pp (90.4% → 91.21%), driving the overall improvement
-- No countries exceeded the ±2.5% threshold, indicating geographic stability
+- Reactivation rate has increased +5.75 pp over the 8-week period (85.24% → 90.99%), showing strong sustained improvement
+- Volume decreased 7.5% WoW (15,928 → 14,736 orders), but this follows seasonal patterns and does not impact the positive rate trend
+- Credit Card payments (68% of volume) improved +0.81 pp (90.40% → 91.21%), driving overall gains
+- Apple Pay declined -1.37 pp (88.62% → 87.25%) with 2,329 orders, partially offsetting gains but within normal variance
+- No countries exceeded the ±2.5% threshold, indicating stable geographic performance
 
-**Action:** Monitor — The metric is trending positively within normal operational variance. Continue tracking Apple Pay performance for potential emerging issues, but no immediate investigation required.
+**Action:** Monitor — The +0.40% improvement is within normal fluctuation and part of a healthy upward trend. No investigation required. Continue monitoring Apple Pay performance in coming weeks.
 
 ---
 
@@ -66,4 +66,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

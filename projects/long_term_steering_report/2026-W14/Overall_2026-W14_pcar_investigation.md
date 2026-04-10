@@ -1,22 +1,22 @@
 # Payment Checkout Approval Rate - Overall Summary
 
 **Week:** 2026-W14  
-**Generated:** 2026-04-09 20:01  
+**Generated:** 2026-04-10 13:03  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Checkout Approval Rate showed mixed but generally stable performance across clusters in 2026-W14, with changes ranging from -0.04pp to +0.83pp. The most significant concern is HF-INTL's Denmark market, which declined -2.78pp on high volume (30,036 orders) and warrants investigation despite the cluster's overall improvement.
+Payment Checkout Approval Rate performance was mixed across clusters in 2026-W14, with most regions showing modest improvements or stability. The most significant concern is HF-INTL's DK market, which declined -2.78pp on high volume (30,036 orders) and requires investigation alongside a notable 20.5% week-over-week volume decline in that cluster.
 
 ### Cluster Highlights
 
-- **US-HF:** PCAR improved by +0.30pp to 92.85%, with Apple Pay (+1.55pp) driving gains while Credit Card (-0.60pp) declined on 56% of volume.
-- **HF-INTL:** PCAR improved by +0.83pp to 96.0%, but Denmark's -2.78pp decline on 30,036 orders and continued volume erosion (-35% over 8 weeks) require investigation.
-- **WL:** PCAR remained essentially stable at 97.03% (-0.04pp), though Angola's -3.13pp decline exceeded the threshold and order volume dropped 16% week-over-week.
-- **HF-NA:** PCAR improved by +0.21pp to 94.12%, reversing prior week's decline, with Apple Pay (+1.13pp) offsetting Credit Card's -0.41pp drop on the highest volume method.
-- **RTE:** PCAR stable at 96.9% (+0.01pp) with no countries or payment methods exceeding thresholds, though overall order volume continues a 21.5% decline since W07.
+- **US-HF:** Improved by +0.30pp to 92.85%, driven by Apple Pay gains (+1.55pp) while Credit Card declined -0.60pp on the largest volume segment.
+- **HF-INTL:** Improved by +0.83pp to 96.0%, but DK exceeded threshold with -2.78pp decline requiring investigation, and overall volume dropped 20.5% WoW.
+- **WL:** Stable at 97.03% (-0.04pp), with AO flagged for exceeding threshold at -3.13pp decline.
+- **HF-NA:** Improved by +0.21pp to 94.12%, with Apple Pay driving gains (+1.13pp) while Credit Card declined -0.41pp.
+- **RTE:** Stable at 96.9% (+0.01pp) with no material changes; all countries within acceptable thresholds.
 
 ---
 

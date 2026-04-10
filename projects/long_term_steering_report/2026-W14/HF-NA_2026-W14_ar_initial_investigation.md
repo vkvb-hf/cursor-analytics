@@ -7,28 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Initial (LL0) improved from 89.1% to 89.66% (+0.56 pp) in W14, representing a recovery toward the 8-week average after the prior week's decline.
+**Overall:** AR Initial (LL0) improved by +0.63 pp (89.1% → 89.66%) on a volume of 17,242 orders, recovering from the prior week's decline and returning to levels consistent with the 8-week trend.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Rate | 89.1% → 89.66% | +0.56 pp | ✅ |
-| L1: CA | 80.74% → 80.88% | +0.14 pp | ✅ |
-| L1: US | 66.77% → 69.72% | +2.95 pp | ⚠️ |
-| L1: Adyen | 97.75% → 93.12% | -4.63 pp | ⚠️ |
-| L1: Unknown Provider | 95.16% → 98.39% | +3.23 pp | ⚠️ |
+| L0 Trend | Rate within 8-week range (89.37%-90.82%) | +0.63 pp | ✅ |
+| L1 Country | Any country Δ > ±2.5 pp | US +4.43 pp | ⚠️ |
+| L1 Payment Method | Any method Δ > ±2.5 pp | None | ✅ |
+| L1 Payment Provider | Any provider Δ > ±2.5 pp | Adyen -4.74 pp, Unknown +3.40 pp | ⚠️ |
 
 **Key Findings:**
-- US showed a significant +4.43% change in rate (66.77% → 69.72%), exceeding the ±2.5% threshold and flagged for attention
-- PaymentProvider Adyen experienced a notable decline of -4.74 pp (97.75% → 93.12%), though on relatively low volume (218 orders)
-- Volume decreased significantly from prior weeks (17,242 in W14 vs. 21,080+ in W11-W12), potentially indicating seasonal factors or order pattern shifts
-- Unknown PaymentProvider improved by +3.40 pp (95.16% → 98.39%) on 621 orders
-- Apple Pay showed healthy improvement of +1.90 pp (86.78% → 88.43%) on meaningful volume (5,262 orders)
+- US showed significant improvement of +4.43 pp (66.77% → 69.72%) with high volume (24,598 orders), driving the overall metric increase
+- CA remained stable with minimal change (+0.18 pp) at 80.88% on 7,779 orders
+- Adyen experienced a notable decline of -4.74 pp (97.75% → 93.12%), though on low volume (218 orders)
+- Unknown payment provider improved by +3.40 pp (95.16% → 98.39%) on 621 orders
+- Volume decreased significantly from prior weeks (17,242 vs. 25,000+ in W07-W10), which may amplify rate volatility
 
-**Action:** Monitor — The overall metric improved and remains stable within the 8-week range (89.37%-90.82%). Investigate the Adyen decline if it persists into W15, and continue monitoring the US rate volatility.
+**Action:** Monitor — The overall improvement is positive and within normal trend ranges. The US improvement warrants observation to determine if it's sustainable. Adyen's decline should be monitored given low volume but notable rate drop.
 
 ---
 
@@ -76,4 +73,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

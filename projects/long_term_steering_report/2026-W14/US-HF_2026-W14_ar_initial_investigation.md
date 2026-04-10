@@ -7,26 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.31 pp) in W14, recovering partially from the prior week's decline but remaining below the W11 peak of 90.11%.
+**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.50%, equivalent to +1.31 pp) in W14, representing a positive recovery after the prior week's decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Rate | 87.53% → 88.84% | +1.31 pp | ✅ |
-| L1: US Country | 66.77% → 69.72% | +2.95 pp | ⚠️ |
-| L1: Apple Pay | 84.92% → 87.13% | +2.21 pp | ⚠️ |
-| L1: ProcessOut | 87.54% → 89.36% | +1.82 pp | ✅ |
-| L1: Credit Card | 88.26% → 89.22% | +0.96 pp | ✅ |
+| L0: Overall Trend | W14 vs W13 | +1.50% | ✅ |
+| L1: Country (US) | Threshold ±2.5% | +4.43% | ⚠️ |
+| L1: PaymentMethod | Credit Card | +1.09% | ✅ |
+| L1: PaymentMethod | Apple Pay | +2.60% | ⚠️ |
+| L1: PaymentProvider | ProcessOut | +2.07% | ✅ |
 
 **Key Findings:**
-- US country performance improved significantly by +4.43% (66.77% → 69.72%), exceeding the ±2.5% monitoring threshold
-- Apple Pay showed the largest payment method improvement at +2.60 pp (84.92% → 87.13%), with 4,000 orders processed
-- ProcessOut provider improved by +2.07 pp (87.54% → 89.36%) on 6,146 orders, contributing to overall gains
-- Volume decreased 38% from W10 peak (19,259) to W14 (11,716), which may amplify rate volatility
-- PayPal and Others payment methods showed minor declines (-0.53 pp and -0.31 pp respectively) but with low volume impact
+- US showed significant improvement of +4.43%, exceeding the ±2.5% threshold and flagged for attention
+- Apple Pay acceptance rate improved notably by +2.60% (from 84.92% to 87.13%) with 4,000 orders
+- ProcessOut provider improved by +2.07% (from 87.54% to 89.36%) handling 6,146 orders, the highest volume among providers
+- Volume decreased significantly from prior weeks (11,716 in W14 vs 19,259 in W10), though rate recovered
+- PayPal showed slight decline of -0.53% but remains the highest performing payment method at 90.57%
 
-**Action:** Monitor — The improvement is positive but follows a volatile 8-week trend. Continue monitoring US performance and Apple Pay/ProcessOut to confirm sustained recovery toward the W11 benchmark of 90.11%.
+**Action:** Monitor — The metric shows healthy recovery with no critical degradations. Continue tracking US performance and Apple Pay trends to confirm sustained improvement.
 
 ---
 
@@ -72,4 +72,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

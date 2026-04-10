@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined slightly from 91.98% to 91.93% (-0.05 pp) in W14, representing a minor decrease within normal weekly fluctuation range across 415,885 orders.
+**Overall:** AR Overall declined by -0.05 percentage points (91.98% → 91.93%) on volume of 415,885 orders in W14, representing a minor fluctuation within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (91.48%-92.09%) | -0.05 pp | ✅ |
-| L1: Country Breakdown | US declined -0.07 pp | -0.07 pp | ✅ |
-| L1: PaymentMethod | All methods within ±0.29 pp | -0.29 pp max | ✅ |
-| L1: PaymentProvider | Unknown improved +8.23 pp (low volume) | +8.23 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within historical range (91.48%-92.09%) | -0.05pp | ✅ |
+| L1: Country Breakdown | US declined -0.07pp, no countries exceed ±2.5% threshold | -0.07pp | ✅ |
+| L1: Payment Method | All methods stable; largest decline Others -0.29pp on low volume | -0.29pp | ✅ |
+| L1: Payment Provider | Braintree (primary) declined -0.05pp; Unknown improved +8.23pp on 249 orders | -0.05pp | ✅ |
 
 **Key Findings:**
-- The -0.05 pp decline is minimal and consistent with the 8-week trend pattern showing normal oscillation between 91.48% and 92.09%
-- No countries exceeded the ±2.5% threshold; US (sole country) declined only -0.07 pp
-- PaymentMethod "Others" showed the largest decline at -0.29 pp but represents only 2,202 orders (0.5% of volume)
-- ProcessOut provider improved +0.38 pp (41,023 orders), partially offsetting Braintree's -0.05 pp decline (372,325 orders)
-- Unknown PaymentProvider showed +8.23 pp improvement but volume is negligible (249 orders)
+- The -0.05pp decline matches the primary payment provider Braintree's decline (-0.05pp on 372,325 orders), indicating this is the main contributor
+- US is the sole country and showed a -0.07pp decline (92.85% → 92.79%), driving the overall metric movement
+- Apple Pay showed slight improvement (+0.15pp) while Credit Card (-0.06pp) and PayPal (-0.11pp) declined marginally
+- ProcessOut improved +0.38pp (86.57% → 86.90%) on 41,023 orders, partially offsetting Braintree's decline
+- Volume decreased by ~8,200 orders week-over-week (424,103 → 415,885), continuing a multi-week downward volume trend
 
-**Action:** Monitor - The decline is within normal weekly variance and no dimension exceeds concerning thresholds. Continue standard monitoring for W15.
+**Action:** Monitor — The decline is minimal (-0.05pp), within normal weekly variance, and no dimensions exceed alert thresholds. Continue standard monitoring.
 
 ---
 
@@ -72,4 +72,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

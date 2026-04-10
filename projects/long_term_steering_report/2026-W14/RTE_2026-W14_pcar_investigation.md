@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PCAR remained essentially stable at 96.9%, improving marginally by +0.01 percentage points (pp) from 96.89% in W13 to 96.9% in W14, with order volume declining to 39,914 (down from 42,897).
+**Overall:** PCAR improved marginally from 96.89% to 96.9% (+0.01 pp) on a volume of 39,914 orders in W14, continuing a two-week trend of slight recovery after the W10 dip.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable within ±0.5pp range | +0.01pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5pp threshold | Max decline: TK -1.63pp | ✅ |
-| L1: Payment Method | Minor variations within tolerance | Others -1.41pp (low volume) | ✅ |
-| Volume Trend | Declining week-over-week | -6.95% volume drop | ⚠️ |
+| 8-Week Trend | Rate stable within ±0.5 pp range | +0.01 pp | ✅ |
+| Country Breakdown | Any country exceeding ±2.5% threshold | None exceeded | ✅ |
+| Dimension Scan | Payment method shifts | -1.41 pp (Others) | ⚠️ |
+| Volume Trend | Week-over-week volume | -6.95% (39,914 vs 42,897) | ⚠️ |
 
 **Key Findings:**
-- PCAR has been stable in the 96.88%-96.99% range over the past 8 weeks, with W14 showing no significant deviation from this pattern
-- TK experienced the largest country-level decline at -1.63pp (88.65% vs 90.12%), though volume is relatively low at 1,779 orders
-- Order volume has declined 21.5% since W07 (from 49,262 to 39,914), representing a consistent downward trend worth monitoring
-- "Others" payment method shows the lowest performance at 74.83% (-1.41pp), but represents only 894 orders (2.2% of volume)
-- TT (+0.97pp) and TV (+1.52pp) showed positive country-level improvements, partially offsetting declines elsewhere
+- The +0.01 pp improvement is statistically negligible and represents normal fluctuation within a stable 96.88%-97.3% operating range over 8 weeks
+- TK showed the largest country-level decline at -1.63 pp (90.12% → 88.65%), though volume is minimal at 1,779 orders
+- TV demonstrated the strongest improvement at +1.52 pp (92.01% → 93.41%) on 2,065 orders
+- "Others" payment method continues to underperform at 74.83% (-1.41 pp), though it represents only 894 orders (2.2% of volume)
+- Order volume has declined 21.5% over 8 weeks (49,262 in W07 → 39,914 in W14), which warrants monitoring
 
-**Action:** Monitor – No immediate action required. The +0.01pp change is within normal fluctuation. Continue observing the declining volume trend and TK's below-average performance.
+**Action:** Monitor – No significant rate changes detected; all countries within acceptable thresholds. Continue standard weekly review.
 
 ---
 
@@ -74,4 +74,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

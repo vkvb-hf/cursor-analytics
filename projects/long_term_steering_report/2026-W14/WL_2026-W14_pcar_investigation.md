@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PCAR metric experienced a marginal decline of -0.04 percentage points (97.07% → 97.03%) in W14, representing a minor week-over-week decrease on a volume of 11,373 orders.
+**Overall:** PCAR declined marginally by -0.04 percentage points (97.07% → 97.03%) on a volume of 11,373 orders in W14, representing a minor fluctuation within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Stable trend with recovery from W07 low (94.85%) | -0.04pp WoW | ✅ |
-| Country Breakdown | AO exceeds ±2.5% threshold | -3.13pp | ⚠️ |
-| Payment Method | Minor fluctuations within normal range | -0.37pp to +0.16pp | ✅ |
-| Volume | Decreased from 13,604 to 11,373 orders | -16.4% volume drop | ⚠️ |
+| L0: 8-Week Trend | Stability check | -0.04 pp | ✅ Within normal variance; rate stable between 96.86%-97.37% over 8 weeks |
+| L1: Country | AO threshold (±2.5%) | -3.13 pp | ⚠️ AO flagged with significant decline |
+| L1: Country | Other countries | -1.25 pp to +0.68 pp | ✅ GN, ER, CK, KN within threshold |
+| L1: Payment Method | Dimension scan | -0.37 pp to +0.16 pp | ✅ All payment methods within normal range |
 
 **Key Findings:**
-- **AO country is the primary driver of concern:** AO showed a significant decline of -3.13pp (87.96% → 85.21%) with the highest volume (15,776 orders), exceeding the ±2.5% threshold
-- **Volume reduction:** Order volume dropped notably from 13,604 (W13) to 11,373 (W14), a ~16% decrease week-over-week
-- **Payment methods remain stable:** Apple Pay showed minor decline (-0.37pp), while Credit Card (+0.09pp) and PayPal (+0.16pp) improved slightly
-- **Overall trend remains healthy:** Despite the -0.04pp dip, PCAR has recovered significantly from the W07 low of 94.85% and remains above 97%
-- **GN secondary watch:** GN declined -1.25pp (93.5% → 92.33%) though still within acceptable threshold
+- AO is the only country exceeding the ±2.5% threshold with a -3.13 pp decline (87.96% → 85.21%), representing the primary driver of the overall metric decline
+- Volume decreased significantly from 13,604 (W13) to 11,373 (W14), a -16.4% reduction in order volume
+- The 8-week trend shows overall recovery from a low of 94.85% in W07 to current 97.03%, indicating positive longer-term trajectory
+- Payment methods show minimal variance: Apple Pay declined slightly (-0.37 pp) while Paypal improved (+0.16 pp)
+- GN showed the second-largest country decline at -1.25 pp (93.5% → 92.33%) but remains within acceptable thresholds
 
-**Action:** **Investigate** - Focus investigation on AO country to understand the -3.13pp decline. Monitor volume trends and assess if the 16% volume drop is seasonal or indicative of a larger issue.
+**Action:** Investigate - Focus investigation on AO to identify root cause of -3.13 pp decline; monitor GN for potential emerging issues
 
 ---
 
@@ -72,4 +72,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

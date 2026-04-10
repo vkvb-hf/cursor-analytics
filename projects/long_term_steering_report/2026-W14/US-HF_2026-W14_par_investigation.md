@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR metric showed marginal improvement from 93.59% to 93.63% (+0.04 pp) in W14, continuing a stable upward trend observed over the past 5 weeks.
+**Overall:** PAR improved marginally from 93.59% to 93.63% (+0.04 pp) on a volume of 415,885 orders, continuing a stable upward trend observed since W09.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 8-week trend stable, +0.25 pp from W07 | +0.04 pp | ✅ |
-| L1: Country | US slightly declined (-0.07 pp) | -0.07 pp | ✅ |
-| L1: Payment Method | All methods within normal range | Max +0.39 pp (Apple Pay) | ✅ |
-| L1: Payment Provider | Unknown provider spike (+8.88 pp) | +8.88 pp | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement since W09 | +0.04 pp | ✅ |
+| L1: Country Breakdown | US declined slightly | -0.07 pp | ⚠️ |
+| L1: Payment Method | All methods stable; Apple Pay improved | +0.39 pp (Apple Pay) | ✅ |
+| L1: Payment Provider | All major providers stable or improved | +0.09 pp (Braintree) | ✅ |
 
 **Key Findings:**
-- The +0.04 pp week-over-week improvement continues a consistent upward trajectory since W08 (93.13% → 93.63%, +0.50 pp over 6 weeks)
-- Volume decreased by 8,218 orders (424,103 → 415,885) representing a -1.9% decline in order volume
-- PaymentProvider "Unknown" showed an unusually large improvement of +8.88 pp (87.79% → 95.58%), though on minimal volume (249 orders)
-- Apple Pay showed the largest improvement among payment methods at +0.39 pp (87.04% → 87.38%) but remains the lowest-performing method at 87.38%
-- No countries exceeded the ±2.5% threshold; US showed a minor decline of -0.07 pp
+- The +0.04 pp weekly improvement aligns with prior week's trajectory, indicating consistent performance rather than a one-time spike
+- US showed a slight decline of -0.07 pp (92.85% → 92.79%), though no countries exceeded the ±2.5% threshold
+- Apple Pay improved by +0.39 pp (87.04% → 87.38%) but remains the lowest-performing payment method at 87.38%
+- Braintree, handling 372,325 orders (89.5% of volume), improved +0.09 pp to 94.10%
+- "Unknown" PaymentProvider showed +8.88 pp improvement, but volume is negligible (249 orders)
 
-**Action:** Monitor — The overall metric improvement is positive and within expected variance. The "Unknown" payment provider anomaly warrants observation but impacts negligible volume (<0.1% of orders).
+**Action:** Monitor — The metric shows healthy stability with no significant degradation signals. Continue standard weekly monitoring.
 
 ---
 
@@ -74,4 +72,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

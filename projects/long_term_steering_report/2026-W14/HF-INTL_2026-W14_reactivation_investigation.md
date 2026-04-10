@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved from 90.03% to 90.92% (+0.99pp) in W14, representing a positive weekly change on a volume of 32,555 orders.
+**Overall:** Reactivation rate improved from 90.03% to 90.92% (+0.89 pp) in W14, reaching the highest level in the 8-week trend period, though on significantly lower volume (32,555 orders vs 43,179 prior week).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (89.85%-90.92%) | +0.99pp | ✅ |
-| L1: Country Breakdown | DK (-2.78pp), AT (-2.50pp) declined; CH (+2.98pp) improved | Mixed | ⚠️ |
-| L1: Payment Method | Credit Card (+1.78pp), Apple Pay (+1.64pp) improved | Positive | ✅ |
+| L0: 8-Week Trend | Rate within normal range (89.85%-90.92%) | +0.89 pp | ✅ |
+| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | DK -2.78 pp, CH +2.98 pp | ⚠️ |
+| L1: Payment Method | All methods within tolerance | +0.42 pp to +1.78 pp | ✅ |
 
 **Key Findings:**
-- Denmark (DK) showed the largest decline at -2.78pp (96.72% → 94.03%), exceeding the ±2.5% threshold, with significant volume of 30,036 orders
-- Switzerland (CH) improved notably by +2.98pp (91.21% → 93.93%), though on low volume (2,174 orders)
-- Credit Card payments improved by +1.78pp (84.64% → 86.15%) on 15,082 orders, contributing positively to the overall rate increase
-- Volume decreased significantly from 43,179 (W13) to 32,555 (W14), a reduction of approximately 25%
-- Austria (AT) declined by -2.50pp (95.19% → 92.81%), meeting the threshold for flagging
+- DK showed the largest decline at -2.78 pp (96.72% → 94.03%) with substantial volume (30,036 orders), warranting attention
+- CH improved significantly by +2.98 pp (91.21% → 93.93%), though on low volume (2,174 orders)
+- Credit Card payment method showed strongest improvement at +1.78 pp (84.64% → 86.15%) but remains the lowest performing payment method at 86.15%
+- Volume decreased 24.6% week-over-week (43,179 → 32,555), which may partially explain the rate improvement
+- AT and NO also showed notable declines of -2.50 pp and -2.24 pp respectively
 
-**Action:** Investigate – The overall improvement is positive, but the significant declines in DK (-2.78pp) and AT (-2.50pp) warrant further investigation to understand root causes, especially given DK's substantial order volume.
+**Action:** Monitor — The overall improvement is positive and within historical bounds. Continue monitoring DK performance given its decline despite high volume. No escalation required at this time.
 
 ---
 
@@ -72,4 +72,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

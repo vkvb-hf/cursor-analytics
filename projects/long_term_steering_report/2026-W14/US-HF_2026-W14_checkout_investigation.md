@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.37pp (from 26.77% to 26.41%) in US-HF for 2026-W14, with 44,056 payment visits processed.
+**Overall:** Payment Conversion Rate declined by -0.37pp (26.77% → 26.41%) in US-HF for 2026-W14, with the primary drop occurring at the Select Payment Method step in the GA funnel.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate vs threshold | -0.42pp | ⚠️ |
-| Click Submit Form | Rate vs threshold | +0.02pp | ✅ |
-| FE Validation Passed | Rate vs threshold | -0.41pp | ⚠️ |
-| Enter Fraud Service | Rate vs threshold | +0.12pp | ✅ |
-| Approved by Fraud Service | Rate vs threshold | -0.01pp | ✅ |
-| Call to PVS | Rate vs threshold | -0.24pp | ⚠️ |
-| Successful Checkout | Rate vs threshold | +0.26pp | ✅ |
+| Select Payment Method | GA Funnel Entry | -0.42pp | ⚠️ |
+| Click Submit Form | Form Submission | +0.02pp | ✅ |
+| FE Validation Passed | Validation | -0.41pp | ⚠️ |
+| Enter Fraud Service | Fraud Entry | +0.12pp | ✅ |
+| Approved by Fraud Service | Fraud Approval | -0.01pp | ✅ |
+| Call to PVS | PVS Call | -0.24pp | ⚠️ |
+| Successful Checkout | Final Conversion | +0.26pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary drop-off point:** Conversion decreased by -0.42pp (from 37.60% to 37.18%), indicating fewer visitors are proceeding to select a payment option
-- **FE Validation recovery rate declined:** Recovery rate dropped from 75.67% to 74.36% (-1.31pp), with "terms_not_accepted" remaining the top error at 51.6% of customers with errors
-- **Backend shows improvement in Fraud Service approval:** Approved by Fraud Service improved significantly by +2.75pp (from 89.15% to 91.91%), partially offsetting upstream losses
-- **ProcessOut_CreditCard and Braintree_ApplePay success rates improved:** ProcessOut_CreditCard increased +3.21pp (to 82.50%) and ApplePay increased +2.28pp (to 78.00%)
-- **PVS failures decreased:** Total PVS failures dropped from 1,013 to 958 (-55 failures), with "Card Not Activated" errors down -1.14pp
+- **Select Payment Method** showed the largest GA funnel drop (-0.42pp), indicating users are abandoning before selecting a payment option
+- **FE Validation Passed** declined by -0.41pp with recovery rate dropping from 75.67% to 74.36% (-1.31pp); "terms_not_accepted" errors decreased but remain the top error type at 51.6%
+- **Backend Fraud Approval** improved significantly (+2.75pp), partially offsetting upstream losses
+- **ProcessOut_CreditCard** success rate improved notably (+3.21pp) and **Braintree_ApplePay** also improved (+2.28pp)
+- **PVS failures** decreased by 55 cases, with "Blocked Verification" remaining the dominant decline reason at 55.7%
 
-**Action:** Investigate - Focus on the Select Payment Method drop-off and FE Validation issues, particularly the "terms_not_accepted" errors which affect over 50% of customers encountering FE errors.
+**Action:** **Investigate** - The -0.42pp drop at Select Payment Method requires UX analysis to understand why fewer users are engaging with payment options. Additionally, monitor the FE Validation recovery rate decline.
 
 ---
 
@@ -178,4 +178,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

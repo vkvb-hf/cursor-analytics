@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 92.79% to 92.46% (-0.36 pp) in W14, continuing a three-week downward trend that has seen the metric drop from a peak of 93.20% in W11.
+**Overall:** AR Overall declined by 0.33 percentage points (92.79% → 92.46%) in W14, continuing a three-week downward trend since the W11 peak of 93.2%.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent decline W11→W14 | -0.74 pp over 3 weeks | ⚠️ |
-| L1: Country Impact | No country exceeds ±2.5% threshold | TK largest drop at -1.63 pp | ✅ |
-| L1: Payment Method | Credit Card (73% volume) declined | -0.42 pp | ⚠️ |
-| L1: Payment Provider | Braintree (68% volume) declined | -0.36 pp | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern | -0.36% WoW | ⚠️ |
+| L1: Country Analysis | No country exceeds ±2.5% threshold | TK worst at -1.63% | ✅ |
+| L1: Payment Method | Credit Card largest volume decline | -0.42% (316K orders) | ⚠️ |
+| L1: Payment Provider | Braintree decline matches overall | -0.36% (294K orders) | ⚠️ |
 
 **Key Findings:**
-- **Sustained decline pattern:** The metric has dropped consecutively for three weeks (W12: -0.12 pp, W13: -0.32 pp, W14: -0.36 pp), with the rate of decline accelerating
-- **Credit Card performance:** The largest payment method by volume (316,124 orders / 73%) declined -0.42 pp, driving the majority of the overall drop
-- **Braintree impact:** As the dominant payment provider (293,781 orders / 68%), Braintree's -0.36 pp decline directly mirrors the overall metric decline
-- **Volume contraction:** Order volume has decreased from 458,408 (W11) to 431,853 (W14), a 5.8% reduction alongside rate deterioration
-- **No geographic outliers:** All countries remained within the ±2.5% threshold, indicating a systemic rather than localized issue
+- Three consecutive weeks of decline: W12 (-0.12%), W13 (-0.32%), W14 (-0.36%), representing accelerating deterioration from the W11 peak (93.2%)
+- Credit Card payments drove the majority of decline at -0.42pp on 316,124 orders (73% of total volume)
+- Braintree, handling 68% of order volume (293,781 orders), declined -0.36pp, directly mirroring the overall metric movement
+- TK showed the steepest country-level decline at -1.63pp (88.65%), though low volume (1,779 orders) limits impact
+- FJ, representing 92% of volume (397,332 orders), declined -0.37pp and is the primary driver of the overall metric
 
-**Action:** **Investigate** – The three-week consecutive decline and accelerating rate of deterioration warrants deeper investigation into Credit Card + Braintree transaction failures. Recommend L2 drill-down into Braintree error codes and decline reasons.
+**Action:** **Investigate** – The accelerating three-week decline pattern combined with Credit Card/Braintree concentration warrants deeper L2 analysis into Braintree processing performance and Credit Card authorization rates, particularly in FJ.
 
 ---
 
@@ -78,4 +78,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*

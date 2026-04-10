@@ -7,24 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined from 94.94% to 94.76% (-0.19pp) in W14 with 431,853 orders, continuing a downward trend for the second consecutive week.
+**Overall:** PAR declined by 0.19 percentage points (94.94% → 94.76%) in 2026-W14, continuing a two-week downward trend from the recent peak of 95.18% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Weekly Trend | 2-week consecutive decline (W13: -0.25%, W14: -0.19%) | -0.19pp | ⚠️ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | Largest: TK -1.63pp | ✅ |
-| L1: Dimension Scan | No major anomalies in core payment methods/providers | Credit Card -0.28pp | ✅ |
+| 8-Week Trend | Rate above 8-week average (~93.9%) | -0.19 pp | ✅ |
+| Country Variance | Any country ±2.5% threshold | None exceeded | ✅ |
+| Top Volume Country (FJ) | Rate stability | -0.37 pp | ✅ |
+| Payment Method | Major method stability | Credit Card -0.28 pp | ⚠️ |
+| Payment Provider | Provider stability | ProcessOut -0.42 pp | ⚠️ |
 
 **Key Findings:**
-- **Consecutive weekly decline:** PAR has dropped for two straight weeks (W12: 95.18% → W13: 94.94% → W14: 94.76%), losing 0.42pp total
-- **Volume contraction:** Order volume decreased from 442,530 (W13) to 431,853 (W14), a reduction of ~10,700 orders (-2.4%)
-- **FJ drives overall performance:** FJ represents 92% of volume (397,332 orders) and declined -0.37pp, directly impacting the aggregate metric
-- **Credit Card payment softness:** Credit Card (73% of volume at 316,124 orders) declined -0.28pp, contributing most to the overall drop
-- **ProcessOut underperformance:** Among payment providers, ProcessOut showed the largest meaningful decline at -0.42pp (60,625 orders)
+- TK experienced the largest rate decline at -1.63 pp (90.12% → 88.65%), though volume is low at 1,779 orders
+- TZ also showed significant decline of -1.43 pp (91.42% → 90.11%) with 3,013 orders
+- Credit Card payments (73% of volume at 316,124 orders) declined -0.28 pp, driving the majority of the overall drop
+- ProcessOut provider showed the steepest decline among major providers at -0.42 pp (93.83% → 93.44%)
+- FJ, representing 92% of total volume (397,332 orders), declined -0.37 pp and is the primary contributor to the overall metric movement
 
-**Action:** Monitor — The decline is modest (-0.19pp) with no dimension exceeding alert thresholds. However, track the consecutive weekly decline pattern; if W15 continues the trend, escalate for deeper investigation into FJ/Credit Card/ProcessOut performance.
+**Action:** Monitor - The decline is modest (-0.19 pp) and the current rate remains above the 8-week average. Continue monitoring Credit Card payment method and ProcessOut provider performance. If the downward trend continues into W15, escalate for deeper investigation into FJ market performance.
 
 ---
 
@@ -77,4 +79,4 @@
 
 ---
 
-*Report: 2026-04-09*
+*Report: 2026-04-10*
