@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Overall declined from 92.79% to 92.46% (-0.36pp) in 2026-W12, continuing a three-week downward trend with volume of 431,853 orders.
+**Overall:** AR Overall declined by -0.36% (from 92.79% to 92.46%) in 2026-W12 on a volume of 431,853 orders, continuing a three-week downward trend.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent decline W11→W14 | -0.74pp over 3 weeks | ⚠️ |
-| L1: Country Impact | No country exceeds ±2.5% threshold | TK worst at -1.64pp | ✅ |
-| L1: Payment Method | All methods declined slightly | Apple Pay -0.24pp | ✅ |
-| L1: Payment Provider | ProcessOut largest decline | -0.42pp | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern | -0.36% WoW | ⚠️ |
+| L1: Country Breakdown | Any country ≥±2.5% threshold | None exceeded | ✅ |
+| L1: PaymentMethod | Largest decline | Apple Pay -0.24pp | ✅ |
+| L1: PaymentProvider | Largest decline | ProcessOut -0.42pp | ⚠️ |
 
 **Key Findings:**
-- AR Overall has declined for three consecutive weeks (W11: 93.2% → W14: 92.46%), representing a cumulative drop of -0.74pp
-- TK showed the largest country-level decline at -1.64pp (93.49% → 91.96%), though volume is low at 2,338 orders
-- ProcessOut payment provider exhibited the most significant decline among major providers at -0.42pp (92.2% → 91.81%) on 48,689 orders
-- FJ dominates volume (408,532 orders / 94.6% of total) with a minor decline of -0.17pp, contributing most to the overall metric movement
-- All payment methods showed slight declines, with Apple Pay performing weakest at 90.75% (-0.24pp)
+- The 8-week trend shows AR Overall peaked at 93.2% in W11 and has declined for three consecutive weeks, dropping 0.74pp total since the peak
+- TK experienced the largest country-level decline at -1.64pp (93.49% → 91.96%), though volume is relatively low at 2,338 orders
+- ProcessOut shows the most significant payment provider decline at -0.42pp (92.20% → 91.81%) on 48,689 orders
+- FJ dominates volume (408,532 orders, 94.6% of total) with a minor decline of -0.17pp, indicating broad-based softening rather than isolated issues
+- Apple Pay underperforms other payment methods at 90.75% (-0.24pp), the lowest rate among standard payment methods
 
-**Action:** Monitor – The decline is modest (-0.36pp) with no single dimension exceeding critical thresholds. Continue tracking the three-week downward trend, particularly ProcessOut performance and TK recovery.
+**Action:** Monitor — No single dimension exceeds critical thresholds, but the sustained three-week decline warrants close observation. If the downward trend continues in W13, escalate investigation into ProcessOut and TK performance.
 
 ---
 

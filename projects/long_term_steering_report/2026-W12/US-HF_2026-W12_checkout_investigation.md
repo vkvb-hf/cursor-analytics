@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +0.34pp (25.84% → 26.18%) in US-HF during 2026-W12, exceeding the significance threshold of +0.17pp, driven primarily by improved form submission and frontend validation performance.
+**Overall:** Payment Conversion Rate improved from 25.84% to 26.18% (+0.34pp) in US-HF for 2026-W12, driven primarily by improved form submission and frontend validation conversion rates despite a 7.7% decrease in overall payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | -1.18pp | ⚠️ |
+| Select Payment Method | Below threshold | -1.18pp | ⚠️ |
 | Click Submit Form | Above threshold | +2.25pp | ✅ |
 | FE Validation Passed | Above threshold | +1.35pp | ✅ |
-| Enter Fraud Service | Below threshold | +0.06pp | ✅ |
-| Approved by Fraud Service | Below threshold | +0.11pp | ✅ |
-| Call to PVS | Below threshold | -0.10pp | ✅ |
-| Successful Checkout | Below threshold | +0.04pp | ✅ |
+| Enter Fraud Service | Stable | +0.06pp | ✅ |
+| Approved by Fraud Service | Stable | +0.11pp | ✅ |
+| Call to PVS | Stable | -0.10pp | ✅ |
+| Successful Checkout | Stable | +0.04pp | ✅ |
 
 **Key Findings:**
-- **Click Submit Form conversion increased significantly (+2.25pp)**, representing the largest positive driver of PCR improvement, with conversion rising from 81.84% to 84.09%
-- **FE Validation recovery rate improved by +3.36pp** (69.81% → 73.17%), with fewer customers encountering errors (4,604 → 4,003) and more successfully recovering
-- **ProcessOut_CreditCard showed strong performance gains (+2.88pp)** with increased volume (5,554 → 6,991 attempts) and improved success rate (78.61% → 81.49%)
-- **Select Payment Method conversion declined (-1.18pp)**, partially offsetting gains, with conversion dropping from 40.06% to 38.88%
-- **CC_NO_PREPAID_ERR reduced significantly (-3.96pp share)**, dropping from 470 to 250 occurrences, contributing to improved FE validation performance
+- Click Submit Form conversion improved significantly (+2.25pp, from 81.84% to 84.09%), the largest positive driver of PCR improvement
+- FE Validation recovery rate increased from 69.81% to 73.17% (+3.36pp), indicating users are more successfully correcting form errors
+- CC_NO_PREPAID_ERR errors decreased substantially (-3.96pp share, from 470 to 250 occurrences), contributing to improved validation pass rates
+- ProcessOut_CreditCard success rate improved (+2.88pp to 81.49%) with increased volume share, while Braintree_CreditCard declined (-1.78pp to 82.80%) with reduced volume
+- Select Payment Method conversion declined (-1.18pp to 38.88%), partially offsetting gains in later funnel stages
 
-**Action:** Monitor - The PCR improvement is positive and driven by identifiable improvements in form submission and validation steps. Continue monitoring the Select Payment Method drop-off and ProcessOut_CreditCard performance trends.
+**Action:** Monitor - The PCR improvement is positive and driven by identifiable improvements in form submission and validation steps. Continue monitoring the Select Payment Method drop-off and the payment method mix shift toward ProcessOut_CreditCard.
 
 ---
 

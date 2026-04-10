@@ -7,29 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Initial (LL0) declined from 91.4% to 90.89% (-0.56pp) week-over-week, continuing a downward trend observed over the past 8 weeks from a high of 93.59% in W09.
+**Overall:** AR Initial (LL0) declined by -0.56 percentage points (pp) from 91.4% to 90.89% week-over-week, continuing a downward trend observed over the past 8 weeks with volume dropping to 31,900 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Trend | 8-week pattern | -2.70pp from W09 peak | ⚠️ |
-| L1 Country | TO threshold breach | -3.02pp | ⚠️ |
-| L1 Country | TZ decline | -2.37pp | ⚠️ |
-| L1 Country | TK decline | -2.13pp | ⚠️ |
-| L1 Payment Provider | Unknown provider | -33.33pp | ⚠️ |
-| L1 Payment Method | Apple Pay | -0.52pp | ✅ |
+| L0: Overall Rate | 91.4% → 90.89% | -0.56 pp | ⚠️ |
+| L1: Country Threshold (±2.5%) | TO flagged at -3.02 pp | -3.02 pp | ⚠️ |
+| L1: Payment Method | Apple Pay declined | -0.52 pp | ✅ |
+| L1: Payment Provider | Unknown dropped significantly | -33.33 pp | ⚠️ |
 
 **Key Findings:**
-- **Sustained decline:** The metric has dropped consistently from 93.59% (W09) to 90.89% (W14), a cumulative decline of 2.70pp over 6 weeks
-- **Volume reduction:** Order volume decreased significantly from 46,087 (W09) to 31,900 (W14), a 31% drop in volume
-- **TO country flagged:** TO exceeded the ±2.5% threshold with a -3.02pp decline (77.88% → 75.53%) on 805 orders
-- **Multiple countries declining:** TZ (-2.37pp) and TK (-2.13pp) also show notable deterioration, though below threshold
-- **Unknown PaymentProvider anomaly:** Shows -33.33pp drop but on minimal volume (9 orders), likely noise
+- The 8-week trend shows a consistent decline from 93.59% (W09) to 90.89% (W14), representing a cumulative drop of 2.7 pp alongside significant volume reduction (46,087 → 31,900 orders)
+- TO is the only country exceeding the ±2.5% threshold with a -3.02 pp decline (77.88% → 75.53%), though volume is relatively low at 805 orders
+- TZ (-2.37 pp) and TK (-2.13 pp) also show notable declines approaching the threshold
+- Payment Provider "Unknown" shows a severe drop of -33.33 pp (100% → 66.67%), but with minimal volume impact (only 9 orders)
+- FJ represents the largest volume (43,185 orders) and declined by -1.31 pp, contributing most to the overall metric movement
 
-**Action:** **Investigate** — The persistent multi-week decline combined with significant volume reduction and TO country breach warrants deeper investigation into root causes, particularly focusing on TO market conditions and the correlation between declining volume and rate deterioration.
+**Action:** Investigate - The sustained 8-week declining trend combined with the flagged country TO and significant volume reduction warrants deeper investigation into root causes, particularly focusing on FJ due to its volume impact.
 
 ---
 

@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** PCAR declined by -0.04 percentage points (pp) from 97.07% to 97.03% in WL 2026-W12, representing a minor week-over-week decrease on a volume of 11,373 orders.
+**Overall:** PCAR declined by 0.04 percentage points (97.07% → 97.03%) on volume of 11,373 orders, representing a minor week-over-week decrease that remains within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 8-week stability check | -0.04 pp | ✅ Within normal range; rate stable at ~97% for past 4 weeks |
-| L1: Country | ±2.5% threshold | None exceeded | ✅ No country flagged; largest decline MR at -1.38 pp |
-| L1: Dimension (Payment) | Payment method variance | Apple Pay -0.70 pp | ⚠️ Apple Pay shows notable decline vs other methods |
+| L0: WL Trend | 8-week stability check | -0.04pp | ✅ Rate stable, well above W07 low of 94.85% |
+| L1: Country | Any country >±2.5% threshold | None flagged | ✅ No countries exceed threshold |
+| L1: Dimension | Payment method anomalies | -0.70pp Apple Pay | ⚠️ Apple Pay shows largest decline |
 
 **Key Findings:**
-- The -0.04 pp decline is minimal and within normal weekly fluctuation; the 8-week trend shows recovery from a low of 94.85% in W07 to stable ~97% range
-- No countries exceeded the ±2.5% threshold, though MR (-1.38 pp) and KN (-1.31 pp) showed the largest declines
-- Apple Pay experienced a -0.70 pp decline (96.44% from 97.12%), underperforming compared to Credit Card which improved +0.31 pp
-- Volume decreased significantly from 13,604 (W13) to 11,373 (W12), a drop of ~16% in order volume
-- Credit Card remains the highest volume payment method (8,076 orders) and showed positive performance (+0.31 pp)
+- The -0.04pp decline is minimal and follows a +0.20pp improvement the prior week (W13), indicating normal fluctuation
+- MR shows the lowest absolute PCAR rate at 80.0% (-1.38pp) with highest volume (18,070 orders), though below the ±2.5% alert threshold
+- Apple Pay experienced the largest payment method decline at -0.70pp (97.12% → 96.44%) on 4,550 orders
+- Credit Card performance improved +0.31pp (96.74% → 97.04%) on the highest payment volume (8,076 orders)
+- Overall 8-week trend shows recovery from W07 low (94.85%) with current rate stabilizing near 97%
 
-**Action:** Monitor — The decline is minor (-0.04 pp) with no dimensions exceeding alert thresholds. Continue monitoring Apple Pay performance and volume trends in the next weekly cycle.
+**Action:** Monitor — The decline is within normal variance, no dimensions exceed alert thresholds, and the 8-week trend remains stable. Continue standard monitoring with attention to MR's persistently low rate and Apple Pay performance.
 
 ---
 

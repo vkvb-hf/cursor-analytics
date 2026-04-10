@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate improved slightly from 90.69% to 90.95% (+0.26pp) in 2026-W12, continuing a positive 8-week upward trend from 86.03% in W07.
+**Overall:** Reactivation rate improved slightly from 90.69% to 90.95% (+0.26 pp), continuing a positive 8-week upward trend from 86.03% in W07 to 90.95% in W14.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement from 86.03% to 90.95% | +4.92pp over 8 weeks | ✅ |
-| L1: Country Performance | US: -0.17pp, CA: -0.01pp | No country exceeds ±2.5% threshold | ✅ |
-| L1: Payment Method | Credit Card +2.78pp, PayPal -0.64pp, Apple Pay -0.56pp | Credit Card up, others slightly down | ⚠️ |
+| L0: 8-Week Trend | Consistent improvement over period | +4.92 pp (W07→W14) | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | US: -0.17 pp, CA: -0.01 pp | ✅ |
+| L1: Dimension Scan | Payment method variance detected | Credit Card: +2.78 pp | ⚠️ |
 
 **Key Findings:**
-- Reactivation rate has shown strong sustained improvement over 8 weeks, climbing +4.92pp from 86.03% (W07) to 90.95% (W14)
-- Credit Card payments showed notable improvement of +2.78pp (88.29% → 90.74%) with the highest volume at 14,613 orders
-- Both US (-0.17pp) and CA (-0.01pp) experienced marginal declines but remain within normal variance thresholds
-- PayPal (-0.64pp) and Apple Pay (-0.56pp) showed minor decreases but represent smaller order volumes (3,271 and 3,173 respectively)
-- Overall volume decreased from 21,909 to 20,279 orders (-7.4%), though rate performance remains healthy
+- The reactivation rate has shown consistent improvement over 8 weeks, climbing from 86.03% (W07) to 90.95% (W14), a gain of +4.92 pp
+- Both US (92.8%) and CA (93.36%) show stable performance with minimal week-over-week changes (-0.17 pp and -0.01 pp respectively)
+- Credit Card payments showed the largest positive shift at +2.78 pp (88.29% → 90.74%), representing the highest volume segment at 14,613 orders
+- PayPal (-0.64 pp) and Apple Pay (-0.56 pp) showed minor declines but remain within acceptable thresholds
+- Volume decreased from 21,909 to 20,279 orders (-7.4%), though this did not negatively impact the reactivation rate
 
-**Action:** Monitor — The positive trend is stable with no segments exceeding alert thresholds. Continue tracking Credit Card performance as the primary volume driver.
+**Action:** Monitor — No significant anomalies detected. Continue tracking Credit Card payment performance as the primary volume driver.
 
 ---
 

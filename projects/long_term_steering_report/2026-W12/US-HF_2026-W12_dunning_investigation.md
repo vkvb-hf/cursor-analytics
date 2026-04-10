@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** The Dunning Ship Rate improved from 45.43% to 47.68%, a gain of +2.25pp week-over-week, during the transition from Payday to Post-Payday phase.
+**Overall:** Dunning Ship Rate improved from 45.43% to 47.68% (+2.25pp) week-over-week, with stable volume of ~13,822 eligible orders during the Post-Payday phase.
 
 **Funnel Analysis:**
 
@@ -20,13 +20,13 @@
 | Ship Rate | 45.43% → 47.68% | +2.25pp | ✅ |
 
 **Key Findings:**
-- Ship Rate increased by +2.25pp despite moving into Post-Payday phase, which typically sees lower conversion
-- Volume remained essentially flat (+10 orders, +0.1% change), indicating no significant mix shift impact
-- PC2 declined by -0.78pp (51.66% → 50.88%), suggesting slight softening in secondary conversion that did not offset overall gains
-- Discount percentage increased marginally by +0.27pp, which may have contributed to the improved Ship Rate
-- Pre-Dunning Approval Rate held steady with only a minor -0.15pp decline, maintaining strong upstream eligibility
+- Ship Rate increased +2.25pp despite a slight decline in Pre-Dunning AR (-0.15pp), indicating improved downstream conversion
+- Discount percentage increased marginally (+0.27pp to 15.17%), which may have contributed to the improved Ship Rate
+- PC2 declined by -0.78pp (50.88%), suggesting payment commitment conversion softened slightly
+- Volume remained essentially flat (+0.1%), ruling out mix shift as a driver of the rate change
+- Transition from Payday to Post-Payday phase coincided with improved performance, contrary to typical seasonal patterns
 
-**Action:** Monitor — The improvement is positive and organic (no volume shift or Simpson's Paradox detected). Continue tracking to confirm the trend sustains through the next payday cycle.
+**Action:** Monitor – The +2.25pp improvement is a positive signal with stable fundamentals. Continue tracking to confirm the trend holds in subsequent weeks, particularly watching PC2 for further softening.
 
 ---
 

@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Overall declined by -0.07 percentage points (92.23% → 92.17%) on volume of 507,188 orders in 2026-W12, representing a minor week-over-week decrease within normal fluctuation range.
+**Overall:** AR Overall declined slightly from 92.23% to 92.17% (-0.07pp) on a volume of 507,188 orders, representing a minor week-over-week decrease within normal fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (91.35%-92.28%) | -0.07pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | US: -0.17pp, CA: -0.01pp | ✅ |
-| L1: Payment Method | Credit Card shows largest volume impact | -0.20pp on 384,303 orders | ⚠️ |
-| L1: Payment Provider | Unknown provider shows significant drop | -2.12pp (low volume: 737) | ⚠️ |
+| 8-Week Trend | Sustained pattern? | -0.07pp WoW, +0.61pp vs W07 | ✅ |
+| Country Breakdown | Any country ≥±2.5%? | US: -0.17pp, CA: -0.01pp | ✅ |
+| Payment Method | Any method ≥±2.5%? | Max decline: Others -0.31pp | ✅ |
+| Payment Provider | Any provider ≥±2.5%? | Max decline: Unknown -2.12pp | ⚠️ |
 
 **Key Findings:**
-- The -0.07pp decline is modest and the current rate of 92.17% remains within the 8-week range (91.35% to 92.28%)
-- US drove most of the decline at -0.17pp on 517,442 orders, while CA remained essentially flat at -0.01pp
-- Credit Card payments declined -0.20pp on the highest volume (384,303 orders), contributing most to the overall drop
-- PaymentProvider "Unknown" showed a notable -2.12pp decline, but on minimal volume (737 orders), limiting overall impact
-- ProcessOut showed positive movement at +0.32pp on 81,514 orders, partially offsetting declines elsewhere
+- The -0.07pp decline is minimal and AR Overall remains above the 8-week low of 91.35% (W08), showing an overall positive trend (+0.82pp since W08)
+- US drove the majority of the decline with -0.17pp on 517,442 orders, while CA remained essentially flat at -0.01pp
+- PaymentProvider "Unknown" showed the largest rate drop at -2.12pp (93.02% → 91.04%), though volume is minimal at only 737 orders (0.15% of total)
+- Credit Card transactions, representing 76% of volume (384,303 orders), declined -0.20pp
+- Apple Pay was the only payment method showing improvement at +0.12pp, though it maintains the lowest rate at 85.65%
 
-**Action:** Monitor – The decline is within normal weekly variance, no country exceeded the ±2.5% threshold, and the 8-week trend shows overall improvement from W07 (91.56%) to W12 (92.17%). Continue standard monitoring; no escalation required.
+**Action:** Monitor — The decline is within normal operating range, no dimensions exceeded the ±2.5% threshold at meaningful volume, and the 8-week trend remains positive overall.
 
 ---
 

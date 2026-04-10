@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved from 90.63% to 90.99% (+0.36 pp) week-over-week, continuing a positive trend that has seen the metric increase approximately 5.75 pp over the past 8 weeks.
+**Overall:** Reactivation rate improved from 90.63% to 90.99% (+0.36 pp) week-over-week, continuing an upward trend observed over the past 8 weeks from a low of 85.24% in W07.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Sustained improvement trend | +5.75 pp since W07 | ✅ |
-| L1: Country (US) | Minor decline within threshold | -0.15 pp | ✅ |
-| L1: Payment - Credit Card | Notable improvement | +4.15 pp | ✅ |
-| L1: Payment - Apple Pay | Slight decline | -0.73 pp | ✅ |
-| L1: Payment - PayPal | Slight decline | -0.51 pp | ✅ |
+| L1: Country (US) | Rate change within threshold | -0.17 pp | ✅ |
+| L1: Payment Method | Credit Card significant change | +4.15 pp | ⚠️ |
+| L1: Payment Method | Apple Pay/PayPal slight decline | -0.73 pp / -0.51 pp | ✅ |
 
 **Key Findings:**
-- Credit Card payment method showed strong improvement of +4.15 pp (from 87.73% to 91.37%), representing the largest positive movement across all dimensions with significant volume (10,693 orders)
-- The 8-week trend shows consistent upward momentum, rising from 85.24% in W07 to 90.99% in W14
-- No countries exceeded the ±2.5% threshold, indicating stable geographic performance
-- Volume decreased 7.5% WoW (from 15,928 to 14,736 orders), which should be monitored
+- Reactivation rate has shown consistent improvement over 8 weeks, rising from 85.24% (W07) to 90.99% (W14), a gain of +5.75 pp
+- Credit Card payment method showed a notable improvement of +4.15 pp (87.73% → 91.37%), driving the majority of volume with 10,693 orders (73% of total)
 - Apple Pay and PayPal both experienced minor declines (-0.73 pp and -0.51 pp respectively) but remain within acceptable thresholds
+- Volume decreased from 15,928 to 14,736 orders (-7.5%), though rate performance improved
+- No countries exceeded the ±2.5% threshold; US showed minimal movement at -0.17 pp
 
-**Action:** Monitor — The metric is trending positively with no dimensions exceeding alert thresholds. Continue tracking Credit Card performance as a potential driver of sustained improvement, and monitor volume trends.
+**Action:** Monitor – The metric is performing positively with sustained improvement. Continue tracking Credit Card performance as the primary volume driver while monitoring the slight softness in Apple Pay and PayPal reactivation rates.
 
 ---
 

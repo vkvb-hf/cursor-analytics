@@ -7,27 +7,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR declined from 97.17% to 97.04% (-0.13pp) in 2026-W12 on a volume of 784,389 orders, representing the second consecutive weekly decline after a period of improvement.
+**Overall:** PAR declined by -0.13 percentage points (97.17% → 97.04%) in 2026-W12 on a volume of 784,389 orders, interrupting a positive trend that had seen the metric improve from 96.22% in W09 to 97.25% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent pattern? | -0.13pp (2nd consecutive decline) | ⚠️ |
-| L1: Country | Any >±2.5% threshold? | NO (-1.70pp), LU (-1.49pp), IE (-1.39pp) | ✅ |
-| L1: Payment Method | Significant shift? | Apple Pay -0.11pp, minimal changes | ✅ |
-| L1: Payment Provider | Significant shift? | Unknown -1.23pp (low volume: 2,605) | ✅ |
+| L0: 8-Week Trend | Rate above 8-week baseline (96.55% W07) | +0.49 pp | ✅ |
+| L1: Country Threshold | Any country exceeding ±2.5% threshold | None | ✅ |
+| L1: Country Declines | Countries with notable declines | NO (-1.70 pp), LU (-1.49 pp), IE (-1.39 pp) | ⚠️ |
+| L1: Payment Method | Payment method variance | Apple Pay -0.11 pp | ✅ |
+| L1: Payment Provider | Provider variance | Unknown -1.23 pp (low volume: 2,605) | ✅ |
 
 **Key Findings:**
-- **Trend reversal emerging:** After peaking at 97.25% in W12, PAR has declined for two consecutive weeks (-0.08pp then -0.13pp), erasing gains from W10-W11
-- **Norway leads country declines:** NO experienced the largest drop at -1.70pp (89.86%), followed by LU (-1.49pp) and IE (-1.39pp), though none breach the ±2.5% threshold
-- **GB contributes highest absolute impact:** With 230,971 orders (29% of volume) and a -0.53pp decline, GB's deterioration has significant weight on overall PAR
-- **Payment dimensions stable:** No payment method or provider shows significant degradation; Unknown provider dropped -1.23pp but represents only 0.3% of volume (2,605 orders)
-- **Volume declining:** Order volume dropped from 842,480 to 784,389 (-6.9%), continuing a downward trend from the W11 peak of 897,106
+- NO showed the largest country decline at -1.70 pp (91.42% → 89.86%) on 26,830 orders
+- LU and IE also experienced significant declines of -1.49 pp and -1.39 pp respectively, though both have relatively low volumes
+- GB, the highest volume country (230,971 orders), declined -0.53 pp which contributed meaningfully to the overall decline due to its scale
+- The "Unknown" PaymentProvider showed a -1.23 pp decline but represents only 2,605 orders (0.3% of volume)
+- Despite the weekly decline, PAR remains elevated compared to the 8-week low of 96.22% in W09
 
-**Action:** **Monitor** – The -0.13pp decline does not breach critical thresholds, and no single dimension shows anomalous behavior exceeding ±2.5%. However, continue monitoring NO, IE, and GB for further deterioration given their consecutive weekly declines.
+**Action:** Monitor – The decline is modest (-0.13 pp), no countries exceeded the ±2.5% threshold, and the metric remains within healthy historical range. Continue monitoring NO and IE performance in the next weekly cycle.
 
 ---
 

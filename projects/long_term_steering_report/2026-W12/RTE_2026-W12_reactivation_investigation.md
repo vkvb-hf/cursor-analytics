@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate improved from 88.6% to 89.2% (+0.68 pp) week-over-week, continuing a positive 4-week upward trend from 85.11% in W10 to 89.2% in W14, though volume declined from 19,685 to 17,264 orders.
+**Overall:** Reactivation rate improved from 88.6% to 89.2% (+0.68 pp) week-over-week, continuing a positive upward trend observed over the past 5 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement pattern | +0.68 pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | -1.64 pp to +0.39 pp range | ✅ |
-| L1: Dimension Scan | Credit Card shows notable improvement | +2.79 pp | ⚠️ |
+| 8-Week Trend | Consistent improvement since W09 | +4.7 pp from W09 to W14 | ✅ |
+| Country Breakdown | No country exceeds ±2.5% threshold | Largest: TK at -1.64 pp | ✅ |
+| Payment Method | Credit Card shows notable improvement | +2.79 pp | ⚠️ |
+| Volume Trend | Declining order volume | 17,264 vs 19,685 prior week | ⚠️ |
 
 **Key Findings:**
-- Credit Card payment method showed the strongest improvement at +2.79 pp (88.45% → 90.92%), representing the largest volume segment with 14,723 orders
-- TK country showed the largest decline at -1.64 pp (93.49% → 91.96%), though still below the ±2.5% escalation threshold
-- Apple Pay continues to underperform at 66.77% rate, declining -1.42 pp from prior week, though with relatively low volume (1,971 orders)
-- Order volume has declined 12.3% week-over-week (19,685 → 17,264) and 33.8% over the 8-week period
-- The reactivation rate has improved +4.09 pp over the past 4 weeks (W10: 85.11% → W14: 89.2%)
+- Reactivation rate has steadily climbed from 84.48% (W09) to 89.2% (W14), representing a +4.72 pp improvement over 5 weeks
+- Credit Card payment method showed the strongest improvement at +2.79 pp (88.45% → 90.92%), driving 14,723 orders (85% of volume)
+- TK experienced the largest country-level decline at -1.64 pp (93.49% → 91.96%), though still within acceptable thresholds
+- Apple Pay continues to underperform other payment methods with the lowest reactivation rate at 66.77% (-1.42 pp)
+- Order volume has decreased by 12.3% week-over-week (19,685 → 17,264), warranting monitoring
 
-**Action:** Monitor – The metric shows healthy improvement with no dimensions exceeding alert thresholds. Continue tracking Credit Card performance as the primary volume driver and monitor volume decline trends.
+**Action:** Monitor - The metric shows healthy improvement with no dimensions exceeding alert thresholds. Continue tracking the declining volume trend and Apple Pay's persistent underperformance for potential future investigation.
 
 ---
 

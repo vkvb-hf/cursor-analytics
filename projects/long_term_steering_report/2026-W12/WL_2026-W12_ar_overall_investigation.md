@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** AR Overall declined from 89.72% to 89.33% (-0.39 pp) in WL 2026-W12, representing a modest deterioration across 165,018 orders, though the metric remains within the normal fluctuation range observed over the 8-week trend.
+**Overall:** AR Overall declined by 0.43 percentage points (89.72% → 89.33%) in WL 2026-W12, representing a moderate decrease across 165,018 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | -0.43% | ⚠️ |
-| L1: Country Impact | Any country ≥ ±2.5% threshold | None exceeded | ✅ |
-| L1: Payment Method | Significant degradation | Others -1.39%, Apple Pay -0.22% | ⚠️ |
-| L1: Payment Provider | Significant degradation | ProcessOut -1.05 pp, Unknown -1.95 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (88.14%-89.79%) | -0.43pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | MR -1.38pp, KN -1.31pp | ✅ |
+| L1: PaymentMethod | Others shows largest decline | -1.39pp | ⚠️ |
+| L1: PaymentProvider | ProcessOut underperforming | -1.05pp (78.95% rate) | ⚠️ |
 
 **Key Findings:**
-- MR country showed the largest rate decline at -1.38 pp (80.0% vs 81.12%), though no country exceeded the ±2.5% alerting threshold
-- KN country also declined notably by -1.31 pp (87.76% vs 88.93%) with 10,617 orders
-- PaymentMethod "Others" degraded by -1.39 pp (87.48% vs 88.71%) on 4,296 orders
-- ProcessOut payment provider declined -1.05 pp (78.95% vs 79.79%) across 18,341 orders, representing meaningful volume
-- The 8-week trend shows overall stability with AR ranging between 88.14% and 89.79%, suggesting current performance is within normal variance
+- MR experienced the largest country-level decline at -1.38pp (81.12% → 80.0%) with 18,070 orders
+- KN showed the second-largest decline at -1.31pp (88.93% → 87.76%) with 10,617 orders
+- PaymentMethod "Others" declined -1.39pp (88.71% → 87.48%), though volume is relatively low at 4,296 orders
+- ProcessOut continues to show the lowest acceptance rate at 78.95% (-1.05pp) with significant volume of 18,341 orders
+- Braintree (largest volume at 110,948 orders) remained stable with a slight +0.06pp improvement
 
-**Action:** Monitor — The decline is modest and no single dimension exceeds critical thresholds. Continue monitoring MR, KN countries and ProcessOut provider performance in the next weekly cycle.
+**Action:** Monitor – The decline is within normal weekly fluctuation range and no country exceeds the ±2.5% threshold. Continue monitoring MR and ProcessOut performance for sustained degradation patterns.
 
 ---
 

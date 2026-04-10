@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined from 94.16% to 93.64% (-0.52pp) in 2026-W12 on volume of 784,389 orders, marking the third consecutive week of decline.
+**Overall:** AR Overall declined by -0.55% (from 94.16% to 93.64%) in 2026-W12, representing the third consecutive week of decline with a total volume of 784,389 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline pattern | -0.55% WoW | ⚠️ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | NO worst at -1.70% | ✅ |
-| L1: Payment Method | Apple Pay underperforming | -0.99% | ⚠️ |
-| L1: Payment Provider | Unknown provider flagged | -2.77% | ⚠️ |
+| L0: 8-Week Trend | Consistent decline pattern | -0.55% WoW | ⚠️ |
+| L1: Country Breakdown | NO, LU, IE leading declines | -1.70% to -1.13% | ⚠️ |
+| L1: Country Threshold | Countries exceeding ±2.5% | None | ✅ |
+| L1: PaymentMethod | Apple Pay underperforming | -0.99% | ⚠️ |
+| L1: PaymentProvider | Unknown provider flagged | -2.77% | ⚠️ |
 
 **Key Findings:**
-- **Sustained downward trend:** AR Overall has declined for 3 consecutive weeks (W11: 94.9% → W12: 94.6% → W13: 94.16% → W14: 93.64%), dropping 1.26pp from the W11 peak
-- **Payment Provider "Unknown" showing significant degradation:** -2.77pp decline (89.9% → 87.41%) on 2,605 orders, exceeding the ±2.5% threshold at the dimension level
-- **Apple Pay underperformance:** Lowest performing payment method at 89.48% (-0.99pp), handling 118,640 orders (15% of volume)
-- **Norway (NO) leading country declines:** Dropped -1.70pp (91.42% → 89.86%) on 26,830 orders, the steepest country-level decline
-- **Volume contraction:** Order volume decreased from 842,480 (W13) to 784,389 (W14), a reduction of ~58,000 orders (-6.9%)
+- Three consecutive weeks of decline: W11 (+1.17%) → W12 (-0.32%) → W13 (-0.47%) → W14 (-0.55%), indicating an accelerating negative trend
+- NO shows the largest country-level decline at -1.70pp (89.86%), followed by LU at -1.49pp and IE at -1.39pp
+- PaymentProvider "Unknown" shows the most significant dimension decline at -2.77pp (87.41%), though volume is limited (2,605 orders)
+- Apple Pay continues to underperform other payment methods at 89.48% (-0.99pp), with substantial volume of 118,640 orders
+- GB represents the largest volume (230,971 orders) with a -0.53pp decline, contributing significantly to overall metric movement
 
-**Action:** Investigate — Focus investigation on PaymentProvider "Unknown" (-2.77pp) and Apple Pay payment method (-0.99pp) degradation; correlate with Norway regional performance to determine if issues are linked.
+**Action:** Investigate — The sustained three-week declining trend combined with notable drops in NO, IE, and the Apple Pay payment method warrants deeper investigation into root causes before further deterioration occurs.
 
 ---
 

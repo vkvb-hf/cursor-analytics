@@ -7,28 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PCAR improved slightly from 93.92% to 94.12% (+0.21 pp) week-over-week on a volume of 20,221 orders, continuing a recovery trend after the dip in W13.
+**Overall:** PCAR improved slightly from 93.92% to 94.12% (+0.20 pp) week-over-week, with volume of 20,221 orders in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Regional Rate Change | WoW Δ ≤ ±1% | +0.21 pp | ✅ |
-| Country Threshold | Any country Δ > ±2.5% | None flagged | ✅ |
-| US Performance | Largest market stable | -0.17 pp | ✅ |
-| CA Performance | Secondary market stable | -0.01 pp | ✅ |
-| Dimension Anomalies | Any dimension Δ > ±2.5% | Others +4.36 pp | ⚠️ |
+| L0: Overall Trend | PCAR within normal range | +0.21% | ✅ |
+| L1: Country Impact | No country exceeds ±2.5% threshold | US: -0.17%, CA: -0.01% | ✅ |
+| L1: Dimension Scan | PaymentMethod variance detected | Others: +4.36% | ⚠️ |
 
 **Key Findings:**
-- The +0.21 pp improvement reverses the -0.29 pp decline seen in W13, bringing PCAR back toward the W12 level of 94.19%
-- Both US (92.8%, -0.17 pp) and CA (93.36%, -0.01 pp) showed marginal declines, indicating the regional improvement is driven by mix shift or other factors
-- PayPal payment method improved notably by +1.34 pp (92.92% → 94.17%) on 1,783 orders
-- "Others" payment method showed a +4.36 pp spike (91.76% → 95.76%), though on low volume (118 orders)
-- Order volume continues to decline (20,221 vs. 20,751 prior week), down from peak of 27,201 in W09
+- PCAR has recovered from the W13 dip (93.92%) and is now trending back toward the 8-week high of 95.23% seen in W10
+- Both US (-0.17 pp) and CA (-0.01 pp) showed minor declines but remained within acceptable thresholds
+- PaymentMethod "Others" showed a +4.36 pp improvement (91.76% → 95.76%), though volume is minimal at 118 orders
+- PayPal showed notable improvement of +1.34 pp (92.92% → 94.17%) on 1,783 orders
+- Order volume continues a downward trend (from 27,201 in W09 to 20,221 in W12), representing a ~26% volume decline over 5 weeks
 
-**Action:** Monitor — The metric is stable and within normal variance. Continue tracking the volume decline trend and PayPal performance improvement.
+**Action:** Monitor – The metric is stable and improving slightly. No immediate investigation required, but continue tracking the volume decline trend.
 
 ---
 

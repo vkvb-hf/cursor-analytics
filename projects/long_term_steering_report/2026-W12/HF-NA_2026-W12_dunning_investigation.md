@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate improved from 46.59% to 48.27% (+1.68pp) in 2026-W12, with stable volume of 17,852 eligible orders during the Post-Payday phase.
+**Overall:** Dunning Ship Rate improved from 46.59% to 48.27% (+1.68pp) week-over-week during the Post-Payday phase, with stable volume of 17,852 eligible orders.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 46.59% → 48.27% | +1.68pp | ✅ |
 
 **Key Findings:**
-- Ship Rate increased +1.68pp despite transitioning from Payday to Post-Payday phase, suggesting strong underlying performance
-- US market drove the improvement with Ship Rate increasing from 45.43% to 47.68% (+2.25pp) while maintaining 77% of total volume
-- CA market remained stable at high performance tier (50.30%) with minimal volume shift (+0.5%)
-- Discount percentage increased slightly (+0.47pp to 16.03%), which may have contributed to the improved Ship Rate
-- No significant mix shift detected between countries—volume distribution remained essentially flat
+- US showed meaningful Ship Rate improvement (+2.25pp, from 45.43% to 47.68%) while maintaining 77% of total volume
+- CA experienced slight Ship Rate decline (-0.26pp, from 50.56% to 50.30%) but remains the highest-performing country
+- Discount % increased by 0.47pp, suggesting slightly more aggressive discounting may have contributed to the improved Ship Rate
+- Volume mix remained stable with minimal shifts between countries (<1% volume change)
+- No Simpson's Paradox detected—both countries show consistent directional trends with the aggregate improvement
 
-**Action:** Monitor — The improvement is positive and appears driven by genuine performance gains in the US market rather than mix effects. Continue tracking to confirm the trend sustains through the next payday cycle.
+**Action:** Monitor
 
 ---
 

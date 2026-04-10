@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation declined marginally from 88.71% to 88.67% (-0.05pp), representing a minimal week-over-week decrease on 7,706 orders.
+**Overall:** Reactivation rate declined marginally from 88.71% to 88.67% (-0.04 pp), representing a minor fluctuation within normal operating range on a volume of 7,706 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 8-week stability | -0.05pp | ✅ Within normal variance; rate remains elevated vs W07-W10 baseline (~85-86%) |
-| L1: Country | ±2.5% threshold | None exceeded | ✅ All countries within acceptable range (MR -1.38pp largest decline) |
-| L1: Dimension | Payment anomalies | -33.33pp Others | ⚠️ "Others" payment method dropped significantly but volume only 6 orders |
+| L0: 8-Week Trend | Rate within historical range (85.07%-89.15%) | -0.04 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max: MR -1.38 pp | ✅ |
+| L1: Dimension Scan | PaymentMethod "Others" shows -33.33 pp drop | Low volume (6 orders) | ⚠️ |
 
 **Key Findings:**
-- The -0.05pp decline is statistically insignificant and within normal weekly fluctuation
-- Current rate (88.67%) remains +3.58pp above the 8-week low of 85.09% (W07), indicating sustained improvement
-- All four countries showed slight declines: MR (-1.38pp), KN (-1.31pp), GN (-0.57pp), CK (-0.32pp), but none breached the ±2.5% threshold
-- "Others" payment method dropped from 100% to 66.67% (-33.33pp), but with only 6 orders this is not material
-- Credit Card (+2.38pp to 89.7%) and PayPal (+1.13pp to 93.19%) both improved, offsetting declines in lower-volume payment methods
+- The -0.04 pp decline is negligible and consistent with week-over-week volatility observed in the 8-week trend (range: -0.49 pp to +1.91 pp)
+- MR shows the largest country decline at -1.38 pp (80.0% vs 81.12%) but remains below the ±2.5% investigation threshold
+- PaymentMethod "Others" dropped -33.33 pp, but this is statistically insignificant with only 6 orders
+- Credit Card payments (highest volume at 5,581 orders) improved +2.38 pp to 89.7%, providing a positive offset
+- Overall 8-week trend shows improvement from 85.09% (W07) to 88.67% (W14), indicating healthy metric trajectory
 
-**Action:** Monitor — No investigation required. The decline is minimal and the metric remains healthy compared to historical performance.
+**Action:** Monitor – No investigation required. The decline is minimal, no country breaches the ±2.5% threshold, and the dimension anomaly (PaymentMethod "Others") lacks sufficient volume for concern.
 
 ---
 

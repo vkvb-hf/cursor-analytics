@@ -9,25 +9,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) for HF-INTL remained essentially flat at 90.13% in 2026-W12, with a minimal +0.01pp increase versus the prior week, on a volume of 31,165 orders.
+**Overall:** AR Initial (LL0) for HF-INTL remained essentially stable in 2026-W12, showing a marginal improvement of +0.01pp (90.12% → 90.13%) on volume of 31,165 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Trend | 8-week pattern | +0.01pp | ✅ |
-| L1 Country | ES, SE, NO, AU, CH outside ±2.5% | -6.51pp to +4.80pp | ⚠️ |
+| L0 Trend | 8-week stability | +0.01pp | ✅ |
+| L1 Country | ES, SE, NO, AU, CH exceed ±2.5% | -6.51pp to +4.80pp | ⚠️ |
 | L1 PaymentMethod | All within threshold | -1.10pp to +0.36pp | ✅ |
-| L1 PaymentProvider | No Payment flagged | -2.02pp | ⚠️ |
+| L1 PaymentProvider | No Payment declined | -2.02pp | ⚠️ |
 
 **Key Findings:**
-- **ES experienced the largest decline** at -6.51pp (81.26% → 75.97%), though volume is relatively low at 491 orders
-- **SE and NO also declined significantly** by -5.40pp and -3.50pp respectively, with SE contributing 2,048 orders and NO contributing 1,664 orders
-- **AU showed notable improvement** at +2.92pp (65.72% → 67.64%) on substantial volume of 6,915 orders
-- **GB remains stable** at -2.40pp with the highest volume (16,115 orders), staying within acceptable range
-- **Consistent volume decline** observed over 8 weeks: from 52,771 (W07) to 31,165 (W14), representing a ~41% reduction
+- ES experienced the largest decline at -6.51pp (81.26% → 75.97%) on 491 orders, indicating potential localized issues
+- SE and NO also showed significant declines of -5.40pp and -3.50pp respectively, suggesting a pattern across Nordic markets
+- AU improved by +2.92pp (65.72% → 67.64%) on substantial volume of 6,915 orders, partially offsetting declines elsewhere
+- GB, the highest volume country at 16,115 orders, declined -2.40pp but remained within threshold
+- Overall L0 rate has dropped from 91.70% (W07) to 90.13% (W14), representing a -1.57pp decline over the 8-week period
 
-**Action:** **Investigate** — The significant declines in ES (-6.51pp), SE (-5.40pp), and NO (-3.50pp) warrant deeper L2 analysis to identify root causes, particularly in the Nordic region where a pattern may be emerging.
+**Action:** Investigate — Multiple countries (ES, SE, NO) showing coordinated declines warrant deeper L2 analysis to identify root cause, particularly focusing on any shared payment or operational factors across European markets.
 
 ---
 

@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation rate improved from 90.03% to 90.92% (+0.99pp) in 2026-W14, representing a positive reversal after two consecutive weeks of decline.
+**Overall:** Reactivation rate improved from 90.03% to 90.92% (+0.99 pp) in W14 vs W13, reversing the slight decline observed in the prior week, with volume decreasing to 32,555 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (89.85%-90.92%) | +0.99pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | -1.70pp max (NO) | ✅ |
-| L1: Payment Method | All methods within expected variance | -0.49pp max (Apple Pay) | ✅ |
+| L0: 8-Week Trend | Rate within normal range (89.85%-90.92%) | +0.99 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | -1.70 pp max (NO) | ✅ |
+| L1: Payment Method | All payment methods within normal variance | -0.49 pp max | ✅ |
 
 **Key Findings:**
-- Reactivation rate recovered to the highest point in the 8-week period (90.92%), reversing the downward trend from W12 and W13
-- Volume decreased significantly to 32,555 orders (down from 43,179 in W13), which may partially explain the rate improvement
-- Norway (NO) showed the largest country-level decline at -1.70pp (89.86% vs 91.42%), though still below the ±2.5% threshold
-- All payment methods showed slight declines except Credit Card, which improved marginally by +0.24pp
-- GB represents the largest volume at 230,971 orders with a minor decline of -0.53pp
+- Reactivation rate of 90.92% represents the highest point in the 8-week trend, recovering from the W12-W13 dip
+- NO showed the largest country-level decline at -1.70 pp (89.86% vs 91.42%), though still below the ±2.5% escalation threshold
+- Volume dropped significantly from 43,179 to 32,555 orders (-24.6%), which may partially explain rate volatility
+- GB maintains the highest volume (230,971 orders) with a modest decline of -0.53 pp
+- Credit Card is the only payment method showing improvement (+0.24 pp), while Apple Pay declined the most (-0.49 pp)
 
-**Action:** Monitor — The improvement is positive and no dimensions exceed alert thresholds, but the significant volume drop warrants continued observation to ensure the rate holds as volume normalizes.
+**Action:** Monitor – The improvement is positive and no dimensions breach threshold levels. Continue tracking NO performance given it has the steepest decline among countries.
 
 ---
 

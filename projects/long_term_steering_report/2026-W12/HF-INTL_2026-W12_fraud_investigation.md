@@ -10,26 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) experienced a minor decline of -0.10pp (91.79% → 91.70%) in 2026-W12, which is not statistically significant, with volume decreasing to 37,558 customers.
+**Overall:** The Fraud Approval Rate (FAR) declined marginally from 91.79% to 91.70% (-0.09pp) week-over-week, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: HF-INTL Trend | FAR within normal range (91.58%-92.37% over 8 weeks) | -0.10pp | ✅ |
-| L1: Country Scan | No countries exceeding ±2.5% threshold | DK -2.42pp (largest decline) | ✅ |
-| L1: Channel Scan | Paid & Referral channels stable | Paid +0.08pp, Referral +0.58pp | ✅ |
-| Duplicate Rate | Slight increase in dup rate | +0.30pp (30.22% → 30.52%) | ✅ |
-| Dup Block Rate | Increased blocking | +0.81pp (6.61% → 7.42%) | ⚠️ |
+| L0: HF-INTL Trend | FAR within 8-week range (91.58%-92.37%) | -0.09pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | DK -2.42pp (largest decline) | ✅ |
+| L1: Channel Category | Both channels stable | Paid +0.08pp, Referral +0.58pp | ✅ |
+| Volume Check | Week-over-week volume decline | 46,689 → 37,558 (-19.6%) | ⚠️ |
 
 **Key Findings:**
-- The -0.10pp FAR decline is within normal weekly fluctuation; the 8-week range spans 91.58% to 92.37%
-- Denmark (DK) showed the largest country-level decline at -2.42pp (87.90% → 85.78%) with an increased duplicate rate (+6.61pp), though below the ±2.5% escalation threshold
-- Netherlands (NL) improved significantly at +1.68pp (92.69% → 94.24%) with a notable reduction in duplicate rate (-14.03%)
-- Duplicate Block Rate increased from 6.61% to 7.42% (+0.81pp), the highest in the 8-week period
-- Overall volume declined by 19.6% WoW (46,689 → 37,558 customers)
+- FAR remains stable at 91.70%, within the 8-week historical range of 91.58% to 92.37%
+- DK showed the largest FAR decline at -2.42pp (87.90% → 85.78%), approaching but not exceeding the ±2.5% threshold
+- NL demonstrated notable improvement with FAR +1.68pp (92.69% → 94.24%) alongside a significant duplicate rate reduction of -14.03%
+- Duplicate Block Rate increased to 7.42% (from 6.61%), the highest in the 8-week period
+- Customer volume decreased 19.6% week-over-week (46,689 → 37,558), though this may reflect normal weekly fluctuation
 
-**Action:** Monitor — No investigation required. The FAR change is not significant and all country/channel breakdowns remain within acceptable thresholds. Continue standard monitoring with attention to Denmark's performance trend and the elevated duplicate block rate.
+**Action:** Monitor — No immediate investigation required. Continue tracking DK performance and Duplicate Block Rate trends over the next 1-2 weeks.
 
 ---
 

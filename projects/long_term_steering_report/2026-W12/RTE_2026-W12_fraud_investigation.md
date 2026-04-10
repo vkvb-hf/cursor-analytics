@@ -10,26 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved from 94.14% to 94.72% (+0.58pp) week-over-week, though the change is not statistically significant and volume decreased by 3.0% (43,962 → 42,650 customers).
+**Overall:** Fraud Approval Rate improved by +0.61pp (94.14% → 94.72%) in 2026-W12, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within normal range (93.82%-94.95%) | +0.61pp | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold (TZ, TV) | TZ: -3.59pp, TV: -2.53pp | ⚠️ |
-| L1: Channel Category | All channels within normal variance | Paid: -0.61pp, Referral: -0.18pp | ✅ |
-| Duplicate Rate | Stable overall (14.50% → 14.31%) | -0.19pp | ✅ |
-| Duplicate Block Rate | Slight increase | +0.40pp (4.06% → 4.46%) | ✅ |
+| Overall FAR | +0.61pp WoW | 94.14% → 94.72% | ✅ |
+| Duplicate Rate | -0.19pp WoW | 14.50% → 14.31% | ✅ |
+| Duplicate Block Rate | +0.40pp WoW | 4.06% → 4.46% | ✅ |
+| PF Block Rate | -0.06pp WoW | 0.26% → 0.20% | ✅ |
+| Country Breakdown | 2 countries exceed ±2.5% threshold | TZ, TV flagged | ⚠️ |
+| Channel Category | No categories exceed threshold | Stable | ✅ |
 
 **Key Findings:**
-- TZ showed the largest FAR decline (-3.59pp to 88.29%) accompanied by a significant duplicate rate spike (+35.30%, from 9.02% to 12.21%), though volume is low (598 customers)
-- TV experienced both FAR decline (-2.53pp to 91.75%) and duplicate rate increase (+31.73%, from 4.95% to 6.53%) with only 521 customers
-- FJ, the largest market (31,445 customers, 74% of volume), saw a moderate FAR decline of -0.91pp but remains stable at 94.21%
-- The Paid channel (87% of volume) showed a slight FAR decrease of -0.61pp while maintaining stable duplicate rates
-- Overall 8-week trend shows FAR fluctuating within a narrow band (93.82%-94.95%), indicating normal operational variance
+- TZ experienced significant FAR decline of -3.59pp (91.58% → 88.29%) coupled with a +35.30% increase in duplicate rate (9.02% → 12.21%), suggesting potential localized fraud pattern changes
+- TV showed FAR decline of -2.53pp (94.13% → 91.75%) with duplicate rate increasing +31.73% (4.95% → 6.53%)
+- FJ, the highest-volume country (31,445 customers), saw a moderate FAR decline of -0.91pp but remains within normal variance
+- Overall volume decreased by approximately 3% (43,962 → 42,650 customers reaching fraud service)
+- 8-week trend shows FAR oscillating within a narrow band (93.82% - 94.95%), indicating stable performance
 
-**Action:** Monitor — The overall change is not significant and the flagged countries (TZ, TV) represent low volume (<3% combined). Continue standard monitoring with attention to TZ duplicate rate trends.
+**Action:** Monitor – The overall metric change is not significant and within historical variance. However, continue monitoring TZ and TV for sustained duplicate rate increases that may indicate emerging fraud vectors.
 
 ---
 

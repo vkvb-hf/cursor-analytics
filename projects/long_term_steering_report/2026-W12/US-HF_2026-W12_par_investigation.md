@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PAR (Payment Acceptance Rate) showed a slight improvement from 93.59% to 93.63% (+0.04 pp) in US-HF for week 2026-W12, with a total volume of 415,885 orders.
+**Overall:** PAR improved marginally by +0.04 pp (93.59% → 93.63%) on volume of 415,885 orders in 2026-W12, continuing a stable trend within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable trend with minor fluctuations | +0.04 pp | ✅ |
-| L1: Country (US) | US rate declined | -0.17 pp | ⚠️ |
-| L1: Payment Method | Most methods stable; Apple Pay improved | -0.17 pp to +0.24 pp | ✅ |
-| L1: Payment Provider | ProcessOut significant improvement; Braintree slight decline | -0.11 pp to +3.55 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal variance (93.13%-93.63% range) | +0.04 pp | ✅ |
+| L1: Country | US at 92.8%, down -0.17 pp | -0.17 pp | ✅ |
+| L1: Payment Method | Apple Pay improved +0.24 pp; Others declined -0.17 pp | Mixed | ✅ |
+| L1: Payment Provider | ProcessOut improved +3.55 pp; Braintree declined -0.11 pp | Mixed | ⚠️ |
 
 **Key Findings:**
-- ProcessOut showed a notable improvement of +3.55 pp (86.04% → 89.10%) with 38,294 orders, potentially driving overall gains
-- Braintree, the dominant payment provider handling 392,447 orders, declined by -0.11 pp (94.04% → 93.94%)
-- Apple Pay improved by +0.24 pp (86.77% → 86.98%) but remains the lowest-performing payment method at 86.98%
-- The US country-level rate shows a -0.17 pp decline despite the overall HF-level improvement, suggesting mix effects
-- No dimensions exceeded the ±2.5% threshold flag, indicating no critical anomalies
+- ProcessOut shows significant improvement of +3.55 pp (86.04% → 89.10%) on 38,294 orders, exceeding the ±2.5% threshold
+- Braintree, the dominant provider (392,447 orders), declined slightly by -0.11 pp (94.04% → 93.94%)
+- Apple Pay improved +0.24 pp (86.77% → 86.98%) but remains the lowest-performing payment method at 86.98%
+- US country-level rate declined -0.17 pp (92.95% → 92.80%), though no countries exceeded the ±2.5% alert threshold
+- Volume continues declining trend (470,140 in W07 → 415,885 in W12), down ~11.5% over 8 weeks
 
-**Action:** Monitor — The overall metric shows slight improvement and remains stable within normal operating range. Continue tracking ProcessOut's positive trend and Braintree's minor decline given its high volume impact.
+**Action:** Monitor – The overall metric is stable with minor positive movement. Continue tracking ProcessOut's improvement trajectory and Apple Pay's below-average performance.
 
 ---
 

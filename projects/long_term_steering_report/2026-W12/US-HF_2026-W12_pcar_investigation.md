@@ -7,27 +7,27 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved from 92.57% to 92.85% (+0.30 pp) week-over-week for US-HF, with order volume of 14,911 in 2026-W12.
+**Overall:** PCAR improved from 92.57% to 92.85% (+0.28 pp) for US-HF in 2026-W12, representing a modest recovery after the prior week's decline, though still below the 8-week high of 94.58% observed in W10.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.45%-94.58%) | +0.30 pp | ✅ |
-| L1: Country Breakdown | US country rate change | -0.17 pp | ✅ |
-| L1: Payment Method - Credit Card | Primary payment method | -0.31 pp | ✅ |
-| L1: Payment Method - Apple Pay | Secondary payment method | -0.26 pp | ✅ |
-| L1: Payment Method - PayPal | Minor payment method | +1.81 pp | ✅ |
-| L1: Payment Method - Others | Low volume segment | +4.36 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (92.45%-94.58%) | +0.28 pp | ✅ |
+| L1: Country | US deviation vs prior | -0.17 pp | ✅ |
+| L1: Payment - Credit Card | Primary method (59% vol) | -0.31 pp | ✅ |
+| L1: Payment - Apple Pay | Secondary method (37% vol) | -0.26 pp | ✅ |
+| L1: Payment - PayPal | Minor method (8% vol) | +1.81 pp | ✅ |
+| L1: Payment - Others | Low volume (118 orders) | +4.36 pp | ⚠️ |
 
 **Key Findings:**
-- Overall PCAR shows modest recovery (+0.30 pp) after declining -0.38 pp the prior week, indicating stabilization
-- Volume has steadily decreased from ~21K orders (W08-W09) to ~15K orders (W12-W14), representing a ~29% volume reduction over 6 weeks
-- "Others" payment method showed a +4.36 pp improvement but with very low volume (118 orders), making this statistically unreliable
-- Credit Card (8,810 orders) and Apple Pay (5,469 orders) both showed minor declines (-0.31 pp and -0.26 pp respectively)
-- No countries exceeded the ±2.5% threshold, indicating no regional anomalies requiring investigation
+- Overall PCAR recovered +0.28 pp week-over-week, partially offsetting the -0.38 pp decline from W13
+- Volume declined 3% (14,911 vs 15,361 orders), continuing a downward trend from the W09 peak of 21,474 orders
+- Credit Card and Apple Pay both showed slight declines (-0.31 pp and -0.26 pp respectively), which is notable as they represent ~96% of order volume
+- PayPal showed strong improvement (+1.81 pp to 93.62%), outperforming Credit Card for the period
+- "Others" payment method showed +4.36 pp improvement but with only 118 orders, making this statistically unreliable
 
-**Action:** Monitor — The +0.30 pp improvement returns PCAR to the mid-range of the 8-week trend. Continue monitoring volume decline trends and ensure the rate stabilization holds through W15.
+**Action:** Monitor — The metric shows healthy recovery within normal operating range. No countries exceeded the ±2.5% threshold. Continue standard monitoring cadence with attention to the ongoing volume decline trend.
 
 ---
 

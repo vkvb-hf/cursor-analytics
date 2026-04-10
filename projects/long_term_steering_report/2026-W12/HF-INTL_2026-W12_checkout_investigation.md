@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined from 35.24% to 34.47% (-0.77pp) on 80,204 payment visits in 2026-W12, driven primarily by drops in the Select Payment Method and Successful Checkout steps.
+**Overall:** Payment Conversion Rate declined from 35.24% to 34.47% (-0.77pp) on 80,204 payment visits in HF-INTL during 2026-W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ > 0.39pp threshold | -0.96pp | ⚠️ |
-| Click Submit Form | Within threshold | -0.13pp | ✅ |
-| FE Validation Passed | Positive improvement | +0.73pp | ✅ |
-| Enter Fraud Service | Within threshold | -0.20pp | ✅ |
-| Approved by Fraud Service | Stable | +0.03pp | ✅ |
-| Call to PVS | Stable | +0.09pp | ✅ |
-| Successful Checkout | Δ > 0.39pp threshold | -0.93pp | ⚠️ |
+| Select Payment Method | ≥-0.39pp | -0.96pp | ⚠️ |
+| Click Submit Form | ≥-0.39pp | -0.13pp | ✅ |
+| FE Validation Passed | ≥-0.39pp | +0.73pp | ✅ |
+| Enter Fraud Service | ≥-0.39pp | -0.20pp | ✅ |
+| Approved by Fraud Service | ≥-0.39pp | +0.03pp | ✅ |
+| Call to PVS | ≥-0.39pp | +0.09pp | ✅ |
+| Successful Checkout | ≥-0.39pp | -0.93pp | ⚠️ |
 
 **Key Findings:**
-- **GB is the largest contributor to decline:** -1.86pp PCR drop with Select Payment Method conversion falling -2.41pp, indicating potential UX or payment option visibility issues
-- **Braintree_ApplePay underperformed:** Success rate dropped -0.99pp (84.46% → 83.47%), contributing to overall decline given its high volume (12,342 attempts)
-- **PVS "Pending" errors surged:** Increased from 6 to 58 cases (+5.80pp share), suggesting potential PSP processing delays
-- **ES market effectively ceased operations:** Volume dropped from 257 to 1 payment visit with 0% conversion, requiring business clarification
-- **FE Validation showed positive recovery:** Recovery rate improved +1.82pp (55.37% → 57.19%) with APPLEPAY_DISMISSED errors decreasing in share
+- **Select Payment Method** is the primary top-of-funnel issue with -0.96pp conversion drop, driven heavily by GB (-2.41pp) where users are abandoning before selecting a payment method
+- **Successful Checkout (PVS)** shows significant degradation (-0.93pp), with "Pending" status errors increasing dramatically (+52 cases, +5.80pp share) and new "Refused" errors appearing (+17 cases)
+- **Braintree_ApplePay** declined -0.99pp in success rate, correlating with APPLEPAY_DISMISSED remaining the dominant FE error (73.5% of errors)
+- **ES** experienced complete payment failure (257→1 visits, 0% PCR), indicating potential market exit or technical blocking issue
+- **FE Validation** improved (+0.73pp) with recovery rate increasing from 55.37% to 57.19%, partially offsetting other losses
 
-**Action:** Investigate — Focus on GB market's Select Payment Method drop and Braintree_ApplePay performance; clarify ES market status with business team; monitor PVS "Pending" error trend with PSP.
+**Action:** Investigate - Priority focus on PVS "Pending" status surge and GB payment method selection drop; verify ES market status with product team
 
 ---
 

@@ -7,27 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) for US-HF improved from 87.53% to 88.84% (+1.31 pp) in 2026-W12, representing a positive recovery from the prior week's decline.
+**Overall:** AR Initial (LL0) improved from 87.53% to 88.84% (+1.50 pp) in 2026-W12, representing a recovery after the prior week's decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Week-over-week change | +1.31 pp | ✅ |
-| L1: Country Impact | US threshold (±2.5%) | -0.86 pp | ✅ |
-| L1: Payment Method | PayPal decline | -1.92 pp | ⚠️ |
-| L1: Payment Method | Credit Card decline | -1.80 pp | ⚠️ |
-| L1: Payment Provider | Braintree decline | -1.66 pp | ⚠️ |
-| L1: Payment Provider | ProcessOut decline | -1.58 pp | ⚠️ |
+| L0: Overall Trend | Rate increased +1.50 pp | +1.50 pp | ✅ |
+| L1: Country Impact | US declined -0.86 pp (within threshold) | -0.86 pp | ✅ |
+| L1: Payment Method | PayPal showed largest drop at -1.92 pp | -1.92 pp | ✅ |
+| L1: Payment Provider | Braintree declined -1.66 pp | -1.66 pp | ✅ |
 
 **Key Findings:**
-- The +1.31 pp improvement in W12 partially recovers from the -1.30 pp decline observed in W13, though the rate (88.84%) remains below the W11 peak of 90.11%
-- Volume decreased significantly from 14,786 (W12) to 11,716 (W14), representing a ~21% reduction in order volume
-- All payment methods showed declines, with PayPal experiencing the largest drop (-1.92 pp) on 1,150 orders and Credit Card declining -1.80 pp on the highest volume (8,177 orders)
-- Both major payment providers declined: Braintree (-1.66 pp, 10,357 orders) and ProcessOut (-1.58 pp, 4,006 orders)
-- No countries exceeded the ±2.5% threshold, indicating the changes are distributed across payment dimensions rather than geographic factors
+- The +1.50 pp week-over-week improvement reverses the -1.30 pp decline seen in 2026-W13, though the rate (88.84%) remains below the 8-week high of 90.11% from 2026-W11
+- Volume decreased significantly to 11,716 orders compared to 14,786 in the prior week (-20.8%), continuing a downward trend from 21,838 orders in 2026-W07
+- No countries or dimensions exceeded the ±2.5% threshold; all payment methods showed declines between -0.24 pp and -1.92 pp
+- PayPal (-1.92 pp) and Credit Card (-1.80 pp) showed the largest payment method declines, though both remain above 88.9%
+- "Others" and "No Payment" categories maintained near-perfect rates (99.76% and 99.49% respectively) despite slight declines from 100%
 
-**Action:** Monitor – The overall metric improved and no single dimension exceeds critical thresholds, but the consistent declines across all payment methods and providers warrant continued observation over the next 1-2 weeks to confirm stabilization.
+**Action:** Monitor — The metric has improved and all dimensions remain within acceptable thresholds. Continue tracking to confirm the recovery trend stabilizes and volume patterns normalize.
 
 ---
 

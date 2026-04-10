@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved slightly from 92.73% to 93.06% (+0.33pp), a statistically non-significant change within normal operating range.
+**Overall:** The Fraud Approval Rate (FAR) declined by 1.35pp (94.31% → 93.03%) in 2026-W12, though the change is not statistically significant and remains within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | 92.73% → 93.06% | +0.33pp | ✅ |
-| L0: Duplicate Rate | 15.53% → 15.81% | +0.28pp | ✅ |
-| L0: Duplicate Block | 5.07% → 5.25% | +0.18pp | ✅ |
-| L0: PF Block | 0.80% → 0.84% | +0.04pp | ✅ |
-| L1: Country (CK) | 94.51% → 90.99% | -3.52pp | ⚠️ |
-| L1: Channel (Referral) | 77.86% → 76.03% | -1.83pp | ✅ |
+| L0: WL Trend | FAR within 8-week range | -1.35pp | ✅ |
+| L1: Country | CK exceeds ±2.5% threshold | -3.73pp | ⚠️ |
+| L1: Channel | All categories within threshold | -0.96pp to -2.36pp | ✅ |
+| Duplicate Rate | Elevated in CK | +20.54% | ⚠️ |
+| PF Block Rate | Stable at 0.43% | +0.08pp | ✅ |
 
 **Key Findings:**
-- CK country shows a significant FAR decline of -3.73% (94.51% → 90.99%) alongside a +20.54% increase in duplicate rate (22.33% → 26.91%), exceeding the ±2.5% threshold
-- Overall volume decreased by 5.5% (14,394 → 13,609 customers), continuing a downward trend from W07 peak of 19,099
-- PF Block rate has stabilized at ~0.80-0.84% after a significant spike in W07 (5.17%)
-- Referral channel maintains notably lower FAR (76.03%) compared to Paid channel (96.19%), with both showing slight week-over-week declines
+- CK shows the largest FAR decline (-3.73pp, from 94.51% to 90.99%) with a significant duplicate rate increase (+20.54%, reaching 26.91%)
+- Volume decreased 8.1% WoW (16,403 → 15,081 customers reaching fraud service)
+- Referral channel has consistently lower FAR (76.03%) compared to Paid channel (96.19%), with both declining slightly WoW
+- The 2026-W07 anomaly (PF Block 5.17%, FAR 89.36%) has fully normalized, with PF Block now stable at 0.43%
+- MR showed secondary decline of -1.66pp in FAR with moderate duplicate rate increase (+11.43%)
 
-**Action:** Monitor – Focus attention on CK country where duplicate rate spike (+20.54%) correlates with the FAR decline; investigate if this represents a localized fraud pattern or operational issue.
+**Action:** Monitor – Focus attention on CK duplicate rate trends; if CK FAR continues declining or duplicate rate exceeds 30% in 2026-W13, escalate for deeper investigation.
 
 ---
 

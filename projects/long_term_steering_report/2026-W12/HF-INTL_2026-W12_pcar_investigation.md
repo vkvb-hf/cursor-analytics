@@ -7,26 +7,24 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PCAR improved from 95.21% to 96.0% (+0.83 pp) week-over-week for HF-INTL in 2026-W12, with a volume of 31,465 orders.
+**Overall:** PCAR improved by +0.83pp (from 95.21% to 96.0%) in 2026-W12 with a volume of 31,465 orders, partially recovering from the prior week's decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric recovering from W13 dip | +0.83 pp | ✅ |
-| L1: Country Breakdown | All countries declined; NO worst at -1.70 pp | No country >±2.5% | ✅ |
-| L1: Payment Method | "Others" declined -2.37 pp | Below ±2.5% threshold | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern | -0.98pp from W07 baseline (96.98%) | ⚠️ |
+| L1: Country Breakdown | Any country ≥±2.5% threshold | None exceeded threshold | ✅ |
+| L1: Dimension Scan | PaymentMethod anomalies | Others at -2.37pp (84.74%) | ⚠️ |
 
 **Key Findings:**
-- Despite the overall +0.83 pp improvement at HF-INTL level, all individual countries showed declines ranging from -0.53 pp (GB) to -1.70 pp (NO)
-- Norway (NO) had the largest country decline at -1.70 pp (91.42% → 89.86%) with 26,830 orders
-- Payment Method "Others" showed the steepest decline at -2.37 pp (86.8% → 84.74%) affecting 2,772 orders
-- Volume decreased significantly from 39,598 (W13) to 31,465 (W12), a reduction of ~20%
-- The 8-week trend shows a gradual decline from peak of 97.31% (W10) to current 96.0%
+- NO showed the largest country decline at -1.70pp (89.86% vs 91.42%) with significant volume of 26,830 orders
+- IE also underperformed with -1.39pp decline (90.41% vs 91.69%) on 18,858 orders
+- PaymentMethod "Others" dropped -2.37pp to 84.74%, approaching the investigation threshold
+- GB represents the highest volume (230,971 orders) with a moderate decline of -0.53pp
+- Volume has decreased substantially from W07 (48,803) to W14 (31,465), a ~35% reduction
 
-**Action:** Monitor – No dimensions exceeded the ±2.5% threshold, but watch Norway's continued decline and the "Others" payment method performance. The volume reduction warrants attention.
+**Action:** Monitor - While the week-over-week metric improved, continue monitoring NO and IE country performance and the "Others" payment method which is trending toward the ±2.5% threshold.
 
 ---
 

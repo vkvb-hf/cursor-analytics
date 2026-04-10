@@ -7,25 +7,26 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined by 0.19 percentage points (94.94% → 94.76%) on a volume of 431,853 orders, continuing a two-week downward trend from the 95.18% peak in W12.
+**Overall:** PAR declined by -0.19pp (94.94% → 94.76%) on volume of 431,853 orders, continuing a two-week downward trend after peaking at 95.18% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate declining for 2 consecutive weeks | -0.19 pp | ⚠️ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max Δ: -1.64 pp (TK) | ✅ |
-| L1: Payment Method | All methods within normal range | Max Δ: -0.10 pp (Others) | ✅ |
-| L1: Payment Provider | Unknown provider shows -12.50 pp drop | Volume: 24 orders | ⚠️ |
+| Overall PAR | -0.19pp decline | -0.19% | ⚠️ |
+| Country Threshold (±2.5%) | No countries exceed threshold | N/A | ✅ |
+| Top Country (FJ) | 94.46% → 94.30% | -0.17% | ✅ |
+| Payment Provider (Unknown) | 42.86% → 37.50% | -12.50% | ⚠️ |
+| Payment Provider (Braintree) | 95.85% → 95.93% | +0.08% | ✅ |
 
 **Key Findings:**
-- The PAR rate has declined for two consecutive weeks, dropping 0.42 pp from the W12 peak of 95.18% to current 94.76%
-- TK showed the largest country-level decline at -1.64 pp (93.49% → 91.96%), though on low volume (2,338 orders)
-- The "Unknown" payment provider experienced a significant -12.50 pp drop (42.86% → 37.5%), but represents negligible volume (24 orders)
-- FJ, representing 95% of total volume (408,532 orders), showed a minor decline of -0.17 pp, contributing most to the overall metric movement
-- No single dimension shows a clear root cause exceeding alerting thresholds on significant volume
+- TK showed the largest country decline at -1.64pp (93.49% → 91.96%), though volume is low at 2,338 orders
+- PaymentProvider "Unknown" dropped significantly by -12.50pp (42.86% → 37.50%), but with minimal volume (24 orders)
+- FJ dominates volume (408,532 orders, 95% of total) with a minor decline of -0.17pp, driving the overall metric movement
+- Adyen showed improvement of +0.33pp (92.84% → 93.14%) on 78,682 orders
+- The 8-week trend shows PAR has declined for two consecutive weeks after reaching a peak of 95.18% in W12
 
-**Action:** Monitor – The decline is modest (-0.19 pp) with no dimension breaching the ±2.5% threshold on meaningful volume. Continue tracking the trend; escalate if decline persists into W15 or any dimension exceeds threshold.
+**Action:** Monitor – The decline is modest (-0.19pp) with no countries exceeding the ±2.5% threshold. Continue monitoring TK performance and the downward trend pattern.
 
 ---
 

@@ -10,28 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved from 89.75% to 89.88% in W12, a modest increase of +0.14 percentage points, which falls within normal operating variance.
+**Overall:** Fraud Approval Rate (FAR) improved slightly from 89.75% to 89.88% (+0.14 pp) in 2026-W12, a non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR stable within historical range (89.75%→89.88%) | +0.14pp | ✅ |
-| L0: Duplicate Rate | Increased from 23.92% to 24.70% | +0.78pp | ⚠️ |
-| L0: Duplicate Block Rate | Slight increase from 6.22% to 6.37% | +0.15pp | ✅ |
-| L0: PF Block Rate | Decreased from 2.92% to 2.72% | -0.20pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.14pp | ✅ |
-| L1: Channel - Paid | FAR stable at 96.92% | +0.49pp | ✅ |
-| L1: Channel - Referral | FAR stable at 62.44% | -0.45pp | ✅ |
+| L0: 8-Week Trend | FAR within historical range (89-92%) | +0.14 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.14 pp (US) | ✅ |
+| L1: Channel Category | Paid & Referral channels stable | Paid +0.49 pp, Referral -0.45 pp | ✅ |
+| Duplicate Rate | Slight increase in duplicate submissions | +3.26 pp (US) | ⚠️ |
+| PF Block Rate | Elevated vs. typical baseline | 2.72% (vs ~1% baseline) | ⚠️ |
 
 **Key Findings:**
-- FAR change of +0.14pp is minimal and within normal weekly fluctuation; the 8-week trend shows FAR ranging between 88.61% and 92.75%
-- Volume declined from 19,069 (W11) to 17,515 (W12), a decrease of 8.1%, continuing a downward trend from W09's peak of 23,228
-- Duplicate Rate increased by +3.26% (from 23.92% to 24.70%), the highest rate observed in the 8-week window
-- Referral channel continues to significantly underperform Paid channel (62.44% vs 96.92% FAR), a persistent 34.48pp gap
-- PF Block Rate decreased slightly (-0.20pp), contributing positively to the FAR improvement
+- FAR change of +0.14 pp is minimal and within normal weekly fluctuation; no significant shift detected
+- Volume declined by 8.2% (19,069 → 17,515 customers), continuing a downward trend from W09 peak of 23,228
+- Duplicate Rate increased by +3.26 pp in US (23.92% → 24.70%), showing gradual upward trend over 8 weeks
+- PF Block Rate at 2.72% remains elevated compared to W07-W10 baseline (~0.5-1.2%), though improved from W13's 3.60%
+- Paid channel maintains strong FAR (96.92%) while Referral channel continues to underperform at 62.44%
 
-**Action:** Monitor — The +0.14pp change is not significant, and no country or channel breached the ±2.5% threshold. Continue tracking the rising Duplicate Rate trend.
+**Action:** Monitor — No investigation required. FAR is stable and all breakdown checks passed thresholds. Continue monitoring Duplicate Rate trend and PF Block Rate normalization.
 
 ---
 

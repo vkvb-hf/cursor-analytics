@@ -8,25 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 0.91pp (33.11% → 32.20%) week-over-week during the Post-Payday phase, with stable volume of 8,367 eligible orders.
+## Executive Summary
+
+**Overall:** Dunning Ship Rate declined from 33.11% to 32.20% (-0.91pp) week-over-week during the Post-Payday phase, with relatively stable volume (8,367 orders).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 91.16% → 91.06% | -0.10pp | ✅ |
-| Discount % | 14.74% → 15.8% | +1.06pp | ✅ |
+| Discount % | 14.74% → 15.80% | +1.06pp | ✅ |
 | PC2 | 51.42% → 47.31% | -4.11pp | ⚠️ |
 | Ship Rate | 33.11% → 32.20% | -0.91pp | ⚠️ |
 
 **Key Findings:**
-- **MR Country Collapse:** MR experienced a catastrophic ship rate decline from 13.20% to 0.80% (-12.40pp), with volume also dropping 12.7% — this is the primary driver of the overall decline
-- **PC2 Deterioration:** Post-checkout conversion (PC2) dropped significantly by 4.11pp (51.42% → 47.31%), indicating issues converting dunning attempts to shipments
-- **Mix Shift Toward Lower-Performing Markets:** KN volume increased 8.8% while its ship rate declined from 20.48% to 16.97% (-3.51pp), amplifying negative impact
-- **High-Performer Stability:** AO maintained strong performance at 63.45% ship rate with minimal volume change (-1.8%)
-- **Discount Increase Ineffective:** Despite discount % increasing by 1.06pp, ship rate still declined, suggesting pricing is not the bottleneck
+- MR experienced a severe Ship Rate collapse from 13.20% to 0.80% (-12.40pp) while volume decreased by 12.7%, indicating a critical issue requiring immediate attention
+- PC2 (Payment Conversion 2) dropped significantly by 4.11pp (51.42% → 47.31%), suggesting downstream payment issues are driving the overall decline
+- KN showed declining performance with Ship Rate falling from 20.48% to 16.97% (-3.51pp) despite an 8.8% volume increase
+- CK increased volume by 8.0% but Ship Rate slightly declined (-0.46pp), potentially contributing to mix shift effects
+- Higher-performing countries (AO, CK) showed stable rates, suggesting the decline is concentrated in lower-tier markets
 
-**Action:** **Escalate** — Immediate investigation required for MR country where ship rate collapsed to near-zero (0.80%), indicating potential operational or technical failure.
+**Action:** Escalate — The MR market requires immediate investigation due to near-zero Ship Rate performance; additionally, investigate root cause of PC2 decline across the cluster.
 
 ---
 

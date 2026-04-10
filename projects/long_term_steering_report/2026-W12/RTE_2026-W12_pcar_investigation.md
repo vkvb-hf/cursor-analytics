@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** PCAR remained essentially stable at 96.9%, showing a marginal improvement of +0.01 pp from the prior week (96.89% → 96.9%) on a volume of 39,914 orders.
+**Overall:** PCAR improved marginally from 96.89% to 96.9% (+0.01 pp) on a volume of 39,914 orders in 2026-W12, continuing a stable trend within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Volatility within normal range | +0.01 pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | TK worst at -1.64 pp | ✅ |
-| L1: Dimension Scan | Payment method variation detected | Others +5.28 pp, Paypal -0.52 pp | ⚠️ |
+| L0: 8-Week Trend | Rate stable (96.88%-97.3% range) | +0.01 pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max: TK -1.64 pp | ✅ |
+| L1: Dimension Scan | PaymentMethod "Others" shows volatility | +5.28 pp | ⚠️ |
 
 **Key Findings:**
-- The +0.01 pp change is within normal fluctuation; the 8-week trend shows PCAR oscillating between 96.88% and 97.3%, indicating overall stability
-- TK experienced the largest country-level decline at -1.64 pp (93.49% → 91.96%), though below the 2.5% escalation threshold
-- "Others" payment method showed a significant +5.28 pp improvement (72.08% → 75.89%), but on low volume (1,157 orders)
-- PayPal and Apple Pay both declined slightly (-0.52 pp and -0.51 pp respectively), though rates remain above 96%
-- Volume continues a downward trend from W09 peak (50,858) to current week (39,914), representing a ~21% volume reduction over 5 weeks
+- TK showed the largest country decline at -1.64 pp (91.96% vs 93.49%) on 2,338 orders, though below the ±2.5% threshold
+- TV declined -0.89 pp (93.47% vs 94.31%) on 2,205 orders, the second largest country movement
+- PaymentMethod "Others" increased significantly by +5.28 pp (75.89% vs 72.08%) but represents low volume (1,157 orders)
+- PayPal and Apple Pay both declined (-0.52 pp and -0.51 pp respectively), while Credit Card remained stable (+0.01 pp)
+- Overall volume decreased from 42,897 to 39,914 orders (-6.9% WoW)
 
-**Action:** Monitor — No immediate investigation required. Continue tracking TK country performance and the declining volume trend over the next 2-3 weeks.
+**Action:** Monitor — The +0.01 pp change is within normal fluctuation. Continue monitoring TK and TV country performance, and track PaymentMethod "Others" volatility given its low baseline rate (75.89%).
 
 ---
 

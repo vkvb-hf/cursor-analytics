@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate improved significantly from 60.72% to 65.33% (+4.61pp) week-over-week, with volume increasing from 32,711 to 34,114 eligible orders during the Post-Payday phase.
+**Overall:** Dunning Ship Rate improved significantly from 60.72% to 65.33% (+4.61pp) in 2026-W12, with volume increasing by 4.3% to 34,114 eligible orders during the Post-Payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +20,13 @@
 | Ship Rate | 60.72% → 65.33% | +4.61pp | ✅ |
 
 **Key Findings:**
-- All 10 countries in the Mix Shift Analysis showed Ship Rate improvements, with NO leading at +8.06pp (76.53% → 84.59%) and BE maintaining the highest absolute rate at 85.91%
-- Ship Rate gains occurred despite slight decreases in Pre-Dunning AR (-0.26pp) and Discount % (-0.87pp), suggesting improved downstream conversion efficiency
-- SE and DK showed significant volume increases (+29.2% and +18.5% respectively) while also improving Ship Rates, indicating healthy market expansion
-- GB, the largest market by volume, improved substantially from 53.59% to 59.96% (+6.37pp) with volume growth of 5.1%
-- No Simpson's Paradox detected—all countries improved individually, confirming genuine cluster-level improvement
+- All 10 countries in the mix analysis showed Ship Rate improvements, with NO leading at +8.06pp (76.53% → 84.59%) and BE maintaining the highest absolute rate at 85.91%
+- SE and DK experienced significant volume growth (+29.2% and +18.5% respectively) while also improving Ship Rates, indicating healthy expansion
+- Ship Rate improvement occurred despite slightly lower Pre-Dunning AR (-0.26pp) and reduced Discount % (-0.87pp), suggesting genuine performance gains rather than aggressive discounting
+- GB, the highest volume country, improved by +6.37pp (53.59% → 59.96%) with 5.1% volume growth
+- No Simpson's Paradox detected: all countries show "High" SR tier improvements aligned with overall cluster improvement
 
-**Action:** Monitor — The broad-based improvement across all markets during Post-Payday is a positive signal; continue tracking to confirm sustainability into the next payday cycle.
+**Action:** Monitor — Continue tracking performance; the broad-based improvement across all markets with reduced discounting suggests sustainable gains. No investigation or escalation required.
 
 ---
 

@@ -9,28 +9,28 @@
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved from 89.23% to 89.84% (+0.68pp) in 2026-W12, representing a partial recovery after two consecutive weeks of decline, though still below the 91.99% peak observed in 2026-W11.
+**Overall:** AR Initial (LL0) improved from 89.23% to 89.84% (+0.61 pp) in 2026-W12, representing a partial recovery after two consecutive weeks of decline, though the rate remains below the 91.99% peak observed in 2026-W11.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Rate | 89.23% → 89.84% | +0.68pp | ✅ |
-| L1: Country - KN | 94.82% → 91.35% | -3.66pp | ⚠️ |
-| L1: Country - ER | 55.49% → 56.92% | +2.58pp | ⚠️ |
-| L1: Country - CK | 76.11% → 79.08% | +3.90pp | ⚠️ |
-| L1: Country - AO | 62.94% → 65.46% | +3.99pp | ⚠️ |
-| L1: PaymentMethod - Credit Card | 91.13% → 88.5% | -2.88pp | ⚠️ |
-| L1: PaymentProvider - Adyen | 86.57% → 84.52% | -2.37pp | ⚠️ |
+| L0 Trend | 8-week stability | +0.68% WoW | ✅ |
+| L1 Country | KN performance | -3.66 pp | ⚠️ |
+| L1 Country | ER performance | +2.58 pp | ⚠️ |
+| L1 Country | CK performance | +3.90 pp | ⚠️ |
+| L1 Country | AO performance | +3.99 pp | ⚠️ |
+| L1 Payment Method | Credit Card | -2.88 pp | ⚠️ |
+| L1 Payment Provider | Adyen | -2.37 pp | ⚠️ |
 
 **Key Findings:**
-- KN experienced the largest negative swing (-3.66pp) despite having the highest current rate (91.35%), with significant volume (2,729 orders) warranting investigation
-- Credit Card payment method declined -2.88pp (91.13% → 88.5%) and represents the highest volume segment at 6,287 orders, masking gains elsewhere
-- Adyen provider showed the steepest decline among payment providers (-2.37pp), potentially linked to Credit Card performance issues
-- CK and AO showed strong recovery (+3.90pp and +3.99pp respectively), though both remain well below the overall average at 79.08% and 65.46%
-- Overall volume has declined steadily from 15,670 (W07) to 12,781 (W14), a decrease of approximately 18%
+- KN experienced a significant decline of -3.66 pp (94.82% → 91.35%) with 2,729 orders, representing the largest negative country movement
+- Credit Card payment method declined -2.88 pp (91.13% → 88.5%) affecting 6,287 orders (49% of total volume)
+- Adyen payment provider dropped -2.37 pp (86.57% → 84.52%) on 2,732 orders, showing potential processing issues
+- CK and AO showed strong improvements (+3.90 pp and +3.99 pp respectively), partially offsetting KN decline
+- Overall volume continues declining trend (12,781 vs 15,670 in W07), down ~18% over 8 weeks
 
-**Action:** Investigate — Focus on KN country decline and Credit Card/Adyen payment path degradation, as these high-volume segments are suppressing overall recovery despite gains in smaller markets.
+**Action:** Investigate — Focus on KN country decline and Credit Card/Adyen payment path degradation, as these represent high-volume segments with material rate drops.
 
 ---
 

@@ -7,26 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall declined by -0.05 percentage points (91.98% → 91.93%) on a volume of 415,885 orders in 2026-W12, representing a minor week-over-week decrease within normal fluctuation range.
+**Overall:** AR Overall declined by -0.05pp (91.98% → 91.93%) on volume of 415,885 orders in US-HF for 2026-W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (91.48%-92.09%) | -0.05 pp | ✅ |
-| L1: Country Breakdown | US declined -0.17 pp, no country exceeded ±2.5% threshold | -0.17 pp | ✅ |
-| L1: PaymentMethod | Credit Card declined -0.21 pp (highest volume impact) | -0.21 pp | ⚠️ |
-| L1: PaymentProvider | Braintree declined -0.15 pp (392,447 orders) | -0.15 pp | ⚠️ |
-| L1: PaymentProvider | ProcessOut improved +2.85 pp (38,294 orders) | +2.85 pp | ✅ |
+| L0: 8-Week Trend | Rate within normal fluctuation (91.48%-92.09% range) | -0.05pp | ✅ |
+| L1: Country | US declined -0.17pp | -0.17pp | ✅ |
+| L1: PaymentMethod | Credit Card largest impact (-0.21pp on 316,708 vol) | -0.21pp | ✅ |
+| L1: PaymentProvider | ProcessOut improved +2.85pp; Unknown declined -0.56pp | Mixed | ⚠️ |
 
 **Key Findings:**
-- Credit Card payment method showed the largest decline at -0.21 pp, impacting 316,708 orders (76% of volume)
-- Braintree, the dominant payment provider with 392,447 orders, declined -0.15 pp contributing to the overall drop
-- ProcessOut showed significant improvement of +2.85 pp, though on smaller volume (38,294 orders)
-- Unknown PaymentProvider had the steepest decline at -0.56 pp but minimal volume impact (259 orders)
-- The 8-week trend shows the current rate (91.93%) is within normal operating range, with W11 being the recent peak at 92.09%
+- US showed a -0.17pp decline (92.95% → 92.8%) representing the entire volume impact
+- Credit Card payment method declined -0.21pp (92.94% → 92.75%) on the highest volume (316,708 orders), driving the overall drop
+- PaymentProvider "Unknown" showed the largest negative delta at -0.56pp, though on minimal volume (259 orders)
+- ProcessOut improved significantly by +2.85pp (83.86% → 86.25%) on 38,294 orders, partially offsetting declines
+- The 8-week trend shows the rate remains within the established range (91.48%-92.09%), with W12 matching W14 at 91.93%
 
-**Action:** Monitor – The decline is minor (-0.05 pp) and within normal weekly fluctuation. Continue monitoring Credit Card and Braintree performance over the next 1-2 weeks to determine if this is a sustained trend or normal variance.
+**Action:** Monitor – The decline is minor (-0.05pp) and within normal weekly fluctuation patterns. Credit Card performance via Braintree should be tracked for continued degradation in the next 1-2 weeks.
 
 ---
 

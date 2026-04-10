@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined significantly from 44.03% to 38.63% (-5.41pp) in 2026-W12, exceeding the threshold of 2.70pp, with the primary degradation occurring at the Select Payment Method step.
+**Overall:** Payment Conversion Rate declined significantly from 44.03% to 38.63% (-5.41pp) in 2026-W12, driven primarily by a major drop at the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | >2.70pp drop | -7.30pp | ⚠️ |
-| Click Submit Form | Within threshold | +0.57pp | ✅ |
-| FE Validation Passed | Within threshold | +0.43pp | ✅ |
-| Enter Fraud Service | Within threshold | -0.16pp | ✅ |
-| Approved by Fraud Service | Within threshold | -0.28pp | ✅ |
-| Call to PVS | Within threshold | -0.04pp | ✅ |
-| Successful Checkout | Within threshold | -0.13pp | ✅ |
+| Select Payment Method | >2.70pp threshold | -7.30pp | ⚠️ |
+| Click Submit Form | <2.70pp threshold | +0.57pp | ✅ |
+| FE Validation Passed | <2.70pp threshold | +0.43pp | ✅ |
+| Enter Fraud Service | <2.70pp threshold | -0.16pp | ✅ |
+| Approved by Fraud Service | <2.70pp threshold | -0.28pp | ✅ |
+| Call to PVS | <2.70pp threshold | -0.04pp | ✅ |
+| Successful Checkout | <2.70pp threshold | -0.13pp | ✅ |
 
 **Key Findings:**
-- The Select Payment Method step is the dominant driver of PCR decline, dropping -7.30pp globally (57.55% → 50.25%), indicating users are abandoning before selecting a payment option
-- All four analyzed countries (FJ, CF, TZ, TV) show consistent degradation at Select Payment Method: FJ (-7.81pp), CF (-6.50pp), TZ (-9.59pp), TV (-11.79pp)
-- Payment method mix shifted significantly: Braintree_CreditCard volume dropped from 15,448 to 4,329 attempts (-72%), while ProcessOut_CreditCard increased from 5,365 to 14,520 attempts (+171%)
-- Despite volume increase (+5.8% payment visits), absolute successful checkouts decreased by 2,129 transactions
-- Backend funnel shows smaller degradation (-0.69pp PCR) compared to GA (-5.41pp), suggesting the issue is primarily in the frontend user experience before checkout attempt
+- The Select Payment Method step is the dominant driver of PCR decline, dropping -7.30pp (from 57.55% to 50.25%) at the cluster level, well above the 2.70pp threshold
+- All four analyzed countries (FJ, CF, TZ, TV) show consistent Select Payment Method degradation: FJ (-7.81pp), CF (-6.50pp), TZ (-9.59pp), TV (-11.79pp)
+- Payment method mix shift observed: Braintree_CreditCard volume dropped sharply from 15,448 to 4,329 attempts (-72%), while ProcessOut_CreditCard increased from 5,365 to 14,520 attempts (+171%)
+- TV shows an additional significant drop at Successful Checkout (-6.32pp in GA waterfall) and PVS Success (-3.64pp in Backend waterfall), indicating payment processing issues specific to this country
+- TZ shows elevated Fraud Service rejection rates (-3.99pp in Backend waterfall), suggesting possible fraud rule changes affecting this market
 
-**Action:** **Investigate** - The consistent and severe drop at Select Payment Method across all countries indicates a potential frontend issue, UI/UX change, or payment method availability problem that requires immediate investigation. Review any deployments or configuration changes affecting the payment selection interface in W12.
+**Action:** Investigate - Focus on root cause of Select Payment Method drop across all markets, with priority on understanding the Braintree_CreditCard to ProcessOut_CreditCard migration impact and TV-specific checkout failures.
 
 ---
 

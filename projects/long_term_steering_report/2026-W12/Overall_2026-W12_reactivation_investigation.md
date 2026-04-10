@@ -1,22 +1,22 @@
 # Reactivation Rate - Overall Summary
 
 **Week:** 2026-W12  
-**Generated:** 2026-04-10 08:24  
+**Generated:** 2026-04-10 15:03  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Reactivation Rate improved across all clusters in 2026-W12, with gains ranging from +0.26pp to +0.99pp except for WL which remained essentially flat (-0.05pp). Credit Card payment method emerged as the dominant positive driver across multiple clusters, showing improvements of +2.38pp to +4.15pp, while no countries or dimensions exceeded alert thresholds.
+Reactivation Rate improved across all five clusters this week, with gains ranging from +0.26 pp to +0.99 pp, except for WL which remained essentially flat at -0.04 pp. Credit Card payment method was the primary driver of improvement across multiple clusters, showing gains of +2.38 pp to +4.15 pp, while declining order volumes across all clusters warrant continued monitoring.
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.36pp to 90.99%, driven by strong Credit Card performance (+4.15pp to 91.37%) continuing an 8-week upward trend of +5.75pp.
-- **HF-INTL:** Improved by +0.99pp to 90.92%, reversing two consecutive weeks of decline, though volume dropped significantly to 32,555 orders (-25% WoW).
-- **WL:** Stable at 88.67% (-0.05pp), with Credit Card (+2.38pp) and PayPal (+1.13pp) gains offsetting minor country-level declines.
-- **HF-NA:** Improved by +0.26pp to 90.95%, with Credit Card payments up +2.78pp, continuing a sustained 8-week improvement trend from 86.03%.
-- **RTE:** Improved by +0.68pp to 89.2%, led by Credit Card gains of +2.79pp, marking the fourth consecutive week of improvement despite a 12.3% volume decline.
+- **US-HF:** Improved by +0.36 pp to 90.99%, driven primarily by Credit Card reactivation gains of +4.15 pp (representing 73% of volume), continuing an 8-week upward trend from 85.24% in W07.
+- **HF-INTL:** Improved by +0.99 pp to 90.92% (highest in 8 weeks), with all countries and payment methods within acceptable thresholds despite NO showing the steepest decline at -1.70 pp.
+- **WL:** Stable with a negligible -0.04 pp decline to 88.67%, with Credit Card payments improving +2.38 pp offsetting minor fluctuations in other dimensions.
+- **HF-NA:** Improved by +0.26 pp to 90.95%, continuing a strong 8-week upward trend (+4.92 pp since W07) with Credit Card payments up +2.78 pp as the primary driver.
+- **RTE:** Improved by +0.68 pp to 89.2%, driven by Credit Card gains of +2.79 pp, though Apple Pay continues to underperform at 66.77% reactivation rate.
 
 ---
 

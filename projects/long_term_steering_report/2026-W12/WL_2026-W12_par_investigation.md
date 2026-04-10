@@ -7,25 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PAR declined by 0.27 percentage points (91.3% → 91.05%) on volume of 165,018 orders, continuing a modest downward trend observed over recent weeks.
+**Overall:** PAR declined by 0.27 percentage points (91.3% → 91.05%) on volume of 165,018 orders, continuing a modest downward trend observed over the past three weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained decline pattern | -0.27 pp | ⚠️ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | -1.38 pp max (MR) | ✅ |
-| L1: PaymentMethod | "Others" exceeds threshold | -3.01 pp | ⚠️ |
-| L1: PaymentProvider | ProcessOut underperforming | -0.97 pp | ⚠️ |
+| L0: WL 8-Week Trend | Sustained decline pattern | -0.27pp | ⚠️ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | -1.38pp max (MR) | ✅ |
+| L1: Payment Method | "Others" exceeds threshold | -3.01pp | ⚠️ |
+| L1: Payment Provider | ProcessOut underperforming | -0.97pp | ⚠️ |
 
 **Key Findings:**
-- PaymentMethod "Others" showed the largest decline at -3.01 pp (90.65% → 87.92%), though volume is relatively low at 4,296 orders
-- MR country experienced the steepest country-level decline at -1.38 pp (81.12% → 80.0%) on 18,070 orders
-- ProcessOut payment provider declined -0.97 pp (81.37% → 80.58%) affecting 18,341 orders, correlating with MR country performance
-- KN country also showed notable decline of -1.31 pp (88.93% → 87.76%) on 10,617 orders
-- Overall volume decreased by ~4,649 orders (169,667 → 165,018) week-over-week
+- Payment Method "Others" showed the largest decline at -3.01pp (90.65% → 87.92%), though on relatively low volume (4,296 orders)
+- MR experienced the highest country-level decline at -1.38pp (81.12% → 80.0%) on 18,070 orders, followed by KN at -1.31pp
+- ProcessOut provider declined -0.97pp (81.37% → 80.58%) on 18,341 orders, correlating with MR country performance
+- All four tracked countries showed negative movement, indicating a broad-based decline rather than isolated issues
+- Overall volume decreased by ~4,600 orders (-2.7%) week-over-week
 
-**Action:** Investigate — Focus on ProcessOut provider performance in MR region and root cause of PaymentMethod "Others" decline. Monitor KN country trends.
+**Action:** Investigate — Focus on ProcessOut/MR correlation and the "Others" payment method decline to identify root cause of the broad-based PAR erosion.
 
 ---
 

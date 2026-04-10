@@ -8,30 +8,28 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Conversion Rate declined significantly from 34.47% to 30.34% (-4.13pp) in 2026-W12, despite a 4.0% increase in payment visits volume (40,203 visits).
+**Overall:** Payment Conversion Rate declined significantly from 34.47% to 30.34% (-4.13pp) week-over-week, driven primarily by a substantial drop in the "Select Payment Method" step across all analyzed countries.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | >2.07pp threshold | -3.98pp | ⚠️ |
-| Click Submit Form | >2.07pp threshold | -2.31pp | ⚠️ |
-| FE Validation Passed | Within threshold | +0.15pp | ✅ |
-| Enter Fraud Service | Within threshold | -0.23pp | ✅ |
-| Approved by Fraud Service | Within threshold | -0.87pp | ✅ |
-| Call to PVS | Within threshold | +0.04pp | ✅ |
-| Successful Checkout | Within threshold | -0.04pp | ✅ |
+| Select Payment Method | Δ > 2.07pp | -3.98pp | ⚠️ |
+| Click Submit Form | Δ > 2.07pp | -2.31pp | ⚠️ |
+| FE Validation Passed | Δ > 2.07pp | +0.15pp | ✅ |
+| Enter Fraud Service | Δ > 2.07pp | -0.23pp | ✅ |
+| Approved by Fraud Service | Δ > 2.07pp | -0.87pp | ✅ |
+| Call to PVS | Δ > 2.07pp | +0.04pp | ✅ |
+| Successful Checkout | Δ > 2.07pp | -0.04pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary bottleneck:** Conversion dropped -3.98pp at the global level, with country-level drops of -7.86pp (CG), -8.75pp (GN), and -5.91pp (ER) — all significantly exceeding the 2.07pp threshold
-- **Click Submit Form shows secondary degradation:** -2.31pp globally, with CG experiencing the largest drop at -4.52pp and ER at -4.21pp
-- **All major payment methods declined:** Adyen_CreditCard (-2.08pp), ProcessOut_ApplePay (-2.86pp), Braintree_ApplePay (-1.88pp), and Braintree_Paypal (-1.54pp) all showed decreased success rates
-- **Backend data confirms frontend issues:** Checkout Attempt conversion dropped across all analyzed countries (CG: -0.74pp, ER: -1.50pp, GN: -0.69pp), indicating users are abandoning before initiating checkout
-- **CG had the highest impact:** With -7.57pp PCR decline on 6,419 visits, CG contributed the most to the overall degradation
+- **Select Payment Method** is the primary driver of PCR decline, with conversion dropping -3.98pp globally (from 45.41% to 41.43%), exceeding the 2.07pp threshold
+- All three analyzed countries (CG, ER, GN) show significant drops at Select Payment Method: CG -7.86pp, GN -8.75pp, ER -5.91pp
+- **Click Submit Form** shows a secondary decline of -2.31pp (90.48% → 88.17%), also exceeding threshold
+- Payment volume increased by 4.0% (38,660 → 40,203 visits), indicating the conversion drop is not due to reduced traffic
+- Adyen_CreditCard and ProcessOut_ApplePay show the largest payment method rate declines (-2.08pp and -2.86pp respectively)
 
-**Action:** **Investigate** — The consistent pattern of degradation at the Select Payment Method and Click Submit Form steps across all top countries suggests a potential UX/UI issue, page load problem, or payment method display issue introduced in W12 that requires immediate investigation.
+**Action:** **Investigate** – The consistent pattern of Select Payment Method drops across all countries suggests a potential frontend issue, UX change, or page load problem affecting users' ability to select payment options. Recommend immediate review of recent deployments and frontend monitoring logs.
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved from 40.58% to 43.89% (+3.31pp) week-over-week, with volume remaining stable at 20,396 eligible orders during the Post-Payday phase.
+**Overall:** Dunning Ship Rate improved from 40.58% to 43.89% (+3.31pp) in 2026-W12, with total eligible volume relatively stable at 20,396 orders during the Post-Payday phase.
 
 **Funnel Analysis:**
 
@@ -20,13 +20,13 @@
 | Ship Rate | 40.58% → 43.89% | +3.31pp | ✅ |
 
 **Key Findings:**
-- Ship Rate improved +3.31pp despite transitioning from Payday to Post-Payday phase, suggesting genuine performance improvement rather than favorable timing
-- FJ (largest market at 68% of volume) drove significant gains with Ship Rate increasing from 38.44% to 42.72% (+4.28pp)
-- TZ showed dramatic improvement from 3.87% to 22.15% (+18.28pp), though on low volume (158 orders)
-- PC2 declined by 4.25pp (47.66% → 43.41%), which warrants monitoring as a potential leading indicator
-- TO experienced a decline from 24.84% to 19.66% (-5.18pp) with volume down 8.4%
+- FJ (largest market at 68% of volume) showed strong improvement with Ship Rate increasing from 38.44% to 42.72% (+4.28pp)
+- TZ demonstrated the most dramatic improvement, jumping from 3.87% to 22.15% (+18.28pp) despite volume declining 12.7%
+- YE maintained the highest Ship Rate tier at 61.69% (+1.30pp) while experiencing a 4.5% volume decrease
+- PC2 declined by 4.25pp (47.66% → 43.41%) despite overall Ship Rate improvement, suggesting efficiency gains in later funnel stages
+- TO was the only country showing Ship Rate decline, dropping from 24.84% to 19.66% (-5.18pp)
 
-**Action:** Monitor – The improvement is positive and broad-based across major markets. Continue tracking PC2 decline and TO performance in the next period.
+**Action:** Monitor - The improvement appears driven by genuine performance gains across major markets (FJ, TZ) rather than mix shift effects. Continue tracking TO for potential intervention.
 
 ---
 

@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Conversion Rate improved by +0.55pp (27.80% → 28.35%) in 2026-W12, driven primarily by gains in frontend form submission and validation steps, despite an overall decline in payment visit volume (-7.8%).
+**Overall:** Payment Conversion Rate improved by +0.55pp (27.80% → 28.35%) in HF-NA during 2026-W12, driven primarily by gains in mid-funnel steps, particularly Click Submit Form and FE Validation Passed.
 
 **Funnel Analysis:**
 
@@ -25,13 +23,14 @@
 | Successful Checkout | vs threshold ±0.27pp | -0.02pp | ✅ |
 
 **Key Findings:**
-- **Click Submit Form** conversion improved significantly (+1.58pp), indicating users who select a payment method are more likely to proceed with submission
-- **FE Validation Passed** improved by +1.38pp, supported by a higher error recovery rate (66.60% → 70.19%, +3.59pp) and a notable decrease in CC_NO_PREPAID_ERR occurrences (-3.13pp share reduction)
-- **Canada outperformed US** with +1.19pp PCR improvement vs +0.34pp, driven by FE Validation gains (+1.46pp) in Canada
-- **Select Payment Method declined** (-0.73pp), suggesting fewer visitors are initiating the payment flow despite better downstream conversion
-- **ProcessOut_CreditCard** increased its volume share and improved success rate (+0.53pp to 83.25%), while Braintree_CreditCard declined in both volume and rate (-1.78pp)
+- **Click Submit Form** showed the largest improvement (+1.58pp), indicating users who selected a payment method were more likely to proceed with submission
+- **FE Validation Passed** improved significantly (+1.38pp), supported by a recovery rate increase from 66.60% to 70.19% (+3.59pp) among users encountering frontend errors
+- **CC_NO_PREPAID_ERR** errors decreased substantially (-3.13pp share), contributing to improved validation pass rates
+- **CA** was the top contributor with +1.19pp PCR improvement, driven by FE Validation Passed (+1.46pp in GA funnel)
+- **Select Payment Method** declined (-0.73pp), partially offsetting gains—fewer payment visits converted to method selection despite overall volume drop (-7.8%)
+- **ProcessOut_CreditCard** volume increased (+1,098 attempts) with improved success rate (+0.53pp), while **Braintree_CreditCard** saw reduced volume and rate decline (-1.78pp)
 
-**Action:** Monitor — The overall PCR improvement is positive and driven by legitimate funnel improvements. Continue tracking the Select Payment Method decline and Braintree_CreditCard performance to ensure they don't offset future gains.
+**Action:** Monitor — The PCR improvement is positive and driven by identifiable funnel improvements (submission and validation steps). Continue monitoring the Select Payment Method decline and Braintree_CreditCard performance degradation in upcoming weeks.
 
 ---
 

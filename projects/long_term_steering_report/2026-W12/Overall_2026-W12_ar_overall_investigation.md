@@ -1,22 +1,22 @@
 # Acceptance Rate (Overall) - Overall Summary
 
 **Week:** 2026-W12  
-**Generated:** 2026-04-10 08:23  
+**Generated:** 2026-04-10 15:02  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Overall) declined across all five clusters in 2026-W12, with changes ranging from -0.05pp to -0.55pp. HF-INTL represents the most significant concern, showing a sustained three-week decline totaling -1.26pp from its W11 peak, driven by Apple Pay underperformance and PaymentProvider "Unknown" degradation (-2.77pp).
+Acceptance Rate (Overall) declined across all five clusters in 2026-W12, with changes ranging from -0.05pp to -0.55pp. HF-INTL presents the most significant concern with a -0.55pp decline marking the third consecutive week of deterioration, driven by broad-based weakness across NO, LU, IE and Apple Pay performance.
 
 ### Cluster Highlights
 
-- **US-HF:** Declined marginally by -0.05pp to 91.93%, driven primarily by Credit Card payment method (-0.21pp) and Braintree provider (-0.15pp), remaining within normal 8-week range.
-- **HF-INTL:** Declined -0.52pp to 93.64% marking the third consecutive weekly drop, with PaymentProvider "Unknown" exceeding threshold at -2.77pp and Apple Pay underperforming at -0.99pp.
-- **WL:** Declined -0.39pp to 89.33%, with ProcessOut provider (-1.05pp on 18,341 orders) and MR country (-1.38pp) showing the largest deterioration while remaining within normal variance.
-- **HF-NA:** Declined marginally by -0.07pp to 92.17%, with Credit Card payments (-0.20pp) driving the modest decrease while both US and CA remained within acceptable thresholds.
-- **RTE:** Declined -0.36pp to 92.46% continuing a three-week downward trend (-0.74pp cumulative), with ProcessOut provider (-0.42pp) and TK country (-1.64pp) showing the largest drops.
+- **US-HF:** Declined marginally by -0.05pp to 91.93%, driven by Credit Card transactions via Braintree (-0.21pp on 316,708 orders), though remaining within normal 8-week fluctuation range.
+- **HF-INTL:** Declined -0.55pp to 93.64% in a sustained three-week downtrend, with NO (-1.70pp), LU (-1.49pp), and IE (-1.39pp) leading country-level declines while Apple Pay underperformed at 89.48%.
+- **WL:** Declined -0.43pp to 89.33%, with MR (-1.38pp) and KN (-1.31pp) showing the largest country drops and ProcessOut continuing to underperform at 78.95% acceptance rate.
+- **HF-NA:** Stable with minimal decline of -0.07pp to 92.17%, driven by US (-0.17pp) with no dimensions exceeding critical thresholds at meaningful volume.
+- **RTE:** Declined -0.36pp to 92.46% continuing a three-week downward trend (-0.74pp since W11 peak), with TK (-1.64pp) and ProcessOut (-0.42pp) showing notable weakness.
 
 ---
 

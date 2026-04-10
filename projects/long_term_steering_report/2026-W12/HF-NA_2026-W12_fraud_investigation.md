@@ -10,29 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved from 89.13% to 90.90%, a significant increase of +1.98 percentage points week-over-week, with 23,540 customers reaching fraud service.
+**Overall:** Fraud Approval Rate (FAR) improved from 89.13% to 90.90% (+1.98pp), representing a significant positive shift with 23,540 customers reaching fraud service in 2026-W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | FAR 89.13% → 90.90% | +1.98 pp | ⚠️ |
-| L0: Duplicate Rate | 26.05% → 26.58% | +0.53 pp | ✅ |
-| L0: Duplicate Block | 6.32% → 6.85% | +0.53 pp | ✅ |
-| L0: PF Block | 3.33% → 1.48% | -1.85 pp | ⚠️ |
-| L1: US FAR | 89.75% → 89.88% | +0.14 pp | ✅ |
-| L1: CA FAR | 91.53% → 91.33% | -0.22 pp | ✅ |
-| L1: Paid Channel FAR | 96.66% → 96.94% | +0.29 pp | ✅ |
-| L1: Referral Channel FAR | 64.60% → 64.61% | +0.01 pp | ✅ |
+| FAR % | 89.13% → 90.90% | +1.98pp | ✅ |
+| Dup Rate % | 26.05% → 26.58% | +0.53pp | ⚠️ |
+| Dup Block % | 6.32% → 6.85% | +0.53pp | ⚠️ |
+| PF Block % | 3.33% → 1.48% | -1.85pp | ✅ |
+| Volume | 24,590 → 23,540 | -4.27% | ⚠️ |
 
 **Key Findings:**
-- PF Block rate decreased significantly from 3.33% to 1.48% (-1.85 pp), which is the primary driver of the FAR improvement
-- No individual country exceeded the ±2.5% threshold; both US (+0.14 pp) and CA (-0.22 pp) showed minimal movement
-- Referral channel duplicate rate increased by +4.10% (29.24% → 30.44%), the largest duplicate rate change across segments
-- Overall volume declined from 24,590 to 23,540 customers (-4.27%), continuing an 8-week downward trend from 30,135 in W07
-- Duplicate Block rate increased slightly from 6.32% to 6.85% (+0.53 pp), reaching the highest level in the 8-week window
+- PF Block % decreased significantly from 3.33% to 1.48% (-1.85pp), which is the primary driver of the FAR improvement
+- No countries exceeded the ±2.5% threshold; US showed minimal change (+0.14pp) and CA showed slight decline (-0.22pp)
+- Duplicate Rate increased slightly across both countries, with US showing +3.26% and CA showing +0.38%
+- Referral channel Dup Rate increased notably by +4.10pp (29.24% → 30.44%) while FAR remained flat (+0.01pp)
+- Overall volume declined by ~1,050 customers (-4.27%) week-over-week
 
-**Action:** Monitor — The FAR improvement is driven primarily by a reduction in PF Block rate rather than fundamental changes in country or channel performance. Continue monitoring PF Block trends to confirm this is expected behavior and not a system issue.
+**Action:** Monitor — The FAR improvement is driven by reduced PF Block rates rather than fundamental fraud pattern changes. Continue monitoring Dup Rate trends, particularly in the Referral channel.
 
 ---
 
