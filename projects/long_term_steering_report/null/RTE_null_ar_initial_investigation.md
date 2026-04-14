@@ -2,30 +2,30 @@
 
 **Metric:** AR Initial (LL0)  
 **Period:** 2026-W14 → null  
-**Observation:** 90.91% → 91.74% (+0.91%)  
-**Volume:** 31,095 orders
+**Observation:** 90.88% → 91.76% (+0.97%)  
+**Volume:** 31,081 orders
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) improved by +0.91 pp (90.91% → 91.74%) in 2026-W15, representing a partial recovery after three consecutive weeks of decline.
+**Overall:** AR Initial (LL0) improved by +0.97 percentage points (90.88% → 91.76%) in 2026-W15, representing a partial recovery from the declining trend observed over the prior 6 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Trend | Week-over-week change | +0.91 pp | ✅ |
-| L0 8-Week Pattern | Trend vs W08 baseline | -1.41 pp | ⚠️ |
+| L0 Trend | Week-over-week change | +0.97 pp | ✅ |
 | L1 Country | Countries exceeding ±2.5% threshold | None flagged | ✅ |
-| L1 Dimension | Anomalies in dimension scan | No data | ✅ |
+| L1 Dimension | Anomalies in dimension scan | No data available | ⚠️ |
+| Volume Check | Order volume trend | 31,081 (-2.6% vs prior) | ✅ |
 
 **Key Findings:**
-- The +0.91 pp increase reverses the previous week's -0.55 pp decline, showing positive momentum
-- Volume decreased significantly to 31,095 orders (-24.0% vs W14's 31,860), continuing a 6-week volume decline trend from W10 peak of 48,166
-- Despite the weekly improvement, the rate remains 1.41 pp below the W08 baseline of 93.15%
+- AR Initial rate improved +0.97 pp WoW, breaking a 4-week consecutive decline streak (W10-W14)
+- Current rate of 91.76% remains 1.83 pp below the 8-week high of 93.59% observed in 2026-W09
+- Volume has decreased significantly from peak of 48,166 (W10) to 31,081 (W15), a 35.5% reduction over 5 weeks
 - No country-level anomalies were flagged (none exceeded the ±2.5% threshold)
-- No dimension-level anomalies were identified in the L1 scan
+- L1 dimension scan returned no data, limiting root cause analysis capability
 
-**Action:** Monitor – The metric shows improvement this week with no flagged anomalies at L1. Continue monitoring the declining volume trend and whether the rate recovery sustains toward the W08-W09 levels (~93%).
+**Action:** Monitor – The metric showed improvement this week, but remains below historical performance. Continue tracking to confirm sustained recovery trend. If volume continues declining or rate reverses, escalate for deeper investigation.
 
 ---
 
@@ -35,9 +35,9 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 91.74% | 31,095 | +0.91% |
-| 2026-W14 | 90.91% | 31,860 | -0.55% |
-| 2026-W13 | 91.41% | 36,504 | -1.24% |
+| 2026-W15 | 91.76% | 31,081 | +0.97% |
+| 2026-W14 | 90.88% | 31,924 | -0.51% |
+| 2026-W13 | 91.35% | 36,477 | -1.31% |
 | 2026-W12 | 92.56% | 42,779 | +0.05% |
 | 2026-W11 | 92.51% | 46,365 | -0.24% |
 | 2026-W10 | 92.73% | 48,166 | -0.92% |
@@ -62,4 +62,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

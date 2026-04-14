@@ -1,22 +1,22 @@
 # Payment Checkout Approval Rate - Overall Summary
 
 **Week:** null  
-**Generated:** 2026-04-13 14:38  
+**Generated:** 2026-04-14 14:28  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Checkout Approval Rate showed mixed performance globally in W15 2026, with most clusters stable but HF-INTL declining significantly by -1.14pp to 94.86%. The HF-INTL cluster requires immediate investigation as it recorded its second-lowest rate in 8 weeks amid a 16% volume increase, with no country or dimension data available to identify root causes.
+Payment Checkout Approval Rate improved globally this week, with all clusters except HF-NA showing positive movement ranging from +0.13 pp to +0.35 pp. No country-level or dimensional anomalies were flagged across any cluster, indicating broad-based stability with continued recovery from the W13 trough period.
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.18pp to 93.02% on 18.5% higher volume, continuing recovery from the W13 low with no anomalies flagged.
-- **HF-INTL:** Declined by -1.14pp to 94.86%, the largest drop across all clusters, representing a 2.34pp decline over 4 weeks since W11's peak of 97.2%.
-- **WL:** Improved marginally by +0.11pp to 97.14%, the second-highest rate in 8 weeks, though volume continues a downward trend (-29.3% since W08).
-- **HF-NA:** Stable with a negligible -0.04pp decline to 94.08% despite 16.3% volume growth, with no country or dimension anomalies detected.
-- **RTE:** Stable at 96.89% with a statistically insignificant -0.01pp change, maintaining consistent performance within the 96.88%-96.99% range over 6 weeks.
+- **US-HF:** Improved by +0.18 pp to 93.02% with volume up 18.5%, marking the second consecutive week of recovery though still 1.56 pp below the W10 peak.
+- **HF-INTL:** Improved by +0.13 pp to 96.12% on 36,514 orders, continuing recovery from the W13 low but remaining 1.19 pp below the 8-week high.
+- **WL:** Improved by +0.35 pp to 97.37%, matching the 8-week high from W10 with no anomalies despite a declining volume trend.
+- **HF-NA:** Essentially stable at 94.08% (-0.04 pp) on 16.3% higher volume, with no countries flagged and performance within normal operating range.
+- **RTE:** Improved by +0.33 pp to 97.22%, reaching the highest level in the 8-week window with consistent performance across all regions.
 
 ---
 

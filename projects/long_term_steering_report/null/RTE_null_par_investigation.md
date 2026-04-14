@@ -2,29 +2,29 @@
 
 **Metric:** PAR  
 **Period:** 2026-W14 → null  
-**Observation:** 94.75% → 94.88% (+0.14%)  
+**Observation:** 94.75% → 94.87% (+0.13%)  
 **Volume:** 421,406 orders
 
 ## Executive Summary
 
-**Overall:** PAR improved slightly from 94.75% to 94.88% (+0.13 pp) in 2026-W15, representing a modest recovery after the previous week's decline, though still below the recent peak of 95.18% in W12.
+**Overall:** PAR improved slightly from 94.75% to 94.87% (+0.13 pp) in W15, representing a partial recovery but remaining below the recent peak of 95.18% observed in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric direction vs prior week | +0.14% | ✅ |
+| L0: RTE Trend | Week-over-week change | +0.13 pp | ✅ |
 | L1: Country Breakdown | Countries exceeding ±2.5% threshold | None flagged | ✅ |
-| L1: Dimension Scan | Anomalies in dimension values | No data available | ⚠️ |
+| L1: Dimension Scan | Anomalous dimensions | No data available | ⚠️ |
 
 **Key Findings:**
-- PAR recovered +0.13 pp week-over-week, partially offsetting the -0.20% decline observed in W14
-- Volume decreased by approximately 10,447 orders (from 431,853 to 421,406), continuing a downward volume trend since W11 (458,408)
-- The metric remains below the 8-week high of 95.18% achieved in W12, representing a gap of -0.30 pp
-- No country-level anomalies were flagged (none exceeded the ±2.5% threshold)
-- The 8-week trend shows overall improvement from 93.07% (W08) to 94.88% (W15), a gain of +1.81 pp
+- PAR shows modest recovery in W15 (+0.13 pp) after declining -0.20 pp in W14 and -0.25 pp in W13
+- Volume decreased by ~10,400 orders (421,406 vs 431,853), continuing a downward trend from the W11 peak of 458,408 orders
+- No country-level anomalies detected exceeding the ±2.5% threshold
+- Current rate of 94.87% remains 0.31 pp below the W12 peak (95.18%) and 0.23 pp below W11 (95.10%)
+- Strong improvement occurred between W10 (93.42%) and W11 (95.10%), suggesting a +1.80 pp structural shift mid-period
 
-**Action:** Monitor — The slight improvement and absence of country-level flags suggest no immediate intervention is required. Continue tracking to confirm sustained recovery toward W12 levels.
+**Action:** Monitor — The slight improvement is positive but insufficient to confirm sustained recovery; continue tracking to determine if the metric stabilizes above 95% or resumes decline.
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 94.88% | 421,406 | +0.14% |
+| 2026-W15 | 94.87% | 421,406 | +0.13% |
 | 2026-W14 | 94.75% | 431,853 | -0.20% |
 | 2026-W13 | 94.94% | 442,530 | -0.25% |
 | 2026-W12 | 95.18% | 443,994 | +0.08% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

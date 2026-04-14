@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate declined by 0.52 percentage points (pp) from 90.99% in W14 to 90.47% in W15, representing a -0.57% relative change on significantly higher volume (21,155 vs 14,736 orders).
+**Overall:** Reactivation rate declined by 0.52 percentage points (pp) from 90.99% (2026-W14) to 90.47% (2026-W15), with volume increasing significantly from 14,736 to 21,155 orders (+43.6%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range | -0.52pp | ✅ |
+| L0: 8-Week Trend | Rate decline within normal variance | -0.52 pp | ✅ |
 | L1: Country Breakdown | No data available | N/A | ⚠️ |
-| L1: Dimension Scan | No data available | N/A | ⚠️ |
+| L1: Dimension Scan | No dimensional anomalies flagged | N/A | ⚠️ |
 
 **Key Findings:**
-- Current rate of 90.47% remains elevated compared to 8-week historical lows (85.79% in W09, 85.84% in W08)
-- Volume increased substantially (+43.5%) from 14,736 in W14 to 21,155 in W15, which may contribute to rate normalization
-- The 8-week trend shows overall improvement from 85.84% (W08) to 90.47% (W15), a gain of +4.63pp
-- No country-level or dimension-level anomalies were identified (no data flagged beyond ±2.5% threshold)
-- Week-over-week volatility is normal; prior weeks showed similar fluctuations (e.g., -0.69% in W13, +2.56% in W12)
+- Reactivation rate dropped 0.52 pp week-over-week, but remains elevated compared to earlier weeks (85.84% in W08 vs 90.47% in W15)
+- Volume surged by 43.6% (from 14,736 to 21,155 orders), representing the highest weekly volume in the 8-week period
+- The 8-week trend shows strong overall improvement: +4.63 pp from W08 (85.84%) to W15 (90.47%)
+- No country-level breakdowns available to identify regional drivers; no countries exceeded the ±2.5% threshold
+- No dimensional anomalies were flagged in the L1 dimension scan
 
-**Action:** Monitor — The decline is minor and within normal fluctuation; the rate remains near 8-week highs with no dimensional flags requiring investigation.
+**Action:** Monitor — The decline is minor (-0.52 pp) and likely attributable to volume normalization after a strong prior week. The overall 8-week trend remains positive. Continue monitoring; no immediate escalation required.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

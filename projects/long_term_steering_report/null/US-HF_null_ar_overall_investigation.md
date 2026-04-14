@@ -7,23 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall for US-HF improved by +0.33 percentage points (91.93% → 92.23%) in 2026-W15, continuing a positive trend observed over the past 8 weeks.
+**Overall:** AR Overall improved by +0.33 percentage points (91.93% → 92.23%) in 2026-W15, continuing a positive trend with the highest rate observed in the 8-week period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement from W08 baseline | +0.75pp vs W08 | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | None flagged | ✅ |
-| L1: Dimension Scan | No anomalous dimensions identified | No data | ✅ |
+| L0: 8-Week Trend | Consistent improvement over 8 weeks | +0.75pp from W08 | ✅ |
+| L1: Country Breakdown | No data available | N/A | ⚠️ |
+| L1: Dimension Scan | No data available | N/A | ⚠️ |
 
 **Key Findings:**
-- AR Overall has shown steady improvement over 8 weeks, rising from 91.48% (W08) to 92.23% (W15), a cumulative gain of +0.75pp
-- Volume has declined week-over-week from 453,781 (W08) to 408,629 (W15), representing a ~10% reduction in order volume
-- No country-level or dimensional anomalies were flagged, indicating broad-based performance stability
-- The current week's +0.33pp improvement is the largest single-week gain since W10 (+0.34pp)
+- AR Overall reached 92.23% in W15, the highest rate in the 8-week tracking period, up from 91.48% in W08
+- Volume decreased by 45,152 orders (-9.9%) from W08 (453,781) to W15 (408,629), indicating a declining order trend
+- No countries or dimensions exceeded the ±2.5% threshold, suggesting stable performance across segments
+- The metric has shown steady week-over-week improvement with only one minor dip (-0.17pp in W12)
+- L1 breakdown data is unavailable, limiting deeper root cause analysis
 
-**Action:** Monitor — The metric is trending positively with no flagged anomalies. Continue standard monitoring cadence while observing the declining volume trend.
+**Action:** Monitor — The metric shows healthy improvement and no flagged anomalies. Continue tracking to confirm the positive trend sustains while investigating the declining volume pattern.
 
 ---
 
@@ -60,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

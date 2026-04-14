@@ -2,29 +2,29 @@
 
 **Metric:** PCAR  
 **Period:** 2026-W14 → null  
-**Observation:** 96.0% → 94.86% (-1.19%)  
+**Observation:** 96.0% → 96.12% (+0.13%)  
 **Volume:** 36,514 orders
 
 ## Executive Summary
 
-**Overall:** PCAR declined by 1.14 percentage points (pp) from 96.0% to 94.86% in week 2026-W15, representing a -1.19% relative change on a volume of 36,514 orders.
+**Overall:** PCAR improved by +0.13 percentage points (96.0% → 96.12%) in 2026-W15 with 36,514 orders, showing modest recovery after the significant dip in W13.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Trend Analysis | 8-week trend reviewed | -1.14 pp WoW | ⚠️ |
-| L1: Country Breakdown | No country data available | N/A | ⚠️ |
-| L1: Dimension Scan | No dimension data available | N/A | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range | +0.13 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | N/A | ✅ |
+| L1: Dimension Scan | No anomalies detected | N/A | ✅ |
 
 **Key Findings:**
-- PCAR dropped from 96.0% to 94.86% (-1.14 pp), the second-lowest rate in the 8-week period after W13 (95.21%)
-- Volume increased by 16.0% WoW (31,465 → 36,514 orders), suggesting the rate decline occurred alongside higher order volume
-- The metric has been on a general downward trend since W11 (97.2%), declining approximately 2.34 pp over 4 weeks
-- No country-level or dimension-level data is available to identify specific root causes
-- W10 represented the peak performance at 97.31%; current rate is 2.45 pp below that benchmark
+- PCAR rate increased +0.13 pp week-over-week, continuing the recovery trend from the W13 low point (95.21%)
+- Current rate of 96.12% remains below the 8-week high of 97.31% achieved in W10, representing a gap of -1.19 pp
+- Order volume decreased significantly from 49,249 (W08) to 36,514 (W15), a decline of approximately 26% over the 8-week period
+- No individual countries flagged for exceeding the ±2.5% threshold, indicating stable performance across all markets
+- W13 experienced the largest weekly decline (-1.52 pp) in the observation period, but has since recovered in consecutive weeks
 
-**Action:** Investigate — The 1.14 pp decline warrants deeper analysis. Country and dimension breakdowns should be populated to identify specific drivers of the degradation.
+**Action:** Monitor – The metric shows steady improvement with no country-level anomalies requiring investigation. Continue tracking to confirm sustained recovery toward historical highs.
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 94.86% | 36,514 | -1.19% |
+| 2026-W15 | 96.12% | 36,514 | +0.13% |
 | 2026-W14 | 96.0% | 31,465 | +0.83% |
 | 2026-W13 | 95.21% | 39,598 | -1.52% |
 | 2026-W12 | 96.68% | 38,136 | -0.53% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

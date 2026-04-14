@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall improved by +0.28 pp (92.17% → 92.43%) in W15, continuing a positive 8-week upward trend from 91.35% in W08.
+**Overall:** AR Overall improved by +0.28 percentage points (92.17% → 92.43%) in W15, continuing a positive 8-week upward trend from 91.35% in W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement pattern | +1.08 pp over 8 weeks | ✅ |
+| L0: 8-Week Trend | Consistent improvement observed | +1.08pp over 8 weeks | ✅ |
 | L1: Country Breakdown | No data available | N/A | ⚠️ |
 | L1: Dimension Scan | No data available | N/A | ⚠️ |
 
 **Key Findings:**
-- AR Overall reached its highest point in the 8-week window at 92.43%, representing a cumulative gain of +1.08 pp since W08
-- Volume decreased by 1.86% (507,189 → 497,775 orders) week-over-week, continuing a gradual volume decline trend
-- No countries flagged for exceeding the ±2.5% threshold, indicating stable regional performance
-- The metric has shown positive week-over-week movement in 6 of the last 7 weeks
-- L1 breakdowns (Country and Dimension) contain no detailed data for deeper analysis
+- AR Overall reached 92.43% in W15, the highest rate in the 8-week observation period
+- Steady upward trajectory from 91.35% (W08) to 92.43% (W15), representing +1.08pp cumulative improvement
+- Volume decreased by 1.86% WoW (507,189 → 497,775 orders), continuing a gradual volume decline trend
+- No country-level anomalies detected (none exceeded the ±2.5% threshold)
+- L1 dimension data unavailable, limiting root cause analysis capability
 
-**Action:** Monitor — The metric shows healthy, sustained improvement with no anomalies flagged. Continue tracking to confirm the positive trend holds as volume stabilizes.
+**Action:** Monitor — The metric shows healthy improvement within normal operating range. Continue tracking to ensure the positive trend sustains; prioritize obtaining L1 country and dimension data for deeper visibility.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

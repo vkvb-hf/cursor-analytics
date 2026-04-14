@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** AR Overall improved from 92.46% to 92.83% (+0.37 pp) in 2026-W15, recovering partially from the prior week's decline.
+**Overall:** AR Overall improved by +0.40% (from 92.46% to 92.83%) in 2026-W15, recovering partially from the prior week's decline and continuing the general upward trend observed since W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Weekly volatility observed | +0.40% | ✅ |
-| L1: Country Breakdown | No country data available | N/A | ⚠️ |
-| L1: Dimension Scan | No dimension data available | N/A | ⚠️ |
+| L0: 8-Week Trend | Rate improvement W15 vs W14 | +0.40% | ✅ |
+| L1: Country Breakdown | Countries exceeding ±2.5% threshold | None | ✅ |
+| L1: Dimension Scan | Anomalies detected | No data | ✅ |
 
 **Key Findings:**
-- AR Overall increased +0.40% WoW, rebounding from the -0.34% decline in W14
-- Current rate of 92.83% remains below the recent peak of 93.2% achieved in 2026-W11
-- Volume decreased by 10,447 orders (431,853 → 421,406), continuing a downward trend from W11's peak of 458,408
-- The 8-week trend shows rates stabilizing in the 91-93% range with moderate fluctuation
-- No country-level or dimension-level anomalies were flagged (data not provided)
+- AR Overall rate increased +0.40% to 92.83% in W15, rebounding from the -0.34% decline in W14
+- Volume decreased by 10,447 orders (from 431,853 to 421,406), continuing a downward volume trend since W11 (458,408)
+- The 8-week trend shows overall improvement from 91.07% (W08) to 92.83% (W15), a gain of +1.76pp
+- No countries flagged as exceeding the ±2.5% threshold, indicating stable performance across regions
+- Peak performance was observed in W11 at 93.2%, with W15 still 0.37pp below that high point
 
-**Action:** Monitor – The metric shows positive recovery this week, but limited L1 breakdown data prevents deeper root cause analysis. Continue tracking to confirm sustained improvement.
+**Action:** Monitor — The metric is trending positively with no country-level anomalies. Continue standard monitoring to confirm sustained recovery toward W11 peak levels.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

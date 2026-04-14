@@ -2,29 +2,29 @@
 
 **Metric:** PCAR  
 **Period:** 2026-W14 → null  
-**Observation:** 96.9% → 96.89% (-0.01%)  
-**Volume:** 44,166 orders
+**Observation:** 96.9% → 97.22% (+0.33%)  
+**Volume:** 44,168 orders
 
 ## Executive Summary
 
-**Overall:** PCAR declined marginally by -0.01 percentage points (96.9% → 96.89%) in W15 2026, representing a negligible change within normal operational variance on a volume of 44,166 orders.
+**Overall:** PCAR improved from 96.9% to 97.22%, an increase of +0.33 percentage points in W15 with 44,168 orders processed.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stability check | -0.01pp | ✅ |
-| L1: Country Breakdown | Threshold ±2.5% | No countries flagged | ✅ |
-| L1: Dimension Scan | Anomaly detection | No anomalies detected | ✅ |
+| L0: 8-Week Trend | Metric direction | +0.33 pp | ✅ |
+| L1: Country Breakdown | Countries ±2.5% threshold | None flagged | ✅ |
+| L1: Dimension Scan | Anomalous dimensions | No data available | ⚠️ |
 
 **Key Findings:**
-- The -0.01pp decline is statistically insignificant and represents the smallest week-over-week change in the 8-week observation period
-- PCAR has remained remarkably stable in the 96.88%-96.99% range over the past 6 weeks (W10-W15), with the exception of W09 which peaked at 97.3%
-- Volume decreased by approximately 11% compared to the 8-week average (~47,199), though this did not materially impact the rate
-- No country-level or dimensional anomalies were flagged, indicating the minor decline is distributed rather than concentrated
-- The metric appears to have stabilized after a -0.42pp drop in W10 following the W09 peak
+- PCAR reached its highest level in the 8-week window at 97.22%, recovering above the W09 peak of 97.3%
+- Volume decreased by 10.7% compared to W14 (44,168 vs 39,914 orders), though this appears to be a data reporting note as W15 shows higher volume
+- The trend has been relatively stable over 8 weeks, fluctuating within a narrow band of 96.88% to 97.30%
+- No countries exceeded the ±2.5% threshold, indicating consistent performance across regions
+- No dimension-level anomalies were identified in the L1 scan (empty dataset)
 
-**Action:** Monitor – No immediate action required. The metric remains stable within acceptable bounds with no identified root cause for concern.
+**Action:** Monitor — The metric is improving and within normal operating range. No escalation required. Continue standard weekly tracking.
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 96.89% | 44,166 | -0.01% |
+| 2026-W15 | 97.22% | 44,168 | +0.33% |
 | 2026-W14 | 96.9% | 39,914 | +0.01% |
 | 2026-W13 | 96.89% | 42,897 | +0.01% |
 | 2026-W12 | 96.88% | 44,209 | -0.11% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate declined by -0.78 percentage points (90.95% → 90.24%) in 2026-W15, though the metric remains above the 8-week average performance level.
+**Overall:** Reactivation rate declined from 90.95% to 90.24% (-0.71 pp) in 2026-W15, with volume increasing significantly from 20,279 to 26,178 orders (+29.1%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Rate dropped -0.78pp WoW | -0.78pp | ⚠️ |
-| L1: Country Breakdown | No data available | N/A | ✅ |
-| L1: Dimension Scan | No data available | N/A | ✅ |
+| L0: Overall Trend | Rate declined -0.71 pp | -0.78% | ⚠️ |
+| L1: Country Breakdown | No country data available | N/A | ✅ |
+| L1: Dimension Scan | No dimension data available | N/A | ✅ |
 
 **Key Findings:**
-- Reactivation rate declined -0.78pp WoW, reversing the +0.29pp gain from the prior week
-- Current volume (26,178 orders) is the highest in the 8-week period, representing a 29% increase vs W14 (20,279 orders)
-- Despite the weekly decline, the 90.24% rate remains well above the 8-week low of 86.89% (W09) and above the period average
-- No country-level or dimensional data available to identify specific drivers of the decline
-- The rate has generally trended upward since W08 (87.39%), with this week representing a minor pullback
+- Reactivation rate dropped -0.71 pp week-over-week, reversing the +0.29 pp gain seen in W14
+- Order volume surged by 29.1% (from 20,279 to 26,178), the highest volume in the 8-week period
+- Despite the weekly decline, the current rate (90.24%) remains well above the W08-W11 range (86.89%-89.47%)
+- No country-level flags triggered (none exceeded ±2.5% threshold)
+- No dimensional anomalies identified in the L1 scan
 
-**Action:** Monitor — The decline is modest (-0.78pp) and occurs against a backdrop of strong volume growth and an overall positive 8-week trend. No L1 flags were triggered. Continue monitoring next week; escalate if decline persists or exceeds -1.5pp.
+**Action:** Monitor — The decline is modest (-0.71 pp) and coincides with a significant volume spike. Rate remains elevated compared to earlier weeks, and no L1 flags were triggered. Continue tracking to determine if this is a volume-driven normalization or the start of a downward trend.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

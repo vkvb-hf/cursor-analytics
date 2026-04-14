@@ -7,24 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PAR improved by +0.14 percentage points (93.63% → 93.76%) in 2026-W15, continuing a positive 7-week upward trend from the 93.13% baseline in W08.
+**Overall:** PAR improved by +0.14 percentage points (93.63% → 93.76%) in 2026-W15, continuing a consistent upward trend observed over the past 8 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Trend Analysis | 8-week trend showing consistent improvement | +0.63pp since W08 | ✅ |
-| L1: Country Breakdown | No country data available | N/A | ⚠️ |
-| L1: Dimension Scan | No dimension anomalies flagged | N/A | ⚠️ |
+| L0: 8-Week Trend | Sustained improvement pattern | +0.63pp since W08 | ✅ |
+| L1: Country Breakdown | No countries provided | N/A | ✅ |
+| L1: Dimension Scan | No dimension anomalies | N/A | ✅ |
+| Threshold Check | No countries exceeding ±2.5% | None flagged | ✅ |
 
 **Key Findings:**
-- PAR has shown consistent week-over-week improvement for 7 consecutive weeks, rising from 93.13% (W08) to 93.76% (W15), a cumulative gain of +0.63pp
-- Volume has declined steadily from 457,610 orders (W10) to 408,629 orders (W15), representing an approximate 10.7% reduction in order volume
-- The strongest single-week improvements occurred in W10 (+0.24pp) and W11 (+0.22pp)
-- No countries exceeded the ±2.5% threshold, indicating stable performance across regions
-- No specific dimension anomalies were flagged in the dimension scan
+- PAR has shown consistent week-over-week improvement for 6 consecutive weeks, rising from 93.13% (W08) to 93.76% (W15), a cumulative gain of +0.63pp
+- Volume has steadily decreased from 453,781 (W08) to 408,629 (W15), a reduction of approximately 45,000 orders (-10%)
+- No country-level or dimension-level anomalies were flagged in the L1 breakdown
+- The +0.14pp improvement in W15 is within the normal range of recent weekly fluctuations (+0.03pp to +0.24pp)
+- All threshold checks passed with no segments exceeding the ±2.5% alert threshold
 
-**Action:** Monitor — The metric is trending positively with no flagged anomalies; continue standard tracking while noting the declining volume trend.
+**Action:** Monitor — The metric shows healthy, sustained improvement with no anomalies requiring investigation. Continue standard weekly monitoring.
 
 ---
 
@@ -61,4 +62,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

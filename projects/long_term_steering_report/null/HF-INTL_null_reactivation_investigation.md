@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved from 90.92% to 91.47% (+0.55 pp) in 2026-W15, continuing a positive trend with volume of 41,652 orders.
+**Overall:** Reactivation rate improved from 90.92% to 91.47% (+0.55 pp) in 2026-W15, reaching the highest level in the 8-week observation period with 41,652 orders processed.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Trend | Rate increasing for 2 consecutive weeks | +0.55 pp | ✅ |
-| L1: Country | No countries exceeding ±2.5% threshold | N/A | ✅ |
-| L1: Dimension | No dimension anomalies detected | N/A | ✅ |
+| L0: 8-Week Trend | Rate increased +0.55 pp vs prior week | +0.60% | ✅ |
+| L1: Country Breakdown | No country data available | N/A | ⚠️ |
+| L1: Dimension Scan | No dimension data available | N/A | ⚠️ |
 
 **Key Findings:**
-- Reactivation rate reached 91.47% in W15, the highest point in the 8-week observation window
-- Two consecutive weeks of improvement: +0.99 pp in W14 followed by +0.55 pp in W15
-- Volume decreased from 32,555 (W14) to 41,652 (W15), representing a 28% increase in order volume alongside rate improvement
-- Rate has improved +0.61 pp compared to W08 baseline (90.86%), showing sustained positive trajectory
-- No country-level or dimensional anomalies flagged requiring investigation
+- Reactivation rate of 91.47% in W15 represents the highest point in the 8-week trend, surpassing the previous high of 90.92% in W09
+- Week-over-week improvement of +0.55 pp continues positive momentum from W14 (+0.99 pp)
+- Order volume of 41,652 represents a +28.0% increase vs prior week (32,555) but remains below the 8-week average
+- No countries flagged as exceeding the ±2.5% threshold, indicating stable performance across regions
+- Insufficient dimensional data available to identify specific drivers of improvement
 
-**Action:** Monitor — The metric shows healthy improvement with no threshold breaches. Continue standard monitoring cadence.
+**Action:** Monitor — The metric shows healthy improvement with no anomalies detected. Continue tracking to confirm sustained positive trend. Consider investigating data availability for L1 breakdowns to enable deeper analysis in future periods.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

@@ -2,29 +2,29 @@
 
 **Metric:** PCAR  
 **Period:** 2026-W14 → null  
-**Observation:** 97.03% → 97.14% (+0.11%)  
-**Volume:** 11,720 orders
+**Observation:** 97.03% → 97.37% (+0.35%)  
+**Volume:** 11,721 orders
 
 ## Executive Summary
 
-**Overall:** PCAR improved from 97.03% to 97.14% (+0.11 pp) in W15, representing a modest recovery on lower volume of 11,720 orders.
+**Overall:** PCAR improved by +0.35 percentage points (97.03% → 97.37%) in 2026-W15, returning to the same level observed in 2026-W10.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Trend Analysis | 8-week trend review | +0.11 pp | ✅ |
-| L1: Country Breakdown | Country threshold ±2.5% | No countries flagged | ✅ |
-| L1: Dimension Scan | Dimension anomalies | No anomalies detected | ✅ |
+| L0: WL Trend | 8-week stability | +0.35 pp | ✅ |
+| L1: Country | Threshold ±2.5% | None flagged | ✅ |
+| L1: Dimension Scan | Anomaly detection | No data | ✅ |
 
 **Key Findings:**
-- PCAR rate of 97.14% is the second-highest in the 8-week period, behind only W10 (97.37%) and W09 (97.34%)
-- Order volume continues to decline, dropping from 16,585 in W08 to 11,720 in W15 (-29.3% over 8 weeks)
-- No countries exceeded the ±2.5% threshold, indicating stable performance across all regions
-- The metric has recovered from the low point of 96.86% in W08 and 96.88% in W12
-- No dimension anomalies were flagged in the L1 dimension scan
+- PCAR increased +0.35 pp week-over-week, recovering from a slight dip in 2026-W14 (-0.04 pp)
+- Current rate of 97.37% matches the 8-week high previously seen in 2026-W10
+- Order volume decreased to 11,721 (down from 11,373 prior week), continuing a downward volume trend since 2026-W10 (16,267 orders)
+- No countries exceeded the ±2.5% threshold, indicating uniform performance across regions
+- The metric shows general stability within a narrow band of 96.86%–97.37% over the 8-week period
 
-**Action:** Monitor — The slight improvement is positive but the declining volume trend warrants continued observation.
+**Action:** Monitor — The improvement is positive and no anomalies are flagged, but the declining volume trend warrants continued observation.
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 97.14% | 11,720 | +0.11% |
+| 2026-W15 | 97.37% | 11,721 | +0.35% |
 | 2026-W14 | 97.03% | 11,373 | -0.04% |
 | 2026-W13 | 97.07% | 13,604 | +0.20% |
 | 2026-W12 | 96.88% | 14,412 | -0.07% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

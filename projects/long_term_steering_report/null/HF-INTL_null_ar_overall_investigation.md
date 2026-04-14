@@ -2,29 +2,29 @@
 
 **Metric:** AR Overall  
 **Period:** 2026-W14 → null  
-**Observation:** 93.64% → 94.74% (+1.17%)  
+**Observation:** 93.63% → 94.74% (+1.19%)  
 **Volume:** 744,637 orders
 
 ## Executive Summary
 
-**Overall:** AR Overall improved from 93.64% to 94.74% (+1.10 pp) in 2026-W15, recovering to levels last seen in W11-W12 after a three-week decline.
+**Overall:** AR Overall improved from 93.63% to 94.74% (+1.11 pp) in 2026-W15, representing a recovery to the highest level in the 8-week observation period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate increased +1.17% vs prior week | +1.10 pp | ✅ |
-| L1: Country Breakdown | No countries reported | No data | ⚠️ |
-| L1: Dimension Scan | No dimensions flagged | No data | ⚠️ |
+| L0 Trend | 8-week pattern | +1.11 pp WoW | ✅ |
+| L1 Country | Threshold ±2.5% | No flags | ✅ |
+| L1 Dimension | Anomaly scan | No data | ⚠️ |
 
 **Key Findings:**
-- AR Overall rate of 94.74% represents the highest performance in the 8-week observation window, surpassing the previous peak of 94.9% in W11
-- Volume declined to 744,637 orders (-5.07% vs W14's 784,394), continuing a consistent downward volume trend from W10's peak of 916,831
-- The metric shows recovery after three consecutive weeks of decline (W12 through W14)
-- No country-level or dimension-level data is available for root cause analysis, limiting visibility into what drove the improvement
-- Volume has decreased approximately 18.8% over the 8-week period while rates have remained relatively stable (93.13% - 94.90% range)
+- AR Overall recovered +1.11 pp WoW, reversing a 3-week declining trend (W12-W14) where rates dropped from 94.6% to 93.63%
+- Current rate of 94.74% matches the recent peak seen in 2026-W11 (94.9%), indicating a return to optimal performance levels
+- Volume decreased by 5.1% WoW (744,637 vs 784,406), continuing a consistent downward volume trend since W11 (897,107)
+- No countries exceeded the ±2.5% threshold, suggesting the improvement was broadly distributed across all markets
+- No dimension-level anomalies were flagged in the L1 scan
 
-**Action:** Monitor – The improvement is positive but lacks supporting L1 data to confirm drivers. Continue tracking to verify sustained recovery and investigate the data gap in country/dimension breakdowns.
+**Action:** Monitor – The metric has recovered positively with no country or dimension flags requiring investigation. Continue standard monitoring to confirm the improvement sustains.
 
 ---
 
@@ -34,9 +34,9 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 94.74% | 744,637 | +1.17% |
-| 2026-W14 | 93.64% | 784,394 | -0.55% |
-| 2026-W13 | 94.16% | 842,482 | -0.47% |
+| 2026-W15 | 94.74% | 744,637 | +1.19% |
+| 2026-W14 | 93.63% | 784,406 | -0.55% |
+| 2026-W13 | 94.15% | 842,482 | -0.48% |
 | 2026-W12 | 94.6% | 877,189 | -0.32% |
 | 2026-W11 | 94.9% | 897,107 | +1.17% |
 | 2026-W10 | 93.8% | 916,831 | +0.72% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

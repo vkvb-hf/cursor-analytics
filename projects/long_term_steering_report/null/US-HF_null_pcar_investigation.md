@@ -7,24 +7,25 @@
 
 ## Executive Summary
 
-**Overall:** PCAR improved by +0.18 percentage points (92.85% → 93.02%) in 2026-W15, with volume increasing to 17,669 orders.
+**Overall:** PCAR improved by +0.18 percentage points (92.85% → 93.02%) in 2026-W15, continuing a positive recovery trend from the W13 low point.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Rate within normal range | +0.18 pp | ✅ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | None flagged | ✅ |
-| L1: Dimension Scan | No anomalies detected | No data | ✅ |
+| L1: Country Breakdown | No countries flagged | N/A | ✅ |
+| L1: Dimension Scan | No anomalies detected | N/A | ✅ |
+| Volume Check | 17,669 orders (+18.5% vs prior week) | N/A | ✅ |
 
 **Key Findings:**
-- PCAR increased +0.18 pp week-over-week, continuing a recovery from the W13 low of 92.57%
-- Order volume rose significantly from 14,911 (W14) to 17,669 (W15), a +18.5% increase in volume
-- Current rate of 93.02% remains below the recent peak of 94.58% observed in W10 (-1.56 pp)
-- No country-level or dimensional anomalies were flagged in this period
-- The metric shows stabilization within the 92.5%-93.5% range over the past 4 weeks
+- PCAR increased +0.18 pp week-over-week, marking the second consecutive week of improvement after the W13 trough (92.57%)
+- Order volume rose significantly from 14,911 to 17,669 orders (+18.5%), indicating stronger demand in W15
+- No country-level anomalies exceeded the ±2.5% threshold, suggesting broad-based stability
+- Current rate (93.02%) remains below the 8-week high of 94.58% observed in W10, indicating room for further recovery
+- The metric shows moderate volatility over the 8-week period, ranging from 92.57% to 94.58%
 
-**Action:** Monitor — The slight improvement and absence of flagged anomalies suggest normal operations; continue standard weekly tracking.
+**Action:** Monitor — The metric is trending positively with no flagged dimensions or country-level concerns. Continue standard monitoring to confirm sustained recovery toward the W10 peak performance level.
 
 ---
 
@@ -61,4 +62,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

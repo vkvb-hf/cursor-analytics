@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** PAR improved by +0.12 percentage points (94.0% → 94.11%) in 2026-W15, continuing a consistent upward trend observed over the past 8 weeks.
+**Overall:** PAR improved by +0.12 percentage points (94.0% → 94.11%) in 2026-W15, continuing a consistent upward trend over the past 8 weeks with volume of 497,775 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | 8-week trend shows steady improvement (+0.84pp since W08) | +0.12pp | ✅ |
-| L1: Country Breakdown | No country data available | N/A | ✅ |
-| L1: Dimension Scan | No dimension anomalies flagged | N/A | ✅ |
-| Threshold Check | No countries exceeding ±2.5% threshold | None flagged | ✅ |
+| L0: 8-Week Trend | Sustained improvement pattern | +0.84pp over 8 weeks | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | N/A | ✅ |
+| L1: Dimension Scan | No anomalies flagged | N/A | ✅ |
 
 **Key Findings:**
-- PAR has improved consistently for 7 consecutive weeks, rising from 93.27% (W08) to 94.11% (W15), representing a cumulative gain of +0.84pp
-- Week-over-week volume declined by 9,414 orders (-1.9%), from 507,189 to 497,775, continuing a gradual volume decline trend since W11
-- No countries or dimensions were flagged as exceeding the ±2.5% threshold, indicating stable performance across all segments
-- The improvement rate has been modest but steady, averaging approximately +0.12pp per week over the 8-week period
+- PAR has improved consistently for 7 consecutive weeks, rising from 93.27% (W08) to 94.11% (W15), a cumulative gain of +0.84pp
+- Week-over-week improvement of +0.12pp is in line with the recent average weekly gains (+0.10% to +0.30%)
+- Order volume has decreased steadily from 548,921 (W08) to 497,775 (W15), a reduction of ~9.3%, which may partially explain rate improvement
+- No country-level or dimensional anomalies were flagged, indicating broad-based stable performance
+- All changes remain within normal operating thresholds
 
-**Action:** Monitor — Continue tracking the positive trend; no investigation required as all checks pass and no anomalies detected.
+**Action:** Monitor — The metric shows healthy, steady improvement with no anomalies requiring investigation. Continue tracking to ensure the positive trend sustains.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

@@ -2,29 +2,29 @@
 
 **Metric:** PAR  
 **Period:** 2026-W14 → null  
-**Observation:** 91.05% → 91.66% (+0.67%)  
+**Observation:** 91.05% → 91.65% (+0.66%)  
 **Volume:** 160,979 orders
 
 ## Executive Summary
 
-**Overall:** PAR metric improved from 91.05% to 91.66%, a gain of +0.61 percentage points week-over-week, reaching the highest level in the 8-week observation period.
+**Overall:** PAR improved from 91.05% to 91.65% (+0.60 pp) in 2026-W15, representing a recovery after the prior week's decline and reaching the highest rate in the 8-week observation period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement pattern | +0.67% WoW | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | N/A | ✅ |
-| L1: Dimension Scan | No dimensional anomalies detected | N/A | ✅ |
+| L0: WL Trend | Rate change within normal range | +0.60 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | None flagged | ✅ |
+| L1: Dimension Scan | No anomalous dimensions detected | No data | ✅ |
 
 **Key Findings:**
-- PAR has shown consistent upward momentum, rising from 89.88% in W08 to 91.66% in W15 (+1.78 pp over 8 weeks)
-- Week-over-week improvement of +0.67% reverses the slight decline seen in W14 (-0.27%)
-- Order volume decreased by 4,039 orders (160,979 vs 165,018) while rate improved, suggesting quality improvement rather than volume-driven change
-- No country-level flags triggered; performance appears uniform across geographies
-- No dimensional anomalies identified in the L1 scan, indicating broad-based improvement
+- PAR rate of 91.65% is the highest observed in the 8-week trend period, surpassing the previous high of 91.58% in 2026-W11
+- Volume decreased by approximately 4,039 orders (160,979 vs 165,018) week-over-week, continuing a consistent downward volume trend from 180,862 in W09
+- The 8-week trend shows overall positive trajectory with PAR improving from 89.88% (W08) to 91.65% (W15), a gain of +1.77 pp
+- No country-level flags were triggered, indicating the improvement was broadly distributed
+- No dimension-level anomalies were identified requiring investigation
 
-**Action:** Monitor — The metric is trending positively with no flags at L1 level. Continue standard monitoring cadence; no immediate investigation required.
+**Action:** Monitor — The metric is performing well with positive week-over-week improvement and no flagged anomalies. Continue standard monitoring cadence.
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 91.66% | 160,979 | +0.67% |
+| 2026-W15 | 91.65% | 160,979 | +0.66% |
 | 2026-W14 | 91.05% | 165,018 | -0.27% |
 | 2026-W13 | 91.3% | 169,667 | -0.02% |
 | 2026-W12 | 91.32% | 169,891 | -0.28% |
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

@@ -1,22 +1,22 @@
 # Fraud Approval Rate - Overall Summary
 
 **Week:** null  
-**Generated:** 2026-04-13 14:38  
+**Generated:** 2026-04-14 14:28  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Fraud Approval Rate performance was mixed globally this week, with two clusters (US-HF and HF-NA) showing significant declines while three clusters (HF-INTL, WL, RTE) remained stable or improved slightly. The most significant concern is the sharp increase in PF Block Rate across US-HF (+2.16 pp to 3.03%) and HF-NA (+1.45 pp to 2.84%), which drove meaningful FAR declines in both North American clusters.
+Fraud Approval Rate performance was mixed across clusters this week, with two clusters (US-HF, HF-NA) showing significant declines while three others (HF-INTL, WL, RTE) remained stable or improved marginally. The most critical concern is the sharp spike in PF Block Rate across both US-HF (+2.18 pp to 3.03%) and HF-NA (+1.47 pp to 2.84%), which drove significant FAR declines and warrants immediate investigation.
 
 ### Cluster Highlights
 
-- **US-HF:** FAR declined significantly by -2.47 pp to 89.22%, primarily driven by PF Block Rate spiking from 0.87% to 3.03%, the highest level in the 8-week observation period.
-- **HF-INTL:** Stable at 92.19% (+0.77 pp), a non-significant improvement with all metrics within normal operating ranges despite an 18.9% volume increase.
-- **WL:** Stable at 93.45% (+0.68 pp), a non-significant improvement though Duplicate Rate reached an 8-week high of 16.07%.
-- **HF-NA:** FAR declined significantly by -1.14 pp to 89.67%, driven by PF Block Rate doubling from 1.39% to 2.84% amid an 18.0% volume increase.
-- **RTE:** Stable at 94.79% (+0.23 pp), continuing a gradual upward trend with no anomalies detected across countries or channels.
+- **US-HF:** FAR declined significantly by -2.60 pp to 89.21%, driven primarily by PF Block Rate more than tripling from 0.85% to 3.03%.
+- **HF-INTL:** Stable with FAR improving marginally by +0.51 pp to 92.17%, with no statistically significant changes or country-level anomalies.
+- **WL:** Stable with FAR improving by +0.52 pp to 93.41%, supported by a slight decrease in PF Block Rate despite elevated Duplicate Rate at 16.06%.
+- **HF-NA:** FAR declined significantly by -1.44 pp to 89.66%, driven by PF Block Rate doubling from 1.37% to 2.84% amid a 16.8% volume increase.
+- **RTE:** Stable with FAR improving marginally by +0.11 pp to 94.75%, continuing a gradual 3-week upward trend with no material concerns.
 
 ---
 

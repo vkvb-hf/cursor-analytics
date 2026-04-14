@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved by +0.70% (from 88.67% to 89.29%) in 2026-W15, reaching the highest level in the 8-week observation period with a volume of 9,277 orders.
+**Overall:** Reactivation rate improved from 88.67% to 89.29% (+0.62 pp) in 2026-W15, continuing a positive upward trend with the highest rate observed in the 8-week period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent upward trend from W08 baseline | +4.22pp vs W08 | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | None flagged | ✅ |
-| L1: Dimension Scan | No anomalous dimensions detected | No data | ✅ |
+| L0: 8-Week Trend | Sustained improvement | +0.70% vs prior week | ✅ |
+| L1: Country Breakdown | No countries reported | No data available | ✅ |
+| L1: Dimension Scan | No dimensions flagged | No data available | ✅ |
 
 **Key Findings:**
-- Reactivation rate has improved steadily from 85.07% (W08) to 89.29% (W15), representing a +4.22pp gain over the 8-week period
-- Current week volume (9,277 orders) is the highest in the observation period, indicating strong engagement alongside improved conversion
-- No country-level flags triggered, suggesting the improvement is broad-based rather than driven by a single market
-- Week-over-week growth of +0.70% continues positive momentum following W14's slight dip (-0.05%)
-- The metric appears to be stabilizing in the 88-89% range after earlier volatility between W09-W11
+- Reactivation rate reached 89.29% in W15, the highest point in the 8-week observation window
+- Volume increased significantly from 7,706 (W14) to 9,277 (W15), a 20.4% increase in order volume
+- The metric shows a consistent upward trajectory from 85.07% (W08) to 89.29% (W15), representing a +4.22 pp improvement over 8 weeks
+- No countries exceeded the ±2.5% threshold, indicating stable performance across all markets
+- No anomalies detected in dimension scan analysis
 
-**Action:** Monitor — The metric is trending positively with no anomalies detected. Continue standard monitoring cadence to confirm sustained performance at the elevated rate.
+**Action:** Monitor – The metric is trending positively with no flags raised. Continue standard monitoring to ensure the improvement trajectory is maintained.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

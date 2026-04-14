@@ -7,24 +7,24 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved from 89.2% to 90.41% (+1.21 pp) in 2026-W15, continuing a strong upward trend observed over the past 8 weeks.
+**Overall:** Reactivation rate improved from 89.2% to 90.41% (+1.21 pp) in 2026-W15, continuing a positive 8-week upward trend from 84.71% in W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement from 84.71% (W08) to 90.41% (W15) | +5.70 pp over 8 weeks | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | N/A | ✅ |
-| L1: Dimension Scan | No anomalies flagged | N/A | ✅ |
+| L0: 8-Week Trend | Consistent upward trend observed | +5.70 pp over 8 weeks | ✅ |
+| L1: Country Breakdown | No data available | N/A | ⚠️ |
+| L1: Dimension Scan | No data available | N/A | ⚠️ |
 
 **Key Findings:**
-- Reactivation rate has improved consistently over 8 weeks, rising +5.70 pp from 84.71% (W08) to 90.41% (W15)
-- Week-over-week change of +1.21 pp (W14 to W15) represents continued positive momentum
-- Volume decreased from 17,264 (W14) to 19,757 (W15), indicating the rate improvement is not driven by volume reduction
-- No country-level anomalies detected; improvement appears broad-based across all markets
-- No dimension-level flags identified, suggesting systemic improvement rather than isolated segment shifts
+- Reactivation rate has shown consistent week-over-week improvement, rising from 84.71% (W08) to 90.41% (W15), a total gain of +5.70 pp over the 8-week period
+- Current week (W15) volume of 19,757 orders is lower than mid-period peaks (W11: 23,790; W10: 26,102), suggesting improved rate is not solely volume-driven
+- No countries flagged as exceeding the ±2.5% threshold, indicating stable performance across regions
+- L1 dimension data is unavailable, limiting root cause identification for the positive trend
+- The rate appears to be approaching a plateau with smaller weekly gains in recent weeks (+1.36% W15 vs +2.19% W11)
 
-**Action:** Monitor — Continue tracking weekly performance to confirm the positive trend sustains; no investigation or escalation required at this time.
+**Action:** Monitor — Continue tracking the positive trend; investigate L1 dimension data gaps to understand drivers of improvement and assess sustainability.
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*

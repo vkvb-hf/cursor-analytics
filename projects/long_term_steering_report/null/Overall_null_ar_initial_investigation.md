@@ -1,22 +1,22 @@
 # Acceptance Rate (Initial Charges) - Overall Summary
 
 **Week:** null  
-**Generated:** 2026-04-13 14:38  
+**Generated:** 2026-04-14 14:28  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Initial Charges) improved across all five clusters in 2026-W15, with gains ranging from +0.26pp (HF-NA) to +2.22pp (HF-INTL). The most significant concern is the substantial volume decline observed across all clusters (24-41% reductions over recent weeks), which may be influencing rate improvements through mix shift effects and warrants continued monitoring.
+Acceptance Rate (Initial Charges) improved across all clusters in 2026-W15, with gains ranging from +0.32 pp (HF-NA) to +2.13 pp (HF-INTL). However, significant volume declines of 32-41% across multiple clusters over the 8-week period warrant close monitoring to ensure rate improvements are sustainable at normalized volume levels.
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.78% to 89.71% with no country-level anomalies, though volume has declined 37% over the past 5 weeks.
-- **HF-INTL:** Strongest improvement at +2.47% to 92.06% (8-week high), coinciding with the lowest volume week (27,458 orders), suggesting possible mix shift effects.
-- **WL:** Recovered by +1.36% to 91.05%, reversing a two-week declining trend with no dimensional flags raised.
-- **HF-NA:** Modest improvement of +0.26% to 90.01%, marking two consecutive weeks of gains following the W13 low point.
-- **RTE:** Improved by +0.91% to 91.74%, partially recovering after three consecutive weeks of decline but still 1.41pp below the W08 baseline of 93.15%.
+- **US-HF:** Improved by +0.87% to 89.73% on 12,186 orders, though no L1 breakdown data is available to identify specific drivers and volume has declined 37% since W10.
+- **HF-INTL:** Strongest improvement at +2.13% to 91.77% (8-week high), but accompanied by a concerning 41% volume decline from W08 that may be artificially inflating rates.
+- **WL:** Improved by +1.35% to 91.04%, reversing prior week declines with no country-level anomalies flagged.
+- **HF-NA:** Modest improvement of +0.32% to 90.03%, marking two consecutive weeks of gains with no L1 anomalies detected.
+- **RTE:** Recovered +0.97% to 91.76%, breaking a 4-week decline streak though still 1.83 pp below the W09 peak of 93.59%.
 
 ---
 

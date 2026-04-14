@@ -2,29 +2,29 @@
 
 **Metric:** AR Initial (LL0)  
 **Period:** 2026-W14 → null  
-**Observation:** 89.84% → 92.06% (+2.47%)  
-**Volume:** 27,458 orders
+**Observation:** 89.86% → 91.77% (+2.13%)  
+**Volume:** 27,526 orders
 
 ## Executive Summary
 
-**Overall:** AR Initial (LL0) for HF-INTL improved from 89.84% to 92.06%, a gain of +2.22 percentage points (+2.47% relative change) in W15 vs W14, though on lower volume (27,458 vs 30,889 orders).
+**Overall:** AR Initial (LL0) for HF-INTL improved from 89.86% to 91.77%, a +1.91 percentage point increase week-over-week (2026-W14 to 2026-W15), though volume declined from 30,893 to 27,526 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0 Trend | 8-week pattern review | +2.22pp WoW | ✅ |
-| L1 Country | Country breakdown analysis | No data available | ⚠️ |
+| L0 Trend | 8-week stability | +1.91 pp WoW | ✅ |
+| L1 Country | Country breakdown | No data available | ⚠️ |
 | L1 Dimension | Dimension scan | No data available | ⚠️ |
 
 **Key Findings:**
-- W15 rate of 92.06% represents the highest AR Initial rate in the 8-week observation period, surpassing the previous high of 91.58% in W11
-- Volume has declined consistently over the past 8 weeks, dropping from 46,395 orders in W08 to 27,458 in W15 (a 41% reduction)
-- The metric shows volatility with alternating positive/negative weeks: W09 (-2.34%), W10 (+2.64%), W11 (+1.27%), W12 (-0.41%), W13 (-1.11%), W14 (-0.39%), W15 (+2.47%)
-- No L1 country or dimension data is available to identify specific drivers of the improvement
-- The rate improvement coincides with the lowest volume week, suggesting possible mix shift effects
+- AR Initial rate increased +1.91 pp WoW, reaching 91.77% in 2026-W15—the highest rate in the 8-week observation period
+- Order volume has been declining steadily over the 8-week period, dropping from 46,385 (W08) to 27,526 (W15), representing a ~41% volume reduction
+- No countries exceeded the ±2.5% threshold, and no dimension-level anomalies were flagged in L1 analysis
+- The rate improvement in W15 recovers the metric to levels similar to W11-W12 (91.59% and 91.19% respectively)
+- Volume decline may be artificially inflating the rate if lower-risk orders are being prioritized
 
-**Action:** Monitor — The improvement is positive but root cause cannot be confirmed without L1 breakdown data. Continue tracking to verify if the rate holds as volume potentially normalizes.
+**Action:** Monitor — The metric improvement is positive, but the significant volume decline warrants continued observation. Investigate the root cause of the ~41% volume drop over 8 weeks to ensure the rate improvement is sustainable at normal volume levels.
 
 ---
 
@@ -34,14 +34,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 92.06% | 27,458 | +2.47% |
-| 2026-W14 | 89.84% | 30,889 | -0.39% |
-| 2026-W13 | 90.19% | 34,606 | -1.11% |
-| 2026-W12 | 91.2% | 39,234 | -0.41% |
-| 2026-W11 | 91.58% | 42,845 | +1.27% |
-| 2026-W10 | 90.43% | 47,675 | +2.64% |
-| 2026-W09 | 88.1% | 46,648 | -2.34% |
-| 2026-W08 | 90.21% | 46,395 | - |
+| 2026-W15 | 91.77% | 27,526 | +2.13% |
+| 2026-W14 | 89.86% | 30,893 | -0.43% |
+| 2026-W13 | 90.25% | 34,621 | -1.03% |
+| 2026-W12 | 91.19% | 39,244 | -0.44% |
+| 2026-W11 | 91.59% | 42,865 | +1.28% |
+| 2026-W10 | 90.43% | 47,660 | +2.64% |
+| 2026-W09 | 88.1% | 46,653 | -2.35% |
+| 2026-W08 | 90.22% | 46,385 | - |
 
 ---
 
@@ -61,4 +61,4 @@
 
 ---
 
-*Report: 2026-04-13*
+*Report: 2026-04-14*
