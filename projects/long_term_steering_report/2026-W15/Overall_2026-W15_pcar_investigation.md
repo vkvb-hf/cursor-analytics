@@ -1,22 +1,22 @@
 # Payment Checkout Approval Rate - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-14 14:50  
+**Generated:** 2026-04-15 16:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Checkout Approval Rate improved globally in 2026-W15, with all five clusters showing positive or stable performance ranging from -0.04pp to +0.35pp. The most significant finding was the strong recovery in HF-INTL's DK (+3.94pp) and AT (+2.94pp), both exceeding the ±2.5% threshold, while the "Others" payment method continues to underperform across multiple clusters.
+Payment Checkout Approval Rate remained stable across all clusters in 2026-W15, with changes ranging from -0.04pp to +0.35pp, none of which were statistically significant. The most notable finding was TK's +7.54pp improvement in the RTE cluster, driven by a substantial reduction in "Insufficient Funds" declines (-5.81pp).
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.18pp to 93.02% on strong volume growth (+18.5%), driven primarily by Credit Card performance (+0.90pp on 9,998 orders).
-- **HF-INTL:** Improved by +0.13pp to 96.12%, with DK (+3.94pp) and AT (+2.94pp) exceeding thresholds while "Others" payment method remains a concern at 76.47%.
-- **WL:** Improved by +0.35pp to 97.37%, returning to the W10 peak with broad-based gains across all countries and payment methods.
-- **HF-NA:** Essentially stable at 94.08% (-0.04pp), with minor Apple Pay softness (-1.08pp) offset by Credit Card and PayPal improvements.
-- **RTE:** Improved by +0.33pp to 97.22%, reaching an 8-week high, though TK's +7.54pp swing warrants investigation for sustainability.
+- **US-HF:** Stable at 93.02% (+0.18pp), with Credit Card approval improving +0.83pp on the highest volume payment method (9,998 orders).
+- **HF-INTL:** Stable at 96.12% (+0.13pp), with AT (+2.95pp) and DK (+3.94pp) showing Apple Pay-driven improvements from reduced Insufficient Funds declines.
+- **WL:** Improved to 97.37% (+0.35pp), matching the 8-week high with all funnel checks passing and no countries exceeding investigation thresholds.
+- **HF-NA:** Stable at 94.08% (-0.04pp), with offsetting movements between Apple Pay (-1.08pp) and Credit Card (+0.50pp) on 16.3% higher volume.
+- **RTE:** Improved to 97.22% (+0.33pp), driven by TK's significant +7.54pp gain from Braintree (+10.60pp) and reduced Insufficient Funds declines.
 
 ---
 

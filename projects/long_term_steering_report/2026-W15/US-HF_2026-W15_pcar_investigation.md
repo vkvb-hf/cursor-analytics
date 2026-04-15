@@ -1,30 +1,35 @@
 # PCAR Investigation: US-HF 2026-W15
 
-**Metric:** PCAR  
+**Metric:** Payment Checkout Approval Rate  
 **Period:** 2026-W14 → 2026-W15  
 **Observation:** 92.85% → 93.02% (+0.18%)  
-**Volume:** 17,669 orders
+**Volume:** 17,669 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** PCAR improved by +0.18 percentage points (92.85% → 93.02%) in W15, with volume increasing significantly from 14,911 to 17,669 orders (+18.5%).
+## Executive Summary
+
+**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.18 pp | ✅ |
-| L1: Country Breakdown | US only, no countries exceeding ±2.5% threshold | +0.34 pp | ✅ |
-| L1: Payment Method | "Others" declined -2.49 pp but low volume (91 orders) | Mixed | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34pp (US) | ✅ |
+| L1: PaymentMethod | "Others" declined -2.49% but low volume (91 orders) | Mixed | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
+| Mix Shift | High AR tier stable, minor volume decrease (-0.9%) | Stable | ✅ |
 
 **Key Findings:**
-- US PCAR rate improved +0.34 pp (92.78% → 93.1%) with substantial volume of 492,811 orders
-- Credit Card payments showed solid improvement (+0.90 pp, 92.09% → 92.92%) representing the largest volume segment (9,998 orders)
-- "Others" payment method declined -2.49 pp (99.17% → 96.7%) but with minimal volume impact (91 orders)
-- Apple Pay experienced a slight decline of -1.00 pp (93.51% → 92.58%) on 6,169 orders
-- W15 volume (17,669) represents the second-highest in the 8-week period, surpassed only by W09 (21,474)
+- The +0.17pp week-over-week improvement is within normal weekly fluctuation and not statistically significant
+- Credit Card approval rate improved from 92.09% to 92.92% (+0.83pp), representing the largest payment method by volume (9,998 orders)
+- "Others" payment method showed a -2.49% decline, but with only 91 orders, this has negligible impact on overall rate
+- Volume increased 18.5% WoW (14,911 → 17,669 orders), returning closer to W10 levels (17,681)
+- 8-week trend shows rate has stabilized in the 92.5%-93.5% range after a peak of 94.58% in W10
 
-**Action:** Monitor — The +0.18 pp improvement is positive and within normal variance. No dimensions exceeded the ±2.5% threshold with meaningful volume. Continue standard monitoring.
+**Action:** Monitor — No investigation required. The change is not significant, all funnel checks pass, and the rate remains within normal operating range.
 
 ---
 
@@ -49,7 +54,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 93.1% | 92.78% | +0.34% | 492,811 |  |
+| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -57,14 +62,40 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Unknown | nan% | nan% | +nan% | 0 |
-| PaymentMethod | Others | 96.7% | 99.17% | -2.49% | 91 |
-| PaymentMethod | Apple Pay | 92.58% | 93.51% | -1.00% | 6,169 |
-| PaymentMethod | Paypal | 95.39% | 94.57% | +0.87% | 1,411 |
-| PaymentMethod | Credit Card | 92.92% | 92.09% | +0.90% | 9,998 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Unknown | nan% | nan% | +nan% | 0 |  |
+| Others | 96.7% | 99.17% | -2.49% | 91 |  |
+| Apple Pay | 92.58% | 93.51% | -1.00% | 6,169 |  |
+| Paypal | 95.39% | 94.57% | +0.87% | 1,411 |  |
+| Credit Card | 92.92% | 92.09% | +0.90% | 9,998 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
 
 ---
 
-*Report: 2026-04-14*
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+No countries exceeded threshold for deep-dive.
+
+---
+
+*Report: 2026-04-15*

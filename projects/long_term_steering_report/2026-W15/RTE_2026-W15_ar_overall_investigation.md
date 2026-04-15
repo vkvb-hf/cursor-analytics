@@ -1,31 +1,36 @@
 # AR Overall Investigation: RTE 2026-W15
 
-**Metric:** AR Overall  
+**Metric:** Pre-Dunning Acceptance Rate (Overall)  
 **Period:** 2026-W14 → 2026-W15  
 **Observation:** 92.46% → 92.83% (+0.40%)  
-**Volume:** 421,406 orders
+**Volume:** 421,406 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** AR Overall improved from 92.46% to 92.83% (+0.37 pp) in W15, recovering partially from the prior week's decline, with volume of 421,406 orders.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.46% to 92.83% (+0.40%), a change that is not statistically significant given the volume of 421,406 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.37 pp | ✅ |
-| L1: Country Breakdown | 1 country exceeds ±2.5% threshold (TK) | TK: +7.54 pp | ⚠️ |
-| L1: Payment Method | All methods within normal variance | -0.77 pp to +0.48 pp | ✅ |
-| L1: Payment Provider | Unknown provider shows high volatility | +35.88 pp (low volume) | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.40% | ✅ |
+| L1: Country Breakdown | 1 country (TK) exceeded ±2.5% threshold | +7.54% TK | ⚠️ |
+| L1: Dimension Scan | PaymentProvider "Unknown" flagged | +34.35% | ⚠️ |
+| L2: TK Deep-Dive | Multiple payment methods improved significantly | +6.49% to +12.10% | ⚠️ |
+| L3: Related Metrics | All funnel metrics stable | -0.01% to +0.47% | ✅ |
+| Mix Shift | No significant volume shifts impacting rate | TK +9.6% vol | ✅ |
 
 **Key Findings:**
-- TK showed significant improvement of +7.54 pp (88.65% → 95.33%) on 1,950 orders, flagged as outlier exceeding ±2.5% threshold
-- TV experienced the largest decline at -1.37 pp (93.41% → 92.14%) but on low volume (1,895 orders)
-- FJ, the highest volume country (388,956 orders / 92% of total), improved slightly by +0.38 pp, driving overall metric recovery
-- "Unknown" Payment Provider shows +35.88 pp change but is statistically insignificant (131 orders)
-- Overall trend shows stabilization after two consecutive weeks of decline (W13-W14)
+- TK showed exceptional improvement (+7.54pp), driven by significant reductions in "Insufficient Funds" declines (-5.81pp), particularly affecting Adyen (+6.49%) and Braintree (+10.60%) providers
+- All payment methods in TK improved: applepay (+12.10pp), credit_card (+6.49pp), and paypal (+5.41pp)
+- The "Unknown" PaymentProvider flag (+34.35%) is a low-volume artifact (131 orders) and not actionable
+- Overall 8-week trend shows recovery from W14's dip, returning closer to W12-W13 levels (~93%)
+- Volume continues gradual decline trend (-2.4% WoW), consistent with recent weeks
 
-**Action:** Monitor - The improvement is within normal operating range and primarily driven by stable performance in high-volume country FJ. Continue monitoring TK to confirm if the +7.54 pp improvement is sustained or anomalous.
+**Action:** Monitor — The improvement is positive but not significant. TK's improvement appears driven by reduced Insufficient Funds declines, which may indicate improved customer payment health or successful retry logic. No escalation required.
 
 ---
 
@@ -64,18 +69,98 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Others | 97.55% | 98.3% | -0.77% | 5,340 |
-| PaymentMethod | Paypal | 96.65% | 96.45% | +0.21% | 53,618 |
-| PaymentMethod | Apple Pay | 90.34% | 90.01% | +0.37% | 53,550 |
-| PaymentMethod | Credit Card | 92.52% | 92.08% | +0.48% | 308,898 |
-| PaymentProvider | No Payment | 100.0% | 100.0% | +0.00% | 510 |
-| PaymentProvider | ProcessOut | 91.73% | 91.65% | +0.08% | 64,367 |
-| PaymentProvider | Adyen | 89.86% | 89.45% | +0.46% | 74,351 |
-| PaymentProvider | Braintree | 93.87% | 93.41% | +0.49% | 282,047 |
-| PaymentProvider | Unknown | 67.94% | 50.0% | +35.88% | 131 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Others | 97.53% | 98.3% | -0.79% | 5,340 |  |
+| Paypal | 96.65% | 96.45% | +0.21% | 53,618 |  |
+| Apple Pay | 90.34% | 90.01% | +0.36% | 53,550 |  |
+| Credit Card | 92.52% | 92.08% | +0.48% | 308,898 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| No Payment | 100.0% | 100.0% | +0.00% | 510 |  |
+| ProcessOut | 91.73% | 91.65% | +0.08% | 64,367 |  |
+| Adyen | 89.85% | 89.45% | +0.46% | 74,351 |  |
+| Braintree | 93.87% | 93.41% | +0.49% | 282,047 |  |
+| Unknown | 67.18% | 50.0% | +34.35% | 131 | ⚠️ |
 
 ---
 
-*Report: 2026-04-14*
+## L2: TK Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| None | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
+| cashcredit | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
+| paypal | 97.46% | 92.45% | +5.41% | 118 | 106 | ⚠️ |
+| credit_card | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
+| applepay | 93.51% | 83.41% | +12.10% | 462 | 410 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Unknown | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
+| Adyen | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
+| Braintree | 94.31% | 85.27% | +10.60% | 580 | 516 | ⚠️ |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| 1. SUCCESSFULL | 1,859 | 1,577 | 95.33% | 88.65% | +6.69 |
+| Insufficient Funds | 49 | 148 | 2.51% | 8.32% | -5.81 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 21 | 32 | 1.08% | 1.80% | -0.72 |
+| Other reasons | 20 | 22 | 1.03% | 1.24% | -0.21 |
+| Unknown | 1 | 0 | 0.05% | 0.00% | +0.05 |
+
+**Root Cause:** paypal + Adyen + Insufficient
+
+---
+
+## L3: Related Metrics (Overall Total Box Candidates)
+
+| Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|--------|--------|--------|----------|----------|----------|------|
+| 1_FirstRunAR | 91.25% | 90.82% | +0.47% | 421,406 | 431,853 |  |
+| 2_PreDunningAR | 92.83% | 92.46% | +0.41% | 421,406 | 431,853 |  |
+| 3_PostDunningAR | 94.21% | 94.22% | -0.01% | 421,406 | 431,853 |  |
+| 6_PaymentApprovalRate | 94.87% | 94.75% | +0.12% | 421,406 | 431,853 |  |
+
+---
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| FJ | High (>92%) | 397,332 | 388,956 | -2.1% | Stable |
+| CF | High (>92%) | 52,140 | 51,881 | -0.5% | Stable |
+| YE | Medium (>85%) | 45,214 | 42,126 | -6.8% | Stable |
+| TT | High (>92%) | 4,924 | 4,617 | -6.2% | Stable |
+| TO | Low (>85%) | 3,480 | 3,204 | -7.9% | Stable |
+| TZ | Medium (>85%) | 3,013 | 2,660 | -11.7% | Stable |
+| TV | High (>92%) | 2,065 | 1,895 | -8.2% | Stable |
+| TK | Medium (>85%) | 1,779 | 1,950 | +9.6% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| TK | ↑ +7.54% | paypal +5.4% | Adyen +6.5% | Insufficient Funds -5.81pp | paypal + Adyen + Insufficient |
+
+---
+
+*Report: 2026-04-15*

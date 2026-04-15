@@ -2,36 +2,36 @@
 
 **Metric:** Payment Conversion Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 26.41% → 26.23% (-0.17pp)  
-**Volume:** 52,854 payment visits  
-**Threshold:** +0.09pp (0.5 × |Overall PCR Δ|)
+**Observation:** 26.41% → 26.24% (-0.17pp)  
+**Volume:** 52,860 payment visits  
+**Threshold:** +0.08pp (0.5 × |Overall PCR Δ|)
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** PCR declined by -0.17pp (26.41% → 26.23%) on 52,854 payment visits in US-HF during 2026-W15, driven primarily by Fraud Service approval rate degradation.
+**Overall:** Payment Conversion Rate declined by -0.17pp (26.41% → 26.24%) in US-HF during 2026-W15, despite a 20% increase in payment visit volume (44,056 → 52,860).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | GA step-rate | +0.09pp | ✅ |
-| Click Submit Form | GA step-rate | -0.23pp | ⚠️ |
-| FE Validation Passed | GA step-rate | -0.55pp | ⚠️ |
-| Enter Fraud Service | GA step-rate | -0.10pp | ⚠️ |
-| Approved by Fraud Service | GA step-rate | -0.73pp | ⚠️ |
-| Call to PVS | GA step-rate | +0.37pp | ✅ |
-| Successful Checkout | GA step-rate | +0.42pp | ✅ |
+| Select Payment Method | Within threshold | +0.10pp | ✅ |
+| Click Submit Form | Within threshold | -0.25pp | ⚠️ |
+| FE Validation Passed | Exceeds threshold | -0.56pp | ⚠️ |
+| Enter Fraud Service | Exceeds threshold | -0.09pp | ⚠️ |
+| Approved by Fraud Service | Exceeds threshold | -0.71pp | ⚠️ |
+| Call to PVS | Within threshold | +0.35pp | ✅ |
+| Successful Checkout | Within threshold | +0.44pp | ✅ |
 
 **Key Findings:**
-- **Fraud Service approval rate is the primary driver:** Backend data shows a significant -2.40pp decline (91.91% → 89.51%) in Fraud Service approvals, indicating stricter fraud rules or increased flagging
-- **FE Validation recovery rate declined:** Recovery rate dropped -1.88pp (74.36% → 72.48%), with APPLEPAY_DISMISSED errors increasing by +1.53pp share and terms_not_accepted up +0.57pp
-- **Payment method performance degraded:** ProcessOut_CreditCard declined -2.10pp (82.50% → 80.40%) and Braintree_ApplePay declined -2.66pp (78.00% → 75.34%), affecting the two highest-volume payment methods
-- **Braintree_CreditCard experienced severe decline:** Rate dropped -13.31pp (88.76% → 75.45%), though volume is relatively low (167 attempts)
-- **PVS failures increased:** Total PVS failures rose from 934 to 1,102 (+168), with "Insufficient Funds" errors increasing +1.41pp in share
+- **Fraud Service Approval is the primary driver:** Backend data shows a significant -2.40pp decline in Fraud Service approval rate (91.91% → 89.51%), indicating stricter fraud controls or increased fraudulent activity
+- **FE Validation recovery rate dropped:** Recovery rate decreased by -1.86pp (74.36% → 72.50%), with APPLEPAY_DISMISSED errors increasing to 52.3% of all FE errors (+1.54pp)
+- **Payment method performance degraded:** ProcessOut_CreditCard declined -2.10pp (82.50% → 80.40%) and Braintree_ApplePay declined -2.66pp (78.00% → 75.34%), the two highest-volume payment methods
+- **Braintree_CreditCard showed severe decline:** Success rate dropped -13.31pp (88.76% → 75.45%), though volume is relatively low (167 attempts)
+- **PVS failures increased:** Total failures rose from 934 to 1,102 (+168), with "Insufficient Funds" growing +1.41pp as a proportion of failures
 
-**Action:** Investigate — Prioritize review of Fraud Service rule changes impacting approval rates in US, and coordinate with Fraud team to assess if recent model updates are causing increased false positives.
+**Action:** Investigate — The -2.40pp decline in Fraud Service approval rate requires immediate review with the fraud team to determine if rule changes were deployed or if there's an increase in suspicious transaction patterns. Additionally, coordinate with payment processor teams to investigate the degraded performance of ProcessOut_CreditCard and Braintree_ApplePay.
 
 ---
 
@@ -43,15 +43,15 @@
 
 | Funnel Step | 2026-W14 | 2026-W15 | Δ Count | Δ % | 2026-W14 Conv | 2026-W15 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 44,056 | 52,854 | 8,798 | 20.0% | - | - | - |
-| Select Payment Method | 16,381 | 19,701 | 3,320 | 20.3% | 37.18% | 37.27% | +0.09pp |
-| Click Submit Form | 14,468 | 17,354 | 2,886 | 19.9% | 88.32% | 88.09% | -0.23pp |
-| FE Validation Passed | 13,684 | 16,318 | 2,634 | 19.2% | 94.58% | 94.03% | -0.55pp |
-| Enter Fraud Service | 13,426 | 15,994 | 2,568 | 19.1% | 98.11% | 98.01% | -0.10pp |
-| Approved by Fraud Service | 12,580 | 14,870 | 2,290 | 18.2% | 93.70% | 92.97% | -0.73pp |
-| Call to PVS | 12,551 | 14,891 | 2,340 | 18.6% | 99.77% | 100.14% | +0.37pp |
-| **Successful Checkout** | 11,634 | 13,865 | 2,231 | 19.2% | 92.69% | 93.11% | +0.42pp |
-| **PCR Rate** | | | | | 26.41% | 26.23% | **-0.17pp** |
+| Payment Visits | 44,056 | 52,860 | 8,804 | 20.0% | - | - | - |
+| Select Payment Method | 16,381 | 19,709 | 3,328 | 20.3% | 37.18% | 37.29% | +0.10pp |
+| Click Submit Form | 14,468 | 17,358 | 2,890 | 20.0% | 88.32% | 88.07% | -0.25pp |
+| FE Validation Passed | 13,684 | 16,320 | 2,636 | 19.3% | 94.58% | 94.02% | -0.56pp |
+| Enter Fraud Service | 13,426 | 15,997 | 2,571 | 19.1% | 98.11% | 98.02% | -0.09pp |
+| Approved by Fraud Service | 12,581 | 14,877 | 2,296 | 18.2% | 93.71% | 93.00% | -0.71pp |
+| Call to PVS | 12,551 | 14,894 | 2,343 | 18.7% | 99.76% | 100.11% | +0.35pp |
+| **Successful Checkout** | 11,634 | 13,871 | 2,237 | 19.2% | 92.69% | 93.13% | +0.44pp |
+| **PCR Rate** | | | | | 26.41% | 26.24% | **-0.17pp** |
 
 ### Waterfall Backend
 
@@ -87,7 +87,7 @@
 
 | Country | Volume | PCR 2026-W14 | PCR 2026-W15 | Δ PCR | Contribution Rank | Change Rank |
 |---------|--------|-----------------|-----------------|-------|-------------------|-------------|
-| US | 52,854 | 26.41% | 26.23% | -0.18pp | 1 | 1 |
+| US | 52,860 | 26.41% | 26.24% | -0.17pp | 1 | 1 |
 
 ---
 
@@ -97,17 +97,17 @@
 
 | Funnel Step | 2026-W14 | 2026-W15 | Δ Count | Δ % | 2026-W14 Conv | 2026-W15 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 44,056 | 52,854 | +8,798 | +19.97pp | - | - | - |
-| Select Payment Method | 16,381 | 19,701 | +3,320 | +20.27pp | 37.18% | 37.27% | +0.09pp |
-| Click Submit Form | 14,468 | 17,354 | +2,886 | +19.95pp | 88.32% | 88.09% | -0.23pp |
-| FE Validation Passed | 13,684 | 16,318 | +2,634 | +19.25pp | 94.58% | 94.03% | -0.55pp |
-| Enter Fraud Service | 13,426 | 15,994 | +2,568 | +19.13pp | 98.11% | 98.01% | -0.10pp |
-| Approved by Fraud Service | 12,580 | 14,870 | +2,290 | +18.20pp | 93.70% | 92.97% | -0.73pp |
-| Call to PVS | 12,551 | 14,891 | +2,340 | +18.64pp | 99.77% | 100.14% | +0.37pp |
-| **Successful Checkout** | 11,634 | 13,865 | +2,231 | +19.18pp | 92.69% | 93.11% | +0.42pp |
-| **PCR Rate** | | | | | 26.41% | 26.23% | **-0.17pp** |
+| Payment Visits | 44,056 | 52,860 | +8,804 | +19.98pp | - | - | - |
+| Select Payment Method | 16,381 | 19,709 | +3,328 | +20.32pp | 37.18% | 37.29% | +0.10pp |
+| Click Submit Form | 14,468 | 17,358 | +2,890 | +19.98pp | 88.32% | 88.07% | -0.25pp |
+| FE Validation Passed | 13,684 | 16,320 | +2,636 | +19.26pp | 94.58% | 94.02% | -0.56pp |
+| Enter Fraud Service | 13,426 | 15,997 | +2,571 | +19.15pp | 98.11% | 98.02% | -0.09pp |
+| Approved by Fraud Service | 12,581 | 14,877 | +2,296 | +18.25pp | 93.71% | 93.00% | -0.71pp |
+| Call to PVS | 12,551 | 14,894 | +2,343 | +18.67pp | 99.76% | 100.11% | +0.35pp |
+| **Successful Checkout** | 11,634 | 13,871 | +2,237 | +19.23pp | 92.69% | 93.13% | +0.44pp |
+| **PCR Rate** | | | | | 26.41% | 26.24% | **-0.17pp** |
 
-**Key Driver:** Approved by Fraud Service (-0.73pp)
+**Key Driver:** Approved by Fraud Service (-0.71pp)
 
 #### Waterfall Backend
 
@@ -129,26 +129,26 @@
 
 ## FE Validation Errors
 
-**Include reason:** FE Validation Passed Δ Conv (-0.55pp) meets threshold (+0.09pp)
+**Include reason:** FE Validation Passed Δ Conv (-0.56pp) meets threshold (+0.08pp)
 
 ### Recovery Rate
 
 | Metric | 2026-W14 | 2026-W15 | Δ |
 |--------|-------------|-----------------|---|
-| Customers with FE Error | 3,553 | 4,357 | 804 |
-| Error → Passed | 2,642 | 3,158 | 516 |
-| **Recovery Rate** | **74.36%** | **72.48%** | **-1.88pp** |
+| Customers with FE Error | 3,553 | 4,360 | 807 |
+| Error → Passed | 2,642 | 3,161 | 519 |
+| **Recovery Rate** | **74.36%** | **72.50%** | **-1.86pp** |
 
 ### Error Type Distribution
 
 | Error Type | 2026-W14 | 2026-W14 % | 2026-W15 | 2026-W15 % | Δ % |
 | ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
-| APPLEPAY_DISMISSED | 1,805 | 50.8% | 2,280 | 52.3% | +1.53pp |
-| terms_not_accepted | 1,834 | 51.6% | 2,274 | 52.2% | +0.57pp |
-| PAYPAL_POPUP_CLOSED | 254 | 7.1% | 308 | 7.1% | -0.08pp |
-| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 223 | 6.3% | 231 | 5.3% | -0.97pp |
-| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 113 | 3.2% | 146 | 3.4% | +0.17pp |
-| CC_TOKENISE_ERR | 108 | 3.0% | 114 | 2.6% | -0.42pp |
+| APPLEPAY_DISMISSED | 1,805 | 50.8% | 2,282 | 52.3% | +1.54pp |
+| terms_not_accepted | 1,834 | 51.6% | 2,277 | 52.2% | +0.61pp |
+| PAYPAL_POPUP_CLOSED | 254 | 7.1% | 309 | 7.1% | -0.06pp |
+| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 223 | 6.3% | 231 | 5.3% | -0.98pp |
+| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 113 | 3.2% | 146 | 3.3% | +0.17pp |
+| CC_TOKENISE_ERR | 108 | 3.0% | 114 | 2.6% | -0.43pp |
 | PAYPAL_TOKENISE_ERR | 23 | 0.6% | 38 | 0.9% | +0.22pp |
 | APPLEPAY_MERCHANT_VALIDATION_ERR | 0 | 0.0% | 1 | 0.0% | +0.02pp |
 | CC_NO_PREPAID_ERR | 2 | 0.1% | 0 | 0.0% | -0.06pp |
@@ -159,7 +159,7 @@
 
 ## Fraud Analysis
 
-**Include reason:** Enter FS Δ (-0.10pp) meets threshold (+0.09pp)
+**Include reason:** Enter FS Δ (-0.09pp) meets threshold (+0.08pp)
 
 ### Gap (Checkout Attempt → Enter Fraud Service)
 
@@ -188,7 +188,7 @@
 
 ## Payment Verification Errors
 
-**Include reason:** PVS Success Δ Conv (+0.42pp) meets threshold (+0.09pp)
+**Include reason:** PVS Success Δ Conv (+0.44pp) meets threshold (+0.08pp)
 
 | Decline Reason | 2026-W14 | 2026-W14 % | 2026-W15 | 2026-W15 % | Δ Count | Δ % |
 | -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
@@ -209,4 +209,4 @@
 
 ---
 
-*Report: 2026-04-14*
+*Report: 2026-04-15*

@@ -2,31 +2,31 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 47.75% → 46.83% (-0.92pp)  
-**Volume:** 12,662 eligible orders  
+**Observation:** 47.76% → 46.74% (-1.02pp)  
+**Volume:** 12,639 eligible orders  
 **Payday Phase:** Pre-Payday
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 0.92pp (47.75% → 46.83%) in US-HF during Pre-Payday phase, with volume down 8.2% (13,796 → 12,662 eligible orders).
+**Overall:** Dunning Ship Rate declined by 1.02pp (47.76% → 46.74%) in US-HF during W15, coinciding with a Pre-Payday phase and an 8.4% decrease in eligible order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 92.78% → 93.10% | +0.32pp | ✅ |
-| Discount % | 14.59% → 13.91% | -0.68pp | ⚠️ |
-| PC2 | 49.34% → 52.11% | +2.77pp | ✅ |
-| Ship Rate | 47.75% → 46.83% | -0.92pp | ⚠️ |
+| Pre-Dunning AR | 92.78% → 93.09% | +0.31pp | ✅ |
+| Discount % | 14.6% → 13.93% | -0.67pp | ⚠️ |
+| PC2 | 49.34% → 52.09% | +2.75pp | ✅ |
+| Ship Rate | 47.76% → 46.74% | -1.02pp | ⚠️ |
 
 **Key Findings:**
-- Ship Rate declined 0.92pp despite improved Pre-Dunning AR (+0.32pp) and PC2 (+2.77pp), suggesting conversion issues downstream in the funnel
-- Discount rate decreased by 0.68pp (14.59% → 13.91%), which may have contributed to lower ship rate as fewer customers received discount incentives
-- Volume dropped 8.2% week-over-week, indicating reduced eligible order flow into the dunning process
-- Pre-Payday phase typically shows stronger payment behavior, yet ship rate still declined, which is counter to expected seasonal patterns
-- US is the sole market in this cluster and shows Medium SR tier performance
+- Ship Rate declined 1.02pp despite Pre-Dunning AR improving by 0.31pp (93.09%)
+- Discount percentage decreased by 0.67pp (14.6% → 13.93%), potentially reducing conversion incentives
+- PC2 (payment conversion) improved significantly by 2.75pp (52.09%), yet this did not translate to higher ship rates
+- Order volume dropped 8.4% (13,795 → 12,639), shifting from Mid-Cycle to Pre-Payday phase
+- The disconnect between improved PC2 and declining Ship Rate suggests post-payment fulfillment or inventory issues
 
-**Action:** Investigate — The disconnect between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate warrants deeper analysis into the discount strategy reduction and its impact on final conversion.
+**Action:** Investigate — The divergence between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate warrants deeper analysis into post-payment fulfillment processes and the impact of reduced discount incentives.
 
 ---
 
@@ -36,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Pre-Dunning AR | Discount % | PC2 |
 |------|--------------|--------|-----------|----------------|------------|-----|
-| 2026-W14 | Mid-Cycle | 13,796 | 47.75% | 92.78% | 14.59% | 49.34% |
-| 2026-W15 | Pre-Payday | 12,662 | 46.83% | 93.10% | 13.91% | 52.11% |
+| 2026-W14 | Mid-Cycle | 13,795 | 47.76% | 92.78% | 14.6% | 49.34% |
+| 2026-W15 | Pre-Payday | 12,639 | 46.74% | 93.09% | 13.93% | 52.09% |
 
 ---
 
@@ -45,11 +45,11 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| US | 13,796 | 47.75% | 12,662 | 46.83% | -8.2% | Medium |
+| US | 13,795 | 47.76% | 12,639 | 46.74% | -8.4% | Medium |
 
 ---
 
 
 ---
 
-*Report: 2026-04-14*
+*Report: 2026-04-15*

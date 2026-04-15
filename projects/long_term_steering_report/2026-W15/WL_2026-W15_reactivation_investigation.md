@@ -1,30 +1,33 @@
 # Reactivation Investigation: WL 2026-W15
 
-**Metric:** Reactivation  
+**Metric:** Reactivation Rate  
 **Period:** 2026-W14 → 2026-W15  
 **Observation:** 88.67% → 89.29% (+0.70%)  
-**Volume:** 9,277 orders
+**Volume:** 9,277 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved by +0.70% (from 88.67% to 89.29%) in W15, representing the second consecutive week of improvement and reaching the highest rate in the 8-week observation period.
+**Overall:** Reactivation Rate improved slightly from 88.67% to 89.29% (+0.62 pp), representing a non-significant increase on volume of 9,277 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement pattern | +0.70% WoW | ✅ |
-| L1: Country Breakdown | All countries within ±2.5% threshold | +1.07% to +2.17% | ✅ |
-| L1: Dimension Scan | PaymentMethod "Others" anomaly detected | -66.67% | ⚠️ |
+| L0: 8-Week Trend | Within normal range | +0.70% | ✅ |
+| L1: Country Breakdown | No countries exceed ±2.5% threshold | Max +2.17% (AO) | ✅ |
+| L1: PaymentMethod | "Others" flagged but minimal volume (3 orders) | -66.67% | ⚠️ |
+| L1: PaymentMethod | Apple Pay improvement on low volume (794 orders) | +3.99% | ⚠️ |
+| Mix Shift | All countries stable despite volume shifts | No impact | ✅ |
 
 **Key Findings:**
-- Reactivation rate at 89.29% is the highest in 8 weeks, with volume up 20% WoW (9,277 vs 7,706 orders)
-- All four countries (GN, ER, MR, AO) showed positive movement ranging from +1.07% to +2.17%, with AO leading at +2.17%
-- PaymentMethod "Others" dropped dramatically from 100.0% to 33.33% (-66.67%), though volume is minimal (3 orders)
-- Apple Pay showed the strongest improvement among meaningful payment methods at +3.99% (72.06% → 74.94%)
-- Credit Card (largest volume at 6,638 orders) and PayPal both showed stable, modest improvements (+0.38% and +0.39% respectively)
+- The +0.70% week-over-week increase continues a positive trend, with rates climbing from 85.07% (W08) to 89.29% (W15) over the 8-week period
+- All four countries (GN, ER, MR, AO) showed improvement ranging from +1.07% to +2.17%, with none exceeding the ±2.5% investigation threshold
+- Apple Pay showed a +3.99% improvement (72.06% → 74.94%) but on limited volume (794 orders), flagged but not material
+- "Others" payment method dropped -66.67% but represents only 3 orders, making this statistically irrelevant
+- AO experienced the largest volume decline (-12.0%) but maintained stable mix shift impact
 
-**Action:** Monitor — The metric is trending positively with healthy improvements across all countries and major payment methods. The PaymentMethod "Others" decline is statistically insignificant due to low volume (3 orders) and does not warrant investigation.
+**Action:** Monitor — The change is not statistically significant, all countries are below threshold, and flagged dimensions have minimal volume impact.
 
 ---
 
@@ -50,8 +53,8 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | GN | 93.32% | 92.33% | +1.07% | 13,110 |  |
-| ER | 90.33% | 89.22% | +1.23% | 68,811 |  |
-| MR | 81.43% | 80.25% | +1.47% | 19,468 |  |
+| ER | 90.32% | 89.22% | +1.23% | 68,811 |  |
+| MR | 81.41% | 80.25% | +1.45% | 19,468 |  |
 | AO | 87.06% | 85.21% | +2.17% | 13,883 |  |
 
 **Countries exceeding ±2.5% threshold:** None
@@ -60,13 +63,45 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Others | 33.33% | 100.0% | -66.67% | 3 |
-| PaymentMethod | Credit Card | 89.92% | 89.58% | +0.38% | 6,638 |
-| PaymentMethod | Paypal | 93.27% | 92.9% | +0.39% | 1,842 |
-| PaymentMethod | Apple Pay | 74.94% | 72.06% | +3.99% | 794 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Others | 33.33% | 100.0% | -66.67% | 3 | ⚠️ |
+| Credit Card | 89.92% | 89.58% | +0.38% | 6,638 |  |
+| Paypal | 93.27% | 92.9% | +0.39% | 1,842 |  |
+| Apple Pay | 74.94% | 72.06% | +3.99% | 794 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
 
 ---
 
-*Report: 2026-04-14*
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| ER | Medium (>85%) | 67,730 | 68,811 | +1.6% | Stable |
+| CG | High (>92%) | 44,581 | 43,937 | -1.4% | Stable |
+| CK | High (>92%) | 42,176 | 42,398 | +0.5% | Stable |
+| MR | Low (>85%) | 20,784 | 19,468 | -6.3% | Stable |
+| AO | Medium (>85%) | 15,776 | 13,883 | -12.0% | Stable |
+| GN | High (>92%) | 14,333 | 13,110 | -8.5% | Stable |
+| KN | Medium (>85%) | 11,048 | 10,259 | -7.1% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+No countries exceeded threshold for deep-dive.
+
+---
+
+*Report: 2026-04-15*

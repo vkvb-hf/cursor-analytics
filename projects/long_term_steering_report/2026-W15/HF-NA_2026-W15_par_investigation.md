@@ -1,31 +1,32 @@
 # PAR Investigation: HF-NA 2026-W15
 
-**Metric:** PAR  
+**Metric:** Payment Approval Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 94.0% → 94.11% (+0.12%)  
-**Volume:** 497,775 orders
+**Observation:** 94.0% → 94.1% (+0.11%)  
+**Volume:** 497,775 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** PAR improved by +0.12 percentage points (94.0% → 94.11%) on a volume of 497,775 orders, continuing a positive 8-week upward trend from 93.27% in W08 to 94.11% in W15.
+**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11 pp) on 497,775 orders, a change that is not statistically significant and falls within normal weekly fluctuation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement over 8 weeks (+0.84 pp total) | +0.12 pp | ✅ |
-| L1: Country | No country exceeded ±2.5% threshold | US +0.34 pp, CA +0.02 pp | ✅ |
-| L1: PaymentMethod | "Others" declined but low volume | -0.75 pp (4,413 orders) | ✅ |
-| L1: PaymentProvider | "Unknown" provider significant drop | -4.06 pp (776 orders) | ⚠️ |
+| 1_FirstRunAR | Baseline | +0.38 pp | ✅ |
+| 2_PreDunningAR | Recovery | +0.28 pp | ✅ |
+| 3_PostDunningAR | Dunning | -0.04 pp | ✅ |
+| 6_PaymentApprovalRate | Final | +0.11 pp | ✅ |
 
 **Key Findings:**
-- US drove the majority of improvement with +0.34 pp on 492,811 orders, representing the largest volume segment
-- PaymentProvider "Unknown" showed a significant decline of -4.06 pp (96.17% → 92.27%), though volume is minimal at 776 orders
-- Braintree, the dominant payment provider (385,044 orders), improved slightly by +0.14 pp
-- Apple Pay remains the lowest-performing payment method at 88.76%, though it improved +0.25 pp
-- Volume has steadily decreased over 8 weeks (548,921 → 497,775), down ~9.3% while rate improved
+- The 8-week trend shows consistent gradual improvement from 93.27% (W08) to 94.1% (W15), indicating sustained positive trajectory (+0.83 pp over 7 weeks)
+- US showed stronger week-over-week improvement (+0.34 pp) compared to CA (+0.02 pp), with US representing the majority of volume (492,811 orders)
+- PaymentProvider "Unknown" flagged with -4.07 pp decline (96.17% → 92.26%), though volume is minimal (775 orders, <0.2% of total)
+- First Run Approval Rate improvement (+0.38 pp) drove the overall PAR gain, with slight offset from Post-Dunning (-0.04 pp)
+- No countries exceeded the ±2.5% threshold; mix shift analysis shows stable high-tier distribution across both US and CA
 
-**Action:** Monitor — The +0.12 pp improvement continues a healthy 8-week trend. The "Unknown" PaymentProvider decline warrants watching but has negligible volume impact. No escalation required.
+**Action:** Monitor — No intervention required. Continue tracking the positive 8-week trend and monitor the "Unknown" payment provider for any volume increases.
 
 ---
 
@@ -35,7 +36,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 94.11% | 497,775 | +0.12% ← REPORTED CHANGE |
+| 2026-W15 | 94.1% | 497,775 | +0.11% ← REPORTED CHANGE |
 | 2026-W14 | 94.0% | 507,189 | +0.04% |
 | 2026-W13 | 93.96% | 517,599 | +0.10% |
 | 2026-W12 | 93.87% | 526,516 | -0.04% |
@@ -50,8 +51,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 93.52% | 93.5% | +0.02% | 103,253 |  |
-| US | 93.1% | 92.78% | +0.34% | 492,811 |  |
+| CA | 93.51% | 93.49% | +0.02% | 103,253 |  |
+| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -59,18 +60,56 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Others | 98.53% | 99.27% | -0.75% | 4,413 |
-| PaymentMethod | Credit Card | 94.65% | 94.57% | +0.08% | 366,508 |
-| PaymentMethod | Paypal | 96.33% | 96.19% | +0.15% | 60,610 |
-| PaymentMethod | Apple Pay | 88.76% | 88.54% | +0.25% | 66,244 |
-| PaymentProvider | Unknown | 92.27% | 96.17% | -4.06% | 776 |
-| PaymentProvider | Adyen | 95.76% | 95.86% | -0.10% | 24,575 |
-| PaymentProvider | No Payment | 100.0% | 100.0% | +0.00% | 3,578 |
-| PaymentProvider | Braintree | 94.32% | 94.19% | +0.14% | 385,044 |
-| PaymentProvider | ProcessOut | 92.38% | 92.24% | +0.15% | 83,802 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Others | 98.53% | 99.27% | -0.75% | 4,412 |  |
+| Credit Card | 94.65% | 94.57% | +0.08% | 366,509 |  |
+| Paypal | 96.33% | 96.19% | +0.15% | 60,610 |  |
+| Apple Pay | 88.76% | 88.54% | +0.25% | 66,244 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Unknown | 92.26% | 96.17% | -4.07% | 775 | ⚠️ |
+| Adyen | 95.76% | 95.86% | -0.10% | 24,575 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 3,578 |  |
+| ProcessOut | 92.37% | 92.24% | +0.14% | 83,802 |  |
+| Braintree | 94.32% | 94.19% | +0.14% | 385,045 |  |
 
 ---
 
-*Report: 2026-04-14*
+
+## L3: Related Metrics (Overall Total Box Candidates)
+
+| Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|--------|--------|--------|----------|----------|----------|------|
+| 1_FirstRunAR | 91.29% | 90.95% | +0.38% | 497,775 | 507,189 |  |
+| 2_PreDunningAR | 92.42% | 92.17% | +0.28% | 497,775 | 507,189 |  |
+| 3_PostDunningAR | 93.29% | 93.33% | -0.04% | 497,775 | 507,189 |  |
+| 6_PaymentApprovalRate | 94.1% | 94.0% | +0.11% | 497,775 | 507,189 |  |
+
+---
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
+| CA | High (>92%) | 105,530 | 103,253 | -2.2% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+No countries exceeded threshold for deep-dive.
+
+---
+
+*Report: 2026-04-15*

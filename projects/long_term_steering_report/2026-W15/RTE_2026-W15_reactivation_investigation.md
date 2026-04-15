@@ -1,30 +1,33 @@
 # Reactivation Investigation: RTE 2026-W15
 
-**Metric:** Reactivation  
+**Metric:** Reactivation Rate  
 **Period:** 2026-W14 → 2026-W15  
 **Observation:** 89.2% → 90.41% (+1.36%)  
-**Volume:** 19,757 orders
+**Volume:** 19,757 orders  
+**Significance:** Significant
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved from 89.2% to 90.41% (+1.21 pp) in W15, continuing a positive 8-week upward trend from 84.71% in W08, with volume at 19,757 orders.
+**Overall:** Reactivation Rate improved significantly from 89.2% to 90.41% (+1.21 pp) in W15, continuing a positive 8-week upward trend from 84.71% in W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent improvement over 8 weeks | +5.70 pp cumulative | ✅ |
-| L1: Country Breakdown | 1 country exceeds ±2.5% threshold | TK: +7.54 pp | ⚠️ |
-| L1: Payment Method | All methods within normal range | -1.50 pp to +2.78 pp | ✅ |
+| L0: 8-Week Trend | Consistent upward trend observed | +5.70 pp over 8 weeks | ✅ |
+| L1: Country Scan | 1 country (TK) exceeded ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: Dimension Scan | 1 payment method (Others) flagged | Others +2.78% | ⚠️ |
+| L2: TK Deep-Dive | Multiple payment methods improved significantly | applepay +12.10%, credit_card +6.49% | ⚠️ |
+| Mix Shift | All countries stable despite volume changes | TK +9.6% volume | ✅ |
 
 **Key Findings:**
-- TK showed an exceptional improvement of +7.54 pp (88.65% → 95.33%) with 1,950 orders, flagged as an anomaly requiring review
-- Credit Card payments, representing the largest volume (14,461 orders), improved by +1.59 pp to 92.71%
-- TV and YE were the only countries showing decline (-1.37 pp and -0.43 pp respectively), though both remain within normal thresholds
-- Apple Pay continues to underperform other payment methods at 68.62% (-1.50 pp), though volume is relatively low (1,893 orders)
-- The 8-week trend shows sustained positive momentum with the metric climbing from 84.71% to 90.41%
+- TK drove the largest country-level improvement (+7.54 pp), with all major payment methods showing significant gains: applepay (+12.10 pp), credit_card (+6.49 pp), and paypal (+5.41 pp)
+- Root cause in TK identified as reduced "Insufficient Funds" declines, dropping from 8.32% to 2.51% (-5.81 pp)
+- Payment providers Braintree (+10.60 pp) and Adyen (+6.49 pp) in TK showed substantial improvements
+- Overall volume decreased slightly from W14 (17,264 to 19,757), but rate improvements were consistent across most dimensions
+- YE volume declined 6.8% while maintaining stable rates, indicating healthy performance despite reduced orders
 
-**Action:** Monitor – The overall trend is positive and within expected parameters. Investigate TK's +7.54 pp spike to determine if it represents a sustainable improvement or data anomaly.
+**Action:** Monitor - The improvement is positive and driven by identifiable factors (reduced Insufficient Funds declines in TK). Continue monitoring to confirm the trend sustains in W16.
 
 ---
 
@@ -63,13 +66,82 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Apple Pay | 68.62% | 69.66% | -1.50% | 1,893 |
-| PaymentMethod | Paypal | 93.4% | 92.54% | +0.92% | 3,241 |
-| PaymentMethod | Credit Card | 92.71% | 91.26% | +1.59% | 14,461 |
-| PaymentMethod | Others | 80.25% | 78.08% | +2.78% | 162 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Apple Pay | 68.62% | 69.66% | -1.50% | 1,893 |  |
+| Paypal | 93.4% | 92.54% | +0.92% | 3,241 |  |
+| Credit Card | 92.71% | 91.26% | +1.59% | 14,461 |  |
+| Others | 80.25% | 78.08% | +2.78% | 162 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
 
 ---
 
-*Report: 2026-04-14*
+## L2: TK Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| None | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
+| cashcredit | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
+| paypal | 97.46% | 92.45% | +5.41% | 118 | 106 | ⚠️ |
+| credit_card | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
+| applepay | 93.51% | 83.41% | +12.10% | 462 | 410 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Unknown | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
+| Adyen | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
+| Braintree | 94.31% | 85.27% | +10.60% | 580 | 516 | ⚠️ |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| 1. SUCCESSFULL | 1,859 | 1,577 | 95.33% | 88.65% | +6.69 |
+| Insufficient Funds | 49 | 148 | 2.51% | 8.32% | -5.81 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 21 | 32 | 1.08% | 1.80% | -0.72 |
+| Other reasons | 20 | 22 | 1.03% | 1.24% | -0.21 |
+| Unknown | 1 | 0 | 0.05% | 0.00% | +0.05 |
+
+**Root Cause:** paypal + Adyen + Insufficient
+
+---
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| FJ | High (>92%) | 397,332 | 388,956 | -2.1% | Stable |
+| CF | High (>92%) | 52,140 | 51,881 | -0.5% | Stable |
+| YE | Medium (>85%) | 45,214 | 42,126 | -6.8% | Stable |
+| TT | High (>92%) | 4,924 | 4,617 | -6.2% | Stable |
+| TO | Low (>85%) | 3,480 | 3,204 | -7.9% | Stable |
+| TZ | Medium (>85%) | 3,013 | 2,660 | -11.7% | Stable |
+| TV | High (>92%) | 2,065 | 1,895 | -8.2% | Stable |
+| TK | Medium (>85%) | 1,779 | 1,950 | +9.6% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| TK | ↑ +7.54% | paypal +5.4% | Adyen +6.5% | Insufficient Funds -5.81pp | paypal + Adyen + Insufficient |
+
+---
+
+*Report: 2026-04-15*

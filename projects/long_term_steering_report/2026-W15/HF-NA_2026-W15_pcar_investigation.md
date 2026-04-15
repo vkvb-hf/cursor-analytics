@@ -1,31 +1,33 @@
 # PCAR Investigation: HF-NA 2026-W15
 
-**Metric:** PCAR  
+**Metric:** Payment Checkout Approval Rate  
 **Period:** 2026-W14 → 2026-W15  
 **Observation:** 94.12% → 94.08% (-0.04%)  
-**Volume:** 23,512 orders
+**Volume:** 23,512 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** PCAR declined marginally from 94.12% to 94.08% (-0.04pp) in W15, representing a minor fluctuation within normal operating range on volume of 23,512 orders.
+**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04pp) in W15, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | W15 vs W14 | -0.04pp | ✅ |
-| L1: Country Breakdown | No country ±2.5% | None flagged | ✅ |
-| L1: Payment Method | "Others" declined | -2.49pp | ⚠️ |
-| L1: Payment Method | Apple Pay declined | -1.08pp | ✅ |
+| L0: 8-Week Trend | Rate within historical range (93.92%-95.23%) | -0.04pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34pp, CA +0.02pp | ✅ |
+| L1: PaymentMethod | "Others" declined -2.49pp but low volume (91 orders) | -2.49pp | ✅ |
+| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| Mix Shift | Both US and CA stable in High AR tier | Volume -0.9% to -2.2% | ✅ |
 
 **Key Findings:**
-- The -0.04pp decline is well within the 8-week fluctuation range (93.92% to 95.23%), indicating normal variance
-- Volume increased by 16.3% WoW (20,221 → 23,512 orders), which may contribute to rate normalization
-- "Others" payment method showed the largest decline (-2.49pp), but with only 91 orders, impact is negligible
-- Apple Pay declined by -1.08pp on 7,678 orders, representing the most meaningful segment movement
-- Both US (+0.34pp) and CA (+0.02pp) showed slight improvements at the country level, suggesting no systemic geographic issues
+- The -0.04pp decline is well within normal weekly fluctuation observed over the 8-week period (range: 93.92% - 95.23%)
+- Both US (+0.34pp) and CA (+0.02pp) showed slight improvements at the country level, suggesting no geographic concerns
+- "Others" payment method showed a -2.49pp decline but represents only 91 orders (0.4% of volume), making it immaterial to overall performance
+- Apple Pay declined -1.08pp (7,678 orders) while Credit Card improved +0.50pp (13,776 orders), offsetting each other
+- Volume increased 16.3% WoW (20,221 → 23,512 orders) with no degradation in approval rate
 
-**Action:** Monitor – The decline is minimal and within normal variance. No escalation required. Continue standard monitoring with attention to Apple Pay performance in W16.
+**Action:** Monitor — No investigation required. The change is not statistically significant, no thresholds were breached, and the metric remains stable within historical norms.
 
 ---
 
@@ -50,8 +52,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 93.52% | 93.5% | +0.02% | 103,253 |  |
-| US | 93.1% | 92.78% | +0.34% | 492,811 |  |
+| CA | 93.51% | 93.49% | +0.02% | 103,253 |  |
+| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -59,14 +61,41 @@
 
 ## L1: Dimension Scan
 
-| Dimension | Value | Curr Rate | Prev Rate | Δ % | Volume |
-|-----------|-------|-----------|-----------|-----|--------|
-| PaymentMethod | Unknown | nan% | nan% | +nan% | 0 |
-| PaymentMethod | Others | 96.7% | 99.17% | -2.49% | 91 |
-| PaymentMethod | Apple Pay | 93.46% | 94.48% | -1.08% | 7,678 |
-| PaymentMethod | Paypal | 95.42% | 94.97% | +0.48% | 1,967 |
-| PaymentMethod | Credit Card | 94.21% | 93.75% | +0.50% | 13,776 |
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
+| Unknown | nan% | nan% | +nan% | 0 |  |
+| Others | 96.7% | 99.17% | -2.49% | 91 |  |
+| Apple Pay | 93.46% | 94.48% | -1.08% | 7,678 |  |
+| Paypal | 95.42% | 94.97% | +0.48% | 1,967 |  |
+| Credit Card | 94.21% | 93.75% | +0.50% | 13,776 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Flag |
+|-------|--------|--------|----------|----------|------|
 
 ---
 
-*Report: 2026-04-14*
+
+
+## Mix Shift Analysis
+
+| Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
+| ------- | ------- | ----------- | ----------- | -------- | ------ |
+| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
+| CA | High (>92%) | 105,530 | 103,253 | -2.2% | Stable |
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+No countries exceeded threshold for deep-dive.
+
+---
+
+*Report: 2026-04-15*

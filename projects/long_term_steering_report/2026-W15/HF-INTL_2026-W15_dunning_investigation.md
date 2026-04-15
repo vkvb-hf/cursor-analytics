@@ -2,33 +2,31 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 70.88% → 65.77% (-5.11pp)  
-**Volume:** 27,443 eligible orders  
+**Observation:** 70.88% → 65.63% (-5.25pp)  
+**Volume:** 27,328 eligible orders  
 **Payday Phase:** Pre-Payday
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined significantly from 70.88% to 65.77% (-5.11pp) week-over-week, coinciding with a transition from Mid-Cycle to Pre-Payday phase and a 25% reduction in eligible order volume (36,664 → 27,443).
+**Overall:** Dunning Ship Rate declined significantly from 70.88% to 65.63% (-5.25pp) week-over-week, coinciding with a transition to Pre-Payday phase and a 25.5% reduction in eligible order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 94.31% → 95.28% | +0.97pp | ✅ |
-| Discount % | 13.33% → 13.52% | +0.19pp | ✅ |
-| PC2 | 42.48% → 45.94% | +3.46pp | ⚠️ |
-| Ship Rate | 70.88% → 65.77% | -5.11pp | ⚠️ |
+| Discount % | 13.33% → 13.54% | +0.21pp | ✅ |
+| PC2 | 42.48% → 45.95% | +3.47pp | ✅ |
+| Ship Rate | 70.88% → 65.63% | -5.25pp | ⚠️ |
 
 **Key Findings:**
-- All 10 countries experienced volume declines except NO, which grew 35.9% and improved Ship Rate by +3.15pp (79.22% → 82.37%)
-- DK saw the largest volume drop (-54.5%) with Ship Rate declining -8.20pp (76.00% → 67.80%)
-- GB and FR, the two highest-volume markets, both declined sharply: GB -7.85pp (65.01% → 57.16%) and FR -7.96pp (69.98% → 62.02%)
-- Pre-Payday timing correlates with depressed performance across most markets despite stable Pre-Dunning AR and Discount rates
-- PC2 increased +3.46pp, suggesting more orders required a second payment collection attempt
+- Volume decreased substantially across all major markets, with DK experiencing the largest drop (-54.7%) and BE also declining sharply (-38.1%)
+- All top 10 countries except NO and NZ showed Ship Rate declines; GB fell -7.96pp (65.00% → 57.04%) and FR fell -8.32pp (69.98% → 61.66%)
+- NO was the only market showing both volume growth (+34.7%) and Ship Rate improvement (+2.98pp to 82.20%)
+- Pre-Dunning AR and PC2 metrics both improved, suggesting the conversion breakdown occurs downstream in the funnel
+- The Pre-Payday phase timing correlates with reduced customer payment capacity across markets
 
-**Action:** Investigate — The broad-based decline across major markets (GB, FR, DE) warrants deeper analysis into Pre-Payday consumer behavior patterns and PC2 failure reasons.
+**Action:** Investigate — The broad-based Ship Rate decline across 8 of 10 major markets, despite improved upstream metrics (Pre-Dunning AR, PC2), warrants deeper analysis into payment timing, customer cash flow constraints during Pre-Payday, and potential operational factors in GB and FR specifically.
 
 ---
 
@@ -38,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Pre-Dunning AR | Discount % | PC2 |
 |------|--------------|--------|-----------|----------------|------------|-----|
-| 2026-W14 | Mid-Cycle | 36,664 | 70.88% | 94.31% | 13.33% | 42.48% |
-| 2026-W15 | Pre-Payday | 27,443 | 65.77% | 95.28% | 13.52% | 45.94% |
+| 2026-W14 | Mid-Cycle | 36,662 | 70.88% | 94.31% | 13.33% | 42.48% |
+| 2026-W15 | Pre-Payday | 27,328 | 65.63% | 95.28% | 13.54% | 45.95% |
 
 ---
 
@@ -47,20 +45,20 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| GB | 8,725 | 65.01% | 6,323 | 57.16% | -27.5% | High |
-| FR | 7,647 | 69.98% | 5,350 | 62.02% | -30.0% | High |
+| GB | 8,724 | 65.00% | 6,304 | 57.04% | -27.7% | High |
+| FR | 7,647 | 69.98% | 5,298 | 61.66% | -30.7% | High |
 | AU | 5,850 | 66.10% | 5,023 | 64.74% | -14.1% | High |
-| DE | 4,512 | 74.73% | 3,167 | 67.38% | -29.8% | High |
-| BE | 3,221 | 90.50% | 2,003 | 87.62% | -37.8% | High |
-| NZ | 1,302 | 61.29% | 1,133 | 69.55% | -13.0% | High |
-| DK | 1,229 | 76.00% | 559 | 67.80% | -54.5% | High |
-| IE | 1,149 | 65.88% | 885 | 62.15% | -23.0% | High |
-| NO | 943 | 79.22% | 1,282 | 82.37% | 35.9% | High |
-| SE | 808 | 71.66% | 696 | 61.49% | -13.9% | High |
+| DE | 4,511 | 74.73% | 3,162 | 67.33% | -29.9% | High |
+| BE | 3,221 | 90.50% | 1,995 | 87.57% | -38.1% | High |
+| NZ | 1,302 | 61.29% | 1,132 | 69.52% | -13.1% | High |
+| DK | 1,229 | 76.00% | 557 | 67.68% | -54.7% | High |
+| IE | 1,149 | 65.88% | 878 | 61.85% | -23.6% | High |
+| NO | 943 | 79.22% | 1,270 | 82.20% | 34.7% | High |
+| SE | 808 | 71.66% | 690 | 61.16% | -14.6% | High |
 
 ---
 
 
 ---
 
-*Report: 2026-04-14*
+*Report: 2026-04-15*

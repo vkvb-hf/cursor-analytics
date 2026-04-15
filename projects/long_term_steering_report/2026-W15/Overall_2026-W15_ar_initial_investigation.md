@@ -1,22 +1,22 @@
 # Acceptance Rate (Initial Charges) - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-14 14:50  
+**Generated:** 2026-04-15 16:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Initial Charges) improved globally in 2026-W15, with all five clusters showing positive week-over-week gains ranging from +0.32% to +2.13%. The most significant concern is HF-INTL's GB market, which declined -3.12pp against the overall positive trend while representing 37% of cluster volume, warranting investigation.
+Acceptance Rate (Initial Charges) improved across all clusters in 2026-W15, with significant gains in HF-INTL (+2.35pp to 91.78%), RTE (+1.02pp to 91.78%), and WL (+1.35pp to 91.04%). The most notable concern is HF-INTL's SE market, which declined -6.63pp due to Braintree and ProcessOut failures with rising Insufficient Funds declines, partially offsetting strong recovery in DE (+6.05pp).
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.77pp to 89.73% (8-week high), driven by Credit Card (+1.02%) and ProcessOut provider (+1.06%) gains with no anomalies detected.
-- **HF-INTL:** Improved by +2.13pp to 91.77%, led by DE recovery (+6.05pp), but GB (-3.12pp) and SE (-6.63pp) declined against the trend requiring investigation.
-- **WL:** Improved by +1.21pp to 91.04%, driven by MR (+4.84pp), though anomalous spikes in Unknown provider (+27.03pp) warrant data quality review.
-- **HF-NA:** Improved modestly by +0.29pp to 90.03% (8-week high), with US (+0.79pp) and Credit Card (+0.67pp) driving stable gains across all dimensions.
-- **RTE:** Improved by +0.97pp to 91.76% in partial recovery, with Adyen (+2.16pp) contributing gains while TV (-5.75pp) and TT (-3.10pp) underperformed at low volumes.
+- **US-HF:** Improved by +0.85pp to 89.66% (not significant), driven by Credit Card acceptance gains (+1.17pp) and ProcessOut improvement (+1.22pp) across stable dimensions.
+- **HF-INTL:** Significant improvement of +2.35pp to 91.78%, led by DE (+6.05pp) and AT (+10.34pp) recovery, though SE (-6.63pp) and GB (-3.13pp) require monitoring for provider-specific issues.
+- **WL:** Significant improvement of +1.35pp to 91.04%, driven by MR's +4.84pp gain from reduced Insufficient Funds declines (-1.89pp).
+- **HF-NA:** Stable with marginal improvement of +0.34pp to 89.98% (not significant), with all dimensions within normal operating thresholds.
+- **RTE:** Significant improvement of +1.02pp to 91.78%, driven by TO's +10.03pp credit card recovery, partially offset by TV's -5.75pp decline from PayPal and Adyen issues.
 
 ---
 
