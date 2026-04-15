@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.17pp (26.41% → 26.24%) in US-HF during 2026-W15, despite a 20% increase in payment visit volume (44,056 → 52,860).
+**Overall:** Payment Conversion Rate declined by -0.17pp (from 26.41% to 26.24%) in US-HF during 2026-W15, with payment visit volume increasing 20.0% to 52,860.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Within threshold | +0.10pp | ✅ |
-| Click Submit Form | Within threshold | -0.25pp | ⚠️ |
-| FE Validation Passed | Exceeds threshold | -0.56pp | ⚠️ |
-| Enter Fraud Service | Exceeds threshold | -0.09pp | ⚠️ |
-| Approved by Fraud Service | Exceeds threshold | -0.71pp | ⚠️ |
-| Call to PVS | Within threshold | +0.35pp | ✅ |
-| Successful Checkout | Within threshold | +0.44pp | ✅ |
+| Select Payment Method | ≥ threshold | +0.10pp | ✅ |
+| Click Submit Form | < threshold | -0.25pp | ⚠️ |
+| FE Validation Passed | < threshold | -0.56pp | ⚠️ |
+| Enter Fraud Service | < threshold | -0.09pp | ⚠️ |
+| Approved by Fraud Service | < threshold | -0.71pp | ⚠️ |
+| Call to PVS | ≥ threshold | +0.35pp | ✅ |
+| Successful Checkout | ≥ threshold | +0.44pp | ✅ |
 
 **Key Findings:**
-- **Fraud Service Approval is the primary driver:** Backend data shows a significant -2.40pp decline in Fraud Service approval rate (91.91% → 89.51%), indicating stricter fraud controls or increased fraudulent activity
-- **FE Validation recovery rate dropped:** Recovery rate decreased by -1.86pp (74.36% → 72.50%), with APPLEPAY_DISMISSED errors increasing to 52.3% of all FE errors (+1.54pp)
-- **Payment method performance degraded:** ProcessOut_CreditCard declined -2.10pp (82.50% → 80.40%) and Braintree_ApplePay declined -2.66pp (78.00% → 75.34%), the two highest-volume payment methods
-- **Braintree_CreditCard showed severe decline:** Success rate dropped -13.31pp (88.76% → 75.45%), though volume is relatively low (167 attempts)
-- **PVS failures increased:** Total failures rose from 934 to 1,102 (+168), with "Insufficient Funds" growing +1.41pp as a proportion of failures
+- **Fraud Service approval is the primary driver** of the PCR decline, with GA showing -0.71pp and Backend showing a significant -2.40pp drop in approval rate (91.91% → 89.51%)
+- **FE Validation degraded** with conversion dropping -0.56pp and recovery rate declining from 74.36% to 72.50% (-1.86pp); APPLEPAY_DISMISSED errors increased share (+1.54pp)
+- **ProcessOut_CreditCard and Braintree_ApplePay** both showed notable success rate declines (-2.10pp and -2.66pp respectively), representing the highest volume payment methods
+- **Braintree_CreditCard** experienced a severe success rate drop of -13.31pp (88.76% → 75.45%), though on limited volume (167 attempts)
+- **Adyen_CreditCard continues to show 0% success rate** and accounts for 77.4% of the gap between Checkout Attempt and Enter Fraud Service (240 skipped transactions)
 
-**Action:** Investigate — The -2.40pp decline in Fraud Service approval rate requires immediate review with the fraud team to determine if rule changes were deployed or if there's an increase in suspicious transaction patterns. Additionally, coordinate with payment processor teams to investigate the degraded performance of ProcessOut_CreditCard and Braintree_ApplePay.
+**Action:** **Investigate** – Priority focus on Fraud Service approval rate decline; coordinate with Fraud team to understand if rule changes or model updates occurred in W15. Secondary investigation into Braintree_CreditCard success rate collapse and Adyen_CreditCard integration failure.
 
 ---
 

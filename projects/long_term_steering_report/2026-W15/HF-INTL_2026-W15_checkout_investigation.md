@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +1.71pp (36.04% → 37.75%) on 69,804 payment visits in 2026-W15, exceeding the significance threshold of +0.86pp.
+**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in HF-INTL during 2026-W15, exceeding the threshold of +0.86pp, driven primarily by gains at the top of the funnel.
 
 **Funnel Analysis:**
 
@@ -25,13 +25,13 @@
 | Successful Checkout | Within normal range | +0.18pp | ✅ |
 
 **Key Findings:**
-- Select Payment Method conversion was the primary driver of improvement, increasing +2.05pp (55.29% → 57.34%) at the cluster level
-- GB and NO showed the strongest improvements: GB +2.46pp driven by Select Payment Method (+2.69pp), NO +5.83pp driven by Click Submit Form (+3.04pp) and Checkout Attempt (+6.87pp in backend)
-- LU experienced a significant decline of -17.90pp, primarily due to Select Payment Method drop (-11.63pp), though volume is minimal (73 visits)
-- Braintree_Paypal showed notable improvement (+0.92pp) while ProcessOut_CreditCard improved +0.58pp on the highest volume
-- Backend data confirms the trend with Checkout Attempt improving +1.41pp (46.40% → 47.80%)
+- The primary driver of PCR improvement was the Select Payment Method step (+2.05pp), indicating improved user engagement at the payment method selection stage
+- GB and DE, the two highest-volume countries, both showed strong improvements (+2.46pp and +1.21pp respectively) with Select Payment Method as the key driver in both
+- NO exhibited exceptional growth (+5.83pp PCR increase) with Click Submit Form (+3.04pp) and significant volume increase (+137%)
+- LU showed a notable decline (-17.90pp) but with minimal volume impact (73 visits), driven by Select Payment Method drop (-11.63pp)
+- Payment method performance remained stable with Braintree_Paypal showing the strongest improvement (+0.92pp) among high-volume methods
 
-**Action:** Monitor — Positive trend driven by early-funnel improvements in Select Payment Method. Continue monitoring GB and NO performance while tracking LU for potential data quality issues given low volume.
+**Action:** Monitor - The improvement is broad-based across major markets and funnel steps with no concerning degradations in high-volume segments. Continue tracking NO's performance trajectory and LU's low-volume anomaly.
 
 ---
 

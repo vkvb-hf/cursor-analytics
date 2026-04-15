@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) improved marginally from 94.65% to 94.75% (+0.10 pp), a statistically non-significant change within normal operating range.
+**Overall:** The Fraud Approval Rate (FAR) increased marginally from 94.65% to 94.75% (+0.10pp) in W15, a change deemed not statistically significant, with volume increasing to 47,135 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| RTE Level | FAR within 8-week range (93.83%-94.95%) | +0.10 pp | ✅ |
-| Country Breakdown | 2 countries exceed ±2.5% threshold | TO +5.60 pp, TV +2.89 pp | ⚠️ |
-| Channel Category | All channels within tolerance | Paid +0.15 pp, Referral -0.04 pp | ✅ |
-| Duplicate Rate | Slight increase | +0.71 pp (14.12% → 14.83%) | ✅ |
-| PF Block Rate | Minor increase | +0.14 pp (0.18% → 0.32%) | ✅ |
+| L0: 8-Week Trend | FAR within normal range (93.83%-94.95%) | +0.10pp | ✅ |
+| L1: Country Scan | 2 countries exceed ±2.5% threshold | TO +5.60pp, TV +2.89pp | ⚠️ |
+| L1: Channel Scan | Both channels stable | Paid +0.15pp, Referral -0.04pp | ✅ |
+| L2: TO Deep-Dive | Both channels improved significantly | Paid +4.66pp, Referral +5.39pp | ⚠️ |
+| L2: TV Deep-Dive | Mixed signals: Paid up, Referral down | Paid +5.58pp, Referral -6.75pp | ⚠️ |
 
 **Key Findings:**
-- TO showed a +5.60 pp FAR improvement (88.75% → 93.72%) coinciding with a -36.99% drop in duplicate rate (11.07% → 6.98%), though volume is low (430 customers)
-- TV experienced a +2.89 pp FAR improvement (93.06% → 95.75%) alongside a -39.63% decrease in duplicate rate (7.71% → 4.66%), also low volume (494 customers)
-- FJ, the largest market (32,394 volume), saw FAR decline slightly by -0.30 pp while duplicate rate increased +8.51%
-- YE improved +1.94 pp in FAR (93.15% → 94.96%) with a corresponding -9.41% reduction in duplicate rate
-- Overall volume increased by 13.8% (41,406 → 47,135 customers)
+- TO showed a +5.60pp FAR improvement driven by a substantial decrease in Duplicate Rate (-36.99%) and Duplicate Block Rate (-39.74%), suggesting reduced duplicate fraud attempts or policy changes
+- TV experienced a +2.89pp FAR increase overall, but with divergent channel behavior: Paid improved +5.58pp while Referral declined -6.75pp with a +273.50% spike in Duplicate Rate
+- YE Referral channel showed notable improvement (+9.96pp FAR) with corresponding decreases in Duplicate Rate (-24.73%) and Duplicate Block Rate (-23.20%)
+- Global Duplicate Rate increased from 14.12% to 14.83% (+0.71pp), while PF Block Rate increased from 0.18% to 0.32% (+0.14pp)
+- Referral channels across multiple countries (TK, TT, TV) showed elevated Duplicate Rates and declining FAR, indicating potential abuse patterns
 
-**Action:** Monitor — The +0.10 pp change is not statistically significant. Continue tracking TO and TV for sustained improvements, and monitor FJ's rising duplicate rate trend.
+**Action:** Monitor – The overall FAR change is not significant and within historical range. However, continue monitoring Referral channel performance in TV, TK, and TT for potential duplicate abuse patterns, and validate that TO/TV improvements are sustainable and not due to temporary anomalies.
 
 ---
 
@@ -81,5 +81,93 @@
 | Referral | 2026-W15 | 81.79% | -0.04% | 21.73% | +0.40% | 8,501 |  |
 
 ---
+
+## L2: TK Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 93.14% | - | 6.50% | - | 5.05% | - | 0.00% | - | 277 |  |
+| Paid | 2026-W15 | 93.72% | +0.62% | 6.54% | +0.71% | 5.76% | +13.95% | 0.26% | - | 382 |  |
+| Referral | 2026-W14 | 91.53% | - | 6.78% | - | 6.78% | - | 0.00% | - | 59 |  |
+| Referral | 2026-W15 | 86.49% | -5.51% | 16.22% | +139.19% | 13.51% | +99.32% | 0.00% | - | 74 | ⚠️ |
+
+**Analysis:** The W15 Fraud Approval Rate increase of +0.10pp is statistically insignificant and reflects normal operational variance within the 8-week historical range of 93.83%-94.95%. The flagged improvements in TO and TV appear driven by reduced duplicate detection rates rather than systemic changes, warranting continued observation. No immediate escalation is required, but the Referral channel degradation pattern across multiple smaller markets (TV, TK, TT) should be tracked in subsequent weeks to determine if intervention is needed.
+
+---
+
+## L2: TO Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 91.20% | - | 8.56% | - | 7.18% | - | 0.00% | - | 432 |  |
+| Paid | 2026-W15 | 95.45% | +4.66% | 5.40% | -36.98% | 4.26% | -40.62% | 0.00% | - | 352 | ⚠️ |
+| Referral | 2026-W14 | 81.51% | - | 18.49% | - | 18.49% | - | 0.00% | - | 146 |  |
+| Referral | 2026-W15 | 85.90% | +5.39% | 14.10% | -23.74% | 14.10% | -23.74% | 0.00% | - | 78 | ⚠️ |
+
+**Analysis:** [AI_SUMMARY_PLACEHOLDER]
+
+---
+
+## L2: TT Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 90.45% | - | 8.68% | - | 6.51% | - | 0.00% | - | 691 |  |
+| Paid | 2026-W15 | 92.51% | +2.28% | 7.49% | -13.74% | 5.83% | -10.55% | 0.00% | - | 721 |  |
+| Referral | 2026-W14 | 84.00% | - | 15.43% | - | 14.29% | - | 0.00% | - | 175 |  |
+| Referral | 2026-W15 | 79.71% | -5.11% | 18.84% | +22.11% | 19.57% | +36.96% | 0.00% | - | 138 | ⚠️ |
+
+**Analysis:** [AI_SUMMARY_PLACEHOLDER]
+
+---
+
+## L2: TV Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 91.83% | - | 9.15% | - | 6.54% | - | 0.00% | - | 306 |  |
+| Paid | 2026-W15 | 96.95% | +5.58% | 3.55% | -61.17% | 2.28% | -65.05% | 0.00% | - | 394 | ⚠️ |
+| Referral | 2026-W14 | 97.59% | - | 2.41% | - | 2.41% | - | 0.00% | - | 83 |  |
+| Referral | 2026-W15 | 91.00% | -6.75% | 9.00% | +273.50% | 9.00% | +273.50% | 0.00% | - | 100 | ⚠️ |
+
+**Analysis:** [AI_SUMMARY_PLACEHOLDER]
+
+---
+
+## L2: YE Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 97.90% | - | 15.79% | - | 1.38% | - | 0.00% | - | 2,672 |  |
+| Paid | 2026-W15 | 98.31% | +0.41% | 15.43% | -2.31% | 1.10% | -20.57% | 0.00% | - | 3,364 |  |
+| Referral | 2026-W14 | 71.45% | - | 30.60% | - | 27.52% | - | 0.00% | - | 585 |  |
+| Referral | 2026-W15 | 78.57% | +9.96% | 23.03% | -24.73% | 21.14% | -23.20% | 0.00% | - | 686 | ⚠️ |
+
+**Analysis:** [AI_SUMMARY_PLACEHOLDER]
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+| Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
+|---------|------------|----------------|----------|-----------|----------|------------|
+| TO | ↑ +5.60% | Paid ↑ +4.66%, Referral ↑ +5.39% | ↓ -36.99% | ↓ -39.74% | → - | [AI_SUMMARY_PLACEHOLDER] |
+| TV | ↑ +2.89% | Paid ↑ +5.58%, Referral ↓ -6.75% | ↓ -39.63% | ↓ -35.57% | → - | [AI_SUMMARY_PLACEHOLDER] |
+
+---
+
 
 *Report: 2026-04-15*

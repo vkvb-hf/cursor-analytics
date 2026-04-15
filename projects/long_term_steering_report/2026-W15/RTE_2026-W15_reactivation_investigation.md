@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate improved significantly from 89.2% to 90.41% (+1.21 pp) in W15, continuing a positive 8-week upward trend from 84.71% in W08.
+**Overall:** Reactivation Rate improved significantly from 89.2% to 90.41% (+1.21 pp) in W15, continuing a 6-week upward trend from 84.71% in W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent upward trend observed | +5.70 pp over 8 weeks | ✅ |
-| L1: Country Scan | 1 country (TK) exceeded ±2.5% threshold | TK +7.54% | ⚠️ |
-| L1: Dimension Scan | 1 payment method (Others) flagged | Others +2.78% | ⚠️ |
-| L2: TK Deep-Dive | Multiple payment methods improved significantly | applepay +12.10%, credit_card +6.49% | ⚠️ |
-| Mix Shift | All countries stable despite volume changes | TK +9.6% volume | ✅ |
+| L0: 8-Week Trend | Consistent upward trend since W08 | +5.70 pp over 8 weeks | ✅ |
+| L1: Country Scan | 1 country (TK) exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: Dimension Scan | PaymentMethod "Others" flagged | Others +2.78% | ⚠️ |
+| L2: TK Deep-Dive | All payment methods improved significantly | applepay +12.10%, credit_card +6.49% | ✅ |
+| Mix Shift | Volume changes stable across all countries | TK +9.6% volume | ✅ |
 
 **Key Findings:**
-- TK drove the largest country-level improvement (+7.54 pp), with all major payment methods showing significant gains: applepay (+12.10 pp), credit_card (+6.49 pp), and paypal (+5.41 pp)
-- Root cause in TK identified as reduced "Insufficient Funds" declines, dropping from 8.32% to 2.51% (-5.81 pp)
-- Payment providers Braintree (+10.60 pp) and Adyen (+6.49 pp) in TK showed substantial improvements
-- Overall volume decreased slightly from W14 (17,264 to 19,757), but rate improvements were consistent across most dimensions
-- YE volume declined 6.8% while maintaining stable rates, indicating healthy performance despite reduced orders
+- TK drove the largest improvement with +7.54 pp increase in reactivation rate, with applepay showing the strongest recovery (+12.10 pp) followed by credit_card (+6.49 pp) and paypal (+5.41 pp)
+- "Insufficient Funds" decline reason in TK dropped significantly from 8.32% to 2.51% (-5.81 pp), accounting for the majority of the improvement
+- Braintree provider in TK improved by +10.60 pp (85.27% → 94.31%) and Adyen by +6.49 pp (89.97% → 95.81%)
+- Overall volume decreased from 17,264 to 19,757 orders (+14.4%), while YE saw a -6.8% volume decline
+- FJ remains the highest volume market (388,956 orders) with stable high performance at 93.97%
 
-**Action:** Monitor - The improvement is positive and driven by identifiable factors (reduced Insufficient Funds declines in TK). Continue monitoring to confirm the trend sustains in W16.
+**Action:** Monitor - The improvement is driven by positive factors (reduced Insufficient Funds declines in TK). Continue tracking TK performance to confirm sustainability of gains.
 
 ---
 

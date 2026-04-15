@@ -8,25 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in WL 2026-W15, representing a non-significant change on volume of 11,721 orders.
+## Executive Summary
+
+**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in WL 2026-W15, though the change is not statistically significant with a volume of 11,721 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (96.86%-97.37%) | +0.35pp | ✅ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | Max +2.17pp (AO) | ✅ |
-| L1: Payment Method | All methods stable | Max +0.71pp (Apple Pay) | ✅ |
-| Mix Shift Analysis | All tiers marked Stable | No significant shifts | ✅ |
+| L0: Weekly Trend | Rate within normal 8-week range (96.86%-97.37%) | +0.35pp | ✅ |
+| L1: Country Breakdown | No countries exceeded ±2.5% threshold | All stable | ✅ |
+| L1: Payment Method | All methods within normal variance | -0.01pp to +0.71pp | ✅ |
+| Mix Shift Analysis | No significant volume shifts impacting rate | Stable | ✅ |
 
 **Key Findings:**
-- The +0.35pp improvement returns the rate to 97.37%, matching the 8-week high from 2026-W10
-- AO showed the largest country-level improvement at +2.17pp (85.21% → 87.06%), but remains below the 2.5% investigation threshold
-- Apple Pay demonstrated the strongest payment method improvement at +0.71pp (96.65% → 97.34%)
-- Volume declined 29% over the 8-week period (16,585 in W08 → 11,721 in W15), though this did not negatively impact approval rates
-- MR volume decreased -6.3% week-over-week while maintaining its Low tier classification with +1.45pp rate improvement
+- The current rate of 97.37% matches the 8-week high previously seen in W10, indicating a return to peak performance
+- AO showed the largest country-level improvement at +2.17pp (85.21% → 87.06%), though still below the 2.5% investigation threshold
+- Apple Pay improved by +0.71pp (96.65% → 97.34%), the largest gain among payment methods
+- Volume declined 29.3% from W08 (16,585) to W15 (11,721), a consistent downward trend over the 8-week period
+- MR volume dropped -6.3% and AO volume dropped -12.0%, but mix shift impact remains stable
 
-**Action:** Monitor — No investigation required. The change is not statistically significant and all funnel checks passed. Continue standard weekly monitoring.
+**Action:** Monitor — No investigation required. The improvement is within normal variance, no thresholds were breached, and the change is not statistically significant.
 
 ---
 

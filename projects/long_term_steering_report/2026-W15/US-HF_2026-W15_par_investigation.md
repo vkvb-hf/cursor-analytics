@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate improved slightly from 93.63% to 93.76% (+0.13pp) in W15, continuing a steady 8-week upward trend from 93.13% in W08, with the change classified as not statistically significant.
+**Overall:** Payment Approval Rate improved slightly from 93.63% to 93.76% (+0.14 pp) in US-HF during W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.44pp | ✅ |
-| 2_PreDunningAR | Pre-Dunning | +0.32pp | ✅ |
-| 3_PostDunningAR | Post-Dunning | +0.02pp | ✅ |
-| 6_PaymentApprovalRate | Final PAR | +0.14pp | ✅ |
+| 1_FirstRunAR | Largest upstream change | +0.44 pp | ✅ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.32 pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | +0.02 pp | ✅ |
+| 6_PaymentApprovalRate | Final approval rate | +0.14 pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed positive week-over-week improvement, with FirstRunAR contributing the largest gain (+0.44pp)
-- PaymentProvider "Unknown" flagged with -3.36pp decline (95.56% → 92.35%), though volume is minimal (353 orders, <0.1% of total)
-- US showed healthy improvement of +0.34pp (92.78% → 93.09%) with no countries exceeding the ±2.5% threshold
-- Consistent 8-week positive trend observed: PAR increased +0.63pp total from W08 (93.13%) to W15 (93.76%)
-- Volume decline continues (-1.7% WoW), but mix shift analysis shows high-tier AR volume remains stable
+- The +0.14 pp change in PAR is within normal fluctuation and not statistically significant
+- First Run Approval Rate showed the strongest improvement at +0.44 pp, driving most of the downstream gains
+- PaymentProvider "Unknown" flagged with -3.36 pp decline, but volume is minimal (353 orders, <0.1% of total)
+- No countries exceeded the ±2.5% threshold; US remains stable at +0.34 pp
+- Volume declined by ~1.7% (415,885 → 408,629 orders), continuing a gradual 8-week downward trend
 
-**Action:** Monitor — The metric shows healthy, stable improvement with no significant anomalies requiring investigation. Continue standard weekly monitoring.
+**Action:** Monitor – No investigation required. Changes are within normal variance, all funnel steps show stable or improving performance, and flagged segments have negligible volume impact.
 
 ---
 

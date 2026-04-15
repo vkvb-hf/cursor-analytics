@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** HF-INTL Reactivation Rate improved modestly from 90.92% to 91.47% (+0.55pp) in W15, a statistically non-significant change within normal operating range.
+**Overall:** Reactivation Rate for HF-INTL improved from 90.92% to 91.47% (+0.55pp) in W15, a positive but statistically non-significant change within normal operational variance.
 
 **Funnel Analysis:**
 
@@ -17,18 +17,18 @@
 | L0: 8-Week Trend | Rate within historical range (90.03%-91.47%) | +0.60% | ✅ |
 | L1: Country Breakdown | 2 countries exceed ±2.5% threshold (AT, DK) | AT +2.95%, DK +3.94% | ⚠️ |
 | L1: Dimension Scan | All payment methods within threshold | -0.61% to +1.35% | ✅ |
-| L2: AT Deep-Dive | applepay significant improvement | +5.78% | ⚠️ |
-| L2: DK Deep-Dive | applepay and Braintree significant improvement | +6.47%, +5.84% | ⚠️ |
-| Mix Shift | No concerning volume shifts | DK +25.6%, NO +39.2% | ✅ |
+| L2: AT Deep-Dive | applepay improvement drove change | +5.78% | ⚠️ |
+| L2: DK Deep-Dive | Braintree + applepay improvements | +5.84%, +6.47% | ⚠️ |
+| Mix Shift | Volume shifts stable across tiers | DK +25.6%, NO +39.2% | ✅ |
 
 **Key Findings:**
-- AT and DK both showed significant rate improvements driven primarily by reduced "Insufficient Funds" declines (AT: -2.05pp, DK: -3.13pp)
-- Apple Pay performance improved substantially in both flagged countries (AT: +5.78%, DK: +6.47%), suggesting potential payment processor optimizations taking effect
-- DK saw a 25.6% volume increase (30,036 → 37,713) while maintaining improved rates, indicating healthy growth
-- Braintree provider in DK improved significantly (+5.84%), contributing to overall DK improvement
-- Overall change is positive but not statistically significant, consistent with normal week-over-week fluctuations
+- AT and DK showed strong improvements exceeding the ±2.5% threshold, with AT at +2.95% and DK at +3.94%, both driven primarily by reduced "Insufficient Funds" declines (-2.05pp and -3.13pp respectively)
+- Apple Pay performance improved significantly in both flagged countries: AT (+5.78%) and DK (+6.47%), suggesting potential payment provider optimizations taking effect
+- Braintree provider in DK showed +5.84% improvement, contributing to the country-level gain
+- DK volume increased +25.6% (30,036 → 37,713 orders) while maintaining improved reactivation rates, indicating healthy growth
+- Overall 8-week trend shows rate stabilizing in the 90-91.5% range with W15 reaching the highest point in the observation period
 
-**Action:** Monitor - The improvement is positive but not significant. Continue tracking AT and DK to confirm if the reduced Insufficient Funds declines and Apple Pay improvements represent a sustained trend or temporary fluctuation.
+**Action:** Monitor - The improvement is positive but not statistically significant. Continue tracking AT and DK to confirm if Apple Pay and Braintree improvements are sustained trends or temporary fluctuations.
 
 ---
 

@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11 pp) on 497,775 orders, a change that is not statistically significant and falls within normal weekly fluctuation.
+**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11pp) on 497,775 orders, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.38 pp | ✅ |
-| 2_PreDunningAR | Recovery | +0.28 pp | ✅ |
-| 3_PostDunningAR | Dunning | -0.04 pp | ✅ |
-| 6_PaymentApprovalRate | Final | +0.11 pp | ✅ |
+| 1_FirstRunAR | Within normal range | +0.38pp | ✅ |
+| 2_PreDunningAR | Within normal range | +0.28pp | ✅ |
+| 3_PostDunningAR | Within normal range | -0.04pp | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.11pp | ✅ |
 
 **Key Findings:**
-- The 8-week trend shows consistent gradual improvement from 93.27% (W08) to 94.1% (W15), indicating sustained positive trajectory (+0.83 pp over 7 weeks)
-- US showed stronger week-over-week improvement (+0.34 pp) compared to CA (+0.02 pp), with US representing the majority of volume (492,811 orders)
-- PaymentProvider "Unknown" flagged with -4.07 pp decline (96.17% → 92.26%), though volume is minimal (775 orders, <0.2% of total)
-- First Run Approval Rate improvement (+0.38 pp) drove the overall PAR gain, with slight offset from Post-Dunning (-0.04 pp)
-- No countries exceeded the ±2.5% threshold; mix shift analysis shows stable high-tier distribution across both US and CA
+- The 8-week trend shows consistent gradual improvement from 93.27% (W08) to 94.1% (W15), indicating a healthy upward trajectory of +0.83pp over the period
+- US drove the week-over-week improvement with +0.34pp gain (92.78% → 93.09%) on 492,811 orders, while CA remained stable at +0.02pp
+- PaymentProvider "Unknown" flagged with -4.07pp decline (96.17% → 92.26%), but volume is minimal at only 775 orders (0.16% of total)
+- All funnel stages showed positive or neutral movement, with FirstRunAR contributing the largest improvement (+0.38pp)
+- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
 
-**Action:** Monitor — No intervention required. Continue tracking the positive 8-week trend and monitor the "Unknown" payment provider for any volume increases.
+**Action:** Monitor – The metric change is not significant, all dimensions are within acceptable thresholds, and the 8-week trend demonstrates stable improvement. Continue standard monitoring cadence.
 
 ---
 

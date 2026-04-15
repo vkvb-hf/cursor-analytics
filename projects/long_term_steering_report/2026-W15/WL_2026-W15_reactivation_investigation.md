@@ -8,26 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate improved slightly from 88.67% to 89.29% (+0.62 pp), representing a non-significant increase on volume of 9,277 orders.
+**Overall:** Reactivation Rate improved slightly from 88.67% to 89.29% (+0.62 pp), a change that is not statistically significant with volume of 9,277 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal range | +0.70% | ✅ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | Max +2.17% (AO) | ✅ |
-| L1: PaymentMethod | "Others" flagged but minimal volume (3 orders) | -66.67% | ⚠️ |
-| L1: PaymentMethod | Apple Pay improvement on low volume (794 orders) | +3.99% | ⚠️ |
-| Mix Shift | All countries stable despite volume shifts | No impact | ✅ |
+| L0: 8-Week Trend | Rate within normal fluctuation range (85.07% - 89.29%) | +0.62 pp | ✅ |
+| L1: Country Breakdown | No countries exceeded ±2.5% threshold | All stable | ✅ |
+| L1: PaymentMethod | "Others" dropped -66.67%, Apple Pay +3.99% | Mixed signals | ⚠️ |
+| Mix Shift Analysis | All countries show stable impact despite volume shifts | No significant mix effect | ✅ |
 
 **Key Findings:**
-- The +0.70% week-over-week increase continues a positive trend, with rates climbing from 85.07% (W08) to 89.29% (W15) over the 8-week period
-- All four countries (GN, ER, MR, AO) showed improvement ranging from +1.07% to +2.17%, with none exceeding the ±2.5% investigation threshold
-- Apple Pay showed a +3.99% improvement (72.06% → 74.94%) but on limited volume (794 orders), flagged but not material
-- "Others" payment method dropped -66.67% but represents only 3 orders, making this statistically irrelevant
-- AO experienced the largest volume decline (-12.0%) but maintained stable mix shift impact
+- The +0.70% week-over-week change continues an upward trend from the W08 baseline of 85.07% to current 89.29%, showing gradual improvement over the 8-week period
+- PaymentMethod "Others" shows a dramatic -66.67% drop, but with only 3 orders this is statistically irrelevant noise
+- Apple Pay improved +3.99 pp (72.06% → 74.94%) on 794 orders, though still underperforms vs Credit Card (89.92%) and Paypal (93.27%)
+- AO experienced -12.0% volume decline (15,776 → 13,883) while simultaneously improving rate by +2.17 pp, suggesting possible quality filtering effect
+- All four countries (GN, ER, MR, AO) showed positive rate improvements ranging from +1.07% to +2.17%, indicating broad-based gains
 
-**Action:** Monitor — The change is not statistically significant, all countries are below threshold, and flagged dimensions have minimal volume impact.
+**Action:** Monitor - The improvement is not statistically significant and falls within normal weekly fluctuation. Continue tracking Apple Pay performance as a potential optimization opportunity.
 
 ---
 

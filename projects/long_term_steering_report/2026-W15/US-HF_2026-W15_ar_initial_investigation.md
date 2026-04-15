@@ -10,27 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.85 pp) in W15, a non-significant increase within normal operating range.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.96pp) in W15, a statistically non-significant change that returns the metric closer to its 8-week average range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (87.73%-90.11%) | +0.85 pp | ✅ |
-| L1: Country Breakdown | US changed +1.13%, no countries exceeded ±2.5% threshold | +1.13 pp | ✅ |
-| L1: Payment Method | All methods within normal variance (-0.21 to +1.17 pp) | Mixed | ✅ |
-| L1: Payment Provider | ProcessOut +1.22 pp, Braintree +0.47 pp | Positive | ✅ |
-| L3: Related Metrics | All funnel metrics improved (FirstRunAR +1.45 pp leading) | +0.93-1.45 pp | ✅ |
-| Mix Shift | US Low tier volume decreased 3.2%, impact stable | -3.2% vol | ✅ |
+| 1_FirstRunAR | Baseline | +1.45pp | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.96pp | ✅ |
+| 3_PostDunningAR | Post-Recovery | +0.93pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.95pp | ✅ |
 
 **Key Findings:**
-- All acceptance funnel metrics improved in parallel: FirstRunAR (+1.45 pp), PreDunningAR (+0.96 pp), PostDunningAR (+0.93 pp), and PaymentApprovalRate (+0.95 pp)
-- Credit Card acceptance improved most among payment methods (+1.17 pp to 90.3%), driving the largest volume segment (6,577 orders)
-- ProcessOut showed strongest provider improvement (+1.22 pp to 90.52%) with significant volume (6,433 orders)
-- Volume decreased 21% week-over-week (11,533 → 12,162 orders), though still below W08-W11 levels (15,000-19,000)
-- No dimensional flags triggered; all changes within normal operating thresholds
+- All funnel stages showed consistent improvement between +0.93pp and +1.45pp, indicating broad-based recovery rather than an isolated issue
+- No payment method or provider exceeded the ±2.5% threshold; Credit Card showed the largest improvement at +1.17pp (6,577 orders)
+- Volume increased modestly from 11,533 to 12,162 orders (+5.5%), with US remaining in the Medium AR tier (>85%)
+- The W15 rate of 89.66% represents a recovery from the W13 dip (87.73%) and aligns with the W10-W11 performance range
+- ProcessOut, handling the largest volume (6,433 orders), improved by +1.22pp while Braintree improved by +0.47pp
 
-**Action:** Monitor — The improvement is not statistically significant and all metrics are moving directionally positive within expected variance. No investigation required.
+**Action:** Monitor — No significant anomalies detected; changes are within normal fluctuation and all dimensions are performing consistently.
 
 ---
 
@@ -55,7 +53,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 70.51% | 69.72% | +1.13% | 23,822 |  |
+| US | 89.66% | 88.81% | +0.96% | 12,162 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -101,7 +99,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | Low (>85%) | 24,598 | 23,822 | -3.2% | Stable |
+| US | Medium (>85%) | 11,533 | 12,162 | +5.5% | Stable |
 
 ---
 

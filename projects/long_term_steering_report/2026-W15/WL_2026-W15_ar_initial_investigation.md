@@ -8,29 +8,29 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) improved from 89.83% to 91.04% (+1.35%) in 2026-W15, representing a significant positive movement with 11,587 orders processed.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved significantly from 89.83% to 91.04% (+1.35%) in W15, driven primarily by reduced Insufficient Funds declines in ER and MR markets.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (90.74%-91.99%) | +1.21pp | ✅ |
-| L1: Country Breakdown | MR exceeds ±2.5% threshold | +4.84% | ⚠️ |
-| L1: PaymentMethod | Others exceeds threshold | +8.74% | ⚠️ |
-| L1: PaymentProvider | Unknown exceeds threshold | +27.03% | ⚠️ |
-| L2: MR Deep-Dive | PaymentMethod shifts identified | None -100%, venmo -100% | ⚠️ |
-| L3: Related Metrics | All funnel metrics improving consistently | +1.34% to +2.27% | ✅ |
+| L0: 8-Week Trend | Rate within normal range (90.74%-91.99%) | +1.35% | ✅ |
+| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | ER +2.77%, MR +5.15% | ⚠️ |
+| L1: PaymentMethod | "Others" shows anomalous change | +8.74% | ⚠️ |
+| L1: PaymentProvider | "Unknown" shows anomalous change | +27.03% | ⚠️ |
+| L2: ER Deep-Dive | Insufficient Funds decline | -1.74pp | ✅ |
+| L2: MR Deep-Dive | Insufficient Funds decline + volume shift to Unknown provider | -3.17pp | ⚠️ |
+| L3: Related Metrics | All funnel metrics improved consistently | +1.34% to +2.27% | ✅ |
+| Mix Shift | All countries stable impact | No significant shifts | ✅ |
 
 **Key Findings:**
-- MR drove significant improvement (+4.84%) with successful transactions increasing from 76.28% to 79.97% (+3.69pp), while "Insufficient Funds" declines dropped by 1.89pp
-- The "Unknown" PaymentProvider segment showed a dramatic +27.03% increase (76.92% → 97.71%), though volume remains low at 656 orders
-- "Others" PaymentMethod improved significantly (+8.74%) from 89.83% to 97.68% with 689 orders
-- Volume declined 9.3% week-over-week (12,773 → 11,587), continuing a downward trend from 15,382 in W08
-- All related metrics (1_FirstRunAR, 2_PreDunningAR, 3_PostDunningAR, 6_PaymentApprovalRate) show consistent improvement ranging from +1.34% to +2.27%
+- MR showed the largest improvement (+5.15%) with Insufficient Funds declines dropping by 3.17pp (from 7.10% to 3.93%), accompanied by a significant volume shift to "Unknown" provider (4 → 588 orders)
+- ER improved by +2.77% primarily due to Insufficient Funds declines decreasing by 1.74pp (from 10.14% to 8.40%)
+- Overall volume declined 9.3% (12,773 → 11,587 orders), continuing an 8-week downward trend from 15,382 orders in W08
+- The "Unknown" PaymentProvider category showed a +27.03% rate change with volume increasing from ~50 to 656 orders, indicating potential data classification changes
+- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, confirming genuine acceptance rate improvement
 
-**Action:** Monitor - The improvement is positive and driven by genuine reduction in decline rates in MR, particularly "Insufficient Funds" (-1.89pp). Continue monitoring the "Unknown" PaymentProvider segment to ensure data quality, and track volume decline trends.
+**Action:** Monitor - The improvement is positive and driven by legitimate decline reason reductions. However, investigate the MR "Unknown" provider volume spike (4 → 588) to ensure proper payment provider attribution and data quality.
 
 ---
 
@@ -55,12 +55,12 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| GN | 78.65% | 79.7% | -1.32% | 1,527 |  |
-| CK | 79.91% | 79.09% | +1.03% | 3,703 |  |
-| ER | 64.45% | 62.95% | +2.38% | 4,529 |  |
-| MR | 79.97% | 76.28% | +4.84% | 3,215 | ⚠️ |
+| GN | 89.48% | 88.65% | +0.94% | 1,065 |  |
+| CK | 88.53% | 87.68% | +0.97% | 1,961 |  |
+| ER | 86.87% | 84.53% | +2.77% | 2,048 | ⚠️ |
+| MR | 93.06% | 88.51% | +5.15% | 1,932 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** MR
+**Countries exceeding ±2.5% threshold:** ER, MR
 
 ---
 
@@ -87,41 +87,76 @@
 
 ---
 
+## L2: ER Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| None | 0.0% | 0.0% | +0.00% | 5 | 0 |  |
+| None | 0.0% | 0.0% | +0.00% | 0 | 3 |  |
+| cashcredit | 100.0% | 100.0% | +0.00% | 2 | 4 |  |
+| applepay | 88.25% | 86.51% | +2.01% | 630 | 734 |  |
+| credit_card | 84.78% | 82.24% | +3.10% | 1,183 | 1,306 |  |
+| paypal | 95.61% | 91.7% | +4.27% | 228 | 241 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Unknown | 0.0% | 0.0% | +0.00% | 5 | 3 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 2 | 4 |  |
+| Braintree | 89.94% | 87.68% | +2.59% | 885 | 998 |  |
+| ProcessOut | 84.86% | 82.23% | +3.20% | 1,156 | 1,283 |  |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| 1. SUCCESSFULL | 1,779 | 1,934 | 86.87% | 84.53% | +2.34 |
+| Insufficient Funds | 172 | 232 | 8.40% | 10.14% | -1.74 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 22 | 46 | 1.07% | 2.01% | -0.94 |
+| Other reasons | 70 | 73 | 3.42% | 3.19% | +0.23 |
+| Unknown | 5 | 2 | 0.24% | 0.09% | +0.16 |
+| PROVIDER_ERROR: failure executing charge with provider | 0 | 1 | 0.00% | 0.04% | -0.04 |
+
+**Root Cause:** Insufficient
+
+---
+
 ## L2: MR Deep-Dive
 
 ### PaymentMethod
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 99.5% | 0.0% | +0.00% | 596 | 0 |  |
-| cashcredit | 100.0% | 0.0% | +0.00% | 1 | 0 |  |
+| None | 99.83% | 0.0% | +0.00% | 589 | 0 |  |
 | None | 0.0% | 100.0% | -100.00% | 0 | 5 | ⚠️ |
-| venmo | 0.0% | 100.0% | -100.00% | 1 | 1 | ⚠️ |
-| applepay | 82.8% | 84.22% | -1.69% | 558 | 792 |  |
-| credit_card | 70.93% | 71.54% | -0.85% | 1,789 | 2,326 |  |
-| paypal | 91.11% | 86.87% | +4.89% | 270 | 434 |  |
+| venmo | 0.0% | 100.0% | -100.00% | 0 | 1 | ⚠️ |
+| applepay | 90.57% | 91.56% | -1.08% | 318 | 533 |  |
+| paypal | 98.72% | 97.19% | +1.57% | 156 | 285 |  |
+| credit_card | 88.38% | 85.35% | +3.55% | 869 | 1,317 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Braintree | 67.62% | 69.55% | -2.77% | 1,152 | 1,583 |  |
-| Unknown | 99.66% | 100.0% | -0.34% | 595 | 4 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 1 | 1 |  |
-| ProcessOut | 81.66% | 81.62% | +0.05% | 1,467 | 1,970 |  |
+| No Payment | 0.0% | 100.0% | -100.00% | 0 | 1 | ⚠️ |
+| Unknown | 100.0% | 100.0% | +0.00% | 588 | 4 |  |
+| Braintree | 87.84% | 86.47% | +1.59% | 510 | 894 |  |
+| ProcessOut | 91.37% | 89.94% | +1.59% | 834 | 1,242 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 2,571 | 2,714 | 79.97% | 76.28% | +3.69 |
-| Insufficient Funds | 232 | 324 | 7.22% | 9.11% | -1.89 |
-| Other reasons | 169 | 240 | 5.26% | 6.75% | -1.49 |
-| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 240 | 280 | 7.47% | 7.87% | -0.40 |
-| Unknown | 2 | 0 | 0.06% | 0.00% | +0.06 |
-| State_failed | 1 | 0 | 0.03% | 0.00% | +0.03 |
+| 1. SUCCESSFULL | 1,798 | 1,895 | 93.06% | 88.51% | +4.55 |
+| Insufficient Funds | 76 | 152 | 3.93% | 7.10% | -3.17 |
+| Other reasons | 40 | 68 | 2.07% | 3.18% | -1.11 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 17 | 26 | 0.88% | 1.21% | -0.33 |
+| State_failed | 1 | 0 | 0.05% | 0.00% | +0.05 |
 
-**Root Cause:** None + Insufficient
+**Root Cause:** None + No + Insufficient
 
 ---
 
@@ -141,13 +176,13 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| ER | Low (>85%) | 5,023 | 4,529 | -9.8% | Stable |
-| MR | Low (>85%) | 3,558 | 3,215 | -9.6% | Stable |
-| CK | Low (>85%) | 3,386 | 3,703 | +9.4% | Stable |
-| KN | High (>92%) | 2,973 | 2,480 | -16.6% | Stable |
-| CG | Medium (>85%) | 2,951 | 2,812 | -4.7% | Stable |
-| GN | Low (>85%) | 1,823 | 1,527 | -16.2% | Stable |
-| AO | Low (>85%) | 1,559 | 1,399 | -10.3% | Stable |
+| KN | High (>92%) | 2,455 | 2,023 | -17.6% | Stable |
+| ER | Low (>85%) | 2,288 | 2,048 | -10.5% | Stable |
+| MR | Medium (>85%) | 2,141 | 1,932 | -9.8% | Stable |
+| CG | High (>92%) | 1,952 | 1,832 | -6.1% | Stable |
+| CK | Medium (>85%) | 1,810 | 1,961 | +8.3% | Stable |
+| GN | Medium (>85%) | 1,286 | 1,065 | -17.2% | Stable |
+| AO | Low (>85%) | 841 | 726 | -13.7% | Stable |
 
 ---
 
@@ -158,7 +193,8 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| MR | ↑ +4.84% | None -100.0% | → Stable | Insufficient Funds -1.89pp | None + Insufficient |
+| ER | ↑ +2.77% | → Stable | → Stable | Insufficient Funds -1.74pp | Insufficient |
+| MR | ↑ +5.15% | None -100.0% | No Payment -100.0% | Insufficient Funds -3.17pp | None + No + Insufficient |
 
 ---
 

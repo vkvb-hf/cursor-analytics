@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.46% to 92.83% (+0.40%), a change that is not statistically significant given the volume of 421,406 orders.
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.46% to 92.83% (+0.40%) in W15, a non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.40% | ✅ |
+| L0: 8-Week Trend | Rate within historical range (91.07%-93.20%) | +0.40% | ✅ |
 | L1: Country Breakdown | 1 country (TK) exceeded ±2.5% threshold | +7.54% TK | ⚠️ |
-| L1: Dimension Scan | PaymentProvider "Unknown" flagged | +34.35% | ⚠️ |
-| L2: TK Deep-Dive | Multiple payment methods improved significantly | +6.49% to +12.10% | ⚠️ |
-| L3: Related Metrics | All funnel metrics stable | -0.01% to +0.47% | ✅ |
-| Mix Shift | No significant volume shifts impacting rate | TK +9.6% vol | ✅ |
+| L1: Dimension Scan | 1 provider (Unknown) flagged but minimal volume (131) | +34.35% | ✅ |
+| L2: TK Deep-Dive | Improvement driven by reduced Insufficient Funds declines | -5.81pp | ✅ |
+| L3: Related Metrics | All funnel metrics stable, no anomalies | <±0.5% | ✅ |
+| Mix Shift | No significant volume shifts impacting overall rate | Stable | ✅ |
 
 **Key Findings:**
-- TK showed exceptional improvement (+7.54pp), driven by significant reductions in "Insufficient Funds" declines (-5.81pp), particularly affecting Adyen (+6.49%) and Braintree (+10.60%) providers
-- All payment methods in TK improved: applepay (+12.10pp), credit_card (+6.49pp), and paypal (+5.41pp)
-- The "Unknown" PaymentProvider flag (+34.35%) is a low-volume artifact (131 orders) and not actionable
-- Overall 8-week trend shows recovery from W14's dip, returning closer to W12-W13 levels (~93%)
-- Volume continues gradual decline trend (-2.4% WoW), consistent with recent weeks
+- TK showed significant improvement (+7.54%), driven by a substantial decrease in "Insufficient Funds" declines (-5.81pp), with success rate rising from 88.65% to 95.33%
+- All payment methods in TK improved: applepay (+12.10%), credit_card (+6.49%), and paypal (+5.41%)
+- TK volume increased by +9.6% (1,779 → 1,950), the only country with positive volume growth
+- TV showed the largest decline (-1.37%) but with minimal volume impact (1,895 orders)
+- Overall volume declined by 2.4% (431,853 → 421,406), consistent with downward trend since W11
 
-**Action:** Monitor — The improvement is positive but not significant. TK's improvement appears driven by reduced Insufficient Funds declines, which may indicate improved customer payment health or successful retry logic. No escalation required.
+**Action:** Monitor — The overall change is not statistically significant and represents normal fluctuation. TK improvement is positive and should be monitored to confirm sustainability.
 
 ---
 

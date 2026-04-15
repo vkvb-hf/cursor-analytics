@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 39.36% to 45.59% (+6.23pp) in 2026-W15, exceeding the threshold of +3.11pp, driven primarily by a substantial increase in the Select Payment Method step.
+**Overall:** Payment Conversion Rate improved significantly from 39.36% to 45.59% (+6.23pp) in 2026-W15, exceeding the threshold of +3.11pp, driven primarily by substantial gains in the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ > 3.11pp | +6.32pp | ⚠️ |
-| Click Submit Form | Δ > 3.11pp | +1.52pp | ✅ |
-| FE Validation Passed | Δ > 3.11pp | +0.36pp | ✅ |
-| Enter Fraud Service | Δ > 3.11pp | +0.17pp | ✅ |
-| Approved by Fraud Service | Δ > 3.11pp | +0.09pp | ✅ |
-| Call to PVS | Δ > 3.11pp | +0.07pp | ✅ |
-| Successful Checkout | Δ > 3.11pp | +0.39pp | ✅ |
+| Select Payment Method | Rate ≥ threshold | +6.32pp | ✅ |
+| Click Submit Form | Rate ≥ threshold | +1.52pp | ⚠️ |
+| FE Validation Passed | Rate ≥ threshold | +0.36pp | ⚠️ |
+| Enter Fraud Service | Rate ≥ threshold | +0.17pp | ⚠️ |
+| Approved by Fraud Service | Rate ≥ threshold | +0.09pp | ⚠️ |
+| Call to PVS | Rate ≥ threshold | +0.07pp | ⚠️ |
+| Successful Checkout | Rate ≥ threshold | +0.39pp | ⚠️ |
 
 **Key Findings:**
-- The Select Payment Method step is the primary driver of the PCR improvement, with conversion jumping from 49.93% to 56.25% (+6.32pp) at the global level
-- All four analyzed countries (TV, CF, YE, FJ) show significant improvements in Select Payment Method conversion: TV +14.30pp, CF +12.81pp, YE +12.38pp, FJ +3.64pp
-- Payment method performance is generally stable, with Braintree_ApplePay (+2.16pp), Adyen_IDeal (+2.28pp), and Adyen_Klarna (+2.06pp) showing notable improvements
-- Backend waterfall shows minimal change in PCR (+0.68pp), suggesting the improvement is concentrated in the front-end user experience rather than backend processing
-- Total payment visits decreased slightly (-3.0%) while successful checkouts increased (+12.4%), indicating improved conversion efficiency
+- Select Payment Method is the primary driver of PCR improvement, with conversion increasing +6.32pp (49.93% → 56.25%) at the global level
+- All four analyzed countries (TV, CF, YE, FJ) show consistent improvement in Select Payment Method: TV (+14.30pp), CF (+12.81pp), YE (+12.38pp), FJ (+3.64pp)
+- Braintree_ApplePay showed notable improvement (+2.16pp) while ProcessOut_CreditCard remained stable (-0.22pp)
+- Backend Checkout Attempt rates improved modestly across countries, with TV (+3.85pp) and CF (+3.18pp) leading gains
+- Payment visits decreased slightly (-3.0%, from 63,361 to 61,475) while successful checkouts increased (+12.4%, from 24,939 to 28,026)
 
-**Action:** Monitor – The improvement appears to be a positive trend driven by improved user engagement at the payment method selection step. Investigate what changes may have been deployed affecting the payment selection UI/UX to document and potentially replicate this success.
+**Action:** Monitor - The improvement is positive and consistent across markets. Continue tracking to confirm the trend is sustained and identify what UI/UX or product changes may have contributed to the Select Payment Method improvement.
 
 ---
 

@@ -8,26 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.78%, equivalent to -0.71pp) in W15, though this change is not statistically significant.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.71pp) in W15, representing a statistically non-significant change on 26,178 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal fluctuation range (86.89%-91.02%) | -0.71pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: +0.34%, CA: +0.02% | ✅ |
-| L1: PaymentMethod | "Others" flagged but minimal volume | -52.38% on 7 orders | ⚠️ |
-| L1: PaymentProvider | No anomalies detected | - | ✅ |
-| Mix Shift Analysis | Both US and CA stable | US: -0.9%, CA: -2.2% vol | ✅ |
+| L0: 8-Week Trend | Rate within normal variance (86.89%-91.02% range) | -0.71pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34%, CA +0.02% | ✅ |
+| L1: Dimension Scan | "Others" payment method flagged | -52.38% | ⚠️ |
+| Mix Shift Analysis | Both US and CA stable | US -0.9%, CA -2.2% vol | ✅ |
 
 **Key Findings:**
-- The -0.78% week-over-week decline is not statistically significant and falls within the normal 8-week fluctuation range (86.89% to 91.02%)
-- Volume increased substantially from 20,279 (W14) to 26,178 (W15), a +29% increase, which may contribute to rate normalization
-- Both US (+0.34%) and CA (+0.02%) showed stable or slightly improving rates at the country level
-- The "Others" payment method showed a -52.38% decline but represents only 7 orders, making it statistically irrelevant
-- Current rate of 90.24% remains elevated compared to W08-W10 period (86.89%-88.23%)
+- The -0.71pp decline is within normal weekly fluctuation observed over the 8-week period (range: 86.89% - 91.02%)
+- Both US (93.09%) and CA (93.51%) showed stable or slightly improved rates, with no country exceeding the ±2.5% investigation threshold
+- "Others" PaymentMethod showed a -52.38% change, but volume is negligible (7 orders) making this statistically irrelevant
+- W15 had the highest volume in the 8-week period (26,178 orders), representing a +29% increase vs W14 (20,279 orders)
+- Credit Card (18,327 orders, -0.72%) drove the majority of volume with minimal rate change
 
-**Action:** Monitor – No investigation required. The decline is not significant, no countries exceeded thresholds, and the flagged payment method anomaly involves negligible volume (7 orders).
+**Action:** Monitor — The decline is not statistically significant, no countries breached thresholds, and the flagged payment method has negligible volume. Continue standard monitoring in W16.
 
 ---
 

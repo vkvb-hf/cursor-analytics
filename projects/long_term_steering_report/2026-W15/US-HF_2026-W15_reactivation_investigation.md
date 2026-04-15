@@ -8,26 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by 0.52 percentage points (from 90.99% to 90.47%) in W15, representing a statistically non-significant change on a volume of 21,155 orders.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined by -0.57% (from 90.99% to 90.47%) in W15, with volume increasing significantly from 14,736 to 21,155 orders; the change is flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Statistical Significance | Not significant | -0.52pp | ✅ |
-| Country Threshold (±2.5%) | No countries exceeded | +0.34pp (US) | ✅ |
-| Payment Method Scan | "Others" flagged | -50.00pp | ⚠️ |
-| Mix Shift Analysis | US High tier stable | -0.9% volume | ✅ |
-| 8-Week Trend | Rate within normal range | 85.79%-91.26% | ✅ |
+| L0: 8-Week Trend | Within normal range | -0.57% | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: +0.34% | ✅ |
+| L1: PaymentMethod | "Others" flagged but minimal volume | -50.00% (4 orders) | ⚠️ |
+| L1: PaymentProvider | No data available | - | ✅ |
+| Mix Shift | High AR tier stable | -0.9% volume | ✅ |
 
 **Key Findings:**
-- The -0.52pp decline is within normal weekly fluctuation, as the 8-week trend shows rates ranging from 85.79% to 91.26%
-- US country-level performance actually improved slightly (+0.34pp), moving from 92.78% to 93.09%
-- "Others" payment method shows a -50.00pp decline but with minimal volume impact (only 4 orders)
-- W15 volume (21,155) is the second-highest in the 8-week period, 44% higher than W14 (14,736)
-- Credit Card, the largest payment segment (14,585 orders), showed only a minor decline of -0.45pp
+- The -0.57% decline follows a +0.40% improvement in W14, representing normal week-over-week fluctuation within the 8-week trend range (85.79% - 91.26%)
+- Volume increased by 43.6% (14,736 → 21,155 orders), which may contribute to rate normalization toward the mean
+- US country-level performance actually improved by +0.34% (92.78% → 93.09%), suggesting no underlying country-specific issue
+- "Others" payment method shows a -50.00% decline but affects only 4 orders, making it statistically irrelevant
+- PayPal shows the largest meaningful decline at -1.21% (93.68% → 92.55%) across 3,369 orders
 
-**Action:** Monitor - No immediate action required. The decline is not statistically significant, no countries exceeded the ±2.5% threshold, and the flagged "Others" payment method represents negligible volume (4 orders).
+**Action:** Monitor – No significant threshold breaches detected; the decline is within normal variance and not statistically significant. Continue standard weekly tracking.
 
 ---
 

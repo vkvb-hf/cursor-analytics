@@ -10,27 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for HF-NA Initial Charges improved marginally from 89.64% to 89.98% (+0.34 pp) in W15, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 89.64% to 89.98% (+0.34 pp) in W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (89.23%-90.82%) | +0.34 pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +1.13%, CA -0.46% | ✅ |
-| L1: Payment Method | All methods within tolerance | Range -1.69% to +0.85% | ✅ |
-| L1: Payment Provider | All providers within tolerance | Range -1.92% to +0.87% | ✅ |
-| L3: Related Metrics | All funnel metrics moved directionally aligned | +0.37% to +0.64% | ✅ |
-| Mix Shift | Volume shifts stable | US -3.2%, CA -4.0% | ✅ |
+| 8-Week Trend Stability | Rate within normal range (89.23%-90.82%) | +0.34 pp | ✅ |
+| Country Threshold (±2.5%) | No countries exceeded threshold | US +0.96 pp, CA -0.70 pp | ✅ |
+| Payment Method Variance | All methods within normal bounds | -1.69 pp to +0.85 pp | ✅ |
+| Payment Provider Variance | Unknown provider declined but low volume | -1.92 pp (655 vol) | ✅ |
+| Related Metrics Alignment | All funnel metrics moved directionally together | +0.37 pp to +0.64 pp | ✅ |
 
 **Key Findings:**
-- The +0.34 pp improvement continues a two-week upward trend following the W13 low point of 89.23%
-- US showed the strongest improvement at +1.13% while CA declined slightly by -0.46%, though neither crossed investigation thresholds
-- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating broad-based funnel health
-- Volume declined 15.5% compared to W12 (17,332 vs 21,103), but this appears to be a normalization after elevated W10-W12 volumes
-- "Others" payment method showed the largest rate decline (-1.69%) but represents only 4.7% of volume (810 orders)
+- US drove the improvement with +0.96 pp (12,162 orders), offsetting CA's decline of -0.70 pp (5,170 orders)
+- Credit Card acceptance improved +0.85 pp (9,695 orders), representing 56% of volume
+- "Others" payment method declined -1.69 pp but represents only 810 orders (4.7% of volume)
+- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating healthy funnel behavior
+- Volume decreased significantly from ~25K (W08-W10) to ~17K (W15), a seasonal or operational pattern worth monitoring
 
-**Action:** Monitor — No investigation required. The metric change is not significant and all dimension checks passed without flags.
+**Action:** Monitor — No anomalies detected; week-over-week change is within normal variance and not statistically significant.
 
 ---
 
@@ -55,8 +54,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 80.51% | 80.88% | -0.46% | 7,465 |  |
-| US | 70.51% | 69.72% | +1.13% | 23,822 |  |
+| CA | 90.74% | 91.38% | -0.70% | 5,170 |  |
+| US | 89.66% | 88.81% | +0.96% | 12,162 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -102,8 +101,8 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | Low (>85%) | 24,598 | 23,822 | -3.2% | Stable |
-| CA | Low (>85%) | 7,779 | 7,465 | -4.0% | Stable |
+| US | Medium (>85%) | 11,533 | 12,162 | +5.5% | Stable |
+| CA | Medium (>85%) | 5,519 | 5,170 | -6.3% | Stable |
 
 ---
 

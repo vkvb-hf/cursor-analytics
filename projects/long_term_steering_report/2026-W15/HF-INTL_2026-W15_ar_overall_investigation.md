@@ -10,29 +10,29 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved significantly from 93.63% to 94.74% (+1.19%) in 2026-W15, representing a positive reversal after two consecutive weeks of decline.
+**Overall:** The Pre-Dunning Acceptance Rate for HF-INTL improved significantly from 93.63% to 94.74% (+1.19%) in 2026-W15, representing a positive recovery after three consecutive weeks of decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate at 8-week high | +1.19% | ✅ |
+| L0: 8-Week Trend | Rate returned to near 8-week high | +1.19% | ✅ |
 | L1: Country Breakdown | 2 countries exceed ±2.5% threshold (AT, DK) | AT +2.95%, DK +3.94% | ⚠️ |
-| L1: PaymentMethod | Apple Pay exceeds threshold | +2.73% | ⚠️ |
-| L1: PaymentProvider | All providers stable | Max +1.55% | ✅ |
+| L1: PaymentMethod | Apple Pay shows elevated change | +2.73% | ⚠️ |
+| L1: PaymentProvider | All providers within threshold | Max +1.55% | ✅ |
 | L2: AT Deep-Dive | applepay driving improvement | +5.78% | ⚠️ |
 | L2: DK Deep-Dive | applepay + Braintree driving improvement | +6.47%, +5.84% | ⚠️ |
-| L3: Related Metrics | All funnel metrics improved | 1_FirstRunAR +1.76% | ✅ |
-| Mix Shift | Volume shifts stable across tiers | DK +25.6%, NO +39.2% | ✅ |
+| L3: Related Metrics | All funnel metrics improved or stable | 1_FirstRunAR +1.76% | ✅ |
+| Mix Shift | No significant mix impact | All Stable | ✅ |
 
 **Key Findings:**
 - Insufficient Funds declines dropped significantly in both flagged countries: AT (-2.05pp) and DK (-3.13pp), driving the overall improvement
-- Apple Pay showed the largest improvement across payment methods (+2.73% overall), with AT applepay +5.78% and DK applepay +6.47%
-- First Run AR improved by +1.76% (91.51% → 93.12%), indicating upstream payment success improvements
-- DK volume increased +25.6% while maintaining strong rate improvement, suggesting healthy growth
-- Credit Card acceptance improved consistently across markets (+1.53% overall, +4.08% in AT, +3.42% in DK)
+- Apple Pay acceptance rate improved across markets, with AT (+5.78%) and DK (+6.47%) showing the largest gains
+- DK volume increased +25.6% WoW while maintaining strong AR improvement, indicating healthy growth
+- First Run AR improved by +1.76pp (91.51% → 93.12%), suggesting upstream payment processing improvements
+- The improvement reverses a 3-week declining trend (W12-W14), returning the rate close to the W11 peak of 94.9%
 
-**Action:** Monitor — This is a positive trend driven by reduced Insufficient Funds declines. Continue monitoring to confirm sustained improvement, particularly Apple Pay performance in AT and DK.
+**Action:** Monitor - This is a positive improvement driven by reduced Insufficient Funds declines, particularly in Apple Pay transactions. Continue monitoring to confirm the trend sustains through W16.
 
 ---
 

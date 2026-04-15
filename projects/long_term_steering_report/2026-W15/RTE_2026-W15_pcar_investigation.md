@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved by +0.33pp (96.9% → 97.22%) on 44,168 orders in W15, a statistically non-significant change within normal operating range.
+**Overall:** Payment Checkout Approval Rate improved from 96.9% to 97.22% (+0.33pp) in W15, a positive but statistically not significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate stable within 96.88%-97.30% range | +0.33pp | ✅ |
-| L1: Country Scan | 1 country (TK) exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
-| L1: Dimension Scan | PaymentMethod "Others" flagged | Others -4.35pp | ⚠️ |
-| L2: TK Deep-Dive | Broad improvement across all payment methods | +5.4% to +12.1% | ✅ |
-| Mix Shift | All countries stable, no significant volume shifts | TK +9.6% vol | ✅ |
+| L0: 8-Week Trend | Rate within historical range (96.88%-97.30%) | +0.33pp | ✅ |
+| L1: Country Scan | 1 of 7 countries exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
+| L1: Dimension Scan | PaymentMethod "Others" declined significantly | -4.35pp | ⚠️ |
+| L2: TK Deep-Dive | All major payment methods improved | +5.4% to +12.1% | ✅ |
+| Mix Shift | All countries show stable impact | No significant shifts | ✅ |
 
 **Key Findings:**
-- TK showed significant improvement of +7.54pp (88.65% → 95.33%) driven by reduced "Insufficient Funds" declines (-5.81pp)
-- All payment methods in TK improved: applepay +12.10pp, credit_card +6.49pp, paypal +5.41pp
-- Braintree provider in TK improved +10.60pp (85.27% → 94.31%), Adyen improved +6.49pp
-- "Others" payment method declined -4.35pp globally but represents minimal volume (950 orders)
-- Overall metric remains stable with 8-week range of 96.88%-97.30%
+- TK showed significant improvement (+7.54pp), driven by reduced "Insufficient Funds" declines (-5.81pp), improving from 8.32% to 2.51% of transactions
+- In TK, all payment methods improved: applepay (+12.10pp), credit_card (+6.49pp), and paypal (+5.41pp)
+- Braintree provider in TK improved substantially (+10.60pp), from 85.27% to 94.31%
+- PaymentMethod "Others" declined globally (-4.35pp) but represents minimal volume (950 orders)
+- Overall volume decreased slightly from 39,914 to 44,168 orders (+10.7%), with TK volume up 9.6%
 
-**Action:** Monitor — The improvement is positive but not statistically significant. Continue monitoring TK performance to confirm the reduction in Insufficient Funds declines is sustained.
+**Action:** Monitor — The improvement is positive but not statistically significant. Continue tracking TK performance to confirm the "Insufficient Funds" reduction is sustained. No escalation required.
 
 ---
 

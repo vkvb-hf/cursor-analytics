@@ -10,28 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Fraud Approval Rate declined from 91.59% to 89.20% (-2.39pp) in 2026-W15, representing a significant decrease alongside a 19.9% increase in volume (16,726 → 20,057 customers).
+**Overall:** Fraud Approval Rate (FAR) declined significantly from 91.59% to 89.20% (-2.39 pp) in US-HF during W15, driven primarily by a sharp deterioration in the Referral channel.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR Trend | FAR dropped below 8-week baseline (~91%) | -2.39pp | ⚠️ |
-| L0: Duplicate Rate | Increased from 25.49% to 26.41% | +0.92pp | ⚠️ |
-| L0: Duplicate Block Rate | Increased from 6.49% to 7.03% | +0.54pp | ⚠️ |
-| L0: PF Block Rate | Increased from 0.85% to 3.03% | +2.18pp | ⚠️ |
-| L1: Country (US) | Only country, exceeds ±2.5% threshold | -2.61% | ⚠️ |
-| L1: Channel (Paid) | Minor decline, stable performance | -0.98% | ✅ |
-| L1: Channel (Referral) | Significant FAR decline | -12.15% | ⚠️ |
+| L0: US-HF Overall Trend | FAR dropped -2.61% vs W14 | -2.39 pp | ⚠️ |
+| L1: Country Scan | US exceeds ±2.5% threshold | -2.61% | ⚠️ |
+| L1: Channel Category Scan | Referral channel flagged | -12.15% | ⚠️ |
+| L2: US Paid Channel | Stable performance | -0.98% | ✅ |
+| L2: US Referral Channel | Severe FAR decline + PF Block spike | -12.15% | ⚠️ |
 
 **Key Findings:**
-- PF Block Rate spiked significantly from 0.85% to 3.03% (+2.18pp), the highest level in the 8-week trend and a primary driver of FAR decline
-- Referral channel experienced severe FAR degradation of -12.15% (70.00% → 61.50%), far exceeding the overall decline
-- Volume increased by 19.9% week-over-week while FAR decreased, suggesting potential quality issues with new traffic
-- Duplicate Rate reached its highest point in 8 weeks at 26.41%, contributing to increased blocking
-- Paid channel remains relatively stable at 95.34% FAR despite the overall decline, indicating issues are concentrated in Referral
+- Referral channel FAR collapsed from 70.00% to 61.50% (-8.50 pp), accounting for the majority of the overall decline despite representing only 18% of volume
+- PF Block rate in Referral channel surged from 2.48% to 12.62% (+409.56%), indicating a significant increase in policy/fraud-related rejections
+- Duplicate Rate increased modestly overall (+3.60%), with Dup Block rate rising from 6.49% to 7.03% (+8.45%)
+- Volume increased 19.9% (16,726 → 20,057), suggesting the decline is not due to volume drop but rather quality degradation in Referral traffic
+- Paid channel remains stable at 95.34% FAR (-0.98%), confirming the issue is isolated to Referral
 
-**Action:** Investigate — Focus immediate analysis on the Referral channel's 12.15% FAR drop and the 2.18pp spike in PF Block Rate to identify root cause of increased rejections.
+**Action:** **Investigate** — Immediate deep-dive required into Referral channel to identify source of PF Block spike (+409.56%). Review specific referral partners/programs active in W15 and coordinate with Policy/Fraud teams on recent rule changes affecting this segment.
 
 ---
 
@@ -73,5 +71,32 @@
 | Referral | 2026-W15 | 61.50% | -12.15% | 29.70% | -6.51% | 3,636 | ⚠️ |
 
 ---
+
+## L2: US Deep-Dive
+
+### Channel Category
+
+| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
+|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
+| Paid | 2026-W14 | 96.28% | - | 24.13% | - | 2.20% | - | 0.50% | - | 13,739 |  |
+| Paid | 2026-W15 | 95.34% | -0.98% | 25.68% | +6.43% | 3.01% | +36.86% | 0.90% | +79.46% | 16,421 |  |
+| Referral | 2026-W14 | 70.00% | - | 31.77% | - | 26.21% | - | 2.48% | - | 2,987 |  |
+| Referral | 2026-W15 | 61.50% | -12.15% | 29.70% | -6.51% | 25.22% | -3.79% | 12.62% | +409.56% | 3,636 | ⚠️ |
+
+**Analysis:** The -2.39 pp FAR decline in US-HF for W15 is primarily attributable to the Referral channel, where the PF Block rate increased dramatically by +409.56% (2.48% → 12.62%), causing FAR to drop from 70.00% to 61.50%. This suggests either a sudden influx of fraudulent referral traffic, a new fraud rule deployment affecting referral customers, or abuse of a specific referral program. Immediate investigation into Referral channel sources and recent policy changes is recommended before W16 reporting.
+
+---
+
+
+## Decision Framework
+
+**Root Cause Derivation:**
+
+| Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
+|---------|------------|----------------|----------|-----------|----------|------------|
+| US | ↓ -2.61% | Referral ↓ -12.15% | ↑ +3.60% | ↑ +8.45% | ↑ +253.98% | [AI_SUMMARY_PLACEHOLDER] |
+
+---
+
 
 *Report: 2026-04-15*

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.24pp) in W15, a change that is not statistically significant, with volume declining from 784,406 to 744,637 orders (-5.1%).
+**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.23pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +1.76% | ✅ |
-| 2_PreDunningAR | vs Step 1 | +1.18% | ✅ |
-| 3_PostDunningAR | vs Step 2 | +0.01% | ✅ |
-| 6_PaymentApprovalRate | vs Step 3 | +0.24% | ✅ |
+| 1_FirstRunAR | Baseline conversion | +1.76% | ✅ |
+| 2_PreDunningAR | Recovery step | +1.18% | ✅ |
+| 3_PostDunningAR | Dunning recovery | +0.01% | ✅ |
+| 6_PaymentApprovalRate | Final approval | +0.24% | ✅ |
 
 **Key Findings:**
-- Two countries exceeded the ±2.5% threshold: AT (+2.95pp) and DK (+3.94pp), both showing improvement rather than decline
-- In AT, applepay approval rate improved significantly (+5.78pp), driven by a reduction in "Insufficient Funds" declines (-2.05pp)
-- In DK, Braintree provider saw the largest improvement (+5.84pp), with "Insufficient Funds" declines dropping by -3.13pp
-- FirstRunAR showed the strongest improvement across the funnel (+1.76%), indicating better initial payment success
-- All payment methods and providers showed stable or improving performance, with no negative flags identified
+- AT and DK exceeded the ±2.5% threshold with improvements of +2.95% and +3.94% respectively, driven primarily by reduced "Insufficient Funds" declines (-2.05pp in AT, -3.13pp in DK)
+- Apple Pay showed significant improvement in both flagged countries: +5.78% in AT and +6.47% in DK
+- Braintree provider in DK improved substantially (+5.84%), contributing to the country-level improvement
+- Overall volume declined 5.1% WoW (784,406 → 744,637), continuing an 8-week downward trend from 916,831 in W10
+- All payment methods and providers at the aggregate level showed stable performance with no flags triggered
 
-**Action:** Monitor — The observed changes are positive but not statistically significant. Continue standard monitoring; no investigation or escalation required.
+**Action:** Monitor — The overall change is not significant and all movements are positive. Continue tracking AT and DK for sustained improvement patterns, particularly the Apple Pay and Braintree performance.
 
 ---
 

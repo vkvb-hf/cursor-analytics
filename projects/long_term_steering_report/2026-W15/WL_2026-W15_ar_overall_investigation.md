@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved by +0.86% (89.33% → 90.1%) on volume of 160,979 orders in W15, a statistically non-significant change continuing a gradual upward trend over the past 8 weeks.
+**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.86 pp) week-over-week, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.87% | ✅ |
-| 3_PostDunningAR | Downstream | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Final | +0.67% | ✅ |
+| 1_FirstRunAR | Baseline | +0.92 pp | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.87 pp | ✅ |
+| 3_PostDunningAR | Dunning Recovery | +0.53 pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.67 pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed positive movement, with 1_FirstRunAR leading at +0.92%, indicating improvement originated at initial payment attempt
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17% (85.21% → 87.06%)
-- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) and is not operationally significant
-- ProcessOut provider showed notable improvement of +2.31% (79.78% → 81.62%) on 17,676 orders
-- Volume declined -2.4% WoW (165,018 → 160,979), continuing a consistent weekly volume decrease since W08
+- All funnel stages showed positive movement, with 1_FirstRunAR leading at +0.92 pp, indicating broad-based improvement across the payment acceptance pipeline
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06% current)
+- ProcessOut provider improved significantly (+2.31 pp to 81.62%) though remains the lowest-performing provider; Unknown provider shows anomalous +69.73% change but represents minimal volume (664 orders)
+- Volume declined 2.4% week-over-week (165,018 → 160,979 orders), with notable drops in AO (-12.0%), GN (-8.5%), and MR (-6.3%)
+- The 8-week trend shows steady improvement from 88.14% (W08) to 90.1% (W15), representing cumulative gain of +1.96 pp
 
-**Action:** Monitor — No significant anomalies detected; all metrics trending positively within normal variance. Continue standard weekly tracking.
+**Action:** Monitor — The improvement is positive but not statistically significant. Continue tracking the upward trend, particularly ProcessOut's performance recovery and volume shifts in AO and GN.
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate for HF-NA showed a marginal improvement of +0.03pp (27.96% → 27.99%) in W15, driven primarily by strong performance in CA (+1.29pp) which offset a slight decline in US (-0.17pp).
+**Overall:** Payment Conversion Rate showed marginal improvement from 27.96% to 27.99% (+0.03pp) on increased volume of 69,097 payment visits (+16.2% WoW), with mixed performance across funnel steps and countries.
 
 **Funnel Analysis:**
 
@@ -23,13 +23,13 @@
 | Successful Checkout | ≥ threshold | +0.09pp | ✅ |
 
 **Key Findings:**
-- **FE Validation degradation:** FE Validation Passed dropped -0.38pp with recovery rate declining from 70.06% to 68.94% (-1.12pp); "terms_not_accepted" errors increased by +1.29pp share
-- **Fraud Service approval decline:** Backend shows Approved by Fraud Service dropped -1.25pp overall, with US experiencing -2.40pp while CA improved +1.63pp
-- **Braintree_CreditCard severe drop:** Conversion rate fell -13.31pp (88.76% → 75.45%), though volume is relatively low (167 attempts)
-- **Braintree_ApplePay decline:** The second largest payment method dropped -2.14pp (79.64% → 77.50%) affecting ~8.5K attempts
-- **CA outperformance:** CA drove positive results with Select Payment Method +1.29pp and Fraud Service approval +0.98pp in GA waterfall
+- **CA drove positive performance** with PCR improving +1.29pp (32.39% → 33.68%), primarily from Select Payment Method (+1.29pp) and Fraud Service approval (+0.98pp GA, +1.63pp Backend)
+- **US showed decline** with PCR dropping -0.17pp (26.41% → 26.24%), driven by Fraud Service approval deterioration (-0.71pp GA, -2.40pp Backend)
+- **FE Validation degraded** with recovery rate falling from 70.06% to 68.94% (-1.12pp); "terms_not_accepted" errors increased share by +1.29pp
+- **Braintree_ApplePay success rate declined** -2.14pp (79.64% → 77.50%) on significant volume (8,572 attempts)
+- **Braintree_CreditCard experienced severe drop** of -13.31pp (88.76% → 75.45%), though on lower volume (167 attempts)
 
-**Action:** Monitor - The overall change is minimal (+0.03pp) and within acceptable range. Continue monitoring Fraud Service approval rates in US and FE validation recovery rates. If Braintree_CreditCard decline persists next week despite low volume, investigate root cause.
+**Action:** Monitor - Overall PCR change is minimal (+0.03pp), but investigate US Fraud Service approval decline and Braintree_ApplePay/CreditCard success rate deterioration if trends persist into W16.
 
 ---
 

@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 91.93% to 92.22% (+0.29 pp) in W15, a statistically non-significant change within normal operating variance.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in W15, a statistically not significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Rate: 91.07% | +0.40 pp | ✅ |
-| 2_PreDunningAR | Rate: 92.22% | +0.29 pp | ✅ |
-| 3_PostDunningAR | Rate: 93.00% | +0.02 pp | ✅ |
-| 6_PaymentApprovalRate | Rate: 93.76% | +0.14 pp | ✅ |
+| 1_FirstRunAR | Within range | +0.44% | ✅ |
+| 2_PreDunningAR | Within range | +0.32% | ✅ |
+| 3_PostDunningAR | Within range | +0.02% | ✅ |
+| 6_PaymentApprovalRate | Within range | +0.14% | ✅ |
 
 **Key Findings:**
-- All funnel stages show stable or slightly improved performance; no metrics flagged for concern
-- PaymentProvider "Unknown" showed a +4.73 pp increase (87.10% → 91.22%), but volume is minimal at 353 orders (⚠️ flagged but low impact)
-- Apple Pay continues to underperform other payment methods at 85.13% vs. Credit Card at 92.92%, though Apple Pay improved +0.67 pp week-over-week
-- Volume declined by 1.7% (415,885 → 408,629 orders), continuing a downward trend observed since W12
-- No countries exceeded the ±2.5% threshold; US remains the sole market with stable High AR tier performance
+- All funnel metrics showed slight positive movement, with FirstRunAR showing the largest improvement (+0.44%)
+- PaymentProvider "Unknown" flagged with +4.73% change, but represents minimal volume (353 orders)
+- US is the sole country in this market, showing +0.34% improvement with 492,811 orders
+- 8-week trend shows consistent stability, with rates oscillating between 91.48% and 92.22%
+- Volume has declined steadily over 8 weeks (453,781 → 408,629), representing approximately 10% reduction
 
-**Action:** Monitor – No investigation required. The +0.29 pp change is not statistically significant, all funnel steps are healthy, and no dimensions exceed alert thresholds. Continue standard weekly monitoring.
+**Action:** Monitor - No investigation required. Change is not statistically significant and all dimensions remain within acceptable thresholds. Continue standard weekly monitoring.
 
 ---
 
@@ -64,8 +64,8 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | Others | 98.29% | 98.41% | -0.12% | 2,397 |  |
-| Paypal | 95.58% | 95.34% | +0.25% | 50,099 |  |
 | Credit Card | 92.92% | 92.69% | +0.25% | 300,596 |  |
+| Paypal | 95.58% | 95.34% | +0.25% | 50,099 |  |
 | Apple Pay | 85.13% | 84.57% | +0.67% | 55,537 |  |
 
 ### PaymentProvider
