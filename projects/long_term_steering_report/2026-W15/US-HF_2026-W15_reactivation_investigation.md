@@ -10,26 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by -0.57% (from 90.99% to 90.47%) in W15, with volume increasing significantly from 14,736 to 21,155 orders; the change is flagged as not statistically significant.
+**Overall:** Reactivation Rate declined from 90.99% to 90.47% (-0.52pp) in W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal range | -0.57% | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: +0.34% | ✅ |
-| L1: PaymentMethod | "Others" flagged but minimal volume | -50.00% (4 orders) | ⚠️ |
-| L1: PaymentProvider | No data available | - | ✅ |
-| Mix Shift | High AR tier stable | -0.9% volume | ✅ |
+| 8-Week Trend | Rate within normal fluctuation range (85.79%-91.26%) | -0.52pp | ✅ |
+| Country Breakdown | US +0.34% (no countries exceed ±2.5% threshold) | +0.34pp | ✅ |
+| Payment Method | "Others" flagged with -50.00% change | -50.00pp | ⚠️ |
+| Mix Shift | High AR Tier volume stable (-0.9%) | -0.9% | ✅ |
 
 **Key Findings:**
-- The -0.57% decline follows a +0.40% improvement in W14, representing normal week-over-week fluctuation within the 8-week trend range (85.79% - 91.26%)
-- Volume increased by 43.6% (14,736 → 21,155 orders), which may contribute to rate normalization toward the mean
-- US country-level performance actually improved by +0.34% (92.78% → 93.09%), suggesting no underlying country-specific issue
-- "Others" payment method shows a -50.00% decline but affects only 4 orders, making it statistically irrelevant
-- PayPal shows the largest meaningful decline at -1.21% (93.68% → 92.55%) across 3,369 orders
+- The -0.52pp decline is within normal weekly variance; the 8-week trend shows rates fluctuating between 85.79% and 91.26%
+- US country-level performance actually improved slightly (+0.34pp), indicating the aggregate decline is not driven by country mix
+- "Others" payment method shows a significant -50.00pp drop, but with only 4 orders, this is not material to overall performance
+- Volume increased substantially from 14,736 to 21,155 orders (+43.6%), which may introduce natural rate variance
+- No systemic issues identified across payment providers or major payment methods (Credit Card -0.45pp, Apple Pay -0.55pp, PayPal -1.21pp)
 
-**Action:** Monitor – No significant threshold breaches detected; the decline is within normal variance and not statistically significant. Continue standard weekly tracking.
+**Action:** Monitor – No significant anomalies detected; continue standard weekly tracking.
 
 ---
 
@@ -97,4 +96,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

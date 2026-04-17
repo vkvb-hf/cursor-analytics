@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in WL 2026-W15, though the change is not statistically significant with a volume of 11,721 orders.
+**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in WL 2026-W15, representing a modest increase that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Weekly Trend | Rate within normal 8-week range (96.86%-97.37%) | +0.35pp | ✅ |
-| L1: Country Breakdown | No countries exceeded ±2.5% threshold | All stable | ✅ |
-| L1: Payment Method | All methods within normal variance | -0.01pp to +0.71pp | ✅ |
-| Mix Shift Analysis | No significant volume shifts impacting rate | Stable | ✅ |
+| L0: 8-Week Trend | Rate within normal range (96.86%-97.37%) | +0.35pp | ✅ |
+| L1: Country Breakdown | No countries exceed ±2.5% threshold | Max: AO +2.17pp | ✅ |
+| L1: Payment Method | All methods stable | Apple Pay +0.71pp | ✅ |
+| Mix Shift Analysis | All volume shifts marked Stable | AO -12.0% vol | ✅ |
 
 **Key Findings:**
-- The current rate of 97.37% matches the 8-week high previously seen in W10, indicating a return to peak performance
-- AO showed the largest country-level improvement at +2.17pp (85.21% → 87.06%), though still below the 2.5% investigation threshold
-- Apple Pay improved by +0.71pp (96.65% → 97.34%), the largest gain among payment methods
-- Volume declined 29.3% from W08 (16,585) to W15 (11,721), a consistent downward trend over the 8-week period
-- MR volume dropped -6.3% and AO volume dropped -12.0%, but mix shift impact remains stable
+- The +0.35pp improvement brings the rate back to 97.37%, matching the 8-week high observed in W10
+- AO showed the largest rate improvement (+2.17pp) but experienced significant volume decline (-12.0%), which may contribute to the overall rate improvement through mix effect
+- Apple Pay showed notable improvement (+0.71pp to 97.34%) with 3,871 orders, while other payment methods remained stable
+- MR continues to have the lowest approval rate at 81.41%, though it improved +1.45pp from prior week
+- Overall volume decreased to 11,721 orders from 11,373, continuing a declining trend from the W11 peak of 15,835
 
-**Action:** Monitor — No investigation required. The improvement is within normal variance, no thresholds were breached, and the change is not statistically significant.
+**Action:** Monitor - The change is not statistically significant and all dimensional checks passed within normal thresholds. Continue standard monitoring cadence.
 
 ---
 
@@ -106,4 +104,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

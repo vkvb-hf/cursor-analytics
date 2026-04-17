@@ -10,26 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 89.64% to 89.98% (+0.34 pp) in W15, a change that is not statistically significant.
+**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) for HF-NA improved slightly from 89.64% to 89.98% (+0.34 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend Stability | Rate within normal range (89.23%-90.82%) | +0.34 pp | ✅ |
-| Country Threshold (±2.5%) | No countries exceeded threshold | US +0.96 pp, CA -0.70 pp | ✅ |
-| Payment Method Variance | All methods within normal bounds | -1.69 pp to +0.85 pp | ✅ |
-| Payment Provider Variance | Unknown provider declined but low volume | -1.92 pp (655 vol) | ✅ |
-| Related Metrics Alignment | All funnel metrics moved directionally together | +0.37 pp to +0.64 pp | ✅ |
+| 1_FirstRunAR | Baseline | +0.64 pp | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.34 pp | ✅ |
+| 3_PostDunningAR | Post-Dunning | +0.37 pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.40 pp | ✅ |
 
 **Key Findings:**
-- US drove the improvement with +0.96 pp (12,162 orders), offsetting CA's decline of -0.70 pp (5,170 orders)
-- Credit Card acceptance improved +0.85 pp (9,695 orders), representing 56% of volume
-- "Others" payment method declined -1.69 pp but represents only 810 orders (4.7% of volume)
-- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating healthy funnel behavior
-- Volume decreased significantly from ~25K (W08-W10) to ~17K (W15), a seasonal or operational pattern worth monitoring
+- All funnel stages show modest improvement (+0.34 to +0.64 pp), indicating consistent performance across the payment journey
+- No countries exceeded the ±2.5% threshold; US improved +0.96 pp while CA declined -0.70 pp
+- Volume decreased significantly from ~25K orders (W08-W10) to 17,332 orders in W15, a ~32% reduction over the 8-week period
+- Credit Card (90.21%, +0.85 pp) and ProcessOut (90.36%, +0.87 pp) showed the strongest improvements among payment dimensions
+- "Others" payment method and "Unknown" provider showed notable declines (-1.69 pp and -1.92 pp respectively), though both represent low volumes (<1,000 orders)
 
-**Action:** Monitor — No anomalies detected; week-over-week change is within normal variance and not statistically significant.
+**Action:** Monitor — The metric remains stable within normal operating range with no significant deviations requiring investigation. Continue tracking volume trends given the sustained decline over recent weeks.
 
 ---
 
@@ -115,4 +114,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

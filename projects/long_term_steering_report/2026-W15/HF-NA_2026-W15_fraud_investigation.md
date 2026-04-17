@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Fraud Approval Rate (FAR) declined from 90.97% to 89.66% (-1.31pp) in 2026-W15, driven primarily by a significant drop in US Referral channel performance.
+**Overall:** The Fraud Approval Rate (FAR) declined from 90.97% to 89.66% (-1.31pp) in 2026-W15, representing a significant decrease driven primarily by US Referral channel deterioration.
 
 **Funnel Analysis:**
 
@@ -18,20 +18,20 @@
 | ---- | ----- | ------ | ------ |
 | L0: HF-NA Overall | FAR 90.97% → 89.66% | -1.31pp | ⚠️ |
 | L1: Country - US | FAR 91.59% → 89.20% | -2.61pp | ⚠️ |
-| L1: Country - CA | FAR 89.46% → 90.87% | +1.41pp | ✅ |
-| L1: Channel - Paid | FAR 96.24% → 95.63% | -0.61pp | ✅ |
-| L1: Channel - Referral | FAR 67.80% → 63.00% | -4.80pp | ⚠️ |
-| L2: US Referral | FAR 70.00% → 61.50% | -8.50pp | ⚠️ |
-| L2: US Referral PF Block | 2.48% → 12.62% | +409.56% | ⚠️ |
+| L1: Country - CA | FAR 89.46% → 90.87% | +1.57pp | ✅ |
+| L1: Channel - Paid | FAR 96.24% → 95.63% | -0.64pp | ✅ |
+| L1: Channel - Referral | FAR 67.80% → 63.00% | -7.08pp | ⚠️ |
+| L2: US Referral | FAR 70.00% → 61.50% | -12.15pp | ⚠️ |
+| L2: US Referral PF Block | PF Block 2.48% → 12.62% | +409.56% | ⚠️ |
 
 **Key Findings:**
-- US is the primary driver of FAR decline (-2.61pp), exceeding the ±2.5% threshold, while CA improved (+1.41pp)
-- US Referral channel experienced severe FAR degradation (-12.15%), dropping from 70.00% to 61.50%
-- PF Block rate in US Referral spiked dramatically from 2.48% to 12.62% (+409.56%), indicating a major policy or model change
-- Overall volume increased significantly from 23,607 to 27,572 (+16.8%), with US volume growing from 16,726 to 20,057
-- Duplicate Rate increased across both countries (US +3.60%, CA +3.30%) but Dup Block changes were moderate
+- US is the primary driver of the FAR decline, dropping -2.61pp (exceeding the ±2.5% threshold), while CA improved +1.57pp
+- US Referral channel experienced a severe FAR drop of -12.15pp (70.00% → 61.50%), with volume increasing from 2,987 to 3,636 customers
+- PF Block rate in US Referral spiked dramatically by +409.56% (2.48% → 12.62%), indicating a significant change in fraud prevention filtering
+- Overall Duplicate Rate increased modestly (+0.88pp to 26.94%), with Dup Block Rate rising to 6.71% (+0.22pp)
+- Volume increased significantly by +16.8% (23,607 → 27,572), concentrated in US (+19.9%)
 
-**Action:** Investigate — Urgent review required of the PF Block rule/model changes affecting US Referral channel; the +409.56% increase in PF Block rate is the clear root cause of FAR decline.
+**Action:** **Escalate** - The +409.56% spike in US Referral PF Block rate requires immediate investigation to determine if this reflects a legitimate fraud attack, a model/rule change, or a system anomaly.
 
 ---
 
@@ -87,7 +87,7 @@
 | Referral | 2026-W14 | 63.07% | - | 38.44% | - | 30.02% | - | 4.90% | - | 1,389 |  |
 | Referral | 2026-W15 | 66.88% | +6.05% | 37.87% | -1.49% | 28.37% | -5.51% | 3.48% | -29.01% | 1,410 | ⚠️ |
 
-**Analysis:** The 1.31pp decline in Fraud Approval Rate is attributable to a dramatic increase in PF (Policy/Fraud) Block rate within the US Referral channel, which surged from 2.48% to 12.62%. This isolated but severe impact on US Referral customers warrants immediate investigation into any policy changes, model updates, or fraud rule deployments that occurred between W14 and W15. CA performance improved during this period, confirming the issue is localized to US Referral traffic.
+**Analysis:** The 2026-W15 FAR decline is primarily attributable to the US Referral channel, where a dramatic increase in PF Block rate (+409.56%) drove the FAR down by 12.15pp. This pattern suggests either a targeted fraud attack on the Referral channel triggering enhanced blocking, or a recent change to fraud prevention rules/models affecting this segment. Immediate investigation into the PF Block rule triggers and review of blocked transaction characteristics in US Referral is recommended to determine appropriate remediation.
 
 ---
 
@@ -118,4 +118,4 @@
 ---
 
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

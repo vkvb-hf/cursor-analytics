@@ -8,28 +8,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04pp) in W15, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04pp) in W15, a statistically non-significant change within normal weekly variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Rate within normal 8-week range (93.92%-95.23%) | -0.04pp | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | US +0.34pp, CA +0.02pp | ✅ |
-| L1: Payment Method | "Others" declined -2.49pp but minimal volume (91 orders) | -2.49pp | ✅ |
-| L1: Payment Provider | No data available for analysis | N/A | ✅ |
-| Mix Shift | Both US and CA remain in High AR tier with stable impact | US -0.9%, CA -2.2% vol | ✅ |
+| L0: 8-Week Trend | Rate within historical range (93.92%-95.23%) | -0.04pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34pp, CA +0.02pp | ✅ |
+| L1: PaymentMethod | "Others" declined -2.49pp but minimal volume (91 orders) | -2.49pp | ✅ |
+| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| Mix Shift | Both US and CA remain in High AR tier | Stable | ✅ |
 
 **Key Findings:**
-- The -0.04pp decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 93.92% and 95.23%
+- The -0.04pp decline is well within normal weekly fluctuation, with the 8-week range spanning 93.92% to 95.23%
 - Both US (+0.34pp) and CA (+0.02pp) showed slight improvements at the country level, indicating no geographic concerns
-- "Others" payment method showed a -2.49pp decline, but with only 91 orders this has negligible impact on overall rate
-- Apple Pay declined -1.08pp (7,678 orders) while Credit Card improved +0.50pp (13,776 orders), offsetting each other
-- Volume increased 16.3% WoW (20,221 → 23,512 orders) with no negative impact on approval rates
+- "Others" payment method declined -2.49pp but represents only 91 orders (0.4% of volume), making it immaterial to overall performance
+- Apple Pay showed a -1.08pp decline (7,678 orders) while Credit Card improved +0.50pp (13,776 orders), partially offsetting each other
+- Volume increased 16.3% week-over-week (20,221 → 23,512 orders) with no negative impact on approval rates
 
-**Action:** Monitor — No investigation required. The change is not significant and all dimensional checks pass within acceptable thresholds.
+**Action:** Monitor — No investigation required. Change is not statistically significant and all dimensional checks pass within acceptable thresholds.
 
 ---
 
@@ -100,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

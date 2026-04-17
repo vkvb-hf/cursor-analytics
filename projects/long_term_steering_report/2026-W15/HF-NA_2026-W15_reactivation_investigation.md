@@ -8,27 +8,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.71pp) in W15, representing a statistically non-significant change on 26,178 orders.
+**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.78%, or -0.71 pp) in W15, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal variance (86.89%-91.02% range) | -0.71pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34%, CA +0.02% | ✅ |
-| L1: Dimension Scan | "Others" payment method flagged | -52.38% | ⚠️ |
-| Mix Shift Analysis | Both US and CA stable | US -0.9%, CA -2.2% vol | ✅ |
+| 8-Week Trend | Rate within normal range (86.89%-91.02%) | -0.71 pp | ✅ |
+| Country Breakdown | US +0.34%, CA +0.02% | No country >±2.5% | ✅ |
+| Payment Method | Others -52.38% (7 orders) | Low volume outlier | ⚠️ |
+| Payment Provider | No data flagged | N/A | ✅ |
+| Mix Shift | US -0.9%, CA -2.2% volume | Stable impact | ✅ |
 
 **Key Findings:**
-- The -0.71pp decline is within normal weekly fluctuation observed over the 8-week period (range: 86.89% - 91.02%)
-- Both US (93.09%) and CA (93.51%) showed stable or slightly improved rates, with no country exceeding the ±2.5% investigation threshold
-- "Others" PaymentMethod showed a -52.38% change, but volume is negligible (7 orders) making this statistically irrelevant
-- W15 had the highest volume in the 8-week period (26,178 orders), representing a +29% increase vs W14 (20,279 orders)
-- Credit Card (18,327 orders, -0.72%) drove the majority of volume with minimal rate change
+- The -0.78% week-over-week decline is not statistically significant and falls within the normal 8-week fluctuation range (86.89% to 91.02%)
+- No countries exceeded the ±2.5% threshold; both US (+0.34%) and CA (+0.02%) showed stable or slightly improved performance
+- "Others" payment method showed a -52.38% decline, but this is based on only 7 orders (negligible volume impact)
+- Volume increased significantly from 20,279 (W14) to 26,178 (W15), a +29% increase, which may contribute to natural rate variance
+- Current rate of 90.24% remains elevated compared to W08-W10 baseline (86.89%-88.23%)
 
-**Action:** Monitor — The decline is not statistically significant, no countries breached thresholds, and the flagged payment method has negligible volume. Continue standard monitoring in W16.
+**Action:** Monitor — No investigation required. The decline is not significant, no dimensional flags warrant deep-dive, and the rate remains within healthy historical bounds.
 
 ---
 
@@ -98,4 +97,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

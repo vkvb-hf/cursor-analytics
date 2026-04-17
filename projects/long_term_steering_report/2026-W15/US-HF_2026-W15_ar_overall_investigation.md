@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in W15, a statistically not significant change within normal operating range.
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 91.93% to 92.22% (+0.29 pp), a statistically non-significant change within normal weekly fluctuation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within range | +0.44% | ✅ |
-| 2_PreDunningAR | Within range | +0.32% | ✅ |
-| 3_PostDunningAR | Within range | +0.02% | ✅ |
-| 6_PaymentApprovalRate | Within range | +0.14% | ✅ |
+| 1_FirstRunAR | Within range | +0.44 pp | ✅ |
+| 2_PreDunningAR | Within range | +0.32 pp | ✅ |
+| 3_PostDunningAR | Within range | +0.02 pp | ✅ |
+| 6_PaymentApprovalRate | Within range | +0.14 pp | ✅ |
 
 **Key Findings:**
-- All funnel metrics showed slight positive movement, with FirstRunAR showing the largest improvement (+0.44%)
-- PaymentProvider "Unknown" flagged with +4.73% change, but represents minimal volume (353 orders)
-- US is the sole country in this market, showing +0.34% improvement with 492,811 orders
-- 8-week trend shows consistent stability, with rates oscillating between 91.48% and 92.22%
-- Volume has declined steadily over 8 weeks (453,781 → 408,629), representing approximately 10% reduction
+- All funnel metrics showed slight improvement week-over-week, with FirstRunAR showing the largest gain (+0.44 pp)
+- No countries exceeded the ±2.5% threshold; US as the sole country improved +0.34 pp to 93.09%
+- PaymentProvider "Unknown" showed a notable +4.73 pp increase (87.10% → 91.22%), though volume is minimal (353 orders)
+- Apple Pay showed the largest payment method improvement at +0.67 pp but remains the lowest performing method at 85.13%
+- Volume continues a declining trend (453,781 in W08 → 408,629 in W15), representing a ~10% decrease over 8 weeks
 
-**Action:** Monitor - No investigation required. Change is not statistically significant and all dimensions remain within acceptable thresholds. Continue standard weekly monitoring.
+**Action:** Monitor — No significant changes detected; all dimensions within normal operating ranges.
 
 ---
 
@@ -110,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

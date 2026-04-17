@@ -1,22 +1,22 @@
 # Acceptance Rate (Initial Charges) - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-15 18:07  
+**Generated:** 2026-04-17 13:30  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Initial Charges) improved across all clusters in 2026-W15, with gains ranging from +0.38pp (HF-NA) to +2.35pp (HF-INTL). The most significant finding is the broad-based recovery driven by reduced Insufficient Funds declines across multiple markets, particularly in HF-INTL and WL clusters.
+Acceptance Rate (Initial Charges) improved across all clusters in 2026-W15, with gains ranging from +0.38% (HF-NA) to +2.35% (HF-INTL). The most significant finding was HF-INTL's broad-based recovery driven by reduced Insufficient Funds declines across multiple European markets (FR, DE, BE, AT) and strong Apple Pay/ProcessOut performance improvements.
 
 ### Cluster Highlights
 
-- **US-HF:** Improved by +0.96pp to 89.66% (not significant), with consistent gains across all funnel stages and payment methods indicating broad-based recovery from the W13 dip.
-- **HF-INTL:** Significantly improved by +2.35pp to 91.78%, driven by reduced Insufficient Funds declines across DE, FR, BE, and AT, with Apple Pay and ProcessOut showing strong recovery.
-- **WL:** Significantly improved by +1.35pp to 91.04%, primarily driven by reduced Insufficient Funds declines in ER (-1.74pp) and MR (-3.17pp), though MR's "Unknown" provider volume spike warrants data quality investigation.
-- **HF-NA:** Stable at 89.98% (+0.38pp, not significant), with US gains (+0.96pp) offsetting CA's decline (-0.70pp) and all metrics remaining within normal variance.
-- **RTE:** Significantly improved by +1.02pp to 91.78%, reversing a two-week declining trend, with TK (+5.28pp) and TO (+6.15pp) driving gains through reduced Insufficient Funds declines via Adyen.
+- **US-HF:** Improved from 88.81% to 89.66% (+0.96%, not significant), with Credit Card (+1.17%) and ProcessOut (+1.22%) contributing to recovery from W13 trough toward W11 peak levels.
+- **HF-INTL:** Significant improvement from 89.67% to 91.78% (+2.35%), driven by reduced Insufficient Funds declines across FR, DE, BE, and AT, with Apple Pay and ProcessOut showing strong gains exceeding +3%.
+- **WL:** Significant improvement from 89.83% to 91.04% (+1.35%), led by MR (+5.15%) and ER (+2.77%) through reduced Insufficient Funds declines, though anomalous "Unknown" PaymentProvider volume spike in MR warrants investigation.
+- **HF-NA:** Stable at 89.98% (+0.38%, not significant), with no countries exceeding thresholds and consistent modest improvements across all funnel stages despite continued volume decline (-32% over 8 weeks).
+- **RTE:** Significant improvement from 90.85% to 91.78% (+1.02%), recovering after two weeks of decline, though TV (-3.37%) and TT (-3.25%) showed concerning PayPal and Braintree degradation requiring monitoring.
 
 ---
 

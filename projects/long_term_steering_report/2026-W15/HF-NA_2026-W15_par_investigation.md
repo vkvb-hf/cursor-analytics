@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11pp) on 497,775 orders, a change that is not statistically significant.
+**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11 pp) on 497,775 orders, representing a statistically non-significant change within normal operational variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within normal range | +0.38pp | ✅ |
-| 2_PreDunningAR | Within normal range | +0.28pp | ✅ |
-| 3_PostDunningAR | Within normal range | -0.04pp | ✅ |
-| 6_PaymentApprovalRate | Within normal range | +0.11pp | ✅ |
+| 1_FirstRunAR | First payment attempt | +0.38 pp | ✅ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.28 pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | -0.04 pp | ✅ |
+| 6_PaymentApprovalRate | Final approval | +0.11 pp | ✅ |
 
 **Key Findings:**
-- The 8-week trend shows consistent gradual improvement from 93.27% (W08) to 94.1% (W15), indicating a healthy upward trajectory of +0.83pp over the period
-- US drove the week-over-week improvement with +0.34pp gain (92.78% → 93.09%) on 492,811 orders, while CA remained stable at +0.02pp
-- PaymentProvider "Unknown" flagged with -4.07pp decline (96.17% → 92.26%), but volume is minimal at only 775 orders (0.16% of total)
-- All funnel stages showed positive or neutral movement, with FirstRunAR contributing the largest improvement (+0.38pp)
+- 8-week trend shows consistent upward trajectory from 93.27% (W08) to 94.1% (W15), gaining +0.83 pp over the period
+- US drove the week-over-week improvement with +0.34 pp gain (92.78% → 93.09%) on 492,811 orders; CA remained flat at +0.02 pp
+- PaymentProvider "Unknown" flagged with -4.07 pp decline (96.17% → 92.26%), but volume is minimal at only 775 orders (0.16% of total)
+- FirstRunAR improvement of +0.38 pp indicates better initial payment success, partially offset by slight PostDunningAR decline of -0.04 pp
 - No countries exceeded the ±2.5% threshold requiring deep-dive investigation
 
-**Action:** Monitor – The metric change is not significant, all dimensions are within acceptable thresholds, and the 8-week trend demonstrates stable improvement. Continue standard monitoring cadence.
+**Action:** Monitor — Continue standard weekly tracking. The +0.11 pp change is not statistically significant and falls within normal variance. The flagged "Unknown" provider decline warrants observation but low volume makes it immaterial to overall performance.
 
 ---
 
@@ -112,4 +112,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

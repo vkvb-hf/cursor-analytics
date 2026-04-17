@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Approval Rate improved modestly from 91.05% to 91.65% (+0.60pp) in WL 2026-W15, representing a statistically non-significant change on 160,979 orders.
+**Overall:** Payment Approval Rate improved slightly from 91.05% to 91.65% (+0.60 pp) in W15, representing a statistically non-significant change on 160,979 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | Recovery | +0.87% | ✅ |
-| 3_PostDunningAR | Dunning | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Final | +0.67% | ✅ |
+| 1_FirstRunAR | Within normal range | +0.92% | ✅ |
+| 2_PreDunningAR | Within normal range | +0.87% | ✅ |
+| 3_PostDunningAR | Within normal range | +0.53% | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel stages showed improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
-- Unknown PaymentProvider flagged with +13.15% change, but low volume (664 orders) limits significance
-- AO showed the largest country-level improvement at +2.17pp (87.06%), though no countries exceeded the ±2.5% investigation threshold
-- MR experienced a -6.3% volume decline while maintaining the lowest approval rate (81.41%) in the region
-- ProcessOut provider improved +2.05pp to 82.67%, showing recovery but still underperforming other providers
+- All funnel stages showed modest improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06% current)
+- ProcessOut payment provider improved by +2.05 pp (82.67%) on 17,676 orders, approaching threshold
+- Unknown payment provider flagged with +13.15% change, but low volume (664 orders) limits impact
+- Volume declined 2.4% WoW (165,018 → 160,979), with notable drops in AO (-12.0%) and GN (-8.5%)
 
-**Action:** Monitor — The improvement is not statistically significant, all changes fall within normal operational variance, and no dimension exceeded investigation thresholds. Continue weekly tracking.
+**Action:** Monitor — The improvement is not statistically significant and all dimensions remain within normal operating ranges. Continue standard weekly monitoring.
 
 ---
 
@@ -121,4 +119,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

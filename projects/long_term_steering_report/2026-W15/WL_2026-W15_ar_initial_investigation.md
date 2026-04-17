@@ -8,29 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved significantly from 89.83% to 91.04% (+1.35%) in W15, driven primarily by reduced Insufficient Funds declines in ER and MR markets.
+**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) improved significantly from 89.83% to 91.04% (+1.35%) in W15, representing a recovery toward the higher levels seen in W11 (91.99%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (90.74%-91.99%) | +1.35% | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | ER +2.77%, MR +5.15% | ⚠️ |
-| L1: PaymentMethod | "Others" shows anomalous change | +8.74% | ⚠️ |
-| L1: PaymentProvider | "Unknown" shows anomalous change | +27.03% | ⚠️ |
-| L2: ER Deep-Dive | Insufficient Funds decline | -1.74pp | ✅ |
-| L2: MR Deep-Dive | Insufficient Funds decline + volume shift to Unknown provider | -3.17pp | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (90.74%-91.99%) | +1.21pp | ✅ |
+| L1: Country Variance | 2 countries exceed ±2.5% threshold | ER +2.77%, MR +5.15% | ⚠️ |
+| L1: PaymentMethod | "Others" shows anomalous improvement | +8.74% | ⚠️ |
+| L1: PaymentProvider | "Unknown" shows anomalous improvement | +27.03% | ⚠️ |
+| L2: ER Deep-Dive | Insufficient Funds decline reason improved | -1.74pp | ✅ |
+| L2: MR Deep-Dive | Insufficient Funds decline reason improved | -3.17pp | ✅ |
 | L3: Related Metrics | All funnel metrics improved consistently | +1.34% to +2.27% | ✅ |
-| Mix Shift | All countries stable impact | No significant shifts | ✅ |
 
 **Key Findings:**
-- MR showed the largest improvement (+5.15%) with Insufficient Funds declines dropping by 3.17pp (from 7.10% to 3.93%), accompanied by a significant volume shift to "Unknown" provider (4 → 588 orders)
-- ER improved by +2.77% primarily due to Insufficient Funds declines decreasing by 1.74pp (from 10.14% to 8.40%)
-- Overall volume declined 9.3% (12,773 → 11,587 orders), continuing an 8-week downward trend from 15,382 orders in W08
-- The "Unknown" PaymentProvider category showed a +27.03% rate change with volume increasing from ~50 to 656 orders, indicating potential data classification changes
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, confirming genuine acceptance rate improvement
+- MR drove the largest improvement with +5.15% AR change, primarily due to a 3.17pp reduction in "Insufficient Funds" declines and a significant volume shift to "Unknown" PaymentProvider (4 → 588 orders at 100% success rate)
+- ER improved +2.77% with "Insufficient Funds" declines dropping from 10.14% to 8.40% (-1.74pp) and "Refused" reasons declining from 2.01% to 1.07% (-0.94pp)
+- The "Unknown" PaymentProvider segment showed a dramatic rate increase (+27.03%) but volume grew from minimal levels, suggesting a data classification or new integration change
+- Mix shift analysis shows stable impact across all countries despite volume declines of 6-18% across most markets
+- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, confirming a genuine upstream payment success improvement
 
-**Action:** Monitor - The improvement is positive and driven by legitimate decline reason reductions. However, investigate the MR "Unknown" provider volume spike (4 → 588) to ensure proper payment provider attribution and data quality.
+**Action:** Monitor - The improvement is positive and driven by reduced decline rates in ER and MR. However, investigate the "Unknown" PaymentProvider volume spike in MR (4 → 588 orders) to confirm this is expected behavior from a system change rather than a data quality issue.
 
 ---
 
@@ -198,4 +197,4 @@
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

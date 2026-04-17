@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in HF-INTL during 2026-W15, exceeding the threshold of +0.86pp, driven primarily by gains at the top of the funnel.
+**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in 2026-W15, driven primarily by gains in the early funnel stages, particularly at the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | +2.05pp | ✅ |
-| Click Submit Form | Within normal range | +0.05pp | ✅ |
-| FE Validation Passed | Within normal range | +0.24pp | ✅ |
-| Enter Fraud Service | Within normal range | -0.06pp | ✅ |
-| Approved by Fraud Service | Within normal range | +0.31pp | ✅ |
-| Call to PVS | Within normal range | +0.24pp | ✅ |
-| Successful Checkout | Within normal range | +0.18pp | ✅ |
+| Select Payment Method | >0.86pp threshold | +2.05pp | ⚠️ |
+| Click Submit Form | <0.86pp threshold | +0.05pp | ✅ |
+| FE Validation Passed | <0.86pp threshold | +0.24pp | ✅ |
+| Enter Fraud Service | <0.86pp threshold | -0.06pp | ✅ |
+| Approved by Fraud Service | <0.86pp threshold | +0.32pp | ✅ |
+| Call to PVS | <0.86pp threshold | +0.22pp | ✅ |
+| Successful Checkout | <0.86pp threshold | +0.19pp | ✅ |
 
 **Key Findings:**
-- The primary driver of PCR improvement was the Select Payment Method step (+2.05pp), indicating improved user engagement at the payment method selection stage
-- GB and DE, the two highest-volume countries, both showed strong improvements (+2.46pp and +1.21pp respectively) with Select Payment Method as the key driver in both
-- NO exhibited exceptional growth (+5.83pp PCR increase) with Click Submit Form (+3.04pp) and significant volume increase (+137%)
-- LU showed a notable decline (-17.90pp) but with minimal volume impact (73 visits), driven by Select Payment Method drop (-11.63pp)
-- Payment method performance remained stable with Braintree_Paypal showing the strongest improvement (+0.92pp) among high-volume methods
+- **Select Payment Method** is the primary driver of improvement with +2.05pp conversion gain at the GA level, exceeding the 0.86pp threshold
+- **GB** and **DE** are the top contributors by volume, both showing strong improvements in Select Payment Method conversion (+2.69pp and +2.54pp respectively)
+- **NO** showed exceptional growth with PCR increasing +5.83pp (42.23% → 48.06%), driven by significant gains in Click Submit Form (+3.04pp) and Checkout Attempt (+6.87pp)
+- **LU** experienced a substantial decline of -17.90pp (57.63% → 39.73%) due to a -11.63pp drop in Select Payment Method, though low volume (73 visits) limits overall impact
+- **Braintree_Paypal** showed the strongest payment method improvement at +0.92pp (90.71% → 91.63%), while **ProcessOut_CreditCard** improved +0.58pp with the highest volume
 
-**Action:** Monitor - The improvement is broad-based across major markets and funnel steps with no concerning degradations in high-volume segments. Continue tracking NO's performance trajectory and LU's low-volume anomaly.
+**Action:** Monitor — The improvement is positive and driven by healthy early-funnel gains. Continue monitoring GB and DE performance, and investigate the Select Payment Method improvements to understand if they stem from UX changes or external factors. LU decline should be noted but low volume makes it non-critical.
 
 ---
 
@@ -48,9 +48,9 @@
 | Click Submit Form | 28,133 | 32,523 | 4,390 | 15.6% | 81.21% | 81.25% | +0.05pp |
 | FE Validation Passed | 26,335 | 30,521 | 4,186 | 15.9% | 93.61% | 93.84% | +0.24pp |
 | Enter Fraud Service | 25,467 | 29,497 | 4,030 | 15.8% | 96.70% | 96.64% | -0.06pp |
-| Approved by Fraud Service | 23,887 | 27,757 | 3,870 | 16.2% | 93.80% | 94.10% | +0.31pp |
-| Call to PVS | 23,823 | 27,749 | 3,926 | 16.5% | 99.73% | 99.97% | +0.24pp |
-| **Successful Checkout** | 22,582 | 26,353 | 3,771 | 16.7% | 94.79% | 94.97% | +0.18pp |
+| Approved by Fraud Service | 23,889 | 27,763 | 3,874 | 16.2% | 93.80% | 94.12% | +0.32pp |
+| Call to PVS | 23,823 | 27,747 | 3,924 | 16.5% | 99.72% | 99.94% | +0.22pp |
+| **Successful Checkout** | 22,582 | 26,353 | 3,771 | 16.7% | 94.79% | 94.98% | +0.19pp |
 | **PCR Rate** | | | | | 36.04% | 37.75% | **+1.71pp** |
 
 ### Waterfall Backend
@@ -141,9 +141,9 @@
 | Click Submit Form | 5,180 | 6,654 | +1,474 | +28.46pp | 78.56% | 77.18% | -1.37pp |
 | FE Validation Passed | 4,939 | 6,360 | +1,421 | +28.77pp | 95.35% | 95.58% | +0.23pp |
 | Enter Fraud Service | 4,630 | 5,984 | +1,354 | +29.24pp | 93.74% | 94.09% | +0.34pp |
-| Approved by Fraud Service | 4,417 | 5,742 | +1,325 | +30.00pp | 95.40% | 95.96% | +0.56pp |
-| Call to PVS | 4,376 | 5,719 | +1,343 | +30.69pp | 99.07% | 99.60% | +0.53pp |
-| **Successful Checkout** | 3,998 | 5,180 | +1,182 | +29.56pp | 91.36% | 90.58% | -0.79pp |
+| Approved by Fraud Service | 4,417 | 5,743 | +1,326 | +30.02pp | 95.40% | 95.97% | +0.57pp |
+| Call to PVS | 4,376 | 5,718 | +1,342 | +30.67pp | 99.07% | 99.56% | +0.49pp |
+| **Successful Checkout** | 3,998 | 5,180 | +1,182 | +29.56pp | 91.36% | 90.59% | -0.77pp |
 | **PCR Rate** | | | | | 35.69% | 36.90% | **+1.20pp** |
 
 **Key Driver:** Select Payment Method (+2.54pp)
@@ -175,8 +175,8 @@
 | Click Submit Form | 7,243 | 8,447 | +1,204 | +16.62pp | 81.42% | 81.99% | +0.57pp |
 | FE Validation Passed | 6,616 | 7,720 | +1,104 | +16.69pp | 91.34% | 91.39% | +0.05pp |
 | Enter Fraud Service | 6,450 | 7,537 | +1,087 | +16.85pp | 97.49% | 97.63% | +0.14pp |
-| Approved by Fraud Service | 6,103 | 7,174 | +1,071 | +17.55pp | 94.62% | 95.18% | +0.56pp |
-| Call to PVS | 6,101 | 7,176 | +1,075 | +17.62pp | 99.97% | 100.03% | +0.06pp |
+| Approved by Fraud Service | 6,103 | 7,175 | +1,072 | +17.57pp | 94.62% | 95.20% | +0.58pp |
+| Call to PVS | 6,101 | 7,176 | +1,075 | +17.62pp | 99.97% | 100.01% | +0.05pp |
 | **Successful Checkout** | 5,999 | 7,059 | +1,060 | +17.67pp | 98.33% | 98.37% | +0.04pp |
 | **PCR Rate** | | | | | 38.46% | 40.92% | **+2.46pp** |
 
@@ -238,4 +238,4 @@
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

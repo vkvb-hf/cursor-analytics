@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Fraud Approval Rate (FAR) improved slightly from 92.89% to 93.41% (+0.52pp) week-over-week, remaining within normal operating range and flagged as not statistically significant.
+**Overall:** Fraud Approval Rate (FAR) improved modestly from 92.89% to 93.41% (+0.52pp) week-over-week, remaining within normal operating range and flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Overall Trend | FAR +0.52pp, within 8-week range (92.70%-94.33%) | +0.52pp | ✅ |
-| L1: Country Scan | No countries exceed ±2.5% threshold | Max +2.25pp (MR) | ✅ |
-| L1: Channel Category | Paid +0.60pp, Referral +0.65pp | <1pp changes | ✅ |
-| L2: Country Deep-Dives | Referral channels flagged in AO, CG, CK, KN, MR | Mixed signals | ⚠️ |
+| L0: WL Trend | FAR within 8-week range (93.37%-94.33%) | +0.57% | ✅ |
+| L1: Country Scan | No country exceeds ±2.5% threshold | Max +2.25% (MR) | ✅ |
+| L1: Channel Category | Paid & Referral both stable | +0.60%, +0.65% | ✅ |
+| L2: Country Deep-Dives | Referral channel volatility in multiple countries | See flags | ⚠️ |
 
 **Key Findings:**
-- MR Paid channel showed the strongest FAR improvement (+2.53pp to 97.96%) with significant duplicate rate reduction (-26.72%) and PF Block rate decrease (-52.83%)
-- Referral channels across multiple countries (AO, CG, CK, KN, MR) are flagged with elevated duplicate rates and duplicate block rates, though volumes remain relatively low (127-521 customers)
-- CK and ER show increasing duplicate rates (+14.37pp and +12.20% respectively) which bears monitoring despite stable FAR
-- KN Paid channel experienced a significant PF Block rate spike (+1136.05%), though absolute rate remains low at 0.59%
-- Overall volume increased 16.4% (13,283 → 15,464 customers), with most growth in Paid channels
+- MR Paid channel showed notable FAR improvement (+2.53pp to 97.96%) with volume increase (+712 customers) and significant duplicate rate reduction (-26.72%)
+- Referral channel exhibits consistent volatility across countries: MR (-4.16pp), CK (-2.96pp), while KN (+5.30pp) and AO (+8.44pp) improved significantly
+- Duplicate rates increased in ER (+12.20%), CK (+14.37%), and CK Paid (+14.77%), though not yet impacting overall FAR
+- KN Paid experienced a +1136% spike in PF Block rate (0.05% → 0.59%), warranting observation
+- Overall volume increased 16.4% (13,283 → 15,464 customers), with growth concentrated in MR (+36.8%) and KN (+23.6%)
 
-**Action:** Monitor — The FAR change is not significant and falls within normal variance. Continue tracking Referral channel duplicate patterns and the KN PF Block rate anomaly in upcoming weeks.
+**Action:** Monitor — No immediate action required. Continue tracking Referral channel performance across MR, CK, and AO, and monitor duplicate rate trends in ER and CK for potential future impact.
 
 ---
 
@@ -90,7 +90,7 @@
 | Referral | 2026-W14 | 65.79% | - | 36.47% | - | 33.83% | - | 0.00% | - | 266 |  |
 | Referral | 2026-W15 | 71.34% | +8.44% | 32.09% | -12.01% | 28.66% | -15.29% | 0.00% | - | 321 | ⚠️ |
 
-**Analysis:** The week-over-week FAR increase of +0.52pp represents normal fluctuation within established operating parameters and does not require immediate intervention. While Referral channels across several countries show elevated duplicate and block rates warranting continued observation, their lower volumes limit overall impact. The investigation confirms no systemic issues driving the change, and standard monitoring should continue with attention to the flagged Referral segments.
+**Analysis:** The +0.52pp increase in Fraud Approval Rate for WL 2026-W15 represents normal week-over-week fluctuation within established operating parameters and is not statistically significant. While Referral channel volatility and rising duplicate rates in select countries merit ongoing observation, no systemic issues were identified that require immediate escalation. Standard monitoring should continue with particular attention to Referral channel trends and duplicate rate trajectory in ER and CK.
 
 ---
 
@@ -156,4 +156,4 @@
 
 
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.86 pp) week-over-week, with the change flagged as not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but not statistically significant change within normal weekly variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.92 pp | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.87 pp | ✅ |
-| 3_PostDunningAR | Dunning Recovery | +0.53 pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.67 pp | ✅ |
+| 1_FirstRunAR | Within normal range | +0.92% | ✅ |
+| 2_PreDunningAR | Within normal range | +0.87% | ✅ |
+| 3_PostDunningAR | Within normal range | +0.53% | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel stages showed positive movement, with 1_FirstRunAR leading at +0.92 pp, indicating broad-based improvement across the payment acceptance pipeline
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06% current)
-- ProcessOut provider improved significantly (+2.31 pp to 81.62%) though remains the lowest-performing provider; Unknown provider shows anomalous +69.73% change but represents minimal volume (664 orders)
-- Volume declined 2.4% week-over-week (165,018 → 160,979 orders), with notable drops in AO (-12.0%), GN (-8.5%), and MR (-6.3%)
-- The 8-week trend shows steady improvement from 88.14% (W08) to 90.1% (W15), representing cumulative gain of +1.96 pp
+- All four funnel metrics showed consistent week-over-week improvement (+0.53% to +0.92%), indicating broad-based performance gains rather than isolated anomalies
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17%
+- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) and likely reflects data classification corrections
+- ProcessOut showed notable improvement (+2.31%) among meaningful payment providers, improving from 79.78% to 81.62%
+- Volume declined 2.4% week-over-week (165,018 → 160,979), with AO (-12.0%) and GN (-8.5%) showing the largest volume decreases
 
-**Action:** Monitor — The improvement is positive but not statistically significant. Continue tracking the upward trend, particularly ProcessOut's performance recovery and volume shifts in AO and GN.
+**Action:** Monitor — The improvement is positive but not statistically significant. Continue standard weekly monitoring; no investigation or escalation required.
 
 ---
 
@@ -121,4 +121,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

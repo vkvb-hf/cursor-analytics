@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.17% to 92.42% (+0.25 pp) in W15, a statistically non-significant change within normal operating range.
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.17% to 92.42% (+0.25pp) in W15, a statistically non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within range | +0.38 pp | ✅ |
-| 2_PreDunningAR | Within range | +0.28 pp | ✅ |
-| 3_PostDunningAR | Within range | -0.04 pp | ✅ |
-| 6_PaymentApprovalRate | Within range | +0.11 pp | ✅ |
+| 1_FirstRunAR | Within range | +0.38pp | ✅ |
+| 2_PreDunningAR | Within range | +0.28pp | ✅ |
+| 3_PostDunningAR | Within range | -0.04pp | ✅ |
+| 6_PaymentApprovalRate | Within range | +0.11pp | ✅ |
 
 **Key Findings:**
-- All funnel metrics remain stable with no significant deviations; the +0.27% week-over-week change is not statistically significant
-- No countries exceeded the ±2.5% threshold; US improved +0.34 pp while CA remained flat at +0.02 pp
-- Apple Pay showed the largest payment method improvement at +0.56 pp (86.28%), though it remains the lowest-performing method
-- 8-week trend shows gradual upward trajectory from 91.35% (W08) to 92.42% (W15), representing +1.07 pp cumulative improvement
-- Volume declined by approximately 1.9% week-over-week (507,189 → 497,775), consistent with mix shift showing stable high-AR tier distribution
+- The +0.27% week-over-week change is not statistically significant and falls within the normal 8-week fluctuation band (91.35% - 92.42%)
+- No countries exceeded the ±2.5% threshold; US improved +0.34pp while CA remained stable at +0.02pp
+- Apple Pay showed the largest payment method improvement at +0.56pp (86.28%), though it remains the lowest-performing method
+- Volume declined by 1.9% (507,189 → 497,775 orders), continuing a gradual downward trend observed over the 8-week period
+- All payment providers performed within normal ranges; Braintree (largest volume at 385,045) improved +0.32pp
 
-**Action:** Monitor — No investigation required. All metrics within normal operating parameters with no anomalies detected.
+**Action:** Monitor — No action required. The metric movement is within normal variance, all funnel steps show healthy performance, and no dimensional breakdowns flagged concerning patterns.
 
 ---
 
@@ -114,4 +114,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

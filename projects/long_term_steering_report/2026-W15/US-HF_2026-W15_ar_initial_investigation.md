@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.96pp) in W15, a statistically non-significant change that returns the metric closer to its 8-week average range.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.85 pp) in W15, representing a non-significant increase on a volume of 12,162 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +1.45pp | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.96pp | ✅ |
-| 3_PostDunningAR | Post-Recovery | +0.93pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.95pp | ✅ |
+| 1_FirstRunAR | Within normal range | +1.27 pp | ✅ |
+| 2_PreDunningAR | Within normal range | +0.85 pp | ✅ |
+| 3_PostDunningAR | Within normal range | +0.84 pp | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.85 pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed consistent improvement between +0.93pp and +1.45pp, indicating broad-based recovery rather than an isolated issue
-- No payment method or provider exceeded the ±2.5% threshold; Credit Card showed the largest improvement at +1.17pp (6,577 orders)
-- Volume increased modestly from 11,533 to 12,162 orders (+5.5%), with US remaining in the Medium AR tier (>85%)
-- The W15 rate of 89.66% represents a recovery from the W13 dip (87.73%) and aligns with the W10-W11 performance range
-- ProcessOut, handling the largest volume (6,433 orders), improved by +1.22pp while Braintree improved by +0.47pp
+- All funnel stages show consistent improvement (+0.84 to +1.27 pp), with FirstRunAR showing the strongest gain at +1.45% change
+- No payment methods or providers exceeded the ±2.5% threshold; Credit Card showed the largest improvement (+1.17%) on the highest volume (6,577 orders)
+- ProcessOut provider improved +1.22% on 6,433 orders, contributing meaningfully to the overall rate increase
+- Volume increased +5.5% week-over-week (11,533 → 12,162) while maintaining stable performance in the Medium AR tier (>85%)
+- 8-week trend shows recovery from W13 trough (87.73%) back toward the W11 peak (90.11%)
 
-**Action:** Monitor — No significant anomalies detected; changes are within normal fluctuation and all dimensions are performing consistently.
+**Action:** Monitor — The improvement is not statistically significant and all dimensions remain within normal operating ranges. Continue standard weekly tracking.
 
 ---
 
@@ -112,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

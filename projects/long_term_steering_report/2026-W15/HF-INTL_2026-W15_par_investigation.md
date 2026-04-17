@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.23pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.24pp) in W15, a change that is not statistically significant, with volume declining from 784,406 to 744,637 orders (-5.1%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline conversion | +1.76% | ✅ |
-| 2_PreDunningAR | Recovery step | +1.18% | ✅ |
-| 3_PostDunningAR | Dunning recovery | +0.01% | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.24% | ✅ |
+| 1_FirstRunAR | Baseline | +1.76% | ✅ |
+| 2_PreDunningAR | vs FirstRun | +1.18% | ✅ |
+| 3_PostDunningAR | vs PreDunning | +0.01% | ✅ |
+| 6_PaymentApprovalRate | Final | +0.24% | ✅ |
 
 **Key Findings:**
-- AT and DK exceeded the ±2.5% threshold with improvements of +2.95% and +3.94% respectively, driven primarily by reduced "Insufficient Funds" declines (-2.05pp in AT, -3.13pp in DK)
-- Apple Pay showed significant improvement in both flagged countries: +5.78% in AT and +6.47% in DK
-- Braintree provider in DK improved substantially (+5.84%), contributing to the country-level improvement
-- Overall volume declined 5.1% WoW (784,406 → 744,637), continuing an 8-week downward trend from 916,831 in W10
-- All payment methods and providers at the aggregate level showed stable performance with no flags triggered
+- Two countries exceeded the ±2.5% threshold: AT (+2.95pp) and DK (+3.94pp), both showing improvement driven by reduced "Insufficient Funds" declines
+- In AT, Apple Pay improved significantly (+5.78pp) with ProcessOut showing the largest provider gain (+4.67pp); Insufficient Funds declines dropped from 4.63% to 2.58% (-2.05pp)
+- In DK, Braintree improved substantially (+5.84pp) and Apple Pay gained +6.47pp; Insufficient Funds declines dropped sharply from 4.28% to 1.16% (-3.13pp)
+- DK experienced notable volume growth (+25.6%) while maintaining improved approval rates
+- All payment methods showed modest improvements at the aggregate level, with Apple Pay showing the largest gain (+0.84pp)
 
-**Action:** Monitor — The overall change is not significant and all movements are positive. Continue tracking AT and DK for sustained improvement patterns, particularly the Apple Pay and Braintree performance.
+**Action:** Monitor - The metric change is not statistically significant and directionally positive. Continue monitoring AT and DK for sustained improvement trends; no immediate investigation required.
 
 ---
 
@@ -204,4 +204,4 @@
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) increased marginally from 94.65% to 94.75% (+0.10pp) in W15, a change deemed not statistically significant, with volume increasing to 47,135 customers.
+**Overall:** The Fraud Approval Rate (FAR) improved marginally from 94.65% to 94.75% (+0.10pp) in 2026-W15, a change that is not statistically significant, with volume increasing to 47,135 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within normal range (93.83%-94.95%) | +0.10pp | ✅ |
-| L1: Country Scan | 2 countries exceed ±2.5% threshold | TO +5.60pp, TV +2.89pp | ⚠️ |
-| L1: Channel Scan | Both channels stable | Paid +0.15pp, Referral -0.04pp | ✅ |
-| L2: TO Deep-Dive | Both channels improved significantly | Paid +4.66pp, Referral +5.39pp | ⚠️ |
-| L2: TV Deep-Dive | Mixed signals: Paid up, Referral down | Paid +5.58pp, Referral -6.75pp | ⚠️ |
+| L0: RTE Trend | 8-week stability check | +0.10pp (within normal range 93.83%-94.95%) | ✅ |
+| L1: Country Scan | ±2.5% threshold | TO +5.60pp, TV +2.89pp exceed threshold | ⚠️ |
+| L1: Channel Scan | Category variance | Paid +0.15pp, Referral -0.04pp | ✅ |
+| L2: TO Deep-Dive | Channel attribution | Paid +4.66pp, Referral +5.39pp (both improved) | ⚠️ |
+| L2: TV Deep-Dive | Channel attribution | Paid +5.58pp, Referral -6.75pp (mixed signals) | ⚠️ |
 
 **Key Findings:**
-- TO showed a +5.60pp FAR improvement driven by a substantial decrease in Duplicate Rate (-36.99%) and Duplicate Block Rate (-39.74%), suggesting reduced duplicate fraud attempts or policy changes
-- TV experienced a +2.89pp FAR increase overall, but with divergent channel behavior: Paid improved +5.58pp while Referral declined -6.75pp with a +273.50% spike in Duplicate Rate
-- YE Referral channel showed notable improvement (+9.96pp FAR) with corresponding decreases in Duplicate Rate (-24.73%) and Duplicate Block Rate (-23.20%)
-- Global Duplicate Rate increased from 14.12% to 14.83% (+0.71pp), while PF Block Rate increased from 0.18% to 0.32% (+0.14pp)
-- Referral channels across multiple countries (TK, TT, TV) showed elevated Duplicate Rates and declining FAR, indicating potential abuse patterns
+- TO experienced a significant FAR improvement (+5.60pp) driven by a substantial decrease in duplicate rate (-36.99%) and duplicate block rate (-39.74%) across both Paid and Referral channels
+- TV showed mixed performance: Paid channel improved sharply (+5.58pp) with duplicate rate dropping -61.17%, while Referral channel declined (-6.75pp) with duplicate rate spiking +273.50%
+- YE Referral channel showed notable improvement (+9.96pp FAR) with duplicate rate declining -24.73%, though overall YE impact was +1.94pp
+- Global duplicate rate increased slightly from 14.12% to 14.83% (+0.71pp), primarily driven by FJ (+8.51% relative increase)
+- PF Block rate increased from 0.18% to 0.32% (+0.14pp) at L0, but remains minimal in overall impact
 
-**Action:** Monitor – The overall FAR change is not significant and within historical range. However, continue monitoring Referral channel performance in TV, TK, and TT for potential duplicate abuse patterns, and validate that TO/TV improvements are sustainable and not due to temporary anomalies.
+**Action:** Monitor — The overall FAR change is not significant and within normal operating range. Continue monitoring TO and TV for sustained patterns, particularly TV's divergent Referral channel performance which warrants attention if the trend continues.
 
 ---
 
@@ -93,7 +93,7 @@
 | Referral | 2026-W14 | 91.53% | - | 6.78% | - | 6.78% | - | 0.00% | - | 59 |  |
 | Referral | 2026-W15 | 86.49% | -5.51% | 16.22% | +139.19% | 13.51% | +99.32% | 0.00% | - | 74 | ⚠️ |
 
-**Analysis:** The W15 Fraud Approval Rate increase of +0.10pp is statistically insignificant and reflects normal operational variance within the 8-week historical range of 93.83%-94.95%. The flagged improvements in TO and TV appear driven by reduced duplicate detection rates rather than systemic changes, warranting continued observation. No immediate escalation is required, but the Referral channel degradation pattern across multiple smaller markets (TV, TK, TT) should be tracked in subsequent weeks to determine if intervention is needed.
+**Analysis:** The +0.10pp increase in Fraud Approval Rate for 2026-W15 represents normal week-over-week fluctuation and does not indicate a systemic change in fraud prevention performance. The flagged improvements in TO and TV appear driven by reduced duplicate detection activity rather than policy changes, with TO showing consistent improvement across channels while TV exhibits concerning divergence between Paid (improving) and Referral (declining) segments. No immediate action is required, but TV's Referral channel should be monitored in the coming weeks to determine if the +273.50% spike in duplicate rate represents an emerging fraud pattern or anomalous low-volume variance.
 
 ---
 
@@ -170,4 +170,4 @@
 ---
 
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*

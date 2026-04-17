@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate for US-HF improved slightly from 92.85% to 93.02% (+0.17 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Rate within normal 8-week range (92.57%-94.58%) | +0.17 pp | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17 pp | ✅ |
 | L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34 pp (US) | ✅ |
 | L1: PaymentMethod | "Others" declined -2.49% but low volume (91 orders) | Mixed | ✅ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | US High AR tier stable (-0.9% volume shift) | Stable | ✅ |
+| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| Mix Shift | High AR tier stable, minor volume decrease (-0.9%) | Stable | ✅ |
 
 **Key Findings:**
-- The +0.17 pp week-over-week improvement is within normal fluctuation range; the 8-week trend shows rates oscillating between 92.57% and 94.58%
-- Credit Card approval rate improved +0.90 pp (92.09% → 92.92%) on the highest volume segment (9,998 orders)
-- Apple Pay declined -1.00 pp (93.51% → 92.58%) across 6,169 orders, partially offsetting Credit Card gains
-- "Others" payment method showed a -2.49 pp decline but represents negligible volume (91 orders)
-- Order volume increased 18.5% week-over-week (14,911 → 17,669 orders) without negatively impacting approval rates
+- The +0.17 pp week-over-week improvement is within normal fluctuation range and not statistically significant
+- US showed a +0.34 pp improvement (92.78% → 93.09%), well below the ±2.5% investigation threshold
+- Credit Card approval rate improved +0.90 pp (92.09% → 92.92%) on the highest volume (9,998 orders)
+- "Others" payment method declined -2.49 pp but represents negligible volume (91 orders)
+- Current rate of 93.02% remains below the 8-week high of 94.58% observed in 2026-W10
 
-**Action:** Monitor — No investigation required. The change is not statistically significant, no dimensions exceeded thresholds, and the metric remains within normal operating range.
+**Action:** Monitor — No investigation required. The change is not significant and no dimensions exceeded alert thresholds.
 
 ---
 
@@ -98,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-15*
+*Report: 2026-04-17*
