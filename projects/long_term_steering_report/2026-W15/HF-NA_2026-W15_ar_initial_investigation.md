@@ -8,27 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 89.64% to 89.98% (+0.34 pp) in W15, a non-significant change within normal operating range.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-NA improved slightly from 89.64% to 89.98% (+0.34 pp) in W15, a statistically non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (89.23%-90.82%) | +0.34 pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.96%, CA -0.70% | ✅ |
-| L1: Payment Method | All methods within normal variance | Range: -1.69% to +0.85% | ✅ |
-| L1: Payment Provider | No provider flagged | Range: -1.92% to +0.87% | ✅ |
-| L3: Related Metrics | All funnel metrics moved directionally aligned | +0.37% to +0.64% | ✅ |
-| Mix Shift | No significant population shifts | US +5.5%, CA -6.3% vol | ✅ |
+| 1_FirstRunAR | Within range | +0.64 pp | ✅ |
+| 2_PreDunningAR | Within range | +0.38 pp | ✅ |
+| 3_PostDunningAR | Within range | +0.37 pp | ✅ |
+| 6_PaymentApprovalRate | Within range | +0.40 pp | ✅ |
 
 **Key Findings:**
-- US drove the improvement with +0.96% change (12,162 orders), offsetting CA's -0.70% decline (5,170 orders)
-- All related funnel metrics improved in parallel: FirstRunAR (+0.64 pp), PostDunningAR (+0.37 pp), PaymentApprovalRate (+0.40 pp)
-- "Others" payment method showed largest decline (-1.69%) but represents minimal volume (810 orders)
-- Volume decreased 32% from W08-W10 levels (~25K) to current levels (~17K), though rates remain stable
-- No payment providers or methods were flagged for investigation
+- No countries exceeded the ±2.5% threshold; US improved +0.96 pp while CA declined -0.70 pp, both within normal variance
+- Volume decreased significantly from ~25K orders (W08-W10) to ~17K orders (W15), representing a ~32% volume reduction over the 8-week period
+- All payment methods and providers remained stable with no flags triggered; "Others" payment method showed the largest decline (-1.69 pp) but on low volume (810 orders)
+- The full payment funnel shows consistent modest improvement across all stages (+0.37 pp to +0.64 pp)
+- Mix shift analysis shows US volume grew +5.5% while CA volume declined -6.3%, with both remaining in the Medium AR tier (>85%)
 
-**Action:** Monitor — Change is not statistically significant, all dimensions within normal variance, and funnel metrics are directionally aligned.
+**Action:** Monitor — No investigation required. The metric change is not statistically significant, no dimension thresholds were breached, and all funnel stages show healthy, aligned movement.
 
 ---
 

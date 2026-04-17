@@ -8,28 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation Rate declined from 90.99% to 90.47% (-0.52 pp) in W15, but this change is not statistically significant given the 43.5% increase in order volume.
+**Overall:** Reactivation Rate declined by -0.57% (from 90.99% to 90.47%) in 2026-W15, a statistically non-significant change that remains within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (85.79%-91.26%) | -0.52 pp | ✅ |
-| L1: Country Breakdown | US +0.34 pp, no countries exceed ±2.5% threshold | +0.34 pp | ✅ |
-| L1: PaymentMethod | "Others" flagged at -50.00 pp | -50.00 pp | ⚠️ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | US High AR Tier volume -0.9% | Stable | ✅ |
+| 8-Week Trend | Rate within historical range (85.79%-91.26%) | -0.52pp | ✅ |
+| Country Breakdown | US performance (+0.34%) | No threshold breach | ✅ |
+| Payment Method | "Others" flagged (-50.00%) | Low volume (4 orders) | ⚠️ |
+| Mix Shift | High AR tier volume shift | -0.9% (Stable) | ✅ |
 
 **Key Findings:**
-- The -0.52 pp decline is within normal weekly fluctuation; 8-week trend shows consistent improvement from 85.84% (W08) to 90.47% (W15)
-- Volume increased significantly from 14,736 to 21,155 orders (+43.5%), which may explain minor rate variance
-- "Others" payment method shows -50.00 pp drop but represents only 4 orders (negligible impact)
-- PayPal showed the largest meaningful decline at -1.21 pp (3,369 orders)
-- US country-level performance actually improved +0.34 pp despite overall HF decline
+- The -0.57% decline reverses the prior week's +0.40% gain but remains well above the 8-week low of 85.79% (W09)
+- Volume increased significantly from 14,736 to 21,155 orders (+43.6%), which may contribute to rate normalization
+- "Others" payment method shows a -50.00% decline but represents only 4 orders, making it statistically irrelevant
+- US country-level performance actually improved +0.34% despite the overall metric decline
+- PayPal showed the largest meaningful decline at -1.21% (3,369 orders), followed by Apple Pay at -0.55% (3,197 orders)
 
-**Action:** Monitor — No investigation required. The change is not statistically significant, no countries exceeded the ±2.5% threshold, and the flagged "Others" payment method has minimal volume (4 orders).
+**Action:** Monitor – The decline is not statistically significant, no countries exceeded the ±2.5% threshold, and the flagged payment method ("Others") has negligible volume. Continue standard weekly monitoring.
 
 ---
 

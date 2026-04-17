@@ -10,25 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-INTL improved slightly from 91.67% to 92.17% (+0.50pp) in 2026-W15, a change that is **not statistically significant** and falls within normal weekly fluctuation (8-week range: 91.58%-92.37%).
+**Overall:** The Fraud Approval Rate (FAR) for HF-INTL increased by +0.55pp (91.67% → 92.17%) in 2026-W15, with volume rising to 43,119 customers; this change is not statistically significant and remains within the normal 8-week range (91.58% - 92.37%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | Within normal range | +0.50pp | ✅ |
-| L1: Country Variance | AT +4.39pp, NZ -2.74pp exceed ±2.5% threshold | Mixed | ⚠️ |
+| L0: Overall FAR | +0.55pp within normal range | +0.55pp | ✅ |
+| L0: Duplicate Rate | 30.04% → 31.06% | +1.02pp | ✅ |
+| L0: Dup Block Rate | 7.07% → 6.98% | -0.09pp | ✅ |
+| L0: PF Block Rate | 0.23% → 0.26% | +0.03pp | ✅ |
+| L1: Country Outliers | AT +4.39pp, NZ -2.74pp exceed ±2.5% threshold | Mixed | ⚠️ |
 | L1: Channel Category | Paid +0.68pp, Referral -0.60pp | Stable | ✅ |
-| L2: Referral Channel | Multiple countries show elevated Dup Block rates | Elevated blocks | ⚠️ |
+| L2: Referral Channel | Multiple countries show Referral degradation | Degraded | ⚠️ |
 
 **Key Findings:**
-- **AT Referral channel improved significantly** (+25.53pp FAR) driven by a substantial decrease in Duplicate Rate (-38.27%) and Duplicate Block Rate (-42.36%), suggesting reduced repeat/fraudulent traffic in that segment
-- **NZ Referral channel declined sharply** (-21.35pp FAR) due to a dramatic increase in Duplicate Block Rate (+53.51%) and elevated Duplicate Rate (+33.97%), indicating a spike in duplicate/suspicious activity
-- **Paid channel remains stable across all markets** with FAR consistently above 97%, while Referral channel shows higher volatility and lower baseline FAR (~75-76%)
-- **Volume increased 16%** (37,184 → 43,119) driven primarily by growth in DE (+28%), GB (+19%), and NO (+154%)
-- **CH Referral shows concerning pattern** with FAR dropping -17.07pp and Duplicate Rate spiking +76.92%, though volume is very low (26 customers)
+- AT saw FAR increase of +4.39pp driven by Referral channel improvement (+25.53pp), correlating with a significant drop in Dup Rate (-22.07%) and Dup Block (-42.36%)
+- NZ experienced FAR decline of -2.74pp, driven by Referral channel collapse (-21.35pp) with Dup Block rate surging +53.51% (29.05% → 44.59%)
+- Referral channel shows consistent underperformance vs Paid across all countries (75.96% vs 97.98% overall), with particularly severe drops in CH (-17.07pp), NZ (-21.35pp), and AU (-7.94pp)
+- Volume increased +15.96% WoW (37,184 → 43,119), with notable spikes in NO (+153.8%), DK (+48.1%), and DE (+28.3%)
+- Duplicate-based blocking in Referral channels remains the primary friction point, with NZ Referral Dup Block at 44.59% and CH Referral at 34.62%
 
-**Action:** **Monitor** - The overall metric change is not significant. Continue monitoring NZ and CH Referral channels for sustained degradation. AT improvement appears to be normalization of duplicate blocking behavior.
+**Action:** Monitor - Overall metric change is not significant; however, recommend targeted investigation into NZ Referral channel duplicate blocking patterns if degradation continues in W16.
 
 ---
 
@@ -94,7 +97,7 @@
 | Referral | 2026-W14 | 63.04% | - | 34.78% | - | 34.06% | - | 0.00% | - | 138 |  |
 | Referral | 2026-W15 | 79.14% | +25.53% | 21.47% | -38.27% | 19.63% | -42.36% | 0.00% | - | 163 | ⚠️ |
 
-**Analysis:** The +0.50pp increase in FAR for HF-INTL in 2026-W15 represents normal weekly variation and requires no immediate action. The primary areas of concern are the Referral channels in NZ and CH, where elevated duplicate rates and block rates are suppressing approval rates, though these represent relatively small volumes (<250 customers combined). If the NZ Referral degradation persists for another 1-2 weeks, a deeper investigation into the source of duplicate traffic in that market would be warranted.
+**Analysis:** The +0.55pp increase in HF-INTL Fraud Approval Rate represents normal weekly fluctuation within established bounds, requiring no immediate intervention. The divergent country-level patterns (AT improving via reduced duplicate friction, NZ declining via increased duplicate blocking in Referral) suggest localized dynamics rather than systemic issues. Continued monitoring is advised, with particular attention to NZ Referral performance and the persistent gap between Paid (~98%) and Referral (~76%) channel approval rates across the portfolio.
 
 ---
 

@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate improved significantly from 89.2% to 90.41% (+1.21 pp) in W15, continuing a positive 8-week upward trend from 84.71% in W08.
+**Overall:** Reactivation Rate improved significantly from 89.2% to 90.41% (+1.36%) in W15, continuing a positive 8-week upward trend from 84.71% in W08.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consistent upward trend | +5.70 pp over 8 weeks | ✅ |
-| L1: Country Breakdown | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
-| L1: PaymentMethod | 1 dimension exceeds threshold | Others +2.78% | ⚠️ |
+| L0: 8-Week Trend | Consistent upward trend | +5.70pp since W08 | ✅ |
+| L1: Country Scan | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: Dimension Scan | 1 payment method exceeds threshold | Others +2.78% | ⚠️ |
 | L2: TK Deep-Dive | Multiple payment improvements | applepay +12.10%, credit_card +6.49% | ✅ |
-| L2: Decline Reasons | Insufficient Funds decreased | -5.81 pp | ✅ |
+| L2: Decline Analysis | Insufficient Funds significantly reduced | -5.81pp | ✅ |
 
 **Key Findings:**
-- TK drove the largest country-level improvement at +7.54 pp, with all payment methods showing gains—applepay (+12.10 pp), credit_card (+6.49 pp), and paypal (+5.41 pp)
-- Insufficient Funds declines in TK dropped significantly from 8.32% to 2.51% (-5.81 pp), indicating improved payment success
-- Braintree provider in TK showed the strongest improvement at +10.60 pp, followed by Adyen at +6.49 pp
-- Minor declines in TV (-1.37 pp) and YE (-0.43 pp) were offset by gains in larger volume countries like FJ (+0.38 pp) and CF (+0.72 pp)
-- Volume mix remained stable across all countries with no significant shifts impacting the overall rate
+- TK drove the largest country-level improvement at +7.54%, with applepay showing the strongest gain (+12.10%) followed by credit_card (+6.49%) and paypal (+5.41%)
+- Insufficient Funds declines in TK dropped substantially from 8.32% to 2.51% (-5.81pp), indicating improved payment processing or customer payment capability
+- Both Braintree (+10.60%) and Adyen (+6.49%) providers in TK showed significant rate improvements
+- Mix shift analysis shows stable volume distribution across AR tiers with TK volume increasing +9.6% while maintaining improvement
+- Minor declines in TV (-1.37%) and YE (-0.43%) were offset by broad-based improvements across other markets
 
-**Action:** Monitor - The improvement is driven by genuine performance gains in TK, particularly reduced Insufficient Funds declines across payment providers. Continue monitoring to confirm sustainability.
+**Action:** Monitor - The improvement is driven by positive operational changes (reduced Insufficient Funds declines) rather than anomalies. Continue tracking TK performance to confirm sustainability of gains.
 
 ---
 

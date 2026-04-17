@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 1.02pp (47.75% → 46.73%) week-over-week, representing a -2.1% relative decrease during the transition from Mid-Cycle to Pre-Payday phase.
+**Overall:** Dunning Ship Rate declined by 1.02pp (from 47.75% to 46.73%) in US-HF during W15, representing a -2.1% relative decrease amid a transition from Mid-Cycle to Pre-Payday phase.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 92.78% → 93.09% | +0.31pp | ✅ |
-| Discount % | 14.6% → 13.94% | -0.66pp | ✅ |
-| PC2 | 49.33% → 52.08% | +2.75pp | ✅ |
-| Ship Rate | 47.75% → 46.73% | -1.02pp | ⚠️ |
+| Pre-Dunning AR | 92.78% → 93.09% | +0.31pp (+0.3%) | ✅ |
+| Discount % | 14.6% → 13.94% | -0.66pp (-4.5%) | ✅ |
+| PC2 | 49.33% → 52.08% | +2.75pp (+5.6%) | ✅ |
+| Ship Rate | 47.75% → 46.73% | -1.02pp (-2.1%) | ⚠️ |
 
 **Key Findings:**
-- Ship Rate declined despite positive movements in all upstream metrics (Pre-Dunning AR +0.3%, Discount -4.5%, PC2 +5.6%)
-- Volume decreased by 8.4% (13,791 → 12,628 orders), indicating fewer orders entered the dunning funnel
-- The payday phase shift from Mid-Cycle to Pre-Payday correlates with the performance decline, suggesting timing-related payment constraints
-- The paradox of improving individual metrics but declining Ship Rate suggests the volume reduction disproportionately removed higher-converting orders (compositional effect)
-- Lower discount offering (-4.5%) may have reduced conversion incentive despite the metric relationship suggesting this should help
+- Ship Rate declined despite favorable movement in all upstream metrics (Pre-Dunning AR, Discount %, and PC2 all improved)
+- Volume decreased by 8.4% (13,791 → 12,628 orders), suggesting mix shift effects may be masking underlying improvements
+- Discount % decreased by 4.5%, which should positively impact Ship Rate per the decision framework, yet Ship Rate still fell
+- PC2 improved significantly (+5.6%), indicating stronger payment completion at step 2, but this didn't translate to overall ship improvement
+- Payday phase transition (Mid-Cycle → Pre-Payday) likely introduced external customer liquidity pressures overriding operational gains
 
-**Action:** Investigate — The disconnect between improving funnel metrics and declining Ship Rate warrants deeper analysis into the volume composition change and whether the Pre-Payday phase is creating systematic payment barriers for customers.
+**Action:** Investigate — The paradoxical pattern of declining Ship Rate despite improving supporting metrics suggests Simpson's Paradox or external factors (payday timing, customer segment mix) are driving the decline. Deeper cohort analysis by customer segment and payment timing is recommended.
 
 ---
 
@@ -50,7 +50,7 @@
 | 2026-W14 | Mid-Cycle | 13,791 | 47.75% | - | 92.78% | - | 14.6% | - | 49.33% | - |
 | 2026-W15 | Pre-Payday | 12,628 | 46.73% | →-2.1% | 93.09% | →+0.3% | 13.94% | ↓-4.5% | 52.08% | ↑+5.6% |
 
-**Analysis:** The 1.02pp decline in US-HF Dunning Ship Rate appears driven primarily by the payday phase transition to Pre-Payday combined with an 8.4% volume reduction that likely removed higher-propensity orders from the eligible pool. While individual funnel metrics showed improvement, the compositional shift in the order mix and timing of the dunning cycle relative to customer paydays created headwinds that outweighed these gains. Recommend monitoring through the payday transition to confirm recovery and analyzing the characteristics of orders that exited the funnel.
+**Analysis:** The US-HF cluster experienced a 1.02pp decline in Dunning Ship Rate during W15 despite improvements across all key operational metrics (Pre-Dunning AR, Discount %, PC2). This counterintuitive pattern, combined with an 8.4% volume reduction and the Mid-Cycle to Pre-Payday phase transition, strongly suggests that external customer liquidity factors and potential mix shift effects are outweighing operational improvements. Further investigation into customer segment composition and payday-aligned behavioral patterns is warranted before the next reporting cycle.
 
 
 ---

@@ -8,28 +8,27 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 90.85% to 91.78% (+1.02%) in W15, representing a significant positive change on 31,091 orders.
+**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) improved from 90.85% to 91.78% (+1.02%) in W15, representing a positive reversal after two consecutive weeks of decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate recovering after 3-week decline | +1.02% | ⚠️ |
-| Country Distribution | 4 countries exceeded ±2.5% threshold | TV -3.37%, TT -3.25%, TK +5.28%, TO +6.15% | ⚠️ |
-| Payment Method | No methods exceeded threshold | Stable | ✅ |
-| Payment Provider | Adyen improved +2.15% | Within threshold | ✅ |
-| Related Metrics | All funnel metrics improved consistently | +0.85% to +1.02% | ✅ |
+| 8-Week Trend | Rate recovering but below W08-W12 levels | -1.37pp vs W08 | ⚠️ |
+| Country Breakdown | 4 countries exceed ±2.5% threshold | TV -3.37%, TT -3.25%, TK +5.28%, TO +6.15% | ⚠️ |
+| Payment Method | No methods exceed threshold | All within ±2.5% | ✅ |
+| Payment Provider | No providers exceed threshold | All within ±2.5% | ✅ |
+| Related Metrics | All funnel metrics improved in sync | +0.85% to +1.02% | ✅ |
+| Mix Shift | Volume shifts stable across tiers | No significant impact | ✅ |
 
 **Key Findings:**
-- The +1.02% improvement breaks a 3-week declining trend (W12-W14), though the rate remains below the W08-W10 baseline of ~93%
-- TV and TT showed notable declines (-3.37% and -3.25% respectively), with TV driven by PayPal (-25.00%) and credit card (-9.60%) payment method deterioration, primarily due to increased Insufficient Funds declines (+1.34pp)
-- TK and TO showed strong improvements (+5.28% and +6.15%), both driven by Adyen provider improvements (+6.91% and +8.93%) and reduced Insufficient Funds declines (-5.23pp and -4.76pp)
-- Volume continues to decline significantly (31,091 vs 46,567 in W08, a -33% reduction over 8 weeks), which may be inflating rate volatility in smaller countries
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) show consistent improvement, indicating systemic improvement rather than isolated factors
+- TV experienced a -3.37% decline driven by PayPal (-25.0%) and Credit Card (-9.60%) payment methods, with Insufficient Funds increasing by +1.34pp
+- TT declined -3.25% with anomalous "None" payment method entries and "Other reasons" decline codes increasing by +1.95pp, suggesting potential data quality issues
+- TK showed strong improvement (+5.28%) driven by Adyen provider (+6.91%) and reduced Insufficient Funds declines (-5.23pp)
+- TO improved significantly (+6.15%) with Adyen (+8.93%) and Apple Pay (+7.69%) improvements, and Insufficient Funds declining by -4.76pp
+- Overall volume decreased from 31,951 to 31,091 orders (-2.7%), continuing a downward trend from 46,567 in W08
 
-**Action:** Monitor - The overall improvement is positive and consistent across the funnel. Continue monitoring TV and TT for sustained declines, particularly PayPal performance in TV. No escalation required as the metric is trending favorably.
+**Action:** Monitor - The overall metric improvement is positive, but investigate the data quality issues in TT (None/No Payment anomalies) and monitor TV's PayPal decline pattern for potential provider-specific issues.
 
 ---
 

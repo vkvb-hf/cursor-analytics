@@ -10,25 +10,29 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved significantly from 93.63% to 94.74% (+1.11 pp) in 2026-W15, driven by broad improvements across all countries, particularly AT (+2.95 pp) and DK (+3.94 pp).
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved significantly in 2026-W15, increasing from 93.63% to 94.74% (+1.19%), representing a positive recovery after three consecutive weeks of decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Improved | +1.76% | ✅ |
-| 2_PreDunningAR | Improved | +1.18% | ✅ |
-| 3_PostDunningAR | Stable | +0.01% | ✅ |
-| 6_PaymentApprovalRate | Stable | +0.24% | ✅ |
+| L0: 8-Week Trend | Rate at 8-week high, reversing 3-week decline | +1.19% | ✅ |
+| L1: Country Breakdown | 2 countries (AT, DK) exceeded ±2.5% threshold | AT +2.95%, DK +3.94% | ⚠️ |
+| L1: Payment Method | Apple Pay showed significant improvement | +2.73% | ⚠️ |
+| L1: Payment Provider | All providers stable, no flags | Max +1.55% | ✅ |
+| L2: AT Deep-Dive | applepay +5.78%, Insufficient Funds declined -2.05pp | Root cause identified | ⚠️ |
+| L2: DK Deep-Dive | applepay +6.47%, Braintree +5.84%, Insufficient Funds -3.13pp | Root cause identified | ⚠️ |
+| L3: Related Metrics | FirstRunAR drove improvement (+1.76%) | All metrics improved | ✅ |
+| Mix Shift | Volume shifts stable across all countries | DK +25.6%, NO +39.2% volume growth | ✅ |
 
 **Key Findings:**
-- All countries showed improvement in acceptance rates; AT (+2.95 pp) and DK (+3.94 pp) exceeded the ±2.5% threshold with significant gains
-- Apple Pay showed the largest payment method improvement globally (+2.73 pp), with even stronger gains in AT (+5.78 pp) and DK (+6.47 pp)
-- "Insufficient Funds" declines dropped substantially in both flagged countries: AT (-2.05 pp) and DK (-3.13 pp), indicating improved customer payment capacity or retry success
-- DK volume increased +25.6% WoW while maintaining strong rate improvement, and Braintree in DK improved +5.84 pp
-- The improvement reverses a 3-week declining trend (W12-W14), returning rates to W11 levels (~94.9%)
+- The +1.19% improvement is driven primarily by reduced "Insufficient Funds" declines across AT (-2.05pp) and DK (-3.13pp), suggesting improved payment retry logic or customer payment method health
+- Apple Pay acceptance rates improved significantly in both flagged countries: AT (+5.78%) and DK (+6.47%), indicating potential payment processor optimizations
+- DK showed the largest country-level improvement (+3.94%) with Braintree provider improving +5.84%, while volume increased +25.6%
+- FirstRunAR improvement (+1.76%) exceeds PreDunningAR improvement (+1.18%), indicating the gains are occurring at initial payment attempt rather than through dunning recovery
+- Overall volume decreased -5.1% (784,406 → 744,637) but rate improvements offset this, resulting in net positive acceptance performance
 
-**Action:** Monitor - This is a positive trend reversal with broad-based improvements. Continue monitoring to confirm sustainability, particularly Apple Pay performance and Insufficient Funds decline rates.
+**Action:** Monitor - This is a positive trend reversal. Continue monitoring AT and DK Apple Pay performance and Insufficient Funds decline rates to ensure improvements sustain. No escalation required.
 
 ---
 

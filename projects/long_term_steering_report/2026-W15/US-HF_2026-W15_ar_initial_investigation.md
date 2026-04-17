@@ -10,25 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.85 pp) in W15, a non-significant change within normal weekly fluctuation.
+**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) for US-HF improved from 88.81% to 89.66% (+0.96pp) in W15, a statistically non-significant increase within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within normal range | +1.27 pp | ✅ |
-| 2_PreDunningAR | Within normal range | +0.85 pp | ✅ |
-| 3_PostDunningAR | Within normal range | +0.84 pp | ✅ |
-| 6_PaymentApprovalRate | Within normal range | +0.85 pp | ✅ |
+| L0: 8-Week Trend | Rate within historical range (87.73%-90.11%) | +0.96pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.96pp | ✅ |
+| L1: Dimension Scan | All payment methods/providers within normal variance | <±1.25pp | ✅ |
+| L3: Related Metrics | All funnel metrics improved consistently | +0.93pp to +1.45pp | ✅ |
+| Mix Shift | US remains in Medium AR tier, volume +5.5% | Stable | ✅ |
 
 **Key Findings:**
-- All funnel stages show consistent improvement between +0.84 pp and +1.27 pp, indicating broad-based recovery rather than a single point improvement
-- No payment method exceeded the ±2.5% threshold; Credit Card showed the largest positive movement (+1.17 pp) with the highest volume (6,577 orders)
-- Volume increased +5.5% WoW (11,533 → 12,162 orders), recovering partially from a multi-week decline (down from 19,259 in W10)
-- ProcessOut showed slightly stronger improvement (+1.22 pp) compared to Braintree (+0.47 pp), both within normal bounds
-- Current rate of 89.66% remains within the 8-week range (87.73% - 90.11%), suggesting normal variance
+- All related funnel metrics showed consistent improvement: FirstRunAR (+1.45pp), PreDunningAR (+0.96pp), PostDunningAR (+0.93pp), and PaymentApprovalRate (+0.95pp)
+- Credit Card acceptance improved by +1.17pp (90.30%) on the highest volume segment (6,577 orders), contributing most to the overall lift
+- ProcessOut provider showed +1.22pp improvement (90.52%) on 6,433 orders, aligning with Credit Card gains
+- Volume increased 5.5% WoW (11,533 → 12,162 orders) while maintaining improved acceptance rates
+- No payment method or provider exhibited concerning deterioration; all changes remained within ±1.25pp
 
-**Action:** Monitor — No significant anomalies detected; continue standard weekly tracking.
+**Action:** Monitor — The improvement is not statistically significant and falls within normal weekly fluctuation (8-week range: 87.73%-90.11%). No intervention required; continue standard monitoring cadence.
 
 ---
 

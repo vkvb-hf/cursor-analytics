@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate for US-HF improved marginally from 92.85% to 93.02% (+0.17 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17pp) in 2026-W15, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17 pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34 pp (US) | ✅ |
-| L1: PaymentMethod | "Others" declined -2.49% but minimal volume (91 orders) | Mixed | ✅ |
-| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34pp (US) | ✅ |
+| L1: PaymentMethod | No methods exceeding threshold; "Others" at -2.49% but minimal volume (91 orders) | Mixed | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
 | Mix Shift | US High AR tier stable (-0.9% volume shift) | Stable | ✅ |
 
 **Key Findings:**
-- The +0.17 pp week-over-week improvement is within normal fluctuation and not statistically significant
-- Credit Card approval rate improved +0.90 pp (92.09% → 92.92%) with the highest volume at 9,998 orders
-- "Others" payment method showed a -2.49 pp decline, but volume is negligible (91 orders) and does not materially impact overall rate
-- Apple Pay experienced a -1.00 pp decline (93.51% → 92.58%) across 6,169 orders, worth monitoring
-- Volume increased 18.5% week-over-week (14,911 → 17,669 orders), indicating healthy order flow
+- The +0.17pp week-over-week improvement is within normal fluctuation and not statistically significant given the 17,669 order volume
+- Credit Card approval rate improved +0.90pp (92.09% → 92.92%) representing the largest positive movement in the highest-volume payment method (9,998 orders)
+- Apple Pay declined -1.00pp (93.51% → 92.58%) but remains within acceptable range
+- "Others" payment method showed -2.49% decline but volume is negligible (91 orders)
+- 8-week trend shows rate recovery toward the W08-W09 baseline (~93%) after the W11 dip to 93.0%
 
-**Action:** Monitor — No immediate investigation required. Continue standard monitoring with attention to Apple Pay performance trends.
+**Action:** Monitor – No investigation required. Continue standard weekly monitoring as all metrics are within expected ranges and no thresholds were breached.
 
 ---
 

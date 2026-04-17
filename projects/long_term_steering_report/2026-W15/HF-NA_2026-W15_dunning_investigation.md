@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined by -1.00pp (49.17% → 48.17%) in HF-NA during 2026-W15, with volume decreasing by 6.9% (17,700 → 16,480 eligible orders) as the payday phase shifted from Mid-Cycle to Pre-Payday.
+**Overall:** Dunning Ship Rate declined by 1.00pp (49.17% → 48.17%) in 2026-W15, with volume decreasing by 6.9% (17,700 → 16,480 eligible orders) during the transition from Mid-Cycle to Pre-Payday phase.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 92.94% → 93.19% | +0.3% | ✅ |
-| Discount % | 15.6% → 15.04% | -3.6% | ✅ |
-| PC2 | 49.6% → 51.85% | +4.5% | ✅ |
-| Ship Rate | 49.17% → 48.17% | -2.0% | ⚠️ |
+| Pre-Dunning AR | 92.94% → 93.19% | +0.25pp | ✅ |
+| Discount % | 15.6% → 15.04% | -0.56pp | ✅ |
+| PC2 | 49.6% → 51.85% | +2.25pp | ✅ |
+| Ship Rate | 49.17% → 48.17% | -1.00pp | ⚠️ |
 
 **Key Findings:**
-- Ship Rate declined despite improvements in all supporting metrics (Pre-Dunning AR +0.3%, Discount -3.6%, PC2 +4.5%), suggesting payday timing is the primary driver
-- US contributed the largest absolute impact (Rank #1) with Ship Rate declining -2.1% on -8.4% volume reduction
-- CA showed the steepest Ship Rate decline (-2.4%) despite being a high-performing tier (52.88% SR)
-- Both US and CA experienced Pre-Payday liquidity constraints, with discount reductions (US -4.5%, CA -2.5%) failing to offset timing headwinds
-- Volume contraction was concentrated in US (-8.4%), while CA remained relatively stable (-1.5%)
+- Despite positive movements in supporting metrics (Pre-Dunning AR +0.3%, Discount % -3.6%, PC2 +4.5%), Ship Rate still declined by 1.00pp, suggesting external factors are overriding funnel improvements
+- CA showed the largest Ship Rate decline (-2.4%) despite having the highest absolute Ship Rate (52.88%) in the cluster
+- US contributed most to the overall decline due to volume weight (76.6% of cluster volume) with Ship Rate dropping -2.1%
+- Volume declined across both countries (US -8.4%, CA -1.5%), with the Pre-Payday phase potentially impacting customer payment behavior
+- The disconnect between improved funnel metrics and declining Ship Rate indicates possible customer-level payment capacity constraints during the Pre-Payday period
 
-**Action:** Monitor — Declines align with expected Pre-Payday behavior; supporting metrics trending positively indicate recovery likely in upcoming payday window.
+**Action:** Monitor - The metric movement appears linked to the natural Pre-Payday phase transition rather than operational issues. All controllable funnel metrics are moving favorably. Continue monitoring through the full payday cycle to confirm recovery post-payday.
 
 ---
 
@@ -52,7 +50,7 @@
 | 2026-W14 | Mid-Cycle | 13,791 | 47.75% | - | 92.78% | - | 14.6% | - | 49.33% | - |
 | 2026-W15 | Pre-Payday | 12,628 | 46.73% | →-2.1% | 93.09% | →+0.3% | 13.94% | ↓-4.5% | 52.08% | ↑+5.6% |
 
-**Analysis:** The -1.00pp Ship Rate decline in HF-NA for 2026-W15 is primarily attributable to the payday phase transition from Mid-Cycle to Pre-Payday, which typically constrains customer liquidity despite operational improvements. Both US and CA showed metric improvements in Pre-Dunning AR, Discount %, and PC2, indicating the dunning process is functioning effectively and the decline is cyclical rather than systemic. Performance should be monitored through the payday period to confirm expected recovery.
+**Analysis:** The 1.00pp decline in Dunning Ship Rate for HF-NA in 2026-W15 appears primarily driven by the payday cycle transition from Mid-Cycle to Pre-Payday, affecting both US and CA markets despite improvements in Pre-Dunning AR, Discount optimization, and PC2 metrics. Given that all controllable metrics are trending positively and the decline aligns with expected Pre-Payday customer cash flow constraints, this warrants continued monitoring rather than immediate intervention. Ship Rate recovery is anticipated as the cluster moves into the Post-Payday phase in the coming week.
 
 ### CA (Rank #2 by Contribution | #1 by Change)
 

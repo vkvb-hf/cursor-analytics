@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate improved from 91.05% to 91.65% (+0.60 pp) in W15, a statistically non-significant change within normal variance.
+**Overall:** Payment Approval Rate improved from 91.05% to 91.65% (+0.60 pp) in WL 2026-W15, representing a non-significant positive change on 160,979 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | vs Prior | +0.87% | ✅ |
-| 3_PostDunningAR | vs Prior | +0.53% | ✅ |
+| 2_PreDunningAR | Recovery | +0.87% | ✅ |
+| 3_PostDunningAR | Dunning | +0.53% | ✅ |
 | 6_PaymentApprovalRate | Final | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel stages showed modest improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
-- No countries exceeded the ±2.5% threshold; AO showed the strongest country-level improvement (+2.17%) on 13,883 orders
-- ProcessOut provider improved +2.05% (82.67% current), though Unknown provider flagged with +13.15% change on minimal volume (664 orders)
-- Volume declined 2.4% WoW (165,018 → 160,979), with notable decreases in AO (-12.0%) and GN (-8.5%)
-- Credit Card payments (71% of volume) improved +0.69%, driving the majority of the overall rate increase
+- All funnel stages showed improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
+- Unknown PaymentProvider showed a significant +13.15% change but represents minimal volume (664 orders) — flagged as anomaly (⚠️)
+- AO showed the strongest country-level improvement (+2.17 pp), though volume declined 12.0% WoW
+- No countries exceeded the ±2.5% investigation threshold; all changes within normal variance
+- 8-week trend shows steady recovery from W08 low of 89.88% to current 91.65%, a cumulative +1.77 pp gain
 
-**Action:** Monitor — Change is non-significant with no dimension exceeding alert thresholds. Continue standard tracking.
+**Action:** Monitor — The improvement is not statistically significant and all dimensional changes fall within normal operating ranges. Continue standard weekly monitoring.
 
 ---
 

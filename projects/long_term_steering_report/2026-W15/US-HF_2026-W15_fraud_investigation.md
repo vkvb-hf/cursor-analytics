@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Fraud Approval Rate (FAR) declined significantly from 91.59% to 89.20% (-2.39pp) in US-HF during W15, driven primarily by a sharp deterioration in the Referral channel.
+**Overall:** Fraud Approval Rate (FAR) declined significantly from 91.59% to 89.20% (-2.39 pp) in US-HF during W15, driven primarily by a sharp deterioration in the Referral channel.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: US-HF Trend | FAR within normal range? | -2.61% | ⚠️ |
-| L1: Country | US exceeds ±2.5% threshold? | -2.61% | ⚠️ |
-| L1: Channel Category | Any channel >±2.5%? | Referral -12.15% | ⚠️ |
-| L2: Duplicate Rate | Significant increase? | +3.60% | ⚠️ |
-| L2: Duplicate Block | Significant increase? | +8.45% (Dup Block % up to 7.03%) | ⚠️ |
-| L2: PF Block | Significant increase? | +253.98% (0.85% → 3.03%) | ⚠️ |
+| L0: US-HF Trend | FAR within normal range? | -2.61% vs 8-week avg ~90.5% | ⚠️ |
+| L1: Country | Any country > ±2.5% threshold? | US: -2.61% | ⚠️ |
+| L1: Channel Category | Any channel > ±2.5% threshold? | Referral: -12.15% | ⚠️ |
+| L2: Duplicate Rate | Significant increase? | +3.60% (25.49% → 26.41%) | ⚠️ |
+| L2: Duplicate Block | Significant increase? | +36.86% in Paid, -3.79% in Referral | ✅ |
+| L2: PF Block | Significant increase? | +409.56% in Referral (2.48% → 12.62%) | ⚠️ |
 
 **Key Findings:**
-- Referral channel FAR dropped sharply from 70.00% to 61.50% (-12.15%), accounting for the majority of the overall decline
-- PF Block rate in Referral spiked dramatically from 2.48% to 12.62% (+409.56%), indicating a significant increase in fraud pattern detection
-- Overall volume increased 19.9% (16,726 → 20,057), with Referral volume up 21.7% (2,987 → 3,636)
-- Duplicate Rate increased across US from 25.49% to 26.41% (+3.60%), contributing to higher rejection rates
-- Paid channel remained relatively stable with only -0.98% FAR change despite volume increase of 19.5%
+- Referral channel FAR dropped severely from 70.00% to 61.50% (-8.50 pp), accounting for the majority of the overall decline
+- PF Block rate in Referral channel spiked by +409.56% (2.48% → 12.62%), indicating a major policy or model change affecting this segment
+- Volume increased 19.9% week-over-week (16,726 → 20,057), with Referral volume up 21.7% (2,987 → 3,636)
+- Paid channel remained relatively stable at 95.34% FAR (-0.94 pp), despite a 19.5% volume increase
+- Duplicate Rate increased modestly across US (+0.92 pp), with Paid channel showing +6.43% relative increase
 
-**Action:** Investigate — The extreme PF Block spike (+409.56%) in the Referral channel requires immediate review to determine if this reflects a genuine fraud attack or a rule misconfiguration.
+**Action:** **Investigate** — The 409% spike in PF Block rate within the Referral channel requires immediate investigation to determine if this reflects a policy change, model update, or emerging fraud pattern.
 
 ---
 
@@ -84,7 +84,7 @@
 | Referral | 2026-W14 | 70.00% | - | 31.77% | - | 26.21% | - | 2.48% | - | 2,987 |  |
 | Referral | 2026-W15 | 61.50% | -12.15% | 29.70% | -6.51% | 25.22% | -3.79% | 12.62% | +409.56% | 3,636 | ⚠️ |
 
-**Analysis:** The W15 FAR decline in US is primarily attributable to the Referral channel, where PF Block rates increased over 400%, suggesting either a coordinated fraud attempt or an overly aggressive fraud rule deployment. The Paid channel remains healthy, indicating the issue is isolated. Immediate investigation into Referral-specific PF rules and recent fraud patterns is recommended to distinguish between legitimate fraud prevention and potential false positive escalation.
+**Analysis:** The W15 FAR decline in US-HF is primarily attributable to a dramatic increase in PF (Policy/Fraud) blocks within the Referral channel, where the block rate surged from 2.48% to 12.62%. This suggests either a recent rule deployment or threshold adjustment specifically impacting referral traffic. Immediate review of any W15 policy changes and PF model updates is recommended to confirm whether this is intentional tightening or an unintended configuration issue.
 
 ---
 

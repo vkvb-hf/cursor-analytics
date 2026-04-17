@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-NA showed a marginal improvement from 94.0% to 94.1% (+0.11pp) in W15, continuing a steady upward trend observed over the past 8 weeks, with the change being statistically not significant.
+**Overall:** Payment Approval Rate improved marginally from 94.0% to 94.1% (+0.11 pp) in HF-NA during W15, continuing a steady 8-week upward trend from 93.27% (W08), with the change deemed not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.38pp | ✅ |
-| 2_PreDunningAR | vs FirstRun | +0.28pp | ✅ |
-| 3_PostDunningAR | vs PreDunning | -0.04pp | ✅ |
-| 6_PaymentApprovalRate | Final | +0.11pp | ✅ |
+| 1_FirstRunAR | Within normal range | +0.38 pp | ✅ |
+| 2_PreDunningAR | Within normal range | +0.28 pp | ✅ |
+| 3_PostDunningAR | Slight decline | -0.04 pp | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.11 pp | ✅ |
 
 **Key Findings:**
-- Consistent 8-week upward trend: PAR has improved steadily from 93.27% (W08) to 94.1% (W15), representing +0.83pp cumulative gain
-- US drove the weekly improvement with +0.34pp (92.78% → 93.09%), while CA remained flat at +0.02pp
-- PaymentProvider "Unknown" flagged with -4.07pp decline (96.17% → 92.26%), though volume is minimal at 775 orders (0.16% of total)
-- All payment methods stable; Apple Pay remains lowest performer at 88.76% but showed slight improvement (+0.25pp)
-- Volume decline of ~1.9% week-over-week (507,189 → 497,775) with no significant mix shift impact
+- US showed stronger improvement (+0.34 pp) compared to CA (+0.02 pp), with US representing the majority of volume (492,811 orders)
+- Unknown PaymentProvider flagged with -4.07 pp decline (96.17% → 92.26%), though volume is minimal at 775 orders
+- FirstRunAR drove the largest positive contribution in the funnel (+0.38 pp), indicating improved initial payment success
+- All major payment methods remained stable: Credit Card (+0.08 pp), PayPal (+0.15 pp), Apple Pay (+0.25 pp)
+- Overall volume declined 1.9% week-over-week (507,189 → 497,775), consistent with the declining trend observed since W08
 
-**Action:** Monitor — No significant anomalies detected; continue tracking the positive trend and the minor "Unknown" provider flag for potential data quality issues.
+**Action:** Monitor – The +0.11 pp change is not significant and aligns with the gradual 8-week improvement trend. No countries or major payment dimensions exceeded thresholds requiring investigation.
 
 ---
 

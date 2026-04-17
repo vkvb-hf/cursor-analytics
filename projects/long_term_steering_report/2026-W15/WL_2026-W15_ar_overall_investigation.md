@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate improved by +0.86% (from 89.33% to 90.1%) in WL 2026-W15, representing a statistically non-significant increase on 160,979 orders.
+**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but statistically not significant change with volume of 160,979 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within normal range | +0.92% | ✅ |
-| 2_PreDunningAR | Within normal range | +0.87% | ✅ |
-| 3_PostDunningAR | Within normal range | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
+| 1_FirstRunAR | Baseline | +0.92% | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.87% | ✅ |
+| 3_PostDunningAR | Post-Recovery | +0.53% | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.67% | ✅ |
 
 **Key Findings:**
-- All four related metrics (FirstRunAR, PreDunningAR, PostDunningAR, PaymentApprovalRate) improved in parallel, suggesting a systemic positive trend rather than an isolated change
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17% (85.21% → 87.06%)
-- PaymentProvider "Unknown" shows a ⚠️ flag with +69.73% change, but this is based on minimal volume (664 orders) and represents noise rather than a meaningful shift
-- ProcessOut provider improved +2.31% (79.78% → 81.62%) on 17,676 orders, the largest meaningful provider-level improvement
-- Volume declined -2.4% WoW (165,018 → 160,979), continuing a gradual downward trend observed since W08
+- All funnel stages showed improvement week-over-week, indicating broad-based positive performance across the payment acceptance pipeline
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (85.21% → 87.06%)
+- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) and moved from anomalously low 57.14% to 96.99%
+- ProcessOut showed notable improvement of +2.31 pp (79.78% → 81.62%) on 17,676 orders, though remains the lowest-performing provider
+- Volume declined 2.4% week-over-week (165,018 → 160,979), with AO showing the largest volume drop (-12.0%)
 
-**Action:** Monitor – The improvement is positive but not statistically significant, with no anomalies requiring investigation. Continue tracking the 8-week trend to confirm sustained improvement.
+**Action:** Monitor – No significant anomalies detected; all metrics trending positively within normal operating ranges.
 
 ---
 

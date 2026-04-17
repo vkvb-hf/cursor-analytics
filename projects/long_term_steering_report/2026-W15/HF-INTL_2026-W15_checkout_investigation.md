@@ -10,13 +10,13 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in HF-INTL during 2026-W15, with payment visits increasing by 11.4% to 69,804.
+**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in HF-INTL during 2026-W15, exceeding the threshold of +0.86pp, driven primarily by improvements in early funnel stages across multiple countries.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | +2.05pp | ⚠️ |
+| Select Payment Method | Above threshold | +2.05pp | ✅ |
 | Click Submit Form | Within normal range | +0.05pp | ✅ |
 | FE Validation Passed | Within normal range | +0.24pp | ✅ |
 | Enter Fraud Service | Within normal range | -0.06pp | ✅ |
@@ -25,13 +25,13 @@
 | Successful Checkout | Within normal range | +0.19pp | ✅ |
 
 **Key Findings:**
-- The primary driver of PCR improvement is the "Select Payment Method" step, which increased by +2.05pp (55.29% → 57.34%), exceeding the +0.86pp threshold
-- GB and DE contributed most to the improvement, with GB showing +2.46pp and DE showing +1.21pp PCR gains, both driven by improved Select Payment Method conversion (+2.69pp and +2.54pp respectively)
-- NO demonstrated the strongest relative improvement at +5.83pp (42.23% → 48.06%), driven primarily by Click Submit Form (+3.04pp) and backend Checkout Attempt (+6.87pp)
-- LU experienced a significant decline of -17.90pp (57.63% → 39.73%), though with minimal volume impact (73 visits); the drop was driven by Select Payment Method (-11.63pp)
-- Braintree_Paypal showed the strongest payment method improvement at +0.92pp success rate, while Adyen_CreditCard declined by -6.17pp (low volume: 74 attempts)
+- Select Payment Method conversion improved +2.05pp (55.29% → 57.34%), representing the largest single-step gain and primary driver of overall PCR improvement
+- GB and DE, the top contributors by volume, both showed strong improvements driven by Select Payment Method (+2.69pp and +2.54pp respectively)
+- NO showed exceptional improvement of +5.83pp PCR with volume increasing 137% (708 → 1,679 visits), driven by Click Submit Form (+3.04pp) and Checkout Attempt (+6.87pp backend)
+- LU experienced a significant decline of -17.90pp PCR, but with minimal volume impact (73 visits), driven by Select Payment Method drop (-11.63pp)
+- Braintree_Paypal showed the strongest payment method improvement at +0.92pp (90.71% → 91.63%)
 
-**Action:** Monitor - The PCR improvement is driven by healthy top-of-funnel engagement gains across major markets (GB, DE). Continue monitoring LU performance and Adyen_CreditCard success rates, though volumes are too low to warrant immediate investigation.
+**Action:** Monitor - The improvement is healthy and broad-based across major markets. Continue tracking NO performance given the volume surge, and monitor LU for potential UX issues at payment method selection despite low volume impact.
 
 ---
 

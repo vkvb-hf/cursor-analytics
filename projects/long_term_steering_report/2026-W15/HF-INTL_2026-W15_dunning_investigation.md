@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined significantly from 70.87% to 65.62% (-5.25pp) in HF-INTL during 2026-W15, coinciding with a transition from Mid-Cycle to Pre-Payday phase and a 25.5% reduction in eligible order volume.
+**Overall:** Dunning Ship Rate declined significantly from 70.87% to 65.62% (-5.25pp) week-over-week, coinciding with a transition from Mid-Cycle to Pre-Payday phase and a 25.5% reduction in eligible order volume (36,656 → 27,317).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 93.06% → 93.83% | +0.77pp | ✅ Stable |
-| Discount % | 13.57% → 13.8% | +0.23pp | ✅ Stable |
-| PC2 | 42.92% → 46.31% | +3.39pp | ✅ Improved |
-| Ship Rate | 70.87% → 65.62% | -5.25pp | ⚠️ Declined |
+| Pre-Dunning AR | Stable/Improved | +0.8% | ✅ |
+| Discount % | Slight Increase | +1.7% | ⚠️ |
+| PC2 (Payment Capture) | Increased | +7.9% | ✅ |
+| Ship Rate | Declined | -7.4% | ⚠️ |
 
 **Key Findings:**
-- All four analyzed countries (GB, FR, DE, SE) experienced double-digit Ship Rate declines despite stable or improving upstream metrics (Pre-Dunning AR, PC2)
-- SE showed the steepest Ship Rate decline (-14.7%) paired with an 18.7% increase in Discount %, suggesting aggressive discounting failed to convert during Pre-Payday
-- DE experienced both elevated Discount % (+8.2%) and PC2 (+10.1%) increases, yet Ship Rate still fell 9.9%, indicating payment conversion issues downstream
-- Volume contracted significantly across all major markets: DK (-54.7%), BE (-38.1%), FR (-30.8%), DE (-29.9%), GB (-27.7%)
-- The payday phase shift from Mid-Cycle to Pre-Payday appears to be the primary driver, as all input metrics remained stable or positive while output Ship Rate declined uniformly
+- **Payday Phase Impact:** All four analyzed countries (GB, FR, DE, SE) transitioned from Mid-Cycle to Pre-Payday, correlating with universal Ship Rate declines ranging from -9.9% to -14.7%
+- **SE Most Impacted:** SE showed the steepest Ship Rate decline (-14.7%) paired with the largest Discount % increase (+18.7%), suggesting aggressive discounting failed to offset Pre-Payday liquidity constraints
+- **GB Largest Contributor:** GB contributed most to the overall decline with Ship Rate falling from 64.99% to 57.02% (-12.3%) despite stable Pre-Dunning AR (+1.1%) and improving PC2 (+5.9%)
+- **Volume Contraction Broad-Based:** Significant volume drops across major markets (DK -54.7%, BE -38.1%, FR -30.8%, DE -29.9%) indicate systematic reduction in dunning-eligible orders
+- **Metric Divergence:** Pre-Dunning AR and PC2 improved across most countries, yet Ship Rate declined—suggesting the conversion breakdown occurs between payment capture and actual shipment
 
-**Action:** **Investigate** — The disconnect between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate across all markets warrants deeper analysis into payment method failures, bank decline rates, and timing sensitivity during Pre-Payday periods.
+**Action:** **Investigate** — The disconnect between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate during Pre-Payday phase warrants deeper analysis into post-payment fulfillment barriers and whether payday timing adjustments to dunning campaigns could improve outcomes.
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W14 | Mid-Cycle | 8,721 | 64.99% | - | 93.07% | - | 16.87% | - | 46.13% | - |
 | 2026-W15 | Pre-Payday | 6,301 | 57.02% | ↓-12.3% | 94.14% | →+1.1% | 17.17% | →+1.8% | 48.87% | ↑+5.9% |
 
-**Analysis:** The 5.25pp decline in Dunning Ship Rate is primarily attributed to the Pre-Payday phase timing effect, as evidenced by uniform declines across GB (-12.3%), FR (-11.9%), DE (-9.9%), and SE (-14.7%) despite stable Pre-Dunning Acceptance Rates and increased customer engagement (PC2). Increased discounting in SE (+18.7%) and DE (+8.2%) failed to offset the payday-related payment friction, suggesting the decline is cyclical rather than systemic. Recommend monitoring through the payday transition in W16 to confirm recovery before escalating.
+**Analysis:** The 5.25pp decline in Dunning Ship Rate is primarily driven by the Pre-Payday phase transition, which negatively impacted conversion despite stable approval rates and improved payment capture metrics across all major markets. GB, FR, DE, and SE all experienced double-digit percentage declines in Ship Rate, with increased discounting in DE (+8.2%) and SE (+18.7%) failing to counteract the payday-related headwinds. Recommend investigating the timing of dunning campaigns relative to payday cycles and analyzing post-PC2 drop-off points to identify actionable interventions.
 
 ### FR (Rank #2 by Contribution | #2 by Change)
 

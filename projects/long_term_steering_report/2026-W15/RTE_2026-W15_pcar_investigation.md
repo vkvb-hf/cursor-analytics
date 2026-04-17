@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved from 96.9% to 97.22% (+0.33pp) in W15, a change that is not statistically significant and reflects normal week-over-week variation within the 8-week historical range.
+**Overall:** Payment Checkout Approval Rate improved by +0.33pp (96.9% → 97.22%) on 44,168 orders in W15, though the change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within historical range (96.88%-97.30%) | +0.33pp | ✅ |
-| L1: Country Scan | 1 country exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
-| L1: Dimension Scan | 1 payment method exceeds threshold | Others -4.35pp | ⚠️ |
-| L2: TK Deep-Dive | Broad improvement across all methods | +5.4% to +12.1% | ✅ |
-| Mix Shift | No significant volume migration | All Stable | ✅ |
+| L0: 8-Week Trend | Rate within normal range (96.88%-97.30%) | +0.33pp | ✅ |
+| L1: Country Scan | 1 country (TK) exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
+| L1: Dimension Scan | PaymentMethod "Others" declined -4.35pp | Low volume (950) | ⚠️ |
+| L2: TK Deep-Dive | All payment methods improved significantly | +5.4% to +12.1% | ✅ |
+| Mix Shift | All countries stable, no significant volume shifts | TK +9.6% vol | ✅ |
 
 **Key Findings:**
-- TK showed significant improvement (+7.54pp), driven by reduced "Insufficient Funds" declines (-5.81pp), with applepay improving most dramatically (+12.10pp)
-- Braintree provider in TK improved +10.60pp (85.27% → 94.31%), suggesting possible infrastructure or fraud rule improvements
-- "Others" payment method declined -4.35pp globally but represents minimal volume (950 orders, ~2% of total)
-- Overall metric remains stable within the 8-week band of 96.88%-97.30%, with current rate near the upper bound
-- Volume decreased slightly from 39,914 to 44,168 orders (+10.7%), with TK volume increasing +9.6%
+- TK showed significant improvement of +7.54pp (88.65% → 95.33%) driven by reduced "Insufficient Funds" declines (-5.81pp)
+- Apple Pay in TK improved dramatically by +12.10pp (83.41% → 93.51%), with Braintree provider up +10.60pp
+- PaymentMethod "Others" declined -4.35pp globally but represents minimal volume (950 orders)
+- TV and YE showed minor declines (-1.37pp and -0.43pp respectively) but remain within acceptable ranges
+- Overall metric remains stable within the 8-week historical band (96.88%-97.30%)
 
-**Action:** Monitor — The improvement is not statistically significant and the positive movement in TK appears to be a recovery from elevated decline rates rather than an anomaly requiring investigation.
+**Action:** Monitor — The +0.33pp improvement is not statistically significant and falls within normal weekly variance. TK's improvement is positive and may warrant investigation to understand if a fix was deployed that could be applied elsewhere.
 
 ---
 

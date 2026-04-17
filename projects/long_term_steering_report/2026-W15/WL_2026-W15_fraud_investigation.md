@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Fraud Approval Rate (FAR) improved slightly from 92.89% to 93.41% (+0.52pp) in 2026-W15, with volume increasing to 15,464 customers; the change is not statistically significant.
+**Overall:** Fraud Approval Rate (FAR) improved slightly from 92.89% to 93.41% (+0.52pp) week-over-week, though this change is not statistically significant and remains within normal 8-week operating range (93.37%-94.33%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL 8-Week Trend | FAR within normal range (93.37%-94.33%) | +0.57% | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | All <±2.5% | ✅ |
-| L1: Channel Category | Paid +0.60%, Referral +0.65% | Stable | ✅ |
-| L2: AO Referral | FAR +8.44%, Dup Block -15.29% | Improving | ⚠️ |
-| L2: CK Referral | FAR -2.96%, Dup Block +16.04% | Declining | ⚠️ |
-| L2: MR Paid | FAR +2.53%, Dup Rate -26.72% | Improving | ⚠️ |
-| L2: MR Referral | FAR -4.16%, Dup Rate +35.83% | Declining | ⚠️ |
+| L0: WL 8-Week Trend | FAR within normal range | +0.52pp | ✅ |
+| L1: Country Scan | No country exceeds ±2.5% threshold | Max: MR +2.25% | ✅ |
+| L1: Channel Category | Paid & Referral stable | +0.60%, +0.65% | ✅ |
+| L2: AO Referral | FAR increased significantly | +8.44% | ⚠️ |
+| L2: CK Referral | FAR declined | -2.96% | ⚠️ |
+| L2: MR Paid | FAR increased above threshold | +2.53% | ⚠️ |
+| L2: MR Referral | FAR declined significantly | -4.16% | ⚠️ |
 
 **Key Findings:**
-- MR showed the strongest country-level improvement (+2.25pp FAR) driven by Paid channel (+2.53pp), while Referral declined (-4.16pp) with duplicate rate spiking +35.83%
-- Referral channel consistently underperforms Paid across all markets (76.11% vs 96.63% FAR at L1), with elevated duplicate block rates (13-30% vs <1%)
-- CK and ER showed slight FAR declines (-0.76% and -0.79%) coupled with increasing duplicate rates (+14.37% and +12.20% respectively)
-- KN Paid channel saw PF Block rate spike from 0.05% to 0.59% (+1136.05%), though absolute impact remains minimal
-- Overall volume increased 16.4% WoW (13,283 → 15,464), with MR contributing the largest volume growth (+739 customers)
+- MR shows divergent channel behavior: Paid FAR improved +2.53% (to 97.96%) while Referral FAR declined -4.16% (to 83.77%), with Referral duplicate rates spiking +35.83%
+- Referral channel shows elevated duplicate blocking across multiple countries: CK (30.13%), AO (28.66%), KN (19.43%), indicating potential abuse patterns
+- CK Referral FAR declined -2.96% with duplicate rate increasing +10.63% and duplicate blocks rising +16.04%
+- Overall volume increased +16.4% (13,283 → 15,464), primarily driven by MR (+36.8%) and KN (+23.6%)
+- KN Paid channel shows +1136% increase in PF Block rate (0.05% → 0.59%), though absolute impact remains small
 
-**Action:** Monitor — The overall FAR change is not significant and within historical range. Continue tracking MR Referral and CK Referral channels for potential duplicate abuse patterns.
+**Action:** Monitor — No immediate escalation required. Changes are not statistically significant at the aggregate level. Continue monitoring MR Referral channel for sustained duplicate rate elevation and CK Referral for potential further FAR degradation.
 
 ---
 
@@ -93,7 +93,7 @@
 | Referral | 2026-W14 | 65.79% | - | 36.47% | - | 33.83% | - | 0.00% | - | 266 |  |
 | Referral | 2026-W15 | 71.34% | +8.44% | 32.09% | -12.01% | 28.66% | -15.29% | 0.00% | - | 321 | ⚠️ |
 
-**Analysis:** The 2026-W15 Fraud Approval Rate increase of +0.52pp is not statistically significant and falls within the normal 8-week operating range of 92.70%-94.33%. While Referral channels across multiple countries (MR, CK, KN) show elevated duplicate rates and lower approval rates compared to Paid channels, no immediate intervention is required. Recommend continued monitoring of Referral channel duplicate patterns, particularly in MR where duplicate rate increased 35.83% week-over-week.
+**Analysis:** The +0.52pp FAR improvement in WL for 2026-W15 reflects normal week-over-week variation within established operating parameters. While L2 analysis reveals some channel-specific volatility—particularly in MR and CK Referral segments—these movements do not materially impact the aggregate metric and no countries breached the ±2.5% significance threshold. Continued monitoring of Referral channel duplicate patterns across markets is recommended, with no immediate action required.
 
 ---
 

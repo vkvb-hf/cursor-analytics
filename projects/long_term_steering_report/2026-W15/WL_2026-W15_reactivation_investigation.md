@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation rate improved slightly from 88.67% to 89.29% (+0.62 pp), a change that is not statistically significant with 9,277 orders processed.
+**Overall:** Reactivation Rate improved slightly from 88.67% to 89.29% (+0.62 pp) in W15, representing a statistically non-significant change on 9,277 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal range | +0.70% | ✅ |
-| L1: Country Breakdown | No country >±2.5% threshold | All <2.5% | ✅ |
-| L1: PaymentMethod | "Others" flagged, but minimal volume | -66.67% (3 orders) | ✅ |
-| L1: PaymentMethod | Apple Pay flagged | +3.99% (794 orders) | ⚠️ |
-| Mix Shift Analysis | All countries stable | No significant shifts | ✅ |
+| L0: 8-Week Trend | Rate within normal range (85-89%) | +0.70% | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | Max +2.17% (AO) | ✅ |
+| L1: PaymentMethod | Low-volume anomaly in "Others" | -66.67% (3 orders) | ⚠️ |
+| L1: PaymentMethod | Apple Pay improvement | +3.99% (794 orders) | ⚠️ |
+| Mix Shift | All countries stable | Max shift -12.0% (AO) | ✅ |
 
 **Key Findings:**
-- The +0.70% week-over-week improvement continues a positive trend, with rates climbing from 85.07% (W08) to 89.29% (W15) over the 8-week period
-- All four countries (GN, ER, MR, AO) showed improvement ranging from +1.07% to +2.17%, with none exceeding the ±2.5% investigation threshold
-- Apple Pay showed notable improvement (+3.99%, from 72.06% to 74.94%) though it remains the lowest-performing payment method at 74.94%
-- AO experienced the largest volume decline (-12.0%) but maintained stable reactivation performance (+2.17%)
-- The "Others" payment method drop (-66.67%) is statistically irrelevant due to minimal volume (3 orders)
+- The +0.70% week-over-week improvement continues an upward trend from W11 (87.5%) to W15 (89.29%), representing a +1.79 pp gain over 4 weeks
+- All four countries showed improvement: AO (+2.17%), MR (+1.45%), ER (+1.23%), and GN (+1.07%), with none exceeding the ±2.5% threshold
+- Apple Pay showed notable improvement (+3.99% to 74.94%) though it remains the lowest-performing payment method and has low volume (794 orders)
+- "Others" payment method dropped -66.67% but represents only 3 orders, making it statistically irrelevant
+- Volume increased significantly from 7,706 to 9,277 orders (+20.4%), suggesting healthy reactivation activity
 
-**Action:** Monitor — No investigation required. The metric movement is not statistically significant, no country thresholds were breached, and the overall trend remains healthy.
+**Action:** Monitor — No significant anomalies detected; continue tracking the positive trend trajectory.
 
 ---
 

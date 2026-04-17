@@ -8,29 +8,28 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL improved significantly from 89.67% to 91.78% (+2.35%) in 2026-W15, representing a positive trend reversal after two consecutive weeks of decline.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL improved significantly from 89.67% to 91.78% (+2.35%) in W15, driven by reduced Insufficient Funds declines across multiple European markets.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend Stability | Rate within historical range (88.09%-91.78%) | +2.35% vs prior week | ✅ |
-| Volume Change | 27,516 vs 30,838 prior week | -10.8% volume drop | ⚠️ |
-| Country Concentration | 7 countries exceeded ±2.5% threshold | FR, DE, BE, AT, DK, NZ, LU all improved | ⚠️ |
-| Payment Method Impact | Apple Pay +2.87%, Credit Card +3.38% | Broad improvement across methods | ✅ |
-| Provider Performance | Braintree +2.62%, ProcessOut +3.37% | Key providers improved | ✅ |
-| Decline Reason Shift | Insufficient Funds decreased across markets | FR -2.39pp, BE -3.23pp, AT -3.89pp | ✅ |
+| 8-Week Trend | Rate within historical range (88.09%-91.78%) | +2.35% vs W14 | ✅ |
+| Volume Trend | Declining volume (27,516 vs 30,838 prior week) | -10.8% | ⚠️ |
+| Country Breakdown | 7 countries exceed ±2.5% threshold | FR +2.97%, DE +3.27%, BE +4.02%, AT +4.10%, DK +4.37%, NZ +7.21%, LU +10.64% | ⚠️ |
+| Payment Method | Apple Pay and Credit Card showing improvement | Apple Pay +2.87%, Credit Card +3.38% | ✅ |
+| Payment Provider | Braintree and ProcessOut improving | Braintree +2.62%, ProcessOut +3.37% | ✅ |
+| Decline Reasons | Insufficient Funds declining across all deep-dive countries | FR -2.39pp, DE -2.25pp, BE -3.23pp, AT -3.89pp | ✅ |
+| Related Metrics | All funnel stages improving consistently | 1_FirstRunAR +2.63%, PostDunningAR +2.11% | ✅ |
 
 **Key Findings:**
-- **Insufficient Funds declines dropped significantly** across all deep-dive countries: FR (-2.39pp), DE (-2.25pp), BE (-3.23pp), and AT (-3.89pp), driving the overall AR improvement
-- **Apple Pay performance improved substantially** in FR (+5.11%), DE (+5.70%), and BE (+6.14%), contributing to the aggregate rate increase
-- **ProcessOut provider showed strong recovery** with +3.37% at aggregate level and notably +8.10% in BE and +6.22% in AT
-- **Volume declined 10.8% week-over-week** (27,516 vs 30,838), with major mix shifts in FR (-30.4%) and NL (-40.8%) potentially inflating the rate improvement
-- **All funnel metrics improved in parallel**: 1_FirstRunAR (+2.63%), 3_PostDunningAR (+2.11%), and 6_PaymentApprovalRate (+2.05%), indicating systemic improvement rather than isolated anomaly
+- Insufficient Funds declines decreased significantly across all analyzed markets (FR -2.39pp, DE -2.25pp, BE -3.23pp, AT -3.89pp), driving the overall AR improvement
+- Apple Pay performance improved substantially in FR (+5.11%), DE (+5.70%), and BE (+6.14%), contributing to higher acceptance rates
+- ProcessOut showed strong recovery in BE (+8.10%) and AT (+6.22%), though it remains a lower-performing provider overall
+- Volume declined 10.8% WoW (27,516 vs 30,838), with major mix shifts in FR (-30.4%) and NL (-40.8%) potentially inflating the rate improvement
+- The improvement is consistent across the entire payment funnel, with 1_FirstRunAR also up +2.63%
 
-**Action:** **Monitor** - The improvement appears driven by genuine reduction in Insufficient Funds declines across multiple payment methods and providers. However, the concurrent 10.8% volume drop and significant mix shifts in high-performing markets (FR, NL) warrant continued monitoring to confirm the trend sustains as volumes normalize.
+**Action:** Monitor - The improvement appears genuine and driven by reduced Insufficient Funds declines, but the significant volume decrease and mix shifts warrant continued observation to confirm sustainability. Track whether volume stabilizes in W16 while maintaining improved AR.
 
 ---
 

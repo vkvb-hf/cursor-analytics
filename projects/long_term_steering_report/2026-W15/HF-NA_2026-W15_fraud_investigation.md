@@ -10,28 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined significantly from 90.97% to 89.66% (-1.31pp) in 2026-W15, driven primarily by a sharp drop in US performance, particularly within the Referral channel.
+**Overall:** The Fraud Approval Rate (FAR) for HF-NA declined from 90.97% to 89.66% (-1.31 pp) in 2026-W15, a significant change affecting 27,572 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: HF-NA Overall | FAR 90.97% → 89.66% | -1.31pp | ⚠️ |
-| L1: Country - US | FAR 91.59% → 89.20% | -2.61pp | ⚠️ |
-| L1: Country - CA | FAR 89.46% → 90.87% | +1.41pp | ✅ |
-| L1: Channel - Paid | FAR 96.24% → 95.63% | -0.61pp | ✅ |
-| L1: Channel - Referral | FAR 67.80% → 63.00% | -4.80pp | ⚠️ |
-| L2: US Referral | FAR 70.00% → 61.50% | -8.50pp | ⚠️ |
-| L2: US Referral PF Block | PF Block 2.48% → 12.62% | +409.56% | ⚠️ |
+| L0: Regional Trend | FAR within 8-week range (89.11%-91.57%) | -1.31 pp | ✅ |
+| L1: Country Scan | US exceeds ±2.5% threshold | -2.61% | ⚠️ |
+| L1: Channel Scan | Referral exceeds threshold | -7.08% | ⚠️ |
+| L2: US Referral | PF Block spike identified | +409.56% | ⚠️ |
+| L2: CA Referral | FAR improved despite flag | +6.05% | ✅ |
 
 **Key Findings:**
-- US Referral channel experienced a severe FAR decline of -12.15% (70.00% → 61.50%), accounting for the majority of the overall drop
-- PF Block rate in US Referral surged by +409.56% (2.48% → 12.62%), indicating a significant increase in policy/fraud blocking activity
-- Overall volume increased 16.8% (23,607 → 27,572), with US volume up 19.9%, suggesting the decline is not due to sample size reduction
-- Duplicate Rate increased across both countries (US +3.60%, CA +3.30%), with Dup Block in US Paid rising +36.86%
-- CA showed improvement (+1.57pp FAR) partially offsetting US decline, driven by Referral channel recovery (+6.05%)
+- US drove the regional decline with FAR dropping -2.61% (from 91.59% to 89.20%), while CA improved +1.57%
+- US Referral channel experienced a severe FAR drop of -12.15% (from 70.00% to 61.50%) with volume increasing from 2,987 to 3,636 customers
+- PF Block rate in US Referral spiked +409.56% (from 2.48% to 12.62%), indicating a significant change in fraud prevention rules or model behavior
+- Dup Rate increased across the region (+0.88 pp) and Dup Block % rose from 6.49% to 6.71%, contributing to lower approvals
+- Paid channels remained relatively stable with only -0.64% FAR change despite +6.29% increase in Dup Rate
 
-**Action:** **Escalate** – Investigate the root cause of the dramatic PF Block rate increase (+409.56%) in US Referral channel, which is the primary driver of the FAR decline. Review any recent policy changes, fraud rule updates, or model threshold adjustments implemented around W15.
+**Action:** **Investigate** – The +409.56% spike in PF Block rate for US Referral requires immediate review of fraud prevention model changes or rule deployments that may have occurred between W14 and W15.
 
 ---
 
@@ -87,7 +85,7 @@
 | Referral | 2026-W14 | 63.07% | - | 38.44% | - | 30.02% | - | 4.90% | - | 1,389 |  |
 | Referral | 2026-W15 | 66.88% | +6.05% | 37.87% | -1.49% | 28.37% | -5.51% | 3.48% | -29.01% | 1,410 | ⚠️ |
 
-**Analysis:** The 2026-W15 FAR decline of -1.31pp is primarily attributed to US Referral channel deterioration, where PF Block rates increased by over 400%, suggesting a potential policy or fraud model change disproportionately impacting this segment. Immediate investigation into recent fraud rule modifications and US Referral traffic quality is recommended, as the 3,636 affected customers represent meaningful volume. While CA performance improved, the US degradation requires urgent attention to prevent sustained negative impact on overall approval rates.
+**Analysis:** The 1.31 pp decline in HF-NA Fraud Approval Rate is primarily driven by US performance, specifically within the Referral channel where a dramatic +409.56% increase in PF Block rate caused FAR to drop 12.15%. This suggests a potential fraud prevention model or rule change impacting US Referral traffic that warrants immediate investigation. The Paid channel and CA region remained stable, confirming the issue is isolated to US Referral fraud prevention blocking behavior.
 
 ---
 

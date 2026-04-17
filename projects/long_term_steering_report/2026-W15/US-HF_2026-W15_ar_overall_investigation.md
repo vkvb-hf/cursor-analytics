@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in W15, a non-significant change within normal operating range.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
@@ -18,17 +18,17 @@
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +0.44 pp | ✅ |
 | 2_PreDunningAR | Reported Metric | +0.32 pp | ✅ |
-| 3_PostDunningAR | Post-Recovery | +0.02 pp | ✅ |
+| 3_PostDunningAR | Post-Dunning | +0.02 pp | ✅ |
 | 6_PaymentApprovalRate | Final Approval | +0.14 pp | ✅ |
 
 **Key Findings:**
-- All funnel metrics showed slight positive movement, with FirstRunAR leading the improvement at +0.44 pp
-- No countries exceeded the ±2.5% investigation threshold; US showed stable performance at 93.09% (+0.34 pp)
-- Payment Provider "Unknown" flagged with +4.73 pp change, but volume is minimal (353 orders, <0.1% of total)
-- Volume continues gradual decline trend: 408,629 orders in W15 vs 453,781 in W08 (-9.9% over 8 weeks)
-- 8-week trend shows stable acceptance rate oscillating between 91.48% and 92.22%, indicating consistent system performance
+- All funnel stages showed slight improvements week-over-week, with 1_FirstRunAR leading at +0.44 pp
+- No countries or payment methods exceeded the ±2.5% threshold for concern
+- PaymentProvider "Unknown" showed a +4.73 pp increase (87.10% → 91.22%), but volume is minimal at 353 orders
+- Volume continues a declining trend from W08 (453,781) to W15 (408,629), representing a ~10% reduction over 8 weeks
+- Apple Pay maintains the lowest acceptance rate at 85.13% but improved by +0.67 pp
 
-**Action:** Monitor — No investigation required. The change is not statistically significant, all dimensions are within thresholds, and the metric remains stable within historical range.
+**Action:** Monitor - No significant changes detected. Continue standard monitoring cadence. Track volume decline trend for potential business impact assessment.
 
 ---
 

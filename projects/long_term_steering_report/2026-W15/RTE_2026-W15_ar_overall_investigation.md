@@ -8,28 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.46% to 92.83% (+0.40%), a statistically non-significant change across 421,406 orders in 2026-W15.
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.46% to 92.83% (+0.40%), a statistically non-significant change on 421,406 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.37pp | ✅ |
-| L1: Country Breakdown | 1 country exceeds ±2.5% threshold (TK) | TK +7.54% | ⚠️ |
-| L1: PaymentMethod | All methods within threshold | Max +0.48% | ✅ |
-| L1: PaymentProvider | 1 provider flagged (Unknown) | Unknown +34.35% | ⚠️ |
-| L2: TK Deep-Dive | Multiple payment dimensions improved | +6.49% to +12.10% | ⚠️ |
+| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.40% | ✅ |
+| L1: Country Breakdown | 1 country (TK) exceeded ±2.5% threshold | +7.54% | ⚠️ |
+| L1: PaymentMethod | All methods within normal variance | -0.79% to +0.48% | ✅ |
+| L1: PaymentProvider | Unknown flagged but minimal volume (131) | +34.35% | ✅ |
+| L2: TK Deep-Dive | Significant improvements across all payment methods | +5.41% to +12.10% | ⚠️ |
 | L3: Related Metrics | All funnel metrics stable | -0.01% to +0.47% | ✅ |
-| Mix Shift | No significant volume shifts impacting AR | TK +9.6% vol | ✅ |
+| Mix Shift | No significant volume shifts impacting overall rate | - | ✅ |
 
 **Key Findings:**
-- TK showed exceptional improvement (+7.54pp), driven by reduced "Insufficient Funds" declines (-5.81pp), with improvements across all payment methods (applepay +12.10%, credit_card +6.49%, paypal +5.41%)
-- The "Unknown" PaymentProvider showed a +34.35% change but represents negligible volume (131 orders), making it statistically irrelevant
-- Overall volume declined 2.4% week-over-week (431,853 → 421,406), continuing a downward trend from W11 peak of 458,408
-- FJ remains the dominant market (92.4% of volume) with stable performance (+0.38%), anchoring overall metric stability
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) show consistent stable-to-positive movement
+- TK showed a significant +7.54pp improvement (88.65% → 95.33%) driven by a substantial reduction in "Insufficient Funds" declines (-5.81pp)
+- In TK, Apple Pay improved most dramatically (+12.10pp), followed by Credit Card (+6.49pp) and PayPal (+5.41pp)
+- TK's Braintree provider improved +10.60pp and Adyen improved +6.49pp, suggesting a systemic improvement rather than isolated to one processor
+- Overall volume declined 2.4% WoW (431,853 → 421,406), continuing a 6-week downward trend from peak of 467,998 in W10
+- FJ remains the dominant market (92.4% of volume) with stable performance (+0.38%)
 
-**Action:** Monitor – The overall change is not statistically significant and reflects normal weekly variation. TK's improvement is positive but low-volume (1,950 orders). Continue standard monitoring; no escalation required.
+**Action:** Monitor – The overall change is not statistically significant and represents normal fluctuation. The TK improvement is positive but low-volume (1,950 orders); continue monitoring to confirm if the reduction in Insufficient Funds declines is sustained.
 
 ---
 

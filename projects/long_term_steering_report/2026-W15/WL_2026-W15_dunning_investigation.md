@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved by +2.73pp (28.34% → 31.07%) at the cluster level in W15, despite all three top contributing countries showing individual declines—indicating a classic Simpson's Paradox driven by mix shift.
+**Overall:** Dunning Ship Rate improved from 28.34% to 31.07% (+2.73pp) in W15, despite all three major contributing countries (AO, ER, GN) experiencing individual Ship Rate declines—indicating a Simpson's Paradox driven by mix shift toward higher-performing segments.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | Ship Rate | 28.34% → 31.07% | +2.73pp | ✅ |
 
 **Key Findings:**
-- **Simpson's Paradox confirmed:** AO volume increased +123.6% (496 → 1,109 orders) with the highest SR tier (66.37%), shifting mix toward high-performing segment despite AO's own SR declining -8.6%
-- **GN showed largest individual decline:** Ship Rate dropped -22.0% (37.03% → 28.89%) with volume contracting -21.7%, likely driven by increased Discount % (+4.3%) while PC2 remained flat
-- **AO root cause:** Sharp Discount % increase (+26.2%) and PC2 surge (+21.2%) suggest aggressive discounting attracted price-sensitive customers who converted at payment but churned before shipping
-- **ER decline:** Despite improved Pre-Dunning AR (+1.2%) and lower discounts (-4.4%), Ship Rate fell -9.1%—PC2 increase (+6.6%) not translating to shipments suggests fulfillment or inventory constraints
-- **Payday phase transition (Mid-Cycle → Pre-Payday):** Cluster-wide improvements in AR and PC2 align with typical pre-payday liquidity patterns
+- **Simpson's Paradox confirmed:** Cluster-level Ship Rate increased +2.73pp while AO (-8.6%), ER (-9.1%), and GN (-22.0%) all declined individually
+- **AO volume surge (+123.6%)** from 496 to 1,109 orders shifted mix toward this high-SR tier country (66.37% SR), masking country-level declines
+- **GN experienced the steepest SR decline (-22.0%)** with a +4.3% increase in Discount % suggesting aggressive discounting failed to convert
+- **AO Discount % spiked +26.2%** (13.65% → 17.22%) correlating with its SR decline despite strong PC2 improvement (+21.2%)
+- **Payday phase transition** (Mid-Cycle → Pre-Payday) coincided with improved Pre-Dunning AR across all countries (+1.0% to +2.2%)
 
-**Action:** Monitor — Cluster-level improvement is positive but driven entirely by mix shift toward AO. Investigate AO's discount strategy sustainability and ER's conversion-to-ship gap if trends persist in W16.
+**Action:** **Monitor** — The cluster improvement is mechanically driven by favorable mix shift rather than operational gains. Track whether AO's elevated volume and discount levels are sustainable, and investigate GN's -22.0% SR drop if it persists into W16.
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W14 | Mid-Cycle | 496 | 72.58% | - | 85.21% | - | 13.65% | - | 36.81% | - |
 | 2026-W15 | Pre-Payday | 1,109 | 66.37% | ↓-8.6% | 87.06% | →+2.2% | 17.22% | ↑+26.2% | 44.6% | ↑+21.2% |
 
-**Analysis:** The +2.73pp cluster-level Ship Rate improvement in W15 is attributable to favorable mix shift rather than genuine performance gains, as AO's 123.6% volume surge (despite its own -8.6% SR decline) mathematically lifted the aggregate rate. All three top countries experienced individual Ship Rate declines, with GN's -22.0% drop being most concerning. Continued monitoring is warranted to assess whether AO's volume growth is sustainable and to identify root causes for ER and GN underperformance.
+**Analysis:** The +2.73pp improvement in Dunning Ship Rate is primarily attributable to a significant volume shift toward AO (+123.6% volume increase), a high-performing country that elevated the weighted average despite declining at the individual level. Underlying country performance deteriorated across all top contributors, with aggressive discounting (particularly AO's +26.2% increase) failing to prevent SR erosion. Continued monitoring is warranted to determine if this mix-driven improvement is sustainable or if the country-level declines signal emerging collection challenges.
 
 ### ER (Rank #2 by Contribution)
 

@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined from 44.24% to 42.60% (-1.64pp) week-over-week, coinciding with a payday phase transition from Mid-Cycle to Pre-Payday.
+**Overall:** Dunning Ship Rate declined from 44.24% to 42.60% (-1.64pp) in W15, driven primarily by FJ's -5.5% relative decline and severe drops in smaller markets TV (-59.4%) and TO (-24.6%), amid a Pre-Payday phase transition.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | Ship Rate | 44.24% → 42.60% | -1.64pp | ⚠️ |
 
 **Key Findings:**
-- **FJ drove the majority of decline:** As the largest volume country (70% of orders), FJ's ship rate dropped -5.5% (43.54% → 41.16%) despite improving Pre-Dunning AR (+0.4%) and lower discounts (-3.2%)
-- **TV experienced severe collapse:** Ship rate plummeted -59.4% (30.77% → 12.50%) on small volume (96 orders), representing the largest relative decline across all countries
-- **TO showed significant deterioration:** Ship rate fell -24.6% (31.67% → 23.88%) with a concerning +9.4% increase in Discount % suggesting affordability pressure
-- **PC2 increased universally:** All countries showed PC2 increases (+13.3% to +20.5%), yet ship rates declined, indicating payment capacity did not translate to conversions
-- **Volume contracted -9.7%:** Total eligible orders dropped from 21,660 to 19,565, with high-SR country YE maintaining relative stability (→-1.4%)
+- **FJ dominates the decline:** As the largest market (70% of volume), FJ's ship rate dropped -5.5% (43.54% → 41.16%) despite improved Pre-Dunning AR (+0.4%) and lower Discount % (-3.2%), suggesting customer payment behavior issues during Pre-Payday phase
+- **TV experienced catastrophic decline:** Ship rate plummeted -59.4% (30.77% → 12.50%) on small volume (96 orders), with PC2 rising +15.2% indicating customers are deferring payments to second payment cycle
+- **TO shows concerning trajectory:** -24.6% ship rate decline paired with significant Discount % increase (+9.4%) suggests deeper customer financial stress
+- **PC2 spike across all markets:** Every country showed PC2 increases (+13.3% to +20.5%), indicating systematic payment deferral behavior consistent with Pre-Payday cash constraints
+- **Volume contraction observed:** Total eligible orders dropped -9.7% (21,660 → 19,565), with TK (-65.8%) and TZ (-33.0%) showing largest volume declines
 
-**Action:** **Investigate** - The disconnect between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate, particularly in FJ and TV, suggests potential issues with dunning messaging effectiveness or timing during the Pre-Payday phase transition.
+**Action:** **Investigate** — The disconnect between improving upstream metrics (Pre-Dunning AR, Discount %) and declining Ship Rate, combined with universal PC2 spikes, suggests Pre-Payday timing is causing systematic payment deferrals. Prioritize FJ deep-dive given volume contribution.
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W14 | Mid-Cycle | 15,137 | 43.54% | - | 93.62% | - | 17.72% | - | 43.98% | - |
 | 2026-W15 | Pre-Payday | 13,715 | 41.16% | ↓-5.5% | 93.97% | →+0.4% | 17.15% | ↓-3.2% | 50.36% | ↑+14.5% |
 
-**Analysis:** The -1.64pp decline in Dunning Ship Rate appears driven primarily by FJ's underperformance and severe drops in smaller markets TV and TO, despite stable or improving Pre-Dunning AR and PC2 metrics across all countries. The payday phase transition to Pre-Payday typically correlates with customer liquidity constraints, which may explain the universal pattern of increased PC2 not converting to actual shipments. Recommend investigating dunning touchpoint effectiveness and timing optimization for Pre-Payday periods, with particular focus on FJ given its dominant volume contribution.
+**Analysis:** The W15 Dunning Ship Rate decline is primarily attributable to Pre-Payday phase timing effects, evidenced by the cluster-wide PC2 surge (+13.4%) as customers defer payments until payday. FJ requires immediate attention given its volume dominance and -5.5% relative decline, while TV and TO warrant monitoring despite lower volumes due to severe rate deterioration. Recommend tracking W16 performance post-payday to confirm cyclical pattern versus structural degradation.
 
 ### YE (Rank #2 by Contribution)
 

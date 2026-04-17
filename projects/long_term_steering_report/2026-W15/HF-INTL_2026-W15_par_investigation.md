@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.24pp) in W15, a change that is not statistically significant, with volume declining from 784,406 to 744,637 orders (-5.1%).
+**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.24pp) in 2026-W15, a change that is not statistically significant, with volume decreasing from 784,406 to 744,637 orders (-5.1%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +1.76% | ✅ |
-| 2_PreDunningAR | vs Prior | +1.18% | ✅ |
-| 3_PostDunningAR | vs Prior | +0.01% | ✅ |
-| 6_PaymentApprovalRate | vs Prior | +0.24% | ✅ |
+| 2_PreDunningAR | Recovery | +1.18% | ✅ |
+| 3_PostDunningAR | Dunning | +0.01% | ✅ |
+| 6_PaymentApprovalRate | Final | +0.24% | ✅ |
 
 **Key Findings:**
-- Two countries exceeded the ±2.5% threshold: AT (+2.95pp) and DK (+3.94pp), both showing improvement driven by reduced "Insufficient Funds" declines
-- In AT, Apple Pay approval rate improved significantly (+5.78pp), with Insufficient Funds declines dropping from 4.63% to 2.58% (-2.05pp)
-- In DK, Braintree provider showed notable improvement (+5.84pp), with Insufficient Funds declines dropping from 4.28% to 1.16% (-3.13pp)
-- All payment methods and providers at the aggregate level remained stable with no concerning movements
-- First Run AR showed the strongest funnel improvement at +1.76%, indicating better initial payment success
+- AT and DK exceeded the ±2.5% threshold with improvements of +2.95% and +3.94% respectively, driven primarily by reduced "Insufficient Funds" declines (-2.05pp in AT, -3.13pp in DK)
+- Apple Pay showed significant improvement in flagged countries: +5.78% in AT and +6.47% in DK
+- In DK, Braintree provider improved substantially (+5.84%) contributing to the country-level gain
+- All payment methods showed positive or neutral trends globally, with Apple Pay improving the most (+0.84%)
+- The 8-week trend shows recovery from a low of 96.22% in W09 to current 97.27%, indicating sustained improvement
 
-**Action:** Monitor - The overall change is not significant and represents positive movement. Continue tracking AT and DK to confirm the "Insufficient Funds" decline reduction is sustained.
+**Action:** Monitor - The overall change is positive but not significant. Continue tracking AT and DK performance to confirm the "Insufficient Funds" decline reduction is sustained and not a temporary fluctuation.
 
 ---
 

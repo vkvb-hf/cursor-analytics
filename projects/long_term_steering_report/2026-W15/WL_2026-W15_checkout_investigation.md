@@ -8,30 +8,28 @@
 
 ## Executive Summary
 
-## Executive Summary
-
 **Overall:** Payment Conversion Rate improved significantly from 29.88% to 34.86% (+4.99pp), exceeding the threshold of +2.49pp, driven primarily by substantial gains in the early funnel stages.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | >2.49pp | +4.94pp | ⚠️ |
-| Click Submit Form | >2.49pp | +3.05pp | ⚠️ |
-| FE Validation Passed | <2.49pp | +0.12pp | ✅ |
-| Enter Fraud Service | <2.49pp | +0.16pp | ✅ |
-| Approved by Fraud Service | <2.49pp | +0.04pp | ✅ |
-| Call to PVS | <2.49pp | -0.45pp | ✅ |
-| Successful Checkout | <2.49pp | +0.68pp | ✅ |
+| Select Payment Method | >+2.49pp | +4.94pp | ⚠️ |
+| Click Submit Form | >+2.49pp | +3.05pp | ⚠️ |
+| FE Validation Passed | Within threshold | +0.12pp | ✅ |
+| Enter Fraud Service | Within threshold | +0.16pp | ✅ |
+| Approved by Fraud Service | Within threshold | +0.04pp | ✅ |
+| Call to PVS | Within threshold | -0.45pp | ✅ |
+| Successful Checkout | Within threshold | +0.68pp | ✅ |
 
 **Key Findings:**
-- Select Payment Method conversion surged +4.94pp (40.67% → 45.61%), representing the largest funnel improvement and primary driver of PCR gains
-- CG showed the most dramatic improvement with +12.84pp PCR increase, driven by a +14.41pp gain in Select Payment Method conversion
-- Backend data reveals a concerning -8.42pp drop in PVS Attempt rate (89.07% → 80.66%), though this did not impact overall success rates
-- All three analyzed countries (CG, ER, AO) showed consistent patterns with Select Payment Method as the key driver (+14.41pp, +9.89pp, +10.05pp respectively)
-- Payment visit volume decreased slightly (-471, -1.3%) while successful checkouts increased significantly (+1,602, +15.1%)
+- Select Payment Method conversion improved significantly (+4.94pp), with CG showing the largest gain (+14.41pp), followed by AO (+10.05pp) and ER (+9.89pp)
+- Click Submit Form conversion increased +3.05pp overall, indicating improved form completion behavior across markets
+- Backend data shows a notable discrepancy at PVS Attempt step (-8.42pp), suggesting potential data logging differences between GA and Backend tracking
+- Payment volume decreased slightly (-471 visits, -1.3%) while successful checkouts increased (+1,602, +15.1%), indicating higher quality traffic
+- ProcessOut_ApplePay showed a significant rate decline (-6.03pp) but with low volume (339 attempts), limiting overall impact
 
-**Action:** Investigate — Identify the root cause of the Select Payment Method improvement (potential UX change, A/B test, or external factor) and investigate the backend PVS Attempt rate decline to ensure no latent issues.
+**Action:** Monitor - The significant improvement appears driven by genuine user experience gains at early funnel stages. Investigate the Backend PVS Attempt discrepancy (-8.42pp) to understand the GA/Backend tracking divergence. Continue monitoring CG, ER, and AO markets to validate sustained performance.
 
 ---
 
