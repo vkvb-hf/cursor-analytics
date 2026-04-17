@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Conversion Rate showed a marginal improvement from 27.96% to 27.99% (+0.03pp) in HF-NA during 2026-W15, with payment visits increasing 16.2% (59,454 → 69,100).
+**Overall:** Payment Conversion Rate showed minimal improvement from 27.96% to 27.99% (+0.03pp) with volume increasing 16.2% to 69,100 payment visits.
 
 **Funnel Analysis:**
 
@@ -25,13 +23,13 @@
 | Successful Checkout | ≥ threshold | +0.09pp | ✅ |
 
 **Key Findings:**
-- **FE Validation decline:** FE Validation Passed dropped -0.38pp with recovery rate declining from 70.06% to 68.93% (-1.13pp); `terms_not_accepted` errors increased +1.28pp in share
-- **Fraud Service divergence by country:** US saw -2.40pp decline in Fraud Approval (Backend) while CA improved +1.63pp, creating offsetting effects
-- **Braintree_ApplePay underperformance:** Success rate declined -2.14pp (79.64% → 77.50%), representing the second largest payment method by volume
-- **Braintree_CreditCard significant drop:** Despite low volume, success rate fell -13.31pp (88.76% → 75.45%)
-- **CA driving positive momentum:** CA showed +1.29pp PCR improvement driven by Select Payment Method (+1.29pp GA) and Fraud Approval (+1.63pp Backend)
+- CA drove positive performance with PCR improving +1.29pp (32.39% → 33.68%), primarily from Select Payment Method gains (+1.29pp) and Fraud Service approval improvements (+1.63pp in backend)
+- US showed PCR decline of -0.17pp, with Fraud Service approval being the key driver (-0.71pp GA, -2.40pp backend)
+- FE Validation recovery rate declined from 70.06% to 68.93% (-1.13pp), with "terms_not_accepted" errors increasing share (+1.28pp)
+- Braintree_ApplePay conversion rate dropped -2.14pp (79.64% → 77.50%) and Braintree_CreditCard experienced significant decline of -13.31pp (88.76% → 75.45%)
+- PVS failures increased by 186 cases (+19%), with "Insufficient Funds" errors growing in share (+2.26pp)
 
-**Action:** Monitor - The overall PCR change is minimal (+0.03pp) and within normal variance. Recommend monitoring FE Validation errors (particularly `terms_not_accepted`) and Fraud Service approval rates in US for potential emerging issues.
+**Action:** Monitor - The overall PCR change is marginal (+0.03pp), but investigate the Fraud Service approval decline in US (-2.40pp backend) and monitor the Braintree_CreditCard conversion drop given its severity despite low volume.
 
 ---
 

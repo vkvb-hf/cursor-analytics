@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 29.88% to 34.86% (+4.99pp), exceeding the monitoring threshold of +2.49pp, driven primarily by substantial gains in the Select Payment Method step.
+**Overall:** Payment Conversion Rate improved significantly from 29.88% to 34.86% (+4.99pp), exceeding the threshold of +2.49pp, driven primarily by substantial gains in the early funnel stages.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Above threshold | +4.94pp | ⚠️ |
-| Click Submit Form | Above threshold | +3.05pp | ⚠️ |
-| FE Validation Passed | Within normal | +0.12pp | ✅ |
-| Enter Fraud Service | Within normal | +0.16pp | ✅ |
-| Approved by Fraud Service | Within normal | +0.04pp | ✅ |
-| Call to PVS | Minor decline | -0.45pp | ✅ |
-| Successful Checkout | Within normal | +0.68pp | ✅ |
+| Select Payment Method | >2.49pp | +4.94pp | ⚠️ |
+| Click Submit Form | >2.49pp | +3.05pp | ⚠️ |
+| FE Validation Passed | <2.49pp | +0.12pp | ✅ |
+| Enter Fraud Service | <2.49pp | +0.16pp | ✅ |
+| Approved by Fraud Service | <2.49pp | +0.04pp | ✅ |
+| Call to PVS | <2.49pp | -0.45pp | ✅ |
+| Successful Checkout | <2.49pp | +0.68pp | ✅ |
 
 **Key Findings:**
-- Select Payment Method conversion improved dramatically across all analyzed countries: CG (+14.41pp), AO (+10.05pp), and ER (+9.89pp), indicating a likely UX improvement or reduced friction at payment selection
-- Click Submit Form conversion increased by +3.05pp globally, suggesting improved form completion rates following payment method selection
-- Backend data shows a significant decline in PVS Attempt rate (-8.42pp), which warrants monitoring despite overall positive results
-- CG showed the largest absolute PCR improvement (+12.84pp) while also experiencing a 27.42% reduction in payment visits
-- ProcessOut_ApplePay experienced a notable decline (-6.03pp) but represents low volume (339 attempts)
+- Select Payment Method conversion surged +4.94pp (40.67% → 45.61%), representing the largest funnel improvement and primary driver of PCR gains
+- CG showed the most dramatic improvement with +12.84pp PCR increase, driven by a +14.41pp gain in Select Payment Method conversion
+- Backend data reveals a concerning -8.42pp drop in PVS Attempt rate (89.07% → 80.66%), though this did not impact overall success rates
+- All three analyzed countries (CG, ER, AO) showed consistent patterns with Select Payment Method as the key driver (+14.41pp, +9.89pp, +10.05pp respectively)
+- Payment visit volume decreased slightly (-471, -1.3%) while successful checkouts increased significantly (+1,602, +15.1%)
 
-**Action:** Monitor - The improvement appears to be driven by positive changes in early-funnel conversion (Select Payment Method and Click Submit Form). Recommend validating if any A/B tests, UI changes, or payment method availability modifications were deployed in W15. Continue monitoring the PVS Attempt decline in backend data.
+**Action:** Investigate — Identify the root cause of the Select Payment Method improvement (potential UX change, A/B test, or external factor) and investigate the backend PVS Attempt rate decline to ensure no latent issues.
 
 ---
 

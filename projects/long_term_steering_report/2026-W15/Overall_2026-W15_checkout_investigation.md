@@ -1,22 +1,22 @@
 # Payment Conversion Rate (Checkout) - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-17 14:33  
+**Generated:** 2026-04-17 16:01  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Conversion Rate (Checkout) showed mixed performance globally in 2026-W15, with significant improvements in WL (+4.99pp to 34.86%), RTE (+6.23pp to 45.59%), and HF-INTL (+1.71pp to 37.75%), while US-HF declined (-0.17pp to 26.24%) and HF-NA remained stable (+0.03pp). The most critical concern is the -2.40pp decline in Fraud Service approval rate in US-HF, which requires immediate investigation alongside increased APPLEPAY_DISMISSED errors driving frontend validation failures.
+Payment Conversion Rate (Checkout) improved globally this week, with most clusters showing positive momentum—RTE (+6.23pp), WL (+4.99pp), and HF-INTL (+1.71pp) all recorded significant gains, while HF-NA remained stable (+0.03pp) and US-HF declined modestly (-0.17pp). The most significant finding is the consistent improvement at the Select Payment Method step across RTE, WL, and HF-INTL clusters, suggesting a potential product or UX change driving top-of-funnel engagement, while US-HF requires attention due to a -2.40pp backend fraud approval rate decline.
 
 ### Cluster Highlights
 
-- **US-HF:** PCR declined -0.17pp to 26.24%, primarily driven by a -2.40pp drop in Fraud Service approval rate and ProcessOut_CreditCard underperformance (-2.10pp on 11,650 attempts).
-- **HF-INTL:** PCR improved +1.71pp to 37.75%, driven by a +2.05pp gain in Select Payment Method conversion with GB contributing the strongest improvement (+2.46pp).
-- **WL:** PCR improved +4.99pp to 34.86%, driven by substantial gains in Select Payment Method (+4.94pp) and Click Submit Form (+3.05pp) across CG, AO, and ER.
-- **HF-NA:** PCR remained stable at 27.99% (+0.03pp), with CA showing +1.29pp improvement offset by US Fraud Service approval decline (-2.40pp in backend).
-- **RTE:** PCR improved +6.23pp to 45.59%, driven by a +6.32pp gain in Select Payment Method conversion across TV, CF, YE, and FJ, warranting investigation to identify and replicate the root cause.
+- **US-HF:** PCR declined by -0.17pp (26.41% → 26.24%), driven primarily by a -2.40pp drop in backend Fraud Service approval rate that warrants immediate investigation.
+- **HF-INTL:** PCR improved by +1.71pp (36.04% → 37.75%), driven by a +2.05pp gain at Select Payment Method with GB (+2.46pp) and DE (+1.21pp) as top contributors.
+- **WL:** PCR improved significantly by +4.99pp (29.88% → 34.86%), driven by a +4.94pp surge in Select Payment Method conversion with CG showing the strongest gain (+12.84pp).
+- **HF-NA:** PCR remained stable at +0.03pp (27.96% → 27.99%), with CA improving +1.29pp offsetting US decline of -0.17pp caused by Fraud Service approval degradation.
+- **RTE:** PCR improved substantially by +6.23pp (39.36% → 45.59%), driven by a +6.32pp increase at Select Payment Method across all analyzed countries including FJ, CF, and YE.
 
 ---
 

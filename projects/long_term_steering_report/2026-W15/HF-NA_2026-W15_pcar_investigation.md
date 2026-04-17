@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04pp) in W15, a statistically non-significant change within normal operating variance.
+**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04 pp) in W15, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (94.0%-95.23%) | -0.04pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34pp, CA +0.02pp | ✅ |
-| L1: PaymentMethod | "Others" declined -2.49pp but volume only 91 orders | -2.49pp (low vol) | ✅ |
-| L1: PaymentProvider | No data flagged | N/A | ✅ |
-| Mix Shift | Both US and CA remain in High AR tier | Stable | ✅ |
+| L0: 8-Week Trend | Rate within historical range (93.92%-95.23%) | -0.04 pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34 pp, CA +0.02 pp | ✅ |
+| L1: Payment Method | "Others" dropped -2.49% but minimal volume (91 orders) | -2.49 pp | ✅ |
+| L1: Payment Provider | No data available for analysis | N/A | ✅ |
+| Mix Shift | Both US and CA remain in High AR tier (>92%) | Stable | ✅ |
 
 **Key Findings:**
-- The -0.04pp decline is not statistically significant and falls well within the 8-week range of 94.0%-95.23%
-- Both US (+0.34pp to 93.09%) and CA (+0.02pp to 93.51%) showed slight improvements week-over-week
-- "Others" payment method showed a -2.49pp decline, but with only 91 orders this is not material to overall performance
-- Apple Pay declined -1.08pp (from 94.48% to 93.46%) across 7,678 orders, the largest movement among significant-volume payment methods
-- Volume increased 16.3% week-over-week (20,221 → 23,512 orders) with no corresponding rate degradation
+- The -0.04 pp decline is not statistically significant and falls within the 8-week range of 93.92% to 95.23%
+- Both US (+0.34 pp) and CA (+0.02 pp) showed slight improvements at the country level, indicating no geographic concerns
+- "Others" payment method declined -2.49 pp but represents only 91 orders (0.4% of volume), making it immaterial to overall performance
+- Volume increased 16.3% week-over-week (20,221 → 23,512 orders) with no adverse impact on approval rates
+- Apple Pay showed a -1.08 pp decline (7,678 orders) but remains below the ±2.5% action threshold
 
-**Action:** Monitor – No investigation required. All checks passed and the change is not statistically significant. Continue standard weekly monitoring.
+**Action:** Monitor — No investigation required. The change is within normal variance, not statistically significant, and no dimensions exceeded alert thresholds.
 
 ---
 

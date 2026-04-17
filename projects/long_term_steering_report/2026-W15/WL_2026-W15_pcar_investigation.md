@@ -8,27 +8,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in W15, though this change is not statistically significant given the volume of 11,721 orders.
+**Overall:** Payment Checkout Approval Rate improved by +0.35 pp (97.03% → 97.37%) in W15, though the change is not statistically significant and volume declined to 11,721 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric within normal range (96.86%-97.37%) | +0.35pp | ✅ |
-| L1: Country Breakdown | No countries exceeded ±2.5% threshold | All <2.5pp | ✅ |
-| L1: Payment Method | All methods stable, Apple Pay highest gain | +0.71pp max | ✅ |
-| Mix Shift Analysis | Volume shifts stable across tiers | No impact | ✅ |
+| L0: WL 8-Week Trend | Rate within normal range (96.86%-97.37%) | +0.35 pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | Max +2.17 pp (AO) | ✅ |
+| L1: Payment Method | All methods stable | Max +0.71 pp (Apple Pay) | ✅ |
+| L1: Payment Provider | No data flagged | N/A | ✅ |
+| Mix Shift Analysis | All impacts marked Stable | No shifts | ✅ |
 
 **Key Findings:**
-- The +0.35pp increase returns the rate to the W10 level (97.37%), suggesting normal fluctuation within the 8-week range
-- AO showed the largest country-level improvement at +2.17pp (87.06%), though still below the 2.5% investigation threshold
-- Apple Pay approval rate improved by +0.71pp (96.65% → 97.34%), the largest gain among payment methods
-- Overall order volume declined by approximately 3% (11,373 → 11,721 orders) week-over-week
-- MR volume decreased by 6.3% and AO volume decreased by 12.0%, but neither shift materially impacted the aggregate rate
+- The +0.35 pp improvement returns the approval rate to W10 levels (97.37%), suggesting normal fluctuation rather than a meaningful trend
+- Volume continues declining trend: W15 (11,721) is down ~29% from W08 (16,585), which warrants separate monitoring
+- AO showed the largest country-level improvement at +2.17 pp (85.21% → 87.06%) but did not breach the ±2.5% threshold
+- Apple Pay showed modest improvement of +0.71 pp (96.65% → 97.34%) while other payment methods remained stable
+- MR experienced notable volume decline (-6.3%) but maintains stable mix shift impact despite having the lowest approval rate (81.41%)
 
-**Action:** Monitor – No significant changes detected; all dimensions remain within normal operating parameters.
+**Action:** Monitor — No significant changes detected and all funnel checks passed. Continue standard weekly monitoring with attention to the ongoing volume decline trend.
 
 ---
 

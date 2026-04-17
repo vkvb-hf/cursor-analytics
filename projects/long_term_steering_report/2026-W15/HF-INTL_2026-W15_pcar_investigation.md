@@ -10,27 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate for HF-INTL improved marginally from 96.0% to 96.12% (+0.13pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate for HF-INTL improved slightly from 96.0% to 96.12% (+0.13pp) in 2026-W15, a statistically non-significant change on 36,514 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal variance | +0.13% | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold | AT +2.95%, DK +3.94% | ⚠️ |
-| L1: Dimension Scan | No payment methods exceed threshold | Stable | ✅ |
-| L2: AT Deep-Dive | Apple Pay improvement drives change | +5.78% | ⚠️ |
-| L2: DK Deep-Dive | Braintree + Apple Pay improvements | +5.84%, +6.47% | ⚠️ |
-| Mix Shift | Volume shifts within stable range | DK +25.6%, NO +39.2% | ✅ |
+| L0: 8-Week Trend | Within normal range | +0.13% | ✅ |
+| L1: Country Breakdown | AT +2.95%, DK +3.94% exceed ±2.5% threshold | 2 flags | ⚠️ |
+| L2: AT Deep-Dive | applepay +5.78%, ProcessOut +4.67% | Insufficient Funds -2.05pp | ⚠️ |
+| L2: DK Deep-Dive | applepay +6.47%, Braintree +5.84% | Insufficient Funds -3.13pp | ⚠️ |
+| Mix Shift | DK +25.6% volume, NO +39.2% volume | All tiers stable | ✅ |
 
 **Key Findings:**
-- AT and DK both showed significant rate improvements (+2.95pp and +3.94pp respectively), driven primarily by reduced "Insufficient Funds" declines (-2.05pp in AT, -3.13pp in DK)
-- Apple Pay approval rates improved substantially in both flagged countries: AT (+5.78pp to 93.57%) and DK (+6.47pp to 96.33%)
-- DK experienced a 25.6% volume increase (30,036 → 37,713 orders) while maintaining improved approval rates
-- Braintree provider in DK showed notable improvement (+5.84pp to 96.35%), contributing to overall gains
-- The 8-week trend shows recovery from W13's dip (95.21%) but remains below the W10-W11 peak (~97.2%)
+- AT and DK both showed approval rate improvements exceeding the ±2.5% threshold (+2.95% and +3.94% respectively), driven primarily by reduced "Insufficient Funds" declines
+- Apple Pay performance improved significantly in both flagged countries: AT (+5.78pp) and DK (+6.47pp)
+- In DK, Braintree provider approval rate increased +5.84pp (from 91.04% to 96.35%), contributing to the overall improvement
+- "Insufficient Funds" declines dropped substantially: AT (-2.05pp) and DK (-3.13pp), suggesting improved customer payment conditions or retry logic
+- DK experienced a +25.6% volume increase week-over-week while maintaining improved approval rates
 
-**Action:** Monitor - The improvements in AT and DK are positive developments requiring no intervention. Continue monitoring to confirm the reduced "Insufficient Funds" decline trend sustains in coming weeks.
+**Action:** Monitor – The overall change is not statistically significant and all flagged movements are positive improvements. Continue monitoring AT and DK to confirm the "Insufficient Funds" reduction trend is sustained.
 
 ---
 

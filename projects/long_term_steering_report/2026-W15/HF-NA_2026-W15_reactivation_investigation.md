@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.78%, or -0.71pp) in W15, though this change is not statistically significant.
+**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.71pp) in W15, representing a non-significant change on a volume of 26,178 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within normal range (86.89%-91.02%) | -0.71pp | ✅ |
-| Country Breakdown | No country exceeded ±2.5% threshold | US: +0.34%, CA: +0.02% | ✅ |
-| Payment Method | "Others" flagged but minimal volume | -52.38% on 7 orders | ⚠️ |
-| Mix Shift | Both US and CA stable in High tier | US: -0.9%, CA: -2.2% vol | ✅ |
+| L0: 8-Week Trend | Rate within normal range (86.89%-91.02%) | -0.71pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.34%, CA +0.02% | ✅ |
+| L1: PaymentMethod | "Others" flagged but minimal volume | -52.38% on 7 orders | ✅ |
+| Mix Shift | Both US and CA stable | US -0.9%, CA -2.2% vol | ✅ |
 
 **Key Findings:**
-- The -0.78% week-over-week decline is within normal weekly fluctuation observed over the 8-week period (range: 86.89% to 91.02%)
+- The -0.71pp decline is within normal weekly fluctuation, as the 8-week trend shows rates ranging from 86.89% (W09) to 91.02% (W12)
+- Both US (93.09%) and CA (93.51%) showed stable or slightly improved reactivation rates week-over-week
+- The "Others" PaymentMethod shows a -52.38% change but is based on only 7 orders, making it statistically irrelevant
 - Volume increased significantly from 20,279 (W14) to 26,178 (W15), a +29% increase, which may contribute to rate normalization
-- Both US (+0.34%) and CA (+0.02%) showed stable or slightly improved reactivation rates at the country level
-- The "Others" payment method showed a -52.38% decline but represents only 7 orders total, making it statistically irrelevant
-- Credit Card (18,327 orders) showed a modest -0.72% decline, representing the largest volume contributor
+- Credit Card (18,327 orders, 70% of volume) showed only a -0.72% change, indicating core payment stability
 
-**Action:** Monitor — The decline is not statistically significant, falls within normal weekly variance, and no dimensions exceeded investigation thresholds. Continue standard monitoring in W16.
+**Action:** Monitor — No significant degradation detected; all countries and major payment methods within acceptable thresholds.
 
 ---
 

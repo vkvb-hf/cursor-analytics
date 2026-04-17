@@ -15,19 +15,19 @@
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Consistent upward trend | +5.70 pp over 8 weeks | ✅ |
-| L1: Country Scan | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
-| L1: Dimension Scan | 1 PaymentMethod exceeds threshold | Others +2.78% | ⚠️ |
+| L1: Country Breakdown | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: PaymentMethod | 1 dimension exceeds threshold | Others +2.78% | ⚠️ |
 | L2: TK Deep-Dive | Multiple payment improvements | applepay +12.10%, credit_card +6.49% | ✅ |
-| Mix Shift | Volume shifts stable | TK +9.6% volume, all others stable | ✅ |
+| L2: Decline Reasons | Insufficient Funds decreased | -5.81 pp | ✅ |
 
 **Key Findings:**
-- TK drove the largest country-level improvement at +7.54 pp, with volume increasing 9.6% (1,779 → 1,950 orders)
-- TK's improvement was primarily driven by reduced "Insufficient Funds" declines, dropping from 8.32% to 2.51% (-5.81 pp)
-- All payment methods in TK showed significant improvement: applepay (+12.10 pp), credit_card (+6.49 pp), paypal (+5.41 pp)
-- Braintree provider in TK showed the strongest recovery at +10.60 pp (85.27% → 94.31%)
-- Minor declines in TV (-1.37 pp) and YE (-0.43 pp) were offset by broad-based improvements elsewhere
+- TK drove the largest country-level improvement at +7.54 pp, with all payment methods showing gains—applepay (+12.10 pp), credit_card (+6.49 pp), and paypal (+5.41 pp)
+- Insufficient Funds declines in TK dropped significantly from 8.32% to 2.51% (-5.81 pp), indicating improved payment success
+- Braintree provider in TK showed the strongest improvement at +10.60 pp, followed by Adyen at +6.49 pp
+- Minor declines in TV (-1.37 pp) and YE (-0.43 pp) were offset by gains in larger volume countries like FJ (+0.38 pp) and CF (+0.72 pp)
+- Volume mix remained stable across all countries with no significant shifts impacting the overall rate
 
-**Action:** Monitor – The improvement is driven by legitimate operational gains (reduced payment declines) rather than mix shift. Continue monitoring TK performance to confirm sustainability.
+**Action:** Monitor - The improvement is driven by genuine performance gains in TK, particularly reduced Insufficient Funds declines across payment providers. Continue monitoring to confirm sustainability.
 
 ---
 

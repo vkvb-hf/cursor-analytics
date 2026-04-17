@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved from 96.9% to 97.22% (+0.33pp) in W15, a change that is not statistically significant, with the metric remaining within normal operating range based on 8-week trend analysis.
+**Overall:** Payment Checkout Approval Rate improved from 96.9% to 97.22% (+0.33pp) in W15, a change that is not statistically significant and reflects normal week-over-week variation within the 8-week historical range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal range (96.88%-97.30%) | +0.33pp | ✅ |
-| L1: Country Scan | 1 country flagged (TK: +7.54pp) | TK outlier | ⚠️ |
-| L1: Dimension Scan | Others payment method -4.35pp | Low volume (950) | ⚠️ |
-| L2: TK Deep-Dive | All payment methods improved | +5.4% to +12.1% | ✅ |
-| Mix Shift | All countries stable | No significant shifts | ✅ |
+| L0: 8-Week Trend | Within historical range (96.88%-97.30%) | +0.33pp | ✅ |
+| L1: Country Scan | 1 country exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
+| L1: Dimension Scan | 1 payment method exceeds threshold | Others -4.35pp | ⚠️ |
+| L2: TK Deep-Dive | Broad improvement across all methods | +5.4% to +12.1% | ✅ |
+| Mix Shift | No significant volume migration | All Stable | ✅ |
 
 **Key Findings:**
-- TK showed significant improvement of +7.54pp (88.65% → 95.33%), driven by reduced "Insufficient Funds" declines dropping from 8.32% to 2.51% (-5.81pp)
-- In TK, all major payment methods improved: applepay (+12.10pp), credit_card (+6.49pp), and paypal (+5.41pp)
-- TK payment providers both improved substantially: Braintree (+10.60pp) and Adyen (+6.49pp)
+- TK showed significant improvement (+7.54pp), driven by reduced "Insufficient Funds" declines (-5.81pp), with applepay improving most dramatically (+12.10pp)
+- Braintree provider in TK improved +10.60pp (85.27% → 94.31%), suggesting possible infrastructure or fraud rule improvements
 - "Others" payment method declined -4.35pp globally but represents minimal volume (950 orders, ~2% of total)
-- Overall volume increased 10.7% WoW (39,914 → 44,168 orders) with no concerning mix shifts
+- Overall metric remains stable within the 8-week band of 96.88%-97.30%, with current rate near the upper bound
+- Volume decreased slightly from 39,914 to 44,168 orders (+10.7%), with TK volume increasing +9.6%
 
-**Action:** Monitor - The overall change is not significant and represents positive movement. The TK improvement appears to be a genuine recovery in payment processing, particularly related to reduced insufficient funds declines. No escalation required.
+**Action:** Monitor — The improvement is not statistically significant and the positive movement in TK appears to be a recovery from elevated decline rates rather than an anomaly requiring investigation.
 
 ---
 

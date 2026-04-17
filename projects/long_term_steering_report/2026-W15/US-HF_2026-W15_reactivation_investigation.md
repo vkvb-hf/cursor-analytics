@@ -8,25 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by 0.52 percentage points (pp) from 90.99% to 90.47% in W15, a statistically non-significant change within normal weekly fluctuation patterns.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined from 90.99% to 90.47% (-0.52 pp) in W15, but this change is not statistically significant given the 43.5% increase in order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within historical range (85.79%-91.26%) | -0.52pp | ✅ |
-| Country Breakdown | US at +0.34%, no country exceeds ±2.5% threshold | +0.34pp | ✅ |
-| Payment Method | "Others" flagged at -50.00pp but minimal volume (4 orders) | -50.00pp | ⚠️ |
-| Mix Shift | High AR tier volume stable (-0.9%) | -0.9% vol | ✅ |
+| L0: 8-Week Trend | Rate within normal range (85.79%-91.26%) | -0.52 pp | ✅ |
+| L1: Country Breakdown | US +0.34 pp, no countries exceed ±2.5% threshold | +0.34 pp | ✅ |
+| L1: PaymentMethod | "Others" flagged at -50.00 pp | -50.00 pp | ⚠️ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
+| Mix Shift | US High AR Tier volume -0.9% | Stable | ✅ |
 
 **Key Findings:**
-- The W15 decline of -0.52pp follows a W14 increase of +0.40pp, representing normal week-over-week volatility
-- US country-level performance actually improved (+0.34pp), suggesting the aggregate decline is driven by mix or segment composition
-- The "Others" payment method shows a dramatic -50.00pp decline but represents only 4 orders (0.02% of volume), making it statistically irrelevant
-- Volume increased significantly from 14,736 to 21,155 orders (+43.6%), which may contribute to rate normalization
-- Current rate of 90.47% remains elevated compared to the 8-week low of 85.79% in W09
+- The -0.52 pp decline is within normal weekly fluctuation; 8-week trend shows consistent improvement from 85.84% (W08) to 90.47% (W15)
+- Volume increased significantly from 14,736 to 21,155 orders (+43.5%), which may explain minor rate variance
+- "Others" payment method shows -50.00 pp drop but represents only 4 orders (negligible impact)
+- PayPal showed the largest meaningful decline at -1.21 pp (3,369 orders)
+- US country-level performance actually improved +0.34 pp despite overall HF decline
 
-**Action:** Monitor — No significant deviations detected; the change is within normal operating variance and no dimensions exceeded investigation thresholds.
+**Action:** Monitor — No investigation required. The change is not statistically significant, no countries exceeded the ±2.5% threshold, and the flagged "Others" payment method has minimal volume (4 orders).
 
 ---
 

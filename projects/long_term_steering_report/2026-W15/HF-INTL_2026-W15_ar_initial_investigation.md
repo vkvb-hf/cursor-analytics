@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL improved significantly from 89.67% to 91.78% (+2.35%) in 2026-W15, representing a positive recovery after two consecutive weeks of decline.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-INTL improved significantly from 89.67% to 91.78% (+2.35%) in 2026-W15, representing a positive trend reversal after two consecutive weeks of decline.
 
 **Funnel Analysis:**
 
@@ -18,19 +18,19 @@
 | ---- | ----- | ------ | ------ |
 | 8-Week Trend Stability | Rate within historical range (88.09%-91.78%) | +2.35% vs prior week | ✅ |
 | Volume Change | 27,516 vs 30,838 prior week | -10.8% volume drop | ⚠️ |
-| Country Concentration | 7 countries exceeding ±2.5% threshold | FR, DE, BE, AT, DK, NZ, LU all positive | ⚠️ |
-| Payment Method Impact | Apple Pay +2.87%, Credit Card +3.38% | Both improving | ✅ |
-| Provider Performance | Braintree +2.62%, ProcessOut +3.37% | Both improving | ✅ |
-| Decline Reason Shift | Insufficient Funds declining across markets | FR -2.39pp, DE -2.25pp, BE -3.23pp, AT -3.89pp | ✅ |
+| Country Concentration | 7 countries exceeded ±2.5% threshold | FR, DE, BE, AT, DK, NZ, LU all improved | ⚠️ |
+| Payment Method Impact | Apple Pay +2.87%, Credit Card +3.38% | Broad improvement across methods | ✅ |
+| Provider Performance | Braintree +2.62%, ProcessOut +3.37% | Key providers improved | ✅ |
+| Decline Reason Shift | Insufficient Funds decreased across markets | FR -2.39pp, BE -3.23pp, AT -3.89pp | ✅ |
 
 **Key Findings:**
-- Widespread reduction in "Insufficient Funds" declines across all analyzed markets: FR (-2.39pp), DE (-2.25pp), BE (-3.23pp), and AT (-3.89pp) drove the overall AR improvement
-- Apple Pay performance improved significantly across multiple countries: FR (+5.11%), DE (+5.70%), BE (+6.14%), AT (+3.98%)
-- ProcessOut provider showed strong gains in BE (+8.10%) and AT (+6.22%), while credit card acceptance in DE surged +20.68%
-- Significant volume declines observed in high-AR markets: NL (-40.8%), FR (-30.4%), and NZ (-36.5%) may be contributing to favorable mix shift
-- All related metrics in the LL0 funnel improved in parallel: FirstRunAR (+2.63%), PostDunningAR (+2.11%), PaymentApprovalRate (+2.05%)
+- **Insufficient Funds declines dropped significantly** across all deep-dive countries: FR (-2.39pp), DE (-2.25pp), BE (-3.23pp), and AT (-3.89pp), driving the overall AR improvement
+- **Apple Pay performance improved substantially** in FR (+5.11%), DE (+5.70%), and BE (+6.14%), contributing to the aggregate rate increase
+- **ProcessOut provider showed strong recovery** with +3.37% at aggregate level and notably +8.10% in BE and +6.22% in AT
+- **Volume declined 10.8% week-over-week** (27,516 vs 30,838), with major mix shifts in FR (-30.4%) and NL (-40.8%) potentially inflating the rate improvement
+- **All funnel metrics improved in parallel**: 1_FirstRunAR (+2.63%), 3_PostDunningAR (+2.11%), and 6_PaymentApprovalRate (+2.05%), indicating systemic improvement rather than isolated anomaly
 
-**Action:** Monitor — The improvement appears driven by genuine decline rate reductions (particularly Insufficient Funds) rather than anomalies. Continue monitoring volume trends in FR and NL to ensure mix shift is not masking underlying issues.
+**Action:** **Monitor** - The improvement appears driven by genuine reduction in Insufficient Funds declines across multiple payment methods and providers. However, the concurrent 10.8% volume drop and significant mix shifts in high-performing markets (FR, NL) warrant continued monitoring to confirm the trend sustains as volumes normalize.
 
 ---
 

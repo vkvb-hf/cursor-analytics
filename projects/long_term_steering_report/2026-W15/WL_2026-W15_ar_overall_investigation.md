@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but statistically not significant change on 160,979 orders.
+**Overall:** The Pre-Dunning Acceptance Rate improved by +0.86% (from 89.33% to 90.1%) in WL 2026-W15, representing a statistically non-significant increase on 160,979 orders.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
 
 **Key Findings:**
-- All AR funnel metrics show consistent improvement across the week, with 1_FirstRunAR leading at +0.92%
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06%)
-- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) – likely data quality noise
-- ProcessOut provider improved +2.31 pp (81.62%) on 17,676 orders, approaching monitoring threshold
-- Volume declined 2.4% WoW (165,018 → 160,979), continuing a gradual downward trend from W08 (179,647)
+- All four related metrics (FirstRunAR, PreDunningAR, PostDunningAR, PaymentApprovalRate) improved in parallel, suggesting a systemic positive trend rather than an isolated change
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17% (85.21% → 87.06%)
+- PaymentProvider "Unknown" shows a ⚠️ flag with +69.73% change, but this is based on minimal volume (664 orders) and represents noise rather than a meaningful shift
+- ProcessOut provider improved +2.31% (79.78% → 81.62%) on 17,676 orders, the largest meaningful provider-level improvement
+- Volume declined -2.4% WoW (165,018 → 160,979), continuing a gradual downward trend observed since W08
 
-**Action:** Monitor – No investigation required. The improvement is positive but not statistically significant. Continue standard monitoring of ProcessOut performance and Unknown provider data quality.
+**Action:** Monitor – The improvement is positive but not statistically significant, with no anomalies requiring investigation. Continue tracking the 8-week trend to confirm sustained improvement.
 
 ---
 

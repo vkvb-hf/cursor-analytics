@@ -8,28 +8,27 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved modestly from 89.64% to 89.98% (+0.34 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 89.64% to 89.98% (+0.34 pp) in W15, a non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend Stability | Within normal range (89.23%-90.82%) | +0.34 pp | ✅ |
-| Country Threshold (±2.5%) | No countries exceeded | US +0.96 pp, CA -0.70 pp | ✅ |
-| Payment Method Variance | All within normal range | -1.69 pp to +0.85 pp | ✅ |
-| Payment Provider Variance | All within normal range | -1.92 pp to +0.87 pp | ✅ |
-| Related Metrics Alignment | All metrics moved directionally together | +0.37 pp to +0.64 pp | ✅ |
+| L0: 8-Week Trend | Rate within historical range (89.23%-90.82%) | +0.34 pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | US +0.96%, CA -0.70% | ✅ |
+| L1: Payment Method | All methods within normal variance | Range: -1.69% to +0.85% | ✅ |
+| L1: Payment Provider | No provider flagged | Range: -1.92% to +0.87% | ✅ |
+| L3: Related Metrics | All funnel metrics moved directionally aligned | +0.37% to +0.64% | ✅ |
+| Mix Shift | No significant population shifts | US +5.5%, CA -6.3% vol | ✅ |
 
 **Key Findings:**
-- US showed the strongest improvement at +0.96 pp (88.81% → 89.66%), representing 70% of total volume (12,162 orders)
-- CA declined by -0.70 pp (91.38% → 90.74%) but remains the higher-performing country
-- "Others" payment method saw the largest decline at -1.69 pp (98.83% → 97.16%), though volume is minimal (810 orders)
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating broad-based stability
-- Volume decreased 24% from W10-W11 (~25K) to W14-W15 (~17K), reflecting expected seasonal patterns
+- US drove the improvement with +0.96% change (12,162 orders), offsetting CA's -0.70% decline (5,170 orders)
+- All related funnel metrics improved in parallel: FirstRunAR (+0.64 pp), PostDunningAR (+0.37 pp), PaymentApprovalRate (+0.40 pp)
+- "Others" payment method showed largest decline (-1.69%) but represents minimal volume (810 orders)
+- Volume decreased 32% from W08-W10 levels (~25K) to current levels (~17K), though rates remain stable
+- No payment providers or methods were flagged for investigation
 
-**Action:** Monitor — No intervention required. All checks passed, change is not significant, and the metric remains stable within the 8-week historical range.
+**Action:** Monitor — Change is not statistically significant, all dimensions within normal variance, and funnel metrics are directionally aligned.
 
 ---
 

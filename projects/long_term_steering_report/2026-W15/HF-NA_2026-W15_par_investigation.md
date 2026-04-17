@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11pp) in W15, continuing a gradual upward trend observed over the past 8 weeks, with the change deemed not statistically significant.
+**Overall:** Payment Approval Rate for HF-NA showed a marginal improvement from 94.0% to 94.1% (+0.11pp) in W15, continuing a steady upward trend observed over the past 8 weeks, with the change being statistically not significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | First attempt success | +0.38pp | ✅ |
-| 2_PreDunningAR | Pre-dunning recovery | +0.28pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.04pp | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.11pp | ✅ |
+| 1_FirstRunAR | Baseline | +0.38pp | ✅ |
+| 2_PreDunningAR | vs FirstRun | +0.28pp | ✅ |
+| 3_PostDunningAR | vs PreDunning | -0.04pp | ✅ |
+| 6_PaymentApprovalRate | Final | +0.11pp | ✅ |
 
 **Key Findings:**
-- All funnel stages are performing within normal ranges; the improvement is primarily driven by FirstRunAR (+0.38pp) and PreDunningAR (+0.28pp)
-- US showed the strongest country-level improvement at +0.34pp, while CA remained essentially flat at +0.02pp
-- PaymentProvider "Unknown" flagged with a -4.07pp decline, but volume is minimal (775 orders, <0.2% of total)
-- Consistent 8-week upward trend: PAR has improved from 93.27% (W08) to 94.1% (W15), a cumulative gain of +0.83pp
-- No countries or major payment methods exceeded the ±2.5% investigation threshold
+- Consistent 8-week upward trend: PAR has improved steadily from 93.27% (W08) to 94.1% (W15), representing +0.83pp cumulative gain
+- US drove the weekly improvement with +0.34pp (92.78% → 93.09%), while CA remained flat at +0.02pp
+- PaymentProvider "Unknown" flagged with -4.07pp decline (96.17% → 92.26%), though volume is minimal at 775 orders (0.16% of total)
+- All payment methods stable; Apple Pay remains lowest performer at 88.76% but showed slight improvement (+0.25pp)
+- Volume decline of ~1.9% week-over-week (507,189 → 497,775) with no significant mix shift impact
 
-**Action:** Monitor — The change is not significant and all metrics are trending positively. Continue standard monitoring; no investigation required.
+**Action:** Monitor — No significant anomalies detected; continue tracking the positive trend and the minor "Unknown" provider flag for potential data quality issues.
 
 ---
 

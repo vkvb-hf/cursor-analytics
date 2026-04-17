@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate for US-HF improved marginally from 92.85% to 93.02% (+0.17 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34pp (US) | ✅ |
-| L1: PaymentMethod | "Others" declined -2.49% but low volume (91 orders) | Mixed | ✅ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | High AR tier stable, minor volume decrease (-0.9%) | Stable | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34 pp (US) | ✅ |
+| L1: PaymentMethod | "Others" declined -2.49% but minimal volume (91 orders) | Mixed | ✅ |
+| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| Mix Shift | US High AR tier stable (-0.9% volume shift) | Stable | ✅ |
 
 **Key Findings:**
-- The +0.17pp WoW improvement is within normal weekly fluctuation and marked as not significant
-- Credit Card approval rate improved +0.90pp (92.09% → 92.92%) with the highest volume (9,998 orders)
-- "Others" payment method showed a -2.49pp decline, but volume is negligible (91 orders) and does not materially impact overall PCAR
-- Order volume increased 18.5% WoW (14,911 → 17,669), indicating healthy demand recovery
-- 8-week trend shows rate stabilizing in the 92.5%-93.5% range after a peak of 94.58% in W10
+- The +0.17 pp week-over-week improvement is within normal fluctuation and not statistically significant
+- Credit Card approval rate improved +0.90 pp (92.09% → 92.92%) with the highest volume at 9,998 orders
+- "Others" payment method showed a -2.49 pp decline, but volume is negligible (91 orders) and does not materially impact overall rate
+- Apple Pay experienced a -1.00 pp decline (93.51% → 92.58%) across 6,169 orders, worth monitoring
+- Volume increased 18.5% week-over-week (14,911 → 17,669 orders), indicating healthy order flow
 
-**Action:** Monitor — No investigation required. Continue standard weekly tracking.
+**Action:** Monitor — No immediate investigation required. Continue standard monitoring with attention to Apple Pay performance trends.
 
 ---
 

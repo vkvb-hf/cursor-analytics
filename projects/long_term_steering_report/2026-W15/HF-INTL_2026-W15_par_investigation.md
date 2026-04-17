@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved by +0.24% (97.04% → 97.27%) in 2026-W15 on 744,637 orders, a change that is not statistically significant.
+**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.04% to 97.27% (+0.24pp) in W15, a change that is not statistically significant, with volume declining from 784,406 to 744,637 orders (-5.1%).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Largest improvement in funnel | +1.76% | ✅ |
-| 2_PreDunningAR | Moderate improvement | +1.18% | ✅ |
-| 3_PostDunningAR | Minimal change | +0.01% | ✅ |
-| 6_PaymentApprovalRate | Final metric | +0.24% | ✅ |
+| 1_FirstRunAR | Baseline | +1.76% | ✅ |
+| 2_PreDunningAR | vs Prior | +1.18% | ✅ |
+| 3_PostDunningAR | vs Prior | +0.01% | ✅ |
+| 6_PaymentApprovalRate | vs Prior | +0.24% | ✅ |
 
 **Key Findings:**
-- **AT and DK exceeded the ±2.5% threshold:** AT improved +2.95% and DK improved +3.94%, both driven primarily by Apple Pay recovery and reduced "Insufficient Funds" declines
-- **Insufficient Funds declines dropped significantly:** In AT, Insufficient Funds decreased by -2.05pp; in DK, it decreased by -3.13pp, indicating improved customer payment capacity or fraud filtering
-- **Apple Pay showed strong recovery in flagged countries:** AT saw applepay improve +5.78% and DK saw +6.47%, suggesting resolution of prior payment processing issues
-- **DK volume increased +25.6% week-over-week** while most other countries experienced volume declines of 6-13%, yet maintained stable AR tier classification
-- **Braintree in DK improved +5.84%**, contributing to the overall DK improvement alongside the Apple Pay recovery
+- Two countries exceeded the ±2.5% threshold: AT (+2.95pp) and DK (+3.94pp), both showing improvement driven by reduced "Insufficient Funds" declines
+- In AT, Apple Pay approval rate improved significantly (+5.78pp), with Insufficient Funds declines dropping from 4.63% to 2.58% (-2.05pp)
+- In DK, Braintree provider showed notable improvement (+5.84pp), with Insufficient Funds declines dropping from 4.28% to 1.16% (-3.13pp)
+- All payment methods and providers at the aggregate level remained stable with no concerning movements
+- First Run AR showed the strongest funnel improvement at +1.76%, indicating better initial payment success
 
-**Action:** Monitor — The overall change is not significant and the movement is positive. Continue tracking AT and DK Apple Pay performance and Insufficient Funds trends to confirm sustained improvement.
+**Action:** Monitor - The overall change is not significant and represents positive movement. Continue tracking AT and DK to confirm the "Insufficient Funds" decline reduction is sustained.
 
 ---
 

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate improved modestly from 91.05% to 91.65% (+0.60pp) in W15, a statistically non-significant change within normal weekly fluctuation.
+**Overall:** Payment Approval Rate improved from 91.05% to 91.65% (+0.60 pp) in W15, a statistically non-significant change within normal variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | Pre-Dunning | +0.87% | ✅ |
-| 3_PostDunningAR | Post-Dunning | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Final PAR | +0.67% | ✅ |
+| 2_PreDunningAR | vs Prior | +0.87% | ✅ |
+| 3_PostDunningAR | vs Prior | +0.53% | ✅ |
+| 6_PaymentApprovalRate | Final | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel steps showed consistent improvement, with the largest gain at FirstRunAR (+0.92%), indicating upstream payment success drove the overall improvement
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17pp (13,883 orders)
-- ProcessOut provider improved +2.05pp (82.67% vs 81.01%) on 17,676 orders, contributing to overall gains
-- Unknown payment provider flagged with +13.15% change, but minimal volume (664 orders) limits impact significance
-- Volume declined -2.4% WoW (160,979 vs 165,018), continuing a multi-week downward trend from W08 peak
+- All funnel stages showed modest improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
+- No countries exceeded the ±2.5% threshold; AO showed the strongest country-level improvement (+2.17%) on 13,883 orders
+- ProcessOut provider improved +2.05% (82.67% current), though Unknown provider flagged with +13.15% change on minimal volume (664 orders)
+- Volume declined 2.4% WoW (165,018 → 160,979), with notable decreases in AO (-12.0%) and GN (-8.5%)
+- Credit Card payments (71% of volume) improved +0.69%, driving the majority of the overall rate increase
 
-**Action:** Monitor — No significant changes or threshold breaches detected. Continue standard weekly tracking.
+**Action:** Monitor — Change is non-significant with no dimension exceeding alert thresholds. Continue standard tracking.
 
 ---
 

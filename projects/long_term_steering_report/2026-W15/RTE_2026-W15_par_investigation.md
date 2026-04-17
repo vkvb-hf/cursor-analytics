@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate increased slightly from 94.75% to 94.87% (+0.13%) in W15, a statistically non-significant change within normal operating variance.
+**Overall:** Payment Approval Rate showed a minor improvement from 94.75% to 94.87% (+0.13%), which is not statistically significant, continuing a slight downward trend from the 8-week high of 95.18% in W12.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable pattern, recovery from W10 low | +0.13% | ✅ |
-| L1: Country Breakdown | 1 country (TK) exceeds ±2.5% threshold | +7.54% TK | ⚠️ |
-| L1: Dimension Scan | Unknown provider shows -10.44% but tiny volume (131) | Minor | ✅ |
-| L2: TK Deep-Dive | All payment methods improved significantly | +6.5% to +12.1% | ⚠️ |
-| L3: Related Metrics | All funnel stages stable | +0.47% to -0.01% | ✅ |
-| Mix Shift | No significant volume shifts impacting overall rate | Stable | ✅ |
+| L0: 8-Week Trend | Stable with minor fluctuation | +0.13% | ✅ |
+| L1: Country Breakdown | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: Dimension Scan | PaymentProvider "Unknown" flagged | -10.44% | ⚠️ |
+| L2: TK Deep-Dive | All payment methods improved | +5.4% to +12.1% | ✅ |
+| L3: Related Metrics | All funnel metrics stable | +0.47% to -0.01% | ✅ |
+| Mix Shift | No significant volume shifts | All Stable | ✅ |
 
 **Key Findings:**
-- TK showed exceptional improvement (+7.54%), driven by a 5.81pp reduction in "Insufficient Funds" declines (from 8.32% to 2.51%)
-- TK improvements were broad-based: applepay +12.10%, credit_card +6.49%, paypal +5.41%
-- Both TK payment providers improved: Braintree +10.60%, Adyen +6.49%
-- Overall trend shows recovery from W10 trough (93.42%) toward W12 peak (95.18%)
-- Unknown provider decline (-10.44%) is immaterial due to minimal volume (131 orders)
+- TK showed significant improvement (+7.54pp), driven by reduced "Insufficient Funds" declines (-5.81pp), with all payment methods improving—particularly Apple Pay (+12.10pp) and Braintree (+10.60pp)
+- PaymentProvider "Unknown" dropped 10.44pp (79.27% → 70.99%), but with minimal volume impact (131 orders)
+- Overall volume declined 2.4% week-over-week (431,853 → 421,406), consistent with the 8-week downward volume trend
+- FirstRunAR improved +0.47pp (90.82% → 91.25%), suggesting better initial payment success rates
+- TV showed the largest negative country movement (-1.37pp) but represents only 0.4% of total volume (1,895 orders)
 
-**Action:** Monitor - The +0.13% change is not statistically significant. TK improvement is positive but represents only 0.5% of total volume (1,950 orders). Continue standard monitoring.
+**Action:** Monitor — The +0.13% change is not significant and within normal operating variance. The TK improvement is positive but represents small volume (<0.5% of total). Continue standard monitoring cadence.
 
 ---
 

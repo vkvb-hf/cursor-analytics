@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in 2026-W15, driven primarily by stronger performance at the top of the funnel, particularly in the Select Payment Method step.
+**Overall:** Payment Conversion Rate improved significantly from 36.04% to 37.75% (+1.71pp) in HF-INTL during 2026-W15, with payment visits increasing by 11.4% to 69,804.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ threshold | +2.05pp | ✅ |
-| Click Submit Form | < threshold | +0.05pp | ⚠️ |
-| FE Validation Passed | < threshold | +0.24pp | ⚠️ |
-| Enter Fraud Service | < threshold | -0.06pp | ⚠️ |
-| Approved by Fraud Service | < threshold | +0.32pp | ⚠️ |
-| Call to PVS | < threshold | +0.22pp | ⚠️ |
-| Successful Checkout | < threshold | +0.19pp | ⚠️ |
+| Select Payment Method | Above threshold | +2.05pp | ⚠️ |
+| Click Submit Form | Within normal range | +0.05pp | ✅ |
+| FE Validation Passed | Within normal range | +0.24pp | ✅ |
+| Enter Fraud Service | Within normal range | -0.06pp | ✅ |
+| Approved by Fraud Service | Within normal range | +0.32pp | ✅ |
+| Call to PVS | Within normal range | +0.22pp | ✅ |
+| Successful Checkout | Within normal range | +0.19pp | ✅ |
 
 **Key Findings:**
-- Select Payment Method conversion increased +2.05pp (55.29% → 57.34%), accounting for the majority of overall PCR improvement
-- GB showed strongest contribution with +2.46pp PCR improvement, driven by Select Payment Method (+2.69pp in GA funnel)
-- NO demonstrated exceptional growth with +5.83pp PCR improvement on 137% volume increase, with Click Submit Form (+3.04pp) as key driver
-- LU experienced significant decline (-17.90pp) but with minimal volume impact (73 visits); Select Payment Method dropped -11.63pp
-- Backend data shows Checkout Attempt conversion improved +1.41pp (46.40% → 47.80%), consistent with GA top-of-funnel gains
+- The primary driver of PCR improvement is the "Select Payment Method" step, which increased by +2.05pp (55.29% → 57.34%), exceeding the +0.86pp threshold
+- GB and DE contributed most to the improvement, with GB showing +2.46pp and DE showing +1.21pp PCR gains, both driven by improved Select Payment Method conversion (+2.69pp and +2.54pp respectively)
+- NO demonstrated the strongest relative improvement at +5.83pp (42.23% → 48.06%), driven primarily by Click Submit Form (+3.04pp) and backend Checkout Attempt (+6.87pp)
+- LU experienced a significant decline of -17.90pp (57.63% → 39.73%), though with minimal volume impact (73 visits); the drop was driven by Select Payment Method (-11.63pp)
+- Braintree_Paypal showed the strongest payment method improvement at +0.92pp success rate, while Adyen_CreditCard declined by -6.17pp (low volume: 74 attempts)
 
-**Action:** Monitor — The improvement is broad-based across major markets (GB, DE, NO) with healthy volume growth (+11.4%). Continue monitoring LU for sustained decline patterns, though low volume limits impact.
+**Action:** Monitor - The PCR improvement is driven by healthy top-of-funnel engagement gains across major markets (GB, DE). Continue monitoring LU performance and Adyen_CreditCard success rates, though volumes are too low to warrant immediate investigation.
 
 ---
 

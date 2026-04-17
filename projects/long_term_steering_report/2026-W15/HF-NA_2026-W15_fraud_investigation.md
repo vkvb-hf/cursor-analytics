@@ -8,28 +8,30 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined from 90.97% to 89.66% (-1.44% or -1.31pp) in W15, representing a significant deterioration driven primarily by US performance.
+## Executive Summary
+
+**Overall:** The Fraud Approval Rate (FAR) declined significantly from 90.97% to 89.66% (-1.31pp) in 2026-W15, driven primarily by a sharp drop in US performance, particularly within the Referral channel.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: HF-NA Overall | FAR 90.97% → 89.66% | -1.31pp | ⚠️ |
-| L1: Country - US | FAR 91.59% → 89.20% | -2.39pp | ⚠️ |
+| L1: Country - US | FAR 91.59% → 89.20% | -2.61pp | ⚠️ |
 | L1: Country - CA | FAR 89.46% → 90.87% | +1.41pp | ✅ |
 | L1: Channel - Paid | FAR 96.24% → 95.63% | -0.61pp | ✅ |
 | L1: Channel - Referral | FAR 67.80% → 63.00% | -4.80pp | ⚠️ |
 | L2: US Referral | FAR 70.00% → 61.50% | -8.50pp | ⚠️ |
-| L2: US Referral PF Block | PF Block 2.48% → 12.62% | +10.14pp (+409.56%) | ⚠️ |
+| L2: US Referral PF Block | PF Block 2.48% → 12.62% | +409.56% | ⚠️ |
 
 **Key Findings:**
-- US is the primary driver of FAR decline, with FAR dropping -2.61% (exceeding the ±2.5% threshold), while CA improved +1.57%
-- US Referral channel experienced a severe FAR decline of -12.15%, with PF Block rate surging +409.56% (from 2.48% to 12.62%)
-- Overall volume increased significantly by 16.8% (23,607 → 27,572), with US volume growing 19.9% (16,726 → 20,057)
-- Duplicate rates increased across both countries (US +3.60%, CA +3.30%) and the Paid channel (+6.29%), though this did not significantly impact FAR
-- US Paid channel also saw elevated blocking activity: Dup Block +36.86% and PF Block +79.46%
+- US Referral channel experienced a severe FAR decline of -12.15% (70.00% → 61.50%), accounting for the majority of the overall drop
+- PF Block rate in US Referral surged by +409.56% (2.48% → 12.62%), indicating a significant increase in policy/fraud blocking activity
+- Overall volume increased 16.8% (23,607 → 27,572), with US volume up 19.9%, suggesting the decline is not due to sample size reduction
+- Duplicate Rate increased across both countries (US +3.60%, CA +3.30%), with Dup Block in US Paid rising +36.86%
+- CA showed improvement (+1.57pp FAR) partially offsetting US decline, driven by Referral channel recovery (+6.05%)
 
-**Action:** Escalate — Investigate the US Referral channel immediately to identify the cause of the +409.56% spike in PF Block rate, which is the primary root cause of the FAR decline. Review any policy changes, fraud model updates, or traffic quality shifts affecting this segment.
+**Action:** **Escalate** – Investigate the root cause of the dramatic PF Block rate increase (+409.56%) in US Referral channel, which is the primary driver of the FAR decline. Review any recent policy changes, fraud rule updates, or model threshold adjustments implemented around W15.
 
 ---
 
@@ -85,7 +87,7 @@
 | Referral | 2026-W14 | 63.07% | - | 38.44% | - | 30.02% | - | 4.90% | - | 1,389 |  |
 | Referral | 2026-W15 | 66.88% | +6.05% | 37.87% | -1.49% | 28.37% | -5.51% | 3.48% | -29.01% | 1,410 | ⚠️ |
 
-**Analysis:** The W15 FAR decline is isolated to US, specifically within the Referral channel where a dramatic increase in PF Block rate (+409.56%) drove FAR down by 12.15%. This suggests either a fraud model change, policy adjustment, or a significant shift in traffic quality within US Referral. Immediate investigation into PF Block triggers and Referral traffic sources in US is required to determine if this is a legitimate fraud prevention measure or an unintended overcorrection.
+**Analysis:** The 2026-W15 FAR decline of -1.31pp is primarily attributed to US Referral channel deterioration, where PF Block rates increased by over 400%, suggesting a potential policy or fraud model change disproportionately impacting this segment. Immediate investigation into recent fraud rule modifications and US Referral traffic quality is recommended, as the 3,636 affected customers represent meaningful volume. While CA performance improved, the US degradation requires urgent attention to prevent sustained negative impact on overall approval rates.
 
 ---
 

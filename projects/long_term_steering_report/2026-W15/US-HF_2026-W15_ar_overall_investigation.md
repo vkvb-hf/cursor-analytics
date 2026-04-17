@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 91.93% to 92.22% (+0.29 pp), a statistically non-significant change on a volume of 408,629 orders.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in W15, a non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | 6_PaymentApprovalRate | Final Approval | +0.14 pp | ✅ |
 
 **Key Findings:**
-- All funnel metrics showed slight improvements, with FirstRunAR leading at +0.44 pp, indicating upstream payment success drove the overall gain
-- No countries exceeded the ±2.5% threshold; US (the only market) improved from 92.78% to 93.09% (+0.31 pp)
-- PaymentProvider "Unknown" showed a +4.73 pp increase (87.10% → 91.22%), but volume is minimal at 353 orders
-- Apple Pay continues to underperform other payment methods at 85.13% acceptance rate, though it improved +0.67 pp
-- Order volume declined 1.7% week-over-week (415,885 → 408,629), continuing a downward trend observed over the 8-week period
+- All funnel metrics showed slight positive movement, with FirstRunAR leading the improvement at +0.44 pp
+- No countries exceeded the ±2.5% investigation threshold; US showed stable performance at 93.09% (+0.34 pp)
+- Payment Provider "Unknown" flagged with +4.73 pp change, but volume is minimal (353 orders, <0.1% of total)
+- Volume continues gradual decline trend: 408,629 orders in W15 vs 453,781 in W08 (-9.9% over 8 weeks)
+- 8-week trend shows stable acceptance rate oscillating between 91.48% and 92.22%, indicating consistent system performance
 
-**Action:** Monitor — The change is not statistically significant, all metrics are stable, and no dimensions breach investigation thresholds. Continue standard weekly monitoring.
+**Action:** Monitor — No investigation required. The change is not statistically significant, all dimensions are within thresholds, and the metric remains stable within historical range.
 
 ---
 

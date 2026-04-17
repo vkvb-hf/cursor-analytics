@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for US-HF improved slightly from 93.63% to 93.76% (+0.14 pp) in W15, a change that is not statistically significant.
+**Overall:** Payment Approval Rate showed a minor improvement of +0.14pp (93.63% → 93.76%) on volume of 408,629 orders, which is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.44 pp | ✅ |
-| 2_PreDunningAR | Recovery | +0.32 pp | ✅ |
-| 3_PostDunningAR | Dunning | +0.02 pp | ✅ |
-| 6_PaymentApprovalRate | Final | +0.14 pp | ✅ |
+| 1_FirstRunAR | Baseline | +0.44pp | ✅ |
+| 2_PreDunningAR | Recovery | +0.32pp | ✅ |
+| 3_PostDunningAR | Dunning | +0.02pp | ✅ |
+| 6_PaymentApprovalRate | Final | +0.14pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed improvement, with FirstRunAR contributing the largest gain (+0.44 pp), indicating better initial payment success
-- PaymentProvider "Unknown" showed a notable decline of -3.36 pp (95.56% → 92.35%), flagged ⚠️, though volume is minimal (353 orders)
-- PaymentMethod "Others" declined -0.70 pp but represents very low volume (2,397 orders)
-- US shows steady 8-week upward trend from 93.13% (W08) to 93.76% (W15), gaining +0.63 pp over the period
-- Order volume continues gradual decline (-1.7% WoW), from 415,885 to 408,629 orders
+- US showed healthy improvement of +0.34pp (92.78% → 93.09%) with no countries exceeding the ±2.5% threshold
+- PaymentProvider "Unknown" flagged with -3.36pp decline (95.56% → 92.35%), though on minimal volume (353 orders)
+- First Run AR drove the largest improvement in the funnel at +0.44pp, indicating improved initial payment success
+- 8-week trend shows consistent gradual improvement from 93.13% (W08) to 93.76% (W15), a cumulative +0.63pp gain
+- Volume continues steady decline trend (-1.7% WoW), dropping from 415,885 to 408,629 orders
 
-**Action:** Monitor – No significant changes or threshold breaches detected. Continue tracking the Unknown provider performance despite low volume.
+**Action:** Monitor — No significant changes detected; continue tracking the positive trend and monitor the Unknown provider flag for any volume increases.
 
 ---
 

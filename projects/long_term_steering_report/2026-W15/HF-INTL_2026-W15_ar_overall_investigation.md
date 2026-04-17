@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate for HF-INTL improved significantly in 2026-W15, increasing from 93.63% to 94.74% (+1.19%), representing a positive recovery after three consecutive weeks of decline (W12-W14).
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved significantly from 93.63% to 94.74% (+1.11 pp) in 2026-W15, driven by broad improvements across all countries, particularly AT (+2.95 pp) and DK (+3.94 pp).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Rate improvement | +1.76% | ✅ |
-| 2_PreDunningAR | Rate improvement | +1.18% | ✅ |
-| 3_PostDunningAR | Rate stable | +0.01% | ✅ |
-| 6_PaymentApprovalRate | Rate stable | +0.24% | ✅ |
+| 1_FirstRunAR | Improved | +1.76% | ✅ |
+| 2_PreDunningAR | Improved | +1.18% | ✅ |
+| 3_PostDunningAR | Stable | +0.01% | ✅ |
+| 6_PaymentApprovalRate | Stable | +0.24% | ✅ |
 
 **Key Findings:**
-- **DK showed the largest improvement** at +3.94%, driven primarily by a significant reduction in "Insufficient Funds" declines (-3.13pp), with Braintree provider improving +5.84%
-- **AT improved +2.95%**, with Apple Pay acceptance rate jumping +5.78% and Insufficient Funds declines dropping -2.05pp
-- **Apple Pay improved across all markets**, with the global Apple Pay rate increasing +2.73% (87.51% → 89.91%), flagged as the primary payment method driver
-- **Volume declined -5.1%** week-over-week (784,406 → 744,637), though DK bucked this trend with +25.6% volume growth
-- **All countries showed positive movement**, with no markets experiencing AR degradation this week
+- All countries showed improvement in acceptance rates; AT (+2.95 pp) and DK (+3.94 pp) exceeded the ±2.5% threshold with significant gains
+- Apple Pay showed the largest payment method improvement globally (+2.73 pp), with even stronger gains in AT (+5.78 pp) and DK (+6.47 pp)
+- "Insufficient Funds" declines dropped substantially in both flagged countries: AT (-2.05 pp) and DK (-3.13 pp), indicating improved customer payment capacity or retry success
+- DK volume increased +25.6% WoW while maintaining strong rate improvement, and Braintree in DK improved +5.84 pp
+- The improvement reverses a 3-week declining trend (W12-W14), returning rates to W11 levels (~94.9%)
 
-**Action:** **Monitor** - The improvement is broad-based across countries, payment methods, and providers, suggesting systemic improvement rather than an anomaly. Continue monitoring to confirm the positive trend sustains, particularly tracking Apple Pay performance and Insufficient Funds decline rates.
+**Action:** Monitor - This is a positive trend reversal with broad-based improvements. Continue monitoring to confirm sustainability, particularly Apple Pay performance and Insufficient Funds decline rates.
 
 ---
 

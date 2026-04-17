@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Overall) for HF-NA improved slightly from 92.17% to 92.42% (+0.25 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.17% to 92.42% (+0.25pp) in W15, representing a statistically non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | First payment attempt | +0.38 pp | ✅ |
-| 2_PreDunningAR | Pre-dunning recovery | +0.28 pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.04 pp | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.11 pp | ✅ |
+| 1_FirstRunAR | Baseline | +0.38pp | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.28pp | ✅ |
+| 3_PostDunningAR | Post-Recovery | -0.04pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.11pp | ✅ |
 
 **Key Findings:**
-- All funnel metrics remain stable with no significant changes; the overall rate of 92.42% continues an upward trend from 91.35% in W08
-- No countries exceeded the ±2.5% threshold; US showed the largest improvement at +0.34 pp while CA remained flat at +0.02 pp
-- Apple Pay showed the strongest improvement among payment methods (+0.56 pp to 86.28%), though it remains the lowest-performing method
-- Volume declined by approximately 1.9% week-over-week (507,189 → 497,775 orders), consistent with the gradual downward volume trend observed over the 8-week period
-- Mix shift analysis shows stable distribution with both US and CA maintaining High AR tier (>92%)
+- The 8-week trend shows steady improvement from 91.35% (W08) to 92.42% (W15), indicating a consistent upward trajectory of approximately +1.07pp over the period
+- No countries exceeded the ±2.5% threshold; US showed modest improvement (+0.34pp) while CA remained stable (+0.02pp)
+- Apple Pay showed the largest positive movement among payment methods (+0.56pp to 86.28%), though it remains the lowest-performing method
+- ProcessOut provider improved +0.26pp while Unknown provider declined -0.78pp, but Unknown represents minimal volume (775 orders)
+- Volume declined -1.9% WoW (507,189 → 497,775 orders), consistent with the mix shift analysis showing slight decreases in both US (-0.9%) and CA (-2.2%)
 
-**Action:** Monitor — No intervention required. The metric shows normal fluctuation within expected ranges and continues a gradual positive trend over the 8-week period.
+**Action:** Monitor – No intervention required. The metric change is not statistically significant, all funnel steps are performing within normal parameters, and no dimensional segments exceeded alert thresholds.
 
 ---
 
