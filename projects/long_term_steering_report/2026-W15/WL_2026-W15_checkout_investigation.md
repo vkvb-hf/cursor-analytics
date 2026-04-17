@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 29.88% to 34.86% (+4.99pp) in 2026-W15, exceeding the +2.49pp threshold, driven primarily by substantial gains in the early funnel stages.
+**Overall:** Payment Conversion Rate improved significantly from 29.88% to 34.86% (+4.99pp), exceeding the monitoring threshold of +2.49pp, driven primarily by substantial gains in the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ ≥ +2.49pp | +4.94pp | ⚠️ |
-| Click Submit Form | Δ ≥ +2.49pp | +3.05pp | ⚠️ |
-| FE Validation Passed | Δ ≥ +2.49pp | +0.12pp | ✅ |
-| Enter Fraud Service | Δ ≥ +2.49pp | +0.16pp | ✅ |
-| Approved by Fraud Service | Δ ≥ +2.49pp | +0.04pp | ✅ |
-| Call to PVS | Δ ≥ +2.49pp | -0.45pp | ✅ |
-| Successful Checkout | Δ ≥ +2.49pp | +0.68pp | ✅ |
+| Select Payment Method | Above threshold | +4.94pp | ⚠️ |
+| Click Submit Form | Above threshold | +3.05pp | ⚠️ |
+| FE Validation Passed | Within normal | +0.12pp | ✅ |
+| Enter Fraud Service | Within normal | +0.16pp | ✅ |
+| Approved by Fraud Service | Within normal | +0.04pp | ✅ |
+| Call to PVS | Minor decline | -0.45pp | ✅ |
+| Successful Checkout | Within normal | +0.68pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method** was the primary driver across all analyzed countries: CG (+14.41pp), AO (+10.05pp), and ER (+9.89pp), indicating improved user engagement with payment options
-- **Click Submit Form** showed consistent improvement globally (+3.05pp) and in key markets (CG +5.31pp, ER +5.77pp), suggesting better form UX or reduced friction
-- Backend data reveals a significant drop in **PVS Attempt** conversion (-8.42pp) that warrants attention despite overall positive results
-- CG experienced the largest PCR improvement (+12.84pp) with a 27.42% reduction in payment visits, indicating higher-quality traffic
-- Payment method performance remained stable, with **Braintree_Paypal** (+1.28pp) and **Braintree_CreditCard** (+1.26pp) showing modest gains
+- Select Payment Method conversion improved dramatically across all analyzed countries: CG (+14.41pp), AO (+10.05pp), and ER (+9.89pp), indicating a likely UX improvement or reduced friction at payment selection
+- Click Submit Form conversion increased by +3.05pp globally, suggesting improved form completion rates following payment method selection
+- Backend data shows a significant decline in PVS Attempt rate (-8.42pp), which warrants monitoring despite overall positive results
+- CG showed the largest absolute PCR improvement (+12.84pp) while also experiencing a 27.42% reduction in payment visits
+- ProcessOut_ApplePay experienced a notable decline (-6.03pp) but represents low volume (339 attempts)
 
-**Action:** Monitor - The significant improvement appears driven by positive changes in early funnel engagement. Continue monitoring the backend PVS Attempt discrepancy (-8.42pp) to ensure it does not indicate a tracking or system issue.
+**Action:** Monitor - The improvement appears to be driven by positive changes in early-funnel conversion (Select Payment Method and Click Submit Form). Recommend validating if any A/B tests, UI changes, or payment method availability modifications were deployed in W15. Continue monitoring the PVS Attempt decline in backend data.
 
 ---
 

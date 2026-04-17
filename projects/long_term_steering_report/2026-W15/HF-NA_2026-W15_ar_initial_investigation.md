@@ -10,25 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) for HF-NA improved slightly from 89.64% to 89.98% (+0.34 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved modestly from 89.64% to 89.98% (+0.34 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.64 pp | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.34 pp | ✅ |
-| 3_PostDunningAR | Post-Dunning | +0.37 pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.40 pp | ✅ |
+| 8-Week Trend Stability | Within normal range (89.23%-90.82%) | +0.34 pp | ✅ |
+| Country Threshold (±2.5%) | No countries exceeded | US +0.96 pp, CA -0.70 pp | ✅ |
+| Payment Method Variance | All within normal range | -1.69 pp to +0.85 pp | ✅ |
+| Payment Provider Variance | All within normal range | -1.92 pp to +0.87 pp | ✅ |
+| Related Metrics Alignment | All metrics moved directionally together | +0.37 pp to +0.64 pp | ✅ |
 
 **Key Findings:**
-- All funnel stages show modest improvement (+0.34 to +0.64 pp), indicating consistent performance across the payment journey
-- No countries exceeded the ±2.5% threshold; US improved +0.96 pp while CA declined -0.70 pp
-- Volume decreased significantly from ~25K orders (W08-W10) to 17,332 orders in W15, a ~32% reduction over the 8-week period
-- Credit Card (90.21%, +0.85 pp) and ProcessOut (90.36%, +0.87 pp) showed the strongest improvements among payment dimensions
-- "Others" payment method and "Unknown" provider showed notable declines (-1.69 pp and -1.92 pp respectively), though both represent low volumes (<1,000 orders)
+- US showed the strongest improvement at +0.96 pp (88.81% → 89.66%), representing 70% of total volume (12,162 orders)
+- CA declined by -0.70 pp (91.38% → 90.74%) but remains the higher-performing country
+- "Others" payment method saw the largest decline at -1.69 pp (98.83% → 97.16%), though volume is minimal (810 orders)
+- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating broad-based stability
+- Volume decreased 24% from W10-W11 (~25K) to W14-W15 (~17K), reflecting expected seasonal patterns
 
-**Action:** Monitor — The metric remains stable within normal operating range with no significant deviations requiring investigation. Continue tracking volume trends given the sustained decline over recent weeks.
+**Action:** Monitor — No intervention required. All checks passed, change is not significant, and the metric remains stable within the 8-week historical range.
 
 ---
 

@@ -8,25 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate improved slightly from 91.05% to 91.65% (+0.60 pp) in W15, representing a statistically non-significant change on 160,979 orders.
+## Executive Summary
+
+**Overall:** Payment Approval Rate improved modestly from 91.05% to 91.65% (+0.60pp) in W15, a statistically non-significant change within normal weekly fluctuation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within normal range | +0.92% | ✅ |
-| 2_PreDunningAR | Within normal range | +0.87% | ✅ |
-| 3_PostDunningAR | Within normal range | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
+| 1_FirstRunAR | Baseline | +0.92% | ✅ |
+| 2_PreDunningAR | Pre-Dunning | +0.87% | ✅ |
+| 3_PostDunningAR | Post-Dunning | +0.53% | ✅ |
+| 6_PaymentApprovalRate | Final PAR | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel stages showed modest improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06% current)
-- ProcessOut payment provider improved by +2.05 pp (82.67%) on 17,676 orders, approaching threshold
-- Unknown payment provider flagged with +13.15% change, but low volume (664 orders) limits impact
-- Volume declined 2.4% WoW (165,018 → 160,979), with notable drops in AO (-12.0%) and GN (-8.5%)
+- All funnel steps showed consistent improvement, with the largest gain at FirstRunAR (+0.92%), indicating upstream payment success drove the overall improvement
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17pp (13,883 orders)
+- ProcessOut provider improved +2.05pp (82.67% vs 81.01%) on 17,676 orders, contributing to overall gains
+- Unknown payment provider flagged with +13.15% change, but minimal volume (664 orders) limits impact significance
+- Volume declined -2.4% WoW (160,979 vs 165,018), continuing a multi-week downward trend from W08 peak
 
-**Action:** Monitor — The improvement is not statistically significant and all dimensions remain within normal operating ranges. Continue standard weekly monitoring.
+**Action:** Monitor — No significant changes or threshold breaches detected. Continue standard weekly tracking.
 
 ---
 

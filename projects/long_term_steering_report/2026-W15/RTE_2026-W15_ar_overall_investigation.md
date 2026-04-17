@@ -8,27 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved modestly from 92.46% to 92.83% (+0.40%) in W15, a non-significant change within normal weekly fluctuation range.
+**Overall:** Pre-Dunning Acceptance Rate improved modestly from 92.46% to 92.83% (+0.40%) in W15, with 421,406 orders processed; the change is not statistically significant and remains within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (91.07%-93.20%) | +0.40% | ✅ |
+| L0: 8-Week Trend | Rate within historical range (91.07%-93.20%) | +0.40% | ✅ |
 | L1: Country Breakdown | 1 country (TK) exceeded ±2.5% threshold | +7.54% TK | ⚠️ |
-| L1: Dimension Scan | 1 provider (Unknown) flagged but negligible volume (131) | +34.35% | ✅ |
-| L2: TK Deep-Dive | All payment methods improved significantly | +6.49% to +12.10% | ⚠️ |
+| L1: PaymentMethod | All methods within normal variance | -0.79% to +0.48% | ✅ |
+| L1: PaymentProvider | Unknown provider flagged (+34.35%) but minimal volume (131) | +0.08% to +0.49% core | ✅ |
+| L2: TK Deep-Dive | Significant improvement across all payment methods | +5.41% to +12.10% | ⚠️ |
 | L3: Related Metrics | All funnel metrics stable | -0.01% to +0.47% | ✅ |
-| Mix Shift | All countries stable, TK volume +9.6% | Minor | ✅ |
+| Mix Shift | No significant volume migration between AR tiers | All Stable | ✅ |
 
 **Key Findings:**
-- TK showed exceptional improvement (+7.54pp) driven by reduced "Insufficient Funds" declines (-5.81pp), with Adyen (+6.49%) and Braintree (+10.60%) both improving significantly
-- All payment methods in TK improved: applepay (+12.10%), credit_card (+6.49%), paypal (+5.41%)
-- FJ dominates volume (92.4% of total at 388,956 orders) with stable performance (+0.38%)
-- YE showed slight decline (-0.43%) but remains within acceptable range at 87.77%
-- Overall funnel health is strong: FirstRunAR (+0.47%), PreDunningAR (+0.41%), and PaymentApprovalRate (+0.12%) all improved while PostDunningAR held flat (-0.01%)
+- TK showed exceptional improvement of +7.54pp driven by reduced "Insufficient Funds" declines (-5.81pp), with applepay improving +12.10%, credit_card +6.49%, and paypal +5.41%
+- FJ remains the dominant market (388,956 orders, 92.4% of volume) with stable performance at 93.97% (+0.38%)
+- The "Unknown" PaymentProvider shows a +34.35% change but represents only 131 orders (0.03% of volume), making it statistically irrelevant
+- Overall volume declined by 2.4% (431,853 → 421,406) consistent with the downward volume trend observed since W11 (458,408)
+- All core payment providers (Braintree, Adyen, ProcessOut) showed modest improvements between +0.08% and +0.49%
 
-**Action:** Monitor — The overall change is not statistically significant. TK improvement appears to be a positive recovery from prior week underperformance (88.65% → 95.33%). Continue standard monitoring cadence.
+**Action:** Monitor - The overall change is not significant and the TK improvement is a positive development likely driven by reduced insufficient funds issues. No escalation required; continue standard monitoring cadence.
 
 ---
 

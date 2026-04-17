@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate for US-HF improved slightly from 92.85% to 93.02% (+0.17 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17 pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34 pp (US) | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34pp (US) | ✅ |
 | L1: PaymentMethod | "Others" declined -2.49% but low volume (91 orders) | Mixed | ✅ |
-| L1: PaymentProvider | No data flagged | N/A | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
 | Mix Shift | High AR tier stable, minor volume decrease (-0.9%) | Stable | ✅ |
 
 **Key Findings:**
-- The +0.17 pp week-over-week improvement is within normal fluctuation range and not statistically significant
-- US showed a +0.34 pp improvement (92.78% → 93.09%), well below the ±2.5% investigation threshold
-- Credit Card approval rate improved +0.90 pp (92.09% → 92.92%) on the highest volume (9,998 orders)
-- "Others" payment method declined -2.49 pp but represents negligible volume (91 orders)
-- Current rate of 93.02% remains below the 8-week high of 94.58% observed in 2026-W10
+- The +0.17pp WoW improvement is within normal weekly fluctuation and marked as not significant
+- Credit Card approval rate improved +0.90pp (92.09% → 92.92%) with the highest volume (9,998 orders)
+- "Others" payment method showed a -2.49pp decline, but volume is negligible (91 orders) and does not materially impact overall PCAR
+- Order volume increased 18.5% WoW (14,911 → 17,669), indicating healthy demand recovery
+- 8-week trend shows rate stabilizing in the 92.5%-93.5% range after a peak of 94.58% in W10
 
-**Action:** Monitor — No investigation required. The change is not significant and no dimensions exceeded alert thresholds.
+**Action:** Monitor — No investigation required. Continue standard weekly tracking.
 
 ---
 

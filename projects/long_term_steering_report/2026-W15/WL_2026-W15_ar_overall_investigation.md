@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but not statistically significant change within normal weekly variance.
+**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but statistically not significant change on 160,979 orders.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
 
 **Key Findings:**
-- All four funnel metrics showed consistent week-over-week improvement (+0.53% to +0.92%), indicating broad-based performance gains rather than isolated anomalies
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17%
-- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) and likely reflects data classification corrections
-- ProcessOut showed notable improvement (+2.31%) among meaningful payment providers, improving from 79.78% to 81.62%
-- Volume declined 2.4% week-over-week (165,018 → 160,979), with AO (-12.0%) and GN (-8.5%) showing the largest volume decreases
+- All AR funnel metrics show consistent improvement across the week, with 1_FirstRunAR leading at +0.92%
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (87.06%)
+- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) – likely data quality noise
+- ProcessOut provider improved +2.31 pp (81.62%) on 17,676 orders, approaching monitoring threshold
+- Volume declined 2.4% WoW (165,018 → 160,979), continuing a gradual downward trend from W08 (179,647)
 
-**Action:** Monitor — The improvement is positive but not statistically significant. Continue standard weekly monitoring; no investigation or escalation required.
+**Action:** Monitor – No investigation required. The improvement is positive but not statistically significant. Continue standard monitoring of ProcessOut performance and Unknown provider data quality.
 
 ---
 

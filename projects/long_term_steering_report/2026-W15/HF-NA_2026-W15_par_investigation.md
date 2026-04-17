@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11 pp) on 497,775 orders, representing a statistically non-significant change within normal operational variance.
+**Overall:** Payment Approval Rate showed a marginal improvement from 94.0% to 94.1% (+0.11pp) in W15, continuing a gradual upward trend observed over the past 8 weeks, with the change deemed not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | First payment attempt | +0.38 pp | ✅ |
-| 2_PreDunningAR | Pre-dunning recovery | +0.28 pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.04 pp | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.11 pp | ✅ |
+| 1_FirstRunAR | First attempt success | +0.38pp | ✅ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.28pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | -0.04pp | ✅ |
+| 6_PaymentApprovalRate | Final approval | +0.11pp | ✅ |
 
 **Key Findings:**
-- 8-week trend shows consistent upward trajectory from 93.27% (W08) to 94.1% (W15), gaining +0.83 pp over the period
-- US drove the week-over-week improvement with +0.34 pp gain (92.78% → 93.09%) on 492,811 orders; CA remained flat at +0.02 pp
-- PaymentProvider "Unknown" flagged with -4.07 pp decline (96.17% → 92.26%), but volume is minimal at only 775 orders (0.16% of total)
-- FirstRunAR improvement of +0.38 pp indicates better initial payment success, partially offset by slight PostDunningAR decline of -0.04 pp
-- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
+- All funnel stages are performing within normal ranges; the improvement is primarily driven by FirstRunAR (+0.38pp) and PreDunningAR (+0.28pp)
+- US showed the strongest country-level improvement at +0.34pp, while CA remained essentially flat at +0.02pp
+- PaymentProvider "Unknown" flagged with a -4.07pp decline, but volume is minimal (775 orders, <0.2% of total)
+- Consistent 8-week upward trend: PAR has improved from 93.27% (W08) to 94.1% (W15), a cumulative gain of +0.83pp
+- No countries or major payment methods exceeded the ±2.5% investigation threshold
 
-**Action:** Monitor — Continue standard weekly tracking. The +0.11 pp change is not statistically significant and falls within normal variance. The flagged "Unknown" provider decline warrants observation but low volume makes it immaterial to overall performance.
+**Action:** Monitor — The change is not significant and all metrics are trending positively. Continue standard monitoring; no investigation required.
 
 ---
 

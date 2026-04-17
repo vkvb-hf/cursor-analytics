@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Reactivation Rate declined from 90.99% to 90.47% (-0.52pp) in W15, a change that is not statistically significant.
+**Overall:** Reactivation Rate declined by 0.52 percentage points (pp) from 90.99% to 90.47% in W15, a statistically non-significant change within normal weekly fluctuation patterns.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within normal fluctuation range (85.79%-91.26%) | -0.52pp | ✅ |
-| Country Breakdown | US +0.34% (no countries exceed ±2.5% threshold) | +0.34pp | ✅ |
-| Payment Method | "Others" flagged with -50.00% change | -50.00pp | ⚠️ |
-| Mix Shift | High AR Tier volume stable (-0.9%) | -0.9% | ✅ |
+| 8-Week Trend | Rate within historical range (85.79%-91.26%) | -0.52pp | ✅ |
+| Country Breakdown | US at +0.34%, no country exceeds ±2.5% threshold | +0.34pp | ✅ |
+| Payment Method | "Others" flagged at -50.00pp but minimal volume (4 orders) | -50.00pp | ⚠️ |
+| Mix Shift | High AR tier volume stable (-0.9%) | -0.9% vol | ✅ |
 
 **Key Findings:**
-- The -0.52pp decline is within normal weekly variance; the 8-week trend shows rates fluctuating between 85.79% and 91.26%
-- US country-level performance actually improved slightly (+0.34pp), indicating the aggregate decline is not driven by country mix
-- "Others" payment method shows a significant -50.00pp drop, but with only 4 orders, this is not material to overall performance
-- Volume increased substantially from 14,736 to 21,155 orders (+43.6%), which may introduce natural rate variance
-- No systemic issues identified across payment providers or major payment methods (Credit Card -0.45pp, Apple Pay -0.55pp, PayPal -1.21pp)
+- The W15 decline of -0.52pp follows a W14 increase of +0.40pp, representing normal week-over-week volatility
+- US country-level performance actually improved (+0.34pp), suggesting the aggregate decline is driven by mix or segment composition
+- The "Others" payment method shows a dramatic -50.00pp decline but represents only 4 orders (0.02% of volume), making it statistically irrelevant
+- Volume increased significantly from 14,736 to 21,155 orders (+43.6%), which may contribute to rate normalization
+- Current rate of 90.47% remains elevated compared to the 8-week low of 85.79% in W09
 
-**Action:** Monitor – No significant anomalies detected; continue standard weekly tracking.
+**Action:** Monitor — No significant deviations detected; the change is within normal operating variance and no dimensions exceeded investigation thresholds.
 
 ---
 

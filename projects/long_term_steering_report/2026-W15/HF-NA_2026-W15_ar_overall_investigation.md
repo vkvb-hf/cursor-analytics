@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved slightly from 92.17% to 92.42% (+0.25pp) in W15, a statistically non-significant change within normal operating range.
+**Overall:** Pre-Dunning Acceptance Rate (Overall) for HF-NA improved slightly from 92.17% to 92.42% (+0.25 pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within range | +0.38pp | ✅ |
-| 2_PreDunningAR | Within range | +0.28pp | ✅ |
-| 3_PostDunningAR | Within range | -0.04pp | ✅ |
-| 6_PaymentApprovalRate | Within range | +0.11pp | ✅ |
+| 1_FirstRunAR | First payment attempt | +0.38 pp | ✅ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.28 pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | -0.04 pp | ✅ |
+| 6_PaymentApprovalRate | Final approval | +0.11 pp | ✅ |
 
 **Key Findings:**
-- The +0.27% week-over-week change is not statistically significant and falls within the normal 8-week fluctuation band (91.35% - 92.42%)
-- No countries exceeded the ±2.5% threshold; US improved +0.34pp while CA remained stable at +0.02pp
-- Apple Pay showed the largest payment method improvement at +0.56pp (86.28%), though it remains the lowest-performing method
-- Volume declined by 1.9% (507,189 → 497,775 orders), continuing a gradual downward trend observed over the 8-week period
-- All payment providers performed within normal ranges; Braintree (largest volume at 385,045) improved +0.32pp
+- All funnel metrics remain stable with no significant changes; the overall rate of 92.42% continues an upward trend from 91.35% in W08
+- No countries exceeded the ±2.5% threshold; US showed the largest improvement at +0.34 pp while CA remained flat at +0.02 pp
+- Apple Pay showed the strongest improvement among payment methods (+0.56 pp to 86.28%), though it remains the lowest-performing method
+- Volume declined by approximately 1.9% week-over-week (507,189 → 497,775 orders), consistent with the gradual downward volume trend observed over the 8-week period
+- Mix shift analysis shows stable distribution with both US and CA maintaining High AR tier (>92%)
 
-**Action:** Monitor — No action required. The metric movement is within normal variance, all funnel steps show healthy performance, and no dimensional breakdowns flagged concerning patterns.
+**Action:** Monitor — No intervention required. The metric shows normal fluctuation within expected ranges and continues a gradual positive trend over the 8-week period.
 
 ---
 

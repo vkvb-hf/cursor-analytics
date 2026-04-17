@@ -8,25 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.85 pp) in W15, representing a non-significant increase on a volume of 12,162 orders.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 88.81% to 89.66% (+0.85 pp) week-over-week, a statistically non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within normal range | +1.27 pp | ✅ |
-| 2_PreDunningAR | Within normal range | +0.85 pp | ✅ |
-| 3_PostDunningAR | Within normal range | +0.84 pp | ✅ |
-| 6_PaymentApprovalRate | Within normal range | +0.85 pp | ✅ |
+| 8-Week Trend | Rate within historical range (87.73%-90.11%) | +0.85 pp | ✅ |
+| Country Breakdown | No countries exceeding ±2.5% threshold | +0.96% | ✅ |
+| Dimension Scan | All payment methods/providers within normal variance | <1.25% | ✅ |
+| Related Metrics | All funnel metrics improved consistently | +0.93-1.45% | ✅ |
+| Mix Shift | US volume stable, no tier migration | +5.5% vol | ✅ |
 
 **Key Findings:**
-- All funnel stages show consistent improvement (+0.84 to +1.27 pp), with FirstRunAR showing the strongest gain at +1.45% change
-- No payment methods or providers exceeded the ±2.5% threshold; Credit Card showed the largest improvement (+1.17%) on the highest volume (6,577 orders)
-- ProcessOut provider improved +1.22% on 6,433 orders, contributing meaningfully to the overall rate increase
-- Volume increased +5.5% week-over-week (11,533 → 12,162) while maintaining stable performance in the Medium AR tier (>85%)
-- 8-week trend shows recovery from W13 trough (87.73%) back toward the W11 peak (90.11%)
+- All related funnel metrics improved in parallel: 1_FirstRunAR (+1.45%), 2_PreDunningAR (+0.96%), 3_PostDunningAR (+0.93%), and 6_PaymentApprovalRate (+0.95%)
+- Credit Card acceptance improved +1.17% (90.30%) driving the largest payment method contribution at 6,577 orders (54% of volume)
+- ProcessOut showed the strongest provider improvement at +1.22% (90.52%) handling 6,433 orders (53% of volume)
+- Volume increased +5.5% (11,533 → 12,162 orders) while maintaining improved acceptance rates
+- Current rate of 89.66% represents a recovery toward W11 peak levels (90.11%) after W13 dip (87.73%)
 
-**Action:** Monitor — The improvement is not statistically significant and all dimensions remain within normal operating ranges. Continue standard weekly tracking.
+**Action:** Monitor — No investigation required. All checks passed, change is not statistically significant, and improvement aligns with consistent gains across the full payment funnel.
 
 ---
 

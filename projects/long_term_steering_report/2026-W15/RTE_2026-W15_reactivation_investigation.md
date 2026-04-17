@@ -14,20 +14,20 @@
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Sustained improvement over 8 weeks | +5.70 pp since W08 | ✅ |
-| L1: Country Breakdown | 1 country (TK) exceeded ±2.5% threshold | TK +7.54% | ⚠️ |
-| L1: PaymentMethod | 1 segment (Others) exceeded threshold | Others +2.78% | ⚠️ |
-| L2: TK Deep-Dive | Root cause identified | Insufficient Funds -5.81 pp | ✅ |
-| Mix Shift | Volume shifts stable across all countries | TK +9.6% volume | ✅ |
+| L0: 8-Week Trend | Consistent upward trend | +5.70 pp over 8 weeks | ✅ |
+| L1: Country Scan | 1 country exceeds ±2.5% threshold | TK +7.54% | ⚠️ |
+| L1: Dimension Scan | 1 PaymentMethod exceeds threshold | Others +2.78% | ⚠️ |
+| L2: TK Deep-Dive | Multiple payment improvements | applepay +12.10%, credit_card +6.49% | ✅ |
+| Mix Shift | Volume shifts stable | TK +9.6% volume, all others stable | ✅ |
 
 **Key Findings:**
-- TK drove the largest country-level improvement at +7.54 pp, with applepay showing the strongest gain (+12.10 pp) and credit_card improving +6.49 pp
-- The primary root cause in TK was a significant reduction in "Insufficient Funds" declines, dropping from 8.32% to 2.51% (-5.81 pp)
-- Braintree provider in TK showed the largest improvement at +10.60 pp (from 85.27% to 94.31%)
-- The overall 8-week trend shows consistent improvement with the rate climbing from 84.71% (W08) to 90.41% (W15)
-- Volume decreased slightly from 17,264 to 19,757 orders (+14.4%), with TK volume increasing +9.6%
+- TK drove the largest country-level improvement at +7.54 pp, with volume increasing 9.6% (1,779 → 1,950 orders)
+- TK's improvement was primarily driven by reduced "Insufficient Funds" declines, dropping from 8.32% to 2.51% (-5.81 pp)
+- All payment methods in TK showed significant improvement: applepay (+12.10 pp), credit_card (+6.49 pp), paypal (+5.41 pp)
+- Braintree provider in TK showed the strongest recovery at +10.60 pp (85.27% → 94.31%)
+- Minor declines in TV (-1.37 pp) and YE (-0.43 pp) were offset by broad-based improvements elsewhere
 
-**Action:** Monitor - The improvement is driven by genuine decline reason reduction (Insufficient Funds) in TK across multiple payment methods and providers. Continue monitoring TK performance to ensure sustainability.
+**Action:** Monitor – The improvement is driven by legitimate operational gains (reduced payment declines) rather than mix shift. Continue monitoring TK performance to confirm sustainability.
 
 ---
 

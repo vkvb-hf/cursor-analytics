@@ -8,25 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in WL 2026-W15, representing a modest increase that is not statistically significant.
+## Executive Summary
+
+**Overall:** Payment Checkout Approval Rate improved from 97.03% to 97.37% (+0.35pp) in W15, though this change is not statistically significant given the volume of 11,721 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (96.86%-97.37%) | +0.35pp | ✅ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | Max: AO +2.17pp | ✅ |
-| L1: Payment Method | All methods stable | Apple Pay +0.71pp | ✅ |
-| Mix Shift Analysis | All volume shifts marked Stable | AO -12.0% vol | ✅ |
+| L0: 8-Week Trend | Metric within normal range (96.86%-97.37%) | +0.35pp | ✅ |
+| L1: Country Breakdown | No countries exceeded ±2.5% threshold | All <2.5pp | ✅ |
+| L1: Payment Method | All methods stable, Apple Pay highest gain | +0.71pp max | ✅ |
+| Mix Shift Analysis | Volume shifts stable across tiers | No impact | ✅ |
 
 **Key Findings:**
-- The +0.35pp improvement brings the rate back to 97.37%, matching the 8-week high observed in W10
-- AO showed the largest rate improvement (+2.17pp) but experienced significant volume decline (-12.0%), which may contribute to the overall rate improvement through mix effect
-- Apple Pay showed notable improvement (+0.71pp to 97.34%) with 3,871 orders, while other payment methods remained stable
-- MR continues to have the lowest approval rate at 81.41%, though it improved +1.45pp from prior week
-- Overall volume decreased to 11,721 orders from 11,373, continuing a declining trend from the W11 peak of 15,835
+- The +0.35pp increase returns the rate to the W10 level (97.37%), suggesting normal fluctuation within the 8-week range
+- AO showed the largest country-level improvement at +2.17pp (87.06%), though still below the 2.5% investigation threshold
+- Apple Pay approval rate improved by +0.71pp (96.65% → 97.34%), the largest gain among payment methods
+- Overall order volume declined by approximately 3% (11,373 → 11,721 orders) week-over-week
+- MR volume decreased by 6.3% and AO volume decreased by 12.0%, but neither shift materially impacted the aggregate rate
 
-**Action:** Monitor - The change is not statistically significant and all dimensional checks passed within normal thresholds. Continue standard monitoring cadence.
+**Action:** Monitor – No significant changes detected; all dimensions remain within normal operating parameters.
 
 ---
 

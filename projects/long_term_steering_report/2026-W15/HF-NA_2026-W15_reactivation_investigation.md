@@ -8,26 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.78%, or -0.71 pp) in W15, with the change flagged as not statistically significant.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined from 90.95% to 90.24% (-0.78%, or -0.71pp) in W15, though this change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within normal range (86.89%-91.02%) | -0.71 pp | ✅ |
-| Country Breakdown | US +0.34%, CA +0.02% | No country >±2.5% | ✅ |
-| Payment Method | Others -52.38% (7 orders) | Low volume outlier | ⚠️ |
-| Payment Provider | No data flagged | N/A | ✅ |
-| Mix Shift | US -0.9%, CA -2.2% volume | Stable impact | ✅ |
+| 8-Week Trend | Rate within normal range (86.89%-91.02%) | -0.71pp | ✅ |
+| Country Breakdown | No country exceeded ±2.5% threshold | US: +0.34%, CA: +0.02% | ✅ |
+| Payment Method | "Others" flagged but minimal volume | -52.38% on 7 orders | ⚠️ |
+| Mix Shift | Both US and CA stable in High tier | US: -0.9%, CA: -2.2% vol | ✅ |
 
 **Key Findings:**
-- The -0.78% week-over-week decline is not statistically significant and falls within the normal 8-week fluctuation range (86.89% to 91.02%)
-- No countries exceeded the ±2.5% threshold; both US (+0.34%) and CA (+0.02%) showed stable or slightly improved performance
-- "Others" payment method showed a -52.38% decline, but this is based on only 7 orders (negligible volume impact)
-- Volume increased significantly from 20,279 (W14) to 26,178 (W15), a +29% increase, which may contribute to natural rate variance
-- Current rate of 90.24% remains elevated compared to W08-W10 baseline (86.89%-88.23%)
+- The -0.78% week-over-week decline is within normal weekly fluctuation observed over the 8-week period (range: 86.89% to 91.02%)
+- Volume increased significantly from 20,279 (W14) to 26,178 (W15), a +29% increase, which may contribute to rate normalization
+- Both US (+0.34%) and CA (+0.02%) showed stable or slightly improved reactivation rates at the country level
+- The "Others" payment method showed a -52.38% decline but represents only 7 orders total, making it statistically irrelevant
+- Credit Card (18,327 orders) showed a modest -0.72% decline, representing the largest volume contributor
 
-**Action:** Monitor — No investigation required. The decline is not significant, no dimensional flags warrant deep-dive, and the rate remains within healthy historical bounds.
+**Action:** Monitor — The decline is not statistically significant, falls within normal weekly variance, and no dimensions exceeded investigation thresholds. Continue standard monitoring in W16.
 
 ---
 

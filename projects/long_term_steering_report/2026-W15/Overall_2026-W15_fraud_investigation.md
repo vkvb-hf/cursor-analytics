@@ -1,22 +1,22 @@
 # Fraud Approval Rate - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-17 13:30  
+**Generated:** 2026-04-17 14:34  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Fraud Approval Rate performance was mixed across clusters in 2026-W15, with US-HF and HF-NA experiencing significant declines while HF-INTL, WL, and RTE remained stable within normal operating ranges. The most critical concern is the +409% spike in PF Block rate within the US Referral channel, driving FAR down by 12.15pp and requiring immediate investigation to determine if this reflects a new fraud pattern, policy change, or system issue.
+Fraud Approval Rate showed mixed performance globally this week, with significant declines in US-HF (-2.61%) and HF-NA (-1.44%) offset by stable or marginally improving results in other clusters. The most critical concern is the +409.56% spike in PF Block rate within the US Referral channel, which drove FAR down from 70.00% to 61.50% and requires immediate investigation for potential false positive over-blocking.
 
 ### Cluster Highlights
 
-- **US-HF:** FAR declined significantly from 91.59% to 89.20% (-2.39pp), driven by Referral channel deterioration where PF Block rate surged +409% from 2.48% to 12.62%.
-- **HF-INTL:** FAR improved modestly from 91.67% to 92.17% (+0.55pp), a non-significant change within normal variance, with AT Referral showing +25.53pp improvement offset by NZ Referral declining -21.35pp.
-- **WL:** FAR stable at 93.41% (+0.52pp), with no countries exceeding thresholds and Referral channel volatility in MR and AO remaining within acceptable bounds.
-- **HF-NA:** FAR declined significantly from 90.97% to 89.66% (-1.31pp), primarily driven by US Referral channel where the +409% PF Block rate spike caused FAR to drop 12.15pp.
-- **RTE:** FAR stable at 94.75% (+0.10pp), with TO (+5.60pp) and TV (+2.89pp) showing improvements driven by reduced duplicate rates, though TV Referral showed concerning -6.75pp decline.
+- **US-HF:** FAR declined significantly from 91.59% to 89.20% (-2.61%), driven by a severe PF Block rate spike (+409.56%) in the Referral channel causing FAR to collapse from 70.00% to 61.50%.
+- **HF-INTL:** FAR stable at 92.17% (+0.55%, not significant), with AT Referral improving +25.53% due to decreased duplicate activity while NZ Referral declined -21.35% from elevated duplicate blocking.
+- **WL:** FAR stable at 93.41% (+0.57%, not significant), with minor offsetting movements across channels as MR Paid improved +2.53% while MR Referral declined -4.16%.
+- **HF-NA:** FAR declined significantly from 90.97% to 89.66% (-1.44%), driven entirely by US Referral channel deterioration (-12.15%) due to the PF Block rate surge to 12.62%.
+- **RTE:** FAR stable at 94.75% (+0.10%, not significant), with TO and TV exceeding thresholds (+5.60% and +2.89% respectively) due to natural duplicate rate fluctuations.
 
 ---
 
