@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 91.73% to 92.56% (+0.90%) in W16, returning to W12 levels after a mid-period dip, though the change is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 91.73% to 92.56% (+0.90%) in W16, returning to W12 levels, though this change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.56% vs 8-wk high 93.59%) | +0.90% | ✅ |
-| L1: Country Breakdown | 3 countries exceed ±2.5% threshold (YE, TV, TO) | +2.78% to +5.50% | ⚠️ |
-| L1: Dimension Scan | Unknown PaymentProvider shows -13.04% decline | -13.04% | ⚠️ |
-| L2: Flagged Countries | All 3 flagged countries improved (positive movement) | +2.78% to +5.50% | ✅ |
-| L3: Related Metrics | All funnel metrics improved consistently (+0.90% to +1.04%) | +0.90% to +1.04% | ✅ |
-| Mix Shift | TO volume dropped -22.6%, TK volume increased +34.3% | Variable | ⚠️ |
+| L0: 8-Week Trend | Rate within historical range (90.83%-93.59%) | +0.83pp | ✅ |
+| L1: Country Variance | 3 countries exceed ±2.5% threshold (YE, TV, TO) | +2.78% to +5.50% | ⚠️ |
+| L1: Dimension Scan | PaymentProvider "Unknown" flagged at -13.04% | -13.04% | ⚠️ |
+| L2: Root Cause | Insufficient Funds declining across flagged countries | -2.13pp to -3.87pp | ✅ |
+| L3: Related Metrics | All funnel metrics improving in parallel (+0.90% to +1.04%) | Aligned | ✅ |
+| Mix Shift | TO volume dropped -22.6%, TK volume increased +34.3% | Minor impact | ✅ |
 
 **Key Findings:**
-- YE improved +2.78% (86.50% → 88.90%) driven by reduced Insufficient Funds declines (-2.13pp) despite Unknown provider showing -16.15% volatility on low volume (23 transactions)
-- TV improved +5.21% (91.32% → 96.07%) with significant gains in credit_card (+12.38%) and applepay (+6.46%), supported by Insufficient Funds decline reduction (-3.87pp)
-- TO improved +5.50% (85.69% → 90.40%) primarily through Adyen performance improvement (+7.71%) and reduced Insufficient Funds (-2.43pp), despite -22.6% volume contraction
-- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) moved in parallel, indicating systemic improvement rather than isolated anomaly
-- Global volume increased +6.4% (30,171 → 32,099) suggesting healthy order growth alongside rate improvement
+- YE, TV, and TO all showed improvements (+2.78%, +5.21%, +5.50% respectively), driven primarily by reduced "Insufficient Funds" declines (-2.13pp, -3.87pp, -2.43pp)
+- TV saw significant improvement in credit_card (+12.38%) and applepay (+6.46%) payment methods, with Braintree provider improving +8.48%
+- TO experienced a -22.6% volume drop (552 → 427 orders) alongside its rate improvement, suggesting potential mix shift effect
+- "Unknown" PaymentProvider shows concerning volatility (-13.04% in L1, -16.15% in YE) but represents minimal volume (91 orders globally)
+- All related metrics (FirstRunAR, PreDunningAR, PostDunningAR, PaymentApprovalRate) improved in parallel, indicating systemic improvement rather than isolated fluctuation
 
-**Action:** Monitor — The improvement is positive but not statistically significant. Continue tracking W17 to confirm whether the upward trend stabilizes at the ~92.5% level or represents normal variance within the 90.83%-93.59% range observed over the past 8 weeks.
+**Action:** Monitor – The improvement is positive but not statistically significant. Continue tracking YE, TV, and TO performance in W17 to confirm trend sustainability. No immediate escalation required.
 
 ---
 

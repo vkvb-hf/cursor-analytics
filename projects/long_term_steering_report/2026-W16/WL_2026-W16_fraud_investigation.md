@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate declined slightly from 93.28% to 92.95% (-0.33pp) in W16, a change that is **not statistically significant** and remains within normal operating range.
+**Overall:** The Fraud Approval Rate declined slightly from 93.28% to 92.95% (-0.33pp) in W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | FAR within historical range (92.70%-94.34%) | -0.33pp | ✅ |
-| L1: Country Scan | No country exceeds ±2.5% threshold | Max: ER +1.28% | ✅ |
-| L1: Channel Category | Referral down but below threshold | -1.86% | ✅ |
-| L2: CG Referral | FAR decline with elevated Dup Block | -4.60%, Dup Block +42.91% | ⚠️ |
-| L2: KN Referral | Significant FAR drop, Dup Rate surge | -16.91%, Dup Rate +91.81% | ⚠️ |
-| L2: ER Referral | FAR improved despite flag | +3.02% | ✅ |
+| L0: WL Trend | 8-week stability check | -0.35% WoW | ✅ Within normal range |
+| L1: Country Scan | Threshold ±2.5% | No countries exceed | ✅ No flags |
+| L1: Channel Scan | Category comparison | Referral -1.86% | ✅ Below threshold |
+| L2: CG Referral | Deep-dive | -4.60% FAR | ⚠️ Elevated Dup Block |
+| L2: KN Referral | Deep-dive | -16.91% FAR | ⚠️ Critical decline |
+| L2: ER Referral | Deep-dive | +3.02% FAR | ✅ Improving |
 
 **Key Findings:**
-- KN Referral channel shows severe degradation: FAR dropped 16.91% (84.54% → 70.25%) with Duplicate Rate nearly doubling (+91.81%) on low volume (121 customers)
-- CG Referral FAR declined 4.60% with Duplicate Block Rate increasing 42.91% (13.08% → 18.69%)
-- Overall Duplicate Rate increased across WL (+1.40pp, from 15.74% to 17.14%) and PF Block Rate rose (+0.27pp)
-- Paid channels remain stable across all countries with FAR changes under ±0.51%
-- Total volume decreased 5.5% WoW (15,143 → 14,308), consistent with recent downward trend
+- KN Referral channel shows critical FAR decline of -16.91% (84.54% → 70.25%) with Duplicate Rate nearly doubling (+91.81%) and Dup Block Rate increasing by +76.42%
+- CG Referral FAR declined -4.60% (83.92% → 80.06%) driven by Dup Rate increase of +24.19% and Dup Block increase of +42.91%
+- Overall Duplicate Rate increased across WL from 15.74% to 17.14% (+1.40pp), reaching the highest level in the 8-week window
+- PF Block Rate increased from 0.69% to 0.96% (+0.27pp) at the WL level, with CG Paid showing +60.34% increase in PF blocks
+- Volume declined across all major countries (total -835 customers, -5.5% WoW)
 
-**Action:** **Monitor** - The overall metric change is not significant. However, KN Referral channel warrants close observation next week; if the duplicate surge and FAR decline persist, escalate for root cause investigation into potential referral abuse.
+**Action:** Investigate — The KN Referral channel requires immediate investigation due to the severe FAR decline and duplicate rate spike. Review duplicate detection rules and assess whether a specific referral source is driving fraudulent traffic.
 
 ---
 
@@ -90,7 +90,7 @@
 | Referral | 2026-W15 | 83.92% | - | 15.80% | - | 13.08% | - | 0.27% | - | 367 |  |
 | Referral | 2026-W16 | 80.06% | -4.60% | 19.63% | +24.19% | 18.69% | +42.91% | 0.00% | -100.00% | 321 | ⚠️ |
 
-**Analysis:** The W16 Fraud Approval Rate decline of 0.33pp is not statistically significant and the overall metric remains healthy at 92.95%. The primary concern is isolated to the Referral channel, particularly in KN where a small cohort (121 customers) experienced a sharp increase in duplicate submissions driving FAR down to 70.25%. No immediate action is required, but the KN and CG Referral segments should be monitored in W17 to determine if this represents emerging fraud patterns or normal week-over-week variance on low-volume segments.
+**Analysis:** While the overall WL Fraud Approval Rate change of -0.35% is not significant, the deep-dive analysis reveals a concentrated issue in the KN Referral channel where FAR dropped 16.91pp with duplicate rates nearly doubling. This pattern suggests a potential fraud attack or abuse vector through KN referral traffic that is being correctly caught by duplicate blocking mechanisms. Recommend focused investigation on KN Referral sources and monitoring of CG Referral for similar patterns.
 
 ---
 

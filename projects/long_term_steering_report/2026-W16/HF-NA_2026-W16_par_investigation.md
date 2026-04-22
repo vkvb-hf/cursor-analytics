@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-NA showed minimal improvement from 94.1% to 94.13% (+0.03pp) in W16, continuing a steady 8-week upward trend from 93.36% in W09, with the change deemed not statistically significant.
+**Overall:** Payment Approval Rate for HF-NA remained essentially flat in 2026-W16, showing a marginal improvement of +0.03pp (94.1% → 94.13%) on 513,372 orders, which is not statistically significant.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | 6_PaymentApprovalRate | Final | +0.04pp | ✅ |
 
 **Key Findings:**
-- Upstream funnel metrics declined (FirstRunAR -0.26pp, PreDunningAR -0.12pp, PostDunningAR -0.20pp) while final PAR slightly improved, indicating effective downstream recovery mechanisms
-- US drove the positive movement (+0.06pp to 94.59%) while CA experienced a minor decline (-0.09pp to 95.76%)
-- Apple Pay showed the strongest improvement among payment methods (+0.35pp to 89.07%), though it remains the lowest-performing method
-- ProcessOut improved notably (+0.49pp to 92.81%) while Adyen declined slightly (-0.09pp to 95.67%)
-- No countries or dimensions exceeded the ±2.5% threshold requiring deep-dive investigation
+- The 8-week trend shows consistent improvement from 93.36% (W09) to 94.13% (W16), representing a cumulative gain of +0.77pp over the period
+- US drove the slight improvement with +0.06pp on 511,272 orders, while CA declined -0.09pp on 104,640 orders
+- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed minor declines between -0.12pp and -0.26pp, yet final PAR still improved slightly
+- ProcessOut showed the strongest provider improvement at +0.49pp (92.36% → 92.81%) on 100,783 orders
+- Apple Pay improved +0.35pp (88.76% → 89.07%) but remains the lowest-performing payment method at 89.07%
 
-**Action:** Monitor — The change is not significant and all metrics remain within normal operating ranges. Continue tracking upstream funnel softness in FirstRunAR and PostDunningAR.
+**Action:** Monitor — No significant changes detected; all dimensions within normal operating ranges. Continue tracking the positive 8-week trend and monitor upstream funnel metrics for potential future impact.
 
 ---
 

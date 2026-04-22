@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined from 37.75% to 37.09% (-0.66pp) on 76,258 payment visits in HF-INTL during 2026-W16.
+**Overall:** Payment Conversion Rate declined by -0.66pp (37.75% → 37.09%) on 76,258 payment visits in 2026-W16, driven primarily by a significant drop at the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥-0.33pp | -1.27pp | ⚠️ |
-| Click Submit Form | ≥-0.33pp | +0.13pp | ✅ |
-| FE Validation Passed | ≥-0.33pp | -0.44pp | ⚠️ |
-| Enter Fraud Service | ≥-0.33pp | -0.40pp | ⚠️ |
-| Approved by Fraud Service | ≥-0.33pp | +0.05pp | ✅ |
-| Call to PVS | ≥-0.33pp | -0.19pp | ✅ |
-| Successful Checkout | ≥-0.33pp | +1.28pp | ✅ |
+| Select Payment Method | Top-of-funnel engagement | -1.27pp | ⚠️ |
+| Click Submit Form | Form submission intent | +0.13pp | ✅ |
+| FE Validation Passed | Client-side validation | -0.44pp | ⚠️ |
+| Enter Fraud Service | Fraud check routing | -0.40pp | ⚠️ |
+| Approved by Fraud Service | Fraud approval rate | +0.05pp | ✅ |
+| Call to PVS | Payment verification routing | -0.19pp | ✅ |
+| Successful Checkout | Final conversion | +1.28pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary driver** of the PCR decline with -1.27pp conversion drop at cluster level, affecting GB (-1.80pp), FR (-1.55pp), and IE (-7.09pp severely)
-- **Adyen_Sepa continues to bypass Fraud Service** with 1,197 checkout attempts skipping fraud checks (83.5% of all gap), explaining the Enter Fraud Service degradation (-0.40pp)
-- **ProcessOut_CreditCard and Braintree_ApplePay underperformed** with -1.26pp and -1.22pp rate declines respectively, impacting high-volume payment methods
-- **PVS performance improved significantly** (+1.28pp) with total failures dropping from 1,143 to 809 (-334 failures), partially offsetting upstream losses
-- **IE experienced severe degradation** (-5.14pp PCR) driven primarily by Select Payment Method drop (-7.09pp) despite 23.55% volume increase
+- **Select Payment Method is the primary bottleneck:** -1.27pp decline in GA waterfall, with country-level impacts ranging from -7.09pp in IE to -1.80pp in GB and -1.55pp in FR
+- **Adyen_Sepa bypassing fraud service:** 83-84% of the gap between Checkout Attempt and Enter Fraud Service is attributed to Adyen_Sepa, with gap increasing from 1,005 to 1,448 sessions (+0.85pp)
+- **FR experiencing elevated fraud rejection:** Approved by Fraud Service dropped -1.94pp in FR backend waterfall, contributing to the -1.81pp overall PCR decline in that market
+- **PVS performance improved significantly:** Total PVS failures decreased from 1,143 to 809 (-334), with "Cancelled: Cancelled" and "RedirectShopper" errors showing notable reductions
+- **LU showed strong positive performance:** +17.41pp PCR improvement driven by +10.87pp at Select Payment Method, though on low volume (91 visits)
 
-**Action:** Investigate - Focus on Select Payment Method drop across GB, FR, and IE; review Adyen_Sepa fraud service bypass configuration; analyze user behavior changes causing payment method selection abandonment.
+**Action:** Investigate — Focus on root cause analysis for the Select Payment Method drop, particularly the payment method presentation and user engagement issues affecting IE, GB, and FR. Additionally, review the Adyen_Sepa fraud service bypass logic and FR fraud rejection rate increase.
 
 ---
 

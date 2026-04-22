@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 45.59% to 48.92% (+3.33pp) in 2026-W16, exceeding the threshold of +1.66pp, driven primarily by improved conversion at the Select Payment Method step.
+**Overall:** Payment Conversion Rate improved significantly from 45.59% to 48.92% (+3.33pp), exceeding the threshold of +1.66pp, driven primarily by improved conversion at the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | >1.66pp threshold | +3.43pp | ⚠️ |
-| Click Submit Form | >1.66pp threshold | +1.40pp | ✅ |
-| FE Validation Passed | >1.66pp threshold | +0.07pp | ✅ |
-| Enter Fraud Service | >1.66pp threshold | -0.04pp | ✅ |
-| Approved by Fraud Service | >1.66pp threshold | -0.40pp | ✅ |
-| Call to PVS | >1.66pp threshold | +0.03pp | ✅ |
-| Successful Checkout | >1.66pp threshold | -0.02pp | ✅ |
+| Select Payment Method | Rate improved | +3.43pp | ✅ |
+| Click Submit Form | Rate improved | +1.40pp | ✅ |
+| FE Validation Passed | Rate stable | +0.07pp | ✅ |
+| Enter Fraud Service | Rate stable | -0.04pp | ✅ |
+| Approved by Fraud Service | Rate declined | -0.40pp | ⚠️ |
+| Call to PVS | Rate stable | +0.03pp | ✅ |
+| Successful Checkout | Rate stable | -0.02pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method** is the primary driver of PCR improvement, with conversion increasing +3.43pp (56.25% → 59.68%) at the cluster level
-- **FJ** contributed most to the improvement with +5.15pp PCR increase (43.45% → 48.60%), driven by +5.41pp at Select Payment Method step
-- **TT** showed the largest absolute change (+10.94pp PCR), with Select Payment Method improving +7.11pp and Fraud Approval improving +3.99pp
-- **YE** moved against the trend with -3.60pp PCR decline, primarily due to a -4.09pp drop at Select Payment Method
-- **Braintree_ApplePay** showed significant improvement (+4.34pp) from 87.67% to 92.01% success rate, contributing to overall gains
+- Select Payment Method conversion increased +3.43pp (56.25% → 59.68%), representing the largest positive driver of the overall PCR improvement
+- Braintree_ApplePay showed the strongest payment method improvement at +4.34pp (87.67% → 92.01%), with substantial volume (10,851 attempts)
+- FJ drove the majority of improvement with +5.15pp PCR increase on 36,172 visits, primarily from Select Payment Method (+5.41pp)
+- TT showed exceptional growth (+10.94pp) with volume increasing 40.81% (1,017 → 1,432 visits) and Select Payment Method improving +7.11pp
+- YE partially offset gains with -3.60pp decline, driven by a -4.09pp drop in Select Payment Method conversion (62.56% → 58.47%)
 
-**Action:** Monitor — The improvement is positive and appears driven by legitimate conversion gains at the payment method selection step. Continue monitoring to confirm the trend sustains, with attention to YE's counter-trend decline.
+**Action:** Monitor - The improvement is positive and widespread across major markets. Continue tracking Braintree_ApplePay performance and investigate the decline in YE Select Payment Method conversion if it persists.
 
 ---
 

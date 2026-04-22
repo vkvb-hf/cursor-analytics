@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved from 65.58% to 66.73% (+1.15pp) in W16, driven primarily by the transition from Pre-Payday to Payday phase across the HF-INTL cluster, with volume increasing 11% to 30,285 eligible orders.
+**Overall:** Dunning Ship Rate improved from 65.58% to 66.73% (+1.15pp) week-over-week, with volume increasing by 11.0% (27,283 → 30,285 eligible orders) as the cluster transitioned from Pre-Payday to Payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | Ship Rate | 65.58% → 66.73% | +1.8% | ✅ Improved |
 
 **Key Findings:**
-- **AU** showed strong improvement (+7.0% SR) driven by an 8.7% decrease in Discount %, indicating better payment quality during Payday phase
-- **NO** had the largest SR gain (+7.3%) with significant Discount % reduction (-21.9%) and 59% volume increase, suggesting strong payday-driven recovery
-- **NZ** is a concern with SR declining 13.3% despite Payday phase, accompanied by a 17.7% increase in Discount % and negative PC2 movement (-2.4%)
-- **GB** contributed most to volume growth (+22.4%) with moderate SR improvement (+4.1%), though Discount % increased (+3.4%)
-- Mix shift favored performance: high-performing NO grew 59% while lower-performing BE contracted 15.3%
+- **AU** showed strong improvement (+7.0% SR) driven primarily by an 8.7% reduction in Discount %, indicating better payment behavior during Payday phase
+- **NO** achieved the highest Ship Rate gain (+7.3%) with a significant 21.9% decrease in Discount % and 59.0% volume increase, suggesting strong Payday effect
+- **NZ** is a concern with Ship Rate declining 13.3% despite Payday phase, accompanied by a 17.7% increase in Discount % usage
+- **GB** improved (+4.1% SR) despite increased Discount % (+3.4%), suggesting Payday liquidity offset discount pressure; volume grew 22.4%
+- Mix shift detected: NO volume increased 59.0% (high-performing at 88.19% SR), while BE volume decreased 15.3% (high-performing at 86.80% SR)
 
-**Action:** **Monitor** - Overall cluster performance is positive and aligned with expected Payday phase behavior. **Investigate NZ** specifically to understand why Discount % increased significantly against the Payday trend, causing the only material SR decline.
+**Action:** **Investigate** - NZ requires immediate attention due to counter-cyclical performance decline during Payday; determine if this is a localized issue (payment processor, campaign, or cohort-specific)
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W15 | Pre-Payday | 5,021 | 64.73% | - | 90.80% | - | 13.66% | - | 50.91% | - |
 | 2026-W16 | Payday | 5,169 | 69.26% | ↑+7.0% | 91.18% | →+0.4% | 12.47% | ↓-8.7% | 51.22% | →+0.6% |
 
-**Analysis:** The HF-INTL cluster's Dunning Ship Rate improvement of +1.15pp in W16 is consistent with the Payday phase transition, with AU and NO demonstrating expected behavior through reduced discount reliance and improved conversion. However, NZ requires focused investigation as it moved counter to the cluster trend with a significant SR decline (-13.3%) and elevated discounting (+17.7%), suggesting potential localized issues with payment recovery effectiveness or customer mix changes that warrant deeper analysis.
+**Analysis:** The HF-INTL cluster demonstrated healthy improvement in Dunning Ship Rate during the Payday phase, with AU and NO driving gains through reduced discount dependency. However, NZ's significant underperformance (-13.3% SR with +17.7% Discount %) warrants investigation as it runs counter to expected Payday behavior. The overall positive trajectory is supported by favorable mix shift toward higher-volume, higher-performing markets like NO and GB.
 
 ### GB (Rank #2 by Contribution)
 

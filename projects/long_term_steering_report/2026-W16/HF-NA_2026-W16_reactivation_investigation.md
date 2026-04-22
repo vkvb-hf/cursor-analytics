@@ -8,27 +8,29 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 90.24% to 89.41% (-0.92%) in W16, a statistically non-significant change within normal weekly fluctuation, primarily driven by CA's -2.57% decline.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined from 90.24% to 89.41% (-0.92%) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (86.89%-91.02%) | -0.92% | ✅ |
-| L1: Country Breakdown | CA exceeds ±2.5% threshold | CA: -2.57% | ⚠️ |
-| L1: Dimension Scan | PaymentMethod stable (Others flagged but n=2) | Credit Card: -1.60% | ✅ |
-| L2: CA Deep-Dive | Credit Card underperforming | -3.05% | ⚠️ |
-| L2: Decline Reasons | "Others" dominant but declining; Fraud/Security rising | Others: -1.57pp | ⚠️ |
-| Mix Shift | Volume distribution stable | US: -10.7%, CA: +1.1% | ✅ |
+| L0: 8-Week Trend | Gradual upward trend from W09 (86.89%) to W14 (90.95%), then decline in W15-W16 | -0.92% | ⚠️ |
+| L1: Country Breakdown | CA exceeds ±2.5% threshold | -2.57% (CA) | ⚠️ |
+| L1: Dimension Scan | PaymentMethod stable; "Others" flagged but minimal volume (2 orders) | -1.60% (Credit Card) | ✅ |
+| L2: CA Deep-Dive | Credit Card in CA shows -3.05% decline | -3.05% | ⚠️ |
+| Decline Reasons | "Others" dominant; Fraud-related declines increased +0.88pp | -1.57pp (Others) | ⚠️ |
+| Mix Shift | Volume distribution stable; US volume decreased -10.7% but rate impact minimal | Stable | ✅ |
 
 **Key Findings:**
 - CA drove the overall decline with a -2.57% drop in reactivation rate (86.98% vs 89.27%), exceeding the ±2.5% threshold
-- Within CA, Credit Card payments declined -3.05% (85.34% vs 88.02%) on volume of 3,942 orders
-- Fraud, Lost/Stolen Card, Security decline reasons increased +0.88pp in CA (from 0.82% to 1.69%), representing a 110% increase in count (41 → 86)
-- 3DS Authentication Failed/Required increased +0.33pp in CA (4 → 21 occurrences), a 5x increase
-- US remained relatively stable at -0.44% with the majority of volume (18,897 orders)
+- Credit Card payments in CA declined -3.05% (85.34% vs 88.02%), representing the largest segment impact with 3,942 orders
+- Fraud, Lost/Stolen Card, Security declines increased significantly in CA (+0.88pp, from 0.82% to 1.69% of decline reasons)
+- 3DS Authentication failures increased from 4 to 21 cases in CA (+0.33pp)
+- US remained relatively stable with only -0.44% change despite lower volume (18,897 vs 21,155)
 
-**Action:** Monitor - The decline is not statistically significant and the 8-week trend shows W16 rate (89.41%) remains above W09-W11 levels. However, continue monitoring CA's Fraud/Security and 3DS authentication trends for potential emerging issues.
+**Action:** Monitor – The decline is not statistically significant and remains within normal fluctuation range. However, track CA Credit Card performance and fraud-related declines over the next 1-2 weeks. If the trend continues, escalate for investigation into potential fraud prevention changes or issuer behavior in CA.
 
 ---
 

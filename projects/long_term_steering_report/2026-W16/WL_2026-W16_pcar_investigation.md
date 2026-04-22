@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved from 97.37% to 97.59% (+0.22pp) in W16, a non-significant increase on volume of 11,024 orders.
+**Overall:** Payment Checkout Approval Rate improved slightly from 97.37% to 97.59% (+0.22pp) in W16, a statistically non-significant change with 11,024 orders processed.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Stable upward trend | +0.23% | ✅ |
-| L1: Country Breakdown | 1 country exceeds ±2.5% threshold | MR +2.78% | ⚠️ |
-| L1: Dimension Scan | No payment method exceeds threshold | Max: Apple Pay +0.58% | ✅ |
-| L2: MR Deep-Dive | ApplePay + Braintree flagged | +7.14%, +5.88% | ⚠️ |
+| L1: Country Scan | 1 country flagged (MR) | +2.78% | ⚠️ |
+| L1: Dimension Scan | No payment methods flagged | <±2.5% | ✅ |
+| L2: MR Deep-Dive | ApplePay + Braintree improvement | +7.14% / +5.88% | ⚠️ |
 | Mix Shift | All countries stable | No significant shifts | ✅ |
 
 **Key Findings:**
-- MR showed a +2.78pp improvement (95.59% → 98.25%), the only country exceeding the ±2.5% threshold, though on very low volume (57 orders)
-- Within MR, ApplePay improved significantly (+7.14pp, from 93.33% to 100.00%) and Braintree improved +5.88pp (94.44% → 100.00%)
-- CVV/CVC Mismatch decline reason appeared in MR (1 case, +1.75pp), while Policy/Lifecycle declines decreased (-1.47pp)
-- Overall volume declined 6.0% week-over-week (11,721 → 11,024 orders), continuing a downward trend from W10 peak (16,267)
-- AO was the only country showing rate decline (-0.62pp), moving from 97.39% to 96.78%
+- MR showed a +2.78pp improvement (95.59% → 98.25%), but with very low volume (57 orders), making this statistically unreliable
+- In MR, ApplePay approval rate improved significantly (+7.14pp) alongside Braintree provider (+5.88pp), though based on only 18 and 26 transactions respectively
+- CVV/CVC Mismatch appeared as a new decline reason in MR (1 case, +1.75pp), but absolute numbers are minimal
+- Overall volume declined 6% week-over-week (11,721 → 11,024), continuing a downward trend from W10 (16,267)
+- All major countries (KN, CK, ER, CG, GN, AO) remained stable with rates above 96%
 
-**Action:** Monitor – The overall change is not statistically significant, and the MR improvement is based on very low volume (57 orders). Continue tracking ApplePay/Braintree performance in MR for sustained improvement confirmation.
+**Action:** Monitor — The overall metric shows slight improvement within normal fluctuation. The MR flag is driven by extremely low volume (57 orders) and does not warrant investigation. Continue standard monitoring.
 
 ---
 

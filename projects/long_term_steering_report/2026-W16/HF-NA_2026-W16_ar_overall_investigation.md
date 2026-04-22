@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined marginally from 92.42% to 92.31% (-0.11pp) in W16, a statistically insignificant change within normal weekly variance.
+**Overall:** Pre-Dunning Acceptance Rate declined slightly from 92.42% to 92.31% (-0.11 pp) in W16, a statistically non-significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.26pp | ⚠️ |
-| 2_PreDunningAR | Reported Metric | -0.12pp | ✅ |
-| 3_PostDunningAR | Post-Recovery | -0.20pp | ⚠️ |
-| 6_PaymentApprovalRate | Final Approval | +0.04pp | ✅ |
+| 1_FirstRunAR | Rate decline | -0.23 pp | ⚠️ |
+| 2_PreDunningAR | Rate decline | -0.11 pp | ⚠️ |
+| 3_PostDunningAR | Rate decline | -0.19 pp | ⚠️ |
+| 6_PaymentApprovalRate | Rate stable | +0.03 pp | ✅ |
 
 **Key Findings:**
-- The -0.12pp decline is not statistically significant and falls within the 8-week variance range (91.59% to 92.42%)
-- US showed a minor decline (-0.13pp to 92.97%) while CA improved slightly (+0.09pp to 93.58%); no countries exceeded the ±2.5% threshold
-- Credit Card payments experienced the largest method decline (-0.21pp) but remain the dominant volume driver at 377,622 orders
-- Unknown payment provider showed notable decline (-1.78pp) but represents minimal volume (669 orders)
-- Mix shift analysis shows stable composition with both US (+3.7%) and CA (+1.3%) maintaining High AR tier status
+- The -0.11 pp decline is within the 8-week normal variance range (91.59% to 92.42%), with W16 rate of 92.31% remaining above the W09 low of 91.59%
+- US showed a slight decline (-0.12 pp to 92.97%) while CA improved (+0.09 pp to 93.58%); no countries exceeded the ±2.5% threshold
+- Credit Card payment method showed the largest decline (-0.21 pp) among payment methods, representing the highest volume segment (377,622 orders)
+- Unknown payment provider showed notable decline (-1.62 pp) but with minimal volume impact (669 orders)
+- All funnel stages (FirstRun, PreDunning, PostDunning) declined in parallel, suggesting a broad rather than stage-specific issue
 
-**Action:** Monitor — No action required. The change is within normal operating variance and no dimensions exceeded investigation thresholds.
+**Action:** Monitor – The decline is not statistically significant and falls within normal weekly fluctuation. Continue standard monitoring; no escalation required unless the downward trend persists for 2+ consecutive weeks.
 
 ---
 

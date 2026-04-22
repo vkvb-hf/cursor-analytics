@@ -1,22 +1,22 @@
 # Reactivation Rate - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-22 11:03  
+**Generated:** 2026-04-22 11:56  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Reactivation Rate declined across most clusters in 2026-W16, with WL experiencing the most significant drop of -2.78pp (89.29% → 86.81%) requiring investigation. The broad-based decline in WL across multiple countries (CK, AO, MR) and payment methods, combined with increased card validity issues, represents the primary concern this week.
+Reactivation Rate declined across most clusters in 2026-W16, with WL experiencing the most significant drop of -2.78% (from 89.29% to 86.81%). The primary concern is the broad-based Credit Card performance degradation, particularly in WL's CK market where all payment methods declined and card validity issues increased substantially.
 
 ### Cluster Highlights
 
-- **US-HF:** Stable at 90.07% with a non-significant -0.40pp decline, driven by Credit Card performance (-1.00%) while PayPal and Apple Pay showed slight improvements.
-- **HF-INTL:** Stable at 91.23% with a non-significant -0.24pp decline; CH flagged at -4.69% but with only 55 orders, insufficient volume to warrant investigation.
-- **WL:** Significant decline of -2.78pp to 86.81% driven by CK (-5.69pp), AO (-3.83pp), and MR (-3.64pp), with Credit Card underperformance and increased "Expired/Invalid Card" errors requiring investigation.
-- **HF-NA:** Non-significant decline of -0.92pp to 89.41%, primarily driven by CA's -2.57pp drop in Credit Card reactivation with notable increases in Fraud/Security (+0.88pp) and 3DS authentication failures.
-- **RTE:** Significant decline of -1.38pp to 89.16% driven by CF's -4.03pp drop, with Credit Card issues showing increased expired/invalid card declines (+1.23pp) and blocked transactions (+1.03pp).
+- **US-HF:** Declined by -0.44% to 90.07% (not significant), with Credit Card payments showing the largest rate decline at -1.00% while PayPal and Apple Pay improved.
+- **HF-INTL:** Declined by -0.26% to 91.23% (not significant), with CH flagged for Apple Pay decline (-20.00%) though impact limited by low volume (55 orders).
+- **WL:** Significant decline of -2.78% to 86.81%, driven by CK (-5.69%), AO (-3.83%), and MR (-3.64%), with rising "Expired, Invalid, Closed Card" declines in CK.
+- **HF-NA:** Declined by -0.92% to 89.41% (not significant), with CA exceeding threshold at -2.57% due to Credit Card decline (-3.05%) and increased fraud-related declines (+0.88pp).
+- **RTE:** Significant decline of -1.38% to 89.16%, primarily driven by CF's -4.03% drop in Credit Card performance and a dramatic -78.2% volume collapse in YE.
 
 ---
 

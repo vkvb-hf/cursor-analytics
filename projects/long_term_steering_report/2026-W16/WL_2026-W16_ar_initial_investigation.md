@@ -8,30 +8,29 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 91.05% to 91.28% (+0.23pp) in W16, a change that is not statistically significant with volume at 13,021 orders.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 91.05% to 91.28% (+0.23pp) in W16, a non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (89.22%-91.98%) | +0.23pp | ✅ |
-| L1: Country Breakdown | 3 countries exceed ±2.5% threshold | CK -4.02%, AO +2.64%, GN +4.04% | ⚠️ |
-| L1: Dimension Scan | All PaymentMethods and Providers within threshold | Max change -2.04% (Adyen) | ✅ |
-| L2: CK Deep-Dive | credit_card via Adyen declined significantly | -5.46% | ⚠️ |
-| L2: AO Deep-Dive | credit_card via Adyen improved | +8.20% | ⚠️ |
-| L2: GN Deep-Dive | applepay via Braintree improved | +7.28% | ✅ |
-| L3: Related Metrics | All funnel metrics stable and aligned | +0.24% to +1.04% | ✅ |
+| L0: 8-Week Trend | Rate within historical range (89.22%-91.98%) | +0.25% | ✅ |
+| L1: Country Breakdown | 3 countries exceed ±2.5% threshold (CK, AO, GN) | Mixed | ⚠️ |
+| L1: Dimension Scan | No payment method or provider exceeds threshold | <2.5% | ✅ |
+| L2: CK Deep-Dive | Credit card via Adyen declined -5.46% | -4.02% | ⚠️ |
+| L2: AO Deep-Dive | Credit card via Adyen improved +8.20% | +2.64% | ✅ |
+| L2: GN Deep-Dive | Apple Pay via Braintree improved +7.28% | +4.04% | ✅ |
+| L3: Related Metrics | All funnel metrics stable and aligned | <1.5% | ✅ |
+| Mix Shift | No material volume shifts impacting AR | Stable | ✅ |
 
 **Key Findings:**
-- CK experienced a -4.02% decline driven by credit_card transactions via Adyen (-5.46%), with "Other reasons" decline codes increasing by +3.85pp
-- GN showed strong improvement (+4.04%) led by applepay via Braintree (+7.28%) and reduced Insufficient Funds declines (-2.60pp)
-- AO improved +2.64% due to credit_card via Adyen recovery (+8.20%), offsetting a -4.78% decline in applepay via ProcessOut
-- Mix shift analysis shows significant volume increases in MR (+26.1%), GN (+21.1%), and KN (+18.3%), all maintaining stable AR tiers
-- The overall metric change is not significant and falls within the normal 8-week volatility range (89.22%-91.98%)
+- CK experienced a -4.02% AR decline driven by credit card payments via Adyen (-5.46%), with "Other reasons" decline codes increasing by +3.85pp
+- GN showed strong improvement (+4.04%) primarily from Apple Pay via Braintree (+7.28%) and reduced Insufficient Funds declines (-2.60pp)
+- AO improved +2.64% due to credit card/Adyen performance gains (+8.20%), with Insufficient Funds declining by -1.41pp
+- Volume increased +12.4% week-over-week (11,583 → 13,021 orders), with MR (+26.1%) and GN (+21.1%) showing largest growth
+- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) moved directionally consistent with PreDunningAR
 
-**Action:** Monitor - No escalation required. Continue tracking CK/Adyen performance for credit_card transactions; if "Other reasons" declines persist beyond W17, consider investigating with Adyen support.
+**Action:** Monitor – The overall metric change is non-significant and within normal variance. Continue monitoring CK/Adyen performance for potential sustained degradation in subsequent weeks.
 
 ---
 

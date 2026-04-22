@@ -8,30 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined from 91.78% to 91.31% (-0.51%) in W16, a change that is not statistically significant, with volume increasing from 27,494 to 35,099 orders.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined from 91.78% to 91.31% (-0.51%) in W16, a statistically non-significant change within normal weekly variation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (88.09%-91.78%) | -0.51% | ✅ |
-| L1: Country Breakdown | 4 countries exceed ±2.5% threshold | NZ -10.84%, LU -5.06%, NL -3.47%, AU +3.30% | ⚠️ |
-| L1: Dimension Scan | No PaymentMethod or Provider exceeds threshold | Max change -1.09% (Adyen) | ✅ |
-| L2: NZ Deep-Dive | Significant decline driven by volume surge | Insufficient Funds +7.48pp | ⚠️ |
-| L2: LU Deep-Dive | Small volume (92 orders) with rate drop | Insufficient Funds +7.74pp | ⚠️ |
-| L2: NL Deep-Dive | ProcessOut -29.54%, credit_card -28.48% | Other reasons +2.28pp | ⚠️ |
-| L2: AU Deep-Dive | Positive improvement | Insufficient Funds -2.35pp | ✅ |
-| L3: Related Metrics | All funnel metrics declined similarly | -0.38% to -0.85% | ✅ |
-| Mix Shift | NZ volume +113%, GB +53.7% | No tier migration | ✅ |
+| L0: 8-Week Trend | Rate within historical range (88.09%-91.78%) | -0.47pp | ✅ |
+| L1: Country Variance | 4 countries exceed ±2.5% threshold (NZ, LU, NL, AU) | NZ -10.84% | ⚠️ |
+| L1: PaymentMethod | All methods within ±1% | Max -0.77% | ✅ |
+| L1: PaymentProvider | All providers within ±1.5% | Max -1.09% | ✅ |
+| L2: NZ Deep-Dive | Significant decline driven by Insufficient Funds | +7.48pp | ⚠️ |
+| L3: Related Metrics | All funnel metrics declined proportionally | -0.38% to -0.85% | ✅ |
+| Mix Shift | No material tier shifts; NZ volume +113% | Low-AR expansion | ⚠️ |
 
 **Key Findings:**
-- NZ experienced the largest decline (-10.84%) with volume more than doubling (+113% from 408 to 869 orders); "Insufficient Funds" increased by +7.48pp to 26.35% of transactions
-- LU showed a -5.06% decline primarily driven by Adyen (-9.36%) and Unknown provider (-10.00%), with "Insufficient Funds" rising +7.74pp
-- NL declined -3.47% with ProcessOut showing severe degradation (-29.54%) and credit_card dropping -28.48%
-- AU improved +3.30% with ProcessOut recovering (+4.68%) and "Insufficient Funds" declining -2.35pp
-- Overall funnel metrics (1_FirstRunAR through 6_PaymentApprovalRate) all declined proportionally (-0.38% to -0.85%), indicating a systemic rather than stage-specific issue
+- NZ experienced the largest decline (-10.84%, from 77.70% to 69.28%) with "Insufficient Funds" declines increasing by +7.48pp, while volume more than doubled (+113% from 408 to 869 orders)
+- The NZ decline is concentrated in ProcessOut (-9.12%) and Braintree (-35.52% on small volume of 29 orders), with credit_card payment method down -10.46%
+- LU and NL also showed elevated declines (-5.06% and -3.47% respectively), both linked to "Insufficient Funds" and "Other reasons" increases
+- AU improved +3.30% (81.92% → 84.62%) despite Adyen declining -6.52%, driven by ProcessOut improvement (+4.68%) on high volume (2,087 orders)
+- Global PaymentMethod and PaymentProvider dimensions show no systemic issues—declines are isolated to specific country-provider combinations
 
-**Action:** Monitor - The overall decline is not statistically significant and falls within the 8-week normal range. However, closely watch NZ performance given the volume surge and elevated "Insufficient Funds" rates. If NZ decline persists in W17 or volume continues to grow, escalate for ProcessOut investigation.
+**Action:** Monitor — The overall decline is not statistically significant and the 8-week trend shows W16 rate (91.31%) remains above the period average. Continue monitoring NZ performance given the volume surge and elevated Insufficient Funds rate; if NZ decline persists in W17, escalate for ProcessOut investigation.
 
 ---
 
@@ -83,8 +81,8 @@
 |-------|--------|--------|----------|----------|------|
 | Adyen | 96.36% | 97.42% | -1.09% | 3,018 |  |
 | Braintree | 92.47% | 92.94% | -0.50% | 16,329 |  |
-| Unknown | 95.8% | 96.07% | -0.28% | 2,239 |  |
 | ProcessOut | 87.93% | 88.18% | -0.28% | 13,402 |  |
+| Unknown | 95.8% | 96.07% | -0.28% | 2,239 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 111 |  |
 
 ---

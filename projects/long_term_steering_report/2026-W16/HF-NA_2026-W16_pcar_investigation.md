@@ -8,28 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Checkout Approval Rate declined from 94.08% to 93.86% (-0.22pp) in 2026-W16, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined by -0.23 percentage points (94.08% → 93.86%) on volume of 23,369 orders, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (93.86% vs 8-week range 93.92%-95.23%) | -0.22pp | ✅ |
-| L1: Country Breakdown | No countries exceed ±2.5% threshold | US: -0.29pp, CA: +0.44pp | ✅ |
-| L1: PaymentMethod | No methods exceed threshold; "Others" at -2.34% but low volume (54) | Varies | ✅ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | CA volume down 10.5% but impact stable | Minimal | ✅ |
+| 8-Week Trend | Rate within normal range (93.86% vs 8-wk range 93.92%-95.23%) | -0.23pp | ✅ |
+| Country Breakdown | No countries exceed ±2.5% threshold | US: -0.29pp, CA: +0.44pp | ✅ |
+| Payment Method | No methods exceed threshold; "Others" largest drop at -2.34pp | Low volume (54 orders) | ✅ |
+| Mix Shift | CA volume down -10.5% but impact stable | No adverse mix effect | ✅ |
 
 **Key Findings:**
-- The -0.22pp decline is within normal weekly fluctuation observed over the 8-week period (range: 93.92% to 95.23%)
-- US accounts for 78% of volume (18,142 orders) and showed a minor decline of -0.29pp
-- CA improved by +0.44pp despite a 10.5% volume decrease (5,843 → 5,227 orders)
-- No payment method showed significant degradation; "Others" declined -2.34pp but represents only 54 orders
-- All countries and dimensions remain within acceptable thresholds
+- The -0.23pp decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 93.86% and 95.23%
+- US drove the majority of the decline (-0.29pp on 18,142 orders), while CA improved (+0.44pp) despite a -10.5% volume drop
+- "Others" payment method showed a -2.34pp decline, but with only 54 orders this is not material to overall performance
+- Credit Card (largest volume at 13,385 orders) declined -0.42pp, contributing most to the overall rate drop
+- No payment providers flagged anomalies; PaymentProvider data returned no flagged results
 
-**Action:** Monitor — No immediate action required. The decline is not statistically significant and all dimensional checks pass. Continue standard weekly monitoring.
+**Action:** Monitor — The decline is not statistically significant and falls within normal weekly variance. Continue standard monitoring for W17.
 
 ---
 

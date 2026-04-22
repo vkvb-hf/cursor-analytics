@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved marginally from 97.27% to 97.4% (+0.13pp) in W16, a statistically non-significant change on volume of 804,152 orders.
+**Overall:** Payment Approval Rate for HF-INTL improved marginally from 97.27% to 97.4% (+0.13pp) in W16, a statistically non-significant change within normal operational variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.45pp | ⚠️ |
-| 2_PreDunningAR | Recovery | +0.07pp | ✅ |
-| 3_PostDunningAR | Recovery | -0.10pp | ⚠️ |
-| 6_PaymentApprovalRate | Final | +0.14pp | ✅ |
+| 1_FirstRunAR | Baseline conversion | -0.45pp | ⚠️ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.07pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | -0.10pp | ✅ |
+| 6_PaymentApprovalRate | Final approval | +0.14pp | ✅ |
 
 **Key Findings:**
-- The +0.13pp PAR improvement is within normal fluctuation and flagged as not statistically significant
-- No countries exceeded the ±2.5% threshold; NZ showed the largest decline (-0.41pp) while AU showed the largest improvement (+0.50pp)
-- Unknown PaymentProvider flagged with +3.14pp change, but represents minimal volume (2,560 orders, ~0.3% of total)
-- 8-week trend shows steady recovery from W09 low of 96.22% to current 97.4%, with PAR now at period high
-- FirstRunAR declined -0.45pp (93.12% → 92.71%), indicating upstream approval challenges that were offset by downstream recovery mechanisms
+- No countries exceeded the ±2.5% threshold; NZ showed the largest decline at -0.41pp (93.75%) while AU improved by +0.50pp
+- Unknown PaymentProvider flagged with +3.14pp change, but volume is minimal (2,560 orders, <0.4% of total)
+- 8-week trend shows steady improvement from 96.22% (W09) to 97.4% (W16), representing +1.18pp cumulative gain
+- Volume increased 8.0% WoW (744,637 → 804,152) with high-AR countries DE (+11.3%), GB (+12.7%), and NO (+27.4%) driving growth
+- FirstRunAR declined -0.45pp but downstream funnel stages recovered, resulting in net positive PAR
 
-**Action:** Monitor — No immediate action required. Continue tracking FirstRunAR trend and Unknown PaymentProvider anomaly.
+**Action:** Monitor — No significant anomalies detected. Continue tracking Unknown provider performance and FirstRunAR trend.
 
 ---
 

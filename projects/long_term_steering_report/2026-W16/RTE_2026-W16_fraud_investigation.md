@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined slightly from 94.68% to 94.42% (-0.27pp) in W16, a change that is not statistically significant and remains within normal weekly fluctuation range.
+**Overall:** The Fraud Approval Rate (FAR) declined slightly from 94.68% to 94.42% (-0.27pp) in 2026-W16, a change deemed not statistically significant with 47,258 customers reaching the fraud service.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: RTE Trend | 8-week stability check | -0.27pp (within ±1% band) | ✅ |
+| L0: RTE Trend | 8-week stability check | -0.27pp | ✅ |
 | L1: Country Scan | ±2.5% threshold | TT +4.47pp, TO -3.54pp | ⚠️ |
-| L1: Channel Scan | ±2.5% threshold | Paid -0.17pp, Referral -0.57pp | ✅ |
-| L2: TT Deep-Dive | Channel breakdown | Paid +3.43pp, Referral +6.42pp (improvement) | ✅ |
-| L2: TO Deep-Dive | Channel breakdown | Referral -9.79pp driven by Dup Rate +72.88% | ⚠️ |
-| L2: YE Deep-Dive | Channel breakdown | Referral -6.93pp driven by Dup Rate +26.44% | ⚠️ |
+| L1: Channel Category | Category variance | Paid -0.17pp, Referral -0.57pp | ✅ |
+| L2: TO Deep-Dive | Channel breakdown | Referral -9.79pp, Dup Rate +72.88% | ⚠️ |
+| L2: TT Deep-Dive | Channel breakdown | Paid +3.43pp, Referral +6.42pp | ⚠️ |
+| L2: YE Deep-Dive | Channel breakdown | Referral -6.93pp, Dup Rate +26.44% | ⚠️ |
 
 **Key Findings:**
-- TT showed significant FAR improvement (+4.47pp) driven by decreased duplicate rates (-24.94%) and duplicate blocks (-26.53%) across both Paid and Referral channels
-- TO experienced FAR decline (-3.54pp) concentrated in Referral channel (-9.79pp), caused by duplicate rate surge (+72.88%) and duplicate block increase (+59.58%)
-- YE Referral channel declined -6.93pp with duplicate rate increasing +26.44% and duplicate blocks rising +25.27%
-- TZ Referral showed the largest single-channel decline (-13.25pp) with duplicate rate spiking +53.60%, though country-level impact is limited by low volume (137 customers)
-- Overall Dup Rate increased from 14.62% to 15.72% (+1.10pp), with Dup Block rising from 4.13% to 4.58% (+0.45pp)
+- **TT showed significant FAR improvement (+4.47pp)** driven by both Paid (+3.43pp) and Referral (+6.42pp) channels, correlating with a -24.94% decrease in duplicate rate and -26.53% reduction in duplicate blocks
+- **TO experienced notable FAR decline (-3.54pp)** primarily driven by Referral channel (-9.79pp), with duplicate rate surging +72.88% and duplicate blocks increasing +59.58%
+- **Referral channel degradation observed across multiple countries:** YE Referral dropped -6.93pp, TZ Referral dropped -13.25pp, both showing significant duplicate rate increases (+26.44% and +53.60% respectively)
+- **Duplicate rate increased at RTE level** from 14.62% to 15.72% (+7.52%), with duplicate blocks rising from 4.13% to 4.58%
+- **Volume increased +3.3%** (45,746 → 47,258) while overall FAR remained within normal 8-week variance range (93.84% - 94.95%)
 
-**Action:** Monitor — The overall FAR change is not significant. Continue monitoring TO and YE Referral channels for sustained duplicate rate increases. If Referral channel duplicate patterns persist for 2+ weeks, escalate for fraud pattern review.
+**Action:** Monitor - The overall RTE change is not significant and FAR remains within historical range. However, recommend tracking TO and TZ Referral channels for continued duplicate rate elevation, and monitoring TT for sustainability of improvement.
 
 ---
 
@@ -94,7 +94,7 @@
 | Referral | 2026-W15 | 88.16% | - | 11.84% | - | 11.84% | - | 0.00% | - | 76 |  |
 | Referral | 2026-W16 | 79.53% | -9.79% | 20.47% | +72.88% | 18.90% | +59.58% | 0.00% | - | 127 | ⚠️ |
 
-**Analysis:** The W16 FAR decline of -0.27pp is not statistically significant and reflects normal operational variance. The primary drivers of localized declines are duplicate rate increases in Referral channels, particularly in TO (+72.88%), TZ (+53.60%), and YE (+26.44%), while TT's improvement stems from reduced duplicate activity. No immediate action is required, but Referral channel duplicate patterns in smaller markets warrant continued observation over the next 2-3 weeks.
+**Analysis:** The -0.27pp decline in Fraud Approval Rate is not statistically significant and falls within normal weekly variance observed over the 8-week period. While the aggregate metric remains stable, localized patterns warrant attention: TO and TZ are experiencing Referral channel degradation driven by elevated duplicate rates, while TT showed genuine improvement through reduced duplicate activity. No immediate escalation is required, but continued monitoring of Referral channel duplicate patterns in TO, TZ, and YE is recommended for the next reporting cycle.
 
 ---
 

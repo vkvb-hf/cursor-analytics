@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved from 31.07% to 31.81% (+0.74pp, +2.4% relative) week-over-week as the cluster transitioned from Pre-Payday to Payday phase, with volume increasing by 8.0% (7,702 → 8,319 eligible orders).
+**Overall:** Dunning Ship Rate improved from 31.07% to 31.81% (+0.74pp, +2.4% relative) in W16, driven by strong gains in AO and GN that offset a decline in CK, during the transition from Pre-Payday to Payday phase.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | Ship Rate | 31.07% → 31.81% | +2.4% | ✅ Improved |
 
 **Key Findings:**
-- **GN drove the strongest improvement:** Ship Rate surged +27.4% (28.89% → 36.81%) with modest Discount reduction (-4.8%) and slight Pre-Dunning AR improvement (+0.9%), indicating effective Payday timing
-- **AO showed strong Payday response:** Ship Rate increased +6.4% (66.37% → 70.63%) driven primarily by a significant Discount reduction (-16.1%), suggesting customers responded well to lower discount offers during Payday
-- **CK underperformed despite Payday:** Ship Rate declined -6.6% (47.04% → 43.92%) despite the Payday phase, with Discount % increasing significantly (+14.9%), indicating deeper discounts failed to convert customers
-- **Mix shift toward high-volume segments:** KN saw the largest volume increase (+21.5%) but maintains low Ship Rate tier (18.03%), while CK volume grew +15.5% despite SR decline
-- **MR remains a conversion challenge:** Near-zero Ship Rate (0.09%) persists despite 5.3% volume growth, requiring separate investigation
+- **GN** showed the strongest improvement with Ship Rate up +27.4% (28.89% → 36.81%), likely driven by slightly improved Pre-Dunning AR (+0.9%) and reduced Discount % (-4.8%)
+- **AO** improved Ship Rate by +6.4% (66.37% → 70.63%), correlating with a significant Discount % reduction of -16.1% during Payday phase
+- **CK** declined -6.6% in Ship Rate (47.04% → 43.92%) despite being the #1 contributor by volume, with Discount % increasing +14.9% as the primary driver
+- **Mix shift detected:** KN volume grew +21.5% and CK grew +15.5%, both in lower SR tiers, partially masking underlying improvements
+- Payday phase transition appears beneficial for AO and GN but negatively impacted CK performance
 
-**Action:** **Monitor** - Overall improvement is positive and aligned with Payday expectations. Investigate CK's inverse Discount-Ship Rate relationship to understand why increased discounts are not driving conversions.
+**Action:** **Monitor** - Overall metric improved modestly. Investigate CK's elevated discount rates to understand if this is a deliberate strategy or requires correction.
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W15 | Pre-Payday | 1,437 | 47.04% | - | 93.91% | - | 25.79% | - | 47.45% | - |
 | 2026-W16 | Payday | 1,660 | 43.92% | ↓-6.6% | 93.32% | →-0.6% | 29.63% | ↑+14.9% | 47.3% | →-0.3% |
 
-**Analysis:** The Dunning Ship Rate improvement of +0.74pp is primarily driven by strong performance in GN (+27.4%) and AO (+6.4%), where the Payday phase combined with optimized discount strategies yielded positive results. However, CK's decline despite aggressive discounting signals a potential issue with discount effectiveness or customer segment behavior that warrants focused investigation. The cluster-level improvement masks divergent country performance, and continued monitoring of the CK discount strategy is recommended for W17.
+**Analysis:** The Dunning Ship Rate showed healthy improvement of +0.74pp in W16, with the Payday phase positively influencing most markets. The divergent performance between CK (declining due to higher discounts) and AO/GN (improving with lower discounts) suggests discount strategy optimization could yield further gains. Continued monitoring of CK's discount levels and their impact on ship rate is recommended for the coming weeks.
 
 ### AO (Rank #2 by Contribution | #2 by Change)
 

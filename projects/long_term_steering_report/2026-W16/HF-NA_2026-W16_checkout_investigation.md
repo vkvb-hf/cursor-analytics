@@ -14,23 +14,22 @@
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ > threshold? | -0.55pp | ⚠️ |
-| Click Submit Form | Δ > threshold? | +0.28pp | ✅ |
-| FE Validation Passed | Δ > threshold? | +0.20pp | ✅ |
-| Enter Fraud Service | Δ > threshold? | +0.04pp | ✅ |
-| Approved by Fraud Service | Δ > threshold? | -0.88pp | ⚠️ |
-| Call to PVS | Δ > threshold? | +0.15pp | ✅ |
-| Successful Checkout | Δ > threshold? | +0.01pp | ✅ |
+| Select Payment Method | Δ ≥ threshold? | -0.55pp | ⚠️ |
+| Click Submit Form | Δ ≥ threshold? | +0.28pp | ✅ |
+| FE Validation Passed | Δ ≥ threshold? | +0.20pp | ✅ |
+| Enter Fraud Service | Δ ≥ threshold? | +0.04pp | ✅ |
+| Approved by Fraud Service | Δ ≥ threshold? | -0.88pp | ⚠️ |
+| Call to PVS | Δ ≥ threshold? | +0.15pp | ✅ |
+| Successful Checkout | Δ ≥ threshold? | +0.01pp | ✅ |
 
 **Key Findings:**
-- **Fraud Service Approval** is the primary bottleneck, dropping -0.88pp (93.08% → 92.20%), exceeding the +0.22pp threshold significantly
-- **US** accounts for the majority of the decline with -0.41pp PCR drop and a -1.04pp decrease in Fraud Service approval rate
-- **Braintree_ApplePay** showed a notable decline of -1.75pp in success rate (77.50% → 75.75%), despite volume increase
-- **Adyen_CreditCard** showed dramatic improvement (+80.06pp) but from a very low baseline, indicating a prior issue was resolved
-- **CA** showed slight improvement (+0.13pp) with Successful Checkout conversion improving +0.83pp, partially offsetting US decline
-- **Fraud Skip Gap** improved significantly, decreasing from 1.22% to 0.55% (-0.67pp), primarily driven by Adyen_CreditCard improvements
+- **Fraud Service approval rate dropped -0.88pp** (93.08% → 92.20%), representing the largest negative conversion change in the funnel and exceeding the threshold of +0.22pp
+- **US drove the overall decline** with PCR dropping -0.41pp, while CA showed slight improvement (+0.13pp); US Fraud Service approval fell -1.04pp
+- **Braintree_ApplePay success rate declined -1.75pp** (77.50% → 75.75%), the largest drop among high-volume payment methods
+- **Adyen_CreditCard showed dramatic improvement** (+80.06pp), recovering from a previous issue (2.95% → 83.01%), though volume remains low
+- **Fraud Service gap improved** (-0.67pp), with Adyen_CreditCard gap reducing from 262 to 65 cases, indicating resolution of a prior integration issue
 
-**Action:** Investigate - The Fraud Service approval rate decline requires immediate investigation, particularly for US market. Recommend collaboration with Fraud team to identify if rule changes or new fraud patterns are causing increased rejections.
+**Action:** Investigate — The Fraud Service approval rate decline in US (-1.04pp) requires immediate attention to identify if fraud rules were tightened or if there's an increase in suspicious transaction patterns.
 
 ---
 

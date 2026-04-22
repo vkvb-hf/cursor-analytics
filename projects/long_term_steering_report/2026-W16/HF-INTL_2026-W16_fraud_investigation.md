@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-INTL declined marginally from 92.14% to 92.06% (-0.09pp) in 2026-W16, a change that is not statistically significant, with volume increasing to 45,438 customers.
+**Overall:** The Fraud Approval Rate (FAR) declined marginally from 92.14% to 92.06% (-0.09pp) in W16, a change deemed not statistically significant, with 45,438 customers reaching fraud service.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: HF-INTL Trend | FAR within normal 8-week range (91.67%-92.38%) | -0.09pp | ✅ |
-| L1: Country Scan | 3 countries exceed ±2.5% threshold (NZ, AT, LU) | Mixed | ⚠️ |
-| L1: Channel Scan | Referral channel declining (-3.11pp) | -3.11pp | ⚠️ |
-| L2: Referral Deep-Dive | Consistent FAR decline across all countries in Referral | -4% to -27% | ⚠️ |
+| L1: Country Scan | 3 countries exceed ±2.5% threshold (NZ, AT, LU) | NZ +3.32pp, AT -2.89pp, LU -5.96pp | ⚠️ |
+| L1: Channel Scan | Referral channel shows decline | -3.11pp | ⚠️ |
+| L2: Deep-Dive | Referral channel flagged across 10 countries | -4.31pp to -26.96pp | ⚠️ |
 
 **Key Findings:**
-- **Referral channel is the primary driver of FAR decline:** Across all 10 countries analyzed in L2, the Referral channel shows FAR decreases ranging from -2.74pp (SE) to -26.96pp (LU), while Paid channel remains stable or improving
-- **Duplicate blocking increasing in Referral:** Multiple countries show Dup Block % increases in Referral (BE +54.29%, IE +35.59%, AT +24.32%, DK +23.98%), indicating heightened duplicate detection activity
-- **LU shows extreme Referral degradation:** FAR dropped from 83.33% to 60.87% (-26.96pp) with Dup Rate jumping from 0% to 17.39%, though volume is very low (23 customers)
-- **NZ is the only positive outlier:** Country-level FAR improved +3.32pp, driven by Referral channel recovery (+7.42pp) despite higher duplicate rates
-- **FR contributes most to overall decline:** Largest market with FAR drop (-2.47pp) shows Referral FAR declining -4.86pp with Dup Block up +14.95%
+- **Referral channel degradation is systemic:** All 10 deep-dive countries show FAR declines in Referral (ranging from -2.74pp in SE to -26.96pp in LU), while Paid channel remains stable or improved
+- **Duplicate rate increases driving blocks:** HF-INTL duplicate rate rose from 30.86% to 33.28% (+2.42pp), with Referral channels showing higher dup rates and corresponding dup block increases (e.g., IE Referral dup block +35.59%, BE Referral +54.29%)
+- **LU shows extreme volatility on low volume:** LU Referral FAR dropped 26.96pp but with only 23 customers, making this statistically unreliable
+- **NZ is an outlier with improving FAR:** Despite Referral channel flag, NZ overall FAR improved +3.32pp, driven by reduced dup blocking (-12.04pp in Referral) and strong Paid performance (+1.28pp)
+- **AT decline driven by Referral dup blocking:** AT Referral dup block increased +24.32pp alongside a +23.66% dup rate increase, causing FAR to drop -11.72pp in that segment
 
-**Action:** **Monitor** - The overall change is not significant and within normal variance. However, continue monitoring the Referral channel performance, particularly the rising duplicate block rates which appear to be the mechanical cause of FAR decline across markets. If Referral FAR continues declining next week, escalate for duplicate detection rule review.
+**Action:** **Monitor** — The overall FAR change is not significant and within normal variance. However, continue monitoring the Referral channel duplicate rate trend, as sustained increases could materially impact FAR in future weeks.
 
 ---
 
@@ -92,7 +92,7 @@
 | Referral | 2026-W15 | 79.38% | - | 21.25% | - | 19.38% | - | 0.00% | - | 160 |  |
 | Referral | 2026-W16 | 70.07% | -11.72% | 26.28% | +23.66% | 24.09% | +24.32% | 0.00% | - | 137 | ⚠️ |
 
-**Analysis:** The -0.09pp FAR decline in 2026-W16 is not significant and represents normal weekly fluctuation within the established 8-week range. The analysis reveals a systematic pattern where the Referral channel is experiencing increased duplicate blocking across nearly all markets, while the Paid channel (representing 75% of volume) remains stable at ~98% FAR. No immediate action is required, but the Referral channel duplicate detection behavior warrants continued observation to determine if this represents a temporary spike or emerging trend requiring intervention.
+**Analysis:** The W16 FAR decline of -0.09pp is within normal operating variance and does not require immediate intervention. The primary pattern across markets is elevated duplicate rates in the Referral channel leading to increased duplicate blocking, though this is offset by stable Paid channel performance which represents the majority of volume (34,176 of 45,438 customers). If the duplicate rate trend continues upward in W17, a deeper investigation into Referral traffic sources may be warranted.
 
 ---
 

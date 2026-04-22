@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement of +0.06 pp (93.76% → 93.82%) in US-HF for W16, a statistically non-significant change within normal operating variance.
+**Overall:** Payment Approval Rate for US-HF showed a marginal improvement from 93.76% to 93.82% (+0.06pp) in W16, continuing a stable upward trend over the past 8 weeks; the change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.31 pp | ⚠️ |
-| 2_PreDunningAR | Recovery | -0.13 pp | ⚠️ |
-| 3_PostDunningAR | Recovery | -0.17 pp | ⚠️ |
-| 6_PaymentApprovalRate | Final | +0.07 pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.31pp | ⚠️ |
+| 2_PreDunningAR | Recovery | -0.13pp | ⚠️ |
+| 3_PostDunningAR | Recovery | -0.17pp | ⚠️ |
+| 6_PaymentApprovalRate | Final | +0.07pp | ✅ |
 
 **Key Findings:**
-- US PAR increased slightly (+0.06 pp) on volume of 511,272 orders, continuing a steady 8-week upward trend from 93.16% (W09) to 93.82% (W16)
-- Upstream funnel metrics all declined: FirstRunAR (-0.31 pp), PreDunningAR (-0.13 pp), and PostDunningAR (-0.17 pp), suggesting recovery mechanisms offset initial approval weakness
-- PaymentProvider "Unknown" flagged with -6.05 pp decline (92.31% → 86.73%), though volume is minimal (226 orders)
-- ProcessOut showed notable improvement (+1.88 pp) on 57,911 orders, while Apple Pay improved +0.48 pp on 57,610 orders
-- No countries exceeded the ±2.5% threshold; mix shift analysis shows US High-tier volume increased +3.7% with stable impact
+- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed slight declines (-0.31pp, -0.13pp, -0.17pp respectively), yet final PAR still improved, indicating effective downstream recovery mechanisms
+- PaymentProvider "Unknown" flagged with significant decline of -6.05pp (92.31% → 86.73%), though volume is minimal at only 226 orders
+- ProcessOut showed notable improvement of +1.88pp (89.25% → 90.93%) on 57,911 orders, contributing positively to overall performance
+- Apple Pay improved +0.48pp (87.63% → 88.05%) on 57,610 orders, though it remains the lowest-performing payment method
+- No countries exceeded the ±2.5% threshold; US volume increased +3.7% WoW with stable high-tier AR performance
 
-**Action:** Monitor — The overall PAR change is not statistically significant and the metric continues its positive 8-week trend. Watch the upstream funnel softening (FirstRunAR -0.31 pp) in coming weeks to ensure recovery mechanisms remain effective.
+**Action:** Monitor – The change is not significant and the metric continues a healthy 8-week upward trend. Keep watching the "Unknown" provider for any volume increases that could impact overall performance.
 
 ---
 

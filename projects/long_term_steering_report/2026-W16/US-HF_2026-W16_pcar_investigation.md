@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate for US-HF declined by -0.29% (from 93.02% to 92.75%) in 2026-W16, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined by -0.29pp (93.02% → 92.75%) in US-HF during 2026-W16, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | -0.29% | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.29% | ✅ |
-| L1: PaymentMethod Scan | No methods flagged; Others -2.34% but low volume (54) | N/A | ✅ |
-| L1: PaymentProvider Scan | No data available | N/A | ✅ |
-| Mix Shift Analysis | US High AR tier stable, volume +2.7% | N/A | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | -0.29pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.29pp | ✅ |
+| L1: PaymentMethod | No payment methods flagged | Max -2.34pp (Others) | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
+| Mix Shift | Volume shift stable (+2.7%) | Stable | ✅ |
 
 **Key Findings:**
-- The -0.29% decline is within normal weekly fluctuation range observed over the 8-week period (92.57% to 94.58%)
-- Volume increased by 2.7% week-over-week (17,669 → 18,142 orders), indicating healthy transaction growth
-- No payment methods exceeded the ±2.5% threshold; "Others" showed -2.34% decline but represents only 54 orders (0.3% of volume)
-- Credit Card (55% of volume) declined -0.51% while Apple Pay (36% of volume) improved +0.29%, largely offsetting each other
-- No countries or segments were flagged for deep-dive investigation
+- The -0.29pp decline is within normal weekly fluctuation observed over the 8-week period (range: 92.57% to 94.58%)
+- Volume increased by +2.7% (17,669 → 18,142 orders), indicating healthy checkout activity despite the minor rate decline
+- "Others" payment method showed the largest decline (-2.34pp), but represents minimal volume (54 orders)
+- Credit Card, the highest volume payment method (10,008 orders), declined modestly by -0.51pp
+- Apple Pay showed slight improvement (+0.29pp) with significant volume (6,597 orders)
 
-**Action:** Monitor — The decline is not statistically significant, falls within normal variance, and no dimensional breakdowns reveal concerning patterns. Continue standard weekly monitoring.
+**Action:** Monitor — No investigation required. The decline is not statistically significant and falls within normal operational variance. Continue standard weekly monitoring.
 
 ---
 

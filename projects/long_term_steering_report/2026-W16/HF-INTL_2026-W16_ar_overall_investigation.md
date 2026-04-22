@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL remained essentially stable in 2026-W16 at 94.81%, showing a minimal +0.07pp increase from 94.74% in W15, which is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved marginally from 94.74% to 94.81% (+0.07pp) in 2026-W16, a change that is not statistically significant across 804,152 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.45pp | ⚠️ |
-| 2_PreDunningAR | Reported Metric | +0.07pp | ✅ |
-| 3_PostDunningAR | Recovery | -0.10pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.14pp | ✅ |
+| 1_FirstRunAR | Base conversion | -0.45pp | ⚠️ |
+| 2_PreDunningAR | Pre-dunning recovery | +0.07pp | ✅ |
+| 3_PostDunningAR | Post-dunning recovery | -0.10pp | ⚠️ |
+| 6_PaymentApprovalRate | Final approval | +0.14pp | ✅ |
 
 **Key Findings:**
-- NO experienced the largest country-level decline at -2.03pp (91.00% → 89.15%), though volume increased +27.4% (24,045 orders) and remains below the ±2.5% investigation threshold
-- "Unknown" PaymentProvider showed a notable +4.32pp improvement (85.30% → 88.98%), but represents minimal volume (2,560 orders)
-- 1_FirstRunAR declined -0.45pp (93.12% → 92.71%), indicating slight upstream pressure that was recovered in subsequent dunning stages
-- SE showed strong volume growth (+22.1%) alongside rate improvement (+1.19pp to 96.32%)
-- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
+- NO showed the largest country-level decline at -2.03pp (91.00% → 89.15%), though still below the ±2.5% investigation threshold
+- Unknown PaymentProvider flagged with +4.32pp increase (85.3% → 88.98%), but represents minimal volume (2,560 orders)
+- SE and NO experienced significant volume growth (+22.1% and +27.4% respectively) without materially impacting overall rates
+- 1_FirstRunAR declined by -0.45pp while PreDunning recovery offset some of this loss
+- All dimension scans (PaymentMethod, PaymentProvider) show stable performance within normal variance, with no actionable flags on high-volume segments
 
-**Action:** Monitor – The +0.07pp change is not significant, no dimension breached investigation thresholds, and the overall rate remains stable within the 8-week trend range (93.13% - 94.90%).
+**Action:** Monitor — No significant changes detected; continue standard weekly tracking. Watch NO performance if decline persists in W17.
 
 ---
 
@@ -80,8 +80,8 @@
 |-------|--------|--------|----------|----------|------|
 | No Payment | 100.0% | 100.0% | +0.00% | 5,371 |  |
 | Braintree | 95.39% | 95.38% | +0.01% | 306,655 |  |
-| ProcessOut | 92.62% | 92.53% | +0.09% | 232,848 |  |
 | Adyen | 96.07% | 95.98% | +0.09% | 256,718 |  |
+| ProcessOut | 92.62% | 92.53% | +0.09% | 232,848 |  |
 | Unknown | 88.98% | 85.3% | +4.32% | 2,560 | ⚠️ |
 
 ---

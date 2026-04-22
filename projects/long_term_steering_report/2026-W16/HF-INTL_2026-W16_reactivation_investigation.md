@@ -8,29 +8,27 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** HF-INTL Reactivation Rate declined slightly from 91.47% to 91.23% (-0.24pp) in W16, a change that is not statistically significant given the 46,003 order volume.
+**Overall:** Reactivation Rate for HF-INTL declined slightly from 91.47% to 91.23% (-0.24pp) in W16, a change that is not statistically significant given the 46,003 order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (90.03%-91.47%) | -0.24pp | ✅ |
-| L1: Country Breakdown | CH flagged at -4.69%, LU at +3.03% | ±2.5% threshold | ⚠️ |
-| L1: Dimension Scan | PaymentMethod stable, no flags | Max -1.33pp | ✅ |
-| L2: CH Deep-Dive | Apple Pay -20.00%, Credit Card -5.38% | Low volume (55) | ⚠️ |
-| L2: LU Deep-Dive | Apple Pay +11.11% improvement | Low volume (37) | ✅ |
-| Mix Shift | DK volume drop -23.9% | Stable impact | ✅ |
+| L0: 8-Week Trend | Within normal range (90.03%-91.47%) | -0.24pp | ✅ |
+| L1: Country Breakdown | CH -4.69%, LU +3.03% exceed ±2.5% threshold | 2 flagged | ⚠️ |
+| L1: Payment Method | All changes within threshold (<±2.5%) | Max -1.33pp | ✅ |
+| L2: CH Deep-Dive | Apple Pay -20.0%, Credit Card -5.38% | Low volume (55) | ⚠️ |
+| L2: LU Deep-Dive | Apple Pay +11.11% (improvement) | Low volume (37) | ✅ |
+| Mix Shift | DK volume drop -23.9% | Minimal rate impact | ✅ |
 
 **Key Findings:**
-- CH experienced a -4.69pp rate decline driven by Apple Pay (-20.00pp) and Credit Card (-5.38pp), but total volume is only 55 orders, limiting statistical significance
-- LU showed improvement (+3.03pp) with Apple Pay recovering from 90.00% to 100.00%, though on minimal volume (37 orders)
-- GB, the largest market (16,889 orders), declined -1.90pp but remains within acceptable range at 89.32%
-- DK experienced a -23.9% volume drop (1,776 → 1,352) while rate improved slightly (+0.68pp)
-- Overall 8-week trend shows W16 rate (91.23%) remains the highest in the period despite the week-over-week decline
+- CH shows the largest decline (-4.69pp) driven by Apple Pay dropping from 100% to 80% and Credit Card declining from 86.11% to 81.48%, though total volume is only 55 orders
+- LU improved +3.03pp to reach 100% reactivation rate, driven by Apple Pay recovery from 90% to 100%
+- GB, the highest volume country (16,889 orders), declined -1.90pp but remains within acceptable range at 89.32%
+- The 8-week trend shows stable performance between 90.03% and 91.47%, with W16 representing the highest rate in the period
+- Root causes identified are Apple Pay performance issues in CH and volume-driven fluctuations in low-volume markets
 
-**Action:** Monitor — The -0.24pp decline is not statistically significant and the flagged countries (CH, LU) have insufficient volume to warrant investigation. Continue standard monitoring with attention to GB performance given its volume contribution.
+**Action:** Monitor — The overall decline is not significant and driven primarily by low-volume markets (CH: 55 orders, LU: 37 orders). Continue monitoring CH Apple Pay performance over the next 2-3 weeks to determine if the pattern persists at scale.
 
 ---
 

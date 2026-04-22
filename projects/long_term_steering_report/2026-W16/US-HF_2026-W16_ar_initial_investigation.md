@@ -10,27 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for US-HF declined from 89.39% to 88.9% (-0.49 pp) in W16, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF Initial Charges declined by -0.55pp (89.39% → 88.9%) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal fluctuation (87.6%-90.11% range) | -0.49 pp | ✅ |
-| L1: Country Breakdown | No countries exceeded ±2.5% threshold | -0.55% | ✅ |
-| L1: PaymentMethod | All methods within normal variance | -0.35% to -1.73% | ✅ |
-| L1: PaymentProvider | Unknown provider flagged at -4.00% | -4.00% | ⚠️ |
-| L3: Related Metrics | All funnel metrics declined similarly | -0.48% to -0.59% | ✅ |
-| Mix Shift | US volume increased +13.5%, AR tier stable | N/A | ✅ |
+| L0: 8-Week Trend | Rate within normal range (87.6%-90.11%) | -0.55pp | ✅ |
+| L1: Country Breakdown | No countries exceeded ±2.5% threshold | -0.55pp | ✅ |
+| L1: PaymentMethod | All methods within tolerance | -0.35pp to -1.73pp | ✅ |
+| L1: PaymentProvider | Unknown provider flagged at -4.00pp | -4.00pp | ⚠️ |
+| L3: Related Metrics | All funnel metrics declined similarly | -0.48pp to -0.59pp | ✅ |
 
 **Key Findings:**
-- The -0.49 pp decline is within the normal 8-week fluctuation range (87.6% to 90.11%) and is not statistically significant
-- "Unknown" PaymentProvider showed a -4.00% decline (93.53% from 97.43%), but represents only 170 orders (1.4% of volume)
-- All payment methods declined uniformly (-0.35% to -1.73%), suggesting no isolated payment processing issue
-- Related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) all declined proportionally (-0.48% to -0.59%), indicating a systemic rather than stage-specific pattern
-- Volume increased 13.5% week-over-week (10,922 → 12,393) while the AR tier remained stable in the Medium (>85%) category
+- The -0.55pp decline is within normal weekly fluctuation; the 8-week range spans 87.6% to 90.11%
+- PaymentProvider "Unknown" showed a notable -4.00pp decline (97.43% → 93.53%), though volume is low at 170 orders (1.4% of total)
+- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) declined in parallel by -0.48pp to -0.59pp, suggesting a systemic rather than isolated issue
+- Volume increased +13.5% WoW (10,922 → 12,393 orders) while US remained in the Medium AR tier (>85%)
+- No payment method exceeded the threshold, though "Others" had the largest drop at -1.73pp on 282 orders
 
-**Action:** Monitor – Continue standard tracking. The decline is not significant, falls within historical variance, and no single dimension shows actionable degradation at meaningful volume.
+**Action:** Monitor — The decline is not significant and falls within historical variance. Continue tracking the "Unknown" PaymentProvider segment for persistence, but no immediate escalation required.
 
 ---
 
@@ -79,8 +78,8 @@
 | Unknown | 93.53% | 97.43% | -4.00% | 170 | ⚠️ |
 | Braintree | 87.13% | 87.5% | -0.42% | 5,383 |  |
 | ProcessOut | 90.0% | 90.36% | -0.40% | 6,719 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 112 |  |
 | Adyen | 100.0% | 100.0% | +0.00% | 9 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 112 |  |
 
 ---
 

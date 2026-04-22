@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** US-HF Reactivation Rate declined slightly from 90.47% to 90.07% (-0.40pp) in 2026-W16, a change that is not statistically significant.
+**Overall:** US-HF Reactivation Rate declined by -0.44% (from 90.47% to 90.07%) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (85.79%-91.26%) | -0.40pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.44% | ✅ |
-| L1: Dimension Scan | No payment methods flagged | Largest: Credit Card -1.00% | ✅ |
-| Mix Shift Analysis | US Medium tier stable | Volume -10.7% | ✅ |
+| L0: 8-Week Trend | Rate within normal range | -0.44% | ✅ |
+| L1: Country Breakdown | No countries exceed ±2.5% threshold | -0.44% (US) | ✅ |
+| L1: Dimension Scan | No payment methods flagged | -1.00% max (Credit Card) | ✅ |
+| Mix Shift Analysis | Volume shift stable | -10.7% volume | ✅ |
 
 **Key Findings:**
-- The -0.40pp decline is within normal weekly fluctuation; the 8-week trend shows rates ranging from 85.79% (W09) to 91.26% (W12)
-- Credit Card payments showed the largest decline at -1.00% (89.9% vs 90.81%), representing 68% of volume (12,893 orders)
-- Order volume decreased by 10.7% week-over-week (21,155 → 18,897), but mix remained stable in the Medium AR tier
-- PayPal (+0.67%) and Apple Pay (+0.91%) both showed slight improvements, partially offsetting Credit Card decline
-- Overall reactivation rate remains strong at 90.07%, well above the W09-W11 period (85.79%-88.98%)
+- The -0.44% decline continues a minor downward trend from 2026-W15 (-0.57%), but remains well above the 8-week low of 85.79% (2026-W09)
+- Credit Card payments showed the largest rate decline at -1.00% (89.9% vs 90.81%), representing 68% of total volume (12,893 orders)
+- PayPal (+0.67%) and Apple Pay (+0.91%) both improved week-over-week, partially offsetting Credit Card decline
+- Order volume decreased by 10.7% (from 21,155 to 18,897 orders) but mix shift impact remains stable
+- No countries or dimensions exceeded the ±2.5% investigation threshold
 
-**Action:** Monitor — No significant threshold breaches detected. Continue standard weekly tracking; no immediate investigation required.
+**Action:** Monitor — The decline is not statistically significant and no dimensions breach alerting thresholds. Continue standard weekly monitoring with attention to Credit Card payment performance if the trend persists.
 
 ---
 

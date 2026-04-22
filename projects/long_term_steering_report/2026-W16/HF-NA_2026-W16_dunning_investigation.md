@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined marginally by -0.16pp (48.19% → 48.03%) during the Pre-Payday to Payday transition, driven primarily by a significant drop in CA that offset gains in US.
+**Overall:** Dunning Ship Rate declined marginally by -0.16pp (48.19% → 48.03%) during the Pre-Payday → Payday transition, driven primarily by a significant drop in CA (-6.7%) that offset improvements in US (+1.9%).
 
 **Funnel Analysis:**
 
@@ -20,13 +20,13 @@
 | Ship Rate | Declined | -0.3% | ⚠️ |
 
 **Key Findings:**
-- **CA drove the decline:** CA Ship Rate dropped significantly by -6.7pp (53.04% → 49.51%) despite stable Pre-Dunning AR (+0.1%) and PC2 (+0.1%), suggesting the +3.4% increase in Discount % negatively impacted conversion
-- **US showed resilience:** US Ship Rate improved by +1.9% (46.72% → 47.61%) even with a +6.6% increase in Discount %, indicating stronger customer response during Payday phase
-- **Mix shift partially masked decline:** US volume grew +11.6% while CA grew only +5.9%, but since CA has higher SR tier (53% vs 47%), the shift toward lower-performing US contributed to cluster-level decline
-- **Discount increases across both markets:** Both CA (+3.4%) and US (+6.6%) saw increased discount rates, which typically has a negative relationship with Ship Rate per the decision framework
-- **Volume increased overall:** Total eligible orders grew from 16,450 to 18,142 (+10.3%), indicating healthy funnel entry during Payday phase
+- CA experienced a sharp Ship Rate decline of -6.7% (53.04% → 49.51%) despite stable Pre-Dunning AR (+0.1%) and PC2 (+0.1%), making it the primary contributor to the cluster-level decline
+- Discount % increased significantly across the cluster (+5.4%), with US showing the largest increase (+6.6%) yet still improving Ship Rate (+1.9%)
+- US volume grew by 11.6% (12,619 → 14,086 orders) and Ship Rate improved +1.9%, partially offsetting CA's decline
+- Mix shift toward lower-performing US (Medium SR tier) diluted overall cluster performance despite US's internal improvement
+- The Payday phase transition correlates with increased discounting but did not uniformly improve Ship Rate across countries
 
-**Action:** Investigate — The significant -6.7pp drop in CA requires deeper analysis to understand why increased discounts during Payday phase did not improve conversion as expected in that market.
+**Action:** Investigate – CA's -6.7% Ship Rate decline during Payday phase requires root cause analysis; the disconnect between increased discounting and declining conversion suggests potential issues with discount effectiveness or customer segment behavior in CA.
 
 ---
 
@@ -50,7 +50,7 @@
 | 2026-W15 | Pre-Payday | 3,831 | 53.04% | - | 93.49% | - | 18.75% | - | 51.08% | - |
 | 2026-W16 | Payday | 4,056 | 49.51% | ↓-6.7% | 93.58% | →+0.1% | 19.38% | ↑+3.4% | 51.12% | →+0.1% |
 
-**Analysis:** The -0.16pp decline in Dunning Ship Rate masks divergent country performance: CA experienced a substantial -6.7pp drop despite favorable Payday timing, while US improved +1.9%. The cluster-wide increase in Discount % (+5.4%) did not translate to improved Ship Rates, particularly in CA, suggesting potential issues with discount effectiveness or customer payment capacity during this Payday cycle. Further investigation into CA-specific factors and discount strategy optimization is recommended before the next billing cycle.
+**Analysis:** The -0.16pp decline in Dunning Ship Rate is primarily attributable to CA's significant underperformance (-6.7%) during the Payday transition, which was not fully compensated by US's modest improvement (+1.9%). The cluster-wide increase in Discount % (+5.4%) failed to drive expected conversion gains in CA, indicating potential discount strategy inefficiencies or shifting customer behavior that warrants further investigation into CA-specific dunning tactics.
 
 ### US (Rank #2 by Contribution | #2 by Change)
 

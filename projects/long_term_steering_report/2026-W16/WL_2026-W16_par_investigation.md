@@ -8,27 +8,25 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Approval Rate showed a marginal increase of +0.04pp (91.65% → 91.69%) on 164,785 orders, which is not statistically significant.
+**Overall:** Payment Approval Rate showed a minimal increase from 91.65% to 91.69% (+0.04pp), a statistically non-significant change within normal operational variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.11pp | ⚠️ |
-| 2_PreDunningAR | Recovery | -0.08pp | ⚠️ |
-| 3_PostDunningAR | Dunning | -0.13pp | ⚠️ |
-| 6_PaymentApprovalRate | Final | +0.04pp | ✅ |
+| 1_FirstRunAR | Within tolerance | -0.11pp | ✅ |
+| 2_PreDunningAR | Within tolerance | -0.08pp | ✅ |
+| 3_PostDunningAR | Within tolerance | -0.13pp | ✅ |
+| 6_PaymentApprovalRate | Within tolerance | +0.04pp | ✅ |
 
 **Key Findings:**
-- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed slight declines (-0.08pp to -0.13pp), yet PAR still improved marginally, suggesting effective late-stage recovery mechanisms
-- No countries exceeded the ±2.5% threshold; KN showed the largest decline at -1.02pp (88.90%) while GN improved +1.08pp (95.58%)
-- PaymentProvider "Unknown" flagged with +2.58pp change (96.99% → 99.49%), though volume is minimal at 1,378 orders
-- GN experienced significant volume growth (+17.8%) while maintaining high approval rates (95.58%), positively contributing to the overall rate
-- 8-week trend shows recovery from W09 low of 89.92% to current 91.69%, indicating sustained improvement
+- The +0.04pp increase in Payment Approval Rate is not statistically significant; the metric remains stable at 91.69% on 164,785 orders
+- No countries exceeded the ±2.5% threshold; KN showed the largest decline (-1.02pp to 88.90%) while GN showed the largest improvement (+1.08pp to 95.58%)
+- PaymentProvider "Unknown" flagged with +2.58pp change, but represents minimal volume (1,378 orders, <1% of total)
+- Upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) all showed slight declines (-0.08pp to -0.13pp), offset by recovery mechanisms
+- 8-week trend shows steady improvement from 89.92% (W09) to 91.69% (W16), indicating healthy long-term trajectory
 
-**Action:** Monitor – The change is not significant and all dimensions remain within normal operating ranges. Continue standard weekly tracking.
+**Action:** Monitor — No investigation required. The change is within normal variance, no dimensional breakdowns exceeded thresholds, and the 8-week trend remains positive.
 
 ---
 

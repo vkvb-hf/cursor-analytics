@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined from 26.24% to 25.83% (-0.41pp) in 2026-W16, with payment visits increasing 5.9% to 55,957.
+**Overall:** Payment Conversion Rate declined by -0.41pp (26.24% → 25.83%) in US-HF for 2026-W16, driven primarily by a significant drop in Fraud Service approval rates despite a 5.9% increase in payment visit volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Rate vs Prior | -0.17pp | ✅ |
-| Click Submit Form | Rate vs Prior | -0.24pp | ⚠️ |
-| FE Validation Passed | Rate vs Prior | +0.10pp | ✅ |
-| Enter Fraud Service | Rate vs Prior | -0.08pp | ✅ |
-| Approved by Fraud Service | Rate vs Prior | -1.04pp | ⚠️ |
-| Call to PVS | Rate vs Prior | +0.44pp | ✅ |
-| Successful Checkout | Rate vs Prior | -0.16pp | ✅ |
+| Select Payment Method | vs threshold ±0.20pp | -0.17pp | ✅ |
+| Click Submit Form | vs threshold ±0.20pp | -0.24pp | ⚠️ |
+| FE Validation Passed | vs threshold ±0.20pp | +0.10pp | ✅ |
+| Enter Fraud Service | vs threshold ±0.20pp | -0.08pp | ✅ |
+| Approved by Fraud Service | vs threshold ±0.20pp | -1.04pp | ⚠️ |
+| Call to PVS | vs threshold ±0.20pp | +0.44pp | ⚠️ |
+| Successful Checkout | vs threshold ±0.20pp | -0.16pp | ✅ |
 
 **Key Findings:**
-- Fraud Service approval rate dropped significantly from 93.04% to 91.99% (-1.04pp), representing the largest conversion decline in the funnel and exceeding the +0.20pp threshold
-- Braintree_ApplePay success rate declined from 75.34% to 73.20% (-2.14pp) despite volume increasing from 6,740 to 7,388 attempts (+9.6%)
-- Fraud Service entry gap improved substantially: skipped transactions decreased from 309 (1.51%) to 110 (0.53%), driven by Adyen_CreditCard gap reduction (-203 transactions)
-- ProcessOut_CreditCard improved from 80.40% to 81.74% (+1.34pp), partially offsetting declines in other methods
-- Backend data shows PVS Success rate declined from 93.02% to 92.75% (-0.27pp), contributing to overall checkout decline
+- **Fraud Service approval rate dropped significantly (-1.04pp)**, declining from 93.04% to 91.99% in GA data, representing the largest conversion drop in the funnel
+- **Braintree_ApplePay experienced a notable decline (-2.14pp)** in success rate (75.34% → 73.20%) with increased volume (+648 attempts), contributing meaningfully to overall PCR decline
+- **Adyen_CreditCard gap to Fraud Service improved dramatically** (-203 transactions skipped), reducing the gap percentage from 77.4% to 33.6% of total gap
+- **Backend PVS Success rate declined (-0.27pp)** from 93.02% to 92.75%, indicating downstream payment processing issues
+- **Click Submit Form conversion weakened (-0.24pp)**, suggesting potential user experience friction at the form submission stage
 
-**Action:** Investigate — The significant decline in Fraud Service approval rate (-1.04pp) requires immediate investigation to determine if fraud rule changes or threshold adjustments were implemented in W16. Additionally, review Braintree_ApplePay performance degradation.
+**Action:** **Investigate** - The -1.04pp drop in Fraud Service approval rate exceeds threshold significantly and warrants immediate investigation into fraud rule changes or model updates deployed in W16. Additionally, review Braintree_ApplePay configuration for potential issues causing the -2.14pp decline.
 
 ---
 

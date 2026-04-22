@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined marginally from 90.1% to 90.03% (-0.07 pp) in W16, a change that is not statistically significant given the volume of 164,785 orders.
+**Overall:** Pre-Dunning Acceptance Rate declined marginally from 90.1% to 90.03% (-0.08pp) on 164,785 orders in WL 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.11 pp | ✅ |
-| 2_PreDunningAR | Reported Metric | -0.08 pp | ✅ |
-| 3_PostDunningAR | Recovery | -0.13 pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.04 pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.11pp | ✅ |
+| 2_PreDunningAR | Reported Metric | -0.08pp | ✅ |
+| 3_PostDunningAR | Recovery | -0.13pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.04pp | ✅ |
 
 **Key Findings:**
-- **8-week trend is positive:** Rate improved from 88.19% (W09) to 90.03% (W16), representing a +1.84 pp gain over the period despite the minor W16 dip
-- **No country breached threshold:** All countries remained within ±2.5% tolerance; KN showed the largest decline at -1.06 pp (87.81%) but did not trigger escalation
-- **Payment Provider anomaly flagged:** "Unknown" provider showed +2.58 pp change (96.99% → 99.49%) but represents minimal volume (1,378 orders)
-- **Mix shift neutral:** GN volume increased +17.8% week-over-week, but as a High AR tier country (94.19%), this positively supports overall rates
-- **All funnel steps moving in parallel:** Slight declines across FirstRunAR, PreDunningAR, and PostDunningAR suggest no isolated bottleneck
+- The -0.08pp decline is within normal weekly fluctuation; the 8-week trend shows steady improvement from 88.19% (W09) to 90.03% (W16), representing a +1.84pp gain over the period
+- No countries exceeded the ±2.5% threshold; KN showed the largest decline at -1.06pp (87.81%) but remains within acceptable bounds
+- PaymentProvider "Unknown" flagged with +2.58pp change, but volume is minimal (1,378 orders, <1% of total)
+- All payment methods showed minor movements within ±0.5pp, with no structural concerns identified
+- Mix shift analysis shows GN volume increased +17.8% week-over-week, but as a High AR tier country (94.19%), this positively supports overall performance
 
-**Action:** **Monitor** — Continue standard weekly tracking. No investigation or escalation required as the change is not significant and the 8-week trend remains healthy.
+**Action:** Monitor — No investigation required. The metric remains stable and the long-term trend is positive.
 
 ---
 

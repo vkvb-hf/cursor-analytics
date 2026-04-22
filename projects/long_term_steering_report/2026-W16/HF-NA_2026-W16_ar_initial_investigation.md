@@ -8,28 +8,27 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) for HF-NA declined from 89.82% to 89.44% (-0.38pp) in W16, a statistically non-significant change within normal weekly fluctuation.
+**Overall:** Pre-Dunning Acceptance Rate declined modestly from 89.82% to 89.44% (-0.38pp) in W16, a statistically non-significant change that remains within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (89.15%-90.82%) | -0.38pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: -0.49pp, CA: -0.09pp | ✅ |
+| L0: 8-Week Trend | Within historical range (89.15%-90.82%) | -0.38pp | ✅ |
+| L1: Country Breakdown | No country exceeds ±2.5% threshold | US: -0.55pp, CA: -0.10pp | ✅ |
 | L1: PaymentMethod | All methods within normal variance | -0.47pp to +0.18pp | ✅ |
-| L1: PaymentProvider | Adyen flagged for decline | -3.96pp | ⚠️ |
-| L3: Related Metrics | All funnel metrics declined uniformly | -0.41pp to -0.48pp | ✅ |
+| L1: PaymentProvider | Adyen flagged (-3.96pp) but low volume (63 orders) | Adyen: -3.96pp | ⚠️ |
+| L3: Related Metrics | All funnel metrics declined similarly | -0.41pp to -0.48pp | ✅ |
+| Mix Shift | Volume growth in both countries, stable AR tiers | US +13.5%, CA +10.6% | ✅ |
 
 **Key Findings:**
-- Adyen PaymentProvider showed a -3.96pp decline (92.55% → 88.89%), but volume is minimal at only 63 orders (0.35% of total volume)
-- Both US (-0.49pp) and CA (-0.09pp) declined modestly, with US contributing 68% of total volume (12,393 orders)
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) declined in parallel by -0.41pp to -0.48pp, suggesting a systemic but minor shift rather than isolated issue
-- Volume increased +12.5% WoW (16,084 → 18,103 orders) with stable mix shift across both countries
-- Current rate of 89.44% remains above the 8-week low of 89.15% (W13)
+- The -0.38pp decline is consistent across the entire payment funnel, with FirstRunAR (-0.48pp), PreDunningAR (-0.41pp), and PostDunningAR (-0.47pp) all moving in parallel
+- Adyen shows a -3.96pp decline but represents only 63 orders (0.35% of total volume), making it statistically negligible
+- Both US (-0.55pp) and CA (-0.10pp) declined modestly, with neither triggering the ±2.5% threshold for investigation
+- Volume increased +12.5% WoW (16,084 → 18,103), indicating healthy order growth despite the slight rate decline
+- The 8-week trend shows the metric oscillating between 89.15% and 90.82%, with W16's 89.44% well within this range
 
-**Action:** Monitor – The decline is not statistically significant and falls within normal weekly variance. Continue standard monitoring; no immediate investigation required.
+**Action:** Monitor — No investigation required. The decline is not statistically significant, no dimensions exceed thresholds, and the metric remains within normal operating range.
 
 ---
 
