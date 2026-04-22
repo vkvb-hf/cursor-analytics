@@ -2,33 +2,33 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 70.87% → 65.62% (-5.25pp)  
-**Volume:** 27,317 eligible orders  
+**Observation:** 70.87% → 65.58% (-5.29pp)  
+**Volume:** 27,283 eligible orders  
 **Payday Phase:** Mid-Cycle → Pre-Payday
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined significantly from 70.87% to 65.62% (-5.25pp) week-over-week, coinciding with a transition from Mid-Cycle to Pre-Payday phase and a 25.5% reduction in eligible order volume (36,656 → 27,317).
+**Overall:** Dunning Ship Rate declined significantly from 70.87% to 65.58% (-5.29pp) in HF-INTL during 2026-W15, coinciding with a payday phase transition from Mid-Cycle to Pre-Payday and a 25.6% reduction in eligible order volume.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | Stable/Improved | +0.8% | ✅ |
-| Discount % | Slight Increase | +1.7% | ⚠️ |
-| PC2 (Payment Capture) | Increased | +7.9% | ✅ |
-| Ship Rate | Declined | -7.4% | ⚠️ |
+| Pre-Dunning AR | 93.06% → 93.84% | +0.78pp | ✅ |
+| Discount % | 13.58% → 13.81% | +0.23pp | ⚠️ |
+| PC2 | 46.28% → 46.31% | +0.03pp | ✅ |
+| Ship Rate | 70.87% → 65.58% | -5.29pp | ⚠️ |
 
 **Key Findings:**
-- **Payday Phase Impact:** All four analyzed countries (GB, FR, DE, SE) transitioned from Mid-Cycle to Pre-Payday, correlating with universal Ship Rate declines ranging from -9.9% to -14.7%
-- **SE Most Impacted:** SE showed the steepest Ship Rate decline (-14.7%) paired with the largest Discount % increase (+18.7%), suggesting aggressive discounting failed to offset Pre-Payday liquidity constraints
-- **GB Largest Contributor:** GB contributed most to the overall decline with Ship Rate falling from 64.99% to 57.02% (-12.3%) despite stable Pre-Dunning AR (+1.1%) and improving PC2 (+5.9%)
-- **Volume Contraction Broad-Based:** Significant volume drops across major markets (DK -54.7%, BE -38.1%, FR -30.8%, DE -29.9%) indicate systematic reduction in dunning-eligible orders
-- **Metric Divergence:** Pre-Dunning AR and PC2 improved across most countries, yet Ship Rate declined—suggesting the conversion breakdown occurs between payment capture and actual shipment
+- SE experienced the largest Ship Rate decline (-14.7%), despite an 18.7% increase in Discount % which typically correlates negatively with Ship Rate performance
+- GB and FR, the two largest markets by volume contribution, both saw Ship Rate drops exceeding 12% while maintaining stable Pre-Dunning AR and Discount metrics, suggesting payday phase timing as the primary driver
+- DE showed a notable 8.2% increase in Discount % alongside a -9.9% Ship Rate decline, indicating potential discount ineffectiveness during Pre-Payday periods
+- Volume declined across 9 of 10 top countries, with DK experiencing the steepest drop (-54.7%), while NO was the only country showing volume growth (+34.5%) and Ship Rate improvement (+2.96pp)
+- Pre-Dunning AR remained stable or improved across most markets, confirming the Ship Rate decline is occurring post-approval in the dunning funnel
 
-**Action:** **Investigate** — The disconnect between improving upstream metrics (Pre-Dunning AR, PC2) and declining Ship Rate during Pre-Payday phase warrants deeper analysis into post-payment fulfillment barriers and whether payday timing adjustments to dunning campaigns could improve outcomes.
+**Action:** Monitor — The decline appears primarily driven by the predictable Pre-Payday phase transition. Track 2026-W16 performance to confirm recovery as customers enter Post-Payday phase. Investigate SE and DE discount strategy effectiveness if underperformance persists.
 
 ---
 
@@ -38,8 +38,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 36,656 | 70.87% | - | 93.06% | - | 13.57% | - | 42.92% | - |
-| 2026-W15 | Pre-Payday | 27,317 | 65.62% | ↓-7.4% | 93.83% | →+0.8% | 13.8% | →+1.7% | 46.31% | ↑+7.9% |
+| 2026-W14 | Mid-Cycle | 36,650 | 70.87% | - | 93.06% | - | 13.58% | - | 46.28% | - |
+| 2026-W15 | Pre-Payday | 27,283 | 65.58% | ↓-7.5% | 93.84% | →+0.8% | 13.81% | →+1.7% | 46.31% | →+0.1% |
 
 ---
 
@@ -49,17 +49,17 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 8,721 | 64.99% | - | 93.07% | - | 16.87% | - | 46.13% | - |
-| 2026-W15 | Pre-Payday | 6,301 | 57.02% | ↓-12.3% | 94.14% | →+1.1% | 17.17% | →+1.8% | 48.87% | ↑+5.9% |
+| 2026-W14 | Mid-Cycle | 8,720 | 64.99% | - | 93.07% | - | 16.87% | - | 48.61% | - |
+| 2026-W15 | Pre-Payday | 6,292 | 56.99% | ↓-12.3% | 94.14% | →+1.1% | 17.18% | →+1.8% | 48.86% | →+0.5% |
 
-**Analysis:** The 5.25pp decline in Dunning Ship Rate is primarily driven by the Pre-Payday phase transition, which negatively impacted conversion despite stable approval rates and improved payment capture metrics across all major markets. GB, FR, DE, and SE all experienced double-digit percentage declines in Ship Rate, with increased discounting in DE (+8.2%) and SE (+18.7%) failing to counteract the payday-related headwinds. Recommend investigating the timing of dunning campaigns relative to payday cycles and analyzing post-PC2 drop-off points to identify actionable interventions.
+**Analysis:** The 5.29pp decline in Dunning Ship Rate for HF-INTL is predominantly attributable to the cyclical payday phase shift from Mid-Cycle to Pre-Payday, a period when customer payment capacity is typically constrained. While all major markets showed rate declines, the stability of Pre-Dunning AR (+0.78pp) indicates upstream approval quality remains intact, and the issue is concentrated in customer payment behavior during this phase. Performance should be reassessed in W16 to confirm expected recovery post-payday.
 
 ### FR (Rank #2 by Contribution | #2 by Change)
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 7,645 | 69.97% | - | 92.95% | - | 12.07% | - | 42.27% | - |
-| 2026-W15 | Pre-Payday | 5,294 | 61.64% | ↓-11.9% | 94.49% | →+1.7% | 12.09% | →+0.2% | 45.11% | ↑+6.7% |
+| 2026-W14 | Mid-Cycle | 7,642 | 69.96% | - | 92.95% | - | 12.08% | - | 45.75% | - |
+| 2026-W15 | Pre-Payday | 5,272 | 61.48% | ↓-12.1% | 94.49% | →+1.7% | 12.11% | →+0.2% | 45.12% | →-1.4% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -67,8 +67,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 4,511 | 74.73% | - | 96.44% | - | 15.89% | - | 38.13% | - |
-| 2026-W15 | Pre-Payday | 3,162 | 67.33% | ↓-9.9% | 97.33% | →+0.9% | 17.19% | ↑+8.2% | 42.0% | ↑+10.1% |
+| 2026-W14 | Mid-Cycle | 4,511 | 74.73% | - | 96.43% | - | 15.89% | - | 42.14% | - |
+| 2026-W15 | Pre-Payday | 3,160 | 67.31% | ↓-9.9% | 97.34% | →+0.9% | 17.19% | ↑+8.2% | 42.0% | →-0.3% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -76,8 +76,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 808 | 71.66% | - | 96.24% | - | 9.16% | - | 40.1% | - |
-| 2026-W15 | Pre-Payday | 690 | 61.16% | ↓-14.7% | 95.19% | →-1.1% | 10.87% | ↑+18.7% | 41.77% | ↑+4.2% |
+| 2026-W14 | Mid-Cycle | 808 | 71.66% | - | 96.24% | - | 9.16% | - | 41.28% | - |
+| 2026-W15 | Pre-Payday | 690 | 61.16% | ↓-14.7% | 95.19% | →-1.1% | 10.87% | ↑+18.7% | 41.77% | →+1.2% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -98,10 +98,10 @@
 
 | Country | Ship Rate | Pre-Dunning AR | Discount % | PC2 | Payday Phase | Root Cause |
 |---------|-----------|----------------|------------|-----|--------------|------------|
-| GB | ↓-12.3% | →+1.1% | →+1.8% | ↑+5.9% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| FR | ↓-11.9% | →+1.7% | →+0.2% | ↑+6.7% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| DE | ↓-9.9% | →+0.9% | ↑+8.2% | ↑+10.1% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| SE | ↓-14.7% | →-1.1% | ↑+18.7% | ↑+4.2% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| GB | ↓-12.3% | →+1.1% | →+1.8% | →+0.5% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| FR | ↓-12.1% | →+1.7% | →+0.2% | →-1.4% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| DE | ↓-9.9% | →+0.9% | ↑+8.2% | →-0.3% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| SE | ↓-14.7% | →-1.1% | ↑+18.7% | →+1.2% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
@@ -109,15 +109,15 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| GB | 8,721 | 64.99% | 6,301 | 57.02% | -27.7% | High |
-| FR | 7,645 | 69.97% | 5,294 | 61.64% | -30.8% | High |
-| AU | 5,849 | 66.10% | 5,021 | 64.73% | -14.2% | High |
-| DE | 4,511 | 74.73% | 3,162 | 67.33% | -29.9% | High |
+| GB | 8,720 | 64.99% | 6,292 | 56.99% | -27.8% | High |
+| FR | 7,642 | 69.96% | 5,272 | 61.48% | -31.0% | High |
+| AU | 5,848 | 66.11% | 5,021 | 64.73% | -14.1% | High |
+| DE | 4,511 | 74.73% | 3,160 | 67.31% | -29.9% | High |
 | BE | 3,221 | 90.50% | 1,995 | 87.57% | -38.1% | High |
 | NZ | 1,302 | 61.29% | 1,132 | 69.52% | -13.1% | High |
 | DK | 1,229 | 76.00% | 557 | 67.68% | -54.7% | High |
-| IE | 1,149 | 65.88% | 877 | 61.80% | -23.7% | High |
-| NO | 943 | 79.22% | 1,269 | 82.19% | 34.6% | High |
+| IE | 1,148 | 65.85% | 877 | 61.80% | -23.6% | High |
+| NO | 943 | 79.22% | 1,268 | 82.18% | 34.5% | High |
 | SE | 808 | 71.66% | 690 | 61.16% | -14.6% | High |
 
 ---
@@ -125,4 +125,4 @@
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

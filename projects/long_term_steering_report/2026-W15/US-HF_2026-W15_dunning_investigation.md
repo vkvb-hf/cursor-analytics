@@ -2,31 +2,33 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 47.75% → 46.73% (-1.02pp)  
-**Volume:** 12,628 eligible orders  
+**Observation:** 47.74% → 46.72% (-1.02pp)  
+**Volume:** 12,619 eligible orders  
 **Payday Phase:** Mid-Cycle → Pre-Payday
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate declined by 1.02pp (from 47.75% to 46.73%) in US-HF during W15, representing a -2.1% relative decrease amid a transition from Mid-Cycle to Pre-Payday phase.
+## Executive Summary
+
+**Overall:** Dunning Ship Rate declined from 47.74% to 46.72% (-1.02pp) week-over-week, representing a -2.1% relative decrease amid the transition from Mid-Cycle to Pre-Payday phase.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 92.78% → 93.09% | +0.31pp (+0.3%) | ✅ |
-| Discount % | 14.6% → 13.94% | -0.66pp (-4.5%) | ✅ |
-| PC2 | 49.33% → 52.08% | +2.75pp (+5.6%) | ✅ |
-| Ship Rate | 47.75% → 46.73% | -1.02pp (-2.1%) | ⚠️ |
+| Pre-Dunning AR | 92.78% → 93.09% | +0.31pp | ✅ |
+| Discount % | 14.6% → 13.95% | -0.65pp | ✅ |
+| PC2 | 52.76% → 52.07% | -0.69pp | ⚠️ |
+| Ship Rate | 47.74% → 46.72% | -1.02pp | ⚠️ |
 
 **Key Findings:**
-- Ship Rate declined despite favorable movement in all upstream metrics (Pre-Dunning AR, Discount %, and PC2 all improved)
-- Volume decreased by 8.4% (13,791 → 12,628 orders), suggesting mix shift effects may be masking underlying improvements
-- Discount % decreased by 4.5%, which should positively impact Ship Rate per the decision framework, yet Ship Rate still fell
-- PC2 improved significantly (+5.6%), indicating stronger payment completion at step 2, but this didn't translate to overall ship improvement
-- Payday phase transition (Mid-Cycle → Pre-Payday) likely introduced external customer liquidity pressures overriding operational gains
+- US accounts for 100% of cluster volume and drove the entire -1.02pp Ship Rate decline
+- Pre-Dunning Approval Rate improved slightly (+0.3%), indicating upstream eligibility is not the issue
+- Discount % decreased by -4.5% (from 14.6% to 13.95%), which should positively impact Ship Rate per the decision framework, yet Ship Rate still declined
+- PC2 (Payment Conversion 2) dropped -1.3% (from 52.76% to 52.07%), suggesting downstream payment completion issues
+- Volume contracted by -8.5% (13,786 → 12,619 orders), coinciding with the Pre-Payday phase transition
 
-**Action:** Investigate — The paradoxical pattern of declining Ship Rate despite improving supporting metrics suggests Simpson's Paradox or external factors (payday timing, customer segment mix) are driving the decline. Deeper cohort analysis by customer segment and payment timing is recommended.
+**Action:** Investigate — The decline in Ship Rate despite favorable Discount % movement, combined with PC2 degradation during Pre-Payday phase, suggests customer payment behavior issues warrant deeper analysis into payment failure reasons and cash flow timing impacts.
 
 ---
 
@@ -36,8 +38,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 13,791 | 47.75% | - | 92.78% | - | 14.6% | - | 49.33% | - |
-| 2026-W15 | Pre-Payday | 12,628 | 46.73% | →-2.1% | 93.09% | →+0.3% | 13.94% | ↓-4.5% | 52.08% | ↑+5.6% |
+| 2026-W14 | Mid-Cycle | 13,786 | 47.74% | - | 92.78% | - | 14.6% | - | 52.76% | - |
+| 2026-W15 | Pre-Payday | 12,619 | 46.72% | →-2.1% | 93.09% | →+0.3% | 13.95% | ↓-4.5% | 52.07% | →-1.3% |
 
 ---
 
@@ -47,10 +49,10 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 13,791 | 47.75% | - | 92.78% | - | 14.6% | - | 49.33% | - |
-| 2026-W15 | Pre-Payday | 12,628 | 46.73% | →-2.1% | 93.09% | →+0.3% | 13.94% | ↓-4.5% | 52.08% | ↑+5.6% |
+| 2026-W14 | Mid-Cycle | 13,786 | 47.74% | - | 92.78% | - | 14.6% | - | 52.76% | - |
+| 2026-W15 | Pre-Payday | 12,619 | 46.72% | →-2.1% | 93.09% | →+0.3% | 13.95% | ↓-4.5% | 52.07% | →-1.3% |
 
-**Analysis:** The US-HF cluster experienced a 1.02pp decline in Dunning Ship Rate during W15 despite improvements across all key operational metrics (Pre-Dunning AR, Discount %, PC2). This counterintuitive pattern, combined with an 8.4% volume reduction and the Mid-Cycle to Pre-Payday phase transition, strongly suggests that external customer liquidity factors and potential mix shift effects are outweighing operational improvements. Further investigation into customer segment composition and payday-aligned behavioral patterns is warranted before the next reporting cycle.
+**Analysis:** The -1.02pp decline in US-HF Dunning Ship Rate appears primarily driven by deteriorating payment conversion (PC2 down -1.3%) during the Pre-Payday phase, when customers typically have reduced liquidity. Despite improved Pre-Dunning AR and reduced discount rates, the payment completion step is underperforming and should be investigated for specific failure codes or timing patterns. Monitoring through the payday transition in W16 will confirm whether this is a cyclical cash-flow effect or a structural issue requiring intervention.
 
 
 ---
@@ -69,7 +71,7 @@
 
 | Country | Ship Rate | Pre-Dunning AR | Discount % | PC2 | Payday Phase | Root Cause |
 |---------|-----------|----------------|------------|-----|--------------|------------|
-| US | →-2.1% | →+0.3% | ↓-4.5% | ↑+5.6% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| US | →-2.1% | →+0.3% | ↓-4.5% | →-1.3% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
@@ -77,11 +79,11 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| US | 13,791 | 47.75% | 12,628 | 46.73% | -8.4% | Medium |
+| US | 13,786 | 47.74% | 12,619 | 46.72% | -8.5% | Medium |
 
 ---
 
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

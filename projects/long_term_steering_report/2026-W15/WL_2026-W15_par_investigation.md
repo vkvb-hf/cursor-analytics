@@ -1,34 +1,32 @@
 # PAR Investigation: WL 2026-W15
 
 **Metric:** Payment Approval Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 91.05% → 91.65% (+0.66%)  
-**Volume:** 160,979 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 91.65% → 91.69% (+0.04%)  
+**Volume:** 164,785 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Approval Rate improved from 91.05% to 91.65% (+0.60 pp) in WL 2026-W15, representing a non-significant positive change on 160,979 orders.
+**Overall:** Payment Approval Rate showed a marginal improvement from 91.65% to 91.69% (+0.04 pp), a statistically non-significant change on volume of 164,785 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | Recovery | +0.87% | ✅ |
-| 3_PostDunningAR | Dunning | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Final | +0.67% | ✅ |
+| 1_FirstRunAR | Within normal range | +0.92% | ✅ |
+| 2_PreDunningAR | Within normal range | +0.87% | ✅ |
+| 3_PostDunningAR | Within normal range | +0.61% | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.67% | ✅ |
 
 **Key Findings:**
-- All funnel stages showed improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating better initial payment success
-- Unknown PaymentProvider showed a significant +13.15% change but represents minimal volume (664 orders) — flagged as anomaly (⚠️)
-- AO showed the strongest country-level improvement (+2.17 pp), though volume declined 12.0% WoW
-- No countries exceeded the ±2.5% investigation threshold; all changes within normal variance
-- 8-week trend shows steady recovery from W08 low of 89.88% to current 91.65%, a cumulative +1.77 pp gain
+- All funnel steps show consistent improvement, with FirstRunAR contributing the largest gain (+0.92%), indicating upstream payment success drove the overall lift
+- PaymentProvider "Unknown" flagged with +13.15% change, but represents minimal volume (664 orders) and does not materially impact overall rate
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement (+2.21 pp) but remained below threshold
+- Volume declined 12.0% in AO and 8.5% in GN week-over-week, though mix shift impact remains stable across all segments
+- ProcessOut provider improved +2.05 pp (17,676 orders), contributing positively to overall rate
 
-**Action:** Monitor — The improvement is not statistically significant and all dimensional changes fall within normal operating ranges. Continue standard weekly monitoring.
+**Action:** Monitor — The change is not statistically significant and all dimensions remain within normal operating ranges. No investigation or escalation required at this time.
 
 ---
 
@@ -38,14 +36,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 91.69% | 164,785 | +0.04% |
 | 2026-W15 | 91.65% | 160,979 | +0.66% ← REPORTED CHANGE |
 | 2026-W14 | 91.05% | 165,018 | -0.27% |
 | 2026-W13 | 91.3% | 169,667 | -0.02% |
 | 2026-W12 | 91.32% | 169,891 | -0.28% |
 | 2026-W11 | 91.58% | 174,933 | +1.03% |
 | 2026-W10 | 90.65% | 179,965 | +0.81% |
-| 2026-W09 | 89.92% | 180,862 | +0.04% |
-| 2026-W08 | 89.88% | 179,647 | - |
+| 2026-W09 | 89.92% | 180,862 | - |
 
 ---
 
@@ -53,10 +51,10 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| GN | 93.32% | 92.33% | +1.07% | 13,110 |  |
-| ER | 90.32% | 89.22% | +1.23% | 68,811 |  |
-| MR | 81.41% | 80.25% | +1.45% | 19,468 |  |
-| AO | 87.06% | 85.21% | +2.17% | 13,883 |  |
+| KN | 89.82% | 89.16% | +0.75% | 10,259 |  |
+| ER | 91.36% | 90.56% | +0.87% | 68,811 |  |
+| MR | 83.92% | 83.02% | +1.08% | 19,468 |  |
+| AO | 93.21% | 91.20% | +2.21% | 13,883 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -79,7 +77,7 @@
 |-------|--------|--------|----------|----------|------|
 | No Payment | 100.0% | 100.0% | +0.00% | 683 |  |
 | Braintree | 92.22% | 91.8% | +0.45% | 105,580 |  |
-| Adyen | 94.13% | 93.51% | +0.67% | 36,376 |  |
+| Adyen | 94.13% | 93.5% | +0.67% | 36,376 |  |
 | ProcessOut | 82.67% | 81.01% | +2.05% | 17,676 |  |
 | Unknown | 96.99% | 85.71% | +13.15% | 664 | ⚠️ |
 
@@ -91,8 +89,8 @@
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 88.17% | 87.37% | +0.92% | 160,979 | 165,018 |  |
-| 2_PreDunningAR | 90.1% | 89.33% | +0.87% | 160,979 | 165,018 |  |
-| 3_PostDunningAR | 91.03% | 90.55% | +0.53% | 160,979 | 165,018 |  |
+| 2_PreDunningAR | 90.1% | 89.32% | +0.87% | 160,979 | 165,018 |  |
+| 3_PostDunningAR | 91.21% | 90.66% | +0.61% | 160,979 | 165,018 |  |
 | 6_PaymentApprovalRate | 91.65% | 91.05% | +0.67% | 160,979 | 165,018 |  |
 
 ---
@@ -121,4 +119,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

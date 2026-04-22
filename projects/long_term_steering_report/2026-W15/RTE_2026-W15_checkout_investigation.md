@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved significantly from 39.36% to 45.59% (+6.23pp) in 2026-W15, exceeding the +3.12pp threshold, driven primarily by a substantial improvement in the Select Payment Method step across all analyzed countries.
+**Overall:** Payment Conversion Rate improved significantly from 39.36% to 45.59% (+6.23pp), exceeding the threshold of +3.12pp, with 61,475 payment visits in 2026-W15.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ > 3.12pp | +6.32pp | ⚠️ |
-| Click Submit Form | Δ > 3.12pp | +1.52pp | ✅ |
-| FE Validation Passed | Δ > 3.12pp | +0.36pp | ✅ |
-| Enter Fraud Service | Δ > 3.12pp | +0.17pp | ✅ |
-| Approved by Fraud Service | Δ > 3.12pp | +0.11pp | ✅ |
-| Call to PVS | Δ > 3.12pp | +0.05pp | ✅ |
-| Successful Checkout | Δ > 3.12pp | +0.39pp | ✅ |
+| Select Payment Method | Above threshold | +6.32pp | ⚠️ |
+| Click Submit Form | Within normal range | +1.52pp | ✅ |
+| FE Validation Passed | Within normal range | +0.36pp | ✅ |
+| Enter Fraud Service | Within normal range | +0.17pp | ✅ |
+| Approved by Fraud Service | Within normal range | +0.10pp | ✅ |
+| Call to PVS | Within normal range | +0.05pp | ✅ |
+| Successful Checkout | Within normal range | +0.39pp | ✅ |
 
 **Key Findings:**
-- The Select Payment Method step is the primary driver of PCR improvement, with GA conversion increasing from 49.93% to 56.25% (+6.32pp) globally
-- All four analyzed countries (TV, CF, YE, FJ) show consistent improvements in the Select Payment Method step, ranging from +3.64pp (FJ) to +14.30pp (TV)
-- TV showed the highest absolute PCR change (+13.75pp) despite low volume (510 visits), while CF contributed most to overall improvement with +12.19pp change on 11,807 visits
-- Braintree_ApplePay showed notable improvement (+2.16pp) while Braintree_CreditCard declined significantly (-11.73pp), though on low volume (116 attempts)
-- Backend funnel shows modest improvement (+0.68pp PCR) with Checkout Attempt conversion improving slightly (+0.38pp)
+- The primary driver of PCR improvement is the "Select Payment Method" step, which improved by +6.32pp (49.93% → 56.25%), accounting for the majority of the overall gain
+- All four analyzed countries (TV, CF, YE, FJ) show consistent improvement at the "Select Payment Method" step: TV (+14.30pp), CF (+12.82pp), YE (+12.38pp), FJ (+3.64pp)
+- Braintree_ApplePay showed notable improvement in success rate (+2.16pp), while Braintree_CreditCard declined significantly (-11.73pp) but with very low volume (116 attempts)
+- Backend waterfall shows modest improvement (+0.68pp PCR) compared to GA waterfall (+6.23pp), indicating the improvement is primarily in the user engagement/selection phase
+- Despite payment visits declining slightly (-3.0%), successful checkouts increased substantially (+12.4%)
 
-**Action:** Investigate - The significant improvement in Select Payment Method step warrants investigation to identify the root cause (potential UX change, A/B test, or technical fix) to ensure sustainability and potential replication across other markets.
+**Action:** Monitor - The improvement appears to be driven by enhanced user engagement at the payment method selection step across multiple countries. Recommend monitoring to confirm this positive trend continues and investigating what changes may have contributed to the improved selection rates.
 
 ---
 
@@ -48,9 +48,9 @@
 | Click Submit Form | 28,501 | 31,676 | 3,175 | 11.1% | 90.09% | 91.60% | +1.52pp |
 | FE Validation Passed | 27,689 | 30,889 | 3,200 | 11.6% | 97.15% | 97.52% | +0.36pp |
 | Enter Fraud Service | 27,074 | 30,254 | 3,180 | 11.7% | 97.78% | 97.94% | +0.17pp |
-| Approved by Fraud Service | 26,001 | 29,087 | 3,086 | 11.9% | 96.04% | 96.14% | +0.11pp |
-| Call to PVS | 25,936 | 29,030 | 3,094 | 11.9% | 99.75% | 99.80% | +0.05pp |
-| **Successful Checkout** | 24,939 | 28,027 | 3,088 | 12.4% | 96.16% | 96.54% | +0.39pp |
+| Approved by Fraud Service | 26,004 | 29,090 | 3,086 | 11.9% | 96.05% | 96.15% | +0.10pp |
+| Call to PVS | 25,936 | 29,029 | 3,093 | 11.9% | 99.74% | 99.79% | +0.05pp |
+| **Successful Checkout** | 24,939 | 28,027 | 3,088 | 12.4% | 96.16% | 96.55% | +0.39pp |
 | **PCR Rate** | | | | | 39.36% | 45.59% | **+6.23pp** |
 
 ### Waterfall Backend
@@ -140,8 +140,8 @@
 | Click Submit Form | 5,852 | 6,911 | +1,059 | +18.10pp | 89.89% | 92.57% | +2.67pp |
 | FE Validation Passed | 5,784 | 6,853 | +1,069 | +18.48pp | 98.84% | 99.16% | +0.32pp |
 | Enter Fraud Service | 5,639 | 6,681 | +1,042 | +18.48pp | 97.49% | 97.49% | -0.00pp |
-| Approved by Fraud Service | 5,375 | 6,385 | +1,010 | +18.79pp | 95.32% | 95.57% | +0.25pp |
-| Call to PVS | 5,339 | 6,350 | +1,011 | +18.94pp | 99.33% | 99.45% | +0.12pp |
+| Approved by Fraud Service | 5,377 | 6,385 | +1,008 | +18.75pp | 95.35% | 95.57% | +0.22pp |
+| Call to PVS | 5,339 | 6,350 | +1,011 | +18.94pp | 99.29% | 99.45% | +0.16pp |
 | **Successful Checkout** | 5,194 | 6,189 | +995 | +19.16pp | 97.28% | 97.46% | +0.18pp |
 | **PCR Rate** | | | | | 40.23% | 52.42% | **+12.19pp** |
 
@@ -174,9 +174,9 @@
 | Click Submit Form | 2,357 | 2,811 | +454 | +19.26pp | 89.79% | 92.07% | +2.28pp |
 | FE Validation Passed | 2,324 | 2,781 | +457 | +19.66pp | 98.60% | 98.93% | +0.33pp |
 | Enter Fraud Service | 2,208 | 2,655 | +447 | +20.24pp | 95.01% | 95.47% | +0.46pp |
-| Approved by Fraud Service | 2,082 | 2,560 | +478 | +22.96pp | 94.29% | 96.42% | +2.13pp |
-| Call to PVS | 2,065 | 2,548 | +483 | +23.39pp | 99.18% | 99.53% | +0.35pp |
-| **Successful Checkout** | 1,973 | 2,466 | +493 | +24.99pp | 95.54% | 96.78% | +1.24pp |
+| Approved by Fraud Service | 2,082 | 2,559 | +477 | +22.91pp | 94.29% | 96.38% | +2.09pp |
+| Call to PVS | 2,065 | 2,547 | +482 | +23.34pp | 99.18% | 99.53% | +0.35pp |
+| **Successful Checkout** | 1,973 | 2,466 | +493 | +24.99pp | 95.54% | 96.82% | +1.27pp |
 | **PCR Rate** | | | | | 37.72% | 50.53% | **+12.82pp** |
 
 **Key Driver:** Select Payment Method (+12.38pp)
@@ -208,8 +208,8 @@
 | Click Submit Form | 18,161 | 19,780 | +1,619 | +8.91pp | 90.93% | 91.54% | +0.62pp |
 | FE Validation Passed | 17,530 | 19,162 | +1,632 | +9.31pp | 96.53% | 96.88% | +0.35pp |
 | Enter Fraud Service | 17,246 | 18,891 | +1,645 | +9.54pp | 98.38% | 98.59% | +0.21pp |
-| Approved by Fraud Service | 16,699 | 18,235 | +1,536 | +9.20pp | 96.83% | 96.53% | -0.30pp |
-| Call to PVS | 16,683 | 18,225 | +1,542 | +9.24pp | 99.90% | 99.95% | +0.04pp |
+| Approved by Fraud Service | 16,700 | 18,239 | +1,539 | +9.22pp | 96.83% | 96.55% | -0.29pp |
+| Call to PVS | 16,683 | 18,225 | +1,542 | +9.24pp | 99.90% | 99.92% | +0.03pp |
 | **Successful Checkout** | 16,232 | 17,784 | +1,552 | +9.56pp | 97.30% | 97.58% | +0.28pp |
 | **PCR Rate** | | | | | 39.94% | 43.45% | **+3.50pp** |
 
@@ -237,4 +237,4 @@
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

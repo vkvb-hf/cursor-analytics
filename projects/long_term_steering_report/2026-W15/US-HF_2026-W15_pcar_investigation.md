@@ -1,35 +1,32 @@
 # PCAR Investigation: US-HF 2026-W15
 
 **Metric:** Payment Checkout Approval Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 92.85% → 93.02% (+0.18%)  
-**Volume:** 17,669 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 93.02% → 92.75% (-0.29%)  
+**Volume:** 18,142 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** PCAR for US-HF improved marginally from 92.85% to 93.02% (+0.17pp) in 2026-W15, with the change flagged as not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined by -0.27 pp (from 93.02% to 92.75%) in W16, a statistically non-significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | +0.17pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.34pp (US) | ✅ |
-| L1: PaymentMethod | No methods exceeding threshold; "Others" at -2.49% but minimal volume (91 orders) | Mixed | ✅ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | US High AR tier stable (-0.9% volume shift) | Stable | ✅ |
+| L0: 8-Week Trend | Rate within historical range (92.57%-94.58%) | -0.27 pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.18 pp (US) | ✅ |
+| L1: Payment Method | No methods exceeding ±2.5% threshold | -2.49% (Others) low volume | ✅ |
+| Mix Shift | Volume shifted to High AR tier | +18.5% volume | ✅ |
 
 **Key Findings:**
-- The +0.17pp week-over-week improvement is within normal fluctuation and not statistically significant given the 17,669 order volume
-- Credit Card approval rate improved +0.90pp (92.09% → 92.92%) representing the largest positive movement in the highest-volume payment method (9,998 orders)
-- Apple Pay declined -1.00pp (93.51% → 92.58%) but remains within acceptable range
-- "Others" payment method showed -2.49% decline but volume is negligible (91 orders)
-- 8-week trend shows rate recovery toward the W08-W09 baseline (~93%) after the W11 dip to 93.0%
+- The -0.29% week-over-week decline is within normal operating variance, with rates fluctuating between 92.57% and 94.58% over the past 8 weeks
+- US showed a slight improvement of +0.18 pp in the prior period comparison, with no countries breaching the ±2.5% threshold
+- "Others" payment method showed a -2.49% decline but represents only 91 orders (0.5% of volume), making it statistically insignificant
+- Apple Pay experienced a -1.00 pp decline (92.58% from 93.51%) across 6,169 orders, worth monitoring but below threshold
+- Volume increased +18.5% week-over-week (14,911 → 17,669 orders) while maintaining stable High AR tier performance
 
-**Action:** Monitor – No investigation required. Continue standard weekly monitoring as all metrics are within expected ranges and no thresholds were breached.
+**Action:** Monitor — No immediate investigation required. Continue standard weekly monitoring with attention to Apple Pay performance trends.
 
 ---
 
@@ -39,14 +36,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 92.75% | 18,142 | -0.29% |
 | 2026-W15 | 93.02% | 17,669 | +0.18% ← REPORTED CHANGE |
 | 2026-W14 | 92.85% | 14,911 | +0.30% |
 | 2026-W13 | 92.57% | 15,361 | -0.38% |
 | 2026-W12 | 92.92% | 15,651 | -0.09% |
 | 2026-W11 | 93.0% | 16,952 | -1.67% |
 | 2026-W10 | 94.58% | 17,681 | +1.54% |
-| 2026-W09 | 93.15% | 21,474 | +0.13% |
-| 2026-W08 | 93.03% | 20,421 | - |
+| 2026-W09 | 93.15% | 21,474 | - |
 
 ---
 
@@ -54,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
+| US | 93.02% | 92.85% | +0.18% | 17,669 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -85,7 +82,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
+| US | High (>92%) | 14,911 | 17,669 | +18.5% | Stable |
 
 ---
 
@@ -98,4 +95,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

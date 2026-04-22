@@ -1,32 +1,34 @@
 # Reactivation Investigation: US-HF 2026-W15
 
 **Metric:** Reactivation Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 90.99% → 90.47% (-0.57%)  
-**Volume:** 21,155 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 90.47% → 90.07% (-0.44%)  
+**Volume:** 18,897 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by -0.57% (from 90.99% to 90.47%) in 2026-W15, a statistically non-significant change that remains within normal operating range.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined by -0.44% (from 90.47% to 90.07%) in W15, representing a statistically non-significant change on a volume of 18,897 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within historical range (85.79%-91.26%) | -0.52pp | ✅ |
-| Country Breakdown | US performance (+0.34%) | No threshold breach | ✅ |
-| Payment Method | "Others" flagged (-50.00%) | Low volume (4 orders) | ⚠️ |
-| Mix Shift | High AR tier volume shift | -0.9% (Stable) | ✅ |
+| L0: 8-Week Trend | Within normal variance | -0.44% | ✅ |
+| L1: Country Breakdown | US only, no threshold breach | -0.58% | ✅ |
+| L1: PaymentMethod Scan | "Others" flagged but minimal volume (4 orders) | -50.00pp | ⚠️ |
+| Mix Shift Analysis | Volume shift to Medium tier (+43.6%) | Stable | ✅ |
 
 **Key Findings:**
-- The -0.57% decline reverses the prior week's +0.40% gain but remains well above the 8-week low of 85.79% (W09)
-- Volume increased significantly from 14,736 to 21,155 orders (+43.6%), which may contribute to rate normalization
-- "Others" payment method shows a -50.00% decline but represents only 4 orders, making it statistically irrelevant
-- US country-level performance actually improved +0.34% despite the overall metric decline
-- PayPal showed the largest meaningful decline at -1.21% (3,369 orders), followed by Apple Pay at -0.55% (3,197 orders)
+- The -0.44% decline is within normal weekly fluctuation; the 8-week trend shows overall improvement from 85.79% (W09) to 90.07% (W16)
+- US is the sole market with a -0.58% rate decline, but this does not exceed the ±2.5% threshold
+- PaymentMethod "Others" shows a -50.00pp drop, but volume is negligible (4 orders) and not statistically meaningful
+- Credit Card remains the dominant payment method (14,585 orders) with only a minor -0.45% decline
+- Volume increased significantly (+43.6%) in the Medium AR tier, but mix shift impact remained stable
 
-**Action:** Monitor – The decline is not statistically significant, no countries exceeded the ±2.5% threshold, and the flagged payment method ("Others") has negligible volume. Continue standard weekly monitoring.
+**Action:** Monitor — The decline is not statistically significant, no dimensions exceed thresholds with meaningful volume, and the 8-week trend remains positive. Continue standard monitoring.
 
 ---
 
@@ -36,14 +38,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 90.07% | 18,897 | -0.44% |
 | 2026-W15 | 90.47% | 21,155 | -0.57% ← REPORTED CHANGE |
 | 2026-W14 | 90.99% | 14,736 | +0.40% |
 | 2026-W13 | 90.63% | 15,928 | -0.69% |
 | 2026-W12 | 91.26% | 15,787 | +2.56% |
 | 2026-W11 | 88.98% | 17,703 | +1.39% |
 | 2026-W10 | 87.76% | 22,710 | +2.30% |
-| 2026-W09 | 85.79% | 18,047 | -0.06% |
-| 2026-W08 | 85.84% | 18,573 | - |
+| 2026-W09 | 85.79% | 18,047 | - |
 
 ---
 
@@ -51,7 +53,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
+| US | 90.47% | 90.99% | -0.58% | 21,155 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -81,7 +83,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
+| US | Medium (>85%) | 14,736 | 21,155 | +43.6% | Stable |
 
 ---
 
@@ -94,4 +96,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

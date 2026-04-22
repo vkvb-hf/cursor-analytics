@@ -1,33 +1,34 @@
 # PCAR Investigation: RTE 2026-W15
 
 **Metric:** Payment Checkout Approval Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 96.9% → 97.22% (+0.33%)  
-**Volume:** 44,168 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 97.22% → 97.2% (-0.02%)  
+**Volume:** 44,111 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved by +0.33pp (96.9% → 97.22%) on 44,168 orders in W15, though the change is not statistically significant.
+**Overall:** Payment Checkout Approval Rate remained stable at 97.2%, declining marginally by -0.02pp from 97.22% in W15, with the change classified as not statistically significant across 44,111 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (96.88%-97.30%) | +0.33pp | ✅ |
-| L1: Country Scan | 1 country (TK) exceeds ±2.5% threshold | TK +7.54pp | ⚠️ |
-| L1: Dimension Scan | PaymentMethod "Others" declined -4.35pp | Low volume (950) | ⚠️ |
-| L2: TK Deep-Dive | All payment methods improved significantly | +5.4% to +12.1% | ✅ |
-| Mix Shift | All countries stable, no significant volume shifts | TK +9.6% vol | ✅ |
+| L0: 8-Week Trend | Stable trend (96.88%-97.30% range) | -0.02pp | ✅ |
+| L1: Country Breakdown | TT -4.17pp, TZ +3.28pp exceed ±2.5% threshold | Mixed | ⚠️ |
+| L1: PaymentMethod | Others -4.35pp flagged | -4.35pp | ⚠️ |
+| L2: TT Deep-Dive | Klarna -5.21pp, IDeal -5.10pp | -5.21pp | ⚠️ |
+| L2: TZ Deep-Dive | CreditCard +7.79pp, Adyen +7.79pp (improvement) | +7.79pp | ✅ |
+| Mix Shift | TO volume -21.0%, all others stable | Minor | ✅ |
 
 **Key Findings:**
-- TK showed significant improvement of +7.54pp (88.65% → 95.33%) driven by reduced "Insufficient Funds" declines (-5.81pp)
-- Apple Pay in TK improved dramatically by +12.10pp (83.41% → 93.51%), with Braintree provider up +10.60pp
-- PaymentMethod "Others" declined -4.35pp globally but represents minimal volume (950 orders)
-- TV and YE showed minor declines (-1.37pp and -0.43pp respectively) but remain within acceptable ranges
-- Overall metric remains stable within the 8-week historical band (96.88%-97.30%)
+- TT declined -4.17pp (74.62% vs 77.86%) driven by Klarna (-5.21pp) and IDeal (-5.10pp) payment methods processed through Adyen (-4.29pp)
+- TZ improved +3.28pp (97.10% vs 94.01%) with CreditCard via Adyen showing +7.79pp recovery
+- "Others" payment method globally declined -4.35pp but represents low volume (950 orders)
+- TO experienced significant volume drop (-21.0%) but maintains high approval rate (98.03%)
+- Overall metric stability maintained despite localized fluctuations, with offsetting positive/negative country movements
 
-**Action:** Monitor — The +0.33pp improvement is not statistically significant and falls within normal weekly variance. TK's improvement is positive and may warrant investigation to understand if a fix was deployed that could be applied elsewhere.
+**Action:** Monitor – The -0.02pp change is not statistically significant. Continue monitoring TT/Klarna performance for sustained degradation patterns; no immediate escalation required.
 
 ---
 
@@ -37,14 +38,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 97.2% | 44,111 | -0.02% |
 | 2026-W15 | 97.22% | 44,168 | +0.33% ← REPORTED CHANGE |
 | 2026-W14 | 96.9% | 39,914 | +0.01% |
 | 2026-W13 | 96.89% | 42,897 | +0.01% |
 | 2026-W12 | 96.88% | 44,209 | -0.11% |
 | 2026-W11 | 96.99% | 47,403 | +0.10% |
 | 2026-W10 | 96.89% | 48,399 | -0.42% |
-| 2026-W09 | 97.3% | 50,858 | +0.37% |
-| 2026-W08 | 96.94% | 49,908 | - |
+| 2026-W09 | 97.3% | 50,858 | - |
 
 ---
 
@@ -52,15 +53,14 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| TV | 92.14% | 93.41% | -1.37% | 1,895 |  |
-| YE | 87.77% | 88.15% | -0.43% | 42,126 |  |
-| FJ | 93.97% | 93.62% | +0.38% | 388,956 |  |
-| CF | 94.14% | 93.47% | +0.72% | 51,881 |  |
-| TZ | 91.69% | 90.11% | +1.76% | 2,660 |  |
-| TO | 86.67% | 84.89% | +2.11% | 3,204 |  |
-| TK | 95.33% | 88.65% | +7.54% | 1,950 | ⚠️ |
+| TT | 74.62% | 77.86% | -4.17% | 788 | ⚠️ |
+| FJ | 97.73% | 97.43% | +0.31% | 30,930 |  |
+| YE | 97.37% | 96.63% | +0.77% | 3,655 |  |
+| TK | 98.58% | 97.78% | +0.82% | 423 |  |
+| TO | 98.03% | 97.08% | +0.98% | 406 |  |
+| TZ | 97.10% | 94.01% | +3.28% | 551 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** TK
+**Countries exceeding ±2.5% threshold:** TT, TZ
 
 ---
 
@@ -83,38 +83,69 @@
 
 ---
 
-## L2: TK Deep-Dive
+## L2: TT Deep-Dive
 
 ### PaymentMethod
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
-| cashcredit | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
-| paypal | 97.46% | 92.45% | +5.41% | 118 | 106 | ⚠️ |
-| credit_card | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
-| applepay | 93.51% | 83.41% | +12.10% | 462 | 410 | ⚠️ |
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Klarna | 54.17% | 57.14% | -5.21% | 96 | 77 | ⚠️ |
+| IDeal | 73.41% | 77.36% | -5.10% | 583 | 614 | ⚠️ |
+| ApplePay | 100.00% | 100.00% | +0.00% | 37 | 45 |  |
+| Paypal | 100.00% | 100.00% | +0.00% | 13 | 11 |  |
+| CreditCard | 98.31% | 94.87% | +3.62% | 59 | 39 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Unknown | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 10 | 7 |  |
-| Adyen | 95.81% | 89.97% | +6.49% | 1,359 | 1,256 | ⚠️ |
-| Braintree | 94.31% | 85.27% | +10.60% | 580 | 516 | ⚠️ |
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Adyen | 72.90% | 76.16% | -4.29% | 738 | 730 |  |
+| Braintree | 100.00% | 100.00% | +0.00% | 50 | 56 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 1,859 | 1,577 | 95.33% | 88.65% | +6.69 |
-| Insufficient Funds | 49 | 148 | 2.51% | 8.32% | -5.81 |
-| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 21 | 32 | 1.08% | 1.80% | -0.72 |
-| Other reasons | 20 | 22 | 1.03% | 1.24% | -0.21 |
-| Unknown | 1 | 0 | 0.05% | 0.00% | +0.05 |
+| Fraud, Lost/Stolen Card, Security | 3 | 5 | 0.38% | 0.64% | -0.26 |
+| Others | 785 | 781 | 99.62% | 99.36% | +0.26 |
 
-**Root Cause:** paypal + Adyen + Insufficient
+**Root Cause:** Klarna
+
+---
+
+## L2: TZ Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Paypal | 96.76% | 95.81% | +1.00% | 278 | 310 |  |
+| ApplePay | 97.96% | 93.57% | +4.69% | 147 | 140 |  |
+| CreditCard | 96.83% | 89.83% | +7.79% | 126 | 118 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Braintree | 97.18% | 95.11% | +2.17% | 425 | 450 |  |
+| Adyen | 96.83% | 89.83% | +7.79% | 126 | 118 | ⚠️ |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 548 | 561 | 99.46% | 98.77% | +0.69 |
+| CVV/CVC Mismatch | 0 | 3 | 0.00% | 0.53% | -0.53 |
+| 3DS Authentication Failed/Required | 0 | 2 | 0.00% | 0.35% | -0.35 |
+| PayPal Declined, Revoked, Payer Issue | 2 | 1 | 0.36% | 0.18% | +0.19 |
+| Fraud, Lost/Stolen Card, Security | 1 | 0 | 0.18% | 0.00% | +0.18 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 0 | 1 | 0.00% | 0.18% | -0.18 |
+
+**Root Cause:** CreditCard + Adyen
 
 ---
 
@@ -123,14 +154,14 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| FJ | High (>92%) | 397,332 | 388,956 | -2.1% | Stable |
-| CF | High (>92%) | 52,140 | 51,881 | -0.5% | Stable |
-| YE | Medium (>85%) | 45,214 | 42,126 | -6.8% | Stable |
-| TT | High (>92%) | 4,924 | 4,617 | -6.2% | Stable |
-| TO | Low (>85%) | 3,480 | 3,204 | -7.9% | Stable |
-| TZ | Medium (>85%) | 3,013 | 2,660 | -11.7% | Stable |
-| TV | High (>92%) | 2,065 | 1,895 | -8.2% | Stable |
-| TK | Medium (>85%) | 1,779 | 1,950 | +9.6% | Stable |
+| FJ | High (>92%) | 28,555 | 30,930 | +8.3% | Stable |
+| CF | High (>92%) | 5,813 | 6,939 | +19.4% | Stable |
+| YE | High (>92%) | 3,000 | 3,655 | +21.8% | Stable |
+| TT | Low (>85%) | 786 | 788 | +0.3% | Stable |
+| TZ | High (>92%) | 568 | 551 | -3.0% | Stable |
+| TO | High (>92%) | 514 | 406 | -21.0% | ⚠️ Volume drop |
+| TV | Low (>85%) | 363 | 476 | +31.1% | Stable |
+| TK | High (>92%) | 315 | 423 | +34.3% | Stable |
 
 ---
 
@@ -141,8 +172,9 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| TK | ↑ +7.54% | paypal +5.4% | Adyen +6.5% | Insufficient Funds -5.81pp | paypal + Adyen + Insufficient |
+| TT | ↓ -4.17% | Klarna -5.2% | → Stable | → Stable | Klarna |
+| TZ | ↑ +3.28% | CreditCard +7.8% | Adyen +7.8% | → Stable | CreditCard + Adyen |
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

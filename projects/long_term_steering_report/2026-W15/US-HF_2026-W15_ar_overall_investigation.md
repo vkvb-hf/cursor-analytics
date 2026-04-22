@@ -1,34 +1,32 @@
 # AR Overall Investigation: US-HF 2026-W15
 
 **Metric:** Pre-Dunning Acceptance Rate (Overall)  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 91.93% → 92.22% (+0.32%)  
-**Volume:** 408,629 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 92.22% → 92.1% (-0.13%)  
+**Volume:** 421,947 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Pre-Dunning Acceptance Rate for US-HF improved slightly from 91.93% to 92.22% (+0.29 pp) in 2026-W15, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF declined marginally from 92.22% to 92.1% (-0.12pp) in 2026-W15, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.44 pp | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.32 pp | ✅ |
-| 3_PostDunningAR | Post-Dunning | +0.02 pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.14 pp | ✅ |
+| 1_FirstRunAR | Within normal range | +0.44pp | ✅ |
+| 2_PreDunningAR | Within normal range | +0.32pp | ✅ |
+| 3_PostDunningAR | Within normal range | +0.02pp | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.14pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed slight improvements week-over-week, with 1_FirstRunAR leading at +0.44 pp
-- No countries or payment methods exceeded the ±2.5% threshold for concern
-- PaymentProvider "Unknown" showed a +4.73 pp increase (87.10% → 91.22%), but volume is minimal at 353 orders
-- Volume continues a declining trend from W08 (453,781) to W15 (408,629), representing a ~10% reduction over 8 weeks
-- Apple Pay maintains the lowest acceptance rate at 85.13% but improved by +0.67 pp
+- The -0.13% week-over-week change is within normal fluctuation; the 8-week trend shows rates oscillating between 91.65% and 92.22%, indicating stable performance
+- No countries exceeded the ±2.5% threshold; US remains the sole market at 93.09% (+0.33pp), performing above the overall rate
+- PaymentProvider "Unknown" showed a +5.33pp spike (87.1% → 91.74%) but with minimal volume (351 orders), flagged as ⚠️ but low impact
+- Apple Pay continues to have the lowest acceptance rate among payment methods at 85.13%, though it improved +0.67pp week-over-week
+- Mix shift analysis shows stable composition with US High AR tier volume declining only 0.9%
 
-**Action:** Monitor - No significant changes detected. Continue standard monitoring cadence. Track volume decline trend for potential business impact assessment.
+**Action:** Monitor - No immediate action required. The decline is not significant and all funnel metrics are improving week-over-week. Continue standard monitoring cadence.
 
 ---
 
@@ -38,14 +36,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 92.1% | 421,947 | -0.13% |
 | 2026-W15 | 92.22% | 408,629 | +0.32% ← REPORTED CHANGE |
 | 2026-W14 | 91.93% | 415,885 | -0.05% |
 | 2026-W13 | 91.98% | 424,103 | +0.05% |
 | 2026-W12 | 91.93% | 433,761 | -0.17% |
 | 2026-W11 | 92.09% | 444,619 | +0.14% |
 | 2026-W10 | 91.96% | 457,610 | +0.34% |
-| 2026-W09 | 91.65% | 455,121 | +0.19% |
-| 2026-W08 | 91.48% | 453,781 | - |
+| 2026-W09 | 91.65% | 455,121 | - |
 
 ---
 
@@ -53,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
+| US | 93.09% | 92.78% | +0.33% | 492,811 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -65,10 +63,10 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 98.29% | 98.41% | -0.12% | 2,397 |  |
-| Credit Card | 92.92% | 92.69% | +0.25% | 300,596 |  |
-| Paypal | 95.58% | 95.34% | +0.25% | 50,099 |  |
-| Apple Pay | 85.13% | 84.57% | +0.67% | 55,537 |  |
+| Others | 98.37% | 98.41% | -0.04% | 2,395 |  |
+| Credit Card | 92.92% | 92.69% | +0.25% | 300,598 |  |
+| Paypal | 95.57% | 95.34% | +0.25% | 50,099 |  |
+| Apple Pay | 85.13% | 84.56% | +0.67% | 55,537 |  |
 
 ### PaymentProvider
 
@@ -76,9 +74,9 @@
 |-------|--------|--------|----------|----------|------|
 | Adyen | 95.04% | 95.05% | -0.02% | 383 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 2,010 |  |
-| Braintree | 92.75% | 92.44% | +0.34% | 363,785 |  |
+| Braintree | 92.75% | 92.44% | +0.34% | 363,787 |  |
 | ProcessOut | 87.24% | 86.9% | +0.40% | 42,098 |  |
-| Unknown | 91.22% | 87.1% | +4.73% | 353 | ⚠️ |
+| Unknown | 91.74% | 87.1% | +5.33% | 351 | ⚠️ |
 
 ---
 
@@ -89,7 +87,7 @@
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 91.07% | 90.67% | +0.44% | 408,629 | 415,885 |  |
 | 2_PreDunningAR | 92.22% | 91.93% | +0.32% | 408,629 | 415,885 |  |
-| 3_PostDunningAR | 93.0% | 92.98% | +0.02% | 408,629 | 415,885 |  |
+| 3_PostDunningAR | 93.19% | 93.17% | +0.02% | 408,629 | 415,885 |  |
 | 6_PaymentApprovalRate | 93.76% | 93.63% | +0.14% | 408,629 | 415,885 |  |
 
 ---
@@ -112,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

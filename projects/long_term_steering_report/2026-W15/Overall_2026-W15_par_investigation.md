@@ -1,22 +1,22 @@
 # Payment Approval Rate - Overall Summary
 
 **Week:** 2026-W15  
-**Generated:** 2026-04-17 16:22  
+**Generated:** 2026-04-22 10:50  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Approval Rate improved across all clusters in 2026-W15, with changes ranging from +0.11pp to +0.66pp, though none reached statistical significance. The most notable finding was in HF-INTL where AT (+2.95pp) and DK (+3.94pp) exceeded monitoring thresholds, driven primarily by reduced "Insufficient Funds" declines.
+Payment Approval Rate remained stable across all clusters in 2026-W15, with changes ranging from -0.06pp to +0.13pp, none of which were statistically significant. All clusters showed healthy 8-week upward trends, with HF-INTL demonstrating the strongest cumulative improvement (+1.18pp since W09) driven by upstream FirstRunAR gains.
 
 ### Cluster Highlights
 
-- **US-HF:** Stable improvement of +0.14pp (93.63% → 93.76%) with all funnel stages positive and no dimensions exceeding thresholds.
-- **HF-INTL:** Improved +0.24pp (97.04% → 97.27%) with AT and DK exceeding the ±2.5% threshold due to significant reductions in "Insufficient Funds" declines (-2.05pp and -3.13pp respectively).
-- **WL:** Strongest cluster improvement of +0.66pp (91.05% → 91.65%) driven by FirstRunAR gains (+0.92pp), continuing recovery from W08 low of 89.88%.
-- **HF-NA:** Marginal improvement of +0.11pp (94.0% → 94.1%) with US contributing stronger gains (+0.34pp) than CA (+0.02pp).
-- **RTE:** Stable at +0.13pp (94.75% → 94.87%) with TK showing exceptional improvement (+7.54pp) driven by reduced "Insufficient Funds" declines (-5.81pp).
+- **US-HF:** Stable at 93.82% (+0.06pp), with consistent 8-week improvement trend (+0.66pp cumulative) driven by FirstRunAR gains; "Unknown" PaymentProvider flagged at -3.41pp but represents <0.1% of volume.
+- **HF-INTL:** Improved to 97.4% (+0.13pp), with DK (+1.34pp) and NO (+1.16pp) showing strongest country-level gains while all payment methods remained stable or improved.
+- **WL:** Stable at 91.69% (+0.04pp), with ProcessOut provider contributing +2.05pp improvement; all funnel steps showed consistent positive movement led by FirstRunAR (+0.92pp).
+- **HF-NA:** Stable at 94.13% (+0.03pp), with US driving the modest improvement (+0.17pp) while CA remained flat; Apple Pay continues to underperform at 88.76% but improved +0.25pp WoW.
+- **RTE:** Marginally declined to 94.81% (-0.06pp), though TK showed significant improvement (+5.72pp) driven by reduced "Insufficient Funds" declines on credit_card payments via Adyen.
 
 ---
 

@@ -1,35 +1,35 @@
 # Fraud Investigation: HF-NA 2026-W15
 
 **Metric:** Fraud Approval Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 90.97% → 89.66% (-1.44%)  
-**Volume:** 27,572 customers reaching fraud service  
-**Significance:** Significant
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 89.70% → 89.82% (+0.14%)  
+**Volume:** 27,399 customers reaching fraud service  
+**Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-NA declined from 90.97% to 89.66% (-1.31 pp) in 2026-W15, a significant change affecting 27,572 customers.
+**Overall:** The Fraud Approval Rate (FAR) for HF-NA showed a minor improvement of +0.14% (from 89.70% to 89.82%) in 2026-W15, which is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | FAR within 8-week range (89.11%-91.57%) | -1.31 pp | ✅ |
-| L1: Country Scan | US exceeds ±2.5% threshold | -2.61% | ⚠️ |
-| L1: Channel Scan | Referral exceeds threshold | -7.08% | ⚠️ |
-| L2: US Referral | PF Block spike identified | +409.56% | ⚠️ |
-| L2: CA Referral | FAR improved despite flag | +6.05% | ✅ |
+| L0: Regional Trend | FAR within normal range | +0.14% | ✅ |
+| L1: Country Scan | US exceeds ±2.5% threshold | -2.53% (US) | ⚠️ |
+| L1: Channel Scan | Referral exceeds threshold | -6.74% | ⚠️ |
+| L2: US Deep-Dive | Referral channel driving decline | -11.91% | ⚠️ |
+| L2: CA Deep-Dive | Referral improving | +6.78% | ✅ |
 
 **Key Findings:**
-- US drove the regional decline with FAR dropping -2.61% (from 91.59% to 89.20%), while CA improved +1.57%
-- US Referral channel experienced a severe FAR drop of -12.15% (from 70.00% to 61.50%) with volume increasing from 2,987 to 3,636 customers
-- PF Block rate in US Referral spiked +409.56% (from 2.48% to 12.62%), indicating a significant change in fraud prevention rules or model behavior
-- Dup Rate increased across the region (+0.88 pp) and Dup Block % rose from 6.49% to 6.71%, contributing to lower approvals
-- Paid channels remained relatively stable with only -0.64% FAR change despite +6.29% increase in Dup Rate
+- US FAR declined -2.53% (91.59% → 89.28%), driven primarily by the Referral channel which dropped -11.91% (70.11% → 61.76%)
+- US Referral PF Block % increased dramatically by +411.63% (2.48% → 12.70%), indicating heightened fraud prevention activity
+- Regional Duplicate Rate increased to 28.10% (+1.62pp), with Dup Block % rising to 7.72% (+1.30pp)
+- CA showed positive movement with FAR improving +1.53% and Referral channel up +6.78%
+- Paid channels remain stable across both US (-1.03%) and CA (+0.07%)
 
-**Action:** **Investigate** – The +409.56% spike in PF Block rate for US Referral requires immediate review of fraud prevention model changes or rule deployments that may have occurred between W14 and W15.
+**Action:** Investigate - The significant spike in US Referral PF Block % (+411.63%) requires immediate review to determine if this reflects a legitimate fraud attack or potential rule misconfiguration.
 
 ---
 
@@ -39,14 +39,14 @@
 
 | Week | FAR % | Dup Rate % | Dup Block % | PF Block % | Volume | Δ FAR % |
 |------|-------|------------|-------------|------------|--------|---------|
-| 2026-W15 | 89.66% | 26.94% | 6.71% | 2.84% | 27,572 | -1.44% ← REPORTED CHANGE |
-| 2026-W14 | 90.97% | 26.06% | 6.49% | 1.37% | 23,607 | +2.09% |
-| 2026-W13 | 89.11% | 25.99% | 6.26% | 3.32% | 24,581 | -1.32% |
-| 2026-W12 | 90.30% | 25.55% | 6.04% | 2.49% | 24,839 | +0.03% |
-| 2026-W11 | 90.27% | 24.97% | 5.89% | 2.65% | 26,804 | -1.36% |
-| 2026-W10 | 91.51% | 25.47% | 5.84% | 1.40% | 27,719 | -0.06% |
-| 2026-W09 | 91.57% | 24.88% | 5.81% | 1.27% | 30,555 | +0.03% |
-| 2026-W08 | 91.54% | 24.93% | 6.13% | 1.08% | 28,183 | - |
+| 2026-W16 | 89.82% | 28.10% | 7.72% | 1.60% | 27,399 | +0.14% |
+| 2026-W15 | 89.70% | 26.48% | 6.42% | 2.73% | 27,685 | -1.40% ← REPORTED CHANGE |
+| 2026-W14 | 90.97% | 25.99% | 6.42% | 1.36% | 23,597 | +2.09% |
+| 2026-W13 | 89.11% | 25.96% | 6.23% | 3.32% | 24,577 | -1.35% |
+| 2026-W12 | 90.33% | 25.53% | 6.01% | 2.49% | 24,830 | +0.07% |
+| 2026-W11 | 90.26% | 24.95% | 5.88% | 2.65% | 26,801 | -1.38% |
+| 2026-W10 | 91.52% | 25.46% | 5.83% | 1.39% | 27,713 | -0.06% |
+| 2026-W09 | 91.58% | 24.86% | 5.80% | 1.26% | 30,553 | - |
 
 ---
 
@@ -54,10 +54,10 @@
 
 | Country | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
 |---------|------|-------|-----|------------|-----|--------|------|
-| US | 2026-W14 | 91.59% | - | 25.49% | - | 16,726 |  |
-| US | 2026-W15 | 89.20% | -2.61% | 26.41% | +3.60% | 20,057 | ⚠️ |
-| CA | 2026-W14 | 89.46% | - | 27.44% | - | 6,881 |  |
-| CA | 2026-W15 | 90.87% | +1.57% | 28.34% | +3.30% | 7,515 |  |
+| US | 2026-W14 | 91.59% | - | 25.42% | - | 16,719 |  |
+| US | 2026-W15 | 89.28% | -2.53% | 25.91% | +1.93% | 20,224 | ⚠️ |
+| CA | 2026-W14 | 89.47% | - | 27.38% | - | 6,878 |  |
+| CA | 2026-W15 | 90.85% | +1.53% | 28.03% | +2.37% | 7,461 |  |
 
 **Countries exceeding ±2.5% threshold:** US
 
@@ -67,10 +67,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|--------|------|
-| Paid | 2026-W14 | 96.24% | - | 24.28% | - | 19,231 |  |
-| Paid | 2026-W15 | 95.63% | -0.64% | 25.81% | +6.29% | 22,526 |  |
-| Referral | 2026-W14 | 67.80% | - | 33.89% | - | 4,376 |  |
-| Referral | 2026-W15 | 63.00% | -7.08% | 31.99% | -5.62% | 5,046 | ⚠️ |
+| Paid | 2026-W14 | 96.20% | - | 24.25% | - | 19,232 |  |
+| Paid | 2026-W15 | 95.50% | -0.73% | 25.45% | +4.95% | 22,689 |  |
+| Referral | 2026-W14 | 67.95% | - | 33.65% | - | 4,365 |  |
+| Referral | 2026-W15 | 63.37% | -6.74% | 31.14% | -7.46% | 4,996 | ⚠️ |
 
 ---
 
@@ -80,12 +80,12 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W14 | 96.14% | - | 24.65% | - | 0.53% | - | 2.04% | - | 5,492 |  |
-| Paid | 2026-W15 | 96.41% | +0.28% | 26.14% | +6.04% | 0.64% | +20.98% | 2.06% | +1.20% | 6,105 |  |
-| Referral | 2026-W14 | 63.07% | - | 38.44% | - | 30.02% | - | 4.90% | - | 1,389 |  |
-| Referral | 2026-W15 | 66.88% | +6.05% | 37.87% | -1.49% | 28.37% | -5.51% | 3.48% | -29.01% | 1,410 | ⚠️ |
+| Paid | 2026-W14 | 96.07% | - | 24.63% | - | 0.53% | - | 2.02% | - | 5,494 |  |
+| Paid | 2026-W15 | 96.13% | +0.07% | 25.97% | +5.47% | 0.61% | +15.31% | 1.89% | -6.37% | 6,079 |  |
+| Referral | 2026-W14 | 63.29% | - | 38.29% | - | 29.84% | - | 4.84% | - | 1,384 |  |
+| Referral | 2026-W15 | 67.58% | +6.78% | 37.05% | -3.26% | 27.42% | -8.10% | 2.97% | -38.72% | 1,382 | ⚠️ |
 
-**Analysis:** The 1.31 pp decline in HF-NA Fraud Approval Rate is primarily driven by US performance, specifically within the Referral channel where a dramatic +409.56% increase in PF Block rate caused FAR to drop 12.15%. This suggests a potential fraud prevention model or rule change impacting US Referral traffic that warrants immediate investigation. The Paid channel and CA region remained stable, confirming the issue is isolated to US Referral fraud prevention blocking behavior.
+**Analysis:** While the overall HF-NA FAR shows marginal improvement (+0.14%), the US market experienced notable degradation driven by the Referral channel, where PF Block rates surged over 400%. This pattern suggests either an emerging fraud vector targeting US Referral traffic or an overly aggressive fraud prevention rule deployment. Recommend prioritizing investigation of US Referral PF blocking logic and validating whether blocked transactions represent true fraud or false positives.
 
 ---
 
@@ -95,10 +95,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W14 | 96.28% | - | 24.13% | - | 2.20% | - | 0.50% | - | 13,739 |  |
-| Paid | 2026-W15 | 95.34% | -0.98% | 25.68% | +6.43% | 3.01% | +36.86% | 0.90% | +79.46% | 16,421 |  |
-| Referral | 2026-W14 | 70.00% | - | 31.77% | - | 26.21% | - | 2.48% | - | 2,987 |  |
-| Referral | 2026-W15 | 61.50% | -12.15% | 29.70% | -6.51% | 25.22% | -3.79% | 12.62% | +409.56% | 3,636 | ⚠️ |
+| Paid | 2026-W14 | 96.25% | - | 24.10% | - | 2.18% | - | 0.50% | - | 13,738 |  |
+| Paid | 2026-W15 | 95.26% | -1.03% | 25.26% | +4.82% | 2.90% | +33.05% | 0.85% | +70.21% | 16,610 |  |
+| Referral | 2026-W14 | 70.11% | - | 31.50% | - | 25.93% | - | 2.48% | - | 2,981 |  |
+| Referral | 2026-W15 | 61.76% | -11.91% | 28.89% | -8.29% | 24.35% | -6.10% | 12.70% | +411.63% | 3,614 | ⚠️ |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -111,9 +111,9 @@
 
 | Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
 |---------|------------|----------------|----------|-----------|----------|------------|
-| US | ↓ -2.61% | Referral ↓ -12.15% | ↑ +3.60% | ↑ +8.45% | ↑ +253.98% | [AI_SUMMARY_PLACEHOLDER] |
+| US | ↓ -2.53% | Referral ↓ -11.91% | → +1.93% | ↑ +4.96% | ↑ +247.44% | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

@@ -1,35 +1,32 @@
 # AR Initial (LL0) Investigation: US-HF 2026-W15
 
 **Metric:** Pre-Dunning Acceptance Rate (Initial Charges)  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 88.81% → 89.66% (+0.96%)  
-**Volume:** 12,162 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 89.39% → 88.9% (-0.55%)  
+**Volume:** 12,393 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** The Pre-Dunning Acceptance Rate (Initial Charges) for US-HF improved from 88.81% to 89.66% (+0.96pp) in W15, a statistically non-significant increase within normal operating variance.
+**Overall:** The Pre-Dunning Acceptance Rate for US-HF declined by -0.55pp (from 89.39% to 88.9%) in 2026-W15, though this change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (87.73%-90.11%) | +0.96pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | +0.96pp | ✅ |
-| L1: Dimension Scan | All payment methods/providers within normal variance | <±1.25pp | ✅ |
-| L3: Related Metrics | All funnel metrics improved consistently | +0.93pp to +1.45pp | ✅ |
-| Mix Shift | US remains in Medium AR tier, volume +5.5% | Stable | ✅ |
+| 1_FirstRunAR | Within normal range | +1.07pp | ✅ |
+| 2_PreDunningAR | Within normal range | +0.63pp | ✅ |
+| 3_PostDunningAR | Within normal range | +0.65pp | ✅ |
+| 6_PaymentApprovalRate | Within normal range | +0.65pp | ✅ |
 
 **Key Findings:**
-- All related funnel metrics showed consistent improvement: FirstRunAR (+1.45pp), PreDunningAR (+0.96pp), PostDunningAR (+0.93pp), and PaymentApprovalRate (+0.95pp)
-- Credit Card acceptance improved by +1.17pp (90.30%) on the highest volume segment (6,577 orders), contributing most to the overall lift
-- ProcessOut provider showed +1.22pp improvement (90.52%) on 6,433 orders, aligning with Credit Card gains
-- Volume increased 5.5% WoW (11,533 → 12,162 orders) while maintaining improved acceptance rates
-- No payment method or provider exhibited concerning deterioration; all changes remained within ±1.25pp
+- The -0.55pp week-over-week decline in Pre-Dunning AR is within normal volatility; the 8-week trend shows rates fluctuating between 87.6% and 90.11%
+- No countries exceeded the ±2.5% threshold for investigation; US is the sole market with a stable +0.63pp change in the prior period
+- PayPal showed the largest negative movement among payment methods at -1.13pp (90.5% → 89.47%), though volume is relatively small at 855 orders
+- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) showed positive movement, indicating no systemic payment processing issues
+- Mix shift analysis confirms US remains in the Medium AR tier (>85%) with stable impact despite a -6.2% volume decrease
 
-**Action:** Monitor — The improvement is not statistically significant and falls within normal weekly fluctuation (8-week range: 87.73%-90.11%). No intervention required; continue standard monitoring cadence.
+**Action:** Monitor – No immediate action required. The decline is not statistically significant and falls within normal weekly variance. Continue standard monitoring for W16.
 
 ---
 
@@ -39,14 +36,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 89.66% | 12,162 | +0.96% ← REPORTED CHANGE |
-| 2026-W14 | 88.81% | 11,533 | +1.23% |
-| 2026-W13 | 87.73% | 10,946 | -1.08% |
-| 2026-W12 | 88.69% | 14,809 | -1.58% |
+| 2026-W16 | 88.9% | 12,393 | -0.55% |
+| 2026-W15 | 89.39% | 10,922 | +0.63% ← REPORTED CHANGE |
+| 2026-W14 | 88.83% | 11,645 | +1.40% |
+| 2026-W13 | 87.6% | 10,907 | -1.25% |
+| 2026-W12 | 88.71% | 14,768 | -1.55% |
 | 2026-W11 | 90.11% | 15,868 | +0.95% |
 | 2026-W10 | 89.26% | 19,259 | +0.01% |
-| 2026-W09 | 89.25% | 18,657 | -0.36% |
-| 2026-W08 | 89.57% | 18,802 | - |
+| 2026-W09 | 89.25% | 18,657 | - |
 
 ---
 
@@ -54,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 89.66% | 88.81% | +0.96% | 12,162 |  |
+| US | 89.39% | 88.83% | +0.63% | 10,922 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -66,20 +63,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Paypal | 90.26% | 90.45% | -0.21% | 955 |  |
-| Others | 98.07% | 98.03% | +0.04% | 415 |  |
-| Apple Pay | 87.71% | 87.02% | +0.79% | 4,215 |  |
-| Credit Card | 90.3% | 89.26% | +1.17% | 6,577 |  |
+| Paypal | 89.47% | 90.5% | -1.13% | 855 |  |
+| Others | 97.79% | 98.06% | -0.27% | 407 |  |
+| Apple Pay | 87.36% | 87.0% | +0.41% | 3,797 |  |
+| Credit Card | 90.11% | 89.3% | +0.91% | 5,863 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | Adyen | 100.0% | nan% | +nan% | 1 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 101 |  |
-| Unknown | 97.45% | 97.12% | +0.35% | 314 |  |
-| Braintree | 87.97% | 87.56% | +0.47% | 5,313 |  |
-| ProcessOut | 90.52% | 89.42% | +1.22% | 6,433 |  |
+| Braintree | 87.5% | 87.53% | -0.04% | 4,791 |  |
+| No Payment | 100.0% | 100.0% | +0.00% | 95 |  |
+| Unknown | 97.43% | 97.17% | +0.27% | 311 |  |
+| ProcessOut | 90.36% | 89.48% | +0.98% | 5,724 |  |
 
 ---
 
@@ -88,10 +85,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 88.86% | 87.59% | +1.45% | 12,162 | 11,533 |  |
-| 2_PreDunningAR | 89.66% | 88.81% | +0.96% | 12,162 | 11,533 |  |
-| 3_PostDunningAR | 89.85% | 89.01% | +0.93% | 12,162 | 11,533 |  |
-| 6_PaymentApprovalRate | 90.11% | 89.26% | +0.95% | 12,162 | 11,533 |  |
+| 1_FirstRunAR | 88.6% | 87.66% | +1.07% | 10,922 | 11,645 |  |
+| 2_PreDunningAR | 89.39% | 88.83% | +0.63% | 10,922 | 11,645 |  |
+| 3_PostDunningAR | 89.58% | 89.0% | +0.65% | 10,922 | 11,645 |  |
+| 6_PaymentApprovalRate | 89.82% | 89.24% | +0.65% | 10,922 | 11,645 |  |
 
 ---
 
@@ -100,7 +97,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | Medium (>85%) | 11,533 | 12,162 | +5.5% | Stable |
+| US | Medium (>85%) | 11,645 | 10,922 | -6.2% | Stable |
 
 ---
 
@@ -113,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

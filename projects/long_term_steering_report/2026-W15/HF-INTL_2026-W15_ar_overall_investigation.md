@@ -1,38 +1,37 @@
 # AR Overall Investigation: HF-INTL 2026-W15
 
 **Metric:** Pre-Dunning Acceptance Rate (Overall)  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 93.63% → 94.74% (+1.19%)  
-**Volume:** 744,637 orders  
-**Significance:** Significant
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 94.74% → 94.81% (+0.07%)  
+**Volume:** 804,152 orders  
+**Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved significantly in 2026-W15, increasing from 93.63% to 94.74% (+1.19%), representing a positive recovery after three consecutive weeks of decline.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved marginally from 94.74% to 94.81% (+0.07pp) in 2026-W15, a statistically non-significant change across 804,152 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate at 8-week high, reversing 3-week decline | +1.19% | ✅ |
-| L1: Country Breakdown | 2 countries (AT, DK) exceeded ±2.5% threshold | AT +2.95%, DK +3.94% | ⚠️ |
-| L1: Payment Method | Apple Pay showed significant improvement | +2.73% | ⚠️ |
-| L1: Payment Provider | All providers stable, no flags | Max +1.55% | ✅ |
-| L2: AT Deep-Dive | applepay +5.78%, Insufficient Funds declined -2.05pp | Root cause identified | ⚠️ |
-| L2: DK Deep-Dive | applepay +6.47%, Braintree +5.84%, Insufficient Funds -3.13pp | Root cause identified | ⚠️ |
-| L3: Related Metrics | FirstRunAR drove improvement (+1.76%) | All metrics improved | ✅ |
-| Mix Shift | Volume shifts stable across all countries | DK +25.6%, NO +39.2% volume growth | ✅ |
+| L0: 8-Week Trend | Within normal variance | +0.07pp | ✅ |
+| L1: Country Breakdown | 2 countries exceed ±2.5% threshold (AT, DK) | AT +2.97%, DK +3.94% | ⚠️ |
+| L1: PaymentMethod | 1 method exceeds threshold (Apple Pay) | +2.73pp | ⚠️ |
+| L1: PaymentProvider | All providers within threshold | Max +1.54pp | ✅ |
+| L2: AT Deep-Dive | applepay improvement driven by Insufficient Funds decline | -2.05pp decline reasons | ⚠️ |
+| L2: DK Deep-Dive | Insufficient Funds decline driving improvement | -3.13pp decline reasons | ⚠️ |
+| L3: Related Metrics | All funnel metrics improved | 1_FirstRunAR +1.77pp | ✅ |
 
 **Key Findings:**
-- The +1.19% improvement is driven primarily by reduced "Insufficient Funds" declines across AT (-2.05pp) and DK (-3.13pp), suggesting improved payment retry logic or customer payment method health
-- Apple Pay acceptance rates improved significantly in both flagged countries: AT (+5.78%) and DK (+6.47%), indicating potential payment processor optimizations
-- DK showed the largest country-level improvement (+3.94%) with Braintree provider improving +5.84%, while volume increased +25.6%
-- FirstRunAR improvement (+1.76%) exceeds PreDunningAR improvement (+1.18%), indicating the gains are occurring at initial payment attempt rather than through dunning recovery
-- Overall volume decreased -5.1% (784,406 → 744,637) but rate improvements offset this, resulting in net positive acceptance performance
+- AT and DK both showed significant improvements (+2.97% and +3.94% respectively), driven primarily by reduced "Insufficient Funds" declines (-2.05pp in AT, -3.13pp in DK)
+- Apple Pay performance improved substantially across flagged countries: +5.78% in AT and +6.46% in DK
+- DK volume increased +25.6% WoW while maintaining improved acceptance rates, indicating healthy growth
+- First Run AR showed the strongest funnel improvement at +1.77pp, suggesting upstream payment processing improvements are benefiting the entire funnel
+- Mix shift analysis shows stable impact across all countries despite volume fluctuations
 
-**Action:** Monitor - This is a positive trend reversal. Continue monitoring AT and DK Apple Pay performance and Insufficient Funds decline rates to ensure improvements sustain. No escalation required.
+**Action:** Monitor - The overall change is not statistically significant and represents positive improvement. Continue monitoring AT and DK Apple Pay performance and Insufficient Funds trends to confirm sustained improvement.
 
 ---
 
@@ -42,14 +41,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 94.81% | 804,152 | +0.07% |
 | 2026-W15 | 94.74% | 744,637 | +1.19% ← REPORTED CHANGE |
 | 2026-W14 | 93.63% | 784,406 | -0.55% |
-| 2026-W13 | 94.15% | 842,482 | -0.48% |
-| 2026-W12 | 94.6% | 877,189 | -0.32% |
+| 2026-W13 | 94.15% | 842,482 | -0.47% |
+| 2026-W12 | 94.59% | 877,189 | -0.33% |
 | 2026-W11 | 94.9% | 897,107 | +1.17% |
 | 2026-W10 | 93.8% | 916,831 | +0.72% |
-| 2026-W09 | 93.13% | 896,537 | -0.45% |
-| 2026-W08 | 93.55% | 884,970 | - |
+| 2026-W09 | 93.13% | 896,537 | - |
 
 ---
 
@@ -57,12 +56,12 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| DE | 97.33% | 96.44% | +0.93% | 201,519 |  |
+| DE | 97.34% | 96.43% | +0.94% | 201,519 |  |
 | GB | 94.14% | 93.07% | +1.15% | 185,598 |  |
 | FR | 94.49% | 92.95% | +1.66% | 147,984 |  |
 | IE | 91.92% | 90.41% | +1.67% | 17,513 |  |
-| AT | 95.52% | 92.78% | +2.95% | 13,962 | ⚠️ |
-| DK | 97.74% | 94.03% | +3.94% | 37,713 | ⚠️ |
+| AT | 95.52% | 92.77% | +2.97% | 13,962 | ⚠️ |
+| DK | 97.73% | 94.03% | +3.94% | 37,713 | ⚠️ |
 
 **Countries exceeding ±2.5% threshold:** AT, DK
 
@@ -74,20 +73,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 98.96% | 98.81% | +0.16% | 121,159 |  |
-| Paypal | 97.74% | 97.23% | +0.53% | 185,690 |  |
-| Credit Card | 93.0% | 91.59% | +1.53% | 338,141 |  |
-| Apple Pay | 89.91% | 87.51% | +2.73% | 99,647 | ⚠️ |
+| Others | 99.01% | 98.8% | +0.22% | 121,157 |  |
+| Paypal | 97.74% | 97.22% | +0.53% | 185,690 |  |
+| Credit Card | 93.0% | 91.59% | +1.53% | 338,143 |  |
+| Apple Pay | 89.9% | 87.51% | +2.73% | 99,647 | ⚠️ |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | No Payment | 100.0% | 100.0% | +0.00% | 4,522 |  |
-| Adyen | 95.95% | 95.19% | +0.80% | 241,312 |  |
-| Braintree | 95.38% | 94.19% | +1.27% | 280,104 |  |
-| Unknown | 85.22% | 83.93% | +1.53% | 2,300 |  |
-| ProcessOut | 92.54% | 91.13% | +1.55% | 216,399 |  |
+| Adyen | 95.98% | 95.18% | +0.84% | 241,311 |  |
+| Braintree | 95.38% | 94.18% | +1.27% | 280,104 |  |
+| Unknown | 85.3% | 84.11% | +1.41% | 2,299 |  |
+| ProcessOut | 92.53% | 91.13% | +1.54% | 216,401 |  |
 
 ---
 
@@ -97,9 +96,9 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| cashcredit | 100.0% | 100.0% | +0.00% | 90 | 65 |  |
-| klarna | 100.0% | 100.0% | +0.00% | 2 | 2 |  |
-| sepadirectdebit | 99.32% | 98.84% | +0.49% | 884 | 775 |  |
+| cashcredit | 100.00% | 100.00% | +0.00% | 90 | 65 |  |
+| klarna | 100.00% | 100.00% | +0.00% | 2 | 2 |  |
+| sepadirectdebit | 99.43% | 98.71% | +0.73% | 884 | 775 |  |
 | paypal | 97.96% | 96.99% | +0.99% | 4,941 | 4,354 |  |
 | credit_card | 93.54% | 89.87% | +4.08% | 6,071 | 5,530 |  |
 | applepay | 93.57% | 88.45% | +5.78% | 1,974 | 1,732 | ⚠️ |
@@ -108,18 +107,18 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| No Payment | 100.0% | 100.0% | +0.00% | 90 | 65 |  |
-| Adyen | 95.22% | 93.61% | +1.72% | 2,470 | 2,191 |  |
-| Braintree | 96.7% | 94.56% | +2.26% | 6,915 | 6,086 |  |
+| No Payment | 100.00% | 100.00% | +0.00% | 90 | 65 |  |
+| Adyen | 95.26% | 93.56% | +1.82% | 2,470 | 2,191 |  |
+| Braintree | 96.70% | 94.56% | +2.26% | 6,915 | 6,086 |  |
 | ProcessOut | 93.76% | 89.58% | +4.67% | 4,487 | 4,116 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 13,336 | 11,558 | 95.52% | 92.78% | +2.74 |
+| 1. SUCCESSFULL | 13,337 | 11,557 | 95.52% | 92.77% | +2.76 |
 | Insufficient Funds | 360 | 577 | 2.58% | 4.63% | -2.05 |
-| Other reasons | 114 | 149 | 0.82% | 1.20% | -0.38 |
+| Other reasons | 113 | 150 | 0.81% | 1.20% | -0.39 |
 | Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 152 | 174 | 1.09% | 1.40% | -0.31 |
 
 **Root Cause:** applepay + Insufficient
@@ -132,34 +131,34 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 65.79% | 0.0% | +0.00% | 38 | 0 |  |
-| None | 0.0% | 70.59% | -100.00% | 0 | 34 | ⚠️ |
-| cashcredit | 100.0% | 100.0% | +0.00% | 238 | 173 |  |
+| None | 65.79% | 0.00% | +0.00% | 38 | 0 |  |
+| None | 0.00% | 70.59% | -100.00% | 0 | 34 | ⚠️ |
+| cashcredit | 100.00% | 100.00% | +0.00% | 238 | 173 |  |
 | paypal | 96.47% | 94.78% | +1.78% | 1,104 | 901 |  |
 | credit_card | 98.17% | 94.92% | +3.42% | 28,919 | 22,890 |  |
-| applepay | 96.33% | 90.48% | +6.47% | 7,414 | 6,038 | ⚠️ |
+| applepay | 96.32% | 90.48% | +6.46% | 7,414 | 6,038 | ⚠️ |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| No Payment | 100.0% | 100.0% | +0.00% | 238 | 173 |  |
-| Unknown | 62.5% | 62.5% | +0.00% | 32 | 24 |  |
+| Unknown | 62.50% | 66.67% | -6.25% | 32 | 24 | ⚠️ |
+| No Payment | 100.00% | 100.00% | +0.00% | 238 | 173 |  |
 | ProcessOut | 98.17% | 95.19% | +3.13% | 21,035 | 16,787 |  |
-| Adyen | 98.15% | 94.18% | +4.22% | 7,890 | 6,113 |  |
-| Braintree | 96.35% | 91.04% | +5.84% | 8,518 | 6,939 | ⚠️ |
+| Adyen | 98.15% | 94.16% | +4.24% | 7,890 | 6,113 |  |
+| Braintree | 96.34% | 91.04% | +5.82% | 8,518 | 6,939 | ⚠️ |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 36,859 | 28,242 | 97.74% | 94.03% | +3.71 |
+| 1. SUCCESSFULL | 36,858 | 28,242 | 97.73% | 94.03% | +3.71 |
 | Insufficient Funds | 436 | 1,286 | 1.16% | 4.28% | -3.13 |
 | Other reasons | 230 | 309 | 0.61% | 1.03% | -0.42 |
-| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 176 | 189 | 0.47% | 0.63% | -0.16 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 177 | 189 | 0.47% | 0.63% | -0.16 |
 | Unknown | 12 | 10 | 0.03% | 0.03% | +0.00 |
 
-**Root Cause:** None + Braintree + Insufficient
+**Root Cause:** None + Unknown + Insufficient
 
 ---
 
@@ -167,10 +166,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 93.12% | 91.51% | +1.76% | 744,637 | 784,406 |  |
-| 2_PreDunningAR | 94.74% | 93.63% | +1.18% | 744,637 | 784,406 |  |
-| 3_PostDunningAR | 96.42% | 96.41% | +0.01% | 744,637 | 784,406 |  |
-| 6_PaymentApprovalRate | 97.27% | 97.04% | +0.24% | 744,637 | 784,406 |  |
+| 1_FirstRunAR | 93.12% | 91.5% | +1.77% | 744,637 | 784,406 |  |
+| 2_PreDunningAR | 94.74% | 93.63% | +1.19% | 744,637 | 784,406 |  |
+| 3_PostDunningAR | 96.63% | 96.51% | +0.12% | 744,637 | 784,406 |  |
+| 6_PaymentApprovalRate | 97.27% | 97.03% | +0.24% | 744,637 | 784,406 |  |
 
 ---
 
@@ -203,9 +202,9 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| AT | ↑ +2.95% | applepay +5.8% | → Stable | Insufficient Funds -2.05pp | applepay + Insufficient |
-| DK | ↑ +3.94% | None -100.0% | Braintree +5.8% | Insufficient Funds -3.13pp | None + Braintree + Insufficient |
+| AT | ↑ +2.97% | applepay +5.8% | → Stable | Insufficient Funds -2.05pp | applepay + Insufficient |
+| DK | ↑ +3.94% | None -100.0% | Unknown -6.2% | Insufficient Funds -3.13pp | None + Unknown + Insufficient |
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

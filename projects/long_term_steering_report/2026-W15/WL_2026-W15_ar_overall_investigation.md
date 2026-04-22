@@ -1,34 +1,34 @@
 # AR Overall Investigation: WL 2026-W15
 
 **Metric:** Pre-Dunning Acceptance Rate (Overall)  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 89.33% → 90.1% (+0.86%)  
-**Volume:** 160,979 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 90.1% → 90.03% (-0.08%)  
+**Volume:** 164,785 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate improved from 89.33% to 90.1% (+0.77 pp) in W15, a positive but statistically not significant change with volume of 160,979 orders.
+**Overall:** Pre-Dunning Acceptance Rate remained essentially flat at 90.03%, declining by -0.08pp from the prior week (90.1%), a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | +0.92% | ✅ |
-| 2_PreDunningAR | Reported Metric | +0.87% | ✅ |
-| 3_PostDunningAR | Post-Recovery | +0.53% | ✅ |
-| 6_PaymentApprovalRate | Final Approval | +0.67% | ✅ |
+| 1_FirstRunAR | Baseline | +0.92pp | ✅ |
+| 2_PreDunningAR | Reported Metric | +0.87pp | ✅ |
+| 3_PostDunningAR | Post-Dunning | +0.61pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.67pp | ✅ |
 
 **Key Findings:**
-- All funnel stages showed improvement week-over-week, indicating broad-based positive performance across the payment acceptance pipeline
-- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17 pp (85.21% → 87.06%)
-- PaymentProvider "Unknown" flagged with +69.73% change, but represents minimal volume (664 orders) and moved from anomalously low 57.14% to 96.99%
-- ProcessOut showed notable improvement of +2.31 pp (79.78% → 81.62%) on 17,676 orders, though remains the lowest-performing provider
-- Volume declined 2.4% week-over-week (165,018 → 160,979), with AO showing the largest volume drop (-12.0%)
+- All funnel metrics show positive week-over-week improvement ranging from +0.61pp to +0.92pp, indicating healthy payment acceptance performance
+- No countries exceeded the ±2.5% threshold; AO showed the largest country-level improvement at +2.17pp
+- ProcessOut payment provider improved significantly (+2.32pp), while Unknown provider shows a ⚠️ flag with +69.73% change, though on minimal volume (664 orders)
+- Mix shift analysis shows volume declines in AO (-12.0%), GN (-8.5%), and MR (-6.3%), but impact remains stable across all countries
+- The 8-week trend shows consistent improvement from 88.19% (W09) to 90.03% (W16), representing a +1.84pp gain over the period
 
-**Action:** Monitor – No significant anomalies detected; all metrics trending positively within normal operating ranges.
+**Action:** Monitor — No significant changes detected; all metrics trending positively within normal operating ranges.
 
 ---
 
@@ -38,14 +38,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W15 | 90.1% | 160,979 | +0.86% ← REPORTED CHANGE |
-| 2026-W14 | 89.33% | 165,018 | -0.43% |
-| 2026-W13 | 89.72% | 169,667 | +0.07% |
-| 2026-W12 | 89.66% | 169,891 | -0.13% |
+| 2026-W16 | 90.03% | 164,785 | -0.08% |
+| 2026-W15 | 90.1% | 160,979 | +0.87% ← REPORTED CHANGE |
+| 2026-W14 | 89.32% | 165,018 | -0.45% |
+| 2026-W13 | 89.72% | 169,667 | +0.08% |
+| 2026-W12 | 89.65% | 169,891 | -0.14% |
 | 2026-W11 | 89.78% | 174,933 | +0.79% |
 | 2026-W10 | 89.08% | 179,965 | +1.01% |
-| 2026-W09 | 88.19% | 180,862 | +0.06% |
-| 2026-W08 | 88.14% | 179,647 | - |
+| 2026-W09 | 88.19% | 180,862 | - |
 
 ---
 
@@ -55,7 +55,7 @@
 |---------|-----------|-----------|-----|-------------|------|
 | GN | 93.32% | 92.33% | +1.07% | 13,110 |  |
 | ER | 90.32% | 89.22% | +1.23% | 68,811 |  |
-| MR | 81.41% | 80.25% | +1.45% | 19,468 |  |
+| MR | 81.37% | 80.21% | +1.45% | 19,468 |  |
 | AO | 87.06% | 85.21% | +2.17% | 13,883 |  |
 
 **Countries exceeding ±2.5% threshold:** None
@@ -68,19 +68,19 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Apple Pay | 86.04% | 85.75% | +0.34% | 20,488 |  |
-| Paypal | 95.26% | 94.68% | +0.61% | 24,084 |  |
+| Apple Pay | 86.04% | 85.75% | +0.33% | 20,488 |  |
+| Paypal | 95.25% | 94.68% | +0.61% | 24,084 |  |
 | Others | 98.21% | 97.46% | +0.77% | 1,393 |  |
-| Credit Card | 89.65% | 88.8% | +0.96% | 115,014 |  |
+| Credit Card | 89.65% | 88.79% | +0.96% | 115,014 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | No Payment | 100.0% | 100.0% | +0.00% | 683 |  |
-| Braintree | 91.26% | 90.77% | +0.54% | 105,580 |  |
+| Braintree | 91.25% | 90.76% | +0.54% | 105,580 |  |
 | Adyen | 90.56% | 89.6% | +1.07% | 36,376 |  |
-| ProcessOut | 81.62% | 79.78% | +2.31% | 17,676 |  |
+| ProcessOut | 81.62% | 79.77% | +2.32% | 17,676 |  |
 | Unknown | 96.99% | 57.14% | +69.73% | 664 | ⚠️ |
 
 ---
@@ -91,8 +91,8 @@
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 88.17% | 87.37% | +0.92% | 160,979 | 165,018 |  |
-| 2_PreDunningAR | 90.1% | 89.33% | +0.87% | 160,979 | 165,018 |  |
-| 3_PostDunningAR | 91.03% | 90.55% | +0.53% | 160,979 | 165,018 |  |
+| 2_PreDunningAR | 90.1% | 89.32% | +0.87% | 160,979 | 165,018 |  |
+| 3_PostDunningAR | 91.21% | 90.66% | +0.61% | 160,979 | 165,018 |  |
 | 6_PaymentApprovalRate | 91.65% | 91.05% | +0.67% | 160,979 | 165,018 |  |
 
 ---
@@ -121,4 +121,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

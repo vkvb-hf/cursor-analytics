@@ -2,33 +2,31 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W14 → 2026-W15  
-**Observation:** 44.24% → 42.60% (-1.64pp)  
-**Volume:** 19,565 eligible orders  
+**Observation:** 44.24% → 42.61% (-1.63pp)  
+**Volume:** 19,543 eligible orders  
 **Payday Phase:** Mid-Cycle → Pre-Payday
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate declined from 44.24% to 42.60% (-1.64pp) in W15, driven primarily by FJ's -5.5% relative decline and severe drops in smaller markets TV (-59.4%) and TO (-24.6%), amid a Pre-Payday phase transition.
+**Overall:** Dunning Ship Rate declined by -1.63pp (from 44.24% to 42.61%) week-over-week during the transition from Mid-Cycle to Pre-Payday phase, with volume decreasing by 9.7% (21,651 → 19,543 orders).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 92.53% → 92.82% | +0.29pp | ✅ |
-| Discount % | 17.76% → 17.49% | -0.27pp | ✅ |
-| PC2 | 42.79% → 48.54% | +5.75pp | ✅ |
-| Ship Rate | 44.24% → 42.60% | -1.64pp | ⚠️ |
+| Discount % | 17.77% → 17.50% | -0.27pp | ✅ |
+| PC2 | 48.06% → 48.53% | +0.47pp | ✅ |
+| Ship Rate | 44.24% → 42.61% | -1.63pp | ⚠️ |
 
 **Key Findings:**
-- **FJ dominates the decline:** As the largest market (70% of volume), FJ's ship rate dropped -5.5% (43.54% → 41.16%) despite improved Pre-Dunning AR (+0.4%) and lower Discount % (-3.2%), suggesting customer payment behavior issues during Pre-Payday phase
-- **TV experienced catastrophic decline:** Ship rate plummeted -59.4% (30.77% → 12.50%) on small volume (96 orders), with PC2 rising +15.2% indicating customers are deferring payments to second payment cycle
-- **TO shows concerning trajectory:** -24.6% ship rate decline paired with significant Discount % increase (+9.4%) suggests deeper customer financial stress
-- **PC2 spike across all markets:** Every country showed PC2 increases (+13.3% to +20.5%), indicating systematic payment deferral behavior consistent with Pre-Payday cash constraints
-- **Volume contraction observed:** Total eligible orders dropped -9.7% (21,660 → 19,565), with TK (-65.8%) and TZ (-33.0%) showing largest volume declines
+- **FJ drove the majority of the decline:** As the largest market (70% of volume), FJ's -5.4% Ship Rate drop (43.54% → 41.17%) was the primary contributor despite improvements in Pre-Dunning AR (+0.4%) and Discount % (-3.2%)
+- **TV experienced severe Ship Rate collapse:** -59.4% relative decline (30.77% → 12.50%) despite stable supporting metrics, indicating potential operational or external factors unrelated to standard funnel metrics
+- **TO showed significant deterioration:** -24.6% Ship Rate decline paired with a +9.4% increase in Discount %, suggesting aggressive discounting failed to convert during Pre-Payday phase
+- **Mix shift impact detected:** High-performing YE volume decreased (-4.6%) while lower-performing TV volume increased (+5.5%), contributing to overall rate decline
+- **Payday phase transition effect:** The Mid-Cycle → Pre-Payday shift appears to have negatively impacted conversion across all major markets despite stable/improving upstream metrics
 
-**Action:** **Investigate** — The disconnect between improving upstream metrics (Pre-Dunning AR, Discount %) and declining Ship Rate, combined with universal PC2 spikes, suggests Pre-Payday timing is causing systematic payment deferrals. Prioritize FJ deep-dive given volume contribution.
+**Action:** **Investigate** — The disconnect between stable/improving funnel metrics (Pre-Dunning AR, Discount %, PC2) and declining Ship Rate suggests external factors (payday timing, customer liquidity) or operational issues require deeper analysis, particularly for TV and TO markets.
 
 ---
 
@@ -38,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 21,660 | 44.24% | - | 92.53% | - | 17.76% | - | 42.79% | - |
-| 2026-W15 | Pre-Payday | 19,565 | 42.60% | ↓-3.7% | 92.82% | →+0.3% | 17.49% | →-1.5% | 48.54% | ↑+13.4% |
+| 2026-W14 | Mid-Cycle | 21,651 | 44.24% | - | 92.53% | - | 17.77% | - | 48.06% | - |
+| 2026-W15 | Pre-Payday | 19,543 | 42.61% | ↓-3.7% | 92.82% | →+0.3% | 17.5% | →-1.5% | 48.53% | →+1.0% |
 
 ---
 
@@ -49,17 +47,17 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 15,137 | 43.54% | - | 93.62% | - | 17.72% | - | 43.98% | - |
-| 2026-W15 | Pre-Payday | 13,715 | 41.16% | ↓-5.5% | 93.97% | →+0.4% | 17.15% | ↓-3.2% | 50.36% | ↑+14.5% |
+| 2026-W14 | Mid-Cycle | 15,131 | 43.54% | - | 93.62% | - | 17.72% | - | 49.74% | - |
+| 2026-W15 | Pre-Payday | 13,700 | 41.17% | ↓-5.4% | 93.97% | →+0.4% | 17.16% | ↓-3.2% | 50.35% | →+1.2% |
 
-**Analysis:** The W15 Dunning Ship Rate decline is primarily attributable to Pre-Payday phase timing effects, evidenced by the cluster-wide PC2 surge (+13.4%) as customers defer payments until payday. FJ requires immediate attention given its volume dominance and -5.5% relative decline, while TV and TO warrant monitoring despite lower volumes due to severe rate deterioration. Recommend tracking W16 performance post-payday to confirm cyclical pattern versus structural degradation.
+**Analysis:** The -1.63pp decline in Dunning Ship Rate is primarily driven by FJ's volume-weighted underperformance and severe drops in smaller markets TV (-59.4%) and TO (-24.6%), occurring during the Pre-Payday phase transition when customer payment capacity is typically constrained. The paradox of declining Ship Rate despite stable or improving upstream metrics (Pre-Dunning AR +0.3%, PC2 +1.0%) suggests the root cause lies outside standard funnel optimization—likely tied to payday cycle timing effects on customer liquidity rather than operational or targeting issues.
 
 ### YE (Rank #2 by Contribution)
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 3,485 | 59.63% | - | 88.15% | - | 15.93% | - | 41.87% | - |
-| 2026-W15 | Pre-Payday | 3,324 | 58.81% | →-1.4% | 87.77% | →-0.4% | 16.24% | →+1.9% | 50.47% | ↑+20.5% |
+| 2026-W14 | Mid-Cycle | 3,484 | 59.62% | - | 88.14% | - | 15.93% | - | 51.18% | - |
+| 2026-W15 | Pre-Payday | 3,322 | 58.79% | →-1.4% | 87.77% | →-0.4% | 16.24% | →+1.9% | 50.46% | →-1.4% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -67,8 +65,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 341 | 31.67% | - | 84.89% | - | 24.68% | - | 29.13% | - |
-| 2026-W15 | Pre-Payday | 268 | 23.88% | ↓-24.6% | 86.67% | →+2.1% | 26.99% | ↑+9.4% | 33.0% | ↑+13.3% |
+| 2026-W14 | Mid-Cycle | 341 | 31.67% | - | 84.89% | - | 24.68% | - | 33.11% | - |
+| 2026-W15 | Pre-Payday | 268 | 23.88% | ↓-24.6% | 86.67% | →+2.1% | 26.99% | ↑+9.4% | 33.0% | →-0.3% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -76,8 +74,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W14 | Mid-Cycle | 91 | 30.77% | - | 93.41% | - | 17.27% | - | 33.38% | - |
-| 2026-W15 | Pre-Payday | 96 | 12.50% | ↓-59.4% | 92.14% | →-1.4% | 17.76% | ↑+2.8% | 38.46% | ↑+15.2% |
+| 2026-W14 | Mid-Cycle | 91 | 30.77% | - | 93.41% | - | 17.27% | - | 38.88% | - |
+| 2026-W15 | Pre-Payday | 96 | 12.50% | ↓-59.4% | 92.14% | →-1.4% | 17.76% | ↑+2.8% | 38.46% | →-1.1% |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -98,10 +96,10 @@
 
 | Country | Ship Rate | Pre-Dunning AR | Discount % | PC2 | Payday Phase | Root Cause |
 |---------|-----------|----------------|------------|-----|--------------|------------|
-| FJ | ↓-5.5% | →+0.4% | ↓-3.2% | ↑+14.5% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| YE | →-1.4% | →-0.4% | →+1.9% | ↑+20.5% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| TO | ↓-24.6% | →+2.1% | ↑+9.4% | ↑+13.3% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
-| TV | ↓-59.4% | →-1.4% | ↑+2.8% | ↑+15.2% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| FJ | ↓-5.4% | →+0.4% | ↓-3.2% | →+1.2% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| YE | →-1.4% | →-0.4% | →+1.9% | →-1.4% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| TO | ↓-24.6% | →+2.1% | ↑+9.4% | →-0.3% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| TV | ↓-59.4% | →-1.4% | ↑+2.8% | →-1.1% | Mid-Cycle → Pre-Payday | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
@@ -109,9 +107,9 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| FJ | 15,137 | 43.54% | 13,715 | 41.16% | -9.4% | Medium |
-| YE | 3,485 | 59.63% | 3,324 | 58.81% | -4.6% | High |
-| CF | 2,194 | 30.36% | 1,887 | 30.26% | -14.0% | Medium |
+| FJ | 15,131 | 43.54% | 13,700 | 41.17% | -9.5% | Medium |
+| YE | 3,484 | 59.62% | 3,322 | 58.79% | -4.6% | High |
+| CF | 2,192 | 30.34% | 1,882 | 30.29% | -14.1% | Medium |
 | TO | 341 | 31.67% | 268 | 23.88% | -21.4% | Medium |
 | TZ | 194 | 26.80% | 130 | 26.15% | -33.0% | Low |
 | TK | 146 | 24.66% | 50 | 32.00% | -65.8% | Low |
@@ -123,4 +121,4 @@
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

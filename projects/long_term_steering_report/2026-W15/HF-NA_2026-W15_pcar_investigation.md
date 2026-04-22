@@ -1,32 +1,33 @@
 # PCAR Investigation: HF-NA 2026-W15
 
 **Metric:** Payment Checkout Approval Rate  
-**Period:** 2026-W14 → 2026-W15  
-**Observation:** 94.12% → 94.08% (-0.04%)  
-**Volume:** 23,512 orders  
+**Period:** 2026-W15 → 2026-W15  
+**Observation:** 94.08% → 93.86% (-0.23%)  
+**Volume:** 23,369 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined marginally from 94.12% to 94.08% (-0.04pp) in HF-NA for W15, a statistically non-significant change within normal weekly variance.
+**Overall:** Payment Checkout Approval Rate declined marginally from 94.08% to 93.86% (-0.22 pp) in 2026-W15, a change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend Stability | Rate within historical range (93.92%-95.23%) | -0.04pp | ✅ |
-| Country Threshold (±2.5%) | No countries exceeded threshold | CA: +0.02pp, US: +0.34pp | ✅ |
-| Payment Method Variance | "Others" dropped -2.49pp but volume only 91 orders | Low impact | ✅ |
-| Volume Mix Shift | US -0.9%, CA -2.2% volume changes | Stable impact | ✅ |
+| L0: 8-Week Trend | Rate within normal variance (93.86%-95.23% range) | -0.22 pp | ✅ |
+| L1: Country Breakdown | No country exceeded ±2.5% threshold | CA: -0.40 pp, US: +0.18 pp | ✅ |
+| L1: PaymentMethod | "Others" declined -2.49 pp but minimal volume (91 orders) | -2.49 pp | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
+| Mix Shift Analysis | Both US and CA remain in High AR tier with stable impact | US: +18.5% vol, CA: +10.0% vol | ✅ |
 
 **Key Findings:**
-- The -0.04pp decline is well within normal weekly fluctuation observed over the 8-week period (range: 93.92% to 95.23%)
-- Both US (+0.34pp) and CA (+0.02pp) showed slight improvements at the country level, indicating no regional concerns
-- "Others" payment method showed a -2.49pp decline, but with only 91 orders this has negligible impact on overall rate
-- Apple Pay declined -1.08pp (7,678 orders) while Credit Card improved +0.50pp (13,776 orders), offsetting each other
-- Volume increased 16.3% (20,221 → 23,512 orders) week-over-week with no adverse impact on approval rates
+- The -0.22 pp decline is within normal weekly fluctuation observed over the 8-week period (range: 93.86% - 95.23%)
+- US showed a slight improvement (+0.18 pp) while CA experienced a minor decline (-0.40 pp); neither breached the ±2.5% threshold
+- "Others" payment method dropped -2.49 pp, but with only 91 orders this has negligible impact on overall rate
+- Apple Pay declined -1.08 pp on significant volume (7,678 orders), partially offset by Credit Card improvement (+0.50 pp)
+- Volume increased in both countries (US: +18.5%, CA: +10.0%) with both maintaining High AR tier status
 
-**Action:** Monitor — No investigation required. The change is not statistically significant, no dimensions exceeded alert thresholds, and the metric remains within normal operating range.
+**Action:** Monitor — No investigation required. The decline is not statistically significant, no thresholds were breached, and the rate remains consistent with recent weekly performance.
 
 ---
 
@@ -36,14 +37,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
+| 2026-W16 | 93.86% | 23,369 | -0.23% |
 | 2026-W15 | 94.08% | 23,512 | -0.04% ← REPORTED CHANGE |
 | 2026-W14 | 94.12% | 20,221 | +0.21% |
 | 2026-W13 | 93.92% | 20,751 | -0.29% |
 | 2026-W12 | 94.19% | 21,127 | +0.03% |
 | 2026-W11 | 94.16% | 22,919 | -1.12% |
 | 2026-W10 | 95.23% | 23,025 | +1.30% |
-| 2026-W09 | 94.01% | 27,201 | +0.01% |
-| 2026-W08 | 94.0% | 26,180 | - |
+| 2026-W09 | 94.01% | 27,201 | - |
 
 ---
 
@@ -51,8 +52,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 93.51% | 93.49% | +0.02% | 103,253 |  |
-| US | 93.09% | 92.78% | +0.34% | 492,811 |  |
+| CA | 97.30% | 97.70% | -0.42% | 5,843 |  |
+| US | 93.02% | 92.85% | +0.18% | 17,669 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -83,8 +84,8 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 497,052 | 492,811 | -0.9% | Stable |
-| CA | High (>92%) | 105,530 | 103,253 | -2.2% | Stable |
+| US | High (>92%) | 14,911 | 17,669 | +18.5% | Stable |
+| CA | High (>92%) | 5,310 | 5,843 | +10.0% | Stable |
 
 ---
 
@@ -97,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*

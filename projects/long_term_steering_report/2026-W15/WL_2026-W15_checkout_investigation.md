@@ -14,22 +14,22 @@
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | >+2.49pp | +4.94pp | ⚠️ |
-| Click Submit Form | >+2.49pp | +3.05pp | ⚠️ |
-| FE Validation Passed | Within threshold | +0.12pp | ✅ |
-| Enter Fraud Service | Within threshold | +0.16pp | ✅ |
-| Approved by Fraud Service | Within threshold | +0.04pp | ✅ |
-| Call to PVS | Within threshold | -0.45pp | ✅ |
-| Successful Checkout | Within threshold | +0.68pp | ✅ |
+| Select Payment Method | Δ > threshold | +4.94pp | ⚠️ |
+| Click Submit Form | Δ > threshold | +3.05pp | ⚠️ |
+| FE Validation Passed | Δ < threshold | +0.12pp | ✅ |
+| Enter Fraud Service | Δ < threshold | +0.16pp | ✅ |
+| Approved by Fraud Service | Δ < threshold | +0.03pp | ✅ |
+| Call to PVS | Δ < threshold | -0.44pp | ✅ |
+| Successful Checkout | Δ < threshold | +0.68pp | ✅ |
 
 **Key Findings:**
-- Select Payment Method conversion improved significantly (+4.94pp), with CG showing the largest gain (+14.41pp), followed by AO (+10.05pp) and ER (+9.89pp)
-- Click Submit Form conversion increased +3.05pp overall, indicating improved form completion behavior across markets
-- Backend data shows a notable discrepancy at PVS Attempt step (-8.42pp), suggesting potential data logging differences between GA and Backend tracking
-- Payment volume decreased slightly (-471 visits, -1.3%) while successful checkouts increased (+1,602, +15.1%), indicating higher quality traffic
-- ProcessOut_ApplePay showed a significant rate decline (-6.03pp) but with low volume (339 attempts), limiting overall impact
+- **Select Payment Method** conversion improved dramatically across all analyzed countries: CG (+14.41pp), AO (+10.05pp), and ER (+9.89pp), indicating a significant UX or traffic quality improvement at this step
+- **Click Submit Form** showed strong gains (+3.05pp overall), with CG (+5.31pp) and ER (+5.77pp) leading the improvement
+- CG experienced the largest PCR increase (+12.84pp) despite a 27% reduction in payment visits, suggesting improved traffic quality or user intent
+- Backend data shows a concerning **PVS Attempt drop (-8.42pp)** at L0, though this doesn't appear to impact overall success rates
+- Payment method performance remained stable, with minor improvements in ProcessOut_CreditCard (+0.97pp), Braintree_Paypal (+1.28pp), and Braintree_CreditCard (+1.26pp)
 
-**Action:** Monitor - The significant improvement appears driven by genuine user experience gains at early funnel stages. Investigate the Backend PVS Attempt discrepancy (-8.42pp) to understand the GA/Backend tracking divergence. Continue monitoring CG, ER, and AO markets to validate sustained performance.
+**Action:** Monitor - The improvement appears organic and driven by early-funnel gains. Investigate the PVS Attempt discrepancy in backend data to confirm no underlying issues. Continue monitoring to validate sustainability of gains.
 
 ---
 
@@ -46,8 +46,8 @@
 | Click Submit Form | 12,752 | 14,597 | 1,845 | 14.5% | 88.51% | 91.56% | +3.05pp |
 | FE Validation Passed | 12,132 | 13,905 | 1,773 | 14.6% | 95.14% | 95.26% | +0.12pp |
 | Enter Fraud Service | 11,671 | 13,399 | 1,728 | 14.8% | 96.20% | 96.36% | +0.16pp |
-| Approved by Fraud Service | 11,038 | 12,678 | 1,640 | 14.9% | 94.58% | 94.62% | +0.04pp |
-| Call to PVS | 10,952 | 12,522 | 1,570 | 14.3% | 99.22% | 98.77% | -0.45pp |
+| Approved by Fraud Service | 11,039 | 12,678 | 1,639 | 14.8% | 94.58% | 94.62% | +0.03pp |
+| Call to PVS | 10,952 | 12,522 | 1,570 | 14.3% | 99.21% | 98.77% | -0.44pp |
 | **Successful Checkout** | 10,584 | 12,186 | 1,602 | 15.1% | 96.64% | 97.32% | +0.68pp |
 | **PCR Rate** | | | | | 29.88% | 34.86% | **+4.99pp** |
 
@@ -138,8 +138,8 @@
 | Click Submit Form | 766 | 774 | +8 | +1.04pp | 93.19% | 95.91% | +2.72pp |
 | FE Validation Passed | 735 | 749 | +14 | +1.90pp | 95.95% | 96.77% | +0.82pp |
 | Enter Fraud Service | 708 | 734 | +26 | +3.67pp | 96.33% | 98.00% | +1.67pp |
-| Approved by Fraud Service | 634 | 664 | +30 | +4.73pp | 89.55% | 90.46% | +0.92pp |
-| Call to PVS | 630 | 663 | +33 | +5.24pp | 99.37% | 99.85% | +0.48pp |
+| Approved by Fraud Service | 634 | 665 | +31 | +4.89pp | 89.55% | 90.60% | +1.05pp |
+| Call to PVS | 630 | 663 | +33 | +5.24pp | 99.37% | 99.70% | +0.33pp |
 | **Successful Checkout** | 609 | 636 | +27 | +4.43pp | 96.67% | 95.93% | -0.74pp |
 | **PCR Rate** | | | | | 47.50% | 58.46% | **+10.95pp** |
 
@@ -201,4 +201,4 @@
 
 ---
 
-*Report: 2026-04-17*
+*Report: 2026-04-22*
