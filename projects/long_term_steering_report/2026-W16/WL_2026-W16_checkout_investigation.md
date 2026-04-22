@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved by +0.97pp (34.86% → 35.83%) in 2026-W16, exceeding the +0.48pp threshold, despite a -10.0% decrease in payment visit volume.
+**Overall:** Payment Conversion Rate improved by +0.97pp (34.86% → 35.83%) on 31,448 payment visits, exceeding the +0.48pp threshold.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ > 0.48pp | +1.01pp | ⚠️ |
-| Click Submit Form | Δ > 0.48pp | +0.10pp | ✅ |
-| FE Validation Passed | Δ > 0.48pp | -0.23pp | ✅ |
-| Enter Fraud Service | Δ > 0.48pp | +0.44pp | ✅ |
-| Approved by Fraud Service | Δ > 0.48pp | -0.31pp | ✅ |
-| Call to PVS | Δ > 0.48pp | +0.09pp | ✅ |
-| Successful Checkout | Δ > 0.48pp | +0.45pp | ✅ |
+| Select Payment Method | vs threshold ±0.48pp | +1.01pp | ⚠️ |
+| Click Submit Form | vs threshold ±0.48pp | +0.10pp | ✅ |
+| FE Validation Passed | vs threshold ±0.48pp | -0.23pp | ✅ |
+| Enter Fraud Service | vs threshold ±0.48pp | +0.44pp | ✅ |
+| Approved by Fraud Service | vs threshold ±0.48pp | -0.31pp | ✅ |
+| Call to PVS | vs threshold ±0.48pp | +0.09pp | ✅ |
+| Successful Checkout | vs threshold ±0.48pp | +0.45pp | ✅ |
 
 **Key Findings:**
 - **Select Payment Method** is the primary driver of PCR improvement, with +1.01pp conversion gain at the global level
-- **CG** showed strong improvement (+1.84pp PCR) driven by Select Payment Method (+2.31pp), while **MR** declined (-1.52pp PCR) with a -1.60pp drop at Select Payment Method
-- **GN** had the highest absolute PCR change (+2.21pp), driven by improved checkout success rates (+0.89pp GA, +7.68pp backend)
-- **Braintree_ApplePay** improved by +0.88pp to 92.00% success rate, while **ProcessOut_CreditCard** declined by -1.25pp to 89.48%
-- Overall payment visit volume dropped by -10.0% (-3,504 visits), with **MR** experiencing the largest decline (-14.06%)
+- **CG** showed strong improvement (+1.84pp PCR) driven by Select Payment Method (+2.31pp), indicating better user engagement at payment selection
+- **GN** had the largest positive PCR change (+2.21pp), with gains in Select Payment Method (+1.58pp) and Successful Checkout (+0.89pp)
+- **MR** experienced a decline (-1.52pp PCR) with Select Payment Method dropping -1.60pp, partially offsetting overall gains
+- **Braintree_ApplePay** improved +0.88pp to 92.00% success rate, while **ProcessOut_CreditCard** declined -1.25pp to 89.48%
 
-**Action:** Monitor — The PCR improvement is positive but driven primarily by the Select Payment Method step. Recommend monitoring MR's continued decline and ProcessOut_CreditCard performance over the next 1-2 weeks.
+**Action:** Monitor — The overall PCR improvement is positive and driven by organic gains in payment method selection. Continue monitoring MR for sustained decline and ProcessOut_CreditCard performance degradation.
 
 ---
 

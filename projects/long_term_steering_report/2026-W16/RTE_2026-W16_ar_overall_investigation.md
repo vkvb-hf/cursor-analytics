@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined slightly from 92.83% to 92.65% (-0.18pp) in W16, a change that is not statistically significant given the volume of 429,385 orders.
+**Overall:** Pre-Dunning Acceptance Rate declined marginally from 92.83% to 92.65% (-0.19pp) in W16, a change that is not statistically significant across 429,385 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline | -0.25pp | ✅ |
-| 2_PreDunningAR | Pre-Dunning Recovery | -0.18pp | ✅ |
-| 3_PostDunningAR | Post-Dunning Recovery | -0.19pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | -0.06pp | ✅ |
+| 1_FirstRunAR | Base metric | -0.28pp | ✅ |
+| 2_PreDunningAR | Reported metric | -0.20pp | ✅ |
+| 3_PostDunningAR | Recovery rate | -0.20pp | ✅ |
+| 6_PaymentApprovalRate | Final approval | -0.06pp | ✅ |
 
 **Key Findings:**
-- No countries exceeded the ±2.5% threshold; TK showed the largest decline at -1.76pp (93.65% from 95.33%) but on low volume (2,079 orders)
-- PaymentProvider "Unknown" flagged with -13.48% change, but volume is negligible (130 orders) and not material to overall performance
-- All major payment methods showed minimal movement: Credit Card -0.32pp, PayPal -0.02pp, Apple Pay +0.28pp
-- FJ dominates volume (395,303 orders, 92% of total) with stable performance at -0.19pp
-- Mix shift analysis shows all countries stable with no significant volume redistribution impacting rates
+- The -0.19pp decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 91.33% (W09) and 93.20% (W11)
+- No countries exceeded the ±2.5% threshold; TK showed the largest decline at -1.76pp but with low volume (2,079 orders)
+- PaymentProvider "Unknown" flagged with -13.48pp decline, but represents minimal volume (130 orders) and is not materially impacting overall performance
+- All major payment methods remained stable: Credit Card (-0.32pp), PayPal (-0.02pp), Apple Pay (+0.28pp)
+- Volume mix shift analysis shows stable distribution across all countries with no concerning patterns
 
-**Action:** Monitor — The decline is within normal fluctuation, not statistically significant, and no dimensional breakdowns reveal actionable root causes.
+**Action:** Monitor — No intervention required. The decline is not significant and all dimension scans show stable performance within normal operating ranges.
 
 ---
 
@@ -72,7 +72,7 @@
 |-------|--------|--------|----------|----------|------|
 | Credit Card | 92.22% | 92.52% | -0.32% | 313,971 |  |
 | Paypal | 96.63% | 96.65% | -0.02% | 54,616 |  |
-| Others | 98.01% | 97.83% | +0.19% | 5,731 |  |
+| Others | 97.99% | 97.83% | +0.17% | 5,731 |  |
 | Apple Pay | 90.59% | 90.34% | +0.28% | 55,067 |  |
 
 ### PaymentProvider
@@ -94,7 +94,7 @@
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 91.0% | 91.25% | -0.28% | 429,385 | 421,406 |  |
 | 2_PreDunningAR | 92.65% | 92.83% | -0.20% | 429,385 | 421,406 |  |
-| 3_PostDunningAR | 94.14% | 94.33% | -0.20% | 429,385 | 421,406 |  |
+| 3_PostDunningAR | 94.16% | 94.35% | -0.20% | 429,385 | 421,406 |  |
 | 6_PaymentApprovalRate | 94.81% | 94.87% | -0.06% | 429,385 | 421,406 |  |
 
 ---

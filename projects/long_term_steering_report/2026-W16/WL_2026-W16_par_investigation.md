@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a minimal increase from 91.65% to 91.69% (+0.04pp), a statistically non-significant change within normal operational variance.
+**Overall:** Payment Approval Rate remained essentially stable at 91.69%, showing a minimal +0.04 pp increase from the prior week (91.65%), which is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Within tolerance | -0.11pp | ✅ |
-| 2_PreDunningAR | Within tolerance | -0.08pp | ✅ |
-| 3_PostDunningAR | Within tolerance | -0.13pp | ✅ |
-| 6_PaymentApprovalRate | Within tolerance | +0.04pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.11 pp | ✅ |
+| 2_PreDunningAR | Recovery | -0.09 pp | ✅ |
+| 3_PostDunningAR | Dunning | -0.12 pp | ✅ |
+| 6_PaymentApprovalRate | Final | +0.04 pp | ✅ |
 
 **Key Findings:**
-- The +0.04pp increase in Payment Approval Rate is not statistically significant; the metric remains stable at 91.69% on 164,785 orders
-- No countries exceeded the ±2.5% threshold; KN showed the largest decline (-1.02pp to 88.90%) while GN showed the largest improvement (+1.08pp to 95.58%)
-- PaymentProvider "Unknown" flagged with +2.58pp change, but represents minimal volume (1,378 orders, <1% of total)
-- Upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) all showed slight declines (-0.08pp to -0.13pp), offset by recovery mechanisms
-- 8-week trend shows steady improvement from 89.92% (W09) to 91.69% (W16), indicating healthy long-term trajectory
+- The +0.04 pp change in Payment Approval Rate is within normal fluctuation and marked as not significant
+- No countries exceeded the ±2.5% threshold; KN showed the largest decline at -1.02 pp (88.90%) while GN improved +1.08 pp (95.58%)
+- PaymentProvider "Unknown" flagged with +2.58 pp change, though volume is minimal (1,378 orders, <1% of total)
+- All funnel stages (FirstRunAR, PreDunningAR, PostDunningAR) showed slight declines (-0.09 to -0.12 pp), but final PAR still improved marginally
+- Mix shift analysis shows GN volume increased +17.8% (high AR tier country), which may have contributed positively to overall rate stability
 
-**Action:** Monitor — No investigation required. The change is within normal variance, no dimensional breakdowns exceeded thresholds, and the 8-week trend remains positive.
+**Action:** Monitor — No intervention required. Continue standard weekly tracking.
 
 ---
 
@@ -52,7 +52,7 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | KN | 88.90% | 89.82% | -1.02% | 11,057 |  |
-| CK | 95.41% | 95.88% | -0.48% | 43,017 |  |
+| CK | 95.41% | 95.87% | -0.49% | 43,017 |  |
 | AO | 94.03% | 93.21% | +0.87% | 14,640 |  |
 | GN | 95.58% | 94.56% | +1.08% | 15,445 |  |
 
@@ -67,7 +67,7 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | Paypal | 95.91% | 96.03% | -0.13% | 24,589 |  |
-| Credit Card | 91.35% | 91.41% | -0.06% | 116,930 |  |
+| Credit Card | 91.34% | 91.4% | -0.07% | 116,930 |  |
 | Apple Pay | 87.88% | 87.44% | +0.51% | 21,131 |  |
 | Others | 99.58% | 98.35% | +1.25% | 2,135 |  |
 
@@ -76,7 +76,7 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | 82.29% | 82.67% | -0.46% | 17,167 |  |
-| Adyen | 94.08% | 94.13% | -0.05% | 38,434 |  |
+| Adyen | 94.07% | 94.13% | -0.06% | 38,434 |  |
 | Braintree | 92.18% | 92.22% | -0.03% | 107,117 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 689 |  |
 | Unknown | 99.49% | 96.99% | +2.58% | 1,378 | ⚠️ |
@@ -89,8 +89,8 @@
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 88.07% | 88.17% | -0.11% | 164,785 | 160,979 |  |
-| 2_PreDunningAR | 90.03% | 90.1% | -0.08% | 164,785 | 160,979 |  |
-| 3_PostDunningAR | 91.1% | 91.21% | -0.13% | 164,785 | 160,979 |  |
+| 2_PreDunningAR | 90.02% | 90.1% | -0.09% | 164,785 | 160,979 |  |
+| 3_PostDunningAR | 91.11% | 91.22% | -0.12% | 164,785 | 160,979 |  |
 | 6_PaymentApprovalRate | 91.69% | 91.65% | +0.04% | 164,785 | 160,979 |  |
 
 ---

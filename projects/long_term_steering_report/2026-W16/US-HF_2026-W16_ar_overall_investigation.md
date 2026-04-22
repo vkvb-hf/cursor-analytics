@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined slightly from 92.22% to 92.1% (-0.13pp) on volume of 421,947 orders, a change that is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for US-HF declined slightly from 92.22% to 92.1% (-0.13pp) in 2026-W16, a change that is not statistically significant and remains within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
@@ -22,13 +22,13 @@
 | 6_PaymentApprovalRate | Final Approval | +0.07pp | ✅ |
 
 **Key Findings:**
-- The -0.13pp decline in Pre-Dunning AR falls within normal weekly fluctuation (8-week range: 91.65% to 92.22%) and is not statistically significant
-- PaymentProvider "Unknown" shows a significant -10.77pp decline (91.74% → 81.86%), but volume is minimal at only 226 orders
-- Credit Card payment method declined -0.25pp while PayPal (+0.22pp) and Apple Pay (+0.27pp) showed slight improvements
-- No countries exceeded the ±2.5% threshold; US is the sole country with a -0.13pp change
-- 1_FirstRunAR shows the largest funnel decline at -0.31pp, suggesting initial payment attempts are slightly underperforming
+- The -0.13pp decline in Pre-Dunning AR is within the 8-week volatility band (range: 91.65% to 92.22%), indicating normal fluctuation
+- PaymentProvider "Unknown" showed a significant drop of -10.37pp (91.74% → 82.22%), but volume is minimal at only 225 orders (0.05% of total)
+- No payment methods exceeded the ±2.5% threshold; Credit Card (-0.25pp) and Others (-0.39pp) showed minor declines
+- Volume increased by 3.3% week-over-week (408,630 → 421,947 orders), with the High AR tier in US remaining stable
+- First Run AR showed the largest funnel decline at -0.31pp, suggesting slight upstream pressure on initial acceptance
 
-**Action:** Monitor — The decline is within normal variance, not significant, and no major dimensions triggered alerts. Continue standard weekly monitoring.
+**Action:** Monitor – No immediate action required. The change is not significant and all major dimensions remain within acceptable thresholds. Continue tracking the "Unknown" PaymentProvider for any volume increases.
 
 ---
 
@@ -39,7 +39,7 @@
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
 | 2026-W16 | 92.1% | 421,947 | -0.13% ← REPORTED CHANGE |
-| 2026-W15 | 92.22% | 408,629 | +0.32% |
+| 2026-W15 | 92.22% | 408,630 | +0.32% |
 | 2026-W14 | 91.93% | 415,885 | -0.05% |
 | 2026-W13 | 91.98% | 424,103 | +0.05% |
 | 2026-W12 | 91.93% | 433,761 | -0.17% |
@@ -65,20 +65,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 97.94% | 98.37% | -0.44% | 2,284 |  |
-| Credit Card | 92.69% | 92.92% | -0.25% | 310,172 |  |
-| Paypal | 95.79% | 95.57% | +0.22% | 51,881 |  |
+| Others | 97.99% | 98.37% | -0.39% | 2,283 |  |
+| Credit Card | 92.69% | 92.92% | -0.25% | 310,173 |  |
+| Paypal | 95.79% | 95.57% | +0.23% | 51,881 |  |
 | Apple Pay | 85.36% | 85.13% | +0.27% | 57,610 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Unknown | 81.86% | 91.74% | -10.77% | 226 | ⚠️ |
+| Unknown | 82.22% | 91.74% | -10.37% | 225 | ⚠️ |
 | Adyen | 94.54% | 95.04% | -0.52% | 403 |  |
-| Braintree | 92.66% | 92.75% | -0.10% | 361,379 |  |
+| Braintree | 92.65% | 92.75% | -0.10% | 361,380 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 2,028 |  |
-| ProcessOut | 88.36% | 87.24% | +1.28% | 57,911 |  |
+| ProcessOut | 88.35% | 87.24% | +1.27% | 57,911 |  |
 
 ---
 
@@ -87,10 +87,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 90.79% | 91.07% | -0.31% | 421,947 | 408,629 |  |
-| 2_PreDunningAR | 92.1% | 92.22% | -0.13% | 421,947 | 408,629 |  |
-| 3_PostDunningAR | 93.03% | 93.19% | -0.17% | 421,947 | 408,629 |  |
-| 6_PaymentApprovalRate | 93.82% | 93.76% | +0.07% | 421,947 | 408,629 |  |
+| 1_FirstRunAR | 90.79% | 91.07% | -0.31% | 421,947 | 408,630 |  |
+| 2_PreDunningAR | 92.1% | 92.22% | -0.13% | 421,947 | 408,630 |  |
+| 3_PostDunningAR | 93.04% | 93.2% | -0.17% | 421,947 | 408,630 |  |
+| 6_PaymentApprovalRate | 93.82% | 93.76% | +0.07% | 421,947 | 408,630 |  |
 
 ---
 
@@ -99,7 +99,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
+| US | High (>92%) | 492,812 | 511,272 | +3.7% | Stable |
 
 ---
 

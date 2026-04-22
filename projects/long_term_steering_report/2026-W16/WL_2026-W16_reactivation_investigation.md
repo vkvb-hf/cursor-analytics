@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined significantly from 89.29% to 86.81% (-2.78 pp) in 2026-W16, affecting 8,022 orders and marking the largest weekly drop in the 8-week trend.
+**Overall:** Reactivation Rate declined significantly from 89.29% to 86.81% (-2.78pp) in WL 2026-W16, representing the largest week-over-week drop in the 8-week trend period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | Significant drop vs stable prior weeks | -2.78 pp | ⚠️ |
-| L1: Country Breakdown | 3 countries exceeded ±2.5% threshold | CK -5.69%, AO -3.83%, MR -3.64% | ⚠️ |
-| L1: Payment Method | Credit Card primary driver | -3.24% | ⚠️ |
-| L2: CK Deep-Dive | All payment methods declined | Apple Pay -9.64%, Paypal -7.17%, Credit Card -5.32% | ⚠️ |
+| L0: WL Trend | Significant drop after stable period | -2.78pp | ⚠️ |
+| L1: Country Breakdown | 3 countries exceed ±2.5% threshold | CK -5.69%, AO -3.83%, MR -3.64% | ⚠️ |
+| L1: PaymentMethod | Credit Card significant decline | -3.24% | ⚠️ |
+| L2: CK Deep-Dive | All payment methods declining | Apple Pay -9.64%, Paypal -7.17%, Credit Card -5.32% | ⚠️ |
 | L2: AO Deep-Dive | Apple Pay severe decline | -29.14% | ⚠️ |
-| L2: MR Deep-Dive | Credit Card primary driver | -6.33% | ⚠️ |
-| Mix Shift | ER volume dropped significantly | -27.5% volume | ⚠️ |
+| L2: MR Deep-Dive | Credit Card decline | -6.33% | ⚠️ |
+| Mix Shift | ER volume dropped significantly | -27.5% | ⚠️ |
 
 **Key Findings:**
-- CK experienced the largest rate decline (-5.69 pp) with increases in "Expired, Invalid, Closed Card, No Account" decline reasons (+3.43 pp) and "Blocked, Restricted, Not Permitted" (+1.48 pp)
-- AO's Apple Pay performance dropped severely (-29.14%), from 45.16% to 32.00%, indicating a payment method-specific issue
-- MR saw Credit Card reactivation decline from 93.65% to 87.72% (-6.33%), while Paypal and Apple Pay improved
-- ER volume decreased by 27.5% (from 3,349 to 2,428 orders), contributing to mix shift impact on overall performance
-- "Others" decline reason category dominates across all flagged countries, obscuring specific root causes
+- CK experienced the largest rate decline (-5.69pp) with all payment methods underperforming; "Expired, Invalid, Closed Card, No Account" decline reasons increased by +3.43pp
+- AO saw severe Apple Pay degradation (-29.14%) dropping from 45.16% to 32.00%, though on relatively low volume (25 orders)
+- MR Credit Card reactivation dropped -6.33% despite volume increasing +22.7%, suggesting underlying processing issues rather than mix shift
+- ER (highest volume country at 2,428 orders) experienced a significant -27.5% volume drop, contributing to overall mix shift
+- "Others" decline reason dominates across all flagged countries (84-90% of declines), limiting root cause visibility
 
-**Action:** Investigate — Prioritize CK for immediate review given the broad payment method impact and rising card validity issues; request detailed decline reason breakdown from payment providers to resolve "Others" categorization.
+**Action:** Investigate — Focus on CK payment processing issues (particularly the +3.43pp increase in expired/invalid card declines) and AO Apple Pay degradation. Request detailed decline code breakdown to resolve "Others" categorization.
 
 ---
 

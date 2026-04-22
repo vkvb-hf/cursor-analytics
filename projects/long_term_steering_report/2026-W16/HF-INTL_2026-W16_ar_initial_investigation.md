@@ -2,34 +2,35 @@
 
 **Metric:** Pre-Dunning Acceptance Rate (Initial Charges)  
 **Period:** 2026-W15 → 2026-W16  
-**Observation:** 91.78% → 91.31% (-0.51%)  
-**Volume:** 35,099 orders  
+**Observation:** 91.78% → 91.42% (-0.39%)  
+**Volume:** 35,070 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined from 91.78% to 91.31% (-0.51%) in W16, a statistically non-significant change within normal weekly variation.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) declined modestly from 91.78% to 91.42% (-0.39%) in W16, a statistically non-significant change within normal week-over-week fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (88.09%-91.78%) | -0.47pp | ✅ |
-| L1: Country Variance | 4 countries exceed ±2.5% threshold (NZ, LU, NL, AU) | NZ -10.84% | ⚠️ |
-| L1: PaymentMethod | All methods within ±1% | Max -0.77% | ✅ |
-| L1: PaymentProvider | All providers within ±1.5% | Max -1.09% | ✅ |
-| L2: NZ Deep-Dive | Significant decline driven by Insufficient Funds | +7.48pp | ⚠️ |
-| L3: Related Metrics | All funnel metrics declined proportionally | -0.38% to -0.85% | ✅ |
-| Mix Shift | No material tier shifts; NZ volume +113% | Low-AR expansion | ⚠️ |
+| L0: 8-Week Trend | Within historical range (88.11%-91.78%) | -0.39% | ✅ |
+| L1: Country Breakdown | 4 countries exceed ±2.5% threshold | NZ -10.84%, LU -5.06%, NL -3.40%, AU +3.35% | ⚠️ |
+| L1: Dimension Scan | All payment methods/providers within tolerance | Max change -0.76% (Adyen) | ✅ |
+| L2: Country Deep-Dives | Insufficient Funds driving declines in NZ, LU | NZ +7.48pp, LU +7.74pp | ⚠️ |
+| L3: Related Metrics | All funnel metrics declined proportionally | 1_FirstRunAR -0.74%, 3_PostDunningAR -0.41% | ✅ |
+| Mix Shift Analysis | Volume shifts stable across all tiers | NZ +113%, GB +54% | ✅ |
 
 **Key Findings:**
-- NZ experienced the largest decline (-10.84%, from 77.70% to 69.28%) with "Insufficient Funds" declines increasing by +7.48pp, while volume more than doubled (+113% from 408 to 869 orders)
-- The NZ decline is concentrated in ProcessOut (-9.12%) and Braintree (-35.52% on small volume of 29 orders), with credit_card payment method down -10.46%
-- LU and NL also showed elevated declines (-5.06% and -3.47% respectively), both linked to "Insufficient Funds" and "Other reasons" increases
-- AU improved +3.30% (81.92% → 84.62%) despite Adyen declining -6.52%, driven by ProcessOut improvement (+4.68%) on high volume (2,087 orders)
-- Global PaymentMethod and PaymentProvider dimensions show no systemic issues—declines are isolated to specific country-provider combinations
+- NZ experienced the largest decline (-10.84%) driven by a +7.48pp increase in "Insufficient Funds" declines, with volume more than doubling from 408 to 869 orders
+- LU showed a -5.06% decline with "Insufficient Funds" increasing by +7.74pp, though volume remains low (92 orders)
+- NL declined -3.40% with ProcessOut provider dropping significantly (-29.54%) and credit_card method falling -28.48%
+- AU improved +3.35% counter to the overall trend, with ProcessOut performance increasing +4.74% and "Insufficient Funds" decreasing -2.39pp
+- Global payment method and provider dimensions show no systemic issues—all changes within ±1% tolerance
 
-**Action:** Monitor — The overall decline is not statistically significant and the 8-week trend shows W16 rate (91.31%) remains above the period average. Continue monitoring NZ performance given the volume surge and elevated Insufficient Funds rate; if NZ decline persists in W17, escalate for ProcessOut investigation.
+**Action:** Monitor — The overall -0.39% decline is not statistically significant and the rate remains within the 8-week historical range. Continue monitoring NZ performance given the volume surge and elevated insufficient funds rate; no escalation required at this time.
 
 ---
 
@@ -39,14 +40,14 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W16 | 91.31% | 35,099 | -0.51% ← REPORTED CHANGE |
-| 2026-W15 | 91.78% | 27,494 | +2.13% |
-| 2026-W14 | 89.87% | 30,723 | -0.28% |
-| 2026-W13 | 90.12% | 34,511 | -1.17% |
-| 2026-W12 | 91.19% | 39,023 | -0.41% |
-| 2026-W11 | 91.57% | 42,690 | +1.31% |
-| 2026-W10 | 90.39% | 47,599 | +2.61% |
-| 2026-W09 | 88.09% | 46,648 | - |
+| 2026-W16 | 91.42% | 35,070 | -0.39% ← REPORTED CHANGE |
+| 2026-W15 | 91.78% | 27,488 | +2.22% |
+| 2026-W14 | 89.79% | 30,666 | -0.40% |
+| 2026-W13 | 90.15% | 34,400 | -1.10% |
+| 2026-W12 | 91.15% | 38,951 | -0.38% |
+| 2026-W11 | 91.5% | 42,707 | +1.21% |
+| 2026-W10 | 90.41% | 47,636 | +2.61% |
+| 2026-W09 | 88.11% | 46,569 | - |
 
 ---
 
@@ -56,9 +57,9 @@
 |---------|-----------|-----------|-----|-------------|------|
 | NZ | 69.28% | 77.70% | -10.84% | 869 | ⚠️ |
 | LU | 89.13% | 93.88% | -5.06% | 92 | ⚠️ |
-| NL | 94.17% | 97.55% | -3.47% | 1,372 | ⚠️ |
-| FR | 93.43% | 94.96% | -1.61% | 7,155 |  |
-| AU | 84.62% | 81.92% | +3.30% | 2,647 | ⚠️ |
+| NL | 94.24% | 97.55% | -3.40% | 1,371 | ⚠️ |
+| FR | 93.42% | 94.96% | -1.63% | 7,156 |  |
+| AU | 84.62% | 81.88% | +3.35% | 2,647 | ⚠️ |
 
 **Countries exceeding ±2.5% threshold:** NZ, LU, NL, AU
 
@@ -70,19 +71,19 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Credit Card | 88.67% | 89.35% | -0.77% | 12,437 |  |
-| Others | 96.85% | 97.39% | -0.56% | 5,170 |  |
-| Paypal | 96.3% | 96.62% | -0.34% | 6,938 |  |
-| Apple Pay | 88.43% | 88.19% | +0.27% | 10,554 |  |
+| Credit Card | 88.78% | 89.36% | -0.65% | 12,422 |  |
+| Others | 97.02% | 97.4% | -0.39% | 5,166 |  |
+| Paypal | 96.41% | 96.63% | -0.23% | 6,934 |  |
+| Apple Pay | 88.52% | 88.18% | +0.38% | 10,548 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Adyen | 96.36% | 97.42% | -1.09% | 3,018 |  |
-| Braintree | 92.47% | 92.94% | -0.50% | 16,329 |  |
-| ProcessOut | 87.93% | 88.18% | -0.28% | 13,402 |  |
-| Unknown | 95.8% | 96.07% | -0.28% | 2,239 |  |
+| Adyen | 96.68% | 97.42% | -0.76% | 3,013 |  |
+| Braintree | 92.58% | 92.94% | -0.39% | 16,319 |  |
+| Unknown | 95.76% | 96.08% | -0.33% | 2,240 |  |
+| ProcessOut | 88.03% | 88.17% | -0.16% | 13,387 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 111 |  |
 
 ---
@@ -105,9 +106,9 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
 | Braintree | 58.62% | 90.91% | -35.52% | 29 | 11 | ⚠️ |
-| Adyen | 77.78% | 92.31% | -15.74% | 9 | 13 | ⚠️ |
+| Adyen | 77.78% | 91.67% | -15.15% | 9 | 12 | ⚠️ |
 | ProcessOut | 68.78% | 75.68% | -9.12% | 804 | 366 | ⚠️ |
-| Unknown | 92.31% | 100.00% | -7.69% | 26 | 16 | ⚠️ |
+| Unknown | 92.31% | 100.00% | -7.69% | 26 | 17 | ⚠️ |
 | No Payment | 100.00% | 100.00% | +0.00% | 1 | 2 |  |
 
 ### Decline Reasons
@@ -171,7 +172,7 @@
 | credit_card | 61.54% | 86.05% | -28.48% | 104 | 43 | ⚠️ |
 | applepay | 86.81% | 92.68% | -6.34% | 144 | 123 | ⚠️ |
 | klarna | 96.12% | 98.31% | -2.23% | 103 | 59 |  |
-| ideal | 98.76% | 99.04% | -0.29% | 967 | 835 |  |
+| ideal | 98.86% | 99.04% | -0.18% | 966 | 835 |  |
 | cashcredit | 100.00% | 100.00% | +0.00% | 32 | 5 |  |
 | paypal | 100.00% | 95.83% | +4.35% | 17 | 24 |  |
 
@@ -182,15 +183,15 @@
 | Unknown | 0.00% | 88.89% | -100.00% | 5 | 9 | ⚠️ |
 | ProcessOut | 60.40% | 85.71% | -29.54% | 101 | 42 | ⚠️ |
 | Braintree | 88.20% | 93.20% | -5.36% | 161 | 147 | ⚠️ |
-| Adyen | 98.51% | 98.89% | -0.39% | 1,073 | 901 |  |
+| Adyen | 98.60% | 98.89% | -0.29% | 1,072 | 901 |  |
 | No Payment | 100.00% | 100.00% | +0.00% | 32 | 5 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 1,292 | 1,077 | 94.17% | 97.55% | -3.39 |
-| Other reasons | 45 | 11 | 3.28% | 1.00% | +2.28 |
+| 1. SUCCESSFULL | 1,292 | 1,077 | 94.24% | 97.55% | -3.32 |
+| Other reasons | 44 | 11 | 3.21% | 1.00% | +2.21 |
 | Insufficient Funds | 27 | 13 | 1.97% | 1.18% | +0.79 |
 | Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 6 | 2 | 0.44% | 0.18% | +0.26 |
 | Unknown | 2 | 1 | 0.15% | 0.09% | +0.06 |
@@ -210,7 +211,7 @@
 | paypal | 92.35% | 92.43% | -0.08% | 327 | 317 |  |
 | cashcredit | 100.00% | 100.00% | +0.00% | 12 | 7 |  |
 | credit_card | 83.06% | 80.12% | +3.68% | 1,169 | 1,192 |  |
-| applepay | 80.79% | 76.44% | +5.68% | 937 | 900 | ⚠️ |
+| applepay | 80.79% | 76.33% | +5.84% | 937 | 900 | ⚠️ |
 
 ### PaymentProvider
 
@@ -220,14 +221,14 @@
 | Unknown | 97.85% | 99.40% | -1.56% | 186 | 167 |  |
 | Braintree | 92.35% | 92.43% | -0.08% | 327 | 317 |  |
 | No Payment | 100.00% | 100.00% | +0.00% | 12 | 8 |  |
-| ProcessOut | 82.18% | 78.51% | +4.68% | 2,087 | 2,047 |  |
+| ProcessOut | 82.18% | 78.46% | +4.74% | 2,087 | 2,047 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 2,240 | 2,152 | 84.62% | 81.92% | +2.71 |
-| Insufficient Funds | 352 | 411 | 13.30% | 15.65% | -2.35 |
+| 1. SUCCESSFULL | 2,240 | 2,151 | 84.62% | 81.88% | +2.74 |
+| Insufficient Funds | 352 | 412 | 13.30% | 15.68% | -2.39 |
 | Other reasons | 26 | 38 | 0.98% | 1.45% | -0.46 |
 | Unknown | 4 | 1 | 0.15% | 0.04% | +0.11 |
 | Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 25 | 25 | 0.94% | 0.95% | -0.01 |
@@ -240,10 +241,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 89.02% | 89.78% | -0.85% | 35,099 | 27,494 |  |
-| 2_PreDunningAR | 91.31% | 91.78% | -0.51% | 35,099 | 27,494 |  |
-| 3_PostDunningAR | 91.7% | 92.19% | -0.54% | 35,099 | 27,494 |  |
-| 6_PaymentApprovalRate | 92.1% | 92.46% | -0.38% | 35,099 | 27,494 |  |
+| 1_FirstRunAR | 89.13% | 89.79% | -0.74% | 35,070 | 27,488 |  |
+| 2_PreDunningAR | 91.42% | 91.78% | -0.39% | 35,070 | 27,488 |  |
+| 3_PostDunningAR | 91.82% | 92.2% | -0.41% | 35,070 | 27,488 |  |
+| 6_PaymentApprovalRate | 92.2% | 92.46% | -0.29% | 35,070 | 27,488 |  |
 
 ---
 
@@ -252,12 +253,12 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| DE | High (>92%) | 6,536 | 7,172 | +9.7% | Stable |
-| GB | Medium (>85%) | 5,647 | 8,681 | +53.7% | Stable |
-| FR | High (>92%) | 5,183 | 7,155 | +38.0% | Stable |
+| DE | High (>92%) | 6,541 | 7,142 | +9.2% | Stable |
+| GB | Medium (>85%) | 5,637 | 8,682 | +54.0% | Stable |
+| FR | High (>92%) | 5,182 | 7,156 | +38.1% | Stable |
 | AU | Low (>85%) | 2,627 | 2,647 | +0.8% | Stable |
 | BE | High (>92%) | 1,437 | 1,796 | +25.0% | Stable |
-| NL | High (>92%) | 1,104 | 1,372 | +24.3% | Stable |
+| NL | High (>92%) | 1,104 | 1,371 | +24.2% | Stable |
 | IE | Medium (>85%) | 1,076 | 1,365 | +26.9% | Stable |
 | DK | High (>92%) | 1,074 | 1,230 | +14.5% | Stable |
 | SE | Medium (>85%) | 1,006 | 1,217 | +21.0% | Stable |
@@ -278,8 +279,8 @@
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
 | NZ | ↓ -10.84% | None -100.0% | Braintree -35.5% | Insufficient Funds +7.48pp | None + Braintree + Insufficient |
 | LU | ↓ -5.06% | None -100.0% | Unknown -10.0% | Insufficient Funds +7.74pp | None + Unknown + Insufficient |
-| NL | ↓ -3.47% | None -100.0% | Unknown -100.0% | Other reasons +2.28pp | None + Unknown + Other |
-| AU | ↑ +3.30% | None -100.0% | Adyen -6.5% | Insufficient Funds -2.35pp | None + Adyen + Insufficient |
+| NL | ↓ -3.40% | None -100.0% | Unknown -100.0% | Other reasons +2.21pp | None + Unknown + Other |
+| AU | ↑ +3.35% | None -100.0% | Adyen -6.5% | Insufficient Funds -2.39pp | None + Adyen + Insufficient |
 
 ---
 

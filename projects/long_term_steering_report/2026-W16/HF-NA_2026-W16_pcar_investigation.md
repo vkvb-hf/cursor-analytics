@@ -8,25 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined by -0.23 percentage points (94.08% → 93.86%) on volume of 23,369 orders, with the change flagged as not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined from 94.08% to 93.86% (-0.22pp) in W16, a statistically non-significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within normal range (93.86% vs 8-wk range 93.92%-95.23%) | -0.23pp | ✅ |
-| Country Breakdown | No countries exceed ±2.5% threshold | US: -0.29pp, CA: +0.44pp | ✅ |
-| Payment Method | No methods exceed threshold; "Others" largest drop at -2.34pp | Low volume (54 orders) | ✅ |
-| Mix Shift | CA volume down -10.5% but impact stable | No adverse mix effect | ✅ |
+| Overall Rate Change | -0.22pp decline | -0.23% | ✅ |
+| Country Threshold (±2.5%) | No countries exceeded | - | ✅ |
+| Payment Method Threshold | Others -2.34% (low volume: 54) | - | ✅ |
+| 8-Week Trend Stability | Rate within 93.86%-95.23% range | - | ✅ |
+| Volume Shift | CA volume -10.5%, US volume +2.7% | - | ⚠️ |
 
 **Key Findings:**
-- The -0.23pp decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 93.86% and 95.23%
-- US drove the majority of the decline (-0.29pp on 18,142 orders), while CA improved (+0.44pp) despite a -10.5% volume drop
-- "Others" payment method showed a -2.34pp decline, but with only 54 orders this is not material to overall performance
-- Credit Card (largest volume at 13,385 orders) declined -0.42pp, contributing most to the overall rate drop
-- No payment providers flagged anomalies; PaymentProvider data returned no flagged results
+- US declined -0.29pp (93.02% → 92.75%) on 18,142 orders, representing 78% of total volume
+- CA improved +0.44pp (97.30% → 97.72%) despite a -10.5% volume decrease (5,843 → 5,227 orders)
+- Credit Card, the highest volume payment method (13,385 orders), declined -0.42pp (94.21% → 93.82%)
+- "Others" payment method showed -2.34pp decline but on negligible volume (54 orders)
+- Current rate of 93.86% remains within the 8-week range (93.92%-95.23%), excluding W10 peak
 
-**Action:** Monitor — The decline is not statistically significant and falls within normal weekly variance. Continue standard monitoring for W17.
+**Action:** Monitor — The decline is not statistically significant, no dimension exceeded alert thresholds, and the rate remains within normal historical bounds. Continue standard weekly monitoring.
 
 ---
 

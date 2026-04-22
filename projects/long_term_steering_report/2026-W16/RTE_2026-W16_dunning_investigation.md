@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved from 42.61% to 43.82% (+1.21pp) week-over-week, coinciding with the transition from Pre-Payday to Payday phase across 20,587 eligible orders.
+**Overall:** Dunning Ship Rate improved from 42.61% to 43.82% (+1.21pp) week-over-week, coinciding with the transition from Pre-Payday to Payday phase, with volume increasing 5.3% to 20,587 eligible orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | Stable? | -0.1% | ✅ |
-| Discount % | Decreased? | -4.1% | ✅ |
-| PC2 | Stable? | -1.1% | ✅ |
+| Pre-Dunning AR | Stable baseline? | -0.1% | ✅ |
+| Discount % | Lower discounts? | -4.1% | ✅ |
+| PC2 | Stable conversion? | -1.1% | ✅ |
 | Ship Rate | Improved? | +2.8% | ✅ |
 
 **Key Findings:**
-- **Payday Effect Confirmed:** All major countries showed Ship Rate improvement during the Pre-Payday → Payday transition, with discount rates decreasing across the board
-- **TV showed dramatic improvement:** Ship Rate surged +109.5% (12.50% → 26.19%) driven by the largest discount reduction (-14.1%) and slight AR improvement (+1.5%)
-- **YE outperformed:** Achieved +4.2% Ship Rate improvement with the second-largest discount decrease (-7.1%) while maintaining stable AR (+0.1%)
-- **TK underperformed despite favorable conditions:** Ship Rate declined -11.7% despite discount reduction (-5.5%), potentially due to AR deterioration (-1.8%) and PC2 decline (-2.0%)
-- **Mix shift minimal risk:** FJ volume increased +5.3% while maintaining the largest absolute contribution; no Simpson's Paradox detected as both volume leader (FJ) and high-SR tier (YE) improved
+- **Payday Effect Confirmed:** All major markets (FJ, YE, TV) showed Ship Rate improvements coinciding with the Pre-Payday → Payday transition, suggesting improved customer liquidity
+- **TV showed dramatic improvement:** Ship Rate surged +109.5% (12.50% → 26.19%) driven by significant discount reduction (-14.1%) and slight AR improvement (+1.5%), though low volume (84 orders) limits statistical significance
+- **YE outperformed cluster average:** +4.2% Ship Rate improvement with the largest discount reduction (-7.1%) among high-volume countries, maintaining stable AR
+- **TK is the sole underperformer:** Ship Rate declined -11.7% despite Payday phase, with deteriorating AR (-1.8%) and PC2 (-2.0%); notable 84% volume increase may indicate mix shift issues
+- **No Simpson's Paradox detected:** Both FJ (largest contributor) and the overall cluster moved in the same positive direction
 
-**Action:** Monitor — The improvement aligns with expected Payday phase behavior. Continue tracking TK performance as it represents an anomaly requiring attention if the pattern persists.
+**Action:** **Monitor** - Improvements align with expected Payday phase behavior. Continue tracking TK performance given volume surge and declining conversion metrics; investigate if TK volume increase represents a cohort quality change.
 
 ---
 
@@ -52,7 +52,7 @@
 | 2026-W15 | Pre-Payday | 13,700 | 41.17% | - | 93.97% | - | 17.16% | - | 50.35% | - |
 | 2026-W16 | Payday | 14,422 | 42.68% | ↑+3.7% | 93.79% | →-0.2% | 16.68% | ↓-2.8% | 49.95% | →-0.8% |
 
-**Analysis:** The +1.21pp improvement in Dunning Ship Rate is primarily driven by the natural Payday phase transition, which enabled lower discount requirements across all markets while maintaining stable Pre-Dunning AR (92.76%). FJ and YE contributed most significantly to the gains, while TV demonstrated exceptional responsiveness to reduced discounting. The TK decline warrants monitoring but does not materially impact cluster-level performance given its small volume (92 orders).
+**Analysis:** The +1.21pp improvement in Dunning Ship Rate is primarily driven by the natural Payday cycle effect, with reduced discount rates across all markets suggesting customers are converting more readily without aggressive incentives. FJ and YE together account for the majority of volume and both showed healthy improvements. TK warrants continued observation as it represents an anomaly with declining Ship Rate despite favorable Payday timing and significant volume growth.
 
 ### YE (Rank #2 by Contribution)
 

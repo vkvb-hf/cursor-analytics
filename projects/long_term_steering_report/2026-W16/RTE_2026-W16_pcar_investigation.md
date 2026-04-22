@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate remained essentially stable, declining marginally from 97.22% to 97.2% (-0.02 pp) week-over-week, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate remained essentially stable at 97.2%, declining by just -0.02pp from the prior week (97.22%), which is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall Trend | Within normal 8-week range (96.88%-97.3%) | -0.02 pp | ✅ |
-| L1: Country Scan | 1 country exceeds ±2.5% threshold (TT) | TT: +7.93 pp | ⚠️ |
-| L1: Dimension Scan | Others PaymentMethod flagged | +8.69 pp | ⚠️ |
-| L2: TT Deep-Dive | Klarna/Adyen volatility identified | Mixed | ⚠️ |
-| Mix Shift | TT volume +55.2% but low-tier, minimal impact | Stable | ✅ |
+| L0: 8-Week Trend | Within normal range (96.88%-97.3%) | -0.02pp | ✅ |
+| L1: Country Breakdown | 1 country (TT) exceeded ±2.5% threshold | +7.93pp (TT) | ⚠️ |
+| L1: Dimension Scan | PaymentMethod "Others" flagged | +8.69pp | ⚠️ |
+| L2: TT Deep-Dive | Klarna, IDeal, Adyen flagged | Mixed | ⚠️ |
+| Mix Shift | TT volume +55.2% but impact stable | N/A | ✅ |
 
 **Key Findings:**
-- TT showed significant improvement (+7.93 pp), driven primarily by IDeal via Adyen improving from 73.41% to 81.67% (+11.24 pp) on substantially higher volume (583 → 1,009 orders)
-- Klarna in TT declined from 54.17% to 49.50% (-8.61 pp), but this was offset by improvements in other payment methods
-- TT volume increased significantly (+55.2%, from 788 to 1,223 orders), but as a low-tier market it has minimal impact on overall RTE metrics
-- Major markets FJ (30,779 orders) and CF (6,546 orders) remained stable with rates of 97.69% and 98.61% respectively
-- 8-week trend shows metric is stable within a narrow band of 96.88%-97.3%
+- The -0.02pp overall decline is within normal weekly fluctuation and not statistically significant
+- TT showed a notable **+7.93pp improvement** (74.62% → 80.54%), driven primarily by IDeal performance improving +11.24pp via Adyen (+9.05pp)
+- TT volume increased significantly by +55.2% (788 → 1,223 orders), indicating growing market activity
+- Klarna in TT declined -8.61pp (54.17% → 49.50%) but on low volume (101 orders)
+- PayPal in TT dropped -7.14pp but represents only 14 orders, making it statistically insignificant
 
-**Action:** Monitor – No immediate action required. The -0.02 pp overall change is not significant, and the TT fluctuations are improvements in a low-volume market. Continue monitoring Klarna performance in TT and Adyen processing rates.
+**Action:** **Monitor** - No escalation required. The overall metric is stable and within historical range. The TT improvement is positive but should be monitored to ensure IDeal/Adyen performance remains consistent. Klarna's low approval rate (49.50%) in TT warrants observation but volume is too low for immediate concern.
 
 ---
 

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined slightly from 92.42% to 92.31% (-0.11 pp) in W16, a statistically non-significant change within normal weekly fluctuation range.
+**Overall:** The Pre-Dunning Acceptance Rate (Overall) for HF-NA declined marginally from 92.42% to 92.31% (-0.11pp) in 2026-W16, a change that is not statistically significant and remains within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Rate decline | -0.23 pp | ⚠️ |
-| 2_PreDunningAR | Rate decline | -0.11 pp | ⚠️ |
-| 3_PostDunningAR | Rate decline | -0.19 pp | ⚠️ |
-| 6_PaymentApprovalRate | Rate stable | +0.03 pp | ✅ |
+| 1_FirstRunAR | Within normal range | -0.23pp | ⚠️ |
+| 2_PreDunningAR | Within normal range | -0.11pp | ✅ |
+| 3_PostDunningAR | Within normal range | -0.19pp | ⚠️ |
+| 6_PaymentApprovalRate | Stable | +0.03pp | ✅ |
 
 **Key Findings:**
-- The -0.11 pp decline is within the 8-week normal variance range (91.59% to 92.42%), with W16 rate of 92.31% remaining above the W09 low of 91.59%
-- US showed a slight decline (-0.12 pp to 92.97%) while CA improved (+0.09 pp to 93.58%); no countries exceeded the ±2.5% threshold
-- Credit Card payment method showed the largest decline (-0.21 pp) among payment methods, representing the highest volume segment (377,622 orders)
-- Unknown payment provider showed notable decline (-1.62 pp) but with minimal volume impact (669 orders)
-- All funnel stages (FirstRun, PreDunning, PostDunning) declined in parallel, suggesting a broad rather than stage-specific issue
+- No countries exceeded the ±2.5% threshold; US declined -0.13pp while CA improved +0.11pp
+- Credit Card payment method showed the largest decline at -0.21pp, contributing most to the overall drop given its high volume (377,623 orders)
+- Unknown PaymentProvider showed notable volatility (-1.63pp) but with minimal volume impact (668 orders)
+- 8-week trend shows stable performance between 91.59% and 92.42%, with current week within historical range
+- Mix shift analysis confirms stable volume distribution across both US and CA with no structural changes
 
-**Action:** Monitor – The decline is not statistically significant and falls within normal weekly fluctuation. Continue standard monitoring; no escalation required unless the downward trend persists for 2+ consecutive weeks.
+**Action:** Monitor — The decline is not significant, falls within normal variance, and no dimensional breakdowns exceeded alert thresholds. Continue standard weekly monitoring.
 
 ---
 
@@ -39,11 +39,11 @@
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
 | 2026-W16 | 92.31% | 513,372 | -0.12% ← REPORTED CHANGE |
-| 2026-W15 | 92.42% | 497,775 | +0.28% |
+| 2026-W15 | 92.42% | 497,776 | +0.28% |
 | 2026-W14 | 92.16% | 507,189 | -0.07% |
 | 2026-W13 | 92.22% | 517,599 | +0.10% |
-| 2026-W12 | 92.13% | 526,516 | -0.16% |
-| 2026-W11 | 92.28% | 539,763 | +0.30% |
+| 2026-W12 | 92.13% | 526,516 | -0.15% |
+| 2026-W11 | 92.27% | 539,763 | +0.29% |
 | 2026-W10 | 92.0% | 554,777 | +0.45% |
 | 2026-W09 | 91.59% | 553,112 | - |
 
@@ -54,7 +54,7 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | US | 92.97% | 93.09% | -0.13% | 511,272 |  |
-| CA | 93.58% | 93.49% | +0.09% | 104,640 |  |
+| CA | 93.58% | 93.48% | +0.11% | 104,640 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -66,20 +66,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Credit Card | 92.74% | 92.93% | -0.21% | 377,622 |  |
-| Others | 98.3% | 98.28% | +0.02% | 4,346 |  |
+| Credit Card | 92.74% | 92.93% | -0.21% | 377,623 |  |
+| Others | 98.32% | 98.28% | +0.04% | 4,345 |  |
 | Paypal | 95.71% | 95.59% | +0.13% | 62,665 |  |
-| Apple Pay | 86.46% | 86.28% | +0.22% | 68,739 |  |
+| Apple Pay | 86.46% | 86.27% | +0.22% | 68,739 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Unknown | 89.84% | 91.46% | -1.78% | 669 |  |
-| Braintree | 92.72% | 92.82% | -0.10% | 383,333 |  |
+| Unknown | 89.97% | 91.46% | -1.63% | 668 |  |
+| Braintree | 92.72% | 92.82% | -0.11% | 383,334 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 3,642 |  |
-| Adyen | 93.26% | 93.12% | +0.15% | 24,945 |  |
 | ProcessOut | 90.24% | 90.07% | +0.19% | 100,783 |  |
+| Adyen | 93.25% | 93.06% | +0.21% | 24,945 |  |
 
 ---
 
@@ -88,10 +88,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 91.06% | 91.29% | -0.26% | 513,372 | 497,775 |  |
-| 2_PreDunningAR | 92.31% | 92.42% | -0.12% | 513,372 | 497,775 |  |
-| 3_PostDunningAR | 93.31% | 93.5% | -0.20% | 513,372 | 497,775 |  |
-| 6_PaymentApprovalRate | 94.13% | 94.1% | +0.04% | 513,372 | 497,775 |  |
+| 1_FirstRunAR | 91.06% | 91.29% | -0.26% | 513,372 | 497,776 |  |
+| 2_PreDunningAR | 92.31% | 92.42% | -0.12% | 513,372 | 497,776 |  |
+| 3_PostDunningAR | 93.32% | 93.51% | -0.20% | 513,372 | 497,776 |  |
+| 6_PaymentApprovalRate | 94.13% | 94.1% | +0.03% | 513,372 | 497,776 |  |
 
 ---
 
@@ -100,7 +100,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
+| US | High (>92%) | 492,812 | 511,272 | +3.7% | Stable |
 | CA | High (>92%) | 103,253 | 104,640 | +1.3% | Stable |
 
 ---

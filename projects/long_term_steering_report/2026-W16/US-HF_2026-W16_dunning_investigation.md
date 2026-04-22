@@ -8,25 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Dunning Ship Rate improved by +0.89pp (46.72% → 47.61%) week-over-week during the transition from Pre-Payday to Payday phase, with volume increasing 11.6% to 14,086 eligible orders.
+## Executive Summary
+
+**Overall:** Dunning Ship Rate improved by +0.89pp (46.72% → 47.61%) in US-HF during 2026-W16, coinciding with the transition from Pre-Payday to Payday phase and a volume increase of 11.6% (12,619 → 14,086 eligible orders).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Pre-Dunning AR | 93.09% → 92.97% | -0.1% | ⚠️ |
-| Discount % | 13.95% → 14.87% | +6.6% | ⚠️ |
-| PC2 | 52.07% → 52.23% | +0.3% | ✅ |
-| Ship Rate | 46.72% → 47.61% | +1.9% | ✅ |
+| Pre-Dunning AR | 93.09% → 92.97% | -0.1% | ✅ Stable |
+| Discount % | 13.95% → 14.87% | +6.6% | ⚠️ Increased |
+| PC2 | 52.07% → 52.23% | +0.3% | ✅ Stable |
+| Ship Rate | 46.72% → 47.61% | +1.9% | ✅ Improved |
 
 **Key Findings:**
-- Ship Rate improved +1.9% in US despite Pre-Dunning AR declining slightly (-0.1%), indicating strong downstream conversion performance
-- Discount % increased significantly (+6.6%), which typically has a negative relationship with Ship Rate, yet Ship Rate still improved—suggesting Payday timing effects outweighed discount pressure
-- PC2 showed marginal improvement (+0.3%), contributing positively to the Ship Rate gain
-- Volume increased 11.6% (12,619 → 14,086 orders), consistent with Payday phase influx
-- The Payday phase transition appears to be the primary driver of improved conversion, overcoming headwinds from higher discounting
+- Ship Rate improvement of +0.89pp is primarily driven by the Payday phase timing, which typically correlates with increased customer liquidity and payment completion
+- Discount % increased significantly by +6.6% (13.95% → 14.87%), which typically has a negative relationship with Ship Rate, yet Ship Rate still improved—suggesting Payday effect outweighed discount pressure
+- Pre-Dunning AR remained stable (-0.1%), indicating upstream acceptance quality was consistent
+- PC2 remained essentially flat (+0.3%), showing no meaningful shift in payment collection at step 2
+- Volume increased by 11.6% with no signs of Simpson's Paradox affecting the rate improvement
 
-**Action:** Monitor — Ship Rate improvement aligns with expected Payday phase behavior. Continue tracking to confirm sustained performance and watch Discount % trend, as the +6.6% increase may compress margins if it persists post-Payday.
+**Action:** Monitor — The improvement aligns with expected Payday phase behavior. Continue tracking to confirm the discount increase does not erode gains in subsequent weeks.
 
 ---
 
@@ -50,7 +52,7 @@
 | 2026-W15 | Pre-Payday | 12,619 | 46.72% | - | 93.09% | - | 13.95% | - | 52.07% | - |
 | 2026-W16 | Payday | 14,086 | 47.61% | →+1.9% | 92.97% | →-0.1% | 14.87% | ↑+6.6% | 52.23% | →+0.3% |
 
-**Analysis:** The +0.89pp improvement in Dunning Ship Rate for US-HF in 2026-W16 is primarily attributable to the Payday phase transition, which drove increased customer payment capacity despite a +6.6% rise in Discount % that would typically suppress conversion. The slight decline in Pre-Dunning AR (-0.1%) had minimal impact, and the overall performance suggests healthy dunning operations that should be monitored for consistency as the payday cycle progresses.
+**Analysis:** The +0.89pp improvement in Dunning Ship Rate for US-HF is consistent with the natural Payday cycle effect, as customer payment capacity typically increases during this phase. While the +6.6% increase in Discount % warrants monitoring (given its normally negative relationship with Ship Rate), the Payday timing appears to have been the dominant driver of improved performance this week.
 
 
 ---

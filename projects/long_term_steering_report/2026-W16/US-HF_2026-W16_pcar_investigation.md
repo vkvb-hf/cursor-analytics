@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined by -0.29pp (93.02% → 92.75%) in US-HF during 2026-W16, with the change flagged as not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined modestly from 93.02% to 92.75% (-0.29pp) in US-HF during 2026-W16, with the change flagged as not statistically significant.
 
 **Funnel Analysis:**
 
@@ -18,18 +18,18 @@
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | -0.29pp | ✅ |
 | L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.29pp | ✅ |
-| L1: PaymentMethod | No payment methods flagged | Max -2.34pp (Others) | ✅ |
+| L1: PaymentMethod | No methods exceeding threshold; "Others" at -2.34% (low volume) | Mixed | ✅ |
 | L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | Volume shift stable (+2.7%) | Stable | ✅ |
+| Mix Shift | US High-AR tier volume stable (+2.7%) | Stable | ✅ |
 
 **Key Findings:**
-- The -0.29pp decline is within normal weekly fluctuation observed over the 8-week period (range: 92.57% to 94.58%)
-- Volume increased by +2.7% (17,669 → 18,142 orders), indicating healthy checkout activity despite the minor rate decline
-- "Others" payment method showed the largest decline (-2.34pp), but represents minimal volume (54 orders)
-- Credit Card, the highest volume payment method (10,008 orders), declined modestly by -0.51pp
-- Apple Pay showed slight improvement (+0.29pp) with significant volume (6,597 orders)
+- The -0.29pp decline is within normal weekly fluctuation observed over the 8-week period (range: 92.57% - 94.58%)
+- Volume increased by 2.7% (17,669 → 18,142 orders), indicating healthy order flow despite the minor rate dip
+- "Others" payment method showed the largest decline (-2.34pp) but represents only 54 orders (0.3% of volume)
+- Credit Card, the highest volume method (10,008 orders), declined -0.51pp while Apple Pay improved +0.29pp
+- No systemic issues identified across any dimension; all major segments performing within expected ranges
 
-**Action:** Monitor — No investigation required. The decline is not statistically significant and falls within normal operational variance. Continue standard weekly monitoring.
+**Action:** **Monitor** – No immediate action required. The decline is not statistically significant and falls within historical variance. Continue standard weekly monitoring.
 
 ---
 

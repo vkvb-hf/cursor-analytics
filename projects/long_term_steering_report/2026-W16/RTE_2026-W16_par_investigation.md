@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate declined marginally from 94.87% to 94.81% (-0.06pp) on 429,385 orders in W16, a statistically non-significant change within normal operational variance.
+**Overall:** Payment Approval Rate experienced a minor decline of -0.06pp (94.87% → 94.81%) on volume of 429,385 orders in W16, which is not statistically significant and falls within normal operational variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Base conversion | -0.28pp | ⚠️ |
+| 1_FirstRunAR | First attempt success | -0.28pp | ⚠️ |
 | 2_PreDunningAR | Pre-dunning recovery | -0.20pp | ⚠️ |
 | 3_PostDunningAR | Post-dunning recovery | -0.20pp | ⚠️ |
 | 6_PaymentApprovalRate | Final approval | -0.06pp | ✅ |
 
 **Key Findings:**
-- The -0.06pp decline is well within the 8-week volatility range (93.26% to 95.18%), indicating normal fluctuation
-- PaymentProvider "Unknown" shows a significant -12.90pp decline (71.54% → 62.31%), but with only 130 orders, impact on overall rate is negligible (<0.01pp)
-- TK experienced the largest country-level decline at -1.30pp (96.15% → 94.90%), but no country exceeded the ±2.5% investigation threshold
-- All high-volume segments (FJ at 395,303 orders, Credit Card at 313,971 orders, Braintree at 275,655 orders) showed minimal movement (<0.15pp)
-- Dunning recovery efforts reduced the gap: FirstRunAR dropped -0.28pp while final PAR only dropped -0.06pp, indicating effective recovery mechanisms
+- The -0.06pp PAR decline is well within normal fluctuation; 8-week trend shows rates ranging from 93.26% to 95.18%, with W16 performing near the upper range
+- No countries exceeded the ±2.5% threshold; TK showed the largest decline at -1.30pp but on minimal volume (2,079 orders)
+- PaymentProvider "Unknown" flagged with -12.90pp decline, but represents negligible volume (130 orders) and has no material impact
+- Upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) all showed slight declines of -0.20pp to -0.28pp, indicating the small PAR drop originated at first payment attempt
+- Mix shift analysis shows stable volume distribution across all countries with no concerning tier migrations
 
-**Action:** Monitor — No investigation required. The change is not statistically significant, no dimension exceeded alert thresholds, and the metric remains stable within historical norms.
+**Action:** Monitor — No investigation required. The decline is not statistically significant, no dimensional thresholds were breached at meaningful volume, and the metric remains within normal 8-week operating range.
 
 ---
 
@@ -95,7 +95,7 @@
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 91.0% | 91.25% | -0.28% | 429,385 | 421,406 |  |
 | 2_PreDunningAR | 92.65% | 92.83% | -0.20% | 429,385 | 421,406 |  |
-| 3_PostDunningAR | 94.14% | 94.33% | -0.20% | 429,385 | 421,406 |  |
+| 3_PostDunningAR | 94.16% | 94.35% | -0.20% | 429,385 | 421,406 |  |
 | 6_PaymentApprovalRate | 94.81% | 94.87% | -0.06% | 429,385 | 421,406 |  |
 
 ---

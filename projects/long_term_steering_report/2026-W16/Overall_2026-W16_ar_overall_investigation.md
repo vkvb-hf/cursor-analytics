@@ -1,22 +1,22 @@
 # Acceptance Rate (Overall) - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-22 11:56  
+**Generated:** 2026-04-22 14:41  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Overall) remained stable across all clusters in 2026-W16, with changes ranging from -0.19pp to +0.07pp, none of which were statistically significant. All clusters are performing within normal weekly variance with no material concerns or actionable findings requiring escalation.
+Acceptance Rate (Overall) remained stable across all clusters in 2026-W16, with minor non-significant declines ranging from -0.09pp to -0.19pp except for HF-INTL which improved marginally by +0.08pp. No clusters exhibited statistically significant changes or breached alert thresholds, with all flagged anomalies occurring in low-volume dimensions (Unknown PaymentProvider) having minimal impact on overall performance.
 
 ### Cluster Highlights
 
-- **US-HF:** Declined by -0.13pp to 92.1% with no significant drivers; PaymentProvider "Unknown" showed a -10.77pp drop but on minimal volume (226 orders).
-- **HF-INTL:** Improved marginally by +0.07pp to 94.81%; NO showed the largest country decline at -2.03pp but remained below investigation threshold.
-- **WL:** Declined by -0.08pp to 90.03%, continuing a positive 8-week trend (+1.84pp since W09) with no dimensional concerns.
-- **HF-NA:** Declined by -0.12pp to 92.31% with Credit Card showing the largest segment decline (-0.21pp) across 377,622 orders.
-- **RTE:** Declined by -0.19pp to 92.65%; FJ (92% of volume) remained stable and no countries exceeded the ±2.5% threshold.
+- **US-HF:** Declined by -0.13pp to 92.1% (not significant), with First Run AR showing the largest funnel pressure at -0.31pp while all major payment methods remained within tolerance.
+- **HF-INTL:** Improved marginally by +0.08pp to 94.82% across 804,152 orders, with NO showing the largest country decline at -2.03pp but remaining below the ±2.5% threshold.
+- **WL:** Declined by -0.09pp to 90.02% (not significant), continuing an overall positive 8-week trend from 88.19% with stable performance across all dimensions.
+- **HF-NA:** Declined by -0.12pp to 92.31% (not significant), driven primarily by Credit Card payment method at -0.21pp while US and CA remained stable with offsetting movements.
+- **RTE:** Declined by -0.19pp to 92.65% (not significant), with all major payment providers showing minimal movement and no countries exceeding alert thresholds.
 
 ---
 

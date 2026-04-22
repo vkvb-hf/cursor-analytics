@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved significantly from 96.12% to 97.13% (+1.01 pp) in 2026-W16, reaching the highest level in the 8-week observation period with 37,314 orders processed.
+**Overall:** Payment Checkout Approval Rate for HF-INTL improved significantly from 96.12% to 97.13% (+1.01 pp) in 2026-W16, recovering toward the 97%+ levels seen in W10-W11 after a dip in W13.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate at 8-week high, recovering from W13 dip | +1.01 pp | ✅ |
-| L1: Country Breakdown | 2 countries flagged (BE, DE) with >±2.5% change | BE +3.72 pp, DE +4.35 pp | ⚠️ |
-| L1: PaymentMethod | "Others" method flagged with significant improvement | +7.20 pp | ⚠️ |
-| L2: BE Deep-Dive | BcmcMobile via Adyen declining | -6.61 pp | ⚠️ |
-| L2: DE Deep-Dive | Klarna via Adyen declining significantly | -10.81 pp | ⚠️ |
-| Mix Shift | AT showing volume drop (-22.3%), otherwise stable | Minor impact | ✅ |
+| L0: 8-Week Trend | Rate returning to historical highs | +1.01 pp | ✅ |
+| L1: Country Scan | 2 countries flagged (BE, DE) with >±2.5% change | BE +3.72%, DE +4.35% | ⚠️ |
+| L1: PaymentMethod | "Others" method flagged | +7.20% | ⚠️ |
+| L2: BE Deep-Dive | BcmcMobile via Adyen declining | -6.61% / -6.69% | ⚠️ |
+| L2: DE Deep-Dive | Klarna via Adyen declining | -10.81% / -9.23% | ⚠️ |
+| Mix Shift | AT volume dropped 22.3%; all tiers stable | Minor impact | ✅ |
 
 **Key Findings:**
-- DE contributed the largest positive impact with approval rate improving +4.35 pp (8,708 orders), despite Klarna via Adyen dropping -10.81 pp (volume decreased from 966 to 115 orders)
-- BE improved +3.72 pp overall, though BcmcMobile via Adyen declined -6.61 pp with volume dropping from 370 to 154 orders
-- The "Others" payment method showed strong improvement (+7.20 pp) across the portfolio, contributing to overall gains
-- Decline reasons remain stable across flagged countries with "Others" category dominating (>99% of declines)
-- AT experienced significant volume reduction (-22.3%) but maintained High AR tier status
+- The overall +1.01 pp improvement is driven by strong performance in DE (+4.35 pp) and BE (+3.72 pp), the two largest flagged markets
+- In BE, BcmcMobile payments via Adyen declined significantly (-6.61 pp) with volume dropping from 370 to 154 orders, but this low-performing segment's reduced share improved the country's overall rate
+- In DE, Klarna via Adyen saw a sharp rate decline (-10.81 pp) alongside an 88% volume reduction (966 → 115 orders), effectively removing a low-performing payment method from the mix
+- The Adyen provider shows consistent underperformance across both flagged countries, with rates of 71.43% (BE) and 48.72% (DE) compared to other providers at 96-98%
+- Decline reasons remain stable with no significant shifts, suggesting the rate improvement is driven by payment method mix changes rather than fewer declines
 
-**Action:** Monitor - The overall metric improvement is positive. Continue monitoring Klarna and BcmcMobile performance via Adyen in DE and BE respectively, as the volume shifts away from these underperforming payment method/provider combinations appear to be driving the improvement rather than underlying fixes.
+**Action:** **Monitor** - The overall metric improvement is positive, but investigate the root cause of Adyen's poor performance with BcmcMobile (BE) and Klarna (DE) to determine if this is intentional routing away from problematic combinations or an underlying provider issue requiring escalation.
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.44pp (from 27.99% to 27.55%) in HF-NA during 2026-W16, driven primarily by a significant drop in Fraud Service approval rates.
+**Overall:** Payment Conversion Rate declined by -0.44pp (27.99% → 27.55%) in HF-NA during 2026-W16, primarily driven by a significant drop in fraud service approval rates.
 
 **Funnel Analysis:**
 
@@ -23,13 +23,13 @@
 | Successful Checkout | Δ ≥ threshold? | +0.01pp | ✅ |
 
 **Key Findings:**
-- **Fraud Service approval rate dropped -0.88pp** (93.08% → 92.20%), representing the largest negative conversion change in the funnel and exceeding the threshold of +0.22pp
-- **US drove the overall decline** with PCR dropping -0.41pp, while CA showed slight improvement (+0.13pp); US Fraud Service approval fell -1.04pp
-- **Braintree_ApplePay success rate declined -1.75pp** (77.50% → 75.75%), the largest drop among high-volume payment methods
-- **Adyen_CreditCard showed dramatic improvement** (+80.06pp), recovering from a previous issue (2.95% → 83.01%), though volume remains low
-- **Fraud Service gap improved** (-0.67pp), with Adyen_CreditCard gap reducing from 262 to 65 cases, indicating resolution of a prior integration issue
+- **Fraud Service Approval** is the primary driver of the decline, dropping -0.88pp (93.08% → 92.20%) at cluster level and -1.04pp in US specifically
+- **Braintree_ApplePay** experienced a notable conversion rate decline of -1.75pp (77.50% → 75.75%), representing the largest negative shift among high-volume payment methods
+- **Adyen_CreditCard** showed dramatic improvement (+80.06pp), but this appears to be recovery from a previous issue rather than organic growth (2.95% → 83.01%)
+- **US** drove the overall decline with -0.41pp drop, while **CA** showed slight improvement (+0.13pp)
+- **Gap reduction** before Fraud Service improved significantly (-0.67pp), with Adyen_CreditCard gap decreasing from 262 to 65 transactions
 
-**Action:** Investigate — The Fraud Service approval rate decline in US (-1.04pp) requires immediate attention to identify if fraud rules were tightened or if there's an increase in suspicious transaction patterns.
+**Action:** Investigate - The -0.88pp decline in Fraud Service approval rate exceeds the threshold and warrants investigation into potential changes in fraud rules or patterns, particularly for US traffic.
 
 ---
 

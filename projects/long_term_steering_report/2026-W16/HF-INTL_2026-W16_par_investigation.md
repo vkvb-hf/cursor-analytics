@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL improved marginally from 97.27% to 97.4% (+0.13pp) in W16, a statistically non-significant change within normal operational variance.
+**Overall:** Payment Approval Rate for HF-INTL improved slightly from 97.27% to 97.4% (+0.13pp) in W16, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline conversion | -0.45pp | ⚠️ |
-| 2_PreDunningAR | Pre-dunning recovery | +0.07pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.10pp | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.14pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.44pp | ⚠️ |
+| 2_PreDunningAR | Recovery | +0.08pp | ✅ |
+| 3_PostDunningAR | Recovery | -0.11pp | ⚠️ |
+| 6_PaymentApprovalRate | Final | +0.14pp | ✅ |
 
 **Key Findings:**
-- No countries exceeded the ±2.5% threshold; NZ showed the largest decline at -0.41pp (93.75%) while AU improved by +0.50pp
-- Unknown PaymentProvider flagged with +3.14pp change, but volume is minimal (2,560 orders, <0.4% of total)
-- 8-week trend shows steady improvement from 96.22% (W09) to 97.4% (W16), representing +1.18pp cumulative gain
-- Volume increased 8.0% WoW (744,637 → 804,152) with high-AR countries DE (+11.3%), GB (+12.7%), and NO (+27.4%) driving growth
-- FirstRunAR declined -0.45pp but downstream funnel stages recovered, resulting in net positive PAR
+- PAR at 97.4% represents the highest rate in the 8-week trend, continuing an upward trajectory from 96.22% in W09
+- No countries exceeded the ±2.5% threshold; NZ showed the largest decline at -0.41pp (93.75%) while AU improved +0.50pp
+- Unknown PaymentProvider flagged with +3.17pp change, but represents minimal volume (2,560 orders, <0.5% of total)
+- FirstRunAR declined -0.44pp to 92.71%, suggesting initial payment attempts are slightly less successful despite overall PAR improvement
+- Mix shift analysis shows stable composition across all countries, with notable volume growth in NO (+27.4%), LU (+28.5%), and SE (+22.1%)
 
-**Action:** Monitor — No significant anomalies detected. Continue tracking Unknown provider performance and FirstRunAR trend.
+**Action:** Monitor — The change is not statistically significant and all dimensions remain within normal thresholds. Continue standard weekly tracking.
 
 ---
 
@@ -70,9 +70,9 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Paypal | 99.04% | 98.97% | +0.07% | 203,503 |  |
+| Paypal | 99.03% | 98.97% | +0.07% | 203,503 |  |
 | Others | 99.57% | 99.49% | +0.08% | 128,100 |  |
-| Credit Card | 96.81% | 96.64% | +0.19% | 363,793 |  |
+| Credit Card | 96.81% | 96.63% | +0.19% | 363,793 |  |
 | Apple Pay | 93.73% | 93.54% | +0.21% | 108,756 |  |
 
 ### PaymentProvider
@@ -82,8 +82,8 @@
 | No Payment | 100.0% | 100.0% | +0.00% | 5,371 |  |
 | Braintree | 97.46% | 97.39% | +0.07% | 306,655 |  |
 | Adyen | 98.53% | 98.42% | +0.11% | 256,718 |  |
-| ProcessOut | 96.09% | 95.87% | +0.23% | 232,848 |  |
-| Unknown | 89.73% | 86.99% | +3.14% | 2,560 | ⚠️ |
+| ProcessOut | 96.09% | 95.87% | +0.24% | 232,848 |  |
+| Unknown | 89.73% | 86.97% | +3.17% | 2,560 | ⚠️ |
 
 ---
 
@@ -92,9 +92,9 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 92.71% | 93.12% | -0.45% | 804,152 | 744,637 |  |
-| 2_PreDunningAR | 94.81% | 94.74% | +0.07% | 804,152 | 744,637 |  |
-| 3_PostDunningAR | 96.53% | 96.63% | -0.10% | 804,152 | 744,637 |  |
+| 1_FirstRunAR | 92.71% | 93.12% | -0.44% | 804,152 | 744,637 |  |
+| 2_PreDunningAR | 94.82% | 94.74% | +0.08% | 804,152 | 744,637 |  |
+| 3_PostDunningAR | 96.56% | 96.67% | -0.11% | 804,152 | 744,637 |  |
 | 6_PaymentApprovalRate | 97.4% | 97.27% | +0.14% | 804,152 | 744,637 |  |
 
 ---

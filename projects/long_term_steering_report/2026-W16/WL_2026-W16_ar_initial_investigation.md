@@ -8,29 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 91.05% to 91.28% (+0.23pp) in W16, a non-significant change within normal operating range.
+## Executive Summary
+
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved slightly from 91.05% to 91.28% (+0.23pp) in W16, a change that is not statistically significant, with volume increasing 12.4% to 13,021 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (89.22%-91.98%) | +0.25% | ✅ |
-| L1: Country Breakdown | 3 countries exceed ±2.5% threshold (CK, AO, GN) | Mixed | ⚠️ |
-| L1: Dimension Scan | No payment method or provider exceeds threshold | <2.5% | ✅ |
-| L2: CK Deep-Dive | Credit card via Adyen declined -5.46% | -4.02% | ⚠️ |
-| L2: AO Deep-Dive | Credit card via Adyen improved +8.20% | +2.64% | ✅ |
-| L2: GN Deep-Dive | Apple Pay via Braintree improved +7.28% | +4.04% | ✅ |
-| L3: Related Metrics | All funnel metrics stable and aligned | <1.5% | ✅ |
-| Mix Shift | No material volume shifts impacting AR | Stable | ✅ |
+| L0: 8-Week Trend | Rate within normal range (89.22%-91.98%) | +0.23pp | ✅ |
+| L1: Country Variance | 3 countries exceed ±2.5% threshold | CK -4.01%, AO +2.64%, GN +4.04% | ⚠️ |
+| L1: Dimension Scan | All payment methods/providers within tolerance | Max change -2.03% (Adyen) | ✅ |
+| L2: Country Deep-Dive | CK decline driven by credit_card/Adyen | -5.45% on 1,662 orders | ⚠️ |
+| L3: Related Metrics | All funnel metrics stable and improving | FirstRunAR +1.04%, PostDunningAR +0.24% | ✅ |
 
 **Key Findings:**
-- CK experienced a -4.02% AR decline driven by credit card payments via Adyen (-5.46%), with "Other reasons" decline codes increasing by +3.85pp
-- GN showed strong improvement (+4.04%) primarily from Apple Pay via Braintree (+7.28%) and reduced Insufficient Funds declines (-2.60pp)
-- AO improved +2.64% due to credit card/Adyen performance gains (+8.20%), with Insufficient Funds declining by -1.41pp
-- Volume increased +12.4% week-over-week (11,583 → 13,021 orders), with MR (+26.1%) and GN (+21.1%) showing largest growth
-- All related funnel metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) moved directionally consistent with PreDunningAR
+- CK experienced a significant -4.01% decline driven by credit_card via Adyen (-5.45%), with "Other reasons" declines increasing by +3.84pp
+- GN showed strong improvement (+4.04%) primarily from applepay via Braintree (+5.78%), with Insufficient Funds declining by -2.60pp
+- AO improved +2.64% due to credit_card/Adyen recovery (+8.20%), offsetting a -4.78% drop in applepay/ProcessOut
+- Volume growth was notable in MR (+26.1%), GN (+21.1%), and KN (+18.3%), all high/medium AR tier countries
+- The entire payment funnel shows consistent improvement: FirstRunAR (+1.04pp), PreDunningAR (+0.26pp), PostDunningAR (+0.24pp)
 
-**Action:** Monitor – The overall metric change is non-significant and within normal variance. Continue monitoring CK/Adyen performance for potential sustained degradation in subsequent weeks.
+**Action:** Monitor — The overall metric change is not significant and remains within historical norms. Continue monitoring CK's Adyen/credit_card performance for the "Other reasons" decline pattern; if the -4.01% trend persists for 2+ weeks, escalate for provider investigation.
 
 ---
 
@@ -41,9 +40,9 @@
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
 | 2026-W16 | 91.28% | 13,021 | +0.25% ← REPORTED CHANGE |
-| 2026-W15 | 91.05% | 11,583 | +1.37% |
-| 2026-W14 | 89.82% | 12,774 | +0.67% |
-| 2026-W13 | 89.22% | 12,902 | -1.40% |
+| 2026-W15 | 91.05% | 11,582 | +1.36% |
+| 2026-W14 | 89.83% | 12,773 | +0.68% |
+| 2026-W13 | 89.22% | 12,900 | -1.40% |
 | 2026-W12 | 90.49% | 13,905 | -1.62% |
 | 2026-W11 | 91.98% | 14,300 | +1.09% |
 | 2026-W10 | 90.99% | 14,879 | -0.32% |
@@ -55,7 +54,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CK | 85.01% | 88.57% | -4.02% | 2,301 | ⚠️ |
+| CK | 85.01% | 88.56% | -4.01% | 2,301 | ⚠️ |
 | KN | 96.20% | 97.18% | -1.01% | 2,393 |  |
 | MR | 94.95% | 93.06% | +2.03% | 2,437 |  |
 | AO | 82.28% | 80.17% | +2.64% | 683 | ⚠️ |
@@ -71,7 +70,7 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Credit Card | 88.41% | 89.58% | -1.31% | 6,652 |  |
+| Credit Card | 88.41% | 89.58% | -1.30% | 6,652 |  |
 | Paypal | 94.16% | 95.37% | -1.26% | 1,371 |  |
 | Apple Pay | 92.23% | 90.73% | +1.66% | 3,565 |  |
 | Others | 99.51% | 97.68% | +1.88% | 1,433 |  |
@@ -80,7 +79,7 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Adyen | 84.53% | 86.29% | -2.04% | 2,450 |  |
+| Adyen | 84.53% | 86.28% | -2.03% | 2,450 |  |
 | ProcessOut | 88.78% | 89.3% | -0.59% | 3,136 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 18 |  |
 | Braintree | 93.4% | 93.08% | +0.34% | 6,048 |  |
@@ -97,7 +96,7 @@
 | None | 50.00% | 0.00% | +0.00% | 4 | 0 |  |
 | None | 0.00% | 0.00% | +0.00% | 0 | 6 |  |
 | cashcredit | 0.00% | 100.00% | -100.00% | 0 | 3 | ⚠️ |
-| credit_card | 83.27% | 88.08% | -5.46% | 1,662 | 1,376 | ⚠️ |
+| credit_card | 83.27% | 88.07% | -5.45% | 1,662 | 1,375 | ⚠️ |
 | paypal | 86.42% | 88.43% | -2.27% | 243 | 216 |  |
 | applepay | 91.84% | 91.90% | -0.07% | 392 | 358 |  |
 
@@ -107,15 +106,15 @@
 |-------|--------|--------|----------|----------|----------|------|
 | Unknown | 50.00% | 0.00% | +0.00% | 4 | 6 |  |
 | No Payment | 0.00% | 100.00% | -100.00% | 0 | 3 | ⚠️ |
-| Adyen | 83.27% | 88.08% | -5.46% | 1,662 | 1,376 | ⚠️ |
+| Adyen | 83.27% | 88.07% | -5.45% | 1,662 | 1,375 | ⚠️ |
 | Braintree | 89.76% | 90.59% | -0.91% | 635 | 574 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| Other reasons | 139 | 43 | 6.04% | 2.19% | +3.85 |
-| 1. SUCCESSFULL | 1,956 | 1,735 | 85.01% | 88.57% | -3.56 |
+| Other reasons | 139 | 43 | 6.04% | 2.20% | +3.84 |
+| 1. SUCCESSFULL | 1,956 | 1,734 | 85.01% | 88.56% | -3.55 |
 | Unknown | 2 | 6 | 0.09% | 0.31% | -0.22 |
 | Insufficient Funds | 150 | 130 | 6.52% | 6.64% | -0.12 |
 | Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 54 | 45 | 2.35% | 2.30% | +0.05 |
@@ -199,10 +198,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 89.26% | 88.34% | +1.04% | 13,021 | 11,583 |  |
-| 2_PreDunningAR | 91.28% | 91.05% | +0.26% | 13,021 | 11,583 |  |
-| 3_PostDunningAR | 91.52% | 91.31% | +0.24% | 13,021 | 11,583 |  |
-| 6_PaymentApprovalRate | 91.7% | 91.46% | +0.26% | 13,021 | 11,583 |  |
+| 1_FirstRunAR | 89.26% | 88.34% | +1.04% | 13,021 | 11,582 |  |
+| 2_PreDunningAR | 91.28% | 91.05% | +0.26% | 13,021 | 11,582 |  |
+| 3_PostDunningAR | 91.52% | 91.31% | +0.24% | 13,021 | 11,582 |  |
+| 6_PaymentApprovalRate | 91.7% | 91.46% | +0.26% | 13,021 | 11,582 |  |
 
 ---
 
@@ -213,7 +212,7 @@
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
 | ER | Medium (>85%) | 2,048 | 2,079 | +1.5% | Stable |
 | KN | High (>92%) | 2,023 | 2,393 | +18.3% | Stable |
-| CK | Medium (>85%) | 1,959 | 2,301 | +17.5% | Stable |
+| CK | Medium (>85%) | 1,958 | 2,301 | +17.5% | Stable |
 | MR | High (>92%) | 1,932 | 2,437 | +26.1% | Stable |
 | CG | High (>92%) | 1,830 | 1,838 | +0.4% | Stable |
 | GN | Medium (>85%) | 1,065 | 1,290 | +21.1% | Stable |
@@ -228,7 +227,7 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| CK | ↓ -4.02% | cashcredit -100.0% | No Payment -100.0% | Other reasons +3.85pp | cashcredit + No + Other |
+| CK | ↓ -4.01% | cashcredit -100.0% | No Payment -100.0% | Other reasons +3.84pp | cashcredit + No + Other |
 | AO | ↑ +2.64% | credit_card +8.2% | Adyen +8.2% | Insufficient Funds -1.41pp | credit_card + Adyen + Insufficient |
 | GN | ↑ +4.04% | None -100.0% | Braintree +5.8% | Insufficient Funds -2.60pp | None + Braintree + Insufficient |
 

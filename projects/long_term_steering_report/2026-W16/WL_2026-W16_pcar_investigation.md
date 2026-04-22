@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate improved slightly from 97.37% to 97.59% (+0.22pp) in W16, a statistically non-significant change with 11,024 orders processed.
+**Overall:** Payment Checkout Approval Rate improved slightly from 97.37% to 97.59% (+0.23pp) in W16, a statistically non-significant change within normal operational variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Stable upward trend | +0.23% | ✅ |
-| L1: Country Scan | 1 country flagged (MR) | +2.78% | ⚠️ |
-| L1: Dimension Scan | No payment methods flagged | <±2.5% | ✅ |
-| L2: MR Deep-Dive | ApplePay + Braintree improvement | +7.14% / +5.88% | ⚠️ |
-| Mix Shift | All countries stable | No significant shifts | ✅ |
+| L0: 8-Week Trend | Stable upward trend | +0.23pp | ✅ |
+| L1: Country Scan | 1 country flagged (MR) | +2.78pp | ⚠️ |
+| L1: Dimension Scan | No payment methods flagged | <±2.5pp | ✅ |
+| L2: MR Deep-Dive | ApplePay + Braintree improvement | +7.14pp / +5.88pp | ⚠️ |
+| Mix Shift | All countries stable | No material shift | ✅ |
 
 **Key Findings:**
-- MR showed a +2.78pp improvement (95.59% → 98.25%), but with very low volume (57 orders), making this statistically unreliable
-- In MR, ApplePay approval rate improved significantly (+7.14pp) alongside Braintree provider (+5.88pp), though based on only 18 and 26 transactions respectively
-- CVV/CVC Mismatch appeared as a new decline reason in MR (1 case, +1.75pp), but absolute numbers are minimal
-- Overall volume declined 6% week-over-week (11,721 → 11,024), continuing a downward trend from W10 (16,267)
-- All major countries (KN, CK, ER, CG, GN, AO) remained stable with rates above 96%
+- MR showed a +2.78pp improvement (95.59% → 98.25%), driven by ApplePay recovery from 93.33% to 100.00% (+7.14pp)
+- Braintree provider in MR improved significantly from 94.44% to 100.00% (+5.88pp), indicating resolved processing issues
+- CVV/CVC Mismatch declines appeared in MR (1 case, +1.75pp), but overall decline volume decreased
+- Volume declined 6% week-over-week (11,721 → 11,024 orders), consistent with broader 8-week downward volume trend
+- All other countries (AO, ER, GN, CK) remained within normal variance (±0.62pp)
 
-**Action:** Monitor — The overall metric shows slight improvement within normal fluctuation. The MR flag is driven by extremely low volume (57 orders) and does not warrant investigation. Continue standard monitoring.
+**Action:** Monitor - The improvement is positive but not statistically significant. Continue tracking MR's ApplePay/Braintree performance to confirm the recovery is sustained.
 
 ---
 

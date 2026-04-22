@@ -1,22 +1,22 @@
 # Fraud Approval Rate - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-22 11:56  
+**Generated:** 2026-04-22 14:41  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Fraud Approval Rate remained stable globally in 2026-W16, with all clusters showing statistically insignificant changes ranging from -0.35% to +0.45%. The most significant concern is the systemic Referral channel degradation observed across multiple clusters, with duplicate rates increasing and PF Block rates showing high volatility, particularly in KN Referral (WL) which experienced a critical -16.91pp FAR decline.
+Fraud Approval Rate remained stable globally in 2026-W16, with all five clusters showing non-significant changes ranging from -0.35pp to +0.44pp. The most significant concern across clusters is a systemic Referral channel degradation, with elevated duplicate rates and divergent PF Block behavior driving opposing FAR movements in US (+10.12pp) and CA (-4.31pp) Referral segments.
 
 ### Cluster Highlights
 
-- **US-HF:** FAR improved slightly by +0.45pp to 89.68% (not significant), driven by a sharp -58.26% drop in PF Block Rate within the Referral channel which warrants monitoring.
-- **HF-INTL:** FAR declined marginally by -0.09pp to 92.06% (not significant), with systemic Referral channel degradation across all 10 deep-dive countries and duplicate rates rising to 33.28%.
-- **WL:** FAR declined by -0.35pp to 92.95% (not significant), but KN Referral requires immediate investigation due to a critical -16.91pp FAR drop with duplicate rates nearly doubling (+91.81%).
-- **HF-NA:** FAR improved slightly by +0.14pp to 89.82% (not significant), with divergent Referral channel trends as US Referral improved +10.21pp while CA Referral declined -4.17pp.
-- **RTE:** FAR declined by -0.27pp to 94.42% (not significant), with TT showing strong improvement (+4.47pp) while TO Referral declined -9.79pp due to a +72.88% surge in duplicate rates.
+- **US-HF:** FAR improved marginally by +0.44pp to 89.67% (not significant), driven by a sharp -58.29% reduction in PF Block rate within the Referral channel that warrants monitoring for potential fraud control degradation.
+- **HF-INTL:** FAR stable at 92.06% (-0.08pp), but Referral channel showed consistent FAR declines across all 10 analyzed countries, with LU (-26.96pp) and AT (-11.72pp) most impacted by elevated duplicate blocking.
+- **WL:** FAR declined marginally by -0.35pp to 92.95% (not significant), with KN Referral experiencing a sharp -16.91pp FAR drop driven by duplicate rate nearly doubling (+91.81%).
+- **HF-NA:** FAR stable at 89.82% (+0.12pp), masking divergent Referral channel trends between US (+10.12pp from reduced PF Block) and CA (-4.31pp from +42.70% PF Block spike).
+- **RTE:** FAR stable at 94.42% (-0.26pp), with TT improving +4.60pp while TO declined -3.54pp driven by Referral channel duplicate rate surging +72.88%.
 
 ---
 

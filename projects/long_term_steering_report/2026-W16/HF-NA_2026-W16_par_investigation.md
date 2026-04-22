@@ -8,9 +8,7 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Approval Rate for HF-NA remained essentially flat in 2026-W16, showing a marginal improvement of +0.03pp (94.1% → 94.13%) on 513,372 orders, which is not statistically significant.
+**Overall:** Payment Approval Rate for HF-NA remained stable in W16, showing a marginal increase of +0.03pp (94.10% → 94.13%) on volume of 513,372 orders, which is not statistically significant.
 
 **Funnel Analysis:**
 
@@ -19,16 +17,16 @@
 | 1_FirstRunAR | Baseline | -0.26pp | ⚠️ |
 | 2_PreDunningAR | Recovery | -0.12pp | ⚠️ |
 | 3_PostDunningAR | Recovery | -0.20pp | ⚠️ |
-| 6_PaymentApprovalRate | Final | +0.04pp | ✅ |
+| 6_PaymentApprovalRate | Final | +0.03pp | ✅ |
 
 **Key Findings:**
-- The 8-week trend shows consistent improvement from 93.36% (W09) to 94.13% (W16), representing a cumulative gain of +0.77pp over the period
-- US drove the slight improvement with +0.06pp on 511,272 orders, while CA declined -0.09pp on 104,640 orders
-- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed minor declines between -0.12pp and -0.26pp, yet final PAR still improved slightly
-- ProcessOut showed the strongest provider improvement at +0.49pp (92.36% → 92.81%) on 100,783 orders
-- Apple Pay improved +0.35pp (88.76% → 89.07%) but remains the lowest-performing payment method at 89.07%
+- The 8-week trend shows consistent improvement from 93.36% (W09) to 94.13% (W16), representing a cumulative gain of +0.77pp over 7 weeks
+- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) declined week-over-week, yet final PAR still improved slightly, suggesting effective downstream recovery mechanisms
+- No countries exceeded the ±2.5% threshold; US (+0.06pp) contributed positively while CA (-0.10pp) showed minor decline
+- Apple Pay showed the largest positive movement among payment methods (+0.35pp), though it remains the lowest-performing method at 89.07%
+- ProcessOut provider improved by +0.48pp (92.36% → 92.81%) on significant volume of 100,783 orders
 
-**Action:** Monitor — No significant changes detected; all dimensions within normal operating ranges. Continue tracking the positive 8-week trend and monitor upstream funnel metrics for potential future impact.
+**Action:** Monitor — No action required. The change is not significant and all metrics remain within normal operating ranges. Continue standard weekly monitoring.
 
 ---
 
@@ -39,7 +37,7 @@
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
 | 2026-W16 | 94.13% | 513,372 | +0.03% ← REPORTED CHANGE |
-| 2026-W15 | 94.1% | 497,775 | +0.12% |
+| 2026-W15 | 94.1% | 497,776 | +0.12% |
 | 2026-W14 | 93.99% | 507,189 | +0.03% |
 | 2026-W13 | 93.96% | 517,599 | +0.10% |
 | 2026-W12 | 93.87% | 526,516 | -0.04% |
@@ -53,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 95.76% | 95.85% | -0.09% | 104,640 |  |
+| CA | 95.75% | 95.84% | -0.10% | 104,640 |  |
 | US | 94.59% | 94.54% | +0.06% | 511,272 |  |
 
 **Countries exceeding ±2.5% threshold:** None
@@ -66,8 +64,8 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Credit Card | 94.61% | 94.64% | -0.04% | 377,622 |  |
-| Others | 98.6% | 98.53% | +0.07% | 4,346 |  |
+| Credit Card | 94.61% | 94.64% | -0.04% | 377,623 |  |
+| Others | 98.6% | 98.53% | +0.07% | 4,345 |  |
 | Paypal | 96.52% | 96.33% | +0.19% | 62,665 |  |
 | Apple Pay | 89.07% | 88.76% | +0.35% | 68,739 |  |
 
@@ -75,11 +73,11 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Unknown | 91.63% | 92.24% | -0.66% | 669 |  |
+| Unknown | 91.62% | 92.24% | -0.67% | 668 |  |
 | Adyen | 95.67% | 95.76% | -0.09% | 24,945 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 3,642 |  |
-| Braintree | 94.33% | 94.32% | +0.01% | 383,333 |  |
-| ProcessOut | 92.81% | 92.36% | +0.49% | 100,783 |  |
+| Braintree | 94.33% | 94.32% | +0.01% | 383,334 |  |
+| ProcessOut | 92.81% | 92.36% | +0.48% | 100,783 |  |
 
 ---
 
@@ -88,10 +86,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 91.06% | 91.29% | -0.26% | 513,372 | 497,775 |  |
-| 2_PreDunningAR | 92.31% | 92.42% | -0.12% | 513,372 | 497,775 |  |
-| 3_PostDunningAR | 93.31% | 93.5% | -0.20% | 513,372 | 497,775 |  |
-| 6_PaymentApprovalRate | 94.13% | 94.1% | +0.04% | 513,372 | 497,775 |  |
+| 1_FirstRunAR | 91.06% | 91.29% | -0.26% | 513,372 | 497,776 |  |
+| 2_PreDunningAR | 92.31% | 92.42% | -0.12% | 513,372 | 497,776 |  |
+| 3_PostDunningAR | 93.32% | 93.51% | -0.20% | 513,372 | 497,776 |  |
+| 6_PaymentApprovalRate | 94.13% | 94.1% | +0.03% | 513,372 | 497,776 |  |
 
 ---
 
@@ -100,7 +98,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
+| US | High (>92%) | 492,812 | 511,272 | +3.7% | Stable |
 | CA | High (>92%) | 103,253 | 104,640 | +1.3% | Stable |
 
 ---

@@ -8,27 +8,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 90.41% to 89.16% (-1.38%) in W16, with 18,508 orders processed, marking a significant drop after the prior week's improvement.
+**Overall:** Reactivation Rate declined from 90.41% to 89.16% (-1.38%) in W16, representing a significant drop across 18,508 orders that interrupts the positive trend observed over the prior 7 weeks.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate dropped after 5 consecutive weeks of improvement | -1.38% | ⚠️ |
-| L1: Country Breakdown | CF showed largest negative impact (-4.03%), YE/TT/TO showed positive swings | 4 countries flagged | ⚠️ |
-| L1: Dimension Scan | PaymentMethod "Others" +13.29% flagged; Credit Card and PayPal both declined ~1.5% | Minor shifts | ✅ |
-| L2: CF Deep-Dive | Credit Card declined -4.67%; "Expired, Invalid, Closed Card" +1.23pp | Root cause: Others | ⚠️ |
-| L2: YE Deep-Dive | Volume dropped -78.2%; Credit Card improved +8.64% | Low volume impact | ✅ |
-| Mix Shift | YE volume collapsed from 1,403 to 306 orders (-78.2%) | Significant shift | ⚠️ |
+| L0: 8-Week Trend | Rate dropped after 6 consecutive weeks of improvement | -1.25pp | ⚠️ |
+| L1: Country Breakdown | CF showed largest negative impact (-4.03%) | -3.68pp vs threshold | ⚠️ |
+| L1: Dimension Scan | PaymentMethod stable; Others +13.29% (low volume) | Minor | ✅ |
+| L2: CF Deep-Dive | Credit Card declined -4.67% (1,955 orders) | -4.67pp | ⚠️ |
+| Mix Shift | YE volume dropped -78.2% (1,403 → 306) | High-rate country loss | ⚠️ |
 
 **Key Findings:**
-- CF drove the overall decline with a -4.03% drop in reactivation rate, specifically within Credit Card payments (-4.67%), while volume increased +12.6%
-- CF saw increased decline reasons for "Expired, Invalid, Closed Card, No Account" (+1.23pp) and "Blocked, Restricted, Not Permitted" (+1.03pp)
-- YE experienced a dramatic volume collapse of -78.2% (1,403 → 306 orders), though its rate improved +6.68%
-- FJ, representing 85% of total volume (15,807 orders), declined -1.32%, contributing meaningfully to the overall drop
-- The 8-week trend shows this is the first decline after five consecutive weeks of improvement (from 84.48% in W09 to 90.41% in W15)
+- CF drove the overall decline with a -4.03% drop in reactivation rate, primarily due to Credit Card performance declining from 91.21% to 86.96% (-4.67pp) on 1,955 orders
+- Decline reasons in CF shifted toward "Expired, Invalid, Closed Card, No Account" (+1.23pp) and "Blocked, Restricted, Not Permitted" (+1.03pp)
+- YE experienced a massive -78.2% volume drop (1,403 → 306 orders), removing a high-performing country (95.42%) from the mix
+- The W16 decline reversed a 6-week upward trend where rates improved from 84.48% (W09) to 90.41% (W15)
+- Small markets TT and TO showed positive swings but with negligible volume impact (45 and 23 orders respectively)
 
-**Action:** Investigate — Focus on CF Credit Card payment processing issues, particularly the increase in card expiration/invalid card declines. Additionally, investigate the cause of YE's 78% volume drop to determine if this is a data issue or operational change.
+**Action:** Investigate - Focus on CF Credit Card decline reasons, particularly the increase in expired/invalid card errors and blocked transactions. Additionally, determine cause of YE volume collapse.
 
 ---
 
