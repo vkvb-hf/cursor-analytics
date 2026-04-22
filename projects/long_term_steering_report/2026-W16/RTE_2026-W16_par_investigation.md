@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate experienced a minor decline from 94.87% to 94.81% (-0.06 pp) in W16, which is not statistically significant and remains within normal operating range.
+**Overall:** Payment Approval Rate declined marginally from 94.87% to 94.81% (-0.06 pp) on 429,385 orders in 2026-W16, a change that is not statistically significant and falls within normal weekly variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | -0.28 pp | ✅ |
-| 2_PreDunningAR | Dunning Setup | -0.20 pp | ✅ |
-| 3_PostDunningAR | Dunning Recovery | -0.20 pp | ✅ |
-| 6_PaymentApprovalRate | Final Approval | -0.06 pp | ✅ |
+| 2_PreDunningAR | Recovery | -0.20 pp | ✅ |
+| 3_PostDunningAR | Dunning | -0.20 pp | ✅ |
+| 6_PaymentApprovalRate | Final | -0.06 pp | ✅ |
 
 **Key Findings:**
-- The -0.06 pp decline is well within normal week-over-week fluctuation; the 8-week trend shows the rate has improved significantly from 93.26% (W09) to 94.81% (W16)
-- TK showed the largest country-level decline at -1.76 pp (95.33% → 93.65%), but with only 2,079 orders, impact on overall rate is minimal
-- PaymentProvider "Unknown" flagged with -12.90 pp decline (71.54% → 62.31%), however volume is negligible at only 130 orders
-- All major payment methods remained stable: Credit Card (-0.15 pp), Paypal (+0.05 pp), Apple Pay (+0.31 pp)
-- No countries exceeded the ±2.5% threshold requiring deep-dive investigation; mix shift analysis shows stable volume distribution across all regions
+- All funnel stages show minor declines (-0.20 to -0.28 pp), with recovery mechanisms reducing the initial FirstRunAR gap from -0.28 pp to a final -0.06 pp impact
+- PaymentProvider "Unknown" shows a significant -12.90 pp decline (62.31% vs 71.54%), but volume is negligible at only 130 orders (0.03% of total)
+- TK experienced the largest country-level decline at -1.30 pp (94.90% vs 96.15%), though no country exceeded the ±2.5% threshold requiring deep-dive
+- Mix shift analysis shows stable volume distribution across all countries, with TZ showing the largest volume increase (+20.9%) but maintaining high AR tier performance
+- Current rate of 94.81% remains within the 8-week range (93.26% - 95.18%), indicating normal operational variance
 
-**Action:** Monitor — No immediate action required. The decline is not significant and all major dimensions are performing within expected ranges.
+**Action:** Monitor — The -0.06 pp decline is not significant, no countries breached thresholds, and the metric remains stable within historical ranges. Continue standard weekly monitoring.
 
 ---
 
@@ -53,12 +53,13 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| TK | 93.65% | 95.33% | -1.76% | 2,079 |  |
-| CF | 93.47% | 94.14% | -0.71% | 53,579 |  |
-| FJ | 93.79% | 93.97% | -0.19% | 395,303 |  |
-| TZ | 92.91% | 91.69% | +1.33% | 3,216 |  |
-| TV | 93.52% | 92.14% | +1.50% | 2,053 |  |
-| TO | 88.82% | 86.67% | +2.48% | 3,301 |  |
+| TK | 94.90% | 96.15% | -1.30% | 2,079 |  |
+| CF | 94.81% | 95.33% | -0.54% | 53,579 |  |
+| FJ | 95.60% | 95.65% | -0.05% | 395,303 |  |
+| YE | 93.23% | 93.01% | +0.24% | 43,089 |  |
+| TZ | 94.34% | 93.23% | +1.19% | 3,216 |  |
+| TO | 90.55% | 88.89% | +1.87% | 3,301 |  |
+| TV | 94.69% | 92.88% | +1.95% | 2,053 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -106,10 +107,10 @@
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
 | FJ | High (>92%) | 388,956 | 395,303 | +1.6% | Stable |
 | CF | High (>92%) | 51,881 | 53,579 | +3.3% | Stable |
-| YE | Medium (>85%) | 42,126 | 43,089 | +2.3% | Stable |
+| YE | High (>92%) | 42,126 | 43,089 | +2.3% | Stable |
 | TT | High (>92%) | 4,617 | 4,817 | +4.3% | Stable |
 | TO | Medium (>85%) | 3,204 | 3,301 | +3.0% | Stable |
-| TZ | Medium (>85%) | 2,660 | 3,216 | +20.9% | Stable |
+| TZ | High (>92%) | 2,660 | 3,216 | +20.9% | Stable |
 | TK | High (>92%) | 1,950 | 2,079 | +6.6% | Stable |
 | TV | High (>92%) | 1,895 | 2,053 | +8.3% | Stable |
 
@@ -124,4 +125,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

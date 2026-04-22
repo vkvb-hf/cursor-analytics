@@ -1,22 +1,22 @@
 # Payment Checkout Approval Rate - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-21 14:46  
+**Generated:** 2026-04-22 11:03  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Checkout Approval Rate remained broadly stable across clusters in 2026-W16, with changes ranging from -0.29% to +1.05% and most movements not statistically significant. The most notable development was HF-INTL's significant +1.01 pp improvement to 97.13%, recovering from a multi-week dip, while all other clusters showed minimal fluctuation within normal operating ranges.
+Payment Checkout Approval Rate remained broadly stable across clusters in 2026-W16, with most changes not statistically significant. The most notable finding was HF-INTL's significant +1.05% improvement to 97.13%, though underlying issues with Klarna in DE and BcmcMobile in BE via Adyen warrant continued monitoring.
 
 ### Cluster Highlights
 
-- **US-HF:** Declined marginally by -0.27 pp to 92.75% (not significant), with all payment methods and US market performance remaining within normal thresholds.
-- **HF-INTL:** Improved significantly by +1.01 pp to 97.13%, driven by recovery in the "Others" payment method (+7.20 pp) while NO warrants monitoring due to -2.03 pp rate decline alongside +27.4% volume growth.
-- **WL:** Stable with a non-significant +0.23 pp improvement to 97.59%, continuing a two-week positive trend with Apple Pay showing the strongest gain (+0.58 pp).
-- **HF-NA:** Declined marginally by -0.22 pp to 93.86% (not significant), with both US (-0.13 pp) and CA (+0.09 pp) well within normal thresholds.
-- **RTE:** Essentially flat at 97.2% (-0.02 pp, not significant), with all countries below the ±2.5% threshold and no material changes detected.
+- **US-HF:** Stable at 92.75% (-0.29%, not significant), with no payment methods or dimensions exceeding thresholds and volume up 2.7% WoW.
+- **HF-INTL:** Improved significantly to 97.13% (+1.05%), driven by DE (+4.35pp) and BE (+3.72pp), despite Klarna/Adyen degradation in DE (-10.81pp) and BcmcMobile/Adyen issues in BE (-6.61pp).
+- **WL:** Stable at 97.59% (+0.23%, not significant), with MR showing +2.78pp improvement on very low volume (57 orders) driven by ApplePay/Braintree recovery.
+- **HF-NA:** Stable at 93.86% (-0.23%, not significant), with US declining -0.29pp offset by CA improving +0.44pp; no dimensions exceeded thresholds.
+- **RTE:** Stable at 97.2% (-0.02%, not significant), with TT improving +7.93pp driven by IDeal/Adyen gains (+11.24pp) offsetting Klarna decline (-8.61pp).
 
 ---
 

@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate for HF-INTL improved marginally from 94.74% to 94.81% (+0.07pp) in 2026-W16, a statistically non-significant change across 804,152 orders.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL remained essentially stable in 2026-W16 at 94.81%, showing a minimal +0.07pp increase from 94.74% in W15, which is not statistically significant.
 
 **Funnel Analysis:**
 
@@ -18,17 +18,17 @@
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | -0.45pp | ⚠️ |
 | 2_PreDunningAR | Reported Metric | +0.07pp | ✅ |
-| 3_PostDunningAR | Downstream | -0.10pp | ✅ |
+| 3_PostDunningAR | Recovery | -0.10pp | ✅ |
 | 6_PaymentApprovalRate | Final Approval | +0.14pp | ✅ |
 
 **Key Findings:**
-- No countries exceeded the ±2.5% threshold; NO showed the largest decline at -2.03pp (89.15%) but remains within tolerance
-- Unknown PaymentProvider flagged with +4.32pp change, but represents minimal volume (2,560 orders / 0.3% of total)
-- SE and NO experienced significant volume growth (+22.1% and +27.4% respectively) without material rate degradation
-- 1_FirstRunAR declined by -0.45pp while pre-dunning recovery offset this, indicating dunning effectiveness remains stable
-- All major payment methods (Credit Card, PayPal, Apple Pay) showed stable performance within ±0.15pp
+- NO experienced the largest country-level decline at -2.03pp (91.00% → 89.15%), though volume increased +27.4% (24,045 orders) and remains below the ±2.5% investigation threshold
+- "Unknown" PaymentProvider showed a notable +4.32pp improvement (85.30% → 88.98%), but represents minimal volume (2,560 orders)
+- 1_FirstRunAR declined -0.45pp (93.12% → 92.71%), indicating slight upstream pressure that was recovered in subsequent dunning stages
+- SE showed strong volume growth (+22.1%) alongside rate improvement (+1.19pp to 96.32%)
+- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
 
-**Action:** Monitor — The +0.07pp change is not statistically significant and all dimensions remain within normal operating parameters. Continue standard weekly tracking.
+**Action:** Monitor – The +0.07pp change is not significant, no dimension breached investigation thresholds, and the overall rate remains stable within the 8-week trend range (93.13% - 94.90%).
 
 ---
 
@@ -53,10 +53,10 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| NO | 89.15% | 91.0% | -2.03% | 24,045 |  |
+| NO | 89.15% | 91.00% | -2.03% | 24,045 |  |
 | GB | 93.92% | 94.14% | -0.23% | 209,202 |  |
 | BE | 96.24% | 95.51% | +0.76% | 64,642 |  |
-| LU | 95.9% | 95.06% | +0.88% | 3,510 |  |
+| LU | 95.90% | 95.06% | +0.88% | 3,510 |  |
 | SE | 96.32% | 95.19% | +1.19% | 38,861 |  |
 
 **Countries exceeding ±2.5% threshold:** None
@@ -80,8 +80,8 @@
 |-------|--------|--------|----------|----------|------|
 | No Payment | 100.0% | 100.0% | +0.00% | 5,371 |  |
 | Braintree | 95.39% | 95.38% | +0.01% | 306,655 |  |
-| Adyen | 96.07% | 95.98% | +0.09% | 256,718 |  |
 | ProcessOut | 92.62% | 92.53% | +0.09% | 232,848 |  |
+| Adyen | 96.07% | 95.98% | +0.09% | 256,718 |  |
 | Unknown | 88.98% | 85.3% | +4.32% | 2,560 | ⚠️ |
 
 ---
@@ -129,4 +129,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

@@ -8,26 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** The HF-NA Fraud Approval Rate showed a marginal improvement from 89.70% to 89.82% (+0.14%), which is not statistically significant, with volume remaining stable at 27,399 customers.
+**Overall:** The Fraud Approval Rate (FAR) improved slightly from 89.70% to 89.82% (+0.12 pp), a change that is not statistically significant, with volume remaining stable at 27,399 customers.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Regional Trend | FAR within normal 8-week range (89.11%-91.58%) | +0.14% | ✅ |
-| L1: Country Breakdown | No country exceeds ±2.5% threshold | US +0.45%, CA -0.66% | ✅ |
-| L1: Channel Category | Referral channel exceeds threshold | +5.87% | ⚠️ |
-| L2: CA Deep-Dive | Referral channel decline with elevated PF Block | -4.17% FAR, +42.91% PF Block | ⚠️ |
-| L2: US Deep-Dive | Referral channel significant improvement | +10.21% FAR, -58.26% PF Block | ⚠️ |
+| L0: HF-NA Overall | FAR +0.14% WoW | +0.12 pp | ✅ |
+| L1: Country - US | FAR +0.45% | +0.40 pp | ✅ |
+| L1: Country - CA | FAR -0.66% | -0.60 pp | ✅ |
+| L1: Channel - Paid | FAR -1.10% | -1.06 pp | ✅ |
+| L1: Channel - Referral | FAR +5.87% | +3.72 pp | ⚠️ |
+| L2: US Referral | FAR +10.21% | +6.31 pp | ⚠️ |
+| L2: CA Referral | FAR -4.17% | -2.81 pp | ⚠️ |
 
 **Key Findings:**
-- Duplicate Rate increased across all segments, rising from 26.48% to 28.10% (+1.62pp) at the regional level, with US Paid channel showing +64.19% increase in Dup Block Rate
-- US Referral channel showed substantial FAR improvement (+10.21%) driven by a significant decrease in PF Block Rate (-58.26%, from 12.70% to 5.30%)
-- CA Referral channel moved in the opposite direction with FAR declining -4.17% and PF Block Rate spiking +42.91% (from 2.97% to 4.24%)
-- Paid channels in both countries showed slight FAR declines (US -1.57%, CA +0.42%) while Referral channels exhibited high volatility
-- Overall volume decreased slightly (-1.0%) from 27,685 to 27,399 customers
+- US Referral channel showed significant FAR improvement (+10.21%, from 61.76% to 68.07%), driven primarily by a -58.26% decrease in PF Block Rate (from 12.70% to 5.30%)
+- Duplicate Rate increased across all segments, with HF-NA overall rising from 26.48% to 28.10% (+6.12%), though this did not materially impact FAR
+- US Paid channel saw Dup Block Rate spike +64.19% (from 2.90% to 4.75%), contributing to a slight FAR decline of -1.57%
+- CA Referral channel experienced FAR decline (-4.17%) with PF Block Rate increasing +42.91% (from 2.97% to 4.24%)
+- Overall volume remained stable (-1.0% WoW) with US volume slightly up and CA volume down
 
-**Action:** Monitor – The overall metric change is not significant and falls within normal operating range. Continue monitoring the divergent Referral channel behavior between US and CA, particularly the elevated PF Block Rate in CA Referral and increased Duplicate Block Rates in US Paid channel.
+**Action:** Monitor - The overall change is not significant. Continue tracking the divergent Referral channel trends between US (improving) and CA (declining), particularly the PF Block Rate movements that appear to be the primary drivers.
 
 ---
 
@@ -83,7 +85,7 @@
 | Referral | 2026-W15 | 67.58% | - | 37.05% | - | 27.42% | - | 2.97% | - | 1,382 |  |
 | Referral | 2026-W16 | 64.77% | -4.17% | 37.72% | +1.81% | 29.46% | +7.42% | 4.24% | +42.91% | 1,368 | ⚠️ |
 
-**Analysis:** The W16 Fraud Approval Rate increase of +0.14% represents normal week-over-week fluctuation within the established 8-week range and requires no immediate action. The most notable patterns are the contrasting Referral channel performance between US (+10.21% FAR improvement) and CA (-4.17% FAR decline), along with rising Duplicate Rates across all segments. These channel-level dynamics should be monitored in subsequent weeks to determine if they represent emerging trends requiring intervention.
+**Analysis:** The W16 FAR performance remained stable with a minor, non-significant improvement of +0.14%. The most notable dynamic is the opposing Referral channel trends: US Referral improved substantially due to reduced PF blocking, while CA Referral declined due to increased PF blocking. No immediate action is required, but the elevated Duplicate Rates across all segments warrant continued monitoring to ensure they do not translate into future approval rate pressure.
 
 ---
 
@@ -104,4 +106,4 @@
 
 
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

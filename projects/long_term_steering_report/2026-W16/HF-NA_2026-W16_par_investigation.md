@@ -8,7 +8,9 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-NA remained essentially stable in 2026-W16, increasing marginally by +0.03pp to 94.13% on volume of 513,372 orders, a statistically non-significant change.
+## Executive Summary
+
+**Overall:** Payment Approval Rate for HF-NA showed minimal improvement from 94.1% to 94.13% (+0.03pp) in W16, continuing a steady 8-week upward trend from 93.36% in W09, with the change deemed not statistically significant.
 
 **Funnel Analysis:**
 
@@ -20,13 +22,13 @@
 | 6_PaymentApprovalRate | Final | +0.04pp | ✅ |
 
 **Key Findings:**
-- The +0.03pp increase in PAR continues an 8-week upward trend, with the rate climbing from 93.36% (W09) to 94.13% (W16), representing a cumulative +0.77pp improvement
-- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed slight declines (-0.12pp to -0.26pp), yet PAR still improved marginally, suggesting effective downstream recovery mechanisms
-- US showed a minor decline of -0.13pp while CA improved by +0.09pp; neither country exceeded the ±2.5% threshold requiring investigation
-- Apple Pay showed the strongest week-over-week improvement at +0.35pp (89.07%), though it remains the lowest-performing payment method
-- No payment methods or providers flagged anomalies; ProcessOut showed the largest provider improvement at +0.49pp
+- Upstream funnel metrics declined (FirstRunAR -0.26pp, PreDunningAR -0.12pp, PostDunningAR -0.20pp) while final PAR slightly improved, indicating effective downstream recovery mechanisms
+- US drove the positive movement (+0.06pp to 94.59%) while CA experienced a minor decline (-0.09pp to 95.76%)
+- Apple Pay showed the strongest improvement among payment methods (+0.35pp to 89.07%), though it remains the lowest-performing method
+- ProcessOut improved notably (+0.49pp to 92.81%) while Adyen declined slightly (-0.09pp to 95.67%)
+- No countries or dimensions exceeded the ±2.5% threshold requiring deep-dive investigation
 
-**Action:** Monitor — No significant changes detected and no thresholds exceeded. Continue standard weekly monitoring.
+**Action:** Monitor — The change is not significant and all metrics remain within normal operating ranges. Continue tracking upstream funnel softness in FirstRunAR and PostDunningAR.
 
 ---
 
@@ -51,8 +53,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
-| CA | 93.58% | 93.49% | +0.09% | 104,640 |  |
+| CA | 95.76% | 95.85% | -0.09% | 104,640 |  |
+| US | 94.59% | 94.54% | +0.06% | 511,272 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -112,4 +114,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

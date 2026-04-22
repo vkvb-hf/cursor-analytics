@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined slightly from 92.83% to 92.65% (-0.19pp) in 2026-W16, a change that is not statistically significant based on 429,385 orders.
+**Overall:** Pre-Dunning Acceptance Rate declined marginally from 92.83% to 92.65% (-0.19pp) in W16, a change that is not statistically significant given the volume of 429,385 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Base metric | -0.28pp | ⚠️ |
-| 2_PreDunningAR | Reported metric | -0.20pp | ⚠️ |
-| 3_PostDunningAR | Recovery stage | -0.20pp | ⚠️ |
-| 6_PaymentApprovalRate | Final approval | -0.06pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.28pp | ✅ |
+| 2_PreDunningAR | Reported Metric | -0.20pp | ✅ |
+| 3_PostDunningAR | Post-Dunning Recovery | -0.20pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | -0.06pp | ✅ |
 
 **Key Findings:**
 - The -0.19pp decline is within normal weekly fluctuation; the 8-week trend shows rates oscillating between 91.33% and 93.20%
-- No countries exceeded the ±2.5% threshold; TK showed the largest decline at -1.76pp but with low volume (2,079 orders)
-- PaymentProvider "Unknown" flagged with -13.48pp decline, but volume is negligible (130 orders) and does not materially impact overall rate
-- All major payment methods remained stable: Credit Card (-0.32pp), PayPal (-0.02pp), Apple Pay (+0.28pp)
-- Mix shift analysis shows stable volume distribution across all countries with no concerning patterns
+- No countries exceeded the ±2.5% threshold; TK showed the largest decline at -1.76pp but remains at 93.65% acceptance rate
+- PaymentProvider "Unknown" flagged with -13.48% change, but volume is negligible (130 orders, 0.03% of total)
+- All major payment methods showed minimal movement: Credit Card -0.32pp, PayPal -0.02pp, Apple Pay +0.28pp
+- Volume mix remains stable across all countries with no significant shifts impacting the overall rate
 
-**Action:** Monitor – No immediate action required. The decline is not significant and no dimensional breakdowns reveal concerning patterns requiring investigation.
+**Action:** Monitor – No action required. The decline is not significant, no dimensional breakdowns breach thresholds, and the flagged "Unknown" provider represents immaterial volume.
 
 ---
 
@@ -124,4 +124,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

@@ -2,36 +2,36 @@
 
 **Metric:** Payment Conversion Rate  
 **Period:** 2026-W15 → 2026-W16  
-**Observation:** 34.86% → 35.83% (+0.96pp)  
-**Volume:** 31,449 payment visits  
+**Observation:** 34.86% → 35.83% (+0.97pp)  
+**Volume:** 31,448 payment visits  
 **Threshold:** +0.48pp (0.5 × |Overall PCR Δ|)
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate improved from 34.86% to 35.83% (+0.96pp) in 2026-W16, exceeding the significance threshold of +0.48pp, while payment visits decreased by 10.0% (31,449 visits).
+**Overall:** Payment Conversion Rate improved from 34.86% to 35.83% (+0.97pp) in 2026-W16, exceeding the threshold of +0.48pp, while payment visit volume decreased by 10.0% (-3,504 visits).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ +0.48pp | +1.01pp | ✅ |
-| Click Submit Form | ≥ +0.48pp | +0.10pp | ⚠️ |
-| FE Validation Passed | ≥ +0.48pp | -0.23pp | ⚠️ |
-| Enter Fraud Service | ≥ +0.48pp | +0.44pp | ⚠️ |
-| Approved by Fraud Service | ≥ +0.48pp | -0.32pp | ⚠️ |
-| Call to PVS | ≥ +0.48pp | +0.10pp | ⚠️ |
-| Successful Checkout | ≥ +0.48pp | +0.45pp | ⚠️ |
+| Select Payment Method | >0.48pp? | +1.01pp | ⚠️ |
+| Click Submit Form | >0.48pp? | +0.10pp | ✅ |
+| FE Validation Passed | >0.48pp? | -0.23pp | ✅ |
+| Enter Fraud Service | >0.48pp? | +0.44pp | ✅ |
+| Approved by Fraud Service | >0.48pp? | -0.31pp | ✅ |
+| Call to PVS | >0.48pp? | +0.09pp | ✅ |
+| Successful Checkout | >0.48pp? | +0.45pp | ✅ |
 
 **Key Findings:**
-- The primary driver of PCR improvement is the Select Payment Method step (+1.01pp), indicating users are more successfully choosing payment options
-- CG showed strong improvement (+1.84pp) driven by Select Payment Method (+2.31pp), while GN improved by +2.21pp with the same key driver (+1.58pp)
-- MR experienced a decline (-1.51pp) with Select Payment Method dropping by -1.60pp, partially offsetting overall gains
-- Braintree_ApplePay conversion improved (+0.88pp to 92.00%) while ProcessOut_CreditCard declined (-1.25pp to 89.48%)
-- Backend data shows PVS Attempt rate improved significantly (+1.55pp to 82.21%), contributing to higher checkout success
+- Select Payment Method conversion improved by +1.01pp (45.61% → 46.63%), the largest positive driver of the overall PCR increase
+- GN showed the strongest improvement at +2.21pp (48.04% → 50.25%), driven by Select Payment Method (+1.58pp) and Successful Checkout (+0.89pp)
+- CG also improved significantly at +1.84pp (45.58% → 47.42%), with Select Payment Method conversion increasing by +2.31pp
+- MR declined by -1.52pp (23.35% → 21.83%), with Select Payment Method conversion dropping -1.60pp, partially offsetting overall gains
+- ProcessOut_CreditCard success rate declined by -1.25pp (90.74% → 89.48%), while Braintree_ApplePay improved by +0.88pp (91.13% → 92.00%)
 
-**Action:** Monitor - Continue tracking Select Payment Method performance across countries, particularly investigating the decline in MR and ProcessOut_CreditCard performance degradation.
+**Action:** Monitor - The positive PCR trend is driven by improved payment method selection in CG and GN; continue monitoring MR's declining performance and ProcessOut_CreditCard success rates for potential intervention.
 
 ---
 
@@ -43,15 +43,15 @@
 
 | Funnel Step | 2026-W15 | 2026-W16 | Δ Count | Δ % | 2026-W15 Conv | 2026-W16 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 34,952 | 31,449 | -3,503 | -10.0% | - | - | - |
-| Select Payment Method | 15,943 | 14,663 | -1,280 | -8.0% | 45.61% | 46.62% | +1.01pp |
+| Payment Visits | 34,952 | 31,448 | -3,504 | -10.0% | - | - | - |
+| Select Payment Method | 15,943 | 14,663 | -1,280 | -8.0% | 45.61% | 46.63% | +1.01pp |
 | Click Submit Form | 14,597 | 13,439 | -1,158 | -7.9% | 91.56% | 91.65% | +0.10pp |
 | FE Validation Passed | 13,905 | 12,771 | -1,134 | -8.2% | 95.26% | 95.03% | -0.23pp |
 | Enter Fraud Service | 13,399 | 12,362 | -1,037 | -7.7% | 96.36% | 96.80% | +0.44pp |
-| Approved by Fraud Service | 12,678 | 11,657 | -1,021 | -8.1% | 94.62% | 94.30% | -0.32pp |
-| Call to PVS | 12,522 | 11,525 | -997 | -8.0% | 98.77% | 98.87% | +0.10pp |
+| Approved by Fraud Service | 12,678 | 11,658 | -1,020 | -8.0% | 94.62% | 94.31% | -0.31pp |
+| Call to PVS | 12,522 | 11,525 | -997 | -8.0% | 98.77% | 98.86% | +0.09pp |
 | **Successful Checkout** | 12,186 | 11,268 | -918 | -7.5% | 97.32% | 97.77% | +0.45pp |
-| **PCR Rate** | | | | | 34.86% | 35.83% | **+0.96pp** |
+| **PCR Rate** | | | | | 34.86% | 35.83% | **+0.97pp** |
 
 ### Waterfall Backend
 
@@ -88,7 +88,7 @@
 
 | Country | Volume | PCR 2026-W15 | PCR 2026-W16 | Δ PCR | Contribution Rank | Change Rank |
 |---------|--------|-----------------|-----------------|-------|-------------------|-------------|
-| MR | 8,568 | 23.35% | 21.84% | -1.51pp | 1 | 3 |
+| MR | 8,569 | 23.35% | 21.83% | -1.52pp | 1 | 3 |
 | CG | 3,876 | 45.58% | 47.42% | +1.84pp | 2 | 2 |
 | GN | 2,422 | 48.04% | 50.25% | +2.21pp | 4 | 1 |
 
@@ -134,7 +134,7 @@
 
 | Funnel Step | 2026-W15 | 2026-W16 | Δ Count | Δ % | 2026-W15 Conv | 2026-W16 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 9,971 | 8,568 | -1,403 | -14.07pp | - | - | - |
+| Payment Visits | 9,971 | 8,569 | -1,402 | -14.06pp | - | - | - |
 | Select Payment Method | 2,927 | 2,378 | -549 | -18.76pp | 29.36% | 27.75% | -1.60pp |
 | Click Submit Form | 2,611 | 2,138 | -473 | -18.12pp | 89.20% | 89.91% | +0.70pp |
 | FE Validation Passed | 2,647 | 2,161 | -486 | -18.36pp | 101.38% | 101.08% | -0.30pp |
@@ -142,7 +142,7 @@
 | Approved by Fraud Service | 2,458 | 1,977 | -481 | -19.57pp | 97.69% | 96.82% | -0.88pp |
 | Call to PVS | 2,329 | 1,866 | -463 | -19.88pp | 94.75% | 94.39% | -0.37pp |
 | **Successful Checkout** | 2,328 | 1,871 | -457 | -19.63pp | 99.96% | 100.27% | +0.31pp |
-| **PCR Rate** | | | | | 23.35% | 21.84% | **-1.51pp** |
+| **PCR Rate** | | | | | 23.35% | 21.83% | **-1.51pp** |
 
 **Key Driver:** Select Payment Method (-1.60pp)
 
@@ -202,4 +202,4 @@
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

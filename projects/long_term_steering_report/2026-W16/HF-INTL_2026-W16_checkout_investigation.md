@@ -3,35 +3,35 @@
 **Metric:** Payment Conversion Rate  
 **Period:** 2026-W15 → 2026-W16  
 **Observation:** 37.75% → 37.09% (-0.66pp)  
-**Volume:** 76,254 payment visits  
+**Volume:** 76,258 payment visits  
 **Threshold:** +0.33pp (0.5 × |Overall PCR Δ|)
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined from 37.75% to 37.09% (-0.66pp) on 76,254 payment visits in HF-INTL during 2026-W16.
+**Overall:** Payment Conversion Rate declined from 37.75% to 37.09% (-0.66pp) on 76,258 payment visits in HF-INTL during 2026-W16.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Δ ≥ ±0.33pp | -1.27pp | ⚠️ |
-| Click Submit Form | Δ ≥ ±0.33pp | +0.12pp | ✅ |
-| FE Validation Passed | Δ ≥ ±0.33pp | -0.44pp | ⚠️ |
-| Enter Fraud Service | Δ ≥ ±0.33pp | -0.40pp | ⚠️ |
-| Approved by Fraud Service | Δ ≥ ±0.33pp | +0.04pp | ✅ |
-| Call to PVS | Δ ≥ ±0.33pp | -0.18pp | ✅ |
-| Successful Checkout | Δ ≥ ±0.33pp | +1.28pp | ✅ (positive) |
+| Select Payment Method | ≥-0.33pp | -1.27pp | ⚠️ |
+| Click Submit Form | ≥-0.33pp | +0.13pp | ✅ |
+| FE Validation Passed | ≥-0.33pp | -0.44pp | ⚠️ |
+| Enter Fraud Service | ≥-0.33pp | -0.40pp | ⚠️ |
+| Approved by Fraud Service | ≥-0.33pp | +0.05pp | ✅ |
+| Call to PVS | ≥-0.33pp | -0.19pp | ✅ |
+| Successful Checkout | ≥-0.33pp | +1.28pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary drop-off point** with -1.27pp conversion decline at cluster level, impacting GB (-1.80pp), FR (-1.55pp), and IE (-7.09pp) significantly
-- **IE experienced the largest country-level decline** at -5.14pp PCR, driven by a -7.09pp drop in payment method selection despite a 23.55% increase in payment visits
-- **Fraud Service entry gap widened** from 2.31% to 3.16% (+0.85pp), primarily due to Adyen_Sepa transactions (83.5% of gap) which show near-zero success rates (0.17%)
-- **ProcessOut_CreditCard and Braintree_ApplePay** both declined (-1.25pp and -1.22pp respectively), representing the two highest-volume payment methods
-- **PVS Success improved significantly** (+1.28pp) with total failures dropping from 1,143 to 809 (-334), partially offsetting upstream losses
+- **Select Payment Method is the primary driver** of the PCR decline with -1.27pp conversion drop at cluster level, affecting GB (-1.80pp), FR (-1.55pp), and IE (-7.09pp severely)
+- **Adyen_Sepa continues to bypass Fraud Service** with 1,197 checkout attempts skipping fraud checks (83.5% of all gap), explaining the Enter Fraud Service degradation (-0.40pp)
+- **ProcessOut_CreditCard and Braintree_ApplePay underperformed** with -1.26pp and -1.22pp rate declines respectively, impacting high-volume payment methods
+- **PVS performance improved significantly** (+1.28pp) with total failures dropping from 1,143 to 809 (-334 failures), partially offsetting upstream losses
+- **IE experienced severe degradation** (-5.14pp PCR) driven primarily by Select Payment Method drop (-7.09pp) despite 23.55% volume increase
 
-**Action:** Investigate - Focus on the Select Payment Method drop-off across GB, FR, and IE; review Adyen_Sepa integration issues causing checkout attempts to skip fraud service
+**Action:** Investigate - Focus on Select Payment Method drop across GB, FR, and IE; review Adyen_Sepa fraud service bypass configuration; analyze user behavior changes causing payment method selection abandonment.
 
 ---
 
@@ -43,34 +43,34 @@
 
 | Funnel Step | 2026-W15 | 2026-W16 | Δ Count | Δ % | 2026-W15 Conv | 2026-W16 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Visits | 69,804 | 76,254 | 6,450 | 9.2% | - | - | - |
-| Select Payment Method | 40,026 | 42,758 | 2,732 | 6.8% | 57.34% | 56.07% | -1.27pp |
-| Click Submit Form | 32,523 | 34,796 | 2,273 | 7.0% | 81.25% | 81.38% | +0.12pp |
-| FE Validation Passed | 30,521 | 32,501 | 1,980 | 6.5% | 93.84% | 93.40% | -0.44pp |
-| Enter Fraud Service | 29,497 | 31,280 | 1,783 | 6.0% | 96.64% | 96.24% | -0.40pp |
-| Approved by Fraud Service | 27,775 | 29,466 | 1,691 | 6.1% | 94.16% | 94.20% | +0.04pp |
-| Call to PVS | 27,746 | 29,383 | 1,637 | 5.9% | 99.90% | 99.72% | -0.18pp |
-| **Successful Checkout** | 26,353 | 28,284 | 1,931 | 7.3% | 94.98% | 96.26% | +1.28pp |
+| Payment Visits | 69,804 | 76,258 | 6,454 | 9.2% | - | - | - |
+| Select Payment Method | 40,026 | 42,759 | 2,733 | 6.8% | 57.34% | 56.07% | -1.27pp |
+| Click Submit Form | 32,523 | 34,798 | 2,275 | 7.0% | 81.25% | 81.38% | +0.13pp |
+| FE Validation Passed | 30,521 | 32,502 | 1,981 | 6.5% | 93.84% | 93.40% | -0.44pp |
+| Enter Fraud Service | 29,497 | 31,281 | 1,784 | 6.0% | 96.64% | 96.24% | -0.40pp |
+| Approved by Fraud Service | 27,779 | 29,475 | 1,696 | 6.1% | 94.18% | 94.23% | +0.05pp |
+| Call to PVS | 27,746 | 29,384 | 1,638 | 5.9% | 99.88% | 99.69% | -0.19pp |
+| **Successful Checkout** | 26,353 | 28,286 | 1,933 | 7.3% | 94.98% | 96.26% | +1.28pp |
 | **PCR Rate** | | | | | 37.75% | 37.09% | **-0.66pp** |
 
 ### Waterfall Backend
 
 | Funnel Step | 2026-W15 | 2026-W16 | Δ Count | Δ % | 2026-W15 Conv | 2026-W16 Conv | Δ Conv |
 | ----------- | ----------- | --------------- | ------- | --- | ---------------- | -------------------- | ------ |
-| Payment Method Listed | 90,874 | 96,799 | 5,925 | 6.5% | - | - | - |
+| Payment Method Listed | 90,874 | 96,797 | 5,923 | 6.5% | - | - | - |
 | Checkout Attempt | 43,442 | 45,804 | 2,362 | 5.4% | 47.80% | 47.32% | -0.49pp |
 | Enter Fraud Service | 42,437 | 44,356 | 1,919 | 4.5% | 97.69% | 96.84% | -0.85pp |
 | Approved by Fraud Service | 39,153 | 40,911 | 1,758 | 4.5% | 92.26% | 92.23% | -0.03pp |
 | PVS Attempt | 36,514 | 37,314 | 800 | 2.2% | 93.26% | 91.21% | -2.05pp |
 | PVS Success | 35,098 | 36,244 | 1,146 | 3.3% | 96.12% | 97.13% | +1.01pp |
-| **Successful Checkout** | 37,822 | 39,287 | 1,465 | 3.9% | 107.76% | 108.40% | +0.63pp |
-| **PCR Rate** | | | | | 41.62% | 40.59% | **-1.03pp** |
+| **Successful Checkout** | 37,822 | 39,285 | 1,463 | 3.9% | 107.76% | 108.39% | +0.63pp |
+| **PCR Rate** | | | | | 41.62% | 40.58% | **-1.04pp** |
 
 ### Payment Method Breakdown
 
 | Payment Method | 2026-W15 Attempt | 2026-W15 Success | 2026-W15 Rate | 2026-W16 Attempt | 2026-W16 Success | 2026-W16 Rate | Δ Rate |
 | -------------- | ------------------- | ------------------- | ---------------- | ----------------------- | ----------------------- | -------------------- | ------ |
-| ProcessOut_CreditCard | 16,221 | 14,429 | 88.95% | 16,099 | 14,119 | 87.70% | -1.25pp |
+| ProcessOut_CreditCard | 16,221 | 14,429 | 88.95% | 16,099 | 14,117 | 87.69% | -1.26pp |
 | Braintree_ApplePay | 12,470 | 10,644 | 85.36% | 13,355 | 11,236 | 84.13% | -1.22pp |
 | Braintree_Paypal | 8,604 | 7,884 | 91.63% | 9,604 | 8,794 | 91.57% | -0.07pp |
 | ProcessOut_ApplePay | 1,474 | 1,342 | 91.04% | 1,544 | 1,419 | 91.90% | +0.86pp |
@@ -107,8 +107,8 @@
 | Click Submit Form | 6,089 | 5,617 | -472 | -7.75pp | 79.96% | 79.75% | -0.21pp |
 | FE Validation Passed | 5,687 | 5,221 | -466 | -8.19pp | 93.40% | 92.95% | -0.45pp |
 | Enter Fraud Service | 5,491 | 5,024 | -467 | -8.50pp | 96.55% | 96.23% | -0.33pp |
-| Approved by Fraud Service | 4,993 | 4,500 | -493 | -9.87pp | 90.93% | 89.57% | -1.36pp |
-| Call to PVS | 5,007 | 4,506 | -501 | -10.01pp | 100.28% | 100.13% | -0.15pp |
+| Approved by Fraud Service | 4,995 | 4,502 | -493 | -9.87pp | 90.97% | 89.61% | -1.36pp |
+| Call to PVS | 5,007 | 4,506 | -501 | -10.01pp | 100.24% | 100.09% | -0.15pp |
 | **Successful Checkout** | 4,871 | 4,385 | -486 | -9.98pp | 97.28% | 97.31% | +0.03pp |
 | **PCR Rate** | | | | | 31.52% | 29.71% | **-1.80pp** |
 
@@ -209,10 +209,10 @@
 | Click Submit Form | 8,447 | 10,564 | +2,117 | +25.06pp | 81.99% | 82.43% | +0.44pp |
 | FE Validation Passed | 7,720 | 9,682 | +1,962 | +25.41pp | 91.39% | 91.65% | +0.26pp |
 | Enter Fraud Service | 7,537 | 9,435 | +1,898 | +25.18pp | 97.63% | 97.45% | -0.18pp |
-| Approved by Fraud Service | 7,176 | 8,985 | +1,809 | +25.21pp | 95.21% | 95.23% | +0.02pp |
-| Call to PVS | 7,176 | 8,940 | +1,764 | +24.58pp | 100.00% | 99.50% | -0.50pp |
-| **Successful Checkout** | 7,059 | 8,770 | +1,711 | +24.24pp | 98.37% | 98.10% | -0.27pp |
-| **PCR Rate** | | | | | 40.92% | 39.64% | **-1.29pp** |
+| Approved by Fraud Service | 7,176 | 8,990 | +1,814 | +25.28pp | 95.21% | 95.28% | +0.07pp |
+| Call to PVS | 7,176 | 8,940 | +1,764 | +24.58pp | 100.00% | 99.44% | -0.56pp |
+| **Successful Checkout** | 7,059 | 8,771 | +1,712 | +24.25pp | 98.37% | 98.11% | -0.26pp |
+| **PCR Rate** | | | | | 40.92% | 39.64% | **-1.28pp** |
 
 **Key Driver:** Select Payment Method (-1.80pp)
 
@@ -242,16 +242,16 @@
 
 | Metric | 2026-W15 | 2026-W16 | Δ |
 |--------|-------------|-----------------|---|
-| Customers with FE Error | 5,532 | 6,043 | 511 |
+| Customers with FE Error | 5,532 | 6,044 | 512 |
 | Error → Passed | 3,238 | 3,478 | 240 |
-| **Recovery Rate** | **58.53%** | **57.55%** | **-0.98pp** |
+| **Recovery Rate** | **58.53%** | **57.54%** | **-0.99pp** |
 
 ### Error Type Distribution
 
 | Error Type | 2026-W15 | 2026-W15 % | 2026-W16 | 2026-W16 % | Δ % |
 | ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
-| APPLEPAY_DISMISSED | 4,220 | 76.3% | 4,548 | 75.3% | -1.02pp |
-| PAYPAL_POPUP_CLOSED | 1,089 | 19.7% | 1,267 | 21.0% | +1.28pp |
+| APPLEPAY_DISMISSED | 4,220 | 76.3% | 4,548 | 75.2% | -1.04pp |
+| PAYPAL_POPUP_CLOSED | 1,089 | 19.7% | 1,268 | 21.0% | +1.29pp |
 | APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 267 | 4.8% | 305 | 5.0% | +0.22pp |
 | APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 134 | 2.4% | 150 | 2.5% | +0.06pp |
 | PAYPAL_TOKENISE_ERR | 127 | 2.3% | 126 | 2.1% | -0.21pp |
@@ -314,4 +314,4 @@
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

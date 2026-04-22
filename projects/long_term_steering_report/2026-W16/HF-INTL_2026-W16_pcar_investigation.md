@@ -10,25 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate for HF-INTL improved significantly from 96.12% to 97.13% (+1.01 pp) in 2026-W16, recovering toward the 97.31% level observed in W10.
+**Overall:** Payment Checkout Approval Rate for HF-INTL improved significantly from 96.12% to 97.13% (+1.01 pp) in 2026-W16, recovering toward the 97.31% level seen in W10 after a dip in W13.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate increased after W13-W15 dip | +1.05% | ✅ |
-| L1: Country Breakdown | No countries exceeded ±2.5% threshold | Mixed | ✅ |
-| L1: PaymentMethod | "Others" method shows +7.20% improvement | +7.20% | ⚠️ |
-| Mix Shift | All countries stable; SE (+22.1%) and NO (+27.4%) volume growth | Stable | ✅ |
+| L0: 8-Week Trend | Upward recovery after W13 dip | +1.05% WoW | ✅ |
+| L1: Country Breakdown | 2 countries flagged (BE, DE) | BE +3.72%, DE +4.35% | ⚠️ |
+| L1: Dimension Scan | PaymentMethod "Others" flagged | +7.20% | ⚠️ |
+| L2: BE Deep-Dive | BcmcMobile via Adyen declining | -6.61% / -6.69% | ⚠️ |
+| L2: DE Deep-Dive | Klarna via Adyen declining | -10.81% / -9.23% | ⚠️ |
+| Mix Shift | AT volume drop (-22.3%) | Minor impact | ⚠️ |
 
 **Key Findings:**
-- The +1.01 pp rate improvement represents a recovery from the W13 trough (95.21%), bringing performance closer to the 8-week high of 97.31% (W10)
-- "Others" payment method showed the largest improvement at +7.20 pp (76.47% → 81.98%), though volume remains low at 2,242 orders
-- NO experienced a -2.03 pp rate decline (91.0% → 89.15%) while simultaneously seeing +27.4% volume growth, which warrants monitoring
-- SE saw strong volume growth (+22.1%) with a +1.19 pp rate improvement (95.19% → 96.32%)
-- Core payment methods (Credit Card, Apple Pay, Paypal) remained stable with rates above 97.8%
+- The overall +1.01 pp improvement is driven by strong performance in DE (+4.35 pp) and BE (+3.72 pp), despite underlying payment method issues
+- In DE, Klarna approval rate dropped sharply from 53.62% to 47.83% (-10.81 pp), with volume declining from 966 to 115 orders—suggesting possible routing changes or Klarna issues via Adyen
+- In BE, BcmcMobile approval rate fell from 76.49% to 71.43% (-6.61 pp) with volume decreasing from 370 to 154 orders, linked to Adyen provider performance
+- Adyen is the common provider in both flagged countries showing degraded performance for specific local payment methods
+- AT experienced a -22.3% volume drop (699 → 543 orders) but maintains High AR tier, warranting monitoring
 
-**Action:** Monitor — The improvement is positive and no countries exceeded the ±2.5% threshold. Continue tracking NO performance given the rate decline combined with volume surge.
+**Action:** **Monitor** - The overall metric improved significantly and the flagged payment method issues (Klarna in DE, BcmcMobile in BE) appear to have reduced volume impact. Continue monitoring Adyen performance for local payment methods; escalate if Klarna or BcmcMobile volumes return to previous levels without rate recovery.
 
 ---
 
@@ -53,13 +55,13 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| NO | 89.15% | 91.0% | -2.03% | 24,045 |  |
-| GB | 93.92% | 94.14% | -0.23% | 209,202 |  |
-| BE | 96.24% | 95.51% | +0.76% | 64,642 |  |
-| LU | 95.9% | 95.06% | +0.88% | 3,510 |  |
-| SE | 96.32% | 95.19% | +1.19% | 38,861 |  |
+| LU | 97.62% | 100.00% | -2.38% | 84 |  |
+| SE | 89.81% | 91.93% | -2.30% | 1,296 |  |
+| AU | 98.46% | 97.60% | +0.89% | 2,930 |  |
+| BE | 93.64% | 90.29% | +3.72% | 1,070 | ⚠️ |
+| DE | 96.93% | 92.89% | +4.35% | 8,708 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** None
+**Countries exceeding ±2.5% threshold:** BE, DE
 
 ---
 
@@ -82,26 +84,100 @@
 
 ---
 
+## L2: BE Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Sepa | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| BcmcMobile | 71.43% | 76.49% | -6.61% | 154 | 370 | ⚠️ |
+| ApplePay | 96.25% | 99.05% | -2.82% | 240 | 210 |  |
+| CreditCard | 97.82% | 96.93% | +0.92% | 551 | 391 |  |
+| Paypal | 97.60% | 96.36% | +1.28% | 125 | 110 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Adyen | 71.43% | 76.55% | -6.69% | 154 | 371 | ⚠️ |
+| Braintree | 96.71% | 98.13% | -1.44% | 365 | 320 |  |
+| ProcessOut | 97.82% | 96.92% | +0.93% | 551 | 390 |  |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 1,062 | 1,067 | 99.25% | 98.70% | +0.55 |
+| CVV/CVC Mismatch | 1 | 3 | 0.09% | 0.28% | -0.18 |
+| PayPal Declined, Revoked, Payer Issue | 1 | 3 | 0.09% | 0.28% | -0.18 |
+| Fraud, Lost/Stolen Card, Security | 4 | 6 | 0.37% | 0.56% | -0.18 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 2 | 1 | 0.19% | 0.09% | +0.09 |
+| Expired, Invalid, Closed Card, No Account | 0 | 1 | 0.00% | 0.09% | -0.09 |
+
+**Root Cause:** BcmcMobile + Adyen
+
+---
+
+## L2: DE Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Klarna | 47.83% | 53.62% | -10.81% | 115 | 966 | ⚠️ |
+| ApplePay | 96.23% | 96.74% | -0.53% | 1,831 | 1,596 |  |
+| Paypal | 97.96% | 98.21% | -0.25% | 5,549 | 5,024 |  |
+| CreditCard | 97.94% | 97.85% | +0.09% | 1,213 | 1,022 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
+| Adyen | 48.72% | 53.67% | -9.23% | 117 | 967 | ⚠️ |
+| Braintree | 97.53% | 97.85% | -0.33% | 7,380 | 6,620 |  |
+| ProcessOut | 97.94% | 97.85% | +0.09% | 1,211 | 1,021 |  |
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 8,641 | 8,559 | 99.23% | 99.43% | -0.20 |
+| PayPal Declined, Revoked, Payer Issue | 41 | 29 | 0.47% | 0.34% | +0.13 |
+| Expired, Invalid, Closed Card, No Account | 5 | 0 | 0.06% | 0.00% | +0.06 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 15 | 10 | 0.17% | 0.12% | +0.06 |
+| Fraud, Lost/Stolen Card, Security | 4 | 8 | 0.05% | 0.09% | -0.05 |
+| CVV/CVC Mismatch | 0 | 1 | 0.00% | 0.01% | -0.01 |
+| Gateway Rejected, Risk Threshold | 1 | 0 | 0.01% | 0.00% | +0.01 |
+| Call Issuer, Voice Auth Required | 1 | 1 | 0.01% | 0.01% | +0.00 |
+
+**Root Cause:** Klarna + Adyen
+
+---
 
 
 ## Mix Shift Analysis
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| DE | High (>92%) | 201,519 | 224,251 | +11.3% | Stable |
-| GB | High (>92%) | 185,598 | 209,202 | +12.7% | Stable |
-| FR | High (>92%) | 147,984 | 145,977 | -1.4% | Stable |
-| NL | High (>92%) | 110,805 | 109,008 | -1.6% | Stable |
-| AU | Medium (>85%) | 85,229 | 89,760 | +5.3% | Stable |
-| BE | High (>92%) | 64,439 | 64,642 | +0.3% | Stable |
-| DK | High (>92%) | 37,713 | 40,108 | +6.4% | Stable |
-| SE | High (>92%) | 31,821 | 38,861 | +22.1% | Stable |
-| NO | Medium (>85%) | 18,868 | 24,045 | +27.4% | Stable |
-| IE | Medium (>85%) | 17,513 | 18,708 | +6.8% | Stable |
-| NZ | Medium (>85%) | 16,941 | 18,117 | +6.9% | Stable |
-| AT | High (>92%) | 13,962 | 14,079 | +0.8% | Stable |
-| LU | High (>92%) | 2,731 | 3,510 | +28.5% | Stable |
-| CH | High (>92%) | 2,101 | 2,299 | +9.4% | Stable |
+| DE | High (>92%) | 8,608 | 8,708 | +1.2% | Stable |
+| GB | High (>92%) | 8,125 | 9,915 | +22.0% | Stable |
+| FR | High (>92%) | 7,408 | 6,547 | -11.6% | Stable |
+| AU | High (>92%) | 2,828 | 2,930 | +3.6% | Stable |
+| NL | Medium (>85%) | 1,580 | 1,604 | +1.5% | Stable |
+| DK | High (>92%) | 1,457 | 1,228 | -15.7% | Stable |
+| SE | Medium (>85%) | 1,412 | 1,296 | -8.2% | Stable |
+| IE | High (>92%) | 1,282 | 1,394 | +8.7% | Stable |
+| BE | Medium (>85%) | 1,081 | 1,070 | -1.0% | Stable |
+| NO | High (>92%) | 1,030 | 909 | -11.7% | Stable |
+| NZ | High (>92%) | 806 | 937 | +16.3% | Stable |
+| AT | High (>92%) | 699 | 543 | -22.3% | ⚠️ Volume drop |
+| CH | High (>92%) | 135 | 149 | +10.4% | Stable |
+| LU | High (>92%) | 63 | 84 | +33.3% | Stable |
 
 ---
 
@@ -110,8 +186,11 @@
 
 **Root Cause Derivation:**
 
-No countries exceeded threshold for deep-dive.
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| BE | ↑ +3.72% | BcmcMobile -6.6% | Adyen -6.7% | → Stable | BcmcMobile + Adyen |
+| DE | ↑ +4.35% | Klarna -10.8% | Adyen -9.2% | → Stable | Klarna + Adyen |
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined marginally from 92.22% to 92.1% (-0.13pp) in W16, a change deemed not statistically significant against a volume of 421,947 orders.
+**Overall:** Pre-Dunning Acceptance Rate declined modestly from 92.22% to 92.1% (-0.12pp) on volume of 421,947 orders, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Largest decline in funnel | -0.31pp | ⚠️ |
-| 2_PreDunningAR | Reported metric | -0.13pp | ✅ |
-| 3_PostDunningAR | Downstream impact | -0.17pp | ✅ |
-| 6_PaymentApprovalRate | Final approval | +0.07pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.31pp | ⚠️ |
+| 2_PreDunningAR | Reported Metric | -0.12pp | ✅ |
+| 3_PostDunningAR | Post-Dunning | -0.17pp | ✅ |
+| 6_PaymentApprovalRate | Final Approval | +0.07pp | ✅ |
 
 **Key Findings:**
-- The -0.13pp decline in Pre-Dunning AR is within normal weekly fluctuation (8-week range: 91.65% to 92.22%) and not statistically significant
-- Payment Provider "Unknown" shows a significant -10.77pp decline (91.74% → 81.86%), though volume is minimal at only 226 orders (0.05% of total)
+- The -0.12pp decline in Pre-Dunning AR falls within normal weekly fluctuation (8-week range: 91.65% to 92.22%)
+- PaymentProvider "Unknown" shows a significant -10.77pp drop (91.74% → 81.86%), but volume is minimal at only 226 orders
+- Credit Card payments declined -0.25pp while representing the largest volume (310,172 orders), contributing most to the overall decline
+- No countries exceeded the ±2.5% threshold; US is the sole market at -0.13pp
 - FirstRunAR shows the largest funnel decline at -0.31pp, suggesting initial payment attempts are the primary pressure point
-- Credit Card payments declined -0.25pp while representing the largest volume (310,172 orders, 74% of total)
-- No countries exceeded the ±2.5% threshold; US is the sole market and remains stable in the High AR tier (>92%)
 
-**Action:** Monitor — The decline is not significant and falls within normal operating variance. Continue standard tracking with attention to the Unknown payment provider anomaly if volume increases.
+**Action:** Monitor — The decline is not significant and within normal variance. Continue tracking Unknown PaymentProvider performance despite low volume, and watch FirstRunAR trends for potential upstream issues.
 
 ---
 
@@ -112,4 +112,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

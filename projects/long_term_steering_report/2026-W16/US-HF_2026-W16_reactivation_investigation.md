@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate for US-HF declined slightly from 90.47% to 90.07% (-0.40pp) in 2026-W16, a change that is not statistically significant.
+**Overall:** US-HF Reactivation Rate declined slightly from 90.47% to 90.07% (-0.40pp) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal variance | -0.40pp | ✅ |
-| L1: Country Breakdown | US -0.13pp (below ±2.5% threshold) | -0.13pp | ✅ |
-| L1: Payment Method | Credit Card -1.00pp (largest decline) | -1.00pp | ✅ |
-| Mix Shift Analysis | High AR tier volume +3.7%, stable | N/A | ✅ |
+| L0: 8-Week Trend | Rate within normal range (85.79%-91.26%) | -0.40pp | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.44% | ✅ |
+| L1: Dimension Scan | No payment methods flagged | Largest: Credit Card -1.00% | ✅ |
+| Mix Shift Analysis | US Medium tier stable | Volume -10.7% | ✅ |
 
 **Key Findings:**
-- The -0.40pp decline is within normal weekly fluctuation; the 8-week trend shows rates have improved significantly from 85.79% (W09) to 90.07% (W16), a +4.28pp gain
-- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
-- Credit Card payment method showed the largest decline at -1.00pp (89.9% vs 90.81%), while Apple Pay improved +0.91pp and PayPal improved +0.67pp
-- Volume decreased from 21,155 to 18,897 orders (-10.7%), which may contribute to rate volatility
-- Mix shift analysis indicates the High AR tier remains stable with +3.7% volume growth
+- The -0.40pp decline is within normal weekly fluctuation; the 8-week trend shows rates ranging from 85.79% (W09) to 91.26% (W12)
+- Credit Card payments showed the largest decline at -1.00% (89.9% vs 90.81%), representing 68% of volume (12,893 orders)
+- Order volume decreased by 10.7% week-over-week (21,155 → 18,897), but mix remained stable in the Medium AR tier
+- PayPal (+0.67%) and Apple Pay (+0.91%) both showed slight improvements, partially offsetting Credit Card decline
+- Overall reactivation rate remains strong at 90.07%, well above the W09-W11 period (85.79%-88.98%)
 
-**Action:** Monitor — No immediate action required. The decline is not statistically significant, no thresholds were breached, and the overall 8-week trend remains positive.
+**Action:** Monitor — No significant threshold breaches detected. Continue standard weekly tracking; no immediate investigation required.
 
 ---
 
@@ -53,7 +53,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
+| US | 90.07% | 90.47% | -0.44% | 18,897 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -83,7 +83,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
+| US | Medium (>85%) | 21,155 | 18,897 | -10.7% | Stable |
 
 ---
 
@@ -96,4 +96,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

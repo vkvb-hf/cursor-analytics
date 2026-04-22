@@ -1,22 +1,22 @@
 # Payment Conversion Rate (Checkout) - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-21 14:45  
+**Generated:** 2026-04-22 11:02  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Conversion Rate (Checkout) showed mixed performance across clusters in 2026-W16, with RTE improving significantly (+3.34pp) while US-HF (-0.41pp), HF-INTL (-0.66pp), and HF-NA (-0.44pp) declined. The most significant concern is the widespread Fraud Service approval rate degradation, particularly in US-HF (-1.07pp) and HF-NA (-0.91pp), requiring immediate investigation with the Fraud team.
+Payment Conversion Rate (Checkout) performance was mixed across clusters in 2026-W16, with RTE showing strong improvement (+3.33pp) while US-HF (-0.41pp), HF-INTL (-0.66pp), and HF-NA (-0.44pp) declined. The most significant concern is a widespread Fraud Service approval rate degradation affecting US-HF (-1.04pp) and HF-NA (-0.88pp), requiring immediate investigation into potential fraud rule changes.
 
 ### Cluster Highlights
 
-- **US-HF:** PCR declined by -0.41pp to 25.83%, driven primarily by a -1.07pp drop in Fraud Service approval rate (93.03% → 91.96%) alongside Braintree_ApplePay degradation (-2.14pp).
-- **HF-INTL:** PCR declined by -0.66pp to 37.09%, with Select Payment Method conversion dropping -1.27pp as the primary driver, particularly impacting IE (-7.09pp at that step) and GB (-1.80pp).
-- **WL:** PCR improved by +0.96pp to 35.83%, driven by a +1.01pp gain in Select Payment Method conversion, with CG (+1.84pp) and GN (+2.21pp) showing strong performance.
-- **HF-NA:** PCR declined by -0.44pp to 27.55%, primarily due to a -0.91pp drop in Fraud Service approval rate concentrated in US, while Braintree_ApplePay also underperformed (-1.75pp).
-- **RTE:** PCR improved significantly by +3.34pp to 48.93%, driven by a +3.44pp gain in Select Payment Method conversion, with FJ (+5.17pp) and TT (+10.94pp) contributing the strongest gains.
+- **US-HF:** PCR declined by -0.41pp to 25.83%, driven primarily by a -1.04pp drop in Fraud Service approval rate and Braintree_ApplePay success rate degradation (-2.14pp).
+- **HF-INTL:** PCR declined by -0.66pp to 37.09%, with Select Payment Method conversion dropping -1.27pp across GB, FR, and IE, while Adyen_Sepa continues bypassing Fraud Service.
+- **WL:** PCR improved by +0.97pp to 35.83%, driven by Select Payment Method conversion gains (+1.01pp) in GN (+2.21pp) and CG (+1.84pp), partially offset by MR decline (-1.52pp).
+- **HF-NA:** PCR declined by -0.44pp to 27.55%, primarily due to Fraud Service approval rate dropping -0.88pp, with US accounting for the majority of the decline.
+- **RTE:** PCR improved significantly by +3.33pp to 48.92%, driven by a +3.43pp increase in Select Payment Method conversion, with FJ (+5.15pp) and TT (+10.94pp) as top contributors.
 
 ---
 

@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 91.73% to 92.56% (+0.90%) in W16, returning to W12 levels after a two-week dip, though this change is not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate (Initial Charges) improved from 91.73% to 92.56% (+0.90%) in W16, returning to W12 levels after a mid-period dip, though the change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.56% matches W12) | +0.90% | ✅ |
+| L0: 8-Week Trend | Rate within normal range (92.56% vs 8-wk high 93.59%) | +0.90% | ✅ |
 | L1: Country Breakdown | 3 countries exceed ±2.5% threshold (YE, TV, TO) | +2.78% to +5.50% | ⚠️ |
-| L1: Dimension Scan | Unknown PaymentProvider dropped -13.04% (low volume: 91) | -13.04% | ⚠️ |
-| L2: Country Deep-Dives | All 3 flagged countries improved due to reduced Insufficient Funds declines | -2.13pp to -3.87pp | ✅ |
-| L3: Related Metrics | All funnel metrics improved consistently (+0.90% to +1.04%) | Aligned | ✅ |
-| Mix Shift | TO volume dropped -22.6% but minimal impact on overall rate | -22.6% vol | ⚠️ |
+| L1: Dimension Scan | Unknown PaymentProvider shows -13.04% decline | -13.04% | ⚠️ |
+| L2: Flagged Countries | All 3 flagged countries improved (positive movement) | +2.78% to +5.50% | ✅ |
+| L3: Related Metrics | All funnel metrics improved consistently (+0.90% to +1.04%) | +0.90% to +1.04% | ✅ |
+| Mix Shift | TO volume dropped -22.6%, TK volume increased +34.3% | Variable | ⚠️ |
 
 **Key Findings:**
-- All three flagged countries (YE +2.78%, TV +5.21%, TO +5.50%) showed **improvement**, not degradation, driven by reduced "Insufficient Funds" declines (-2.13pp to -3.87pp)
-- TV saw significant improvement in credit_card (+12.38%) and Braintree (+8.48%) acceptance rates
-- TO experienced notable volume decline (-22.6%) but improved Adyen performance (+7.71%)
-- The entire payment funnel moved in alignment: 1_FirstRunAR (+1.04%), 2_PreDunningAR (+0.90%), 3_PostDunningAR (+0.92%), 6_PaymentApprovalRate (+0.95%)
-- Unknown PaymentProvider degradation (-13.04%) is contained to very low volume (91 orders)
+- YE improved +2.78% (86.50% → 88.90%) driven by reduced Insufficient Funds declines (-2.13pp) despite Unknown provider showing -16.15% volatility on low volume (23 transactions)
+- TV improved +5.21% (91.32% → 96.07%) with significant gains in credit_card (+12.38%) and applepay (+6.46%), supported by Insufficient Funds decline reduction (-3.87pp)
+- TO improved +5.50% (85.69% → 90.40%) primarily through Adyen performance improvement (+7.71%) and reduced Insufficient Funds (-2.43pp), despite -22.6% volume contraction
+- All related metrics (FirstRunAR, PostDunningAR, PaymentApprovalRate) moved in parallel, indicating systemic improvement rather than isolated anomaly
+- Global volume increased +6.4% (30,171 → 32,099) suggesting healthy order growth alongside rate improvement
 
-**Action:** Monitor — The +0.90% improvement is positive but not statistically significant. Continue tracking to confirm the recovery trend from W13-W14 dip is sustained.
+**Action:** Monitor — The improvement is positive but not statistically significant. Continue tracking W17 to confirm whether the upward trend stabilizes at the ~92.5% level or represents normal variance within the 90.83%-93.59% range observed over the past 8 weeks.
 
 ---
 
@@ -55,12 +55,12 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CF | 93.54% | 94.0% | -0.49% | 6,535 |  |
+| CF | 93.54% | 94.00% | -0.49% | 6,535 |  |
 | FJ | 92.57% | 91.84% | +0.80% | 20,148 |  |
-| TT | 97.79% | 95.6% | +2.28% | 587 |  |
-| YE | 88.9% | 86.5% | +2.78% | 3,090 | ⚠️ |
+| TT | 97.79% | 95.60% | +2.28% | 587 |  |
+| YE | 88.90% | 86.50% | +2.78% | 3,090 | ⚠️ |
 | TV | 96.07% | 91.32% | +5.21% | 331 | ⚠️ |
-| TO | 90.4% | 85.69% | +5.50% | 427 | ⚠️ |
+| TO | 90.40% | 85.69% | +5.50% | 427 | ⚠️ |
 
 **Countries exceeding ±2.5% threshold:** YE, TV, TO
 
@@ -95,10 +95,10 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 89.89% | 0.0% | +0.00% | 89 | 0 |  |
-| None | 0.0% | 96.88% | -100.00% | 0 | 64 | ⚠️ |
+| None | 89.89% | 0.00% | +0.00% | 89 | 0 |  |
+| None | 0.00% | 96.88% | -100.00% | 0 | 64 | ⚠️ |
 | paypal | 95.78% | 93.27% | +2.70% | 759 | 728 |  |
-| credit_card | 86.53% | 83.97% | +3.04% | 2,242 | 2,215 |  |
+| credit_card | 86.53% | 83.97% | +3.05% | 2,242 | 2,215 |  |
 
 ### PaymentProvider
 
@@ -128,19 +128,19 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
-| cashcredit | 100.0% | 100.0% | +0.00% | 2 | 5 |  |
-| klarna | 98.73% | 97.5% | +1.26% | 157 | 160 |  |
+| None | 0.00% | 0.00% | +0.00% | 1 | 0 |  |
+| cashcredit | 100.00% | 100.00% | +0.00% | 2 | 5 |  |
+| klarna | 98.73% | 97.50% | +1.26% | 157 | 160 |  |
 | applepay | 93.33% | 87.67% | +6.46% | 75 | 73 | ⚠️ |
 | credit_card | 94.51% | 84.09% | +12.38% | 91 | 88 | ⚠️ |
-| paypal | 100.0% | 75.0% | +33.33% | 5 | 8 | ⚠️ |
+| paypal | 100.00% | 75.00% | +33.33% | 5 | 8 | ⚠️ |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Unknown | 0.0% | 0.0% | +0.00% | 1 | 0 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 2 | 5 |  |
+| Unknown | 0.00% | 0.00% | +0.00% | 1 | 0 |  |
+| No Payment | 100.00% | 100.00% | +0.00% | 2 | 5 |  |
 | Adyen | 97.18% | 92.74% | +4.78% | 248 | 248 |  |
 | Braintree | 93.75% | 86.42% | +8.48% | 80 | 81 | ⚠️ |
 
@@ -164,11 +164,11 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 0.0% | 0.0% | +0.00% | 3 | 0 |  |
-| None | 0.0% | 0.0% | +0.00% | 0 | 4 |  |
-| sepadirectdebit | 0.0% | 100.0% | -100.00% | 0 | 1 | ⚠️ |
+| None | 0.00% | 0.00% | +0.00% | 3 | 0 |  |
+| None | 0.00% | 0.00% | +0.00% | 0 | 4 |  |
+| sepadirectdebit | 0.00% | 100.00% | -100.00% | 0 | 1 | ⚠️ |
 | paypal | 98.59% | 98.85% | -0.26% | 71 | 87 |  |
-| cashcredit | 100.0% | 100.0% | +0.00% | 1 | 2 |  |
+| cashcredit | 100.00% | 100.00% | +0.00% | 1 | 2 |  |
 | applepay | 85.44% | 82.35% | +3.74% | 103 | 153 |  |
 | credit_card | 91.16% | 84.59% | +7.77% | 249 | 305 | ⚠️ |
 
@@ -176,9 +176,9 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| Unknown | 0.0% | 0.0% | +0.00% | 3 | 4 |  |
-| No Payment | 100.0% | 100.0% | +0.00% | 1 | 2 |  |
-| Braintree | 90.8% | 88.33% | +2.80% | 174 | 240 |  |
+| Unknown | 0.00% | 0.00% | +0.00% | 3 | 4 |  |
+| No Payment | 100.00% | 100.00% | +0.00% | 1 | 2 |  |
+| Braintree | 90.80% | 88.33% | +2.80% | 174 | 240 |  |
 | Adyen | 91.16% | 84.64% | +7.71% | 249 | 306 | ⚠️ |
 
 ### Decline Reasons
@@ -229,10 +229,10 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| YE | ↑ +2.78% | None -100.0% | Unknown -16.1% | Insufficient Funds -2.13pp | None + Unknown + Insufficient |
+| YE | ↑ +2.78% | None -100.0% | Unknown -16.2% | Insufficient Funds -2.13pp | None + Unknown + Insufficient |
 | TV | ↑ +5.21% | applepay +6.5% | Braintree +8.5% | Insufficient Funds -3.87pp | applepay + Braintree + Insufficient |
 | TO | ↑ +5.50% | sepadirectdebit -100.0% | Adyen +7.7% | Insufficient Funds -2.43pp | sepadirectdebit + Adyen + Insufficient |
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

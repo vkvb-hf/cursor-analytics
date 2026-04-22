@@ -8,26 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by -0.83pp (90.24% → 89.41%) in W16, with the change flagged as not statistically significant.
+**Overall:** Reactivation Rate declined from 90.24% to 89.41% (-0.92%) in W16, a statistically non-significant change within normal weekly fluctuation, primarily driven by CA's -2.57% decline.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Within normal fluctuation range (86.89%-91.02%) | -0.83pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: -0.13pp, CA: +0.09pp | ✅ |
-| L1: PaymentMethod | Credit Card showed largest decline | -1.60pp | ⚠️ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift Analysis | Volume stable across tiers | US: +3.7%, CA: +1.3% | ✅ |
+| L0: 8-Week Trend | Rate within historical range (86.89%-91.02%) | -0.92% | ✅ |
+| L1: Country Breakdown | CA exceeds ±2.5% threshold | CA: -2.57% | ⚠️ |
+| L1: Dimension Scan | PaymentMethod stable (Others flagged but n=2) | Credit Card: -1.60% | ✅ |
+| L2: CA Deep-Dive | Credit Card underperforming | -3.05% | ⚠️ |
+| L2: Decline Reasons | "Others" dominant but declining; Fraud/Security rising | Others: -1.57pp | ⚠️ |
+| Mix Shift | Volume distribution stable | US: -10.7%, CA: +1.1% | ✅ |
 
 **Key Findings:**
-- The -0.83pp decline is within the 8-week range (86.89%-91.02%) and follows a similar -0.78pp decline in W15
-- Credit Card payment method showed the largest decline at -1.60pp (90.17% → 88.73%) with significant volume (16,661 orders)
-- Both US and CA remained in high-performing tier (>92%) with stable volume growth
-- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
-- "Others" payment method flagged (⚠️) but represents only 2 orders, making it statistically irrelevant
+- CA drove the overall decline with a -2.57% drop in reactivation rate (86.98% vs 89.27%), exceeding the ±2.5% threshold
+- Within CA, Credit Card payments declined -3.05% (85.34% vs 88.02%) on volume of 3,942 orders
+- Fraud, Lost/Stolen Card, Security decline reasons increased +0.88pp in CA (from 0.82% to 1.69%), representing a 110% increase in count (41 → 86)
+- 3DS Authentication Failed/Required increased +0.33pp in CA (4 → 21 occurrences), a 5x increase
+- US remained relatively stable at -0.44% with the majority of volume (18,897 orders)
 
-**Action:** Monitor – Continue tracking Credit Card payment method performance over the next 1-2 weeks to determine if the -1.60pp decline represents a trend or normal fluctuation.
+**Action:** Monitor - The decline is not statistically significant and the 8-week trend shows W16 rate (89.41%) remains above W09-W11 levels. However, continue monitoring CA's Fraud/Security and 3DS authentication trends for potential emerging issues.
 
 ---
 
@@ -52,10 +53,10 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
-| CA | 93.58% | 93.49% | +0.09% | 104,640 |  |
+| CA | 86.98% | 89.27% | -2.57% | 5,076 | ⚠️ |
+| US | 90.07% | 90.47% | -0.44% | 18,897 |  |
 
-**Countries exceeding ±2.5% threshold:** None
+**Countries exceeding ±2.5% threshold:** CA
 
 ---
 
@@ -77,14 +78,47 @@
 
 ---
 
+## L2: CA Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Others | 0.00% | 0.00% | +0.00% | 0 | 3 |  |
+| Credit Card | 85.34% | 88.02% | -3.05% | 3,942 | 3,857 |  |
+| Paypal | 92.50% | 94.11% | -1.71% | 707 | 713 |  |
+| Apple Pay | 92.97% | 92.89% | +0.09% | 427 | 450 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 4,566 | 4,597 | 89.95% | 91.52% | -1.57 |
+| Fraud, Lost/Stolen Card, Security | 86 | 41 | 1.69% | 0.82% | +0.88 |
+| Blocked, Restricted, Not Permitted | 95 | 73 | 1.87% | 1.45% | +0.42 |
+| Expired, Invalid, Closed Card, No Account | 249 | 266 | 4.91% | 5.30% | -0.39 |
+| 3DS Authentication Failed/Required | 21 | 4 | 0.41% | 0.08% | +0.33 |
+| PayPal Declined, Revoked, Payer Issue | 47 | 30 | 0.93% | 0.60% | +0.33 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 1 | 5 | 0.02% | 0.10% | -0.08 |
+| Call Issuer, Voice Auth Required | 5 | 3 | 0.10% | 0.06% | +0.04 |
+| CVV/CVC Mismatch | 6 | 4 | 0.12% | 0.08% | +0.04 |
+
+**Root Cause:** Others
+
+---
 
 
 ## Mix Shift Analysis
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
-| CA | High (>92%) | 103,253 | 104,640 | +1.3% | Stable |
+| US | Medium (>85%) | 21,155 | 18,897 | -10.7% | Stable |
+| CA | Medium (>85%) | 5,023 | 5,076 | +1.1% | Stable |
 
 ---
 
@@ -93,8 +127,10 @@
 
 **Root Cause Derivation:**
 
-No countries exceeded threshold for deep-dive.
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| CA | ↓ -2.57% | → Stable | → Stable | Others -1.57pp | Others |
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

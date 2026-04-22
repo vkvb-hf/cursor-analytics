@@ -8,26 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined slightly from 93.02% to 92.75% (-0.27 pp) in W16, a statistically non-significant change within normal weekly fluctuation.
+## Executive Summary
+
+**Overall:** Payment Checkout Approval Rate for US-HF declined by -0.29% (from 93.02% to 92.75%) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within historical range (92.57%-94.58%) | -0.27 pp | ✅ |
-| L1: Country Breakdown | US threshold check (±2.5%) | -0.13 pp | ✅ |
-| L1: PaymentMethod | No flags triggered | Largest: Others -2.34 pp (n=54) | ✅ |
-| L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | US volume shift | +3.7% | ✅ Stable |
+| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | -0.29% | ✅ |
+| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.29% | ✅ |
+| L1: PaymentMethod Scan | No methods flagged; Others -2.34% but low volume (54) | N/A | ✅ |
+| L1: PaymentProvider Scan | No data available | N/A | ✅ |
+| Mix Shift Analysis | US High AR tier stable, volume +2.7% | N/A | ✅ |
 
 **Key Findings:**
-- The -0.27 pp decline is not statistically significant and falls within the normal 8-week range (92.57% - 94.58%)
-- US showed minimal decline of -0.13 pp, well within the ±2.5% threshold
-- "Others" payment method showed -2.34 pp decline but represents negligible volume (54 orders)
-- Credit Card, the highest volume method (10,008 orders), declined only -0.51 pp
-- Volume increased from 17,669 to 18,142 orders (+2.7%), indicating healthy transaction growth despite the minor rate decline
+- The -0.29% decline is within normal weekly fluctuation range observed over the 8-week period (92.57% to 94.58%)
+- Volume increased by 2.7% week-over-week (17,669 → 18,142 orders), indicating healthy transaction growth
+- No payment methods exceeded the ±2.5% threshold; "Others" showed -2.34% decline but represents only 54 orders (0.3% of volume)
+- Credit Card (55% of volume) declined -0.51% while Apple Pay (36% of volume) improved +0.29%, largely offsetting each other
+- No countries or segments were flagged for deep-dive investigation
 
-**Action:** Monitor — No investigation required. Continue standard weekly tracking.
+**Action:** Monitor — The decline is not statistically significant, falls within normal variance, and no dimensional breakdowns reveal concerning patterns. Continue standard weekly monitoring.
 
 ---
 
@@ -52,7 +54,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
+| US | 92.75% | 93.02% | -0.29% | 18,142 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -83,7 +85,7 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
+| US | High (>92%) | 17,669 | 18,142 | +2.7% | Stable |
 
 ---
 
@@ -96,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

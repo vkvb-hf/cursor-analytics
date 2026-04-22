@@ -8,26 +8,30 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined from 89.29% to 86.81% (-2.48 pp) in W16, representing a significant drop that breaks a three-week period of relative stability.
+## Executive Summary
+
+**Overall:** Reactivation Rate declined significantly from 89.29% to 86.81% (-2.78 pp) in W16, representing the largest week-over-week drop in the 8-week trend window, with 8,022 orders affected.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Metric dropped below recent range (85.86%-89.29%) | -2.48 pp | ⚠️ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | Max: -1.06 pp (KN) | ✅ |
-| L1: PaymentMethod | Credit Card showed notable decline | -3.24 pp | ⚠️ |
-| L1: PaymentProvider | No data available for analysis | N/A | ✅ |
-| Mix Shift Analysis | All countries show stable impact | No shifts | ✅ |
+| L0: WL Trend | Significant drop breaks stable pattern | -2.78 pp | ⚠️ |
+| L1: Country Breakdown | 3 countries exceed threshold (CK, AO, MR) | -5.69% to -3.64% | ⚠️ |
+| L1: Dimension Scan | Credit Card primary driver | -3.24% | ⚠️ |
+| L2: CK Deep-Dive | All payment methods declining | -5.32% to -9.64% | ⚠️ |
+| L2: AO Deep-Dive | Apple Pay severe decline | -29.14% | ⚠️ |
+| L2: MR Deep-Dive | Credit Card decline with volume increase | -6.33% | ⚠️ |
+| Mix Shift | ER volume drop (-27.5%) shifting mix | -921 orders | ⚠️ |
 
 **Key Findings:**
-- Credit Card payment method declined -3.24 pp (89.92% → 87.01%) and represents 71% of volume (5,690 of 8,022 orders), making it the primary driver of the overall decline
-- No single country exceeded the ±2.5% threshold; KN showed the largest decline at -1.06 pp
-- Volume decreased 13.5% week-over-week (9,277 → 8,022 orders), which may amplify rate volatility
-- GN showed strong volume growth (+17.8%) while maintaining high performance (94.19%), partially offsetting declines
-- The "Others" payment method flagged (+200%) is not actionable due to minimal volume (1 order)
+- CK shows the largest rate decline (-5.69 pp) with all payment methods affected; "Expired, Invalid, Closed Card, No Account" declines increased by +3.43 pp
+- AO experienced a severe Apple Pay performance drop (-29.14%) though on limited volume (25 orders current vs 31 prior)
+- MR saw Credit Card reactivation fall -6.33% despite volume increasing +22.7%, indicating a quality issue rather than mix shift
+- ER volume dropped significantly (-27.5%, losing 921 orders) which impacts overall mix as a Medium AR tier country
+- Across all flagged countries, "Others" decline reason dominates (85-90%), limiting visibility into specific root causes
 
-**Action:** Investigate — Focus on Credit Card payment method performance, as it accounts for the majority of volume and shows the largest rate decline. Review for potential technical issues, authorization failures, or processor-specific problems.
+**Action:** Investigate - The broad-based decline across multiple countries and payment methods, combined with increased "Expired/Invalid Card" errors in CK and unclassified "Others" decline reasons, warrants immediate investigation into potential card network issues or payment processor changes affecting reactivation flows.
 
 ---
 
@@ -52,13 +56,12 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| KN | 87.81% | 88.75% | -1.06% | 11,057 |  |
-| MR | 80.82% | 81.37% | -0.68% | 18,584 |  |
-| CK | 93.32% | 93.91% | -0.63% | 43,017 |  |
-| AO | 87.79% | 87.06% | +0.83% | 14,640 |  |
-| GN | 94.19% | 93.32% | +0.94% | 15,445 |  |
+| CK | 80.02% | 84.86% | -5.69% | 1,697 | ⚠️ |
+| AO | 80.14% | 83.33% | -3.83% | 554 | ⚠️ |
+| MR | 85.58% | 88.81% | -3.64% | 735 | ⚠️ |
+| ER | 89.37% | 91.04% | -1.83% | 2,428 |  |
 
-**Countries exceeding ±2.5% threshold:** None
+**Countries exceeding ±2.5% threshold:** CK, AO, MR
 
 ---
 
@@ -80,19 +83,110 @@
 
 ---
 
+## L2: CK Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Others | 0.00% | 33.33% | -100.00% | 0 | 3 | ⚠️ |
+| Apple Pay | 72.12% | 79.81% | -9.64% | 104 | 104 | ⚠️ |
+| Paypal | 86.94% | 93.66% | -7.17% | 268 | 268 | ⚠️ |
+| Credit Card | 79.25% | 83.70% | -5.32% | 1,325 | 1,454 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 1,439 | 1,641 | 84.80% | 89.72% | -4.92 |
+| Expired, Invalid, Closed Card, No Account | 152 | 101 | 8.96% | 5.52% | +3.43 |
+| Blocked, Restricted, Not Permitted | 65 | 43 | 3.83% | 2.35% | +1.48 |
+| PayPal Declined, Revoked, Payer Issue | 29 | 12 | 1.71% | 0.66% | +1.05 |
+| Fraud, Lost/Stolen Card, Security | 9 | 27 | 0.53% | 1.48% | -0.95 |
+| 3DS Authentication Failed/Required | 0 | 3 | 0.00% | 0.16% | -0.16 |
+| Call Issuer, Voice Auth Required | 2 | 1 | 0.12% | 0.05% | +0.06 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 1 | 1 | 0.06% | 0.05% | +0.00 |
+
+**Root Cause:** Others + Others
+
+---
+
+## L2: AO Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Apple Pay | 32.00% | 45.16% | -29.14% | 25 | 31 | ⚠️ |
+| Credit Card | 78.27% | 82.13% | -4.70% | 382 | 375 |  |
+| Paypal | 93.20% | 93.67% | -0.51% | 147 | 158 |  |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 492 | 508 | 88.81% | 90.07% | -1.26 |
+| Blocked, Restricted, Not Permitted | 11 | 8 | 1.99% | 1.42% | +0.57 |
+| PayPal Declined, Revoked, Payer Issue | 8 | 6 | 1.44% | 1.06% | +0.38 |
+| 3DS Authentication Failed/Required | 1 | 0 | 0.18% | 0.00% | +0.18 |
+| Expired, Invalid, Closed Card, No Account | 42 | 42 | 7.58% | 7.45% | +0.13 |
+
+**Root Cause:** Apple + Others
+
+---
+
+## L2: MR Deep-Dive
+
+### PaymentMethod
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+| Credit Card | 87.72% | 93.65% | -6.33% | 521 | 425 | ⚠️ |
+| Paypal | 88.06% | 84.21% | +4.57% | 134 | 114 |  |
+| Apple Pay | 67.50% | 63.33% | +6.58% | 80 | 60 | ⚠️ |
+
+### PaymentProvider
+
+| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
+|-------|--------|--------|----------|----------|----------|------|
+
+### Decline Reasons
+
+| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
+|--------|------------|------------|--------|--------|------|
+| Others | 662 | 550 | 90.07% | 91.82% | -1.75 |
+| Policy, Lifecycle, Revocation, Limit Exceeded | 24 | 13 | 3.27% | 2.17% | +1.10 |
+| Expired, Invalid, Closed Card, No Account | 28 | 17 | 3.81% | 2.84% | +0.97 |
+| PayPal Declined, Revoked, Payer Issue | 15 | 15 | 2.04% | 2.50% | -0.46 |
+| Gateway Rejected, Risk Threshold | 1 | 0 | 0.14% | 0.00% | +0.14 |
+| Call Issuer, Voice Auth Required | 5 | 4 | 0.68% | 0.67% | +0.01 |
+
+**Root Cause:** Credit + Others
+
+---
 
 
 ## Mix Shift Analysis
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| ER | Medium (>85%) | 68,811 | 69,808 | +1.4% | Stable |
-| CG | High (>92%) | 43,937 | 42,996 | -2.1% | Stable |
-| CK | High (>92%) | 42,398 | 43,017 | +1.5% | Stable |
-| MR | Low (>85%) | 19,468 | 18,584 | -4.5% | Stable |
-| AO | Medium (>85%) | 13,883 | 14,640 | +5.5% | Stable |
-| GN | High (>92%) | 13,110 | 15,445 | +17.8% | Stable |
-| KN | Medium (>85%) | 10,259 | 11,057 | +7.8% | Stable |
+| ER | Medium (>85%) | 3,349 | 2,428 | -27.5% | ⚠️ Volume drop |
+| CK | Low (>85%) | 1,829 | 1,697 | -7.2% | Stable |
+| CG | High (>92%) | 1,429 | 1,241 | -13.2% | Stable |
+| GN | Medium (>85%) | 883 | 815 | -7.7% | Stable |
+| KN | Medium (>85%) | 624 | 552 | -11.5% | Stable |
+| MR | Medium (>85%) | 599 | 735 | +22.7% | Stable |
+| AO | Low (>85%) | 564 | 554 | -1.8% | Stable |
 
 ---
 
@@ -101,8 +195,12 @@
 
 **Root Cause Derivation:**
 
-No countries exceeded threshold for deep-dive.
+| Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
+| ------- | --------- | ------------- | --------------- | -------------- | ---------- |
+| CK | ↓ -5.69% | Others -100.0% | → Stable | Others -4.92pp | Others + Others |
+| AO | ↓ -3.83% | Apple Pay -29.1% | → Stable | Others -1.26pp | Apple + Others |
+| MR | ↓ -3.64% | Credit Card -6.3% | → Stable | Others -1.75pp | Credit + Others |
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

@@ -10,25 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Pre-Dunning Acceptance Rate declined slightly from 92.42% to 92.31% (-0.11 pp) in 2026-W16, a statistically non-significant change within normal weekly fluctuation range.
+**Overall:** Pre-Dunning Acceptance Rate declined marginally from 92.42% to 92.31% (-0.11pp) in W16, a statistically insignificant change within normal weekly variance.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Rate change within tolerance | -0.23 pp | ⚠️ |
-| 2_PreDunningAR | Rate change within tolerance | -0.11 pp | ✅ |
-| 3_PostDunningAR | Rate change within tolerance | -0.19 pp | ⚠️ |
-| 6_PaymentApprovalRate | Rate stable | +0.03 pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.26pp | ⚠️ |
+| 2_PreDunningAR | Reported Metric | -0.12pp | ✅ |
+| 3_PostDunningAR | Post-Recovery | -0.20pp | ⚠️ |
+| 6_PaymentApprovalRate | Final Approval | +0.04pp | ✅ |
 
 **Key Findings:**
-- No countries exceeded the ±2.5% investigation threshold; US declined -0.12 pp while CA improved +0.09 pp
-- Credit Card payment method showed the largest decline at -0.19 pp, representing 74% of total volume (377,622 orders)
-- The "Unknown" payment provider experienced the steepest drop (-1.62 pp) but with minimal volume impact (669 orders)
-- The 8-week trend shows rates fluctuating within a narrow 91.59% - 92.42% band, indicating stable performance
-- Mix shift analysis confirms stable volume distribution across both US and CA with no structural changes
+- The -0.12pp decline is not statistically significant and falls within the 8-week variance range (91.59% to 92.42%)
+- US showed a minor decline (-0.13pp to 92.97%) while CA improved slightly (+0.09pp to 93.58%); no countries exceeded the ±2.5% threshold
+- Credit Card payments experienced the largest method decline (-0.21pp) but remain the dominant volume driver at 377,622 orders
+- Unknown payment provider showed notable decline (-1.78pp) but represents minimal volume (669 orders)
+- Mix shift analysis shows stable composition with both US (+3.7%) and CA (+1.3%) maintaining High AR tier status
 
-**Action:** Monitor — The decline is not statistically significant and falls within normal operating variance. No immediate investigation required, but continue tracking Credit Card performance in the next reporting cycle.
+**Action:** Monitor — No action required. The change is within normal operating variance and no dimensions exceeded investigation thresholds.
 
 ---
 
@@ -114,4 +114,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

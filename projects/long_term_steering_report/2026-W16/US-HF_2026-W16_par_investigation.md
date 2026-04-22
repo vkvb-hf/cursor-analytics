@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate showed a marginal improvement from 93.76% to 93.82% (+0.06 pp) in US-HF for W16, a change that is not statistically significant and continues a stable upward trend observed over the past 8 weeks.
+**Overall:** Payment Approval Rate showed a marginal improvement of +0.06 pp (93.76% → 93.82%) in US-HF for W16, a statistically non-significant change within normal operating variance.
 
 **Funnel Analysis:**
 
@@ -16,17 +16,17 @@
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | -0.31 pp | ⚠️ |
 | 2_PreDunningAR | Recovery | -0.13 pp | ⚠️ |
-| 3_PostDunningAR | Dunning | -0.17 pp | ⚠️ |
+| 3_PostDunningAR | Recovery | -0.17 pp | ⚠️ |
 | 6_PaymentApprovalRate | Final | +0.07 pp | ✅ |
 
 **Key Findings:**
-- The +0.06 pp increase in PAR continues a consistent upward trend, with the rate climbing from 93.16% (W09) to 93.82% (W16) over 8 weeks
-- All upstream funnel metrics (FirstRunAR, PreDunningAR, PostDunningAR) showed slight declines (-0.31 pp, -0.13 pp, -0.17 pp respectively), yet PAR still improved
-- PaymentProvider "Unknown" flagged with a -6.05 pp decline (86.73% from 92.31%), though volume is minimal (226 orders)
-- ProcessOut showed notable improvement at +1.88 pp (90.93% from 89.25%) with meaningful volume (57,911 orders)
-- No countries exceeded the ±2.5% threshold; US showed a minor decline of -0.13 pp
+- US PAR increased slightly (+0.06 pp) on volume of 511,272 orders, continuing a steady 8-week upward trend from 93.16% (W09) to 93.82% (W16)
+- Upstream funnel metrics all declined: FirstRunAR (-0.31 pp), PreDunningAR (-0.13 pp), and PostDunningAR (-0.17 pp), suggesting recovery mechanisms offset initial approval weakness
+- PaymentProvider "Unknown" flagged with -6.05 pp decline (92.31% → 86.73%), though volume is minimal (226 orders)
+- ProcessOut showed notable improvement (+1.88 pp) on 57,911 orders, while Apple Pay improved +0.48 pp on 57,610 orders
+- No countries exceeded the ±2.5% threshold; mix shift analysis shows US High-tier volume increased +3.7% with stable impact
 
-**Action:** Monitor — No significant changes detected. Continue standard weekly tracking; no investigation required.
+**Action:** Monitor — The overall PAR change is not statistically significant and the metric continues its positive 8-week trend. Watch the upstream funnel softening (FirstRunAR -0.31 pp) in coming weeks to ensure recovery mechanisms remain effective.
 
 ---
 
@@ -51,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
+| US | 94.59% | 94.54% | +0.06% | 511,272 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -110,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

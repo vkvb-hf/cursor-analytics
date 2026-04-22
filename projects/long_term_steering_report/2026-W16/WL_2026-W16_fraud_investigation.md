@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) declined slightly from 93.28% to 92.95% (-0.33pp) in W16, a change that is **not statistically significant** and remains within normal weekly fluctuation range.
+**Overall:** The Fraud Approval Rate declined slightly from 93.28% to 92.95% (-0.33pp) in W16, a change that is **not statistically significant** and remains within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL 8-Week Trend | FAR within historical range (92.70%-94.34%) | -0.33pp | ✅ |
+| L0: 8-Week Trend | FAR within historical range (92.70%-94.34%) | -0.33pp | ✅ |
 | L1: Country Scan | No country exceeds ±2.5% threshold | Max: ER +1.28% | ✅ |
-| L1: Channel Category | Referral underperforms vs Paid | -1.86% | ✅ |
-| L2: CG Referral | FAR drop with elevated Dup Block | -4.60%, Dup Block +42.91% | ⚠️ |
-| L2: KN Referral | Significant FAR decline, Dup Rate spike | -16.91%, Dup Rate +91.81% | ⚠️ |
+| L1: Channel Category | Referral down but below threshold | -1.86% | ✅ |
+| L2: CG Referral | FAR decline with elevated Dup Block | -4.60%, Dup Block +42.91% | ⚠️ |
+| L2: KN Referral | Significant FAR drop, Dup Rate surge | -16.91%, Dup Rate +91.81% | ⚠️ |
 | L2: ER Referral | FAR improved despite flag | +3.02% | ✅ |
 
 **Key Findings:**
-- **KN Referral channel shows severe degradation:** FAR dropped 16.91% (84.54% → 70.25%) with Duplicate Rate nearly doubling (+91.81%) and Dup Block Rate increasing 76.42% to 27.27%
-- **CG Referral channel declining:** FAR fell 4.60% (83.92% → 80.06%) driven by Dup Rate increase (+24.19%) and Dup Block surge (+42.91% to 18.69%)
-- **Paid channels remain stable across all countries:** Changes within ±0.5pp, indicating the overall WL decline is driven entirely by Referral channel performance
-- **Overall volume decreased 5.5%** (15,143 → 14,308), with Referral channels seeing proportionally larger volume drops
-- **PF Block Rate elevated in CG Paid:** Increased 60.34% (1.94% → 3.12%), though low absolute impact
+- KN Referral channel shows severe degradation: FAR dropped 16.91% (84.54% → 70.25%) with Duplicate Rate nearly doubling (+91.81%) on low volume (121 customers)
+- CG Referral FAR declined 4.60% with Duplicate Block Rate increasing 42.91% (13.08% → 18.69%)
+- Overall Duplicate Rate increased across WL (+1.40pp, from 15.74% to 17.14%) and PF Block Rate rose (+0.27pp)
+- Paid channels remain stable across all countries with FAR changes under ±0.51%
+- Total volume decreased 5.5% WoW (15,143 → 14,308), consistent with recent downward trend
 
-**Action:** **Investigate** — The KN Referral channel requires immediate attention due to the 16.91% FAR decline and 91.81% Duplicate Rate spike, suggesting potential referral abuse or a single bad actor. Review specific referral sources in KN and CG for anomalous patterns.
+**Action:** **Monitor** - The overall metric change is not significant. However, KN Referral channel warrants close observation next week; if the duplicate surge and FAR decline persist, escalate for root cause investigation into potential referral abuse.
 
 ---
 
@@ -90,7 +90,7 @@
 | Referral | 2026-W15 | 83.92% | - | 15.80% | - | 13.08% | - | 0.27% | - | 367 |  |
 | Referral | 2026-W16 | 80.06% | -4.60% | 19.63% | +24.19% | 18.69% | +42.91% | 0.00% | -100.00% | 321 | ⚠️ |
 
-**Analysis:** The WL-level FAR decline of 0.33pp is not significant and masks localized issues in the Referral channel, particularly in KN where FAR dropped 16.91% due to a near-doubling of duplicate submission rates. While the Paid channel (84% of volume) remains healthy across all countries, the Referral channel deterioration in KN and CG warrants investigation into potential referral fraud or quality issues with specific referral partners. No immediate escalation is required, but the KN Referral anomaly should be root-caused before W17 reporting.
+**Analysis:** The W16 Fraud Approval Rate decline of 0.33pp is not statistically significant and the overall metric remains healthy at 92.95%. The primary concern is isolated to the Referral channel, particularly in KN where a small cohort (121 customers) experienced a sharp increase in duplicate submissions driving FAR down to 70.25%. No immediate action is required, but the KN and CG Referral segments should be monitored in W17 to determine if this represents emerging fraud patterns or normal week-over-week variance on low-volume segments.
 
 ---
 
@@ -126,4 +126,4 @@
 
 
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

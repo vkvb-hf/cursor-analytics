@@ -17,18 +17,18 @@
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | FAR within normal range (88.55%-91.68%) | +0.45pp | ✅ |
-| L1: Country Scan | No countries exceed ±2.5% threshold | +0.45pp | ✅ |
-| L1: Channel Category | Referral channel exceeds threshold | +10.21pp | ⚠️ |
-| L2: US Deep-Dive | Referral channel PF Block rate dropped significantly | -58.26% | ⚠️ |
+| L1: Country Scan | No countries exceeding ±2.5% threshold | +0.45pp | ✅ |
+| L1: Channel Category | Referral channel exceeded threshold | +10.21pp | ⚠️ |
+| L2: US Deep-Dive | Referral PF Block rate dropped significantly | -58.26% | ⚠️ |
 
 **Key Findings:**
-- Referral channel FAR increased significantly from 61.76% to 68.07% (+10.21pp), driven primarily by a sharp decline in PF Block rate from 12.70% to 5.30% (-58.26%)
-- Paid channel FAR decreased slightly (-1.57pp) while Dup Block rate increased substantially from 2.90% to 4.75% (+64.19%)
-- Overall Duplicate Rate increased from 25.91% to 27.64% (+6.68%), with Referral channel showing highest duplicate activity at 31.78%
+- Referral channel FAR increased significantly from 61.76% to 68.07% (+10.21pp), flagged as anomalous
+- Referral PF Block % dropped sharply from 12.70% to 5.30% (-58.26%), driving the FAR improvement in that channel
+- Paid channel FAR decreased slightly from 95.26% to 93.77% (-1.57pp), with Dup Block % increasing from 2.90% to 4.75% (+64.19%)
+- Overall Dup Rate increased from 25.91% to 27.64% (+6.68%), indicating higher duplicate submission activity
 - Volume increased modestly from 20,224 to 20,488 customers (+1.3%)
-- The overall FAR improvement is primarily attributed to the Referral channel's reduced PF blocking, partially offset by Paid channel's increased duplicate blocking
 
-**Action:** Monitor - The overall change is not significant, but the Referral channel's PF Block rate drop warrants continued observation to determine if this represents a policy change or potential risk exposure.
+**Action:** Monitor – The overall FAR change is not significant, but the substantial drop in Referral PF Block % warrants continued observation to determine if this represents a policy change or anomaly.
 
 ---
 
@@ -82,10 +82,10 @@
 | Referral | 2026-W15 | 61.76% | - | 28.89% | - | 24.35% | - | 12.70% | - | 3,614 |  |
 | Referral | 2026-W16 | 68.07% | +10.21% | 31.78% | +10.01% | 26.17% | +7.48% | 5.30% | -58.26% | 3,263 | ⚠️ |
 
-**Analysis:** The +0.45pp increase in US-HF Fraud Approval Rate is not statistically significant and falls within the normal 8-week operating range. The primary driver is the Referral channel's substantial reduction in PF Block rate (-58.26%), which warrants monitoring to ensure fraud controls remain appropriately calibrated. No immediate escalation is required, but the divergent behavior between Paid and Referral channels should be tracked in upcoming weeks.
+**Analysis:** The +0.45pp increase in US-HF Fraud Approval Rate is within normal weekly fluctuation and not statistically significant. The primary driver of interest is the Referral channel, where a 58.26% reduction in PF Block rate contributed to a +10.21pp FAR improvement, though this channel represents only 16% of total volume (3,263 of 20,488 customers). No immediate action is required, but the Referral channel PF Block behavior should be monitored in subsequent weeks to identify whether this is a sustained trend.
 
 ---
 
 
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*

@@ -1,22 +1,22 @@
 # Reactivation Rate - Overall Summary
 
 **Week:** 2026-W16  
-**Generated:** 2026-04-21 14:46  
+**Generated:** 2026-04-22 11:03  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Reactivation Rate declined across most clusters in 2026-W16, with changes ranging from -0.24pp to -2.48pp. The most significant concern is the WL cluster, which experienced a statistically significant -2.48pp decline driven primarily by Credit Card payment method deterioration (-3.24pp).
+Reactivation Rate declined across most clusters in 2026-W16, with WL experiencing the most significant drop of -2.78pp (89.29% → 86.81%) requiring investigation. The broad-based decline in WL across multiple countries (CK, AO, MR) and payment methods, combined with increased card validity issues, represents the primary concern this week.
 
 ### Cluster Highlights
 
-- **US-HF:** Declined by -0.40pp to 90.07% (not significant), with Credit Card showing the largest drop (-1.00pp) while the 8-week trend remains positive at +4.28pp since W09.
-- **HF-INTL:** Declined marginally by -0.24pp to 91.23% (not significant), with NO showing the largest country movement (-2.03pp) but remaining below investigation thresholds.
-- **WL:** Significant decline of -2.48pp to 86.81%, driven by Credit Card payment method (-3.24pp) which represents 71% of volume and requires investigation.
-- **HF-NA:** Declined by -0.83pp to 89.41% (not significant), with Credit Card showing a notable -1.60pp drop across 16,661 orders warranting continued monitoring.
-- **RTE:** Significant decline of -1.38pp to 89.16%, representing a broad-based decrease with no single dimension exceeding thresholds but Credit Card and PayPal both declining ~1.5pp.
+- **US-HF:** Stable at 90.07% with a non-significant -0.40pp decline, driven by Credit Card performance (-1.00%) while PayPal and Apple Pay showed slight improvements.
+- **HF-INTL:** Stable at 91.23% with a non-significant -0.24pp decline; CH flagged at -4.69% but with only 55 orders, insufficient volume to warrant investigation.
+- **WL:** Significant decline of -2.78pp to 86.81% driven by CK (-5.69pp), AO (-3.83pp), and MR (-3.64pp), with Credit Card underperformance and increased "Expired/Invalid Card" errors requiring investigation.
+- **HF-NA:** Non-significant decline of -0.92pp to 89.41%, primarily driven by CA's -2.57pp drop in Credit Card reactivation with notable increases in Fraud/Security (+0.88pp) and 3DS authentication failures.
+- **RTE:** Significant decline of -1.38pp to 89.16% driven by CF's -4.03pp drop, with Credit Card issues showing increased expired/invalid card declines (+1.23pp) and blocked transactions (+1.03pp).
 
 ---
 

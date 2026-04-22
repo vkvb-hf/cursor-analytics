@@ -8,25 +8,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined by 0.22 pp (94.08% → 93.86%) in HF-NA during W16, representing a statistically non-significant change on 23,369 orders.
+## Executive Summary
+
+**Overall:** Payment Checkout Approval Rate declined from 94.08% to 93.86% (-0.22pp) in 2026-W16, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 8-Week Trend | Rate within normal range (93.86% vs 8-wk range 93.92%-95.23%) | -0.23% | ✅ |
-| Country Breakdown | No country exceeded ±2.5% threshold | US: -0.13%, CA: +0.09% | ✅ |
-| Payment Method | No method exceeded threshold; "Others" declined 2.34% but low volume (54) | -2.34% max | ✅ |
-| Mix Shift | Both US and CA remain in High AR tier with stable volume growth | +3.7% US, +1.3% CA | ✅ |
+| L0: 8-Week Trend | Rate within normal range (93.86% vs 8-week range 93.92%-95.23%) | -0.22pp | ✅ |
+| L1: Country Breakdown | No countries exceed ±2.5% threshold | US: -0.29pp, CA: +0.44pp | ✅ |
+| L1: PaymentMethod | No methods exceed threshold; "Others" at -2.34% but low volume (54) | Varies | ✅ |
+| L1: PaymentProvider | No data available | N/A | ✅ |
+| Mix Shift | CA volume down 10.5% but impact stable | Minimal | ✅ |
 
 **Key Findings:**
-- The -0.23% week-over-week decline is within normal fluctuation range and flagged as not statistically significant
-- Both US (-0.13 pp) and CA (+0.09 pp) showed minimal movement, with neither country exceeding the ±2.5% investigation threshold
-- Credit Card payments (57% of volume at 13,385 orders) declined by 0.42 pp, representing the largest volume-weighted contributor to the overall decline
-- The "Others" payment method showed a -2.34% decline but with negligible volume (54 orders), making it immaterial to overall performance
-- Current rate of 93.86% sits near the lower end of the 8-week range but remains above the W13 low of 93.92%
+- The -0.22pp decline is within normal weekly fluctuation observed over the 8-week period (range: 93.92% to 95.23%)
+- US accounts for 78% of volume (18,142 orders) and showed a minor decline of -0.29pp
+- CA improved by +0.44pp despite a 10.5% volume decrease (5,843 → 5,227 orders)
+- No payment method showed significant degradation; "Others" declined -2.34pp but represents only 54 orders
+- All countries and dimensions remain within acceptable thresholds
 
-**Action:** Monitor – No investigation required. The decline is not statistically significant, no dimensions exceeded thresholds, and the rate remains within normal operating range. Continue standard weekly monitoring.
+**Action:** Monitor — No immediate action required. The decline is not statistically significant and all dimensional checks pass. Continue standard weekly monitoring.
 
 ---
 
@@ -51,8 +54,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 92.97% | 93.09% | -0.13% | 511,272 |  |
-| CA | 93.58% | 93.49% | +0.09% | 104,640 |  |
+| US | 92.75% | 93.02% | -0.29% | 18,142 |  |
+| CA | 97.72% | 97.30% | +0.44% | 5,227 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -83,8 +86,8 @@
 
 | Country | AR Tier | Prev Volume | Curr Volume | Volume Δ | Impact |
 | ------- | ------- | ----------- | ----------- | -------- | ------ |
-| US | High (>92%) | 492,811 | 511,272 | +3.7% | Stable |
-| CA | High (>92%) | 103,253 | 104,640 | +1.3% | Stable |
+| US | High (>92%) | 17,669 | 18,142 | +2.7% | Stable |
+| CA | High (>92%) | 5,843 | 5,227 | -10.5% | Stable |
 
 ---
 
@@ -97,4 +100,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-21*
+*Report: 2026-04-22*
