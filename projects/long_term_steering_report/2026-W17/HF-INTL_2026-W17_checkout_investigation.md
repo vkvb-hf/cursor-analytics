@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by 1.00pp (37.09% → 36.09%) on 61,868 payment visits in 2026-W17, with the primary drop occurring at the Select Payment Method step.
+**Overall:** Payment Conversion Rate declined by -1.00pp (from 37.09% to 36.09%) on 61,868 payment visits in 2026-W17, breaching the monitoring threshold.
 
-**Funnel Analysis (GA Waterfall):**
+**Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | ≥ -0.50pp | -1.03pp | ⚠️ |
-| Click Submit Form | ≥ -0.50pp | -0.22pp | ✅ |
-| FE Validation Passed | ≥ -0.50pp | +0.06pp | ✅ |
-| Enter Fraud Service | ≥ -0.50pp | -0.30pp | ✅ |
-| Approved by Fraud Service | ≥ -0.50pp | +0.32pp | ✅ |
-| Call to PVS | ≥ -0.50pp | -0.19pp | ✅ |
-| Successful Checkout | ≥ -0.50pp | -0.49pp | ✅ |
+| Select Payment Method | Δ ≥ ±0.50pp | -1.03pp | ⚠️ |
+| Click Submit Form | Δ ≥ ±0.50pp | -0.22pp | ✅ |
+| FE Validation Passed | Δ ≥ ±0.50pp | +0.06pp | ✅ |
+| Enter Fraud Service | Δ ≥ ±0.50pp | -0.30pp | ✅ |
+| Approved by Fraud Service | Δ ≥ ±0.50pp | +0.32pp | ✅ |
+| Call to PVS | Δ ≥ ±0.50pp | -0.19pp | ✅ |
+| Successful Checkout | Δ ≥ ±0.50pp | -0.49pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary bottleneck:** GA funnel shows -1.03pp conversion drop at this step, exceeding the 0.50pp threshold
-- **NL experienced severe degradation:** PCR dropped -6.44pp (42.36% → 35.92%), driven by a -9.26pp decline at Select Payment Method in the GA funnel
-- **DE also declined significantly:** PCR fell -2.01pp (36.95% → 34.94%), with Select Payment Method down -1.66pp
-- **GB and NO showed positive performance:** GB improved +2.06pp and NO improved +4.84pp, partially offsetting losses
-- **Backend data anomaly detected:** Successful Checkout shows +16.99pp conversion gain and counts exceeding PVS Success, indicating potential data reconciliation issues
+- **Primary bottleneck at Select Payment Method:** GA funnel shows -1.03pp drop at payment method selection, accounting for the majority of the PCR decline
+- **NL experienced severe degradation:** PCR dropped -6.44pp driven by Select Payment Method conversion falling -9.26pp (from 64.96% to 55.70%)
+- **GB showed strong improvement:** PCR increased +2.06pp with Click Submit Form improving +1.98pp, partially offsetting overall decline
+- **Backend Checkout Attempt rates declined significantly across markets:** DE (-9.08pp), NL (-11.12pp), and NO (-8.35pp) all showed major drops in checkout attempt conversion from payment method listing
+- **All payment methods improved success rates:** Despite overall PCR decline, individual payment method success rates increased (e.g., Braintree_Paypal +12.04pp, Adyen_CreditCard +21.11pp), indicating the issue is upstream user engagement
 
-**Action:** Investigate — Focus on the Select Payment Method step degradation, particularly in NL and DE markets. Review any recent UI/UX changes, payment method availability, or loading performance issues affecting payment method selection.
+**Action:** **Investigate** — Focus on NL market to understand the -9.26pp drop in Select Payment Method conversion; review any UI/UX changes, payment method availability, or technical issues affecting the payment selection step across HF-INTL.
 
 ---
 
@@ -62,8 +62,8 @@
 | Enter Fraud Service | 44,356 | 40,922 | -3,434 | -7.7% | 96.84% | 96.33% | -0.51pp |
 | Approved by Fraud Service | 40,911 | 37,878 | -3,033 | -7.4% | 92.23% | 92.56% | +0.33pp |
 | PVS Attempt | 37,314 | 34,080 | -3,234 | -8.7% | 91.21% | 89.97% | -1.23pp |
-| PVS Success | 36,244 | 32,629 | -3,615 | -10.0% | 97.13% | 95.74% | -1.39pp |
-| **Successful Checkout** | 34,049 | 36,198 | 2,149 | 6.3% | 93.94% | 110.94% | +16.99pp |
+| PVS Success | 36,244 | 32,944 | -3,300 | -9.1% | 97.13% | 96.67% | -0.47pp |
+| **Successful Checkout** | 34,049 | 36,198 | 2,149 | 6.3% | 93.94% | 109.88% | +15.93pp |
 | **PCR Rate** | | | | | 40.73% | 39.84% | **-0.88pp** |
 
 ### Payment Method Breakdown
@@ -157,10 +157,10 @@
 | Enter Fraud Service | 1,755 | 1,512 | -243 | -13.85pp | 99.72% | 92.70% | -7.01pp |
 | Approved by Fraud Service | 1,606 | 1,379 | -227 | -14.13pp | 91.51% | 91.20% | -0.31pp |
 | PVS Attempt | 1,604 | 1,371 | -233 | -14.53pp | 99.88% | 99.42% | -0.46pp |
-| PVS Success | 1,432 | 1,090 | -342 | -23.88pp | 89.28% | 79.50% | -9.77pp |
-| **Successful Checkout** | 1,601 | 1,483 | -118 | -7.37pp | 111.80% | 136.06% | +24.25pp |
+| PVS Success | 1,432 | 1,226 | -206 | -14.39pp | 89.28% | 89.42% | +0.15pp |
+| **Successful Checkout** | 1,601 | 1,483 | -118 | -7.37pp | 111.80% | 120.96% | +9.16pp |
 
-**Key Driver:** Successful Checkout (+24.25pp)
+**Key Driver:** Checkout Attempt (-11.12pp)
 
 ---
 
@@ -191,8 +191,8 @@
 | Enter Fraud Service | 9,680 | 9,582 | -98 | -1.01pp | 99.47% | 99.60% | +0.14pp |
 | Approved by Fraud Service | 9,147 | 9,114 | -33 | -0.36pp | 94.49% | 95.12% | +0.62pp |
 | PVS Attempt | 8,708 | 8,900 | +192 | +2.20pp | 95.20% | 97.65% | +2.45pp |
-| PVS Success | 8,441 | 8,653 | +212 | +2.51pp | 96.93% | 97.22% | +0.29pp |
-| **Successful Checkout** | 8,940 | 8,841 | -99 | -1.11pp | 105.91% | 102.17% | -3.74pp |
+| PVS Success | 8,441 | 8,654 | +213 | +2.52pp | 96.93% | 97.24% | +0.30pp |
+| **Successful Checkout** | 8,940 | 8,841 | -99 | -1.11pp | 105.91% | 102.16% | -3.75pp |
 
 **Key Driver:** Checkout Attempt (-9.08pp)
 
@@ -238,4 +238,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

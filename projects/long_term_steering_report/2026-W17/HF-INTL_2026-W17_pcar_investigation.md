@@ -2,34 +2,34 @@
 
 **Metric:** Payment Checkout Approval Rate  
 **Period:** 2026-W16 → 2026-W17  
-**Observation:** 97.13% → 95.74% (-1.43%)  
+**Observation:** 97.13% → 96.67% (-0.47%)  
 **Volume:** 34,080 orders  
-**Significance:** Significant
+**Significance:** Not significant
 
 ## Executive Summary
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined significantly from 97.13% to 95.74% (-1.43%) in HF-INTL for 2026-W17, representing a notable drop below the 8-week average performance.
+**Overall:** Payment Checkout Approval Rate for HF-INTL declined by -0.47pp (97.13% → 96.67%) in 2026-W17, with 34,080 orders processed; this change is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Overall AR Trend | 8-week pattern | -1.43% WoW | ⚠️ Below recent highs (97.31% in W10) |
-| Country Performance | 4 countries flagged | BE -20.40%, NL -10.95%, SE -9.26% | ⚠️ Multiple markets impacted |
-| Payment Method | Others category | -16.90% | ⚠️ Alternative payment methods degraded |
-| Provider Analysis | Adyen across markets | Consistent declines | ⚠️ Provider-specific issue identified |
-| Mix Shift | Volume distribution | NZ -31.3%, NO -31.0% | ⚠️ Major volume shifts detected |
+| 8-Week Trend | Rate within historical range (95.21%-97.31%) | -0.47pp | ✅ |
+| Country Breakdown | BE declined -13.63pp, CH improved +5.71pp | ±2.5% threshold exceeded | ⚠️ |
+| Payment Method | All methods stable (<1% change) | -0.80pp max (Others) | ✅ |
+| Payment Provider | No significant changes flagged | - | ✅ |
+| Mix Shift | NZ -31.3%, NO -31.0% volume drops | Major shifts detected | ⚠️ |
 
 **Key Findings:**
-- **BE experienced the largest decline (-20.40%)**, driven by BcmcMobile payment method (59.04% vs 71.43% prior) processed through Adyen (-17.08%)
-- **Adyen is the common denominator** across all three declining markets (BE, NL, SE), with approval rates dropping 12-21% for local payment methods (BcmcMobile, iDEAL, Klarna)
-- **NL iDEAL transactions** dropped from 90.76% to 77.49% (-14.62%), impacting 1,026 orders through Adyen
-- **SE Klarna approvals** fell sharply from 80.44% to 63.33% (-21.27%), with Adyen processing showing identical decline
-- **CH showed improvement (+5.71%)** with ApplePay and CreditCard via ProcessOut recovering, coinciding with reduced fraud-related declines (-1.34pp)
+- BE experienced a significant decline of -13.63pp (93.64% → 80.88%), driven primarily by BcmcMobile at 69.71% approval rate with 647 orders processed via Adyen
+- CH showed improvement of +5.71pp (93.96% → 99.32%), with ApplePay +6.87pp and ProcessOut +6.94pp, accompanied by reduced fraud-related declines (-1.34pp)
+- NZ and NO experienced major volume drops (-31.3% and -31.0% respectively), though both remain in the High AR tier
+- BE decline reasons show 99.54% categorized as "Others" with no clear pattern in specific decline codes, requiring further investigation
+- Overall rate remains within the 8-week historical range of 95.21%-97.31%
 
-**Action:** **Escalate** — Immediate investigation required into Adyen's processing of local European payment methods (BcmcMobile, iDEAL, Klarna). Contact Adyen technical support to identify any configuration changes, outages, or policy updates affecting BE, NL, and SE markets during W17.
+**Action:** Investigate — Priority focus on BE/BcmcMobile/Adyen pathway to identify root cause of -13.63pp decline; monitor NZ and NO volume recovery
 
 ---
 
@@ -39,7 +39,7 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W17 | 95.74% | 34,080 | -1.43% ← REPORTED CHANGE |
+| 2026-W17 | 96.67% | 34,080 | -0.47% ← REPORTED CHANGE |
 | 2026-W16 | 97.13% | 37,314 | +1.05% |
 | 2026-W15 | 96.12% | 36,514 | +0.13% |
 | 2026-W14 | 96.0% | 31,465 | +0.83% |
@@ -54,13 +54,15 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| BE | 74.54% | 93.64% | -20.40% | 1,088 | ⚠️ |
-| NL | 79.50% | 89.28% | -10.95% | 1,371 | ⚠️ |
-| SE | 81.50% | 89.81% | -9.26% | 1,070 | ⚠️ |
-| FR | 97.14% | 98.18% | -1.07% | 5,901 |  |
+| BE | 80.88% | 93.64% | -13.63% | 1,088 | ⚠️ |
+| FR | 97.15% | 98.18% | -1.05% | 5,901 |  |
+| AU | 97.64% | 98.46% | -0.83% | 3,012 |  |
+| DE | 97.24% | 96.93% | +0.31% | 8,900 |  |
+| SE | 91.50% | 89.81% | +1.87% | 1,070 |  |
+| LU | 100.00% | 97.62% | +2.44% | 62 |  |
 | CH | 99.32% | 93.96% | +5.71% | 148 | ⚠️ |
 
-**Countries exceeding ±2.5% threshold:** BE, NL, SE, CH
+**Countries exceeding ±2.5% threshold:** BE, CH
 
 ---
 
@@ -71,8 +73,8 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | Unknown | nan% | nan% | +nan% | 0 |  |
-| Others | 68.13% | 81.98% | -16.90% | 2,372 | ⚠️ |
-| Credit Card | 97.96% | 98.36% | -0.40% | 12,020 |  |
+| Others | 81.32% | 81.98% | -0.80% | 2,372 |  |
+| Credit Card | 97.98% | 98.36% | -0.39% | 12,020 |  |
 | Apple Pay | 97.7% | 97.95% | -0.26% | 11,535 |  |
 | Paypal | 97.73% | 97.89% | -0.16% | 8,153 |  |
 
@@ -91,8 +93,8 @@
 |-------|--------|--------|----------|----------|----------|------|
 | Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
 | Sepa | 100.00% | 0.00% | +0.00% | 1 | 0 |  |
-| BcmcMobile | 59.04% | 71.43% | -17.34% | 647 | 154 | ⚠️ |
 | Paypal | 94.37% | 97.60% | -3.31% | 71 | 125 |  |
+| BcmcMobile | 69.71% | 71.43% | -2.41% | 647 | 154 |  |
 | ApplePay | 95.97% | 96.25% | -0.29% | 124 | 240 |  |
 | CreditCard | 98.78% | 97.82% | +0.97% | 245 | 551 |  |
 
@@ -101,7 +103,7 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
 | Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Adyen | 59.23% | 71.43% | -17.08% | 650 | 154 | ⚠️ |
+| Adyen | 69.85% | 71.43% | -2.22% | 650 | 154 |  |
 | Braintree | 95.38% | 96.71% | -1.37% | 195 | 365 |  |
 | ProcessOut | 98.77% | 97.82% | +0.96% | 243 | 551 |  |
 
@@ -109,84 +111,13 @@
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| Others | 1,084 | 1,062 | 99.63% | 99.25% | +0.38 |
+| Others | 1,083 | 1,062 | 99.54% | 99.25% | +0.29 |
 | Fraud, Lost/Stolen Card, Security | 2 | 4 | 0.18% | 0.37% | -0.19 |
 | Policy, Lifecycle, Revocation, Limit Exceeded | 1 | 2 | 0.09% | 0.19% | -0.10 |
 | CVV/CVC Mismatch | 0 | 1 | 0.00% | 0.09% | -0.09 |
-| PayPal Declined, Revoked, Payer Issue | 1 | 1 | 0.09% | 0.09% | +0.00 |
+| PayPal Declined, Revoked, Payer Issue | 2 | 1 | 0.18% | 0.09% | +0.09 |
 
-**Root Cause:** BcmcMobile + Adyen
-
----
-
-## L2: NL Deep-Dive
-
-### PaymentMethod
-
-| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
-|-------|--------|--------|----------|----------|----------|------|
-|  | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Sepa | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| IDeal | 77.49% | 90.76% | -14.62% | 1,026 | 1,147 | ⚠️ |
-| Paypal | 92.86% | 95.65% | -2.92% | 14 | 23 |  |
-| ApplePay | 99.31% | 99.45% | -0.14% | 145 | 181 |  |
-| CreditCard | 100.00% | 100.00% | +0.00% | 51 | 74 |  |
-| Klarna | 64.44% | 64.25% | +0.31% | 135 | 179 |  |
-
-### PaymentProvider
-
-| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
-|-------|--------|--------|----------|----------|----------|------|
-| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| NoPayment | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Adyen | 75.97% | 87.18% | -12.86% | 1,161 | 1,326 | ⚠️ |
-| Braintree | 98.74% | 99.02% | -0.28% | 159 | 204 |  |
-| ProcessOut | 100.00% | 100.00% | +0.00% | 51 | 74 |  |
-
-### Decline Reasons
-
-| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
-|--------|------------|------------|--------|--------|------|
-| Fraud, Lost/Stolen Card, Security | 1 | 1 | 0.07% | 0.06% | +0.01 |
-| Others | 1,370 | 1,603 | 99.93% | 99.94% | -0.01 |
-
-**Root Cause:** IDeal + Adyen
-
----
-
-## L2: SE Deep-Dive
-
-### PaymentMethod
-
-| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
-|-------|--------|--------|----------|----------|----------|------|
-| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Klarna | 63.33% | 80.44% | -21.27% | 529 | 639 | ⚠️ |
-| ApplePay | 99.22% | 99.32% | -0.10% | 256 | 293 |  |
-| Paypal | 100.00% | 100.00% | +0.00% | 14 | 17 |  |
-| CreditCard | 99.26% | 98.56% | +0.71% | 271 | 347 |  |
-
-### PaymentProvider
-
-| Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
-|-------|--------|--------|----------|----------|----------|------|
-| Data not available | 0.00% | 0.00% | +0.00% | 0 | 0 |  |
-| Adyen | 63.33% | 80.44% | -21.27% | 529 | 639 | ⚠️ |
-| Braintree | 99.26% | 99.35% | -0.10% | 270 | 310 |  |
-| ProcessOut | 99.26% | 98.56% | +0.71% | 271 | 347 |  |
-
-### Decline Reasons
-
-| Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
-|--------|------------|------------|--------|--------|------|
-| Others | 1,069 | 1,290 | 99.91% | 99.54% | +0.37 |
-| PayPal Declined, Revoked, Payer Issue | 0 | 2 | 0.00% | 0.15% | -0.15 |
-| Policy, Lifecycle, Revocation, Limit Exceeded | 0 | 2 | 0.00% | 0.15% | -0.15 |
-| 3DS Authentication Failed/Required | 0 | 1 | 0.00% | 0.08% | -0.08 |
-| Fraud, Lost/Stolen Card, Security | 1 | 1 | 0.09% | 0.08% | +0.02 |
-
-**Root Cause:** Klarna + Adyen
+**Root Cause:** Requires investigation
 
 ---
 
@@ -251,11 +182,9 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| BE | ↓ -20.40% | BcmcMobile -17.3% | Adyen -17.1% | → Stable | BcmcMobile + Adyen |
-| NL | ↓ -10.95% | IDeal -14.6% | Adyen -12.9% | → Stable | IDeal + Adyen |
-| SE | ↓ -9.26% | Klarna -21.3% | Adyen -21.3% | → Stable | Klarna + Adyen |
+| BE | ↓ -13.63% | → Stable | → Stable | → Stable | Requires investigation |
 | CH | ↑ +5.71% | ApplePay +6.9% | ProcessOut +6.9% | Fraud, Lost/Stolen Card, Security -1.34pp | ApplePay + ProcessOut + Fraud, |
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

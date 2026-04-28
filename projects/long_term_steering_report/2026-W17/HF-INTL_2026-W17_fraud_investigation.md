@@ -2,7 +2,7 @@
 
 **Metric:** Fraud Approval Rate  
 **Period:** 2026-W16 → 2026-W17  
-**Observation:** 91.77% → 92.23% (+0.50%)  
+**Observation:** 91.99% → 92.23% (+0.26%)  
 **Volume:** 42,244 customers reaching fraud service  
 **Significance:** Not significant
 
@@ -10,28 +10,25 @@
 
 ## Executive Summary
 
-**Overall:** The Fraud Approval Rate (FAR) for HF-INTL improved slightly from 91.77% to 92.23% (+0.46pp) in 2026-W17, a statistically non-significant change within normal operating variance.
+**Overall:** The Fraud Approval Rate (FAR) for HF-INTL increased slightly from 91.99% to 92.23% (+0.24pp) in 2026-W17, a change deemed not statistically significant with volume of 42,244 customers reaching fraud service.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: Overall FAR | 91.77% → 92.23% | +0.46pp | ✅ |
-| L0: Duplicate Rate | 33.87% → 34.60% | +0.73pp | ✅ |
-| L0: Duplicate Block | 6.79% → 6.47% | -0.32pp | ✅ |
-| L0: PF Block | 0.26% → 0.35% | +0.09pp | ✅ |
-| L1: Country Outliers | 4 countries exceed ±2.5% | BE, IE, DK, NZ | ⚠️ |
-| L1: Channel Category | Paid stable, Referral -1.43% | Minor shift | ✅ |
-| L2: Referral Channel | Multiple countries flagged | Elevated blocks | ⚠️ |
+| L0: HF-INTL Trend | 8-week stability | +0.26% WoW | ✅ |
+| L1: Country Scan | ±2.5% threshold | IE +2.62%, DK +3.47%, NZ -4.62% | ⚠️ |
+| L1: Channel Category | ±2.5% threshold | Paid +0.16%, Referral -1.55% | ✅ |
+| L2: Country Deep-Dives | Referral channel pattern | Multiple countries show Referral declines | ⚠️ |
 
 **Key Findings:**
-- BE showed the largest positive FAR movement (+5.10pp), driven by a sharp decrease in duplicate rate (-47.83%) and duplicate block rate (-58.99%)
-- NZ experienced the largest FAR decline (-4.52pp), with the Referral channel showing increased duplicate block rates (+46.23%) and elevated PF block (+85.90%)
-- Referral channel consistently underperforms Paid channel across all markets, with FAR gap of ~24pp (73.50% vs 97.85% overall)
-- LU Referral channel shows extreme volatility with FAR dropping -36.11pp (60.87% → 38.89%), though on very low volume (18 customers)
-- DK and IE improvements appear driven by reduced duplicate and PF blocking activity
+- **NZ experienced the largest FAR decline (-4.62pp)**, driven by Referral channel (-5.39pp) with increased Dup Block rates (+6.92pp) and elevated Dup Rate (+7.11%)
+- **DK and IE showed significant FAR improvements** (+3.47pp and +2.62pp respectively), correlating with decreased Dup Block rates (-29.42% and -22.49%)
+- **Referral channel underperforms across all countries**, with FAR ranging from 38.89% (LU) to 78.24% (NO), consistently 20-50pp below Paid channel performance
+- **LU shows extreme volatility** with Paid channel at 100% FAR (+5.06pp) but Referral collapsing to 38.89% (-36.11pp) on very low volumes (18-64 customers)
+- **Dup Rate increased globally** (+1.48pp to 34.60%), with AU (+3.95%), DE (+6.22%), and NZ (+7.11%) showing the largest increases
 
-**Action:** Monitor — The overall change is not statistically significant and falls within the 8-week variance range (91.67%-92.38%). Continue tracking NZ Referral channel for potential escalation if blocking rates persist.
+**Action:** **Monitor** – The overall FAR change is not significant and within normal variance. Continue monitoring NZ Referral channel for sustained decline patterns and LU for volume stabilization before drawing conclusions from extreme percentage swings.
 
 ---
 
@@ -41,14 +38,14 @@
 
 | Week | FAR % | Dup Rate % | Dup Block % | PF Block % | Volume | Δ FAR % |
 |------|-------|------------|-------------|------------|--------|---------|
-| 2026-W17 | 92.23% | 34.60% | 6.47% | 0.35% | 42,244 | +0.50% ← REPORTED CHANGE |
-| 2026-W16 | 91.77% | 33.87% | 6.79% | 0.26% | 44,014 | -0.39% |
-| 2026-W15 | 92.13% | 30.78% | 6.64% | 0.24% | 42,742 | +0.50% |
-| 2026-W14 | 91.67% | 29.90% | 6.93% | 0.22% | 37,155 | -0.11% |
-| 2026-W13 | 91.77% | 30.36% | 6.46% | 0.26% | 46,628 | -0.19% |
+| 2026-W17 | 92.23% | 34.60% | 6.47% | 0.35% | 42,244 | +0.26% ← REPORTED CHANGE |
+| 2026-W16 | 91.99% | 33.12% | 6.63% | 0.25% | 45,020 | -0.15% |
+| 2026-W15 | 92.13% | 30.78% | 6.63% | 0.24% | 42,738 | +0.51% |
+| 2026-W14 | 91.66% | 29.90% | 6.93% | 0.22% | 37,155 | -0.12% |
+| 2026-W13 | 91.77% | 30.36% | 6.46% | 0.26% | 46,625 | -0.18% |
 | 2026-W12 | 91.94% | 30.50% | 6.76% | 0.19% | 44,675 | +0.24% |
-| 2026-W11 | 91.72% | 29.84% | 7.03% | 0.15% | 49,898 | -0.71% |
-| 2026-W10 | 92.38% | 29.79% | 6.38% | 0.22% | 52,823 | - |
+| 2026-W11 | 91.72% | 29.84% | 7.03% | 0.15% | 49,897 | -0.71% |
+| 2026-W10 | 92.38% | 29.78% | 6.37% | 0.22% | 52,821 | - |
 
 ---
 
@@ -56,22 +53,22 @@
 
 | Country | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
 |---------|------|-------|-----|------------|-----|--------|------|
-| BE | 2026-W16 | 91.54% | - | 31.47% | - | 1,147 |  |
-| BE | 2026-W17 | 96.21% | +5.10% | 16.42% | -47.83% | 2,351 | ⚠️ |
-| FR | 2026-W16 | 85.58% | - | 27.90% | - | 7,537 |  |
-| FR | 2026-W17 | 86.60% | +1.19% | 28.21% | +1.10% | 6,806 |  |
-| AU | 2026-W16 | 92.68% | - | 37.19% | - | 3,635 |  |
-| AU | 2026-W17 | 91.06% | -1.75% | 38.71% | +4.08% | 3,725 |  |
-| DE | 2026-W16 | 94.33% | - | 33.32% | - | 9,586 |  |
-| DE | 2026-W17 | 94.77% | +0.47% | 35.37% | +6.15% | 9,520 |  |
-| IE | 2026-W16 | 89.98% | - | 25.02% | - | 1,647 |  |
-| IE | 2026-W17 | 92.34% | +2.62% | 24.26% | -3.02% | 1,789 | ⚠️ |
-| DK | 2026-W16 | 89.09% | - | 32.07% | - | 1,347 |  |
-| DK | 2026-W17 | 92.50% | +3.83% | 32.72% | +2.01% | 1,186 | ⚠️ |
-| NZ | 2026-W16 | 89.42% | - | 35.86% | - | 1,068 |  |
-| NZ | 2026-W17 | 85.38% | -4.52% | 38.51% | +7.39% | 766 | ⚠️ |
+| AU | 2026-W16 | 92.82% | - | 37.24% | - | 3,636 |  |
+| AU | 2026-W17 | 91.06% | -1.90% | 38.71% | +3.95% | 3,725 |  |
+| FR | 2026-W16 | 85.67% | - | 27.87% | - | 7,538 |  |
+| FR | 2026-W17 | 86.60% | +1.08% | 28.21% | +1.21% | 6,806 |  |
+| IE | 2026-W16 | 89.99% | - | 25.00% | - | 1,648 |  |
+| IE | 2026-W17 | 92.34% | +2.62% | 24.26% | -2.96% | 1,789 | ⚠️ |
+| DE | 2026-W16 | 94.34% | - | 33.30% | - | 9,584 |  |
+| DE | 2026-W17 | 94.77% | +0.45% | 35.37% | +6.22% | 9,520 |  |
+| DK | 2026-W16 | 89.39% | - | 32.12% | - | 1,348 |  |
+| DK | 2026-W17 | 92.50% | +3.47% | 32.72% | +1.85% | 1,186 | ⚠️ |
+| NZ | 2026-W16 | 89.51% | - | 35.96% | - | 1,068 |  |
+| NZ | 2026-W17 | 85.38% | -4.62% | 38.51% | +7.11% | 766 | ⚠️ |
+| CH | 2026-W16 | 90.30% | - | 13.33% | - | 165 |  |
+| CH | 2026-W17 | 88.10% | -2.44% | 11.90% | -10.71% | 168 |  |
 
-**Countries exceeding ±2.5% threshold:** BE, IE, DK, NZ
+**Countries exceeding ±2.5% threshold:** IE, DK, NZ
 
 ---
 
@@ -79,10 +76,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 97.60% | - | 34.73% | - | 32,875 |  |
-| Paid | 2026-W17 | 97.85% | +0.25% | 35.26% | +1.53% | 32,500 |  |
-| Referral | 2026-W16 | 74.57% | - | 31.35% | - | 11,139 |  |
-| Referral | 2026-W17 | 73.50% | -1.43% | 32.42% | +3.42% | 9,744 |  |
+| Paid | 2026-W16 | 97.69% | - | 33.71% | - | 33,892 |  |
+| Paid | 2026-W17 | 97.85% | +0.16% | 35.25% | +4.57% | 32,499 |  |
+| Referral | 2026-W16 | 74.66% | - | 31.31% | - | 11,128 |  |
+| Referral | 2026-W17 | 73.50% | -1.55% | 32.43% | +3.57% | 9,745 |  |
 
 ---
 
@@ -92,12 +89,12 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 97.53% | - | 21.97% | - | 0.45% | - | 0.00% | - | 446 |  |
-| Paid | 2026-W17 | 97.84% | +0.31% | 28.13% | +28.00% | 0.72% | +60.82% | 0.00% | - | 416 |  |
+| Paid | 2026-W16 | 97.76% | - | 21.97% | - | 0.45% | - | 0.00% | - | 446 |  |
+| Paid | 2026-W17 | 97.84% | +0.08% | 28.13% | +28.00% | 0.72% | +60.82% | 0.00% | - | 416 |  |
 | Referral | 2026-W16 | 70.07% | - | 26.28% | - | 24.09% | - | 0.00% | - | 137 |  |
 | Referral | 2026-W17 | 75.40% | +7.60% | 24.60% | -6.37% | 22.22% | -7.74% | 0.00% | - | 126 | ⚠️ |
 
-**Analysis:** The HF-INTL Fraud Approval Rate increase of +0.46pp in 2026-W17 represents normal week-over-week fluctuation, with the metric remaining within its established 8-week operating band. Country-level variance is notable in BE (positive) and NZ (negative), both driven primarily by changes in duplicate detection and blocking behavior within the Referral channel. No immediate action is required, but the NZ Referral segment warrants continued monitoring given the sustained elevation in blocking metrics.
+**Analysis:** The +0.24pp increase in HF-INTL Fraud Approval Rate represents normal week-over-week fluctuation within the established 91.66%-92.38% range observed over the past 8 weeks. While three countries (IE, DK, NZ) exceeded the ±2.5% threshold, the opposing directions largely offset at the aggregate level, and the Referral channel's structural underperformance remains a known pattern rather than a new development. No immediate escalation is required, but the NZ market warrants continued observation given its combination of declining FAR and increasing duplicate-related blocks.
 
 ---
 
@@ -107,10 +104,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 97.88% | - | 36.08% | - | 0.74% | - | 0.50% | - | 2,977 |  |
-| Paid | 2026-W17 | 97.20% | -0.70% | 38.40% | +6.43% | 0.80% | +8.44% | 1.27% | +151.81% | 2,995 |  |
-| Referral | 2026-W16 | 69.15% | - | 42.25% | - | 29.33% | - | 0.00% | - | 658 |  |
-| Referral | 2026-W17 | 65.89% | -4.71% | 40.00% | -5.32% | 31.78% | +8.35% | 0.27% | - | 730 | ⚠️ |
+| Paid | 2026-W16 | 97.99% | - | 36.13% | - | 0.81% | - | 0.50% | - | 2,981 |  |
+| Paid | 2026-W17 | 97.20% | -0.81% | 38.40% | +6.28% | 0.80% | -0.47% | 1.27% | +152.15% | 2,995 |  |
+| Referral | 2026-W16 | 69.31% | - | 42.29% | - | 29.31% | - | 0.00% | - | 655 |  |
+| Referral | 2026-W17 | 65.89% | -4.94% | 40.00% | -5.42% | 31.78% | +8.42% | 0.27% | - | 730 | ⚠️ |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -131,31 +128,16 @@
 
 ---
 
-## L2: DK Deep-Dive
-
-### Channel Category
-
-| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 98.26% | - | 33.68% | - | 0.70% | - | 0.23% | - | 861 |  |
-| Paid | 2026-W17 | 99.41% | +1.17% | 32.82% | -2.55% | 0.24% | -66.24% | 0.12% | -49.35% | 850 |  |
-| Referral | 2026-W16 | 72.84% | - | 29.22% | - | 24.28% | - | 0.00% | - | 486 |  |
-| Referral | 2026-W17 | 75.00% | +2.97% | 32.44% | +11.03% | 22.32% | -8.07% | 0.00% | - | 336 | ⚠️ |
-
-**Analysis:** [AI_SUMMARY_PLACEHOLDER]
-
----
-
 ## L2: GB Deep-Dive
 
 ### Channel Category
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 98.60% | - | 42.60% | - | 0.67% | - | 0.26% | - | 10,195 |  |
-| Paid | 2026-W17 | 98.55% | -0.05% | 44.49% | +4.43% | 0.60% | -9.52% | 0.44% | +73.26% | 9,279 |  |
-| Referral | 2026-W16 | 74.26% | - | 35.99% | - | 24.32% | - | 0.04% | - | 2,673 |  |
-| Referral | 2026-W17 | 71.99% | -3.05% | 38.66% | +7.42% | 26.68% | +9.70% | 0.04% | +14.82% | 2,328 | ⚠️ |
+| Paid | 2026-W16 | 98.57% | - | 42.59% | - | 0.67% | - | 0.25% | - | 10,195 |  |
+| Paid | 2026-W17 | 98.54% | -0.02% | 44.48% | +4.44% | 0.60% | -9.51% | 0.44% | +80.21% | 9,278 |  |
+| Referral | 2026-W16 | 74.29% | - | 35.93% | - | 24.25% | - | 0.04% | - | 2,672 |  |
+| Referral | 2026-W17 | 72.01% | -3.07% | 38.69% | +7.68% | 26.66% | +9.95% | 0.04% | +14.73% | 2,329 | ⚠️ |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -167,25 +149,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 95.83% | - | 0.00% | - | 2.78% | - | 1.39% | - | 72 |  |
-| Paid | 2026-W17 | 100.00% | +4.35% | 17.19% | - | 0.00% | -100.00% | 0.00% | -100.00% | 64 | ⚠️ |
+| Paid | 2026-W16 | 95.18% | - | 1.20% | - | 3.61% | - | 1.20% | - | 83 |  |
+| Paid | 2026-W17 | 100.00% | +5.06% | 17.19% | +1326.56% | 0.00% | -100.00% | 0.00% | -100.00% | 64 | ⚠️ |
 | Referral | 2026-W16 | 60.87% | - | 0.00% | - | 13.04% | - | 0.00% | - | 23 |  |
 | Referral | 2026-W17 | 38.89% | -36.11% | 5.56% | - | 5.56% | -57.41% | 0.00% | - | 18 | ⚠️ |
-
-**Analysis:** [AI_SUMMARY_PLACEHOLDER]
-
----
-
-## L2: NL Deep-Dive
-
-### Channel Category
-
-| Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
-|----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 89.32% | - | 32.64% | - | 6.98% | - | 0.17% | - | 1,161 |  |
-| Paid | 2026-W17 | 91.61% | +2.56% | 32.01% | -1.95% | 7.09% | +1.67% | 0.17% | +0.43% | 1,156 | ⚠️ |
-| Referral | 2026-W16 | 90.63% | - | 24.13% | - | 7.47% | - | 0.00% | - | 576 |  |
-| Referral | 2026-W17 | 90.17% | -0.50% | 23.72% | -1.72% | 8.12% | +8.77% | 0.00% | - | 468 |  |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -212,10 +179,10 @@
 
 | Category | Week | FAR % | Δ % | Dup Rate % | Δ % | Dup Block % | Δ % | PF Block % | Δ % | Volume | Flag |
 |----------|------|-------|-----|------------|-----|-------------|-----|------------|-----|--------|------|
-| Paid | 2026-W16 | 97.30% | - | 33.29% | - | 0.12% | - | 1.06% | - | 853 |  |
-| Paid | 2026-W17 | 96.93% | -0.38% | 36.46% | +9.51% | 0.18% | +53.97% | 2.17% | +105.29% | 554 |  |
-| Referral | 2026-W16 | 58.14% | - | 46.05% | - | 37.67% | - | 0.00% | - | 215 |  |
-| Referral | 2026-W17 | 55.19% | -5.08% | 43.87% | -4.73% | 40.09% | +6.42% | 0.00% | - | 212 | ⚠️ |
+| Paid | 2026-W16 | 97.42% | - | 33.45% | - | 0.12% | - | 1.06% | - | 852 |  |
+| Paid | 2026-W17 | 96.93% | -0.50% | 36.46% | +9.00% | 0.18% | +53.79% | 2.17% | +105.05% | 554 |  |
+| Referral | 2026-W16 | 58.33% | - | 45.83% | - | 37.50% | - | 0.00% | - | 216 |  |
+| Referral | 2026-W17 | 55.19% | -5.39% | 43.87% | -4.29% | 40.09% | +6.92% | 0.00% | - | 212 | ⚠️ |
 
 **Analysis:** [AI_SUMMARY_PLACEHOLDER]
 
@@ -228,12 +195,11 @@
 
 | Country | FAR Change | Channel Driver | Dup Rate | Dup Block | PF Block | Root Cause |
 |---------|------------|----------------|----------|-----------|----------|------------|
-| BE | ↑ +5.10% | - | ↓ -47.83% | ↓ -58.99% | ↓ -60.97% | [AI_SUMMARY_PLACEHOLDER] |
-| IE | ↑ +2.62% | - | ↓ -3.02% | ↓ -22.54% | ↓ -100.00% | [AI_SUMMARY_PLACEHOLDER] |
-| DK | ↑ +3.83% | Referral ↑ +2.97% | → +2.01% | ↓ -29.47% | ↓ -43.21% | [AI_SUMMARY_PLACEHOLDER] |
-| NZ | ↓ -4.52% | Referral ↓ -5.08% | ↑ +7.39% | ↑ +46.23% | ↑ +85.90% | [AI_SUMMARY_PLACEHOLDER] |
+| IE | ↑ +2.62% | - | ↓ -2.96% | ↓ -22.49% | ↓ -100.00% | [AI_SUMMARY_PLACEHOLDER] |
+| DK | ↑ +3.47% | - | → +1.85% | ↓ -29.42% | ↓ -43.17% | [AI_SUMMARY_PLACEHOLDER] |
+| NZ | ↓ -4.62% | Referral ↓ -5.39% | ↑ +7.11% | ↑ +46.23% | ↑ +85.90% | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

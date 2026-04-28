@@ -8,27 +8,27 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined by -0.54% (91.23% → 90.74%) week-over-week, with the change flagged as not statistically significant across 40,613 orders.
+**Overall:** HF-INTL Reactivation Rate declined by -0.54% (from 91.23% to 90.74%) in W17, a statistically non-significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (90.08%-91.47%) | -0.49pp | ✅ |
-| L1: Country Breakdown | 2 countries exceed ±2.5% threshold (LU, NO) | LU -8.33%, NO -3.16% | ⚠️ |
-| L1: Dimension Scan | All payment methods within normal range | Max -0.70% (Apple Pay) | ✅ |
-| L2: LU Deep-Dive | Credit Card drop with expired card declines | -18.75% on 16 orders | ⚠️ |
-| L2: NO Deep-Dive | PayPal decline with 3DS auth issues rising | -7.41% on 41 orders | ⚠️ |
-| Mix Shift | Volume drops in GB (-25%), DE (-21.4%), NO (-29.8%) | High-tier countries declining | ⚠️ |
+| L0: 8-Week Trend | Rate within historical range (90.03%-91.47%) | -0.54% | ✅ |
+| L1: Country Scan | 2 countries exceed ±2.5% threshold (LU, NO) | LU -8.33%, NO -3.16% | ⚠️ |
+| L1: Dimension Scan | No payment methods exceed threshold | Max -0.70% | ✅ |
+| L2: LU Deep-Dive | Credit Card drop with low volume (16 orders) | -18.75% | ⚠️ |
+| L2: NO Deep-Dive | PayPal decline with low volume (41 orders) | -7.41% | ⚠️ |
+| Mix Shift | Volume drops in GB (-25%), DE (-21.4%), NO (-29.8%) | High-performing markets down | ⚠️ |
 
 **Key Findings:**
-- LU experienced an -8.33% rate drop driven by Credit Card transactions (-18.75%), with "Expired, Invalid, Closed Card, No Account" declines increasing by +8.33pp; however, total volume is minimal (36 orders)
-- NO declined -3.16% primarily due to PayPal performance (-7.41%), with 3DS Authentication failures rising from 0.87% to 2.33% (+1.46pp)
-- Significant volume shifts observed: GB (-25.0%), DE (-21.4%), and NO (-29.8%) all experienced substantial volume drops, which may mask underlying rate issues
-- Overall metric remains within the 8-week historical range (90.08%-91.47%), suggesting normal fluctuation rather than systemic degradation
-- No PaymentProvider-level anomalies detected across any market
+- LU experienced -8.33% decline driven by Credit Card failures (-18.75%), with "Expired, Invalid, Closed Card" decline reason increasing by +8.33pp, though total volume is minimal (36 orders)
+- NO declined -3.16% primarily due to PayPal performance drop (-7.41%) and increased 3DS Authentication failures (+1.46pp)
+- Significant volume reductions in high-performing markets: GB (-25.0%), DE (-21.4%), and NO (-29.8%) may be masking rate impacts
+- Global payment method performance remained stable with no dimension exceeding the ±2.5% threshold
+- The overall rate of 90.74% remains within the 8-week historical range (90.03%-91.47%)
 
-**Action:** Monitor — The overall change is not statistically significant, and country-level issues (LU, NO) involve low volumes. Continue monitoring NO for 3DS authentication trends and track whether high-performing markets (GB, DE) volume recovers next week.
+**Action:** Monitor - The decline is not statistically significant and affected countries have low volumes. Continue tracking LU Credit Card and NO PayPal performance in W18 to confirm if patterns persist.
 
 ---
 
@@ -176,4 +176,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

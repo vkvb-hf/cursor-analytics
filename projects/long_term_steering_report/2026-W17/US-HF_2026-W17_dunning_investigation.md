@@ -2,15 +2,13 @@
 
 **Metric:** Dunning Ship Rate  
 **Period:** 2026-W16 → 2026-W17  
-**Observation:** 47.59% → 47.69% (+0.10pp)  
-**Volume:** 14,281 eligible orders  
+**Observation:** 47.59% → 47.65% (+0.06pp)  
+**Volume:** 14,267 eligible orders  
 **Payday Phase:** Payday → Post-Payday
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Dunning Ship Rate improved marginally from 47.59% to 47.69% (+0.10pp) in W17, with volume increasing by 1.5% to 14,281 eligible orders during the Post-Payday phase.
+**Overall:** Dunning Ship Rate remained essentially stable at 47.65%, showing a marginal improvement of +0.06pp week-over-week despite the transition from Payday to Post-Payday phase.
 
 **Funnel Analysis:**
 
@@ -18,17 +16,17 @@
 | ---- | ----- | ------ | ------ |
 | Pre-Dunning AR | 92.97% → 92.99% | +0.0% | ✅ |
 | Discount % | 14.88% → 14.61% | -1.8% | ✅ |
-| PC2 | 49.9% → 51.85% | +3.9% | ✅ |
-| Ship Rate | 47.59% → 47.69% | +0.2% | ✅ |
+| PC2 | 49.89% → 51.83% | +3.9% | ✅ |
+| Ship Rate | 47.59% → 47.65% | +0.1% | ✅ |
 
 **Key Findings:**
-- PC2 showed the strongest improvement at +3.9%, rising from 49.9% to 51.85%, indicating better payment collection performance in the second payment cycle
-- Discount % decreased by 1.8% (14.88% → 14.61%), which positively contributed to Ship Rate per the decision framework (negative relationship)
-- Pre-Dunning AR remained essentially flat (+0.0%), showing stable authorization rates entering the dunning process
-- Volume increased modestly by 1.5% (14,073 → 14,281 orders) with no Simpson's Paradox detected in mix shift
-- The transition from Payday to Post-Payday phase did not negatively impact performance as might typically be expected
+- PC2 showed meaningful improvement (+3.9%), indicating stronger payment conversion in the second payment cycle
+- Discount % decreased by 1.8%, suggesting less aggressive discounting was needed to achieve similar ship rates
+- Pre-Dunning Approval Rate held steady at ~93%, maintaining a healthy pipeline of eligible orders
+- Volume increased slightly (+1.4%) from 14,071 to 14,267 orders, showing consistent demand
+- Ship Rate stability during Post-Payday phase (typically weaker) suggests underlying performance strength
 
-**Action:** Monitor — All metrics are trending positively or stable. Continue tracking PC2 improvement sustainability and Discount % trends.
+**Action:** Monitor — All metrics trending favorably with no degradation signals. Continue tracking PC2 improvement sustainability.
 
 ---
 
@@ -38,8 +36,8 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W16 | Payday | 14,073 | 47.59% | - | 92.97% | - | 14.88% | - | 49.9% | - |
-| 2026-W17 | Post-Payday | 14,281 | 47.69% | →+0.2% | 92.99% | →+0.0% | 14.61% | →-1.8% | 51.85% | ↑+3.9% |
+| 2026-W16 | Payday | 14,071 | 47.59% | - | 92.97% | - | 14.88% | - | 49.89% | - |
+| 2026-W17 | Post-Payday | 14,267 | 47.65% | →+0.1% | 92.99% | →+0.0% | 14.61% | →-1.8% | 51.83% | ↑+3.9% |
 
 ---
 
@@ -49,10 +47,10 @@
 
 | Week | Payday Phase | Volume | Ship Rate | Δ SR | Pre-Dunning AR | Δ AR | Discount % | Δ Disc | PC2 | Δ PC2 |
 |------|--------------|--------|-----------|------|----------------|------|------------|--------|-----|-------|
-| 2026-W16 | Payday | 14,073 | 47.59% | - | 92.97% | - | 14.88% | - | 49.9% | - |
-| 2026-W17 | Post-Payday | 14,281 | 47.69% | →+0.2% | 92.99% | →+0.0% | 14.61% | →-1.8% | 51.85% | ↑+3.9% |
+| 2026-W16 | Payday | 14,071 | 47.59% | - | 92.97% | - | 14.88% | - | 49.89% | - |
+| 2026-W17 | Post-Payday | 14,267 | 47.65% | →+0.1% | 92.99% | →+0.0% | 14.61% | →-1.8% | 51.83% | ↑+3.9% |
 
-**Analysis:** The US-HF cluster demonstrated healthy performance in W17 with a slight Ship Rate improvement driven primarily by a +3.9% increase in PC2 and a -1.8% reduction in Discount %. The positive trajectory during the Post-Payday phase suggests effective dunning operations; no immediate intervention is required, but continued monitoring of PC2 trends is recommended to confirm sustained improvement.
+**Analysis:** The US dunning performance demonstrated resilience during W17, maintaining ship rate stability (+0.06pp) despite the less favorable Post-Payday timing. The +3.9% improvement in PC2 combined with reduced discounting (-1.8%) indicates healthier payment behavior, suggesting operational efficiency gains rather than discount-driven conversions. No immediate action required; recommend continued monitoring to confirm PC2 trend sustainability.
 
 
 ---
@@ -71,7 +69,7 @@
 
 | Country | Ship Rate | Pre-Dunning AR | Discount % | PC2 | Payday Phase | Root Cause |
 |---------|-----------|----------------|------------|-----|--------------|------------|
-| US | →+0.2% | →+0.0% | →-1.8% | ↑+3.9% | Payday → Post-Payday | [AI_SUMMARY_PLACEHOLDER] |
+| US | →+0.1% | →+0.0% | →-1.8% | ↑+3.9% | Payday → Post-Payday | [AI_SUMMARY_PLACEHOLDER] |
 
 ---
 
@@ -79,11 +77,11 @@
 
 | Country | Prev Volume | Prev SR | Curr Volume | Curr SR | Volume Δ % | SR Tier |
 |---------|-------------|---------|-------------|---------|------------|---------|
-| US | 14,073 | 47.59% | 14,281 | 47.69% | 1.5% | Medium |
+| US | 14,071 | 47.59% | 14,267 | 47.65% | 1.4% | Medium |
 
 ---
 
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

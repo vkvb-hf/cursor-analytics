@@ -2,31 +2,33 @@
 
 **Metric:** Payment Approval Rate  
 **Period:** 2026-W16 → 2026-W17  
-**Observation:** 91.69% → 91.69% (+0.00%)  
+**Observation:** 91.69% → 91.67% (-0.02%)  
 **Volume:** 166,258 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate remained flat at 91.69% (+0.00%) week-over-week with 166,258 orders processed, representing no significant change from W16 to W17.
+## Executive Summary
+
+**Overall:** Payment Approval Rate remained essentially stable at 91.67% in W17, declining by just -0.02pp from 91.69% in W16, a statistically insignificant change across 166,258 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | 1_FirstRunAR | Baseline | +0.13% | ✅ |
-| 2_PreDunningAR | Pre-Dunning | +0.08% | ✅ |
-| 3_PostDunningAR | Post-Dunning | -0.20% | ✅ |
-| 6_PaymentApprovalRate | Final PAR | +0.00% | ✅ |
+| 2_PreDunningAR | vs Prior | +0.08% | ✅ |
+| 3_PostDunningAR | vs Prior | -0.16% | ⚠️ |
+| 6_PaymentApprovalRate | Final | -0.02% | ✅ |
 
 **Key Findings:**
-- **MR underperformance:** MR declined -2.98% (81.05% → from 83.54%), exceeding the ±2.5% threshold and flagged for attention
-- **MR root cause identified:** Increase in "Refused" decline reasons (+2.25pp) combined with payment method data anomaly (None values showing -100% change) driving the degradation
-- **MR provider impact:** Braintree in MR declined -2.53% (79.39% from 81.45%) with 14,718 volume; Unknown provider declined -3.20%
-- **Credit card weakness in MR:** Credit card approval rate dropped -3.79% (76.52% from 79.54%) representing the largest payment method decline
-- **Overall stability maintained:** Despite MR decline, other countries (CK +0.24%, GN +0.26%, AO +0.60%) offset the impact, keeping overall PAR unchanged
+- MR is the only country exceeding the ±2.5% threshold with a -3.04pp decline (83.54% → 81.00%), driven by increased "Refused" declines (+2.27pp)
+- In MR, credit_card payment method showed the largest degradation at -3.86% (79.54% → 76.47%) with 9,264 orders
+- MR's Braintree provider declined -2.60% (81.45% → 79.33%) across 14,710 transactions
+- PostDunningAR shows slight weakness at -0.16%, partially offsetting gains in earlier funnel stages
+- 8-week trend shows W17 rate (91.67%) remains elevated compared to W10-W14 range (90.65%-91.32%)
 
-**Action:** Monitor - While overall PAR is stable, recommend monitoring MR closely for continued "Refused" decline increases and investigate the payment method data quality issue (None values anomaly). If MR decline persists beyond W18, escalate to payment provider review with Braintree.
+**Action:** Monitor - The overall metric change is not significant. Continue monitoring MR's elevated refusal rates, particularly for credit card transactions through Braintree, but no immediate escalation required.
 
 ---
 
@@ -36,13 +38,13 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W17 | 91.69% | 166,258 | - ← REPORTED CHANGE |
+| 2026-W17 | 91.67% | 166,258 | -0.02% ← REPORTED CHANGE |
 | 2026-W16 | 91.69% | 164,785 | +0.04% |
 | 2026-W15 | 91.65% | 160,979 | +0.66% |
 | 2026-W14 | 91.05% | 165,018 | -0.27% |
 | 2026-W13 | 91.3% | 169,667 | -0.02% |
-| 2026-W12 | 91.32% | 169,891 | -0.28% |
-| 2026-W11 | 91.58% | 174,933 | +1.03% |
+| 2026-W12 | 91.32% | 169,891 | -0.27% |
+| 2026-W11 | 91.57% | 174,933 | +1.01% |
 | 2026-W10 | 90.65% | 179,965 | - |
 
 ---
@@ -51,11 +53,11 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| MR | 81.05% | 83.54% | -2.98% | 19,639 | ⚠️ |
+| MR | 81.00% | 83.54% | -3.04% | 19,639 | ⚠️ |
 | KN | 88.31% | 88.90% | -0.67% | 10,454 |  |
 | ER | 91.46% | 91.32% | +0.16% | 72,449 |  |
-| CK | 95.64% | 95.41% | +0.24% | 42,618 |  |
-| GN | 95.84% | 95.58% | +0.26% | 15,898 |  |
+| CK | 95.62% | 95.41% | +0.23% | 42,618 |  |
+| GN | 95.82% | 95.58% | +0.25% | 15,898 |  |
 | AO | 94.60% | 94.03% | +0.60% | 15,121 |  |
 
 **Countries exceeding ±2.5% threshold:** MR
@@ -68,20 +70,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Paypal | 95.76% | 95.91% | -0.16% | 25,020 |  |
-| Credit Card | 92.73% | 92.76% | -0.03% | 102,102 |  |
-| Others | 84.09% | 83.85% | +0.28% | 18,863 |  |
-| Apple Pay | 88.49% | 88.02% | +0.53% | 20,273 |  |
+| Paypal | 95.75% | 95.91% | -0.16% | 25,020 |  |
+| Credit Card | 92.71% | 92.76% | -0.05% | 102,103 |  |
+| Others | 84.06% | 83.85% | +0.26% | 18,862 |  |
+| Apple Pay | 88.48% | 88.02% | +0.52% | 20,273 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | nan% | 87.2% | +nan% | 0 |  |
-| Braintree | 92.03% | 92.18% | -0.17% | 108,854 |  |
+| Braintree | 92.02% | 92.18% | -0.18% | 108,846 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 732 |  |
-| Unknown | 83.39% | 83.12% | +0.32% | 18,057 |  |
-| Adyen | 94.44% | 94.07% | +0.39% | 38,615 |  |
+| Unknown | 83.37% | 83.12% | +0.30% | 18,062 |  |
+| Adyen | 94.42% | 94.07% | +0.37% | 38,618 |  |
 
 ---
 
@@ -91,11 +93,11 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 85.89% | 0.00% | +0.00% | 4,870 | 0 |  |
+| None | 85.81% | 0.00% | +0.00% | 4,869 | 0 |  |
 | None | 0.00% | 88.71% | -100.00% | 0 | 5,295 | ⚠️ |
-| credit_card | 76.52% | 79.54% | -3.79% | 9,264 | 8,361 |  |
-| applepay | 78.05% | 78.80% | -0.95% | 2,524 | 2,363 |  |
-| paypal | 89.55% | 90.15% | -0.66% | 2,920 | 2,529 |  |
+| credit_card | 76.47% | 79.54% | -3.86% | 9,264 | 8,361 |  |
+| applepay | 78.02% | 78.80% | -0.99% | 2,525 | 2,363 |  |
+| paypal | 89.52% | 90.15% | -0.70% | 2,920 | 2,529 |  |
 | cashcredit | 100.00% | 100.00% | +0.00% | 61 | 36 |  |
 
 ### PaymentProvider
@@ -103,18 +105,18 @@
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
 | ProcessOut | 0.00% | 0.00% | +0.00% | 0 | 2 |  |
-| Unknown | 85.86% | 88.70% | -3.20% | 4,860 | 5,293 |  |
-| Braintree | 79.39% | 81.45% | -2.53% | 14,718 | 13,253 |  |
+| Unknown | 85.81% | 88.70% | -3.27% | 4,868 | 5,293 |  |
+| Braintree | 79.33% | 81.45% | -2.60% | 14,710 | 13,253 |  |
 | No Payment | 100.00% | 100.00% | +0.00% | 61 | 36 |  |
 
 ### Decline Reasons
 
 | Reason | Curr Count | Prev Count | Curr % | Prev % | Δ pp |
 |--------|------------|------------|--------|--------|------|
-| 1. SUCCESSFULL | 15,918 | 15,525 | 81.05% | 83.54% | -2.49 |
-| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 2,501 | 1,948 | 12.73% | 10.48% | +2.25 |
-| Other reasons | 468 | 399 | 2.38% | 2.15% | +0.24 |
-| Insufficient Funds | 752 | 712 | 3.83% | 3.83% | +0.00 |
+| 1. SUCCESSFULL | 15,907 | 15,525 | 81.00% | 83.54% | -2.54 |
+| Refused - eg: Declined, Closed Card, Do Not Honor, etc. | 2,505 | 1,948 | 12.76% | 10.48% | +2.27 |
+| Other reasons | 472 | 399 | 2.40% | 2.15% | +0.26 |
+| Insufficient Funds | 755 | 712 | 3.84% | 3.83% | +0.01 |
 
 **Root Cause:** None + Refused
 
@@ -126,8 +128,8 @@
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 88.19% | 88.07% | +0.13% | 166,258 | 164,785 |  |
 | 2_PreDunningAR | 90.1% | 90.02% | +0.08% | 166,258 | 164,785 |  |
-| 3_PostDunningAR | 90.96% | 91.15% | -0.20% | 166,258 | 164,785 |  |
-| 6_PaymentApprovalRate | 91.69% | 91.69% | +0.00% | 166,258 | 164,785 |  |
+| 3_PostDunningAR | 91.03% | 91.18% | -0.16% | 166,258 | 164,785 |  |
+| 6_PaymentApprovalRate | 91.67% | 91.69% | -0.02% | 166,258 | 164,785 |  |
 
 ---
 
@@ -153,8 +155,8 @@
 
 | Country | AR Change | PaymentMethod | PaymentProvider | Decline Reason | Root Cause |
 | ------- | --------- | ------------- | --------------- | -------------- | ---------- |
-| MR | ↓ -2.98% | None -100.0% | → Stable | Refused - eg: Declined, Closed Card, Do Not Honor, etc. +2.25pp | None + Refused |
+| MR | ↓ -3.04% | None -100.0% | → Stable | Refused - eg: Declined, Closed Card, Do Not Honor, etc. +2.27pp | None + Refused |
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

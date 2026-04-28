@@ -2,31 +2,33 @@
 
 **Metric:** Payment Approval Rate  
 **Period:** 2026-W16 → 2026-W17  
-**Observation:** 97.39% → 97.45% (+0.06%)  
+**Observation:** 97.39% → 97.43% (+0.04%)  
 **Volume:** 794,598 orders  
 **Significance:** Not significant
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-INTL showed a marginal improvement of +0.06 pp (97.39% → 97.45%) in W17, a change that is not statistically significant.
+## Executive Summary
+
+**Overall:** Payment Approval Rate for HF-INTL showed a marginal improvement from 97.39% to 97.43% (+0.04pp) in W17, a statistically non-significant change within normal operating range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Stable | +0.00 pp | ✅ |
-| 2_PreDunningAR | Slight decline | -0.19 pp | ✅ |
-| 3_PostDunningAR | Decline | -0.35 pp | ⚠️ |
-| 6_PaymentApprovalRate | Improvement | +0.05 pp | ✅ |
+| 1_FirstRunAR | Stable | +0.00pp | ✅ |
+| 2_PreDunningAR | Slight decline | -0.19pp | ✅ |
+| 3_PostDunningAR | Slight decline | -0.30pp | ⚠️ |
+| 6_PaymentApprovalRate | Slight improvement | +0.04pp | ✅ |
 
 **Key Findings:**
-- The +0.06 pp change continues a 5-week upward trend, with PAR rising from 96.71% (W10) to 97.45% (W17), representing a cumulative +0.74 pp improvement
-- CH showed the largest country-level decline (-1.24 pp), but with only 2,253 orders, the volume impact is minimal
-- PostDunningAR declined by -0.35 pp, suggesting late-stage recovery efforts were less effective this week, though this was offset by upstream improvements
-- Apple Pay showed the strongest payment method improvement (+0.36 pp to 94.32%), while Credit Card also improved (+0.45 pp to 97.61%)
-- ProcessOut shows 0 volume in W17 (previously 96.46% rate), indicating this provider may have been deprecated or experienced an outage
+- The 8-week trend shows consistent improvement from 96.71% (W10) to 97.43% (W17), representing a +0.72pp gain over the period
+- CH experienced the largest country-level decline (-1.24pp), but with minimal volume impact (2,253 orders)
+- No countries exceeded the ±2.5% threshold requiring deep-dive investigation
+- Payment providers remain stable with Adyen (98.55%) and Braintree (97.44%) performing consistently
+- ProcessOut shows no volume in current week (0 orders), indicating potential provider transition or discontinuation
 
-**Action:** Monitor — No thresholds exceeded and the overall trend remains stable-to-positive. Continue tracking PostDunningAR performance and ProcessOut provider status.
+**Action:** Monitor — The change is not statistically significant and no dimensions exceeded investigation thresholds. Continue standard monitoring cadence.
 
 ---
 
@@ -36,9 +38,9 @@
 
 | Week | Rate % | Volume | Δ % vs Prior |
 |------|--------|--------|--------------|
-| 2026-W17 | 97.45% | 794,598 | +0.06% ← REPORTED CHANGE |
-| 2026-W16 | 97.39% | 804,152 | +0.12% |
-| 2026-W15 | 97.27% | 744,637 | +0.25% |
+| 2026-W17 | 97.43% | 794,598 | +0.04% ← REPORTED CHANGE |
+| 2026-W16 | 97.39% | 804,152 | +0.13% |
+| 2026-W15 | 97.26% | 744,637 | +0.24% |
 | 2026-W14 | 97.03% | 784,406 | -0.13% |
 | 2026-W13 | 97.16% | 842,482 | -0.09% |
 | 2026-W12 | 97.25% | 877,189 | +0.04% |
@@ -52,10 +54,10 @@
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
 | CH | 96.09% | 97.30% | -1.24% | 2,253 |  |
-| IE | 95.52% | 95.99% | -0.49% | 19,064 |  |
-| DK | 98.56% | 98.87% | -0.31% | 39,276 |  |
-| FR | 96.79% | 97.05% | -0.27% | 133,904 |  |
-| GB | 96.72% | 96.42% | +0.31% | 208,580 |  |
+| IE | 95.50% | 95.99% | -0.51% | 19,064 |  |
+| FR | 96.73% | 97.05% | -0.33% | 133,904 |  |
+| DK | 98.56% | 98.87% | -0.32% | 39,276 |  |
+| GB | 96.71% | 96.42% | +0.30% | 208,580 |  |
 | NZ | 94.28% | 93.75% | +0.57% | 19,229 |  |
 | AU | 96.30% | 95.70% | +0.62% | 93,894 |  |
 
@@ -69,20 +71,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 97.38% | 97.77% | -0.40% | 350,746 |  |
-| Paypal | 99.03% | 99.03% | +0.00% | 201,591 |  |
-| Apple Pay | 94.32% | 93.99% | +0.36% | 101,967 |  |
-| Credit Card | 97.61% | 97.17% | +0.45% | 140,294 |  |
+| Others | 97.35% | 97.77% | -0.43% | 350,591 |  |
+| Paypal | 99.02% | 99.03% | -0.01% | 201,607 |  |
+| Apple Pay | 94.3% | 93.99% | +0.33% | 101,975 |  |
+| Credit Card | 97.59% | 97.17% | +0.44% | 140,425 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | nan% | 96.46% | +nan% | 0 |  |
-| Braintree | 97.45% | 97.45% | +0.00% | 303,475 |  |
+| Braintree | 97.44% | 97.45% | -0.01% | 303,499 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 5,290 |  |
-| Adyen | 98.57% | 98.53% | +0.04% | 256,294 |  |
-| Unknown | 96.12% | 95.49% | +0.67% | 229,539 |  |
+| Adyen | 98.55% | 98.53% | +0.02% | 256,441 |  |
+| Unknown | 96.09% | 95.49% | +0.63% | 229,368 |  |
 
 ---
 
@@ -91,10 +93,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 92.7% | 92.71% | +0.00% | 794,598 | 804,152 |  |
+| 1_FirstRunAR | 92.7% | 92.7% | +0.00% | 794,598 | 804,152 |  |
 | 2_PreDunningAR | 94.63% | 94.81% | -0.19% | 794,598 | 804,152 |  |
-| 3_PostDunningAR | 96.29% | 96.63% | -0.35% | 794,598 | 804,152 |  |
-| 6_PaymentApprovalRate | 97.45% | 97.39% | +0.05% | 794,598 | 804,152 |  |
+| 3_PostDunningAR | 96.46% | 96.74% | -0.30% | 794,598 | 804,152 |  |
+| 6_PaymentApprovalRate | 97.43% | 97.39% | +0.03% | 794,598 | 804,152 |  |
 
 ---
 
@@ -129,4 +131,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

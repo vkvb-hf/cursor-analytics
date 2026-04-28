@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined by -0.29pp (27.55% → 27.26%) in HF-NA during 2026-W17, with payment visits down -23.3% (71,281 → 54,647).
+**Overall:** Payment Conversion Rate declined by -0.29pp (27.55% → 27.26%) in HF-NA for 2026-W17, with payment visits dropping 23.3% (71,281 → 54,647).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | vs threshold ±0.15pp | -0.57pp | ⚠️ |
-| Click Submit Form | vs threshold ±0.15pp | +0.15pp | ✅ |
-| FE Validation Passed | vs threshold ±0.15pp | +0.17pp | ✅ |
-| Enter Fraud Service | vs threshold ±0.15pp | +0.02pp | ✅ |
-| Approved by Fraud Service | vs threshold ±0.15pp | +0.88pp | ✅ |
-| Call to PVS | vs threshold ±0.15pp | -0.75pp | ⚠️ |
-| Successful Checkout | vs threshold ±0.15pp | -0.21pp | ⚠️ |
+| Select Payment Method | GA: Step conversion change | -0.57pp | ⚠️ |
+| Click Submit Form | GA: Step conversion change | +0.15pp | ✅ |
+| FE Validation Passed | GA: Step conversion change | +0.17pp | ⚠️ |
+| Enter Fraud Service | GA: Step conversion change | +0.02pp | ✅ |
+| Approved by Fraud Service | GA: Step conversion change | +0.88pp | ✅ |
+| Call to PVS | GA: Step conversion change | -0.75pp | ⚠️ |
+| Successful Checkout | GA: Step conversion change | -0.21pp | ⚠️ |
 
 **Key Findings:**
-- **Select Payment Method** showed the largest negative impact at -0.57pp, driven primarily by US (-1.42pp) while CA improved (+1.36pp)
-- **Call to PVS** conversion dropped -0.75pp, with "Blocked Verification: Payment method is blocked due to business reasons" accounting for 57.4% of PVS failures
-- **Fraud Service approval** improved significantly (+0.88pp), with US showing +1.46pp improvement in GA data
-- **Backend data anomaly:** Successful Checkout shows 102.95% conversion from PVS Success, indicating potential tracking or attribution issues
-- **All payment methods** showed strong rate improvements week-over-week (ProcessOut_CreditCard +13.10pp, Braintree_ApplePay +13.53pp), yet overall PCR declined
+- **Select Payment Method** is the primary negative driver at -0.57pp, indicating reduced user engagement at the first conversion step
+- **Call to PVS** shows a significant gap with -0.75pp drop, contributing to the overall PCR decline
+- **US market underperformed** with PCR dropping -0.79pp (25.83% → 25.04%), while **CA improved** +0.91pp (33.82% → 34.73%)
+- **Fraud approval rates improved** significantly (+0.88pp in GA, +0.99pp in Backend), with Adyen_CreditCard gap decreasing by 42 cases
+- **PVS failures** remain dominated by "Blocked Verification: Payment method blocked due to business reasons" at 56.2% of all failures
 
-**Action:** Investigate — Focus on the Select Payment Method drop in US and the PVS blocking issues. Also recommend data engineering review of the backend tracking anomaly showing >100% conversion rates.
+**Action:** Monitor - The PCR decline (-0.29pp) is modest and partially offset by improved fraud approval rates. Focus monitoring on US market Select Payment Method conversion and PVS call gap issues.
 
 ---
 
@@ -177,14 +177,14 @@
 
 | Error Type | 2026-W16 | 2026-W16 % | 2026-W17 | 2026-W17 % | Δ % |
 | ---------- | ----------- | ------------- | --------------- | ----------------- | ----- |
-| APPLEPAY_DISMISSED | 3,188 | 57.6% | 2,406 | 57.1% | -0.47pp |
-| terms_not_accepted | 2,257 | 40.8% | 1,822 | 43.2% | +2.48pp |
-| PAYPAL_POPUP_CLOSED | 464 | 8.4% | 368 | 8.7% | +0.35pp |
-| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 333 | 6.0% | 253 | 6.0% | -0.01pp |
-| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 205 | 3.7% | 139 | 3.3% | -0.40pp |
-| CC_TOKENISE_ERR | 162 | 2.9% | 116 | 2.8% | -0.17pp |
-| PAYPAL_TOKENISE_ERR | 46 | 0.8% | 55 | 1.3% | +0.47pp |
-| CC_NO_PREPAID_ERR | 9 | 0.2% | 12 | 0.3% | +0.12pp |
+| APPLEPAY_DISMISSED | 3,188 | 57.6% | 2,763 | 65.6% | +8.01pp |
+| terms_not_accepted | 2,257 | 40.8% | 2,076 | 49.3% | +8.51pp |
+| PAYPAL_POPUP_CLOSED | 464 | 8.4% | 418 | 9.9% | +1.54pp |
+| APPLEPAY_ADDRESS_ZIPCODE_VALIDATION_ERR | 333 | 6.0% | 295 | 7.0% | +0.99pp |
+| APPLEPAY_ADDRESS_EMPTY_NAME_ERR | 205 | 3.7% | 162 | 3.8% | +0.14pp |
+| CC_TOKENISE_ERR | 162 | 2.9% | 138 | 3.3% | +0.35pp |
+| PAYPAL_TOKENISE_ERR | 46 | 0.8% | 56 | 1.3% | +0.50pp |
+| CC_NO_PREPAID_ERR | 9 | 0.2% | 13 | 0.3% | +0.15pp |
 | APPLEPAY_MERCHANT_VALIDATION_ERR | 1 | 0.0% | 2 | 0.0% | +0.03pp |
 | VENMO_TOKENISE_ERR | 0 | 0.0% | 1 | 0.0% | +0.02pp |
 
@@ -226,21 +226,21 @@
 
 | Decline Reason | 2026-W16 | 2026-W16 % | 2026-W17 | 2026-W17 % | Δ Count | Δ % |
 | -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
-| Blocked Verification: Payment method is blocked due to business reasons | 665 | 54.4% | 533 | 57.4% | -132 | +3.00pp |
-| Failed Verification: Insufficient Funds | 231 | 18.9% | 162 | 17.4% | -69 | -1.45pp |
-| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 79 | 6.5% | 64 | 6.9% | -15 | +0.43pp |
-| Failed Verification: Issuer or Cardholder has put a restriction on the card | 64 | 5.2% | 40 | 4.3% | -24 | -0.93pp |
-| Failed Verification: Declined - Call Issuer | 39 | 3.2% | 27 | 2.9% | -12 | -0.28pp |
-| Failed Verification: Declined | 28 | 2.3% | 26 | 2.8% | -2 | +0.51pp |
-| Failed Verification: Card Issuer Declined CVV | 41 | 3.4% | 23 | 2.5% | -18 | -0.88pp |
-| Failed Verification: Processor Declined - Fraud Suspected | 31 | 2.5% | 19 | 2.0% | -12 | -0.49pp |
-| Failed Verification: Do Not Honor | 13 | 1.1% | 18 | 1.9% | +5 | +0.87pp |
-| Failed Verification: Closed Card | 32 | 2.6% | 17 | 1.8% | -15 | -0.79pp |
-| **Total PVS Failures** | **1,223** | **100%** | **929** | **100%** | **-294** | - |
+| Blocked Verification: Payment method is blocked due to business reasons | 665 | 54.0% | 593 | 56.2% | -72 | +2.18pp |
+| Failed Verification: Insufficient Funds | 231 | 18.8% | 186 | 17.6% | -45 | -1.14pp |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 79 | 6.4% | 76 | 7.2% | -3 | +0.78pp |
+| Failed Verification: Issuer or Cardholder has put a restriction on the card | 64 | 5.2% | 49 | 4.6% | -15 | -0.55pp |
+| Failed Verification: Declined | 28 | 2.3% | 32 | 3.0% | +4 | +0.76pp |
+| Failed Verification: Declined - Call Issuer | 39 | 3.2% | 31 | 2.9% | -8 | -0.23pp |
+| Failed Verification: Card Issuer Declined CVV | 41 | 3.3% | 28 | 2.7% | -13 | -0.68pp |
+| Failed Verification: Processor Declined - Fraud Suspected | 31 | 2.5% | 21 | 2.0% | -10 | -0.53pp |
+| Failed Verification: Closed Card | 32 | 2.6% | 20 | 1.9% | -12 | -0.70pp |
+| Failed Verification: Processor Declined | 22 | 1.8% | 20 | 1.9% | -2 | +0.11pp |
+| **Total PVS Failures** | **1,232** | **100%** | **1,056** | **100%** | **-176** | - |
 
 ---
 
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Pre-Dunning Acceptance Rate declined slightly from 94.81% to 94.63% (-0.19pp) on 794,598 orders in W17, a change marked as not statistically significant.
+**Overall:** Pre-Dunning Acceptance Rate for HF-INTL declined marginally from 94.81% to 94.63% (-0.19pp) in 2026-W17, a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
 | L0: 8-Week Trend | Rate within normal range (93.63%-94.90%) | -0.19pp | ✅ |
-| L1: Country Scan | NO flagged at +4.53% (above ±2.5% threshold) | +4.53pp | ⚠️ |
-| L1: Dimension Scan | No payment methods/providers exceed threshold | -1.26pp max | ✅ |
-| L2: NO Deep-Dive | ProcessOut volume dropped to 0; Unknown provider surged | -100%/+26.45pp | ⚠️ |
-| L3: Related Metrics | PostDunningAR declined -0.35pp; others stable | -0.35pp | ✅ |
-| Mix Shift | All countries show stable impact despite volume shifts | N/A | ✅ |
+| L1: Country Breakdown | NO exceeded ±2.5% threshold (+4.53%) | +4.53pp | ⚠️ |
+| L1: Dimension Scan | No payment methods/providers exceed threshold | -1.22pp max | ✅ |
+| L2: NO Deep-Dive | ProcessOut volume dropped to 0; Unknown provider surged | -100% / +26.51pp | ⚠️ |
+| L3: Related Metrics | All metrics stable, PostDunningAR -0.30pp | -0.30pp | ✅ |
+| Mix Shift | All countries stable, no significant volume shifts | - | ✅ |
 
 **Key Findings:**
-- NO showed a significant +4.53pp improvement in acceptance rate, flagged as the only country exceeding the ±2.5% threshold
-- ProcessOut payment provider volume in NO dropped from 13,027 to 0 orders (-100%), with traffic shifting to Unknown provider (96 → 13,388 orders)
-- Insufficient Funds decline reason in NO decreased from 9.31% to 5.53% (-3.78pp), contributing to the rate improvement
-- LU (-2.11pp) and CH (-1.77pp) showed notable declines but remain below the flagging threshold
-- PostDunningAR showed a slightly larger decline (-0.35pp) than PreDunningAR, suggesting downstream impact
+- NO showed a significant **improvement** of +4.53pp (89.15% → 93.19%), driven by a reduction in "Insufficient Funds" declines (-3.78pp)
+- ProcessOut payment provider volume in NO dropped from 13,027 to 0 orders, with traffic shifting to Unknown provider (96 → 13,382 orders)
+- The "None" payment method appeared in NO with 13,420 orders at 94.78% acceptance, suggesting a data classification or routing change
+- LU (-2.11pp) and CH (-1.77pp) showed declines but remain below the ±2.5% alert threshold
+- Overall volume decreased slightly from 804,152 to 794,598 orders (-1.2%)
 
-**Action:** Monitor - The overall change is not significant and NO's improvement appears driven by a provider migration (ProcessOut → Unknown). Recommend tracking ProcessOut status and confirming the provider switch was intentional.
+**Action:** **Monitor** - The overall decline is not significant and the flagged country (NO) actually improved. Recommend tracking the ProcessOut → Unknown provider migration in NO to ensure this routing change continues to perform well.
 
 ---
 
@@ -72,20 +72,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 95.24% | 96.45% | -1.26% | 350,746 |  |
-| Credit Card | 92.05% | 92.87% | -0.89% | 140,294 |  |
-| Apple Pay | 89.97% | 90.1% | -0.15% | 101,967 |  |
-| Paypal | 97.73% | 97.84% | -0.12% | 201,591 |  |
+| Others | 95.28% | 96.45% | -1.22% | 350,591 |  |
+| Credit Card | 91.96% | 92.87% | -0.98% | 140,425 |  |
+| Apple Pay | 89.95% | 90.1% | -0.16% | 101,975 |  |
+| Paypal | 97.72% | 97.84% | -0.13% | 201,607 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | nan% | 92.58% | +nan% | 0 |  |
-| Adyen | 95.21% | 95.78% | -0.59% | 256,294 |  |
-| Braintree | 95.13% | 95.37% | -0.26% | 303,475 |  |
-| Unknown | 93.2% | 93.24% | -0.04% | 229,539 |  |
+| Adyen | 95.16% | 95.77% | -0.64% | 256,441 |  |
+| Braintree | 95.11% | 95.37% | -0.27% | 303,499 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 5,290 |  |
+| Unknown | 93.27% | 93.25% | +0.02% | 229,368 |  |
 
 ---
 
@@ -95,10 +95,10 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |-------|--------|--------|----------|----------|----------|------|
-| None | 94.73% | 0.00% | +0.00% | 13,426 | 0 |  |
+| None | 94.78% | 0.00% | +0.00% | 13,420 | 0 |  |
 | None | 0.00% | 75.51% | -100.00% | 0 | 98 | ⚠️ |
 | cashcredit | 100.00% | 100.00% | +0.00% | 151 | 169 |  |
-| credit_card | 92.31% | 89.85% | +2.74% | 6,296 | 18,841 |  |
+| credit_card | 92.22% | 89.85% | +2.65% | 6,302 | 18,841 |  |
 | paypal | 92.50% | 89.76% | +3.05% | 1,360 | 1,377 |  |
 | applepay | 89.14% | 85.11% | +4.74% | 3,767 | 3,560 |  |
 
@@ -108,9 +108,9 @@
 |-------|--------|--------|----------|----------|----------|------|
 | ProcessOut | 0.00% | 90.11% | -100.00% | 0 | 13,027 | ⚠️ |
 | No Payment | 100.00% | 100.00% | +0.00% | 151 | 169 |  |
-| Adyen | 92.11% | 89.25% | +3.20% | 6,334 | 5,816 |  |
+| Adyen | 92.02% | 89.25% | +3.10% | 6,340 | 5,816 |  |
 | Braintree | 90.03% | 86.41% | +4.19% | 5,127 | 4,937 |  |
-| Unknown | 94.84% | 75.00% | +26.45% | 13,388 | 96 | ⚠️ |
+| Unknown | 94.88% | 75.00% | +26.51% | 13,382 | 96 | ⚠️ |
 
 ### Decline Reasons
 
@@ -130,10 +130,10 @@
 
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
-| 1_FirstRunAR | 92.7% | 92.71% | +0.00% | 794,598 | 804,152 |  |
+| 1_FirstRunAR | 92.7% | 92.7% | +0.00% | 794,598 | 804,152 |  |
 | 2_PreDunningAR | 94.63% | 94.81% | -0.19% | 794,598 | 804,152 |  |
-| 3_PostDunningAR | 96.29% | 96.63% | -0.35% | 794,598 | 804,152 |  |
-| 6_PaymentApprovalRate | 97.45% | 97.39% | +0.05% | 794,598 | 804,152 |  |
+| 3_PostDunningAR | 96.46% | 96.74% | -0.30% | 794,598 | 804,152 |  |
+| 6_PaymentApprovalRate | 97.43% | 97.39% | +0.03% | 794,598 | 804,152 |  |
 
 ---
 
@@ -170,4 +170,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

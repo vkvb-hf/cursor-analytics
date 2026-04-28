@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate for HF-NA declined slightly from 94.13% to 94.03% (-0.10pp) in W17, a statistically non-significant change within normal operating variance.
+**Overall:** Payment Approval Rate for HF-NA declined marginally from 94.13% to 94.03% (-0.10 pp) in W17, a statistically non-significant change within normal weekly variation.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | Baseline conversion | -0.10pp | ✅ |
-| 2_PreDunningAR | Pre-dunning recovery | -0.12pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.28pp | ⚠️ |
-| 6_PaymentApprovalRate | Final approval | -0.10pp | ✅ |
+| 1_FirstRunAR | Baseline | -0.10 pp | ✅ |
+| 2_PreDunningAR | Recovery | -0.13 pp | ✅ |
+| 3_PostDunningAR | Dunning | -0.27 pp | ⚠️ |
+| 6_PaymentApprovalRate | Final | -0.11 pp | ✅ |
 
 **Key Findings:**
-- The -0.10pp decline is within normal weekly fluctuation; the 8-week trend shows PAR has steadily improved from 93.64% (W10) to 94.03% (W17), gaining +0.39pp overall
-- CA showed the largest country-level movement at -0.39pp (95.75% → 95.37%), while US remained stable at +0.04pp
-- Post-dunning recovery (3_PostDunningAR) showed the steepest funnel decline at -0.28pp, suggesting slightly reduced dunning effectiveness this week
-- No payment method or provider exceeded the ±2.5% threshold; "Others" payment method showed the largest decline at -0.77pp but on moderate volume (105K orders)
-- ProcessOut provider shows no volume in W17 (0 orders vs. prior week activity), though this represents minimal impact given historical low volume
+- The -0.11 pp decline is well within normal fluctuation; the 8-week trend shows the rate has steadily improved from 93.64% (W10) to 94.03% (W17), representing a +0.39 pp gain over the period
+- CA experienced a -0.41 pp decline (95.75% → 95.35%) while US remained stable with a slight +0.03 pp improvement; neither country exceeded the ±2.5% threshold
+- PostDunningAR showed the largest step decline at -0.27 pp, suggesting dunning recovery was slightly less effective this week
+- "Others" payment method declined -0.79 pp (93.24% → 92.5%) and "Unknown" provider declined -0.80 pp (92.96% → 92.22%), the largest dimension-level drops observed
+- Mix shift analysis shows stable volume distribution across both US and CA with minimal movement (<1% volume change)
 
-**Action:** Monitor — No investigation required. The decline is not statistically significant, no dimensions exceeded alert thresholds, and the 8-week trend remains positive.
+**Action:** Monitor – No investigation required. The change is not statistically significant, no dimensions exceeded alert thresholds, and the overall 8-week trend remains positive.
 
 ---
 
@@ -51,8 +51,8 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| CA | 95.37% | 95.75% | -0.39% | 104,317 |  |
-| US | 94.62% | 94.59% | +0.04% | 508,019 |  |
+| CA | 95.35% | 95.75% | -0.41% | 104,317 |  |
+| US | 94.62% | 94.59% | +0.03% | 508,019 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -64,20 +64,20 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 92.53% | 93.24% | -0.77% | 105,242 |  |
+| Others | 92.5% | 93.24% | -0.79% | 105,192 |  |
 | Paypal | 96.53% | 96.52% | +0.01% | 62,032 |  |
-| Apple Pay | 89.14% | 89.08% | +0.07% | 69,057 |  |
-| Credit Card | 95.28% | 95.09% | +0.20% | 273,733 |  |
+| Apple Pay | 89.13% | 89.07% | +0.06% | 69,057 |  |
+| Credit Card | 95.28% | 95.09% | +0.20% | 273,783 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | nan% | 91.11% | +nan% | 0 |  |
-| Unknown | 92.25% | 92.96% | -0.77% | 101,418 |  |
-| Adyen | 95.41% | 95.72% | -0.32% | 25,697 |  |
+| Unknown | 92.22% | 92.96% | -0.80% | 101,371 |  |
+| Adyen | 95.41% | 95.72% | -0.33% | 25,715 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 3,500 |  |
-| Braintree | 94.36% | 94.33% | +0.03% | 379,449 |  |
+| Braintree | 94.36% | 94.33% | +0.03% | 379,478 |  |
 
 ---
 
@@ -87,9 +87,9 @@
 | Metric | Curr % | Prev % | Change % | Curr Vol | Prev Vol | Flag |
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 90.96% | 91.06% | -0.10% | 510,064 | 513,372 |  |
-| 2_PreDunningAR | 92.19% | 92.31% | -0.12% | 510,064 | 513,372 |  |
-| 3_PostDunningAR | 93.09% | 93.35% | -0.28% | 510,064 | 513,372 |  |
-| 6_PaymentApprovalRate | 94.03% | 94.13% | -0.10% | 510,064 | 513,372 |  |
+| 2_PreDunningAR | 92.19% | 92.31% | -0.13% | 510,064 | 513,372 |  |
+| 3_PostDunningAR | 93.13% | 93.38% | -0.27% | 510,064 | 513,372 |  |
+| 6_PaymentApprovalRate | 94.03% | 94.13% | -0.11% | 510,064 | 513,372 |  |
 
 ---
 
@@ -112,4 +112,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

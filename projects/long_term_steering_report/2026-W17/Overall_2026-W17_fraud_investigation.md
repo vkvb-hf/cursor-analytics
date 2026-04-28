@@ -1,22 +1,22 @@
 # Fraud Approval Rate - Overall Summary
 
 **Week:** 2026-W17  
-**Generated:** 2026-04-27 14:44  
+**Generated:** 2026-04-28 14:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Fraud Approval Rate performance was mixed across clusters in 2026-W17, with US-HF and HF-NA showing significant improvements (+1.84pp and +1.13pp respectively) while WL declined (-0.84pp) and other clusters remained stable. The most significant concern is the deteriorating Referral channel performance across multiple clusters, particularly the severe FAR collapse in CK Referral (-11.53pp) within WL and CA Referral (-7.88pp) within HF-NA, both driven by surging duplicate rates.
+Fraud Approval Rate performance was mixed across clusters in 2026-W17, with US-HF (+2.03%) and HF-NA (+1.19%) showing significant improvements while WL declined significantly (-1.08%). The most critical concern is the deteriorating Referral channel performance across multiple clusters, with WL's CK Referral FAR dropping 11.79pp alongside a 31.25% surge in duplicate rates, and similar patterns emerging in CA Referral (-8.12% FAR) and HF-INTL's NZ Referral (-5.39pp).
 
 ### Cluster Highlights
 
-- **US-HF:** FAR improved significantly by +1.84pp to 91.44%, driven by Paid channel gains (+2.33pp) and decreased PF Block Rate (-0.38pp), returning to the upper end of the 8-week range.
-- **HF-INTL:** FAR stable at 92.23% (+0.46pp, not significant), with BE showing strong improvement (+5.10pp) offset by NZ decline (-4.52pp) due to elevated Referral channel blocking.
-- **WL:** FAR declined by -0.84pp to 91.88%, driven by Referral channel degradation (-4.33pp) with CK Referral experiencing severe FAR collapse (-11.53pp) alongside a +30.36% duplicate rate surge.
-- **HF-NA:** FAR improved significantly by +1.13pp to 90.84%, led by US Paid channel strength (+2.17pp), though CA Referral requires investigation due to -7.88pp FAR decline and 34.18% Dup Block rate.
-- **RTE:** FAR stable at 94.05% (-0.20pp, not significant), with TK flagged for -6.18pp decline driven by duplicate blocking increases, though low volume (321 customers) limits overall impact.
+- **US-HF:** FAR improved significantly by +2.03% to 91.44%, driven by Paid channel gains (+2.34pp to 95.90%) and reduced PF Block rates, though Referral duplicate rate spiked +13.19% warranting monitoring.
+- **HF-INTL:** FAR remained stable at 92.23% (+0.26%, not significant), with NZ showing the largest decline (-4.62pp) driven by Referral channel deterioration while DK (+3.47pp) and IE (+2.62pp) improved.
+- **WL:** FAR declined significantly by -1.08% to 91.88%, driven by Referral channel deterioration (-4.59pp) with CK Referral showing critical FAR collapse (-11.79pp) and duplicate rate surge (+31.25%).
+- **HF-NA:** FAR improved significantly by +1.19% to 90.84%, led by US Paid channel strength (+2.03%), though CA Referral requires investigation due to FAR decline (-8.12%) and elevated duplicate block rate (34.18%).
+- **RTE:** FAR remained stable at 94.05% (-0.29%, not significant), with TK exceeding threshold (-6.18pp) due to duplicate block surges in both channels, though low volume (321 customers) amplifies volatility.
 
 ---
 

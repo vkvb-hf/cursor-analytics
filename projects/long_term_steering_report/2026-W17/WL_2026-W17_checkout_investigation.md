@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined significantly from 35.83% to 32.05% (-3.78pp) in 2026-W17, with payment visits decreasing 7.2% to 29,176 visits.
+**Overall:** Payment Conversion Rate declined significantly from 35.83% to 32.05% (-3.78pp) in 2026-W17, with payment visits decreasing by 7.2% (29,176 visits).
 
 **Funnel Analysis:**
 
@@ -18,20 +18,20 @@
 | ---- | ----- | ------ | ------ |
 | Select Payment Method | >1.89pp threshold | -3.27pp | ⚠️ |
 | Click Submit Form | >1.89pp threshold | -2.31pp | ⚠️ |
-| FE Validation Passed | <1.89pp threshold | +1.15pp | ✅ |
-| Enter Fraud Service | <1.89pp threshold | -0.21pp | ✅ |
-| Approved by Fraud Service | <1.89pp threshold | -1.12pp | ✅ |
-| Call to PVS | <1.89pp threshold | -0.07pp | ✅ |
-| Successful Checkout | <1.89pp threshold | -1.02pp | ✅ |
+| FE Validation Passed | Within threshold | +1.15pp | ✅ |
+| Enter Fraud Service | Within threshold | -0.21pp | ✅ |
+| Approved by Fraud Service | Within threshold | -1.12pp | ✅ |
+| Call to PVS | Within threshold | -0.07pp | ✅ |
+| Successful Checkout | Within threshold | -1.02pp | ✅ |
 
 **Key Findings:**
-- **Select Payment Method is the primary bottleneck:** Conversion dropped -3.27pp globally, with severe declines in CG (-14.37pp), GN (-13.84pp), and ER (-7.69pp)
-- **Click Submit Form shows secondary degradation:** -2.31pp drop globally, with CG (-4.11pp), ER (-4.16pp), and GN (-3.87pp) all experiencing significant form submission issues
-- **Backend data shows discrepancy:** Backend PCR remained stable (-0.13pp) while GA shows -3.78pp decline, suggesting potential tracking or session attribution differences
-- **All major payment methods improved significantly:** Braintree_ApplePay (+11.41pp), ProcessOut_CreditCard (+11.21pp), Braintree_Paypal (+12.42pp) all show strong gains in backend success rates
-- **Volume shift observed:** Payment Method Listed increased 14.5% in backend while Payment Visits decreased 7.2% in GA, indicating more users reaching payment page but fewer proceeding to selection
+- **Select Payment Method is the primary driver** of PCR decline across all analyzed countries: CG (-14.37pp), GN (-13.84pp), and ER (-7.69pp)
+- **CG experienced the largest PCR drop** (-12.90pp, from 47.43% to 34.53%) despite a 7.48% increase in payment visits
+- **Backend data shows contradictory trends**: Backend PCR remained stable (-0.13pp) while GA shows -3.78pp decline, and all payment methods show improved success rates (+9.33pp to +12.42pp)
+- **Click Submit Form shows secondary degradation** (-2.31pp overall), with CG (-4.11pp), GN (-3.87pp), and ER (-4.16pp) all experiencing drops
+- **Payment Method Listed increased 14.5%** in backend while Checkout Attempts remained flat (-0.2%), indicating users are seeing payment options but not initiating checkout
 
-**Action:** **Investigate** — The significant drop in Select Payment Method conversion across all three analyzed countries (CG, GN, ER) warrants immediate investigation into potential UI/UX changes, payment method display issues, or page load performance degradation that may be preventing users from selecting a payment method.
+**Action:** **Investigate** - The significant drop in Select Payment Method conversion across all countries suggests a potential UI/UX issue, page load problem, or A/B test affecting the payment method selection step. Cross-reference with deployment logs and investigate the discrepancy between GA and Backend tracking.
 
 ---
 
@@ -62,8 +62,8 @@
 | Enter Fraud Service | 14,379 | 14,296 | -83 | -0.6% | 99.72% | 99.36% | -0.36pp |
 | Approved by Fraud Service | 13,410 | 13,187 | -223 | -1.7% | 93.26% | 92.24% | -1.02pp |
 | PVS Attempt | 11,024 | 10,957 | -67 | -0.6% | 82.21% | 83.09% | +0.88pp |
-| PVS Success | 10,758 | 10,609 | -149 | -1.4% | 97.59% | 96.82% | -0.76pp |
-| **Successful Checkout** | 11,173 | 12,736 | 1,563 | 14.0% | 103.86% | 120.05% | +16.19pp |
+| PVS Success | 10,758 | 10,631 | -127 | -1.2% | 97.59% | 97.02% | -0.56pp |
+| **Successful Checkout** | 11,173 | 12,736 | 1,563 | 14.0% | 103.86% | 119.80% | +15.94pp |
 | **PCR Rate** | | | | | 29.59% | 29.46% | **-0.13pp** |
 
 ### Payment Method Breakdown
@@ -156,8 +156,8 @@
 | Enter Fraud Service | 1,667 | 1,547 | -120 | -7.20pp | 99.94% | 99.61% | -0.33pp |
 | Approved by Fraud Service | 1,580 | 1,463 | -117 | -7.41pp | 94.78% | 94.57% | -0.21pp |
 | PVS Attempt | 1,329 | 1,218 | -111 | -8.35pp | 84.11% | 83.25% | -0.86pp |
-| PVS Success | 1,300 | 1,162 | -138 | -10.62pp | 97.82% | 95.40% | -2.42pp |
-| **Successful Checkout** | 1,566 | 1,447 | -119 | -7.60pp | 120.46% | 124.53% | +4.07pp |
+| PVS Success | 1,300 | 1,183 | -117 | -9.00pp | 97.82% | 97.13% | -0.69pp |
+| **Successful Checkout** | 1,566 | 1,447 | -119 | -7.60pp | 120.46% | 122.32% | +1.85pp |
 
 **Key Driver:** Checkout Attempt (-5.60pp)
 
@@ -203,4 +203,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

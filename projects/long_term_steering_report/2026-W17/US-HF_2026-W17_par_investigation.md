@@ -8,25 +8,25 @@
 
 ## Executive Summary
 
-**Overall:** Payment Approval Rate (PAR) remained essentially flat in US-HF, declining marginally from 93.82% to 93.8% (-0.02pp), a change that is not statistically significant.
+**Overall:** Payment Approval Rate for US-HF remained essentially stable in 2026-W17, declining marginally by -0.02pp (93.82% → 93.80%), a change that is not statistically significant.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| 1_FirstRunAR | First payment attempt | +0.06pp | ✅ |
-| 2_PreDunningAR | Pre-dunning recovery | -0.03pp | ✅ |
-| 3_PostDunningAR | Post-dunning recovery | -0.18pp | ⚠️ |
-| 6_PaymentApprovalRate | Final approval | -0.02pp | ✅ |
+| 1_FirstRunAR | Baseline | +0.06pp | ✅ |
+| 2_PreDunningAR | Pre-Dunning | -0.03pp | ✅ |
+| 3_PostDunningAR | Post-Dunning | -0.17pp | ⚠️ |
+| 6_PaymentApprovalRate | Final PAR | -0.02pp | ✅ |
 
 **Key Findings:**
-- The -0.02pp PAR decline is within normal variance and flagged as not significant; the 8-week trend shows stable performance ranging from 93.38% to 93.82%
-- Post-dunning recovery (PostDunningAR) showed the largest funnel decline at -0.18pp (93.07% → 92.9%), partially offsetting gains in FirstRunAR (+0.06pp)
-- No payment methods or providers exceeded alert thresholds; "Others" payment method showed the largest decline (-0.51pp) but remains within acceptable range
-- US country-level performance actually improved slightly (+0.04pp), indicating no geographic concerns
-- Volume mix remained stable with US High AR tier showing minimal shift (-0.6% volume change)
+- The -0.02pp decline in PAR is within normal weekly fluctuation and flagged as not significant
+- Post-Dunning AR showed the largest funnel degradation at -0.17pp (93.08% → 92.92%), suggesting slightly reduced dunning recovery effectiveness
+- "Others" payment method declined -0.53pp (91.28% → 90.80%) with 61K volume, the largest drop among payment methods
+- All payment providers remained stable; ProcessOut shows no volume in the current week (previously had activity)
+- 8-week trend shows PAR has been gradually improving from 93.38% (W10) to 93.80% (W17), with this week's minor dip not breaking the positive trajectory
 
-**Action:** Monitor — No investigation required. The change is not statistically significant and all dimensions remain within normal operating ranges. Continue standard weekly monitoring.
+**Action:** Monitor — No action required. The change is not significant and all dimensions remain within acceptable thresholds. Continue standard weekly monitoring.
 
 ---
 
@@ -51,7 +51,7 @@
 
 | Country | Curr Rate | Prev Rate | Δ % | Curr Volume | Flag |
 |---------|-----------|-----------|-----|-------------|------|
-| US | 94.62% | 94.59% | +0.04% | 508,019 |  |
+| US | 94.62% | 94.59% | +0.03% | 508,019 |  |
 
 **Countries exceeding ±2.5% threshold:** None
 
@@ -63,19 +63,19 @@
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
-| Others | 90.81% | 91.28% | -0.51% | 61,159 |  |
+| Others | 90.8% | 91.28% | -0.53% | 61,124 |  |
+| Apple Pay | 88.16% | 88.06% | +0.12% | 58,028 |  |
 | Paypal | 96.6% | 96.49% | +0.12% | 51,246 |  |
-| Apple Pay | 88.17% | 88.06% | +0.13% | 58,028 |  |
-| Credit Card | 95.27% | 95.04% | +0.24% | 248,673 |  |
+| Credit Card | 95.27% | 95.04% | +0.24% | 248,708 |  |
 
 ### PaymentProvider
 
 | Value | Curr % | Prev % | Change % | Curr Vol | Flag |
 |-------|--------|--------|----------|----------|------|
 | ProcessOut | nan% | 90.34% | +nan% | 0 |  |
-| Unknown | 90.5% | 90.91% | -0.45% | 59,105 |  |
+| Unknown | 90.48% | 90.91% | -0.47% | 59,076 |  |
 | No Payment | 100.0% | 100.0% | +0.00% | 1,977 |  |
-| Braintree | 94.31% | 94.26% | +0.05% | 357,596 |  |
+| Braintree | 94.31% | 94.26% | +0.05% | 357,625 |  |
 | Adyen | 96.26% | 96.04% | +0.23% | 428 |  |
 
 ---
@@ -87,7 +87,7 @@
 |--------|--------|--------|----------|----------|----------|------|
 | 1_FirstRunAR | 90.84% | 90.79% | +0.06% | 419,106 | 421,947 |  |
 | 2_PreDunningAR | 92.07% | 92.1% | -0.03% | 419,106 | 421,947 |  |
-| 3_PostDunningAR | 92.9% | 93.07% | -0.18% | 419,106 | 421,947 |  |
+| 3_PostDunningAR | 92.92% | 93.08% | -0.17% | 419,106 | 421,947 |  |
 | 6_PaymentApprovalRate | 93.8% | 93.82% | -0.02% | 419,106 | 421,947 |  |
 
 ---
@@ -110,4 +110,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

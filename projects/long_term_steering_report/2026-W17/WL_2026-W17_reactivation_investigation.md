@@ -10,27 +10,27 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined significantly from 86.81% to 85.35% (-1.68%) in W17, continuing a two-week downward trend that has seen the metric drop from 89.29% in W15.
+**Overall:** Reactivation Rate declined significantly from 86.81% to 85.35% (-1.68%) in W17, continuing a two-week downward trend that has dropped the metric approximately 4.4pp from its W15 peak of 89.29%.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: WL Trend | 2-week consecutive decline | -1.68% WoW | ⚠️ |
+| L0: 8-Week Trend | Consecutive decline W15→W17 | -3.94pp over 2 weeks | ⚠️ |
 | L1: Country Breakdown | 4 countries exceed ±2.5% threshold | GN -5.83%, AO -3.41%, CG -2.90%, MR +3.87% | ⚠️ |
-| L1: PaymentMethod | Apple Pay underperforming | -5.09% WoW | ⚠️ |
-| L2: GN Deep-Dive | Credit Card & Apple Pay declining | CC -7.90%, AP -5.63% | ⚠️ |
-| L2: AO Deep-Dive | Credit Card declining | CC -5.96% | ⚠️ |
-| L2: Mix Shift | Volume shifts in low-AR countries | AO +19.9%, KN -31.3% | ⚠️ |
+| L1: Dimension Scan | Apple Pay underperforming | -5.09% vs prior week | ⚠️ |
+| L2: Payment Method | Credit Card declining in GN, AO | GN -7.90%, AO -5.96% | ⚠️ |
+| L2: Decline Reasons | "Others" category dominant | 85-93% of all declines | ⚠️ |
+| Mix Shift | Volume shifts detected | AO +19.9%, GN +17.2%, KN -31.3% | ⚠️ |
 
 **Key Findings:**
-- GN experienced the largest rate decline (-5.83%), driven by Credit Card (-7.90%) and Apple Pay (-5.63%) performance degradation, with "Expired, Invalid, Closed Card" declines increasing by +1.29pp
-- AO saw Credit Card reactivation drop by -5.96%, with "Expired, Invalid, Closed Card" reasons rising +1.91pp and "Others" decline category shifting -3.27pp
-- Apple Pay is underperforming globally at 70.29% (vs 74.05% prior week), a -5.09% decline affecting 801 orders
-- MR showed improvement (+3.87%) across all payment methods, partially offsetting declines elsewhere
-- Volume mix shifted unfavorably with low-AR country AO gaining +19.9% volume while higher-performing KN dropped -31.3%
+- GN experienced the largest rate decline (-5.83%), driven by Credit Card transactions dropping 7.90% with "Expired, Invalid, Closed Card" reasons increasing +1.29pp
+- AO showed a -3.41% decline, with Credit Card performance falling 5.96% and "Expired, Invalid, Closed Card" reasons rising +1.91pp
+- Apple Pay is underperforming globally at 70.29% (-5.09% WoW), with particularly poor performance in AO at only 33.33%
+- Volume shifted toward lower-performing countries: AO (+19.9%) and GN (+17.2%) both gained volume while having below-average reactivation rates
+- The "Others" decline reason category dominates (85-93% of declines) across all flagged countries, limiting root cause visibility
 
-**Action:** Investigate - Focus on Credit Card processing issues in GN and AO, particularly the increase in "Expired, Invalid, Closed Card" decline reasons. Coordinate with payment operations to assess if card-on-file refresh campaigns or issuer connectivity issues are contributing factors.
+**Action:** Investigate — The consecutive two-week decline, combined with Credit Card degradation in GN and AO and increased card validity issues, warrants immediate investigation into payment processor performance and potential issuer-side changes affecting these markets.
 
 ---
 
@@ -235,4 +235,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

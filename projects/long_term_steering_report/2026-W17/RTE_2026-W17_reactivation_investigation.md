@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate declined significantly from 89.16% to 87.33% (-2.05%, -1.83pp) in W17, representing the second consecutive weekly decline and dropping the metric to its lowest point in the 8-week trend window.
+**Overall:** Reactivation Rate declined significantly from 89.16% to 87.33% (-2.05%) in W17, representing the second consecutive weekly decline and the lowest rate in the 8-week trend period.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Consecutive decline W16→W17 | -2.05% | ⚠️ |
-| L1: Country Breakdown | 4 countries exceed ±2.5% threshold | YE -13.10%, TO -11.76%, TT -5.13%, TV +7.69% | ⚠️ |
-| L1: PaymentMethod | 2 methods flagged | Others -23.56%, Apple Pay -9.53% | ⚠️ |
-| L2: YE Deep-Dive | Major volume increase with rate collapse | +351.6% volume, -13.10% rate | ⚠️ |
-| Mix Shift | YE shifted from low to high volume | 306 → 1,382 orders (+351.6%) | ⚠️ |
+| L0: 8-Week Trend | Sustained decline pattern | -2.05% WoW | ⚠️ |
+| L1: Country Scan | 4 countries exceed ±2.5% threshold | YE -13.10%, TO -11.76%, TT -5.13%, TV +7.69% | ⚠️ |
+| L1: Payment Method | Apple Pay & Others underperforming | Others -23.56%, Apple Pay -9.53% | ⚠️ |
+| L2: YE Deep-Dive | Volume surge with rate collapse | +351.6% volume, -13.10% rate | ⚠️ |
+| Mix Shift | YE volume surge from low-rate tier | 306 → 1,382 orders (+351.6%) | ⚠️ |
 
 **Key Findings:**
-- YE is the primary driver of the decline: volume surged 351.6% (306 → 1,382 orders) while reactivation rate collapsed from 95.42% to 82.92% (-13.10%), with "Expired, Invalid, Closed Card, No Account" decline reasons increasing by +4.84pp
-- "Others" payment method shows severe degradation globally (-23.56%) and within YE specifically (-24.65%), indicating a potential issue with alternative payment processing
-- Apple Pay reactivation rate dropped significantly from 69.47% to 62.85% (-9.53%) across 1,946 orders, contributing materially to the overall decline
-- Credit Card performance in YE deteriorated sharply (-15.34%) despite being the highest volume method (834 orders), with "Blocked, Restricted, Not Permitted" reasons increasing by +2.49pp
-- TO and TT show rate declines but with minimal volume impact (17 and 39 orders respectively)
+- YE experienced a massive volume increase (+351.6%, from 306 to 1,382 orders) while its reactivation rate collapsed from 95.42% to 82.92% (-13.10pp), making it the primary driver of the overall decline
+- In YE, "Others" payment method declined sharply from 86.67% to 65.31% (-24.65pp) and Credit Card dropped from 96.17% to 81.41% (-15.34pp)
+- YE decline reasons show a significant shift: "Expired, Invalid, Closed Card, No Account" increased from 1.31% to 6.15% (+4.84pp) and "Blocked, Restricted, Not Permitted" rose from 0.98% to 3.47% (+2.49pp)
+- Apple Pay globally underperformed at 62.85% vs 69.47% prior week (-9.53pp), with 1,946 orders affected
+- TO and TT showed rate declines but with minimal volume impact (17 and 39 orders respectively)
 
-**Action:** Investigate — The significant volume surge in YE combined with degraded reactivation performance across multiple payment methods suggests a systemic issue requiring immediate root cause analysis, particularly focusing on card validity and payment method processing in the YE market.
+**Action:** Investigate — Prioritize YE market investigation focusing on Credit Card and Others payment methods; coordinate with payment provider to understand the surge in card-related declines (expired/invalid cards, blocked transactions) coinciding with the 4x volume increase.
 
 ---
 
@@ -221,4 +221,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

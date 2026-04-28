@@ -8,27 +8,26 @@
 
 ## Executive Summary
 
-## Executive Summary
-
-**Overall:** Payment Checkout Approval Rate for HF-NA improved marginally from 93.86% to 93.94% (+0.08 pp) in W17, a change that is not statistically significant given the volume of 20,363 orders.
+**Overall:** Payment Checkout Approval Rate showed a marginal improvement from 93.86% to 93.94% (+0.09pp) in W17, a statistically non-significant change on 20,363 orders.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (93.92%-95.23%) | +0.08 pp | ✅ |
-| L1: Country Breakdown | No country exceeded ±2.5% threshold | US: -0.08 pp, CA: +0.29 pp | ✅ |
-| L1: Payment Method | "Others" exceeded threshold but low volume | +4.12 pp (60 orders) | ⚠️ |
-| Mix Shift | Volume declined but AR tiers stable | US: -14.6% vol, CA: -6.9% vol | ✅ |
+| Overall Rate Change | Within normal range (+0.09pp) | +0.09pp | ✅ |
+| Country Threshold (±2.5pp) | No countries exceeded threshold | US: -0.08pp, CA: +0.29pp | ✅ |
+| Payment Method Threshold | "Others" exceeded threshold (+4.12pp) | Low volume (60 orders) | ⚠️ |
+| Volume Trend | W17 volume decreased vs W16 | -12.9% (20,363 vs 23,369) | ⚠️ |
+| 8-Week Trend | Rate below W10 peak (95.23%) | -1.29pp from peak | ⚠️ |
 
 **Key Findings:**
-- The +0.08 pp increase represents a partial recovery from W16's -0.23 pp decline, but the rate remains below the W10 peak of 95.23% (-1.29 pp below peak)
-- US approval rate declined slightly (-0.08 pp to 92.67%) while CA improved (+0.29 pp to 98.01%), with neither exceeding investigation thresholds
-- "Others" payment method showed a +4.12 pp improvement flagged as ⚠️, but with only 60 orders this is not material to overall performance
-- Credit Card (largest volume at 11,873 orders) improved +0.33 pp to 94.13%, contributing positively to the overall rate
-- Overall volume decreased 12.9% week-over-week (23,369 → 20,363 orders)
+- The +0.09pp improvement reverses the -0.23pp decline from W16, but the rate remains 1.29pp below the W10 peak of 95.23%
+- US (76% of volume) showed a slight decline of -0.08pp to 92.67%, while CA improved +0.29pp to 98.01%
+- "Others" payment method showed a +4.12pp increase but represents minimal volume (60 orders), making it statistically unreliable
+- Credit Card (58% of volume) improved +0.33pp to 94.13%, while PayPal declined -0.91pp to 93.89%
+- Overall order volume dropped 12.9% week-over-week (23,369 → 20,363), marking the lowest volume in the 8-week window
 
-**Action:** Monitor — The change is not statistically significant, no country or major payment method exceeded thresholds, and the flagged "Others" segment has insufficient volume to warrant investigation.
+**Action:** Monitor — Continue standard tracking; no significant deviations warrant investigation. Watch for continued volume decline and whether the rate recovers toward the W10 baseline of 95.23%.
 
 ---
 
@@ -99,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

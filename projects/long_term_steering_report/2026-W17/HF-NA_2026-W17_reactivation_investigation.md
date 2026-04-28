@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Reactivation Rate improved from 89.41% to 90.35% (+1.05pp) in W17, returning to levels consistent with the 8-week historical range (88.23%-91.02%).
+**Overall:** Reactivation Rate improved significantly from 89.41% to 90.35% (+1.05 pp) in W17, driven primarily by a strong recovery in CA (+5.79 pp) while US showed a slight decline (-0.40 pp).
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: HF-NA Trend | Within historical range | +1.05pp | ✅ |
-| L1: Country Breakdown | CA exceeded ±2.5% threshold | +5.79pp | ⚠️ |
-| L1: Dimension Scan | Others payment method flagged (low volume) | -33.33% | ✅ |
-| L2: CA Deep-Dive | Credit Card improvement identified | +7.29pp | ⚠️ |
-| Mix Shift | US volume dropped 20.3%, CA volume grew 13.0% | - | ⚠️ |
+| L0: 8-Week Trend | Rate within historical range (88.23%-91.02%) | +1.05 pp | ✅ |
+| L1: Country Breakdown | CA exceeds ±2.5% threshold | CA +5.79 pp | ⚠️ |
+| L1: Dimension Scan | "Others" payment method flagged (low volume) | -33.33% | ✅ (n=3) |
+| L2: CA Deep-Dive | Credit Card identified as driver | +7.29 pp | ⚠️ |
+| L2: Decline Reasons | "Others" category shift | +3.96 pp | ⚠️ |
 
 **Key Findings:**
-- CA drove the overall improvement with a +5.79pp increase (86.98% → 92.02%), while US slightly declined by -0.40pp
-- Credit Card reactivations in CA improved significantly by +7.29pp (85.34% → 91.56%) on volume of 4,348 orders
-- Decline reason "Others" increased to 93.92% of CA declines (+3.96pp), while fraud-related declines dropped from 1.69% to 0.31% (-1.38pp)
-- US volume decreased by 20.3% (18,897 → 15,063) while CA volume increased by 13.0% (5,076 → 5,736)
-- 3DS Authentication failures in CA dropped from 21 to 0 cases (-0.41pp)
+- CA drove the overall improvement with Reactivation Rate jumping from 86.98% to 92.02% (+5.79 pp), representing 5,736 orders
+- Credit Card payments in CA improved significantly from 85.34% to 91.56% (+7.29 pp) on volume of 4,348 orders
+- Fraud-related declines in CA dropped substantially from 1.69% to 0.31% (-1.38 pp), contributing to the improvement
+- US volume decreased by 20.3% (18,897 → 15,063 orders) while maintaining relatively stable rate (-0.40 pp)
+- 3DS Authentication failures in CA dropped from 0.41% to 0.00% (-0.41 pp)
 
-**Action:** Monitor — The improvement is positive and driven by identifiable factors (Credit Card performance in CA). Continue monitoring US volume trends and CA performance stability in W18.
+**Action:** Monitor — The improvement is positive and driven by identifiable factors (Credit Card performance in CA, reduced fraud/security declines). Continue monitoring US volume decline and ensure CA improvement sustains in W18.
 
 ---
 
@@ -134,4 +134,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

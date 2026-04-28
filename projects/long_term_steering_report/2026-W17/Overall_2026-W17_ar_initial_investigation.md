@@ -1,22 +1,22 @@
 # Acceptance Rate (Initial Charges) - Overall Summary
 
 **Week:** 2026-W17  
-**Generated:** 2026-04-27 14:43  
+**Generated:** 2026-04-28 14:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Initial Charges) improved modestly across all clusters in W17, with gains ranging from +0.24% (US-HF) to +0.94% (RTE), though none reached statistical significance. The most notable concern is Braintree payment provider degradation in LU (-12.36%) and CH (-11.59%) within HF-INTL, both showing increased Insufficient Funds declines.
+Acceptance Rate (Initial Charges) improved across all five clusters in 2026-W17, with gains ranging from +0.57% (US-HF) to +1.11% (HF-NA), though only HF-NA's improvement was statistically significant. The most notable finding is the complete migration away from ProcessOut across multiple clusters (US-HF, HF-INTL, WL, HF-NA, RTE), coinciding with improved acceptance rates, suggesting a deliberate provider shift that warrants continued monitoring.
 
 ### Cluster Highlights
 
-- **US-HF:** Stable at 89.01% (+0.24%), with Credit Card payment method showing a -7.30% decline on low volume (157 orders) warranting monitoring.
-- **HF-INTL:** Improved to 91.82% (+0.48%), though LU (-7.94%) and CH (-6.35%) experienced Braintree-driven declines with elevated Insufficient Funds.
-- **WL:** Improved to 92.13% (+0.93%), driven by ER's +2.53% gain from reduced Insufficient Funds (-1.74pp) despite ProcessOut volume dropping to zero.
-- **HF-NA:** Improved to 89.87% (+0.55%), with CA outperforming US (+1.59% vs +0.24%) and Adyen showing a flagged +9.47% spike on low volume.
-- **RTE:** Improved to 93.34% (+0.94%), continuing a steady upward trend from W13, though TK (-3.57%) and TV (-2.78%) showed PayPal and credit card degradation on minimal volume.
+- **US-HF:** Improved by +0.57% to 89.24% (not significant), with Credit Card payment method flagged at -7.42% decline but limited impact due to low volume (160 orders).
+- **HF-INTL:** Improved by +0.64% to 91.8% (not significant), though LU (-7.94%) and CH (-5.66%) declined significantly due to Apple Pay and Braintree performance issues alongside ProcessOut exiting.
+- **WL:** Improved by +0.96% to 92.15% (not significant), driven by ER's +2.53% gain from reduced Insufficient Funds declines and Unknown provider performance improvement following ProcessOut exit.
+- **HF-NA:** Improved by +1.11% to 90.32% (significant), driven by CA's +2.73% gain as Adyen volume surged (+12.27% AR) following ProcessOut migration and Insufficient Funds declined -2.15pp.
+- **RTE:** Improved by +0.85% to 93.2% (not significant), with TK (-3.57%) and TV (-2.78%) flagged for Insufficient Funds increases but representing only ~2.4% of total volume.
 
 ---
 

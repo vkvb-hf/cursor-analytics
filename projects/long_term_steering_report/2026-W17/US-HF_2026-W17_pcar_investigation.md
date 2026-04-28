@@ -10,26 +10,26 @@
 
 ## Executive Summary
 
-**Overall:** Payment Checkout Approval Rate declined slightly from 92.75% to 92.67% (-0.08 pp) in US-HF during 2026-W17, a change that is not statistically significant.
+**Overall:** Payment Checkout Approval Rate declined marginally from 92.75% to 92.67% (-0.08 pp) in W17, a statistically non-significant change within normal weekly fluctuation range.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| L0: 8-Week Trend | Rate within normal range (92.57%-94.58%) | -0.08 pp | ✅ |
-| L1: Country Breakdown | No countries exceeding ±2.5% threshold | -0.08 pp | ✅ |
-| L1: PaymentMethod | "Others" flagged but minimal volume (60 orders) | +4.12 pp | ⚠️ |
+| L0: 8-Week Trend | Rate within historical range (92.57%-94.58%) | -0.08 pp | ✅ |
+| L1: Country Breakdown | No country exceeding ±2.5% threshold | -0.08 pp (US) | ✅ |
+| L1: PaymentMethod | Others flagged but minimal volume (60 orders) | +4.12 pp | ✅ |
 | L1: PaymentProvider | No data available | N/A | ✅ |
-| Mix Shift | High AR tier volume decreased but impact stable | -14.6% vol | ✅ |
+| Mix Shift | High AR tier volume shift stable | -14.6% vol | ✅ |
 
 **Key Findings:**
-- The -0.08 pp decline is within normal weekly fluctuation observed over the 8-week period (range: 92.57% to 94.58%)
-- PayPal showed the largest decline among major payment methods at -1.24 pp (1,202 orders), while Credit Card improved +0.38 pp (8,776 orders)
-- "Others" payment method flagged with +4.12 pp change, but volume is negligible (60 orders) and not material to overall rate
-- Order volume decreased 14.6% week-over-week (18,142 → 15,496), but mix shift impact remains stable
-- No systemic issues identified across any dimension at threshold levels
+- The -0.08 pp decline in US is within normal weekly variance and not statistically significant
+- PayPal showed the largest payment method decline (-1.24 pp) but remains at 93.09% approval rate
+- Volume decreased 14.6% week-over-week (18,142 → 15,496 orders) which may contribute to rate volatility
+- "Others" payment method flagged (⚠️) with +4.12 pp change, but volume is negligible (60 orders)
+- 8-week trend shows gradual decline from W10 peak (94.58%) but W17 rate remains consistent with W12-W16 range
 
-**Action:** Monitor — No investigation required. The decline is not statistically significant and falls within normal operating variance. Continue standard weekly monitoring.
+**Action:** Monitor — No investigation required. The change is not statistically significant and no dimensions exceeded actionable thresholds. Continue standard weekly monitoring.
 
 ---
 
@@ -98,4 +98,4 @@ No countries exceeded threshold for deep-dive.
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

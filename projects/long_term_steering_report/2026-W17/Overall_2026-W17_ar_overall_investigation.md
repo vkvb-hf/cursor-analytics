@@ -1,22 +1,22 @@
 # Acceptance Rate (Overall) - Overall Summary
 
 **Week:** 2026-W17  
-**Generated:** 2026-04-27 14:43  
+**Generated:** 2026-04-28 14:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Acceptance Rate (Overall) remained stable across all clusters in 2026-W17, with changes ranging from -0.19pp to +0.13pp, none of which were statistically significant. The most notable finding was NO in HF-INTL showing a +4.53pp improvement driven by a payment provider migration from ProcessOut to Unknown, while ProcessOut showed zero volume across all clusters this week.
+Acceptance Rate (Overall) remained stable across all clusters in 2026-W17, with changes ranging from -0.19pp to +0.12pp, none of which were statistically significant. The most notable finding was the provider migration in NO (HF-INTL) where ProcessOut volume dropped to zero with traffic shifting to Unknown provider, resulting in a +4.53pp improvement driven by reduced "Insufficient Funds" declines.
 
 ### Cluster Highlights
 
-- **US-HF:** Stable at 92.07% (-0.03pp), with "Others" payment method showing the largest segment decline at -0.89pp but remaining within normal variance.
-- **HF-INTL:** Declined marginally to 94.63% (-0.19pp), with NO flagged at +4.53pp improvement due to ProcessOut-to-Unknown provider migration reducing Insufficient Funds declines by -3.78pp.
-- **WL:** Stable at 90.1% (+0.09pp), with no countries exceeding thresholds and AO showing the strongest improvement at +1.84pp.
-- **HF-NA:** Stable at 92.19% (-0.13pp), with CA showing the largest country decline at -0.47pp while US remained flat at +0.02pp.
-- **RTE:** Improved marginally to 92.76% (+0.13pp), with all countries and payment dimensions remaining within normal operating parameters.
+- **US-HF:** Stable at 92.07% (-0.03pp), with all payment methods and providers operating within normal thresholds and no actionable concerns.
+- **HF-INTL:** Declined marginally to 94.63% (-0.19pp), though NO improved significantly (+4.53pp) following a ProcessOut to Unknown provider migration that reduced Insufficient Funds declines by 3.78pp.
+- **WL:** Improved slightly to 90.1% (+0.08pp), with stable performance across all countries and no dimensions exceeding alert thresholds.
+- **HF-NA:** Declined to 92.19% (-0.13pp), with CA showing the largest country movement at -0.47pp and "Others" payment method declining -1.05pp on 105K orders.
+- **RTE:** Improved to 92.75% (+0.12pp), with all countries within normal range and FJ maintaining stable performance at 93.81% representing 90% of volume.
 
 ---
 

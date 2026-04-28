@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined significantly from 48.92% to 40.13% (-8.79pp) in 2026-W17, representing a substantial drop in checkout performance across 56,341 payment visits.
+**Overall:** Payment Conversion Rate declined significantly from 48.92% to 40.13% (-8.79pp) in 2026-W17, driven primarily by a substantial drop in the Select Payment Method step across all analyzed countries.
 
 **Funnel Analysis:**
 
@@ -25,13 +25,13 @@
 | Successful Checkout | Δ > 4.39pp | +0.07pp | ✅ |
 
 **Key Findings:**
-- **Primary bottleneck identified:** Select Payment Method step shows the largest conversion drop (-9.27pp), accounting for the majority of PCR decline across all regions
-- **Consistent pattern across countries:** All analyzed countries (FJ, CF, TT, TK) show significant drops at the Select Payment Method step, ranging from -8.68pp (FJ) to -20.35pp (TT)
-- **TT severely impacted:** TT experienced the steepest overall PCR decline (-18.51pp) with Select Payment Method dropping -20.35pp and PVS Success dropping -14.63pp in backend data
-- **Backend discrepancy noted:** Payment Method Listed volume increased +21.2% while Checkout Attempt conversion dropped -9.20pp, suggesting users are seeing payment options but not proceeding
-- **Payment method success rates improved:** All major payment methods show improved success rates (+10.50pp to +12.80pp), indicating the issue is upstream of payment processing
+- Select Payment Method is the primary bottleneck, dropping from 59.68% to 50.41% (-9.27pp) at the global level, exceeding the threshold significantly
+- TT experienced the most severe decline with PCR dropping -18.51pp, driven by Select Payment Method conversion falling -20.35pp (72.21% → 51.86%)
+- All four analyzed countries (FJ, CF, TT, TK) show consistent pattern: Select Payment Method is the key driver with declines ranging from -8.68pp to -20.35pp
+- Backend data shows Payment Method Listed increased +21.2% while Checkout Attempt conversion dropped -9.20pp, indicating users are viewing payment options but not proceeding
+- All payment methods show improved success rates (+10.50pp to +12.80pp) once users attempt checkout, confirming the issue is upstream at payment method selection
 
-**Action:** **Investigate** - The consistent and significant drop at Select Payment Method across all countries suggests a potential UI/UX issue, payment method availability problem, or technical degradation affecting user ability to select payment options. Prioritize investigation of the payment selection interface and any changes deployed between W16 and W17.
+**Action:** Investigate - Urgent investigation required into Select Payment Method step. Focus on UI/UX changes, payment method availability, or technical issues preventing users from selecting payment methods. Prioritize TT and TK markets given their disproportionate impact.
 
 ---
 
@@ -61,9 +61,9 @@
 | Checkout Attempt | 47,481 | 45,942 | -1,539 | -3.2% | 45.67% | 36.47% | -9.20pp |
 | Enter Fraud Service | 47,408 | 45,857 | -1,551 | -3.3% | 99.85% | 99.81% | -0.03pp |
 | Approved by Fraud Service | 44,921 | 43,257 | -1,664 | -3.7% | 94.75% | 94.33% | -0.42pp |
-| PVS Attempt | 44,111 | 42,588 | -1,523 | -3.5% | 98.20% | 98.45% | +0.26pp |
-| PVS Success | 42,878 | 41,209 | -1,669 | -3.9% | 97.20% | 96.76% | -0.44pp |
-| **Successful Checkout** | 37,717 | 42,145 | 4,428 | 11.7% | 87.96% | 102.27% | +14.31pp |
+| PVS Attempt | 44,111 | 42,589 | -1,522 | -3.5% | 98.20% | 98.46% | +0.26pp |
+| PVS Success | 42,878 | 41,333 | -1,545 | -3.6% | 97.20% | 97.05% | -0.15pp |
+| **Successful Checkout** | 37,717 | 42,145 | 4,428 | 11.7% | 87.96% | 101.96% | +14.00pp |
 | **PCR Rate** | | | | | 36.28% | 33.45% | **-2.82pp** |
 
 ### Payment Method Breakdown
@@ -122,10 +122,10 @@
 | Enter Fraud Service | 1,297 | 813 | -484 | -37.32pp | 100.00% | 100.00% | +0.00pp |
 | Approved by Fraud Service | 1,224 | 749 | -475 | -38.81pp | 94.37% | 92.13% | -2.24pp |
 | PVS Attempt | 1,223 | 745 | -478 | -39.08pp | 99.92% | 99.47% | -0.45pp |
-| PVS Success | 985 | 491 | -494 | -50.15pp | 80.54% | 65.91% | -14.63pp |
-| **Successful Checkout** | 1,221 | 744 | -477 | -39.07pp | 123.96% | 151.53% | +27.57pp |
+| PVS Success | 985 | 570 | -415 | -42.13pp | 80.54% | 76.51% | -4.03pp |
+| **Successful Checkout** | 1,221 | 744 | -477 | -39.07pp | 123.96% | 130.53% | +6.57pp |
 
-**Key Driver:** Successful Checkout (+27.57pp)
+**Key Driver:** Checkout Attempt (-18.32pp)
 
 ---
 
@@ -189,8 +189,8 @@
 | Checkout Attempt | 7,471 | 6,838 | -633 | -8.47pp | 54.48% | 45.67% | -8.81pp |
 | Enter Fraud Service | 7,417 | 6,777 | -640 | -8.63pp | 99.28% | 99.11% | -0.17pp |
 | Approved by Fraud Service | 7,002 | 6,282 | -720 | -10.28pp | 94.40% | 92.70% | -1.71pp |
-| PVS Attempt | 6,546 | 5,928 | -618 | -9.44pp | 93.49% | 94.36% | +0.88pp |
-| PVS Success | 6,455 | 5,812 | -643 | -9.96pp | 98.61% | 98.04% | -0.57pp |
+| PVS Attempt | 6,546 | 5,929 | -617 | -9.43pp | 93.49% | 94.38% | +0.89pp |
+| PVS Success | 6,455 | 5,812 | -643 | -9.96pp | 98.61% | 98.03% | -0.58pp |
 | **Successful Checkout** | 6,951 | 6,195 | -756 | -10.88pp | 107.68% | 106.59% | -1.09pp |
 
 **Key Driver:** Checkout Attempt (-8.81pp)
@@ -237,4 +237,4 @@
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

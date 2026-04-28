@@ -10,28 +10,28 @@
 
 ## Executive Summary
 
-**Overall:** Payment Conversion Rate declined from 25.83% to 25.04% (-0.79pp) in US-HF during 2026-W17, with payment visits dropping significantly by 24.7% (55,957 → 42,133).
+**Overall:** Payment Conversion Rate declined by -0.79pp (25.83% → 25.04%) on 42,133 payment visits in US-HF during 2026-W17, driven primarily by a significant drop in the Select Payment Method step.
 
 **Funnel Analysis:**
 
 | Step | Check | Δ Conv | Result |
 | ---- | ----- | ------ | ------ |
-| Select Payment Method | Entry rate check | -1.42pp | ⚠️ |
-| Click Submit Form | Form submission | +0.17pp | ✅ |
-| FE Validation Passed | Validation | +0.07pp | ✅ |
-| Enter Fraud Service | Fraud entry | +0.08pp | ✅ |
-| Approved by Fraud Service | Fraud approval | +1.46pp | ✅ |
-| Call to PVS | PVS routing | -0.68pp | ⚠️ |
-| Successful Checkout | Final conversion | -0.44pp | ⚠️ |
+| Select Payment Method | Rate change vs threshold | -1.42pp | ⚠️ |
+| Click Submit Form | Rate change vs threshold | +0.17pp | ✅ |
+| FE Validation Passed | Rate change vs threshold | +0.07pp | ✅ |
+| Enter Fraud Service | Rate change vs threshold | +0.08pp | ✅ |
+| Approved by Fraud Service | Rate change vs threshold | +1.46pp | ✅ |
+| Call to PVS | Rate change vs threshold | -0.68pp | ⚠️ |
+| Successful Checkout | Rate change vs threshold | -0.44pp | ⚠️ |
 
 **Key Findings:**
-- The primary PCR decline is driven by a -1.42pp drop in Select Payment Method rate (37.11% → 35.70%), indicating fewer visitors are initiating the payment process
-- Backend data shows a severe -7.43pp decline in Checkout Attempt rate (41.31% → 33.88%), suggesting significant top-of-funnel friction
-- Fraud Service approval improved substantially (+1.46pp in GA, +1.75pp in Backend), partially offsetting other losses
-- All payment methods showed improved success rates week-over-week, with ProcessOut_CreditCard improving +14.00pp and Braintree_ApplePay improving +13.51pp
-- PVS failures decreased from 1,175 to 898, with "Blocked Verification: Payment method is blocked due to business reasons" remaining the dominant decline reason (59.4% of failures)
+- Select Payment Method conversion dropped significantly by -1.42pp (37.11% → 35.70%), indicating users are abandoning before choosing a payment option
+- Backend Checkout Attempt conversion plummeted by -7.43pp (41.31% → 33.88%), suggesting a major upstream issue preventing users from initiating checkout
+- Payment volume decreased substantially by -24.7% (55,957 → 42,133 payment visits), indicating reduced traffic or engagement
+- Fraud Service approval improved by +1.46pp (92.02% → 93.48%), positively impacting downstream conversion
+- All payment methods showed improved success rates (ProcessOut_CreditCard +14.00pp, Braintree_ApplePay +13.51pp), indicating PSP performance is not the issue
 
-**Action:** Investigate - The significant decline in payment method selection rate (-1.42pp) and checkout attempt rate (-7.43pp) requires investigation into potential UX issues, page load problems, or changes in traffic quality that may be preventing users from initiating checkout.
+**Action:** Investigate - The significant drop in Select Payment Method (-1.42pp) and Backend Checkout Attempt (-7.43pp) conversion requires investigation into potential UX changes, page load issues, or upstream funnel problems that are preventing users from reaching and engaging with payment selection.
 
 ---
 
@@ -161,21 +161,21 @@
 
 | Decline Reason | 2026-W16 | 2026-W16 % | 2026-W17 | 2026-W17 % | Δ Count | Δ % |
 | -------------- | ----------- | ------------- | --------------- | ----------------- | ------- | ----- |
-| Blocked Verification: Payment method is blocked due to business reasons | 665 | 56.6% | 533 | 59.4% | -132 | +2.76pp |
-| Failed Verification: Insufficient Funds | 208 | 17.7% | 150 | 16.7% | -58 | -1.00pp |
-| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 67 | 5.7% | 51 | 5.7% | -16 | -0.02pp |
-| Failed Verification: Issuer or Cardholder has put a restriction on the card | 63 | 5.4% | 39 | 4.3% | -24 | -1.02pp |
-| Failed Verification: Declined - Call Issuer | 38 | 3.2% | 26 | 2.9% | -12 | -0.34pp |
-| Failed Verification: Card Issuer Declined CVV | 41 | 3.5% | 23 | 2.6% | -18 | -0.93pp |
-| Failed Verification: Declined | 19 | 1.6% | 22 | 2.4% | +3 | +0.83pp |
-| Failed Verification: Processor Declined - Fraud Suspected | 29 | 2.5% | 19 | 2.1% | -10 | -0.35pp |
-| Failed Verification: Do Not Honor | 13 | 1.1% | 18 | 2.0% | +5 | +0.90pp |
-| Failed Verification: Closed Card | 32 | 2.7% | 17 | 1.9% | -15 | -0.83pp |
-| **Total PVS Failures** | **1,175** | **100%** | **898** | **100%** | **-277** | - |
+| Blocked Verification: Payment method is blocked due to business reasons | 665 | 56.2% | 593 | 58.0% | -72 | +1.80pp |
+| Failed Verification: Insufficient Funds | 208 | 17.6% | 174 | 17.0% | -34 | -0.56pp |
+| Failed Verification: Funding Instrument In The PayPal Account Was Declined By The Processor Or Bank, Or It Can't Be Used For This Payment | 67 | 5.7% | 62 | 6.1% | -5 | +0.40pp |
+| Failed Verification: Issuer or Cardholder has put a restriction on the card | 63 | 5.3% | 48 | 4.7% | -15 | -0.63pp |
+| Failed Verification: Declined - Call Issuer | 38 | 3.2% | 30 | 2.9% | -8 | -0.28pp |
+| Failed Verification: Card Issuer Declined CVV | 41 | 3.5% | 28 | 2.7% | -13 | -0.73pp |
+| Failed Verification: Declined | 19 | 1.6% | 27 | 2.6% | +8 | +1.03pp |
+| Failed Verification: Processor Declined - Fraud Suspected | 29 | 2.4% | 21 | 2.1% | -8 | -0.40pp |
+| Failed Verification: Closed Card | 32 | 2.7% | 20 | 2.0% | -12 | -0.75pp |
+| Failed Verification: Processor Declined | 22 | 1.9% | 20 | 2.0% | -2 | +0.10pp |
+| **Total PVS Failures** | **1,184** | **100%** | **1,023** | **100%** | **-161** | - |
 
 ---
 
 
 ---
 
-*Report: 2026-04-27*
+*Report: 2026-04-28*

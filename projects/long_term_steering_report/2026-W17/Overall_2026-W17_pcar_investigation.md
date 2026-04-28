@@ -1,22 +1,22 @@
 # Payment Checkout Approval Rate - Overall Summary
 
 **Week:** 2026-W17  
-**Generated:** 2026-04-27 14:44  
+**Generated:** 2026-04-28 14:42  
 **Clusters:** HF-INTL, HF-NA, RTE, US-HF, WL
 
 ---
 
 ### Overall Summary
 
-Payment Checkout Approval Rate declined across most clusters in 2026-W17, with the most significant drop in HF-INTL (-1.43pp to 95.74%), the only statistically significant change this week. Adyen processing of local European payment methods (BcmcMobile, iDEAL, Klarna) in BE, NL, and SE requires immediate investigation as the common root cause across multiple markets.
+Payment Checkout Approval Rate remained broadly stable across all clusters in 2026-W17, with changes ranging from -0.58pp to +0.09pp, none reaching statistical significance. The most significant concern is BE in HF-INTL, which experienced a -13.63pp decline driven by BcmcMobile/Adyen pathway degradation, requiring investigation.
 
 ### Cluster Highlights
 
-- **US-HF:** Stable at 92.67% (-0.08pp), a non-significant decline within normal operating variance with no dimensions exceeding thresholds.
-- **HF-INTL:** Declined significantly by -1.43pp to 95.74%, driven by Adyen-processed local payment methods failing in BE (-20.40pp), NL (-10.95pp), and SE (-9.26pp).
-- **WL:** Declined by -0.79pp to 96.82%, a non-significant change with no countries or payment methods exceeding investigation thresholds.
-- **HF-NA:** Improved marginally by +0.08pp to 93.94%, a non-significant change with stable performance across US and CA.
-- **RTE:** Declined by -0.44pp to 96.76%, with TT (-18.17pp) and TV (-10.47pp) showing IDeal and Klarna degradation via Adyen, though low volumes (3.8% of total) limit overall impact.
+- **US-HF:** Stable at 92.67% (-0.08pp), with no dimensions exceeding thresholds and the decline within normal weekly variance.
+- **HF-INTL:** Declined to 96.67% (-0.47pp), driven by BE dropping -13.63pp due to BcmcMobile payment method at 69.71% approval rate via Adyen.
+- **WL:** Declined to 97.02% (-0.58pp), with ER showing the largest country-level drop at -1.93pp but remaining below investigation threshold.
+- **HF-NA:** Improved marginally to 93.94% (+0.09pp), with CA up +0.29pp and US essentially flat at -0.08pp.
+- **RTE:** Stable at 97.05% (-0.15pp), with TT exceeding threshold at -5.00pp due to IDeal/Adyen degradation, though impact limited by 39.1% volume drop.
 
 ---
 
