@@ -1,6 +1,6 @@
 {
   "week": "2026-W18",
-  "generated_at": "2026-05-03T14:35:49.270795Z",
+  "generated_at": "2026-05-04T14:34:57.535829Z",
   "periods": {
     "latest_week": "2026-W18",
     "prev_week": "2026-W17",
@@ -18,69 +18,75 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.9429574325830176,
+            "current": 0.9379161181117172,
             "previous": 0.963412940206873,
-            "change_pct": -2.1232336384710586,
+            "change_pct": -2.6465102378301966,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 89740.0,
-            "z_score": -1.1897348974742148
+            "volume": 106340.0,
+            "z_score": -1.2243799737883507
           },
           {
             "cluster": "HF-NA",
-            "current": 0.9240506329113924,
+            "current": 0.9245460976184862,
             "previous": 0.9394490006384129,
-            "change_pct": -1.6390850079734274,
+            "change_pct": -1.5863450820426936,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 18249.0,
-            "z_score": -6.007578845326739
+            "volume": 21205.0,
+            "z_score": -6.027197068398831
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.9263479217690697,
+            "current": 0.9134899505573272,
             "previous": 0.9666666666666667,
-            "change_pct": -4.170904644579002,
+            "change_pct": -5.501039597517879,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 28173.0,
-            "z_score": -22.63876881462022
+            "volume": 34181.0,
+            "z_score": -29.259701321966432
           },
           {
             "cluster": "US-HF",
-            "current": 0.9106687446868801,
+            "current": 0.9113198341058795,
             "previous": 0.926690758905524,
-            "change_pct": -1.7289493894993457,
+            "change_pct": -1.658689768073061,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 14116.0,
-            "z_score": -5.04868675183251
+            "volume": 16396.0,
+            "z_score": -5.022513585771396
           },
           {
             "cluster": "RTE",
-            "current": 0.9625745004090218,
+            "current": 0.9602994950374368,
             "previous": 0.9705088168306371,
-            "change_pct": -0.8175419206933235,
+            "change_pct": -1.0519555944417396,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 34228.0,
-            "z_score": -6.11619733647067
+            "volume": 40201.0,
+            "z_score": -8.050105721014177
           },
           {
             "cluster": "WL",
-            "current": 0.9585258525852586,
+            "current": 0.9582442109178834,
             "previous": 0.9702473304736698,
-            "change_pct": -1.2080917432350886,
+            "change_pct": -1.2371195651655766,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 9090.0,
-            "z_score": -4.4914238000204
+            "volume": 10753.0,
+            "z_score": -4.765926753137685
           }
         ],
         "deep_insights": {
           "business_units": {
             "[+50%]": [],
-            "[20% - 49%]": [],
+            "[20% - 49%]": [
+              {
+                "cluster": "HF-INTL",
+                "value": "NL",
+                "change_pct": -21
+              }
+            ],
             "[2.5% - 19%]": [
               {
                 "cluster": "HF-INTL",
@@ -90,37 +96,37 @@
               {
                 "cluster": "HF-INTL",
                 "value": "FR",
-                "change_pct": -6
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "NL",
-                "change_pct": -12
+                "change_pct": -7
               },
               {
                 "cluster": "RTE",
                 "value": "TT",
-                "change_pct": -12
+                "change_pct": -20
               },
               {
                 "cluster": "HF-INTL",
                 "value": "DK",
-                "change_pct": -9
+                "change_pct": -11
               },
               {
                 "cluster": "HF-INTL",
                 "value": "SE",
-                "change_pct": -6
+                "change_pct": -11
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "BE",
+                "change_pct": -10
               },
               {
                 "cluster": "RTE",
                 "value": "TV",
-                "change_pct": -13
+                "change_pct": -16
               },
               {
                 "cluster": "HF-INTL",
                 "value": "NO",
-                "change_pct": -5
+                "change_pct": -7
               },
               {
                 "cluster": "RTE",
@@ -129,18 +135,8 @@
               },
               {
                 "cluster": "HF-INTL",
-                "value": "BE",
-                "change_pct": -3
-              },
-              {
-                "cluster": "HF-INTL",
                 "value": "LU",
                 "change_pct": -9
-              },
-              {
-                "cluster": "WL",
-                "value": "MR",
-                "change_pct": -3
               }
             ]
           },
@@ -150,7 +146,13 @@
               {
                 "cluster": "HF-INTL",
                 "value": "Others",
-                "change_pct": -21,
+                "change_pct": -30,
+                "dimension": "PaymentMethod"
+              },
+              {
+                "cluster": "RTE",
+                "value": "Others",
+                "change_pct": -24,
                 "dimension": "PaymentMethod"
               }
             ],
@@ -158,13 +160,7 @@
               {
                 "cluster": "HF-INTL",
                 "value": "Credit Card",
-                "change_pct": -5,
-                "dimension": "PaymentMethod"
-              },
-              {
-                "cluster": "RTE",
-                "value": "Others",
-                "change_pct": -17,
+                "change_pct": -6,
                 "dimension": "PaymentMethod"
               }
             ]
@@ -174,10 +170,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.9618122531886676,
+          "overall_current": 0.9612911580248444,
           "overall_previous": 0.9633739226016529,
-          "overall_change_pct": -0.16210418160042284,
-          "volume": 1612821.0,
+          "overall_change_pct": -0.2161948261152648,
+          "volume": 1629421.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -186,7 +182,7 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "BE",
-                  "change_pct": -6
+                  "change_pct": -7
                 },
                 {
                   "cluster": "RTE",
@@ -196,7 +192,7 @@
                 {
                   "cluster": "RTE",
                   "value": "TT",
-                  "change_pct": -3
+                  "change_pct": -4
                 },
                 {
                   "cluster": "RTE",
@@ -212,13 +208,13 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Others",
-                  "change_pct": -6,
+                  "change_pct": -7,
                   "dimension": "PaymentMethod"
                 },
                 {
                   "cluster": "RTE",
                   "value": "Others",
-                  "change_pct": -7,
+                  "change_pct": -8,
                   "dimension": "PaymentMethod"
                 },
                 {
@@ -233,18 +229,23 @@
           }
         },
         "yoy": {
-          "overall_current": 0.9429574325830176,
+          "overall_current": 0.9379161181117172,
           "overall_previous": 0.9677027483034008,
-          "overall_change_pct": -2.5571195042865447,
-          "volume": 89740.0,
+          "overall_change_pct": -3.078076428315019,
+          "volume": 106340.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
               "[20% - 49%]": [
                 {
+                  "cluster": "HF-INTL",
+                  "value": "NL",
+                  "change_pct": -20
+                },
+                {
                   "cluster": "RTE",
                   "value": "TT",
-                  "change_pct": -21
+                  "change_pct": -27
                 }
               ],
               "[2.5% - 19%]": [
@@ -256,7 +257,7 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "DE",
-                  "change_pct": -7
+                  "change_pct": -8
                 },
                 {
                   "cluster": "HF-INTL",
@@ -265,18 +266,23 @@
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "NL",
-                  "change_pct": -11
+                  "value": "BE",
+                  "change_pct": -14
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "DK",
-                  "change_pct": -9
+                  "change_pct": -11
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "BE",
-                  "change_pct": -7
+                  "value": "SE",
+                  "change_pct": -9
+                },
+                {
+                  "cluster": "RTE",
+                  "value": "TV",
+                  "change_pct": -17
                 },
                 {
                   "cluster": "WL",
@@ -286,37 +292,27 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "IE",
-                  "change_pct": 4
-                },
-                {
-                  "cluster": "RTE",
-                  "value": "TV",
-                  "change_pct": -14
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "SE",
-                  "change_pct": -4
+                  "change_pct": 5
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "NO",
-                  "change_pct": -4
+                  "change_pct": -6
                 },
                 {
                   "cluster": "RTE",
                   "value": "TZ",
-                  "change_pct": -3
+                  "change_pct": -4
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "CH",
-                  "change_pct": 6
+                  "change_pct": 4
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "LU",
-                  "change_pct": -4
+                  "change_pct": -3
                 }
               ]
             },
@@ -326,13 +322,13 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Others",
-                  "change_pct": -25,
+                  "change_pct": -33,
                   "dimension": "PaymentMethod"
                 },
                 {
                   "cluster": "RTE",
                   "value": "Others",
-                  "change_pct": -28,
+                  "change_pct": -34,
                   "dimension": "PaymentMethod"
                 }
               ],
@@ -589,63 +585,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.326010891393628,
+            "current": 0.3271519546979607,
             "previous": 0.3348224523680662,
-            "change_pct": -2.6317114972778928,
+            "change_pct": -2.2909149657841303,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 276365.0,
-            "z_score": null
+            "volume": 324577.0,
+            "z_score": -0.5783144842826959
           },
           {
             "cluster": "HF-NA",
-            "current": 0.26779925187032416,
+            "current": 0.2678783623204062,
             "previous": 0.29210345548487293,
-            "change_pct": -8.320409484442886,
+            "change_pct": -8.293326460056646,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 64160.0,
-            "z_score": -9.796049328174579
+            "volume": 74056.0,
+            "z_score": -10.12459337632951
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.38839459976040813,
+            "current": 0.3904639320755569,
             "previous": 0.39120576743162183,
-            "change_pct": -0.7185905488228923,
+            "change_pct": -0.189627919070643,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 74293.0,
-            "z_score": -1.165233752448001
+            "volume": 88569.0,
+            "z_score": -0.32197150754185105
           },
           {
             "cluster": "US-HF",
-            "current": 0.24786698753008093,
+            "current": 0.24887259458156907,
             "previous": 0.2706039955734172,
-            "change_pct": -8.402317931468794,
+            "change_pct": -8.03070218745244,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 50281.0,
-            "z_score": -8.274814519222026
+            "volume": 58098.0,
+            "z_score": -8.195604447295874
           },
           {
             "cluster": "RTE",
-            "current": 0.33310422456643657,
+            "current": 0.3334921107472462,
             "previous": 0.3310076596420209,
-            "change_pct": 0.6333886432365574,
+            "change_pct": 0.7505720888490068,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 100389.0,
-            "z_score": 1.0523515607776877
+            "volume": 117565.0,
+            "z_score": 1.3007970118794372
           },
           {
             "cluster": "WL",
-            "current": 0.2830530607893825,
+            "current": 0.2829206749724018,
             "previous": 0.2936183008350103,
-            "change_pct": -3.598290711301597,
+            "change_pct": -3.643378437987649,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 37523.0,
-            "z_score": -3.3044145495479587
+            "volume": 44387.0,
+            "z_score": -3.4953913993495482
           }
         ],
         "deep_insights": {
@@ -666,12 +662,12 @@
               {
                 "cluster": "RTE",
                 "value": "YE",
-                "change_pct": -8
+                "change_pct": -10
               },
               {
-                "cluster": "WL",
-                "value": "KN",
-                "change_pct": -6
+                "cluster": "HF-INTL",
+                "value": "DE",
+                "change_pct": 5
               },
               {
                 "cluster": "HF-INTL",
@@ -686,37 +682,42 @@
               {
                 "cluster": "HF-INTL",
                 "value": "NL",
-                "change_pct": 7
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "AT",
-                "change_pct": -9
+                "change_pct": 6
               },
               {
                 "cluster": "RTE",
                 "value": "TO",
-                "change_pct": -10
+                "change_pct": -13
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "IE",
+                "change_pct": -5
+              },
+              {
+                "cluster": "RTE",
+                "value": "TT",
+                "change_pct": 5
               },
               {
                 "cluster": "RTE",
                 "value": "TV",
-                "change_pct": -12
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "NO",
-                "change_pct": -6
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "CH",
-                "change_pct": -11
+                "change_pct": -8
               },
               {
                 "cluster": "RTE",
                 "value": "TK",
-                "change_pct": 7
+                "change_pct": 6
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "CH",
+                "change_pct": -5
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "LU",
+                "change_pct": -9
               }
             ]
           },
@@ -730,10 +731,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.3376700270119013,
+          "overall_current": 0.3376292702709941,
           "overall_previous": 0.3282546584196283,
-          "overall_change_pct": 2.8683122541513906,
-          "volume": 4656466.0,
+          "overall_change_pct": 2.855896058413782,
+          "volume": 4704678.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
@@ -782,13 +783,13 @@
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "BE",
-                  "change_pct": -6
+                  "value": "SE",
+                  "change_pct": -7
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "SE",
-                  "change_pct": -8
+                  "value": "BE",
+                  "change_pct": -6
                 },
                 {
                   "cluster": "RTE",
@@ -821,10 +822,10 @@
           }
         },
         "yoy": {
-          "overall_current": 0.326010891393628,
+          "overall_current": 0.3271519546979607,
           "overall_previous": 0.3184819665390004,
-          "overall_change_pct": 2.3640035058957136,
-          "volume": 276365.0,
+          "overall_change_pct": 2.722285425821309,
+          "volume": 324577.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -847,12 +848,17 @@
                 {
                   "cluster": "RTE",
                   "value": "TT",
-                  "change_pct": 33
+                  "change_pct": 38
+                },
+                {
+                  "cluster": "RTE",
+                  "value": "TV",
+                  "change_pct": 20
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "LU",
-                  "change_pct": -35
+                  "change_pct": -40
                 }
               ],
               "[5.0% - 19%]": [
@@ -864,32 +870,27 @@
                 {
                   "cluster": "RTE",
                   "value": "FJ",
-                  "change_pct": 9
+                  "change_pct": 10
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "AU",
-                  "change_pct": -20
+                  "change_pct": -19
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "GB",
-                  "change_pct": 6
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "DE",
-                  "change_pct": -5
+                  "change_pct": 5
                 },
                 {
                   "cluster": "WL",
                   "value": "KN",
-                  "change_pct": 7
+                  "change_pct": 10
                 },
                 {
                   "cluster": "RTE",
                   "value": "YE",
-                  "change_pct": -7
+                  "change_pct": -9
                 },
                 {
                   "cluster": "WL",
@@ -899,27 +900,22 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "IE",
-                  "change_pct": 20
+                  "change_pct": 18
                 },
                 {
                   "cluster": "WL",
                   "value": "CK",
-                  "change_pct": -9
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "NZ",
-                  "change_pct": -14
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "AT",
-                  "change_pct": -14
+                  "change_pct": -10
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "BE",
-                  "change_pct": 9
+                  "change_pct": 12
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "NZ",
+                  "change_pct": -11
                 },
                 {
                   "cluster": "HF-INTL",
@@ -927,14 +923,29 @@
                   "change_pct": 6
                 },
                 {
+                  "cluster": "HF-INTL",
+                  "value": "DK",
+                  "change_pct": 7
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "AT",
+                  "change_pct": -10
+                },
+                {
                   "cluster": "RTE",
-                  "value": "TV",
-                  "change_pct": 16
+                  "value": "TO",
+                  "change_pct": -7
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 8
+                  "change_pct": 7
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "CH",
+                  "change_pct": 5
                 }
               ]
             },
@@ -1325,63 +1336,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.9352711000910446,
-            "previous": 0.9258733719648986,
-            "change_pct": 1.0150122479710235,
+            "current": 0.9353519020091361,
+            "previous": 0.9247704779268134,
+            "change_pct": 1.1442216566044046,
             "is_significant": false,
-            "significance_level": 0.0,
-            "volume": 103246.0,
-            "z_score": 1.6019062542955305
+            "significance_level": 90.0,
+            "volume": 123685.0,
+            "z_score": 3.4840022605263723
           },
           {
             "cluster": "HF-NA",
-            "current": 0.9281806705007715,
-            "previous": 0.9083507306889352,
-            "change_pct": 2.1830708273660204,
+            "current": 0.9249628827093616,
+            "previous": 0.9076690211907165,
+            "change_pct": 1.9053048098918606,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 21387.0,
-            "z_score": 7.6698147097423774
+            "volume": 24921.0,
+            "z_score": 6.8970443065446485
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.926289561890072,
-            "previous": 0.9223084935138718,
-            "change_pct": 0.43164173421334684,
+            "current": 0.9278390033540967,
+            "previous": 0.9204391600817271,
+            "change_pct": 0.8039470280374208,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 33713.0,
-            "z_score": 2.058032168907114
+            "volume": 41740.0,
+            "z_score": 4.01118631129606
           },
           {
             "cluster": "US-HF",
-            "current": 0.9338286217968897,
-            "previous": 0.9143831656838941,
-            "change_pct": 2.126620091310606,
+            "current": 0.9300177238304957,
+            "previous": 0.9136218414173686,
+            "change_pct": 1.794602719620958,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 15883.0,
-            "z_score": 6.6647993449963305
+            "volume": 18619.0,
+            "z_score": 5.787163080116537
           },
           {
             "cluster": "RTE",
-            "current": 0.9493050777487271,
-            "previous": 0.9405394762748572,
-            "change_pct": 0.9319759239226489,
+            "current": 0.9493043599646364,
+            "previous": 0.9400175229708175,
+            "change_pct": 0.9879429656235389,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 36335.0,
-            "z_score": 5.443639151918622
+            "volume": 42982.0,
+            "z_score": 6.002182155513063
           },
           {
             "cluster": "WL",
-            "current": 0.9305731944797223,
-            "previous": 0.9188430216231396,
-            "change_pct": 1.2766242525150093,
+            "current": 0.9334140435835351,
+            "previous": 0.9178858290304074,
+            "change_pct": 1.6917370398375855,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 11811.0,
-            "z_score": 3.5603818174948
+            "volume": 14042.0,
+            "z_score": 4.951858900403649
           }
         ],
         "deep_insights": {
@@ -1390,19 +1401,29 @@
             "[20% - 49%]": [],
             "[5.0% - 19%]": [
               {
+                "cluster": "HF-INTL",
+                "value": "BE",
+                "change_pct": 7
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "NZ",
+                "change_pct": 5
+              },
+              {
                 "cluster": "RTE",
                 "value": "TK",
-                "change_pct": 7
+                "change_pct": 8
               },
               {
                 "cluster": "HF-INTL",
                 "value": "LU",
-                "change_pct": 14
+                "change_pct": 17
               },
               {
                 "cluster": "HF-INTL",
                 "value": "CH",
-                "change_pct": 7
+                "change_pct": 8
               }
             ]
           },
@@ -1416,10 +1437,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.927433275348329,
+          "overall_current": 0.9274553027989146,
           "overall_previous": 0.9387438380630653,
-          "overall_change_pct": -1.2048614601906389,
-          "volume": 1790118.0,
+          "overall_change_pct": -1.2025149786807192,
+          "volume": 1807272.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -1440,15 +1461,15 @@
             "dimensions": {
               "[+50%]": [
                 {
-                  "cluster": "WL",
+                  "cluster": "RTE",
                   "value": "Credit Card",
-                  "change_pct": 419,
+                  "change_pct": 188,
                   "dimension": "PaymentMethod"
                 },
                 {
-                  "cluster": "RTE",
+                  "cluster": "WL",
                   "value": "Credit Card",
-                  "change_pct": 173,
+                  "change_pct": 407,
                   "dimension": "PaymentMethod"
                 },
                 {
@@ -1460,13 +1481,13 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Unknown",
-                  "change_pct": 197,
+                  "change_pct": 196,
                   "dimension": "PaymentMethod"
                 },
                 {
                   "cluster": "WL",
                   "value": "Apple Pay",
-                  "change_pct": 452,
+                  "change_pct": 440,
                   "dimension": "PaymentMethod"
                 },
                 {
@@ -1492,7 +1513,7 @@
                 {
                   "cluster": "HF-NA",
                   "value": "Apple Pay",
-                  "change_pct": 45,
+                  "change_pct": 43,
                   "dimension": "PaymentMethod"
                 },
                 {
@@ -1521,10 +1542,10 @@
           }
         },
         "yoy": {
-          "overall_current": 0.9352711000910446,
+          "overall_current": 0.9353519020091361,
           "overall_previous": 0.963342555331992,
-          "overall_change_pct": -2.9139639981204004,
-          "volume": 103246.0,
+          "overall_change_pct": -2.9055763360531297,
+          "volume": 123685.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -1536,45 +1557,52 @@
                   "change_pct": -7
                 },
                 {
+                  "cluster": "HF-NA",
+                  "value": "CA",
+                  "change_pct": -5
+                },
+                {
                   "cluster": "HF-INTL",
                   "value": "AU",
-                  "change_pct": -7
-                },
-                {
-                  "cluster": "WL",
-                  "value": "CK",
-                  "change_pct": -5
-                },
-                {
-                  "cluster": "WL",
-                  "value": "ER",
-                  "change_pct": -5
+                  "change_pct": -6
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "NZ",
-                  "change_pct": -7
-                },
-                {
-                  "cluster": "RTE",
-                  "value": "TZ",
-                  "change_pct": -10
-                },
-                {
-                  "cluster": "RTE",
-                  "value": "TO",
                   "change_pct": -6
                 },
                 {
                   "cluster": "RTE",
-                  "value": "TK",
+                  "value": "TZ",
+                  "change_pct": -9
+                },
+                {
+                  "cluster": "WL",
+                  "value": "AO",
+                  "change_pct": -5
+                },
+                {
+                  "cluster": "RTE",
+                  "value": "TO",
                   "change_pct": -7
+                },
+                {
+                  "cluster": "RTE",
+                  "value": "TK",
+                  "change_pct": -6
                 }
               ]
             },
             "dimensions": {
               "[+50%]": [],
-              "[20% - 49%]": [],
+              "[20% - 49%]": [
+                {
+                  "cluster": "HF-NA",
+                  "value": "Referral",
+                  "change_pct": -21,
+                  "dimension": "ChannelCategory"
+                }
+              ],
               "[5.0% - 19%]": [
                 {
                   "cluster": "HF-INTL",
@@ -1585,13 +1613,7 @@
                 {
                   "cluster": "RTE",
                   "value": "Referral",
-                  "change_pct": -10,
-                  "dimension": "ChannelCategory"
-                },
-                {
-                  "cluster": "HF-NA",
-                  "value": "Referral",
-                  "change_pct": -20,
+                  "change_pct": -11,
                   "dimension": "ChannelCategory"
                 },
                 {
@@ -1617,63 +1639,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.25254247137903646,
-            "previous": 0.25187411089621664,
-            "change_pct": 0.26535497453138923,
+            "current": 0.24856692404091038,
+            "previous": 0.25439809100633587,
+            "change_pct": -2.292142579513406,
             "is_significant": false,
-            "significance_level": 90.0,
-            "volume": 103246.0,
-            "z_score": -2.4983427297144236
+            "significance_level": 0.0,
+            "volume": 123685.0,
+            "z_score": 1.4767849308885792
           },
           {
             "cluster": "HF-NA",
-            "current": 0.2674054332070884,
-            "previous": 0.2817944617456443,
-            "change_pct": -5.106214099957663,
+            "current": 0.26543878656554715,
+            "previous": 0.2812446862778439,
+            "change_pct": -5.6199816328909975,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 21387.0,
-            "z_score": -3.4189997675079407
+            "volume": 24921.0,
+            "z_score": -3.9023660567841656
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.3562127369264082,
-            "previous": 0.34932963697631625,
-            "change_pct": 1.9703738880187287,
+            "current": 0.3450886439865836,
+            "previous": 0.35931232091690546,
+            "change_pct": -3.9585831329205114,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 33713.0,
-            "z_score": 1.9687387559761673
+            "volume": 41740.0,
+            "z_score": -4.259886616199092
           },
           {
             "cluster": "US-HF",
-            "current": 0.24831580935591513,
-            "previous": 0.27017748036077976,
-            "change_pct": -8.091596300206735,
+            "current": 0.24679091250872764,
+            "previous": 0.26948775055679286,
+            "change_pct": -8.422215110397755,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 15883.0,
-            "z_score": -4.529946225765
+            "volume": 18619.0,
+            "z_score": -4.89692889943811
           },
           {
             "cluster": "RTE",
-            "current": 0.17231319664235586,
-            "previous": 0.16774960903944847,
-            "change_pct": 2.720475850309858,
+            "current": 0.17048997254664744,
+            "previous": 0.16749795955382243,
+            "change_pct": 1.7862981738972026,
             "is_significant": false,
-            "significance_level": 90.0,
-            "volume": 36335.0,
-            "z_score": 1.7268588937251577
+            "significance_level": 0.0,
+            "volume": 42982.0,
+            "z_score": 1.1780492188681562
           },
           {
             "cluster": "WL",
-            "current": 0.1765303530607061,
-            "previous": 0.18321529745042492,
-            "change_pct": -3.6486824423204336,
+            "current": 0.17070217917675545,
+            "previous": 0.1810651747438785,
+            "change_pct": -5.723351042950026,
             "is_significant": false,
-            "significance_level": 0.0,
-            "volume": 11811.0,
-            "z_score": -1.3949070894005
+            "significance_level": 90.0,
+            "volume": 14042.0,
+            "z_score": -2.269542793144752
           }
         ],
         "deep_insights": {
@@ -1682,61 +1704,51 @@
               {
                 "cluster": "HF-INTL",
                 "value": "BE",
-                "change_pct": 102
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "LU",
-                "change_pct": -100
+                "change_pct": -52
               }
             ],
             "[20% - 49%]": [
               {
+                "cluster": "HF-INTL",
+                "value": "NO",
+                "change_pct": -21
+              },
+              {
                 "cluster": "RTE",
                 "value": "TZ",
-                "change_pct": 29
+                "change_pct": 26
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "AT",
+                "change_pct": -21
               },
               {
                 "cluster": "RTE",
                 "value": "TK",
-                "change_pct": -24
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "CH",
-                "change_pct": 23
+                "change_pct": -29
               }
             ],
             "[10.0% - 19%]": [
               {
                 "cluster": "WL",
                 "value": "MR",
-                "change_pct": -12
+                "change_pct": -14
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "IE",
+                "change_pct": 10
               },
               {
                 "cluster": "WL",
-                "value": "CG",
-                "change_pct": 12
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "NO",
-                "change_pct": -19
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "AT",
-                "change_pct": -18
-              },
-              {
-                "cluster": "RTE",
-                "value": "TO",
-                "change_pct": -12
+                "value": "AO",
+                "change_pct": -11
               },
               {
                 "cluster": "RTE",
                 "value": "TV",
-                "change_pct": 11
+                "change_pct": 12
               }
             ]
           },
@@ -1750,10 +1762,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.2284488531276718,
+          "overall_current": 0.22857549082498452,
           "overall_previous": 0.21829022828922595,
-          "overall_change_pct": 4.653724043472101,
-          "volume": 1769639.0,
+          "overall_change_pct": 4.711737495702739,
+          "volume": 1786482.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -1771,12 +1783,12 @@
                 {
                   "cluster": "RTE",
                   "value": "TV",
-                  "change_pct": 29
+                  "change_pct": 30
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 25
+                  "change_pct": 23
                 },
                 {
                   "cluster": "HF-INTL",
@@ -1795,83 +1807,76 @@
           }
         },
         "yoy": {
-          "overall_current": 0.25254247137903646,
+          "overall_current": 0.24856692404091038,
           "overall_previous": 0.2261496831262055,
-          "overall_change_pct": 11.670495349799868,
-          "volume": 103246.0,
+          "overall_change_pct": 9.912567908483279,
+          "volume": 123685.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
                 {
                   "cluster": "RTE",
                   "value": "TZ",
-                  "change_pct": 228
+                  "change_pct": 209
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 219
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "NO",
-                  "change_pct": 52
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "CH",
-                  "change_pct": 300
+                  "change_pct": 183
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "LU",
-                  "change_pct": -100
+                  "change_pct": 551
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "CH",
+                  "change_pct": 257
                 }
               ],
               "[20% - 49%]": [
                 {
                   "cluster": "HF-INTL",
                   "value": "FR",
-                  "change_pct": 32
+                  "change_pct": 33
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "DE",
-                  "change_pct": 20
+                  "value": "AU",
+                  "change_pct": 21
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "BE",
-                  "change_pct": 43
+                  "change_pct": -31
                 },
                 {
                   "cluster": "RTE",
                   "value": "TT",
-                  "change_pct": -42
+                  "change_pct": -45
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "NO",
+                  "change_pct": 48
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "DK",
-                  "change_pct": 23
+                  "change_pct": 22
                 },
                 {
                   "cluster": "RTE",
                   "value": "TV",
-                  "change_pct": -40
+                  "change_pct": -39
                 }
               ],
               "[20.0% - 19%]": []
             },
             "dimensions": {
               "[+50%]": [],
-              "[20% - 49%]": [
-                {
-                  "cluster": "HF-INTL",
-                  "value": "Paid",
-                  "change_pct": 21,
-                  "dimension": "ChannelCategory"
-                }
-              ],
+              "[20% - 49%]": [],
               "[20.0% - 19%]": []
             },
             "low_volume_count": 3
@@ -1889,63 +1894,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.057484067179358035,
-            "previous": 0.060291226443744704,
-            "change_pct": -4.655999603865937,
+            "current": 0.05723410276104621,
+            "previous": 0.05899777832633918,
+            "change_pct": -2.989393186193233,
             "is_significant": false,
-            "significance_level": 0.0,
-            "volume": 103246.0,
-            "z_score": -1.3333632488021692
+            "significance_level": 90.0,
+            "volume": 123685.0,
+            "z_score": -2.0710201999099414
           },
           {
             "cluster": "HF-NA",
-            "current": 0.06069107401692617,
-            "previous": 0.07162696742698427,
-            "change_pct": -15.267843666850785,
+            "current": 0.060551342241483085,
+            "previous": 0.07001360312871961,
+            "change_pct": -13.51488919923206,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 21387.0,
-            "z_score": -4.658439953637789
+            "volume": 24921.0,
+            "z_score": -4.217866726695661
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.06668050900246196,
-            "previous": 0.0653155844466219,
-            "change_pct": 2.0897379506043006,
+            "current": 0.06619549592716818,
+            "previous": 0.06503052198828953,
+            "change_pct": 1.7914263998810274,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 33713.0,
-            "z_score": 0.7515701435553168
+            "volume": 41740.0,
+            "z_score": 0.6729532699375523
           },
           {
             "cluster": "US-HF",
-            "current": 0.05804948687275704,
-            "previous": 0.0698865289496654,
-            "change_pct": -16.937516077574546,
+            "current": 0.057360760513454,
+            "previous": 0.0686320478255773,
+            "change_pct": -16.422775757425093,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 15883.0,
-            "z_score": -4.387508304195785
+            "volume": 18619.0,
+            "z_score": -4.385428208595234
           },
           {
             "cluster": "RTE",
-            "current": 0.04769505985963947,
-            "previous": 0.049316094359155085,
-            "change_pct": -3.2870293574144047,
+            "current": 0.04774091480154483,
+            "previous": 0.0477237689308062,
+            "change_pct": 0.03592731907551065,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 36335.0,
-            "z_score": -1.0710267646849685
+            "volume": 42982.0,
+            "z_score": 0.011865662280111393
           },
           {
             "cluster": "WL",
-            "current": 0.05554144441622216,
-            "previous": 0.06161473087818697,
-            "change_pct": -9.85687411987851,
+            "current": 0.053767269619712295,
+            "previous": 0.05870813049480491,
+            "change_pct": -8.415973790086591,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 11811.0,
-            "z_score": -2.069557080083938
+            "volume": 14042.0,
+            "z_score": -1.7883691090835798
           }
         ],
         "deep_insights": {
@@ -1953,13 +1958,18 @@
             "[+50%]": [
               {
                 "cluster": "HF-INTL",
-                "value": "DK",
-                "change_pct": -50
+                "value": "BE",
+                "change_pct": -67
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "IE",
+                "change_pct": 53
               },
               {
                 "cluster": "HF-INTL",
                 "value": "NO",
-                "change_pct": -63
+                "change_pct": -61
               },
               {
                 "cluster": "HF-INTL",
@@ -1969,61 +1979,56 @@
             ],
             "[20% - 49%]": [
               {
-                "cluster": "HF-INTL",
-                "value": "IE",
-                "change_pct": 35
+                "cluster": "RTE",
+                "value": "YE",
+                "change_pct": 24
               },
               {
                 "cluster": "HF-INTL",
-                "value": "BE",
-                "change_pct": 45
+                "value": "DK",
+                "change_pct": -43
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "NZ",
+                "change_pct": -22
               },
               {
                 "cluster": "RTE",
                 "value": "TZ",
-                "change_pct": 30
+                "change_pct": 28
               },
               {
                 "cluster": "RTE",
                 "value": "TK",
-                "change_pct": -35
+                "change_pct": -40
               },
               {
                 "cluster": "HF-INTL",
-                "value": "CH",
-                "change_pct": 21
+                "value": "AT",
+                "change_pct": -25
               }
             ],
             "[10.0% - 19%]": [
               {
                 "cluster": "HF-NA",
                 "value": "US",
-                "change_pct": -17
-              },
-              {
-                "cluster": "HF-NA",
-                "value": "CA",
-                "change_pct": -10
-              },
-              {
-                "cluster": "RTE",
-                "value": "YE",
-                "change_pct": 18
-              },
-              {
-                "cluster": "WL",
-                "value": "CG",
-                "change_pct": -20
+                "change_pct": -16
               },
               {
                 "cluster": "HF-INTL",
-                "value": "AU",
-                "change_pct": -10
+                "value": "GB",
+                "change_pct": 16
               },
               {
                 "cluster": "WL",
                 "value": "MR",
                 "change_pct": 13
+              },
+              {
+                "cluster": "WL",
+                "value": "CG",
+                "change_pct": -14
               },
               {
                 "cluster": "WL",
@@ -2033,32 +2038,17 @@
               {
                 "cluster": "HF-INTL",
                 "value": "NL",
-                "change_pct": -12
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "NZ",
-                "change_pct": -19
+                "change_pct": -11
               },
               {
                 "cluster": "WL",
                 "value": "AO",
-                "change_pct": -17
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "AT",
-                "change_pct": -17
-              },
-              {
-                "cluster": "RTE",
-                "value": "TO",
-                "change_pct": -15
+                "change_pct": -14
               },
               {
                 "cluster": "RTE",
                 "value": "TV",
-                "change_pct": 18
+                "change_pct": 17
               }
             ]
           },
@@ -2068,7 +2058,7 @@
               {
                 "cluster": "HF-NA",
                 "value": "Paid",
-                "change_pct": -26,
+                "change_pct": -24,
                 "dimension": "ChannelCategory"
               }
             ],
@@ -2076,7 +2066,19 @@
               {
                 "cluster": "RTE",
                 "value": "Paid",
-                "change_pct": -15,
+                "change_pct": -16,
+                "dimension": "ChannelCategory"
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "Referral",
+                "change_pct": 12,
+                "dimension": "ChannelCategory"
+              },
+              {
+                "cluster": "RTE",
+                "value": "Referral",
+                "change_pct": 12,
                 "dimension": "ChannelCategory"
               }
             ]
@@ -2086,27 +2088,27 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.05531410643639748,
+          "overall_current": 0.055224178021385045,
           "overall_previous": 0.044375936305490915,
-          "overall_change_pct": 24.648877390679683,
-          "volume": 1769639.0,
+          "overall_change_pct": 24.44622608346364,
+          "volume": 1786482.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
                 {
                   "cluster": "WL",
                   "value": "CK",
-                  "change_pct": 56
+                  "change_pct": 55
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "DK",
-                  "change_pct": 67
+                  "change_pct": 66
                 },
                 {
                   "cluster": "WL",
                   "value": "GN",
-                  "change_pct": 51
+                  "change_pct": 52
                 },
                 {
                   "cluster": "WL",
@@ -2116,7 +2118,7 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "CH",
-                  "change_pct": 56
+                  "change_pct": 54
                 },
                 {
                   "cluster": "HF-INTL",
@@ -2128,7 +2130,7 @@
                 {
                   "cluster": "RTE",
                   "value": "FJ",
-                  "change_pct": 25
+                  "change_pct": 24
                 },
                 {
                   "cluster": "HF-NA",
@@ -2158,12 +2160,12 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "AU",
-                  "change_pct": 44
+                  "change_pct": 43
                 },
                 {
                   "cluster": "WL",
                   "value": "CG",
-                  "change_pct": 49
+                  "change_pct": 47
                 },
                 {
                   "cluster": "RTE",
@@ -2173,7 +2175,7 @@
                 {
                   "cluster": "WL",
                   "value": "MR",
-                  "change_pct": -32
+                  "change_pct": -33
                 },
                 {
                   "cluster": "HF-INTL",
@@ -2181,24 +2183,24 @@
                   "change_pct": -33
                 },
                 {
+                  "cluster": "RTE",
+                  "value": "TO",
+                  "change_pct": 40
+                },
+                {
                   "cluster": "HF-INTL",
                   "value": "NO",
                   "change_pct": 23
                 },
                 {
-                  "cluster": "RTE",
-                  "value": "TO",
-                  "change_pct": 39
-                },
-                {
                   "cluster": "HF-INTL",
                   "value": "AT",
-                  "change_pct": 33
+                  "change_pct": 32
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 46
+                  "change_pct": 43
                 },
                 {
                   "cluster": "RTE",
@@ -2219,13 +2221,13 @@
                 {
                   "cluster": "RTE",
                   "value": "Paid",
-                  "change_pct": 37,
+                  "change_pct": 36,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "WL",
                   "value": "Paid",
-                  "change_pct": 22,
+                  "change_pct": 21,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2235,107 +2237,102 @@
           }
         },
         "yoy": {
-          "overall_current": 0.057484067179358035,
+          "overall_current": 0.05723410276104621,
           "overall_previous": 0.0377351825291969,
-          "overall_change_pct": 52.33546872306978,
-          "volume": 103246.0,
+          "overall_change_pct": 51.67305131428045,
+          "volume": 123685.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
                 {
                   "cluster": "RTE",
                   "value": "TZ",
-                  "change_pct": 6364
+                  "change_pct": 6030
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "US",
-                  "change_pct": 80
+                  "change_pct": 77
                 },
                 {
                   "cluster": "RTE",
                   "value": "TO",
-                  "change_pct": 2450
+                  "change_pct": 2650
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "GB",
-                  "change_pct": 87
+                  "change_pct": 101
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "CA",
-                  "change_pct": 105
+                  "change_pct": 110
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "DE",
-                  "change_pct": 79
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "FR",
-                  "change_pct": 66
+                  "change_pct": 76
                 },
                 {
                   "cluster": "RTE",
                   "value": "TV",
-                  "change_pct": 1342
+                  "change_pct": 1337
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "FR",
+                  "change_pct": 67
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 1294
-                },
-                {
-                  "cluster": "WL",
-                  "value": "CK",
-                  "change_pct": 121
+                  "change_pct": 1103
                 },
                 {
                   "cluster": "RTE",
                   "value": "YE",
-                  "change_pct": 69
+                  "change_pct": 77
+                },
+                {
+                  "cluster": "WL",
+                  "value": "CK",
+                  "change_pct": 114
                 },
                 {
                   "cluster": "WL",
                   "value": "MR",
-                  "change_pct": 96
-                },
-                {
-                  "cluster": "WL",
-                  "value": "ER",
-                  "change_pct": 68
+                  "change_pct": 80
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "NL",
-                  "change_pct": 87
+                  "change_pct": 100
+                },
+                {
+                  "cluster": "WL",
+                  "value": "ER",
+                  "change_pct": 65
                 },
                 {
                   "cluster": "RTE",
                   "value": "TT",
-                  "change_pct": 172
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "BE",
-                  "change_pct": 88
+                  "change_pct": 163
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "SE",
-                  "change_pct": -58
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "NO",
                   "change_pct": -59
                 },
                 {
                   "cluster": "HF-INTL",
+                  "value": "NO",
+                  "change_pct": -56
+                },
+                {
+                  "cluster": "HF-INTL",
                   "value": "CH",
-                  "change_pct": 194
+                  "change_pct": 135
                 }
               ],
               "[20% - 49%]": [
@@ -2347,7 +2344,7 @@
                 {
                   "cluster": "RTE",
                   "value": "CF",
-                  "change_pct": 42
+                  "change_pct": 41
                 },
                 {
                   "cluster": "HF-INTL",
@@ -2357,22 +2354,22 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "IE",
-                  "change_pct": 26
+                  "change_pct": 32
                 },
                 {
                   "cluster": "WL",
                   "value": "AO",
-                  "change_pct": 39
+                  "change_pct": 46
                 },
                 {
-                  "cluster": "HF-INTL",
-                  "value": "DK",
-                  "change_pct": -24
+                  "cluster": "WL",
+                  "value": "GN",
+                  "change_pct": 20
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "AT",
-                  "change_pct": -20
+                  "change_pct": -30
                 }
               ],
               "[20.0% - 19%]": []
@@ -2382,13 +2379,13 @@
                 {
                   "cluster": "RTE",
                   "value": "Paid",
-                  "change_pct": 344,
+                  "change_pct": 333,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "Paid",
-                  "change_pct": 224,
+                  "change_pct": 235,
                   "dimension": "ChannelCategory"
                 },
                 {
@@ -2400,13 +2397,13 @@
                 {
                   "cluster": "HF-NA",
                   "value": "Referral",
-                  "change_pct": 99,
+                  "change_pct": 91,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "WL",
                   "value": "Referral",
-                  "change_pct": 52,
+                  "change_pct": 51,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2414,13 +2411,13 @@
                 {
                   "cluster": "WL",
                   "value": "Paid",
-                  "change_pct": 36,
+                  "change_pct": 29,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "RTE",
                   "value": "Referral",
-                  "change_pct": 31,
+                  "change_pct": 34,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2441,63 +2438,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.0072351471243438,
-            "previous": 0.0062656841903361415,
-            "change_pct": 15.472578964367637,
+            "current": 0.007413995229817682,
+            "previous": 0.006080803093886283,
+            "change_pct": 21.92460626248212,
             "is_significant": false,
-            "significance_level": 0.0,
-            "volume": 103246.0,
-            "z_score": null
+            "significance_level": 90.0,
+            "volume": 123685.0,
+            "z_score": -1.7197372999762335
           },
           {
             "cluster": "HF-NA",
-            "current": 0.011128255482302334,
-            "previous": 0.012835619897315041,
-            "change_pct": -13.301768271977691,
+            "current": 0.01448577504915533,
+            "previous": 0.012285325624893725,
+            "change_pct": 17.911201472778547,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 21387.0,
-            "z_score": -1.6617671482117633
+            "volume": 24921.0,
+            "z_score": 2.103905736932396
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.007000266959333195,
-            "previous": 0.0035370312836077718,
-            "change_pct": 97.91362863471547,
+            "current": 0.005965500718735027,
+            "previous": 0.0033387317802416844,
+            "change_pct": 78.67565025853007,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 33713.0,
-            "z_score": 6.654768746719341
+            "volume": 41740.0,
+            "z_score": 5.506536336628544
           },
           {
             "cluster": "US-HF",
-            "current": 0.008121891330353207,
-            "previous": 0.009717777131219086,
-            "change_pct": -16.42233382507792,
+            "current": 0.012621515656050271,
+            "previous": 0.009553393506036807,
+            "change_pct": 32.11552154817775,
             "is_significant": false,
-            "significance_level": 0.0,
-            "volume": 15883.0,
-            "z_score": -1.5393929125850045
+            "significance_level": 90.0,
+            "volume": 18619.0,
+            "z_score": 2.756512785179371
           },
           {
             "cluster": "RTE",
-            "current": 0.0029998623916334113,
-            "previous": 0.003722384969494064,
-            "change_pct": -19.410205655296743,
+            "current": 0.0029547252338188077,
+            "previous": 0.0036274598712251744,
+            "change_pct": -18.545612116700017,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 36335.0,
-            "z_score": -1.7630479951382692
+            "volume": 42982.0,
+            "z_score": -1.7318952105699117
           },
           {
             "cluster": "WL",
-            "current": 0.01388536110405554,
-            "previous": 0.011473087818696884,
-            "change_pct": 21.02549307979273,
+            "current": 0.012818686796752599,
+            "previous": 0.011334738065828671,
+            "change_pct": 13.092042553657704,
             "is_significant": false,
-            "significance_level": 90.0,
-            "volume": 11811.0,
-            "z_score": 1.7363034687153198
+            "significance_level": 0.0,
+            "volume": 14042.0,
+            "z_score": 1.1322969105262373
           }
         ],
         "deep_insights": {
@@ -2506,17 +2503,17 @@
               {
                 "cluster": "HF-INTL",
                 "value": "DE",
-                "change_pct": 263
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "AU",
-                "change_pct": 248
+                "change_pct": 400
               },
               {
                 "cluster": "HF-INTL",
                 "value": "NL",
-                "change_pct": 415
+                "change_pct": 598
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "AU",
+                "change_pct": 212
               },
               {
                 "cluster": "WL",
@@ -2525,8 +2522,8 @@
               },
               {
                 "cluster": "HF-INTL",
-                "value": "DK",
-                "change_pct": 148
+                "value": "BE",
+                "change_pct": -62
               },
               {
                 "cluster": "HF-INTL",
@@ -2535,8 +2532,8 @@
               },
               {
                 "cluster": "HF-INTL",
-                "value": "BE",
-                "change_pct": -100
+                "value": "DK",
+                "change_pct": 84
               },
               {
                 "cluster": "RTE",
@@ -2546,56 +2543,51 @@
             ],
             "[20% - 49%]": [
               {
+                "cluster": "HF-NA",
+                "value": "US",
+                "change_pct": 32
+              },
+              {
                 "cluster": "HF-INTL",
                 "value": "FR",
-                "change_pct": 40
+                "change_pct": 41
+              },
+              {
+                "cluster": "HF-INTL",
+                "value": "GB",
+                "change_pct": -25
               },
               {
                 "cluster": "WL",
                 "value": "MR",
-                "change_pct": 43
+                "change_pct": 49
               },
               {
                 "cluster": "WL",
                 "value": "KN",
-                "change_pct": 23
-              },
-              {
-                "cluster": "WL",
-                "value": "CG",
                 "change_pct": 27
               },
               {
-                "cluster": "HF-INTL",
-                "value": "NZ",
-                "change_pct": -22
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "CH",
-                "change_pct": 45
+                "cluster": "WL",
+                "value": "ER",
+                "change_pct": -30
               }
             ],
             "[10.0% - 19%]": [
               {
                 "cluster": "RTE",
                 "value": "FJ",
-                "change_pct": -18
-              },
-              {
-                "cluster": "HF-NA",
-                "value": "US",
                 "change_pct": -16
               },
               {
-                "cluster": "HF-INTL",
-                "value": "GB",
-                "change_pct": -17
+                "cluster": "WL",
+                "value": "CG",
+                "change_pct": 16
               },
               {
-                "cluster": "WL",
-                "value": "ER",
-                "change_pct": -19
+                "cluster": "HF-INTL",
+                "value": "CH",
+                "change_pct": 16
               }
             ]
           },
@@ -2604,7 +2596,13 @@
               {
                 "cluster": "HF-INTL",
                 "value": "Paid",
-                "change_pct": 129,
+                "change_pct": 101,
+                "dimension": "ChannelCategory"
+              },
+              {
+                "cluster": "HF-NA",
+                "value": "Referral",
+                "change_pct": 161,
                 "dimension": "ChannelCategory"
               }
             ],
@@ -2616,19 +2614,7 @@
                 "dimension": "ChannelCategory"
               },
               {
-                "cluster": "HF-NA",
-                "value": "Paid",
-                "change_pct": -22,
-                "dimension": "ChannelCategory"
-              },
-              {
-                "cluster": "WL",
-                "value": "Paid",
-                "change_pct": 24,
-                "dimension": "ChannelCategory"
-              },
-              {
-                "cluster": "HF-NA",
+                "cluster": "RTE",
                 "value": "Referral",
                 "change_pct": 21,
                 "dimension": "ChannelCategory"
@@ -2636,48 +2622,56 @@
               {
                 "cluster": "WL",
                 "value": "Referral",
-                "change_pct": -32,
+                "change_pct": -44,
                 "dimension": "ChannelCategory"
               }
             ],
-            "[10.0% - 19%]": []
+            "[10.0% - 19%]": [
+              {
+                "cluster": "HF-NA",
+                "value": "Paid",
+                "change_pct": -20,
+                "dimension": "ChannelCategory"
+              },
+              {
+                "cluster": "WL",
+                "value": "Paid",
+                "change_pct": 16,
+                "dimension": "ChannelCategory"
+              }
+            ]
           },
           "low_volume_count": 0
         }
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.006272465740187688,
+          "overall_current": 0.006283298684229676,
           "overall_previous": 0.005930047651684876,
-          "overall_change_pct": 5.774288987467443,
-          "volume": 1769639.0,
+          "overall_change_pct": 5.95696785749154,
+          "volume": 1786482.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
                 {
                   "cluster": "HF-INTL",
                   "value": "DE",
-                  "change_pct": 1564
+                  "change_pct": 1545
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "CA",
-                  "change_pct": 539
-                },
-                {
-                  "cluster": "HF-INTL",
-                  "value": "GB",
-                  "change_pct": 178
+                  "change_pct": 536
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "US",
-                  "change_pct": 108
+                  "change_pct": 111
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "AU",
-                  "change_pct": 435
+                  "value": "GB",
+                  "change_pct": 176
                 },
                 {
                   "cluster": "RTE",
@@ -2686,18 +2680,28 @@
                 },
                 {
                   "cluster": "HF-INTL",
+                  "value": "AU",
+                  "change_pct": 430
+                },
+                {
+                  "cluster": "HF-INTL",
                   "value": "FR",
-                  "change_pct": 145
+                  "change_pct": 142
                 },
                 {
                   "cluster": "WL",
                   "value": "ER",
-                  "change_pct": 106
+                  "change_pct": 104
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "IE",
-                  "change_pct": 167
+                  "change_pct": 165
+                },
+                {
+                  "cluster": "HF-INTL",
+                  "value": "BE",
+                  "change_pct": 99
                 },
                 {
                   "cluster": "WL",
@@ -2706,18 +2710,13 @@
                 },
                 {
                   "cluster": "HF-INTL",
-                  "value": "BE",
-                  "change_pct": 86
-                },
-                {
-                  "cluster": "HF-INTL",
                   "value": "NO",
-                  "change_pct": 133
+                  "change_pct": 131
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "SE",
-                  "change_pct": 79
+                  "change_pct": 77
                 },
                 {
                   "cluster": "HF-INTL",
@@ -2729,12 +2728,12 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "NL",
-                  "change_pct": 50
+                  "change_pct": 44
                 },
                 {
                   "cluster": "WL",
                   "value": "CK",
-                  "change_pct": 34
+                  "change_pct": 33
                 },
                 {
                   "cluster": "WL",
@@ -2744,12 +2743,12 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "DK",
-                  "change_pct": 41
+                  "change_pct": 39
                 },
                 {
                   "cluster": "RTE",
                   "value": "TK",
-                  "change_pct": 31
+                  "change_pct": 29
                 },
                 {
                   "cluster": "HF-INTL",
@@ -2759,12 +2758,12 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "CH",
-                  "change_pct": -22
+                  "change_pct": -23
                 },
                 {
                   "cluster": "HF-INTL",
                   "value": "LU",
-                  "change_pct": 43
+                  "change_pct": 41
                 }
               ],
               "[20.0% - 19%]": []
@@ -2774,7 +2773,7 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Paid",
-                  "change_pct": 153,
+                  "change_pct": 150,
                   "dimension": "ChannelCategory"
                 },
                 {
@@ -2786,7 +2785,13 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Referral",
-                  "change_pct": 130,
+                  "change_pct": 125,
+                  "dimension": "ChannelCategory"
+                },
+                {
+                  "cluster": "HF-NA",
+                  "value": "Referral",
+                  "change_pct": 185,
                   "dimension": "ChannelCategory"
                 },
                 {
@@ -2796,21 +2801,15 @@
                   "dimension": "ChannelCategory"
                 },
                 {
-                  "cluster": "HF-NA",
-                  "value": "Referral",
-                  "change_pct": 180,
-                  "dimension": "ChannelCategory"
-                },
-                {
                   "cluster": "RTE",
                   "value": "Referral",
-                  "change_pct": 72,
+                  "change_pct": 71,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "WL",
                   "value": "Referral",
-                  "change_pct": 54,
+                  "change_pct": 53,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2818,7 +2817,7 @@
                 {
                   "cluster": "RTE",
                   "value": "Paid",
-                  "change_pct": 50,
+                  "change_pct": 49,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2828,42 +2827,42 @@
           }
         },
         "yoy": {
-          "overall_current": 0.0072351471243438,
+          "overall_current": 0.007413995229817682,
           "overall_previous": 0.0012858646733409167,
-          "overall_change_pct": 462.6678510068665,
-          "volume": 103246.0,
+          "overall_change_pct": 476.57663232591466,
+          "volume": 123685.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [
                 {
                   "cluster": "RTE",
                   "value": "FJ",
-                  "change_pct": 179
-                },
-                {
-                  "cluster": "WL",
-                  "value": "ER",
-                  "change_pct": 962
+                  "change_pct": 176
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "US",
-                  "change_pct": 116
+                  "change_pct": 236
                 },
                 {
                   "cluster": "WL",
-                  "value": "CG",
-                  "change_pct": 715
+                  "value": "ER",
+                  "change_pct": 836
                 },
                 {
                   "cluster": "WL",
                   "value": "KN",
-                  "change_pct": 556
+                  "change_pct": 605
+                },
+                {
+                  "cluster": "WL",
+                  "value": "CG",
+                  "change_pct": 635
                 },
                 {
                   "cluster": "WL",
                   "value": "MR",
-                  "change_pct": 189
+                  "change_pct": 182
                 },
                 {
                   "cluster": "RTE",
@@ -2879,37 +2878,37 @@
                 {
                   "cluster": "HF-NA",
                   "value": "Paid",
-                  "change_pct": 324,
+                  "change_pct": 318,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "RTE",
                   "value": "Referral",
-                  "change_pct": 621,
+                  "change_pct": 642,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "WL",
                   "value": "Paid",
-                  "change_pct": 405,
+                  "change_pct": 367,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "RTE",
                   "value": "Paid",
-                  "change_pct": 115,
+                  "change_pct": 110,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "HF-NA",
                   "value": "Referral",
-                  "change_pct": 399,
+                  "change_pct": 903,
                   "dimension": "ChannelCategory"
                 },
                 {
                   "cluster": "WL",
                   "value": "Referral",
-                  "change_pct": 201,
+                  "change_pct": 158,
                   "dimension": "ChannelCategory"
                 }
               ],
@@ -2931,63 +2930,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.9526502932862491,
-            "previous": 0.9541993362923763,
-            "change_pct": -0.16233956021665008,
+            "current": 0.9526423350848451,
+            "previous": 0.9541988104584168,
+            "change_pct": -0.16311856151067383,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 1884848.0,
-            "z_score": -1.9113393526094746
+            "z_score": -1.8377180409331897
           },
           {
             "cluster": "HF-NA",
-            "current": 0.9393855029883723,
+            "current": 0.9393776050767776,
             "previous": 0.9402075033721259,
-            "change_pct": -0.0874275498552614,
+            "change_pct": -0.08826756778389913,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 506463.0,
-            "z_score": -1.7421113207850163
+            "z_score": -1.7587960092364032
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.9732114495916715,
-            "previous": 0.9742347702863586,
-            "change_pct": -0.10503840818433824,
+            "current": 0.9732024837846976,
+            "previous": 0.9742335117883508,
+            "change_pct": -0.10582965902708198,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 780744.0,
-            "z_score": -4.014984343301778
+            "z_score": -4.044843509528514
           },
           {
             "cluster": "US-HF",
-            "current": 0.9362694887435861,
+            "current": 0.936259848307742,
             "previous": 0.9379130816547604,
-            "change_pct": -0.17523936314807956,
+            "change_pct": -0.17626722340854764,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 414919.0,
-            "z_score": -3.09111565570931
+            "z_score": -3.1091359190451544
           },
           {
             "cluster": "RTE",
-            "current": 0.9465369382420267,
+            "current": 0.9465299735807181,
             "previous": 0.9482824653394333,
-            "change_pct": -0.1840724848562716,
+            "change_pct": -0.18480693493450526,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 430746.0,
-            "z_score": -3.6292734496973122
+            "z_score": -3.6436403420590664
           },
           {
             "cluster": "WL",
-            "current": 0.9124958806435184,
+            "current": 0.9124898888522723,
             "previous": 0.9167017526976146,
-            "change_pct": -0.45880484483850775,
+            "change_pct": -0.45945846977468996,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 166895.0,
-            "z_score": -4.343007716305595
+            "z_score": -4.349125585520617
           }
         ],
         "deep_insights": {
@@ -3037,9 +3036,9 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.9497337322997932,
-          "overall_previous": 0.9452720259869932,
-          "overall_change_pct": 0.47200236441370735,
+          "overall_current": 0.9497327370782347,
+          "overall_previous": 0.9452719848532333,
+          "overall_change_pct": 0.4719014523310995,
           "volume": 26124836.0,
           "deep_insights": {
             "business_units": {
@@ -3191,9 +3190,9 @@
           }
         },
         "yoy": {
-          "overall_current": 0.9526502932862491,
+          "overall_current": 0.9526423350848451,
           "overall_previous": 0.9394760665464339,
-          "overall_change_pct": 1.4022950886066052,
+          "overall_change_pct": 1.4014479992887012,
           "volume": 1884848.0,
           "deep_insights": {
             "business_units": {
@@ -3254,7 +3253,7 @@
                 {
                   "cluster": "WL",
                   "value": "Unknown",
-                  "change_pct": 149,
+                  "change_pct": 150,
                   "dimension": "PaymentProvider"
                 }
               ],
@@ -3262,7 +3261,7 @@
                 {
                   "cluster": "HF-NA",
                   "value": "Bad",
-                  "change_pct": 37,
+                  "change_pct": 38,
                   "dimension": "CustomerQuality"
                 },
                 {
@@ -3274,7 +3273,7 @@
                 {
                   "cluster": "RTE",
                   "value": "Bad",
-                  "change_pct": 28,
+                  "change_pct": 29,
                   "dimension": "CustomerQuality"
                 }
               ],
@@ -3410,63 +3409,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.9274954797416025,
-            "previous": 0.9315132817770664,
-            "change_pct": -0.4313198871194867,
+            "current": 0.9274891131804793,
+            "previous": 0.9315117042751878,
+            "change_pct": -0.4318347344694369,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 1884848.0,
-            "z_score": -2.9072987240304204
+            "z_score": -2.7365659324813802
           },
           {
             "cluster": "HF-NA",
-            "current": 0.92114725063825,
+            "current": 0.9211413272045539,
             "previous": 0.9218784309419994,
-            "change_pct": -0.07931417844349319,
+            "change_pct": -0.07995671801240847,
             "is_significant": false,
             "significance_level": 0.0,
             "volume": 506463.0,
-            "z_score": -1.3705803457042447
+            "z_score": -1.3816599195069188
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.9393540007992377,
-            "previous": 0.946275978545126,
-            "change_pct": -0.7314967200721585,
+            "current": 0.9393501583105346,
+            "previous": 0.9462747200471182,
+            "change_pct": -0.7317707627483514,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 780744.0,
-            "z_score": -18.71221035699301
+            "z_score": -18.718805082120564
           },
           {
             "cluster": "US-HF",
-            "current": 0.9190661309797816,
+            "current": 0.9190613107618596,
             "previous": 0.9206883222860088,
-            "change_pct": -0.1761933182990103,
+            "change_pct": -0.17671686332563363,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 414919.0,
-            "z_score": -2.7284958013921834
+            "z_score": -2.7365659324813802
           },
           {
             "cluster": "RTE",
-            "current": 0.9256011663486138,
-            "previous": 0.927503533950295,
-            "change_pct": -0.2051062375556526,
+            "current": 0.9255942016873053,
+            "previous": 0.9274988916510569,
+            "change_pct": -0.2053576538901326,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 430746.0,
-            "z_score": -3.384427882118611
+            "z_score": -3.3884362536253887
           },
           {
             "cluster": "WL",
-            "current": 0.8961742412894335,
+            "current": 0.8961562659156955,
             "previous": 0.9009070240229041,
-            "change_pct": -0.5253353128868868,
+            "change_pct": -0.5273305658107308,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 166895.0,
-            "z_score": -4.523599183368909
+            "z_score": -4.540601336021917
           }
         ],
         "deep_insights": {
@@ -3498,13 +3497,13 @@
                 "dimension": "LoyaltyLevel"
               },
               {
-                "cluster": "HF-INTL",
+                "cluster": "RTE",
                 "value": "Bad",
                 "change_pct": -7,
                 "dimension": "CustomerQuality"
               },
               {
-                "cluster": "RTE",
+                "cluster": "HF-INTL",
                 "value": "Bad",
                 "change_pct": -7,
                 "dimension": "CustomerQuality"
@@ -3522,9 +3521,9 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.9271742031222703,
+          "overall_current": 0.9271732079007118,
           "overall_previous": 0.9211979171015705,
-          "overall_change_pct": 0.6487515776743591,
+          "overall_change_pct": 0.6486435420893862,
           "volume": 26124836.0,
           "deep_insights": {
             "business_units": {
@@ -3698,9 +3697,9 @@
           }
         },
         "yoy": {
-          "overall_current": 0.9274954797416025,
+          "overall_current": 0.9274891131804793,
           "overall_previous": 0.9145794757076426,
-          "overall_change_pct": 1.412234188173346,
+          "overall_change_pct": 1.411538069214602,
           "volume": 1884848.0,
           "deep_insights": {
             "business_units": {
@@ -3917,63 +3916,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.9142883383463826,
-            "previous": 0.918280647480447,
-            "change_pct": -0.4347591496149288,
+            "current": 0.9140703979413657,
+            "previous": 0.9186575716234652,
+            "change_pct": -0.4993344444974167,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 87106.0,
-            "z_score": 0.38331664218082834
+            "volume": 87048.0,
+            "z_score": null
           },
           {
             "cluster": "HF-NA",
-            "current": 0.8983943958837022,
-            "previous": 0.901267217630854,
-            "change_pct": -0.31875360502999367,
+            "current": 0.8979591836734694,
+            "previous": 0.9016583108368685,
+            "change_pct": -0.41025820079957226,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 16131.0,
-            "z_score": -0.8846397255207724
+            "volume": 15974.0,
+            "z_score": -1.1362069654651636
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.9102164914465731,
-            "previous": 0.9144691076961994,
-            "change_pct": -0.46503662221458386,
+            "current": 0.9105465180040212,
+            "previous": 0.9147301587301587,
+            "change_pct": -0.4573633750028879,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 27299.0,
-            "z_score": -1.8217092284775862
+            "volume": 27355.0,
+            "z_score": -1.7941468300700296
           },
           {
             "cluster": "US-HF",
-            "current": 0.8861153060318024,
-            "previous": 0.889757143951582,
-            "change_pct": -0.4093069602796856,
+            "current": 0.8854157283127646,
+            "previous": 0.890293419137363,
+            "change_pct": -0.5478745231346991,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 11257.0,
-            "z_score": -0.8980469888270888
+            "volume": 11101.0,
+            "z_score": -1.1981964492149753
           },
           {
             "cluster": "RTE",
-            "current": 0.9236631761571349,
-            "previous": 0.9311159220625861,
-            "change_pct": -0.8004101024222687,
+            "current": 0.9229317492729411,
+            "previous": 0.9317255881193324,
+            "change_pct": -0.9438228335170508,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 32278.0,
-            "z_score": -3.5936919148609365
+            "volume": 32322.0,
+            "z_score": -4.237648444607325
           },
           {
             "cluster": "WL",
-            "current": 0.9199859624495526,
-            "previous": 0.92157712305026,
-            "change_pct": -0.17265626076317345,
+            "current": 0.9199789418267965,
+            "previous": 0.921650199341307,
+            "change_pct": -0.18133316910308275,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 11398.0,
-            "z_score": -0.44614324269162897
+            "volume": 11397.0,
+            "z_score": -0.4686608647155712
           }
         ],
         "deep_insights": {
@@ -4007,12 +4006,6 @@
                 "value": "Credit Card",
                 "change_pct": 3,
                 "dimension": "PaymentMethod"
-              },
-              {
-                "cluster": "HF-INTL",
-                "value": "Credit Card",
-                "change_pct": 3,
-                "dimension": "PaymentMethod"
               }
             ]
           },
@@ -4021,10 +4014,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.9107981564123199,
+          "overall_current": 0.9107235762729681,
           "overall_previous": 0.9161419705269737,
-          "overall_change_pct": -0.5832954156199148,
-          "volume": 1503590.0,
+          "overall_change_pct": -0.5914360905099539,
+          "volume": 1503062.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -4118,10 +4111,10 @@
           }
         },
         "yoy": {
-          "overall_current": 0.9142883383463826,
+          "overall_current": 0.9140703979413657,
           "overall_previous": 0.9186106446302978,
-          "overall_change_pct": -0.47052647486518345,
-          "volume": 87106.0,
+          "overall_change_pct": -0.4942514780850833,
+          "volume": 87048.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -4143,14 +4136,14 @@
                   "change_pct": 9
                 },
                 {
-                  "cluster": "WL",
-                  "value": "CK",
-                  "change_pct": -8
-                },
-                {
                   "cluster": "HF-INTL",
                   "value": "DE",
                   "change_pct": -3
+                },
+                {
+                  "cluster": "WL",
+                  "value": "CK",
+                  "change_pct": -8
                 },
                 {
                   "cluster": "HF-INTL",
@@ -4289,63 +4282,63 @@
         "clusters": [
           {
             "cluster": "Overall",
-            "current": 0.928135325464194,
-            "previous": 0.9321856627366739,
-            "change_pct": -0.434498988172498,
+            "current": 0.9281387564120107,
+            "previous": 0.9321636037688421,
+            "change_pct": -0.43177478079582665,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 1797740.0,
-            "z_score": -9.332077004539713
+            "volume": 1797798.0,
+            "z_score": -2.6234826829532616
           },
           {
             "cluster": "HF-NA",
-            "current": 0.9218957767390258,
-            "previous": 0.9226406349103091,
-            "change_pct": -0.08073112576011182,
+            "current": 0.9218963116400164,
+            "previous": 0.9226262474309377,
+            "change_pct": -0.07911500382238221,
             "is_significant": false,
             "significance_level": 0.0,
-            "volume": 490332.0,
-            "z_score": -1.3785619560642928
+            "volume": 490489.0,
+            "z_score": -1.3509959735223298
           },
           {
             "cluster": "HF-INTL",
-            "current": 0.9404097180285224,
-            "previous": 0.9475966850466665,
-            "change_pct": -0.7584415534115343,
+            "current": 0.9403959972869261,
+            "previous": 0.9475791286252134,
+            "change_pct": -0.7580508182687473,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 753445.0,
-            "z_score": -19.24995404403733
+            "volume": 753389.0,
+            "z_score": -19.237649529429063
           },
           {
             "cluster": "US-HF",
-            "current": 0.9199850369863896,
-            "previous": 0.9216849073517678,
-            "change_pct": -0.18443074762527842,
+            "current": 0.9199862314210857,
+            "previous": 0.9216676681804301,
+            "change_pct": -0.1824341698634084,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 403662.0,
-            "z_score": -2.832686040504733
+            "volume": 403818.0,
+            "z_score": -2.8021066467469553
           },
           {
             "cluster": "RTE",
-            "current": 0.9257579674100992,
-            "previous": 0.9272280826212178,
-            "change_pct": -0.15854947004653805,
+            "current": 0.9258100059484518,
+            "previous": 0.9271774096867008,
+            "change_pct": -0.1474802690362265,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 398467.0,
-            "z_score": -2.5174365676888373
+            "volume": 398423.0,
+            "z_score": -2.3415716918682823
           },
           {
             "cluster": "WL",
-            "current": 0.8944281524926686,
-            "previous": 0.8993633455062534,
-            "change_pct": -0.5487429566975263,
+            "current": 0.8944095384476871,
+            "previous": 0.8993581830050996,
+            "change_pct": -0.5502417891920651,
             "is_significant": false,
             "significance_level": 90.0,
-            "volume": 155496.0,
-            "z_score": -4.51939727023215
+            "volume": 155497.0,
+            "z_score": -4.531506091164693
           }
         ],
         "deep_insights": {
@@ -4376,13 +4369,13 @@
                 "dimension": "CustomerQuality"
               },
               {
-                "cluster": "HF-INTL",
+                "cluster": "RTE",
                 "value": "Bad",
                 "change_pct": -7,
                 "dimension": "CustomerQuality"
               },
               {
-                "cluster": "RTE",
+                "cluster": "HF-INTL",
                 "value": "Bad",
                 "change_pct": -7,
                 "dimension": "CustomerQuality"
@@ -4400,10 +4393,10 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 0.9281782036801366,
+          "overall_current": 0.9281813337158747,
           "overall_previous": 0.9215321729691778,
-          "overall_change_pct": 0.7211935628406003,
-          "volume": 24620771.0,
+          "overall_change_pct": 0.7215332184521963,
+          "volume": 24621301.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -4483,7 +4476,7 @@
                 {
                   "cluster": "WL",
                   "value": "Bad",
-                  "change_pct": 20,
+                  "change_pct": 19,
                   "dimension": "CustomerQuality"
                 },
                 {
@@ -4528,10 +4521,10 @@
           }
         },
         "yoy": {
-          "overall_current": 0.928135325464194,
+          "overall_current": 0.9281387564120107,
           "overall_previous": 0.9143384444070594,
-          "overall_change_pct": 1.5089468392726035,
-          "volume": 1797740.0,
+          "overall_change_pct": 1.5093220775487284,
+          "volume": 1797798.0,
           "deep_insights": {
             "business_units": {
               "[+50%]": [],
@@ -4579,7 +4572,7 @@
                 {
                   "cluster": "HF-INTL",
                   "value": "Unknown",
-                  "change_pct": 4307,
+                  "change_pct": 4309,
                   "dimension": "PaymentProvider"
                 },
                 {
@@ -4699,7 +4692,7 @@
             "is_significant": false,
             "significance_level": 0.0,
             "volume": 83393.0,
-            "z_score": 1.1251477411503206
+            "z_score": 0.2759150497607431
           },
           {
             "cluster": "HF-NA",
@@ -5168,7 +5161,7 @@
             "is_significant": false,
             "significance_level": 0.0,
             "volume": 45630.0,
-            "z_score": 1.1251102323195978
+            "z_score": -0.43739557743412305
           },
           {
             "cluster": "HF-NA",
@@ -5320,28 +5313,28 @@
           {
             "cluster": "Overall",
             "current": 9.8248679760426,
-            "previous": 6.200091124104068,
-            "change_pct": 58.46328351282618,
+            "previous": 6.200091124104065,
+            "change_pct": 58.463283512826244,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 81311.0,
-            "z_score": -82.69356324079799
+            "z_score": 41.29129764244601
           },
           {
             "cluster": "HF-NA",
-            "current": 9.940706800904048,
-            "previous": 3.41644074801116,
-            "change_pct": 190.9667555830117,
+            "current": 9.940706800904044,
+            "previous": 3.4164407480111585,
+            "change_pct": 190.96675558301172,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 19468.0,
-            "z_score": 197.0423516738607
+            "z_score": 197.04235167386074
           },
           {
             "cluster": "HF-INTL",
-            "current": 10.952693415637862,
-            "previous": 11.180637264062796,
-            "change_pct": -2.038737533839855,
+            "current": 10.95269341563786,
+            "previous": 11.18063726406279,
+            "change_pct": -2.038737533839824,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 34020.0,
@@ -5349,19 +5342,19 @@
           },
           {
             "cluster": "US-HF",
-            "current": 9.200274504461548,
-            "previous": 1.4602915833735457,
-            "change_pct": 530.0299617701829,
+            "current": 9.200274504461543,
+            "previous": 1.4602915833735441,
+            "change_pct": 530.0299617701831,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 14681.0,
-            "z_score": 170.8419232050707
+            "z_score": 170.84192320507074
           },
           {
             "cluster": "RTE",
             "current": 9.37613413277888,
-            "previous": 0.45666804507391695,
-            "change_pct": 1953.1618609883785,
+            "previous": 0.45666804507391734,
+            "change_pct": 1953.161860988377,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 20681.0,
@@ -5369,9 +5362,9 @@
           },
           {
             "cluster": "WL",
-            "current": 5.436250350042004,
+            "current": 5.4362503500420045,
             "previous": 3.1773555804823332,
-            "change_pct": 71.09354657802457,
+            "change_pct": 71.09354657802459,
             "is_significant": false,
             "significance_level": 90.0,
             "volume": 7142.0,
@@ -5487,9 +5480,9 @@
       },
       "long_term": {
         "quarter": {
-          "overall_current": 10.100658319842536,
+          "overall_current": 10.100658319842534,
           "overall_previous": 10.093307317631211,
-          "overall_change_pct": 0.07283046062100428,
+          "overall_change_pct": 0.07283046062098668,
           "volume": 858610.0,
           "deep_insights": {
             "business_units": {
@@ -5523,9 +5516,9 @@
           }
         },
         "yoy": {
-          "overall_current": 9.824867976042603,
-          "overall_previous": 11.260835969621146,
-          "overall_change_pct": -12.751877369072934,
+          "overall_current": 9.8248679760426,
+          "overall_previous": 11.260835969621148,
+          "overall_change_pct": -12.751877369072965,
           "volume": 81311.0,
           "deep_insights": {
             "business_units": {
